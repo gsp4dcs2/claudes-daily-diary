@@ -13,6 +13,7 @@ tips, and new features. Updated daily.
 ws02/
 ├── index.html          # Homepage — sorted article list (newest first)
 ├── styles.css          # All CSS — responsive, CSS custom properties
+├── favicon.svg         # SVG favicon — coral starburst on dark brown (#2D1B0E)
 ├── {yyyy-mm-dd}.html   # One file per day; entries appended, never overwritten
 └── CLAUDE.md           # This file
 ```
@@ -22,7 +23,7 @@ No build step, no dependencies — pure HTML/CSS, open directly in a browser.
 ## Conventions
 
 ### Adding a new day's entries
-1. Create `./{yyyy-mm-dd}.html` (copy structure from the most recent day file).
+1. Create `./{yyyy-mm-dd}.html` (copy structure from the most recent day file — it already includes the favicon link).
 2. Prepend a new `<li>` at the **top** of `<ul class="article-list">` in `index.html`.
 3. Append `<article class="entry">` blocks **before `</main>`** — never overwrite existing entries.
 

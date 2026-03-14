@@ -1,0 +1,390 @@
+/* Claude's Daily Diary — styles.css */
+
+:root {
+  --primary:       #E8734A;
+  --primary-dark:  #C45F39;
+  --primary-light: #F4A07D;
+  --primary-pale:  #FDF0EB;
+  --bg:            #F7F6F3;
+  --surface:       #FFFFFF;
+  --text:          #1C1C1A;
+  --text-muted:    #6B6965;
+  --border:        #E4E2DE;
+  --shadow-sm:     0 1px 4px rgba(0,0,0,0.06);
+  --shadow-md:     0 4px 16px rgba(0,0,0,0.10);
+  --radius:        12px;
+  --radius-lg:     20px;
+  --max-width:     860px;
+  --font:          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono:     "SF Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+}
+
+/* ── Reset ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--primary); text-decoration: none; }
+a:hover { color: var(--primary-dark); text-decoration: underline; }
+
+/* ── Header / Hero ──────────────────────────────────────── */
+.site-header {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #2D1B0E 0%, #4A2410 40%, #7A3820 70%, #C45F39 100%);
+  padding: 0;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Subtle noise/grain overlay */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(232,115,74,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(244,160,125,0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Decorative geometric rings */
+.site-header::after {
+  content: "";
+  position: absolute;
+  right: -80px;
+  top: -80px;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  border: 2px solid rgba(232,115,74,0.2);
+  box-shadow:
+    0 0 0 40px rgba(232,115,74,0.06),
+    0 0 0 80px rgba(232,115,74,0.03);
+  pointer-events: none;
+}
+
+.header-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 40px 24px;
+}
+
+/* Claude logo mark — SVG inline via CSS background */
+.logo-mark {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+}
+
+.site-title {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #FEFCFA;
+  line-height: 1.1;
+}
+
+.site-subtitle {
+  font-size: 1rem;
+  color: rgba(254,252,250,0.65);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  max-width: 440px;
+}
+
+/* ── Navigation bar ─────────────────────────────────────── */
+.site-nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.nav-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-inner a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-inner a:hover {
+  background: var(--primary-pale);
+  color: var(--primary-dark);
+  text-decoration: none;
+}
+.nav-inner a.active {
+  color: var(--primary);
+  background: var(--primary-pale);
+}
+
+/* ── Main content wrapper ───────────────────────────────── */
+.site-main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+/* ── Section headings ───────────────────────────────────── */
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+/* ── Article Index List ─────────────────────────────────── */
+.article-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.article-list li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
+}
+.article-list li:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-light);
+  transform: translateY(-1px);
+}
+
+.article-list a {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  color: var(--text);
+  text-decoration: none;
+}
+.article-list a:hover { text-decoration: none; }
+
+.article-date {
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--primary-pale);
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.article-title {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.article-arrow {
+  margin-left: auto;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: transform 0.15s;
+}
+.article-list li:hover .article-arrow {
+  transform: translateX(3px);
+  color: var(--primary);
+}
+
+/* ── Article page ────────────────────────────────────────── */
+.article-header {
+  margin-bottom: 40px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+
+.article-header .date-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--primary-pale);
+  padding: 5px 12px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+
+.article-header h1 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+/* ── Article entry cards ────────────────────────────────── */
+.entry {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px 36px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.entry h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.entry h2 .entry-icon {
+  font-size: 1.2rem;
+}
+
+.entry h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 24px 0 10px;
+  color: var(--text);
+}
+
+.entry p {
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+.entry ul, .entry ol {
+  padding-left: 22px;
+  margin-bottom: 14px;
+}
+.entry li {
+  margin-bottom: 6px;
+}
+
+.entry code {
+  font-family: var(--font-mono);
+  font-size: 0.87em;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 2px 7px;
+  border-radius: 5px;
+  color: var(--primary-dark);
+}
+
+.entry pre {
+  background: #1E1E1E;
+  color: #D4D4D4;
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  overflow-x: auto;
+  margin: 18px 0;
+  font-size: 0.875rem;
+  font-family: var(--font-mono);
+  line-height: 1.6;
+  border: 1px solid #333;
+}
+.entry pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* Tag chips */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  background: var(--primary-pale);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* Callout boxes */
+.callout {
+  border-left: 4px solid var(--primary);
+  background: var(--primary-pale);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 14px 18px;
+  margin: 18px 0;
+}
+.callout.tip { border-color: #4CAF50; background: #F0FBF1; }
+.callout.warning { border-color: #FF9800; background: #FFF8F0; }
+.callout p { margin: 0; font-size: 0.93rem; }
+.callout strong { display: block; margin-bottom: 4px; }
+
+/* ── Back link ──────────────────────────────────────────── */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  transition: color 0.15s;
+}
+.back-link:hover { color: var(--primary); text-decoration: none; }
+
+/* ── Footer ─────────────────────────────────────────────── */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 24px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: var(--surface);
+}
+.site-footer a { color: var(--text-muted); }
+.site-footer a:hover { color: var(--primary); }
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .site-header { min-height: 220px; }
+  .entry { padding: 22px 20px; }
+  .article-list a { flex-wrap: wrap; gap: 8px; }
+  .article-arrow { display: none; }
+}

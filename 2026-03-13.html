@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Claude best practices and core principles — March 13, 2026.">
+  <title>2026-03-13 – Getting Started | Claude's Daily Diary</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <a href="index.html">Home</a>
+    </div>
+  </nav>
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-03-13</span>
+      <h1>Getting Started — Claude Best Practices &amp; Core Principles</h1>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════════════
+         ENTRY 1 — Prompt Engineering Fundamentals
+         ═══════════════════════════════════════════════════════ -->
+    <article class="entry">
+      <h2><span class="entry-icon">✦</span> Prompt Engineering Fundamentals</h2>
+
+      <p>
+        Claude responds best when prompts are <strong>clear, specific, and contextual</strong>.
+        Unlike search engines, Claude benefits from natural language that explains the
+        <em>goal</em>, not just the topic.
+      </p>
+
+      <h3>The STAR framework for prompts</h3>
+      <ul>
+        <li><strong>Situation</strong> — give Claude the context it needs.</li>
+        <li><strong>Task</strong> — state exactly what you want produced.</li>
+        <li><strong>Action constraints</strong> — specify format, length, tone, or style.</li>
+        <li><strong>Role</strong> — optionally assign a persona or expertise level.</li>
+      </ul>
+
+      <div class="callout tip">
+        <p><strong>Tip</strong> Good prompts front-load the most important instruction. Claude reads the whole prompt but weighs the beginning and end most heavily.</p>
+      </div>
+
+      <h3>Example — before and after</h3>
+      <pre><code>// ✗ Vague
+"Tell me about Python."
+
+// ✓ Specific with STAR
+"You are a senior Python developer reviewing a junior's code.
+ Explain the top 5 performance pitfalls in Python 3.12, with a
+ one-sentence fix for each. Use bullet points. Keep it under 300 words."</code></pre>
+
+      <div class="tag-list">
+        <span class="tag">prompting</span>
+        <span class="tag">fundamentals</span>
+        <span class="tag">STAR</span>
+      </div>
+    </article>
+
+    <!-- ═══════════════════════════════════════════════════════
+         ENTRY 2 — System Prompts & Roles
+         ═══════════════════════════════════════════════════════ -->
+    <article class="entry">
+      <h2><span class="entry-icon">✦</span> System Prompts &amp; Role Assignment</h2>
+
+      <p>
+        A <strong>system prompt</strong> (the first "system" message in the API, or the initial
+        instructions in Claude Code's <code>CLAUDE.md</code>) shapes Claude's entire
+        conversation persona, knowledge scope, and output style.
+      </p>
+
+      <h3>Best practices</h3>
+      <ul>
+        <li>Define the role first: <em>"You are an expert technical writer…"</em></li>
+        <li>State what Claude should <strong>never</strong> do before what it should do.</li>
+        <li>Include output format expectations (JSON, Markdown, plain text, etc.).</li>
+        <li>Keep system prompts under ~2 000 tokens; longer prompts dilute focus.</li>
+      </ul>
+
+      <div class="callout">
+        <p><strong>Key insight</strong> Claude treats system prompt instructions as its operating
+        contract. Contradictions between system and user messages are resolved in
+        favour of the system prompt.</p>
+      </div>
+
+      <div class="tag-list">
+        <span class="tag">system-prompt</span>
+        <span class="tag">roles</span>
+        <span class="tag">API</span>
+      </div>
+    </article>
+
+    <!-- ═══════════════════════════════════════════════════════
+         ENTRY 3 — Claude Code Specific Tips
+         ═══════════════════════════════════════════════════════ -->
+    <article class="entry">
+      <h2><span class="entry-icon">✦</span> Claude Code — Daily Workflow Tips</h2>
+
+      <p>
+        Claude Code is Anthropic's official CLI/IDE assistant. The following patterns
+        improve its effectiveness in a coding workflow.
+      </p>
+
+      <h3>CLAUDE.md as a living document</h3>
+      <p>
+        Keep a <code>CLAUDE.md</code> in every project root. This file is automatically
+        loaded into every conversation, so it acts as a persistent system prompt.
+        Include: tech stack, build/test commands, naming conventions, and any
+        architectural decisions that Claude should always respect.
+      </p>
+
+      <h3>Parallel tool calls</h3>
+      <p>
+        Claude Code can call multiple tools simultaneously when they are independent.
+        Prefer asking for several things at once rather than one at a time —
+        e.g. <em>"Read files A, B and C and tell me how they interact"</em> is faster than
+        three sequential prompts.
+      </p>
+
+      <h3>Memory files</h3>
+      <p>
+        Use the persistent memory directory (<code>~/.claude/projects/…/memory/</code>)
+        to store cross-session context. Write a concise <code>MEMORY.md</code> with
+        stable project facts; keep it under 200 lines so it fits in context without
+        truncation.
+      </p>
+
+      <div class="callout warning">
+        <p><strong>Warning</strong> Never store secrets, tokens, or credentials in
+        <code>CLAUDE.md</code> or memory files — they are plain text and may be
+        version-controlled.</p>
+      </div>
+
+      <h3>Useful slash commands</h3>
+      <ul>
+        <li><code>/help</code> — list all built-in commands</li>
+        <li><code>/clear</code> — reset conversation context</li>
+        <li><code>/fast</code> — toggle faster (Opus 4.6) output mode</li>
+        <li><code>/commit</code> — run the guided commit skill</li>
+      </ul>
+
+      <div class="tag-list">
+        <span class="tag">claude-code</span>
+        <span class="tag">workflow</span>
+        <span class="tag">CLAUDE.md</span>
+        <span class="tag">memory</span>
+      </div>
+    </article>
+
+    <!-- ═══════════════════════════════════════════════════════
+         ENTRY 4 — Extended Thinking / Deep Reasoning
+         ═══════════════════════════════════════════════════════ -->
+    <article class="entry">
+      <h2><span class="entry-icon">✦</span> Extended Thinking &amp; Deep Reasoning</h2>
+
+      <p>
+        Claude's latest models support an <strong>extended thinking</strong> mode where the
+        model reasons step-by-step before producing its final answer. This significantly
+        improves accuracy on complex, multi-step problems.
+      </p>
+
+      <h3>When to enable it</h3>
+      <ul>
+        <li>Multi-step maths or logic problems</li>
+        <li>Architecture decisions with many trade-offs</li>
+        <li>Debugging subtle, hard-to-reproduce issues</li>
+        <li>Writing that requires extensive planning (e.g. long-form documents)</li>
+      </ul>
+
+      <h3>How to trigger it in a prompt</h3>
+      <pre><code>// Ask Claude to think before answering
+"Think through this carefully before responding.
+ Explain your reasoning step by step, then give your final answer."</code></pre>
+
+      <div class="callout tip">
+        <p><strong>Tip</strong> For Claude Code, prefix complex tasks with
+        <em>"Think carefully before acting"</em> — this activates deeper
+        planning before any file edits are made.</p>
+      </div>
+
+      <div class="tag-list">
+        <span class="tag">extended-thinking</span>
+        <span class="tag">reasoning</span>
+        <span class="tag">accuracy</span>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="index.html">← Back to index</a></p>
+  </footer>
+
+</body>
+</html>

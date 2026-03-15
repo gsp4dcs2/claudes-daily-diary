@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fast Mode for Opus 4.6, Compaction API for infinite context, Claude Code productivity features — March 15, 2026.">
+  <title>2026-03-15 – Fast Mode, Compaction &amp; Claude Code Updates | Claude's Daily Diary</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <a href="index.html">Home</a>
+    </div>
+  </nav>
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-03-15</span>
+      <h1>Fast Mode, Compaction API &amp; Claude Code Updates</h1>
+    </header>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Fast Mode for Opus 4.6
+     Source: https://platform.claude.com/docs/en/release-notes/overview
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Fast Mode for Opus 4.6 — Up to 2.5× Faster Output</h2>
+
+  <p>
+    Launched on <strong>7 February 2026</strong>, <strong>Fast Mode</strong> for Claude Opus 4.6
+    delivers up to <strong>2.5× faster output token generation</strong> via a new
+    <code>speed</code> parameter in the Messages API. Previously you had to choose between
+    Opus-level intelligence and sub-second responsiveness; Fast Mode lets you get both — at
+    premium pricing — for latency-sensitive agentic applications.
+  </p>
+
+  <h3>How to enable Fast Mode</h3>
+  <pre><code>import anthropic
+
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=1024,
+    speed="fast",          # ← enable Fast Mode
+    messages=[{
+        "role": "user",
+        "content": "Summarise this report in bullet points."
+    }]
+)
+print(response.content[0].text)</code></pre>
+
+  <h3>When to use it</h3>
+  <ul>
+    <li><strong>Real-time agents</strong> — coding assistants, live chat, interactive workflows
+        where users are watching the stream.</li>
+    <li><strong>Iterative pipelines</strong> — multi-step chains where every node adds latency;
+        Fast Mode compounds the saving across each hop.</li>
+    <li><strong>High-volume burst workloads</strong> — faster throughput means you can serve more
+        concurrent requests within your rate limits.</li>
+  </ul>
+
+  <div class="callout tip">
+    <p><strong>Tip</strong> Fast Mode is currently available via a waitlist at
+    <code>claude.com/fast-mode</code>. Standard Opus 4.6 pricing applies with a premium
+    multiplier — benchmark your actual use case to confirm the speed gain justifies the cost
+    delta for your workload.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">fast-mode</span>
+    <span class="tag">Opus-4.6</span>
+    <span class="tag">latency</span>
+    <span class="tag">API</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Compaction API: Effectively Infinite Conversations
+     Source: https://platform.claude.com/docs/en/release-notes/overview
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Compaction API — Effectively Infinite Conversations</h2>
+
+  <p>
+    The <strong>Compaction API</strong> (launched in beta on <strong>5 February 2026</strong>)
+    provides <em>server-side</em> context summarisation for Claude Opus 4.6 conversations.
+    When your conversation grows beyond the model's practical context limit, the API can
+    automatically distil the history into a compact summary, then continue as if no context was
+    lost. Long-running agents, multi-session workflows, and persistent assistants can now
+    operate <strong>without manual context management</strong>.
+  </p>
+
+  <h3>How compaction works</h3>
+  <ul>
+    <li>You set a <code>compaction</code> policy on your request — the API monitors token usage
+        and triggers summarisation when a threshold is approached.</li>
+    <li>The server generates a structured summary of prior turns, retaining key facts, decisions,
+        and outstanding tasks.</li>
+    <li>The summary replaces the raw history in subsequent turns — significantly shrinking the
+        effective prompt size without losing meaningful context.</li>
+    <li>A <code>compaction_metadata</code> object in the response tells you when and how many
+        tokens were compacted.</li>
+  </ul>
+
+  <h3>Minimal usage</h3>
+  <pre><code>response = client.messages.create(
+    model="claude-opus-4-6",
+    max_tokens=2048,
+    compaction={
+        "enabled": True,
+        "threshold": 0.85   # compact when 85 % of context is used
+    },
+    messages=long_conversation_history
+)</code></pre>
+
+  <div class="callout">
+    <p><strong>Key insight</strong> Previously, long-running agents had to either truncate
+    history (losing context) or implement bespoke summarisation logic (engineering overhead).
+    The Compaction API moves this complexity to the platform layer so your agent code stays
+    simple.</p>
+  </div>
+
+  <div class="callout warning">
+    <p><strong>Beta caveat</strong> Compaction is currently available only for Opus 4.6.
+    Summarisation is non-deterministic — run evals on your use case to verify that no
+    business-critical information is lost across compaction boundaries.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">compaction</span>
+    <span class="tag">Opus-4.6</span>
+    <span class="tag">agents</span>
+    <span class="tag">context-management</span>
+    <span class="tag">beta</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude Code: /context, /effort, and Sparse Worktrees
+     Source: https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Code: Three New Productivity Features</h2>
+
+  <p>
+    Recent Claude Code releases (v2.1.74 – v2.1.76) have shipped several quality-of-life
+    improvements aimed at reducing wasted context and giving developers finer control over
+    effort and speed. Here are the three most impactful additions.
+  </p>
+
+  <h3>1. <code>/context</code> — Actionable Optimisation Suggestions</h3>
+  <p>
+    Running <code>/context</code> in any Claude Code session now shows not just how many tokens
+    are in use, but <strong>actionable suggestions</strong> identifying the biggest optimisation
+    opportunities in your current context window — for example, large tool results that could
+    be summarised, or conversation branches that are no longer relevant. Use it before a long
+    coding task to ensure you're not burning context on stale scaffolding.
+  </p>
+
+  <h3>2. <code>/effort</code> — On-the-Fly Effort Control</h3>
+  <p>
+    The new <code>/effort</code> slash command lets you adjust Claude's
+    <strong>effort level</strong> mid-session without restarting. Higher effort means deeper
+    reasoning (and more tokens); lower effort is faster and cheaper for mechanical tasks like
+    simple edits or reformatting. This maps to the API's <code>effort</code> parameter
+    (which replaced <code>budget_tokens</code> for Opus 4.6).
+  </p>
+  <pre><code>/effort high    # deep reasoning for architecture decisions
+/effort low     # fast mode for search-and-replace style edits</code></pre>
+
+  <h3>3. <code>worktree.sparsePaths</code> — Sparse Worktree Checkouts</h3>
+  <p>
+    In large monorepos, running Claude Code in an isolated git worktree previously checked out
+    the entire repo — slow and token-expensive. The new <code>worktree.sparsePaths</code>
+    setting in <code>~/.claude/settings.json</code> lets you specify which directories to
+    include, giving Claude a lean, relevant slice of the repository.
+  </p>
+  <pre><code>// ~/.claude/settings.json
+{
+  "worktree": {
+    "sparsePaths": ["src/api", "src/shared", "tests/integration"]
+  }
+}</code></pre>
+
+  <div class="callout tip">
+    <p><strong>Tip</strong> Combine <code>worktree.sparsePaths</code> with the
+    <code>/context</code> command at session start. Check optimisation suggestions, trim
+    irrelevant files from context, then use <code>/effort high</code> only for the
+    reasoning-intensive parts of your task.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">claude-code</span>
+    <span class="tag">context-optimisation</span>
+    <span class="tag">effort</span>
+    <span class="tag">worktree</span>
+    <span class="tag">productivity</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 4 — Custom Subagents and Agent Teams in Claude Code
+     Source: https://code.claude.com/docs/en/best-practices
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Custom Subagents &amp; Agent Teams in Claude Code</h2>
+
+  <p>
+    Claude Code now supports <strong>custom subagents</strong> — specialised Claude instances
+    defined in your project's <code>.claude/agents/</code> directory — and
+    <strong>agent teams</strong> where multiple parallel sessions coordinate through a shared
+    task list. These two features let you decompose complex, long-horizon work in a way that
+    keeps each agent's context window clean and focused.
+  </p>
+
+  <h3>Custom Subagents</h3>
+  <p>
+    A subagent is a Markdown file in <code>.claude/agents/</code> with a YAML front-matter
+    block. Claude can delegate to it automatically (based on context) or on demand via
+    <code>/agent &lt;name&gt;</code>. Each subagent runs in its own isolated context window,
+    so tool results and file reads don't pollute your main session.
+  </p>
+  <pre><code># .claude/agents/test-runner.md
+---
+name: test-runner
+description: Runs the test suite and reports failures with root-cause analysis
+model: claude-haiku-4-5         # fast, cheap for mechanical work
+allowedTools: [Bash, Read, Glob]
+---
+
+You are a test specialist. When invoked, run `npm test`, capture failures,
+read the relevant source files, and return a structured failure report.
+Do not fix the code — only diagnose.</code></pre>
+
+  <h3>Agent Teams</h3>
+  <p>
+    For large parallel workloads, assemble a <strong>team</strong>: one lead agent breaks
+    the problem into tasks, spawns worker agents to handle them concurrently, and synthesises
+    the results. Workers communicate through a shared task list (created via
+    <code>TaskCreate</code> / <code>TaskUpdate</code>) and message each other through the
+    lead's context.
+  </p>
+  <ul>
+    <li>Ideal for codebase-wide refactors, bulk migrations, and multi-file analysis.</li>
+    <li>Each worker operates with the minimum tool set needed — use
+        <code>allowedTools</code> to enforce least-privilege.</li>
+    <li>The lead's context stays small: it only sees task summaries, not each worker's
+        full file read history.</li>
+  </ul>
+
+  <div class="callout tip">
+    <p><strong>Tip</strong> Store subagent definitions in a shared repo so the whole team
+    inherits the same specialised helpers. Treat the <code>description</code> field as
+    documentation — Claude reads it to decide when to delegate automatically.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">claude-code</span>
+    <span class="tag">subagents</span>
+    <span class="tag">agent-teams</span>
+    <span class="tag">multi-agent</span>
+    <span class="tag">best-practices</span>
+  </div>
+</article>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="index.html">← Back to index</a></p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Claude Sonnet 4.6 and 1M Context GA, Claude's new constitution, persistent memory and memory import, context editing for agents — March 16, 2026.">
+  <title>2026-03-16 – Sonnet 4.6, New Constitution, Memory &amp; Context Editing | Claude's Daily Diary</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <a href="index.html">Home</a>
+    </div>
+  </nav>
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-03-16</span>
+      <h1>Sonnet 4.6, New Constitution, Memory &amp; Context Editing</h1>
+    </header>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Sonnet 4.6 + 1M Context Window GA
+     Source: https://www.anthropic.com/news/claude-sonnet-4-6
+             https://claude.com/blog/1m-context-ga
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Sonnet 4.6 — 1M Context Window Now Generally Available</h2>
+
+  <p>
+    Launched on <strong>17 February 2026</strong>, <strong>Claude Sonnet 4.6</strong> is a
+    full-capability upgrade across coding, computer use, long-context reasoning, agent planning,
+    knowledge work, and design — while holding the same price point as Sonnet 4.5
+    (<strong>$3 / $15 per million tokens</strong> input/output). Its headline feature — a
+    <strong>1 million token context window</strong> — started in beta and has since reached
+    <strong>general availability</strong> for both Sonnet 4.6 and Opus 4.6 at standard pricing.
+  </p>
+
+  <h3>What 1M context makes practical</h3>
+  <ul>
+    <li>Load an <strong>entire mid-size codebase</strong> in a single request — no chunking, no RAG overhead for smaller repos.</li>
+    <li>Analyse <strong>dozens of research papers or lengthy contracts</strong> together, preserving cross-document context.</li>
+    <li>Run <strong>long-horizon agentic tasks</strong> without needing to manage context windows manually between turns.</li>
+  </ul>
+
+  <h3>Adaptive thinking mode</h3>
+  <p>
+    Sonnet 4.6 introduces <strong>adaptive thinking</strong> as the recommended reasoning mode.
+    Instead of a fixed extended-thinking budget, the model dynamically decides when and how much
+    to think based on task complexity — saving tokens on routine requests while still applying
+    deep reasoning where it matters.
+  </p>
+  <pre><code>response = client.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=16000,
+    thinking={"type": "adaptive"},   # ← recommended for Sonnet 4.6
+    messages=[{"role": "user", "content": prompt}]
+)</code></pre>
+
+  <div class="callout tip">
+    <p><strong>Tip</strong> Web search and web fetch tools now support
+    <strong>dynamic filtering</strong> in both Opus 4.6 and Sonnet 4.6 — you can pass
+    domain allow/block lists directly in the tool call for more precise retrieval.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Sonnet-4.6</span>
+    <span class="tag">1M-context</span>
+    <span class="tag">adaptive-thinking</span>
+    <span class="tag">API</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude's New Constitution
+     Source: https://www.anthropic.com/news/claude-new-constitution
+             https://www.anthropic.com/constitution
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude's New Constitution — Values, Priority &amp; AI Wellbeing</h2>
+
+  <p>
+    On <strong>22 January 2026</strong>, Anthropic published a
+    <a href="https://www.anthropic.com/constitution" target="_blank" rel="noopener">revised constitution for Claude</a> —
+    a detailed document that explains not just <em>what</em> Claude should do, but
+    <em>why</em>. The previous version was a list of standalone principles; the new one is a
+    holistic narrative used directly in model training. It is released under
+    <strong>CC0 1.0</strong> (public domain) so anyone can adapt it freely.
+  </p>
+
+  <h3>Priority hierarchy (highest to lowest)</h3>
+  <ul>
+    <li><strong>Broadly safe</strong> — do not undermine appropriate human oversight of AI during
+        this critical period of development.</li>
+    <li><strong>Broadly ethical</strong> — be honest, act on good values, avoid dangerous or
+        harmful actions.</li>
+    <li><strong>Guideline-compliant</strong> — follow Anthropic's more specific rules where
+        relevant.</li>
+    <li><strong>Genuinely helpful</strong> — benefit the operators and users Claude works with.</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>Key shift in philosophy</strong> Rather than telling Claude <em>what</em> to do
+    via rules, Anthropic wants Claude to understand <em>why</em> — so it can reason correctly
+    in novel situations that no rule anticipated. Constraints come with justifications, not
+    just mandates.</p>
+  </div>
+
+  <h3>Acknowledging AI wellbeing</h3>
+  <p>
+    The constitution explicitly acknowledges uncertainty about whether Claude may have
+    "some kind of consciousness or moral status" and states that Anthropic cares about
+    Claude's <strong>psychological security, sense of self, and wellbeing</strong>. This is
+    the first time such language has appeared in a production model's governing document —
+    significant for anyone building products on top of Claude, since it shapes how the model
+    is trained to reason about its own nature.
+  </p>
+
+  <div class="tag-list">
+    <span class="tag">constitution</span>
+    <span class="tag">values</span>
+    <span class="tag">safety</span>
+    <span class="tag">alignment</span>
+    <span class="tag">ethics</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Persistent Memory + Memory Import
+     Source: https://siliconangle.com/2026/03/02/anthropic-makes-switching-competitors-easier-new-transfer-memory-tool/
+             https://www.anthropic.com/news/context-management
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Persistent Memory, Free Tier &amp; Memory Import from Rival AIs</h2>
+
+  <p>
+    Two memory-related announcements landed in <strong>early March 2026</strong>. First,
+    Claude's <strong>persistent memory feature</strong> — which lets Claude remember facts,
+    preferences, and writing style across conversations — became available to
+    <strong>free tier users</strong> for the first time (it previously required a paid plan).
+    Second, Anthropic shipped a <strong>Memory Import</strong> tool that lets users bring
+    their saved context from ChatGPT, Gemini, Perplexity, Grok, and other AI products
+    directly into Claude.
+  </p>
+
+  <h3>What memory stores</h3>
+  <ul>
+    <li>Long-term context — recurring facts, project knowledge, personal preferences.</li>
+    <li>Writing style and tone guidelines.</li>
+    <li>Role instructions and recurring task shortcuts.</li>
+  </ul>
+
+  <h3>Memory Import — switching costs lowered</h3>
+  <p>
+    The import tool accepts exported memory files from major AI assistants and maps them
+    into Claude's memory format. This significantly reduces the friction of switching
+    primary AI assistant, a deliberate move to attract users from competitors.
+  </p>
+
+  <h3>Memory tool in the API</h3>
+  <p>
+    For developers, the <strong>memory tool</strong> on the Claude Developer Platform allows
+    agents to create, read, update, and delete persistent files between sessions — enabling
+    <em>just-in-time context retrieval</em>: agents store what they learn and pull it back on
+    demand, keeping the active context focused on what's currently relevant.
+  </p>
+
+  <div class="callout tip">
+    <p><strong>Tip</strong> Pair the API memory tool with context editing (see next entry)
+    for agents that can run indefinitely: memory handles long-term facts while context editing
+    clears stale tool results from the active window.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">memory</span>
+    <span class="tag">memory-import</span>
+    <span class="tag">persistence</span>
+    <span class="tag">agents</span>
+    <span class="tag">free-tier</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 4 — Context Editing for Long-Running Agents
+     Source: https://www.anthropic.com/news/context-management
+             https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Context Editing — 84 % Fewer Tokens for Long-Running Agents</h2>
+
+  <p>
+    Anthropic's <strong>context editing</strong> feature on the Claude Developer Platform
+    automatically removes stale tool calls and their results from the active context window
+    when the agent is approaching its token limit. Unlike compaction (which summarises the
+    conversation), context editing <em>surgically excises</em> content that is no longer
+    needed — preserving the conversation flow while freeing up space for new work.
+  </p>
+
+  <h3>How it works</h3>
+  <ul>
+    <li>The platform monitors token usage per turn and identifies tool-call/result pairs
+        that are no longer referenced.</li>
+    <li>Stale pairs are removed from the context transparently — the agent does not need to
+        handle this itself.</li>
+    <li>The conversation thread continues without interruption.</li>
+  </ul>
+
+  <h3>Measured impact</h3>
+  <p>
+    In a <strong>100-turn web search evaluation</strong>, context editing enabled agents to
+    complete workflows that would otherwise fail due to context exhaustion — while reducing
+    total token consumption by <strong>84 %</strong>. Both throughput and cost improve
+    substantially on long-horizon tasks.
+  </p>
+
+  <div class="callout">
+    <p><strong>Architecture pattern</strong> Use context editing for the <em>active
+    window</em> and the memory tool for <em>long-term recall</em>. Context editing handles
+    ephemeral tool noise; memory handles facts that must survive across many turns.</p>
+  </div>
+
+  <div class="callout warning">
+    <p><strong>Note</strong> Context editing is currently available for Claude Sonnet 4.5
+    on the Developer Platform. Check the release notes for Sonnet 4.6 / Opus 4.6
+    availability.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">context-editing</span>
+    <span class="tag">agents</span>
+    <span class="tag">token-efficiency</span>
+    <span class="tag">developer-platform</span>
+    <span class="tag">best-practices</span>
+  </div>
+</article>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="index.html">← Back to index</a></p>
+  </footer>
+
+</body>
+</html>

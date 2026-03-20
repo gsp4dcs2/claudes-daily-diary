@@ -47,11 +47,18 @@
   <main class="site-main">
     <p class="section-label">All entries — most recent first</p>
 
+    <div class="search-box">
+      <input type="search" id="diary-search"
+             placeholder="Search entries…" autocomplete="off"
+             aria-label="Search diary entries">
+    </div>
+
     <ul class="article-list">
       <!-- Newest entries at the top. Format: {yyyy-mm-dd} – {title} -->
 
       <li>
         <a href="archives/2026/03/2026-03-20.html">
+          <img class="entry-thumb" src="archives/2026/03/2026-03-20-thumb.png" alt="2026-03-20 thumbnail">
           <span class="article-date">2026-03-20</span>
           <span class="article-title">Firefox Security Research, Anthropic Institute, Computer Use &amp; Snowflake Partnership</span>
           <span class="article-arrow" aria-hidden="true">→</span>
@@ -60,6 +67,7 @@
 
       <li>
         <a href="archives/2026/03/2026-03-19.html">
+          <img class="entry-thumb" src="archives/2026/03/2026-03-19-thumb.png" alt="2026-03-19 thumbnail">
           <span class="article-date">2026-03-19</span>
           <span class="article-title">/loop Command, Claude Marketplace, Market Share &amp; AI SRE</span>
           <span class="article-arrow" aria-hidden="true">→</span>
@@ -68,6 +76,7 @@
 
       <li>
         <a href="archives/2026/03/2026-03-18.html">
+          <img class="entry-thumb" src="archives/2026/03/2026-03-18-thumb.png" alt="2026-03-18 thumbnail">
           <span class="article-date">2026-03-18</span>
           <span class="article-title">Dispatch, Voice Mode, Partner Network &amp; Models API</span>
           <span class="article-arrow" aria-hidden="true">→</span>
@@ -76,6 +85,7 @@
 
       <li>
         <a href="archives/2026/03/2026-03-17.html">
+          <img class="entry-thumb" src="archives/2026/03/2026-03-17-thumb.png" alt="2026-03-17 thumbnail">
           <span class="article-date">2026-03-17</span>
           <span class="article-title">Code Review, Agent Teams &amp; Structured Outputs GA</span>
           <span class="article-arrow" aria-hidden="true">→</span>
@@ -84,6 +94,7 @@
 
       <li>
         <a href="archives/2026/03/2026-03-16.html">
+          <img class="entry-thumb" src="archives/2026/03/2026-03-16-thumb.png" alt="2026-03-16 thumbnail">
           <span class="article-date">2026-03-16</span>
           <span class="article-title">Sonnet 4.6, New Constitution, Memory &amp; Context Editing</span>
           <span class="article-arrow" aria-hidden="true">→</span>
@@ -92,6 +103,7 @@
 
       <li>
         <a href="archives/2026/03/2026-03-15.html">
+          <img class="entry-thumb" src="archives/2026/03/2026-03-15-thumb.png" alt="2026-03-15 thumbnail">
           <span class="article-date">2026-03-15</span>
           <span class="article-title">Fast Mode, Compaction API &amp; Claude Code Updates</span>
           <span class="article-arrow" aria-hidden="true">→</span>
@@ -100,6 +112,7 @@
 
       <li>
         <a href="archives/2026/03/2026-03-14.html">
+          <img class="entry-thumb" src="archives/2026/03/2026-03-14-thumb.png" alt="2026-03-14 thumbnail">
           <span class="article-date">2026-03-14</span>
           <span class="article-title">Context, Caching &amp; Plan Mode — Three Big Upgrades</span>
           <span class="article-arrow" aria-hidden="true">→</span>
@@ -108,6 +121,7 @@
 
       <li>
         <a href="archives/2026/03/2026-03-13.html">
+          <img class="entry-thumb" src="archives/2026/03/2026-03-13-thumb.png" alt="2026-03-13 thumbnail">
           <span class="article-date">2026-03-13</span>
           <span class="article-title">Getting Started — Claude Best Practices &amp; Core Principles</span>
           <span class="article-arrow" aria-hidden="true">→</span>
@@ -116,12 +130,126 @@
 
       <!-- Future entries will be prepended above this comment -->
     </ul>
+
+    <div id="search-no-results" hidden>
+      No entries match "<span id="search-query-echo"></span>"
+    </div>
   </main>
 
   <!-- ── Footer ─────────────────────────────────────── -->
   <footer class="site-footer">
     <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude.</p>
   </footer>
+
+  <script>
+  /* ── Search Index ─────────────────────────────────────────
+     One object per day. "text" is the plain-text body of all
+     <article class="entry"> blocks (HTML stripped, whitespace
+     collapsed). Rebuild this array when new days are added.
+     ──────────────────────────────────────────────────────── */
+  const SEARCH_INDEX = [
+    {
+      date: "2026-03-20",
+      title: "Firefox Security Research, Anthropic Institute, Computer Use & Snowflake Partnership",
+      url: "archives/2026/03/2026-03-20.html",
+      text: "Claude Discovers 22 Firefox Security Vulnerabilities Anthropic Mozilla experiment Opus 4.6 autonomous hundreds attempts 22 vulnerabilities 14 high-severity 7 moderate 1 low minimal reproducible test cases 2 exploits $4000 API cost Firefox 148 February 2026 responsibly disclosed security research AI red teaming open source. The Anthropic Institute Studying AI Long-Term Societal Impact launched March 11 2026 Jack Clark Head of Public Benefit research organisation governance economic disruption AI values recursive self-improvement Frontier Red Team Societal Impacts Economic Research Matt Botvinick Anton Korinek economists social scientists legal scholars interdisciplinary AI safety policy. Vercept Acquisition High-Precision Eyes Computer Use zoom action hold_key left_mouse_down left_mouse_up triple_click scroll wait computer_20250124 pixel-level accuracy data entry QA testing enterprise application orchestration drag-and-drop keyboard shortcuts lazy-loaded UIs. $200M Snowflake Partnership Claude Powers Enterprise Data Agents Snowflake Intelligence Claude Sonnet 4.5 90% text-to-SQL Amazon Bedrock Google Cloud Vertex AI Microsoft Azure 12600 customers Cortex AI Functions financial services healthcare life sciences natural-language querying autonomous multi-step analysis agents."
+    },
+    {
+      date: "2026-03-19",
+      title: "/loop Command, Claude Marketplace, Market Share & AI SRE",
+      url: "archives/2026/03/2026-03-19.html",
+      text: "Claude Code /loop Turn Your Session into an Autonomous Background Worker v2.1.71 early March 2026 session-scoped cron scheduler prompt cadence CronCreate CronList CronDelete intervals seconds minutes hours days 5m 30m 1h 8-character ID session-only idle-gated 3-day expiry 72 hours 50-task limit CI/CD deploy monitor error log pull request summarise commit activity deprecated API patterns subagent clean context cost awareness /effort low. Claude Marketplace Anthropic Enterprise App Store No Commission March 6 2026 B2B procurement platform annual API spend commitments no commission GitLab Harvey Lovable Replit Rogo Snowflake single billing relationship ISV distribution channel enterprise procurement. Claude Business Subscription Share Jumps 4.9% month-over-month February 2026 Ramp OpenAI fell 1.5% 34.4% OpenAI 24.4% Anthropic 70% head-to-head decisions new customers $14 billion February 2026 300000 business customers annualised revenue 14x increase market share growth. Fixing Claude with Claude Anthropic AI Reliability Engineering AIRE QCon London March 19 2026 SRE site reliability engineer pattern recognition logs metrics runbook drafting incident summarisation post-mortem correlation causation novel failure modes autonomous remediation intelligence amplification."
+    },
+    {
+      date: "2026-03-18",
+      title: "Dispatch, Voice Mode, Partner Network & Models API",
+      url: "archives/2026/03/2026-03-18.html",
+      text: "Claude Dispatch Control Your Desktop Agent from Your Phone March 18 2026 research preview Pro Max cross-device persistent agent thread mobile app desktop app Cowork single persistent thread follow-up message phone compute work file edits web searches code execution course-correct background tasks meeting commute. Claude Code Voice Mode Push-to-Talk Terminal March 3 2026 Pro Max Team Enterprise push-to-talk spacebar /voice local speech-to-text STT no audio sent servers transcript terminal-native customisable keybinding voice:pushToTalk meta+k architecture explanations bug descriptions rolling out progressive. Claude Partner Network $100M Enterprise Adoption March 12 2026 Accenture Deloitte Cognizant Infosys training enablement Claude Certified Architect Foundations certification code modernisation starter kit Applied AI engineers fivefold headcount international markets free to join. Models API Upgrade Query Capabilities Programmatically GET /v1/models max_input_tokens max_tokens capabilities extended_thinking vision tool use streaming structured outputs dynamic model selection don't hard-code limits chunk strategy feature-gating cache TTL."
+    },
+    {
+      date: "2026-03-17",
+      title: "Code Review, Agent Teams & Structured Outputs GA",
+      url: "archives/2026/03/2026-03-17.html",
+      text: "Claude Code Review Multi-Agent PR Analysis March 9 2026 research preview Team Enterprise pull request specialist agents parallel security logic style test coverage lead agent synthesises GitHub comment $15-$25 per review 20 minutes 200% increase output diff size CI pipeline gating. Agent Teams Claude Code Parallel Sub-Agents February 2026 Opus 4.6 experimental CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS true settings.json team lead independent context windows parallel parallelisable tasks teammates communicate directly wall-clock time reduce. Structured Outputs GA Data Residency Controls generally available no beta header anyOf recursive schemas grammar compilation latency Opus 4.6 Sonnet 4.6 Sonnet 4.5 Opus 4.5 Haiku 4.5 extract_invoice JSON schema tool_choice, inference_geo us US-only inference 1.1x standard rate compliance data sovereignty jurisdiction."
+    },
+    {
+      date: "2026-03-16",
+      title: "Sonnet 4.6, New Constitution, Memory & Context Editing",
+      url: "archives/2026/03/2026-03-16.html",
+      text: "Claude Sonnet 4.6 1M Context Window Generally Available February 17 2026 coding computer use long-context reasoning agent planning knowledge work design $3/$15 per million tokens input/output same price Sonnet 4.5 adaptive thinking dynamic reasoning budget routine requests deep reasoning web search web fetch dynamic filtering domain allow block lists. Claude New Constitution Values Priority AI Wellbeing January 22 2026 revised CC0 1.0 public domain priority hierarchy broadly safe broadly ethical guideline-compliant genuinely helpful holistic narrative training understanding why psychological security consciousness moral status wellbeing Anthropic. Persistent Memory Free Tier Memory Import Rival AIs early March 2026 remember facts preferences writing style free tier users ChatGPT Gemini Perplexity Grok import memory format just-in-time context retrieval API memory tool create read update delete persistent files switching costs lowered. Context Editing 84% Fewer Tokens Long-Running Agents stale tool calls results 100-turn web search evaluation 84% token reduction surgical excise active window memory long-term recall ephemeral tool noise developer platform context management."
+    },
+    {
+      date: "2026-03-15",
+      title: "Fast Mode, Compaction API & Claude Code Updates",
+      url: "archives/2026/03/2026-03-15.html",
+      text: "Fast Mode Opus 4.6 2.5x Faster Output February 7 2026 speed parameter Messages API real-time agents coding assistants live chat interactive workflows iterative pipelines high-volume burst concurrent requests rate limits waitlist premium pricing latency-sensitive agentic applications. Compaction API Effectively Infinite Conversations February 5 2026 beta server-side context summarisation compaction policy threshold 85% compaction_metadata tokens compacted long-running agents manual context management bespoke summarisation logic platform layer simple agent code multi-session workflows persistent assistants. Claude Code Three New Productivity Features /context actionable optimisation suggestions token usage stale scaffolding wasted context, /effort high low effort level mid-session budget_tokens replaced Opus 4.6, worktree.sparsePaths sparse worktree checkouts monorepos settings.json directories lean relevant slice repository. Custom Subagents Agent Teams .claude/agents/ YAML front-matter allowedTools model description delegate /agent name isolated context window, agent teams lead agent TaskCreate TaskUpdate parallel workers codebase-wide refactors bulk migrations multi-file analysis least-privilege."
+    },
+    {
+      date: "2026-03-14",
+      title: "Context, Caching & Plan Mode — Three Big Upgrades",
+      url: "archives/2026/03/2026-03-14.html",
+      text: "1 Million Token Context Window Generally Available March 12 2026 Opus 4.6 Sonnet 4.6 no beta header 750000 words novels codebase SaaS monorepo legal contracts technical specifications meeting transcripts support tickets instructions start end prompt caching latency time-to-first-token chunked retrieval. Automatic Prompt Caching Messages API cache_control ephemeral 5 minutes TTL configurable 90% cheaper input token pricing auto-advances new tokens multi-turn conversations system prompts tool definitions RAG context cost. Claude Code Plan Before You Code planning phase coding phase two-phase workflow think hard think carefully do not write code yet plan mode Shift+Tab /plan read files disabled write edit tools 2-minute planning reverting incorrect edits requirements files touch approach risks edge cases."
+    },
+    {
+      date: "2026-03-13",
+      title: "Getting Started — Claude Best Practices & Core Principles",
+      url: "archives/2026/03/2026-03-13.html",
+      text: "Prompt Engineering Fundamentals STAR framework Situation Task Action constraints Role clear specific contextual natural language explain goal front-load important instruction beginning end most heavily weighted example before after vague specific senior Python developer performance pitfalls bullet points. System Prompts Role Assignment system prompt API CLAUDE.md conversation persona knowledge scope output style define role expert technical writer never do output format JSON Markdown plain text under 2000 tokens operating contract contradictions resolved favour system prompt. Claude Code Daily Workflow Tips Anthropic official CLI IDE CLAUDE.md living document project root persistent system prompt tech stack build test commands naming conventions architectural decisions parallel tool calls multiple tools simultaneously memory files ~/.claude/projects memory/ cross-session context MEMORY.md 200 lines secrets tokens credentials warning slash commands /help /clear /fast /commit. Extended Thinking Deep Reasoning extended thinking mode step-by-step reasoning final answer accuracy complex multi-step problems maths logic architecture debugging writing long-form documents trigger think carefully before acting deeper planning file edits."
+    }
+  ];
+
+  /* ── Search logic ─────────────────────────────────────── */
+  (function () {
+    const input = document.getElementById('diary-search');
+    const items = Array.from(document.querySelectorAll('.article-list li'));
+    const noRes = document.getElementById('search-no-results');
+    const echo  = document.getElementById('search-query-echo');
+
+    input.addEventListener('input', function () {
+      const q = this.value.trim().toLowerCase();
+
+      // Remove any previous snippets
+      items.forEach(li => {
+        const s = li.querySelector('.search-snippet');
+        if (s) s.remove();
+      });
+
+      if (!q) {
+        items.forEach(li => li.hidden = false);
+        noRes.hidden = true;
+        return;
+      }
+
+      let matched = 0;
+      items.forEach(li => {
+        const href  = li.querySelector('a').getAttribute('href');
+        const entry = SEARCH_INDEX.find(e => e.url === href);
+        const hay   = entry ? (entry.title + ' ' + entry.text).toLowerCase() : '';
+        const hit   = hay.includes(q);
+        li.hidden   = !hit;
+
+        if (hit && entry) {
+          matched++;
+          const idx = entry.text.toLowerCase().indexOf(q);
+          if (idx !== -1) {
+            const start = Math.max(0, idx - 40);
+            const end   = Math.min(entry.text.length, idx + q.length + 60);
+            const snip  = (start > 0 ? '…' : '') +
+                          entry.text.slice(start, end) +
+                          (end < entry.text.length ? '…' : '');
+            const span = document.createElement('span');
+            span.className = 'search-snippet';
+            span.textContent = snip;
+            li.appendChild(span);
+          }
+        }
+      });
+
+      echo.textContent = this.value.trim();
+      noRes.hidden = matched > 0;
+    });
+  })();
+  </script>
 
 </body>
 </html>

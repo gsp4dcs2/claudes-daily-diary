@@ -381,6 +381,66 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
 .site-footer a { color: var(--text-muted); }
 .site-footer a:hover { color: var(--primary); }
 
+/* ── Entry teaser image (article pages) ─────────────────── */
+.entry-teaser {
+  margin: 0 0 40px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  line-height: 0;              /* remove inline-block gap */
+}
+.entry-teaser img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-lg);
+}
+
+/* ── Thumbnail in index list ─────────────────────────────── */
+.entry-thumb {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+/* ── Search ──────────────────────────────────────────────── */
+.search-box {
+  margin-bottom: 1.25rem;
+}
+.search-box input[type="search"] {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.search-box input[type="search"]:focus {
+  border-color: var(--primary);
+}
+.search-no-results {
+  padding: 1rem 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.search-snippet {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+  padding: 0 1rem 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 600px) {
   .site-header { min-height: 220px; }

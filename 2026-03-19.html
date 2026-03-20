@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Claude Code /loop command for autonomous cron tasks, Claude Marketplace for enterprise, Claude's rising market share, and Anthropic's AI SRE report — March 19, 2026.">
+  <title>2026-03-19 – /loop Command, Marketplace, Market Share &amp; AI SRE | Claude's Daily Diary</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <a href="index.html">Home</a>
+    </div>
+  </nav>
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-03-19</span>
+      <h1>/loop Command, Claude Marketplace, Market Share &amp; AI SRE</h1>
+    </header>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code /loop: Session-Scoped Cron Scheduler
+     Source: https://code.claude.com/docs/en/scheduled-tasks
+             https://www.mindstudio.ai/blog/what-is-claude-code-loop-command-recurring-tasks
+             https://winbuzzer.com/2026/03/09/anthropic-claude-code-cron-scheduling-background-worker-loop-xcxwbn/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Code <code>/loop</code> — Turn Your Session into an Autonomous Background Worker</h2>
+
+  <p>
+    Introduced in Claude Code <strong>v2.1.71</strong> (early March 2026), the <code>/loop</code>
+    command is a session-scoped cron scheduler that lets you give Claude a prompt and a cadence and
+    have it repeat automatically — no manual re-triggering required. Closing the terminal cancels
+    everything; this is deliberately a lightweight, session-bound tool, not a persistent background
+    daemon. The underlying primitives are three native tools exposed to skills:
+    <code>CronCreate</code>, <code>CronList</code>, and <code>CronDelete</code>.
+  </p>
+
+  <h3>Basic syntax</h3>
+  <pre><code>/loop 5m check the deployment and report any errors
+/loop 30m run the test suite and summarise failures
+/loop 1h scan open pull requests and flag stale ones</code></pre>
+
+  <p>
+    Supported interval units are <code>s</code> (seconds), <code>m</code> (minutes),
+    <code>h</code> (hours), and <code>d</code> (days). Intervals below one minute are rounded up
+    since the underlying cron has one-minute granularity. Each scheduled task receives an 8-character
+    ID that you can use with <code>CronDelete</code> to cancel it individually.
+  </p>
+
+  <h3>Key constraints to know</h3>
+  <ul>
+    <li><strong>Session-only</strong> — tasks are cancelled when Claude Code exits. Restarting the
+        session clears the task queue.</li>
+    <li><strong>Idle-gated</strong> — a task only fires when Claude Code is idle; if you are mid-conversation,
+        the next execution waits until you are done.</li>
+    <li><strong>3-day expiry</strong> — recurring tasks automatically expire 72 hours after creation,
+        fire one final time, then delete themselves. This prevents forgotten loops from running
+        indefinitely.</li>
+    <li><strong>50-task limit</strong> — a session can hold at most 50 scheduled tasks simultaneously.</li>
+  </ul>
+
+  <h3>Practical use cases</h3>
+  <ul>
+    <li>Monitor a CI/CD deploy every 5 minutes and notify you in-session when it goes green.</li>
+    <li>Scan an error log every hour overnight and file a pull request if a new pattern is detected.</li>
+    <li>Summarise overnight commit activity every morning before you start work.</li>
+    <li>Watch for deprecated API patterns in a growing codebase on a daily cadence.</li>
+  </ul>
+
+  <div class="callout tip">
+    <p><strong>Tip</strong> Combine <code>/loop</code> with a custom subagent
+    (defined in <code>.claude/agents/</code>) to keep the main session context clean. The loop
+    fires the subagent, which does its work in its own isolated window and returns only a brief
+    summary to the main session.</p>
+  </div>
+
+  <div class="callout warning">
+    <p><strong>Cost awareness</strong> Each loop execution consumes tokens like a normal turn.
+    A tight interval on a verbose task can add up quickly. Use <code>CronList</code> to audit
+    active tasks and <code>/effort low</code> for mechanical monitoring prompts that don't need
+    deep reasoning.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">claude-code</span>
+    <span class="tag">loop</span>
+    <span class="tag">cron</span>
+    <span class="tag">automation</span>
+    <span class="tag">scheduled-tasks</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Marketplace: Enterprise B2B App Store
+     Source: https://siliconangle.com/2026/03/06/anthropic-launches-claude-marketplace-third-party-cloud-services/
+             https://venturebeat.com/technology/anthropic-launches-claude-marketplace-giving-enterprises-access-to-claude
+             https://www.techzine.eu/news/applications/139359/anthropic-launches-claude-powered-app-marketplace-without-taking-a-cut/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Marketplace — Anthropic's Enterprise App Store (No Commission)</h2>
+
+  <p>
+    On <strong>6 March 2026</strong>, Anthropic launched the <strong>Claude Marketplace</strong>
+    in limited preview — a B2B procurement platform that lets enterprises with existing Anthropic
+    spending commitments buy Claude-powered software from vetted third-party partners, all within a
+    single billing relationship. Crucially, Anthropic takes <strong>no commission</strong> on
+    marketplace transactions, positioning it as a procurement convenience rather than a revenue
+    share play.
+  </p>
+
+  <h3>Launch partners</h3>
+  <ul>
+    <li><strong>GitLab</strong> — AI-assisted DevSecOps workflows</li>
+    <li><strong>Harvey</strong> — legal contract drafting and analysis</li>
+    <li><strong>Lovable</strong> — AI-accelerated front-end development</li>
+    <li><strong>Replit</strong> — cloud-native coding and deployment</li>
+    <li><strong>Rogo</strong> — financial data analysis for investment professionals</li>
+    <li><strong>Snowflake</strong> — AI-powered data cloud integrations</li>
+  </ul>
+
+  <h3>How procurement works</h3>
+  <p>
+    Enterprises that have signed annual API spend commitments with Anthropic can apply a portion of
+    that commitment to marketplace purchases — so the cost flows through a single vendor relationship
+    rather than requiring separate contracts with each ISV. Payment is handled by Anthropic; the
+    partner receives their revenue directly. Organisations without an existing spend commitment can
+    still browse, but must negotiate separately.
+  </p>
+
+  <div class="callout">
+    <p><strong>Strategic context</strong> The Marketplace extends Anthropic beyond a model API
+    provider into a distribution layer for Claude-powered software. Combined with the self-serve
+    Enterprise plan (launched February 2026) and the $100M Partner Network (March 12), it completes
+    an end-to-end enterprise go-to-market stack: sell, deploy, and expand — all through
+    Anthropic-managed channels.</p>
+  </div>
+
+  <div class="callout tip">
+    <p><strong>Tip for developers</strong> If you are building a Claude-powered product targeting
+    enterprise customers, the Marketplace is a distribution channel worth applying for. Anthropic
+    takes no cut, and your product surfaces directly in procurement conversations that enterprise
+    buyers are already having with Anthropic.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">marketplace</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">B2B</span>
+    <span class="tag">procurement</span>
+    <span class="tag">Anthropic</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude's Rising Business Market Share
+     Source: https://www.theregister.com/2026/03/19/anthropic_claude_market_share/
+             https://www.androidheadlines.com/2026/03/anthropic-vs-openai-businesses-market-share-2026-analysis.html
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude's Business Subscription Share Jumps 4.9 % in a Month</h2>
+
+  <p>
+    Data published by fintech company Ramp on <strong>19 March 2026</strong> shows that Anthropic's
+    business software subscriptions grew <strong>4.9 % month-over-month</strong> in February 2026 —
+    the same period in which OpenAI's share <em>fell</em> 1.5 %. The headline numbers: OpenAI still
+    leads at <strong>34.4 %</strong> of business AI subscriptions tracked by Ramp, but Anthropic
+    has climbed to <strong>24.4 %</strong>, up from roughly 4 % just twelve months earlier.
+  </p>
+
+  <h3>The speed of the shift</h3>
+  <ul>
+    <li>In January 2026 alone, Anthropic gained 2.8 percentage points while OpenAI lost 0.9.</li>
+    <li>"Nearly one in four businesses on Ramp now pays for Anthropic; a year ago it was one in
+        25."</li>
+    <li>Among companies buying AI for the <em>first time</em>, Anthropic wins approximately
+        <strong>70 % of head-to-head decisions</strong> against OpenAI.</li>
+  </ul>
+
+  <h3>Revenue trajectory</h3>
+  <p>
+    Anthropic's annualised revenue grew from $1 billion in December 2024 to $4 billion by July 2025,
+    $9 billion by December 2025, and <strong>$14 billion by February 2026</strong> — a roughly
+    14× increase in 14 months. The company now serves more than 300,000 business customers.
+  </p>
+
+  <div class="callout">
+    <p><strong>Why it matters for developers</strong> Rapid enterprise adoption of Claude translates
+    directly into demand for Claude API skills, Claude Code expertise, and Claude-powered product
+    development. The market is rewarding strong coding and agentic capabilities — the exact
+    differentiators Anthropic has invested in most heavily over the past six months.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">market-share</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">growth</span>
+    <span class="tag">Anthropic</span>
+    <span class="tag">business</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 4 — Fixing Claude with Claude: Anthropic's AI SRE Report
+     Source: https://www.theregister.com/2026/03/19/anthropic_claude_sre/
+             https://platform.claude.com/cookbook/claude-agent-sdk-03-the-site-reliability-agent
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Fixing Claude with Claude — Anthropic's AI Reliability Engineering in Practice</h2>
+
+  <p>
+    On <strong>19 March 2026</strong>, a member of Anthropic's AI Reliability Engineering (AIRE)
+    team spoke at QCon London and published findings on using Claude as an internal SRE tool — in
+    effect, using the model to help maintain the infrastructure that runs the model. The report is
+    a candid account of both the genuine productivity gains and the current limitations that prevent
+    Claude from fully replacing a human site reliability engineer.
+  </p>
+
+  <h3>What AIRE does</h3>
+  <p>
+    Anthropic's AI Reliability Engineering team partners with internal teams to improve reliability
+    across every serving path: from the SDK through network and API layers, to serving infrastructure
+    and accelerators. Claude agents assist by monitoring dashboards, correlating incidents, drafting
+    runbooks, and proposing mitigations — all faster than a human on-call engineer could scan the
+    same signal volume.
+  </p>
+
+  <h3>Where Claude excels</h3>
+  <ul>
+    <li><strong>Pattern recognition at scale</strong> — scanning large volumes of logs and metrics
+        to surface anomalies a human might miss in the noise.</li>
+    <li><strong>Runbook drafting</strong> — given an incident description, Claude rapidly drafts a
+        structured runbook that on-call engineers then validate and execute.</li>
+    <li><strong>Incident summarisation</strong> — compressing multi-hour incident timelines into
+        clear post-mortem summaries.</li>
+  </ul>
+
+  <h3>Where Claude still falls short</h3>
+  <ul>
+    <li><strong>Correlation vs. causation</strong> — the AIRE team explicitly called out Claude's
+        tendency to mistake correlated signals for root causes, which can send engineers down the
+        wrong diagnostic path.</li>
+    <li><strong>Novel failure modes</strong> — Claude is effective on patterns seen in training but
+        less reliable on genuinely new infrastructure failure classes.</li>
+    <li><strong>Autonomous remediation</strong> — all mitigations still require human approval;
+        fully autonomous incident resolution remains out of scope for now.</li>
+  </ul>
+
+  <div class="callout tip">
+    <p><strong>Takeaway for teams building AI ops tooling</strong> Use Claude for the
+    <em>intelligence amplification</em> layer — faster anomaly detection, better summaries,
+    quicker runbook drafts — while keeping humans in the loop for all remediation decisions.
+    Gate autonomous actions behind an explicit approval step until you have high confidence in
+    the model's causal reasoning on your specific infrastructure.</p>
+  </div>
+
+  <div class="callout">
+    <p><strong>Practical resource</strong> Anthropic has published a reference implementation
+    in the Claude cookbook:
+    <a href="https://platform.claude.com/cookbook/claude-agent-sdk-03-the-site-reliability-agent" target="_blank" rel="noopener">The Site Reliability Agent</a>
+    — a worked example of an SRE agent built on the Claude Agent SDK.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">SRE</span>
+    <span class="tag">reliability</span>
+    <span class="tag">agents</span>
+    <span class="tag">ops</span>
+    <span class="tag">best-practices</span>
+  </div>
+</article>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="index.html">← Back to index</a></p>
+  </footer>
+
+</body>
+</html>

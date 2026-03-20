@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Claude Dispatch cross-device agent threads, Claude Code voice mode, the $100M Claude Partner Network, and the Models API capabilities endpoint — March 18, 2026.">
+  <title>2026-03-18 – Dispatch, Voice Mode, Partner Network &amp; Models API | Claude's Daily Diary</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <a href="index.html">Home</a>
+    </div>
+  </nav>
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-03-18</span>
+      <h1>Dispatch, Voice Mode, Partner Network &amp; Models API</h1>
+    </header>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Dispatch (Cross-Device Persistent Agent Thread)
+     Source: https://support.claude.com/en/articles/13947068-assign-tasks-to-claude-from-anywhere-in-cowork
+             https://blockchain.news/ainews/claude-cowork-dispatch-launch-persistent-cross-device-ai-workflow-preview-for-2026-productivity
+             https://releasebot.io/updates/anthropic/claude
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Dispatch — Control Your Desktop Agent from Your Phone</h2>
+
+  <p>
+    Launched on <strong>18 March 2026</strong> as a research preview for
+    <strong>Pro and Max</strong> plan subscribers, <strong>Claude Dispatch</strong> bridges the
+    Claude mobile app and the Claude Desktop app into a single, persistent agent thread. Instead
+    of each Cowork session starting fresh, Claude now retains context from previous tasks across
+    devices — you can hand off work to your desktop, step away, and check in or redirect Claude
+    from your phone whenever you like.
+  </p>
+
+  <h3>How Dispatch works</h3>
+  <ul>
+    <li>Your <strong>phone</strong> runs the Claude mobile app — this is your remote control.</li>
+    <li>Your <strong>desktop</strong> (awake, with Claude Desktop open) does the actual compute
+        work: file edits, web searches, code execution.</li>
+    <li>A <strong>single persistent thread</strong> connects both ends — Claude remembers the
+        task it was working on when you send a follow-up message from your phone.</li>
+    <li>You can send new instructions, ask for a status update, or course-correct mid-task
+        without sitting at your desk.</li>
+  </ul>
+
+  <h3>Practical use cases</h3>
+  <ul>
+    <li>Start a long research task before leaving the office, then check Claude's progress from
+        the commute home.</li>
+    <li>Trigger a code refactor in Cowork, go to a meeting, and confirm the result on mobile
+        before merging.</li>
+    <li>Queue up a batch of document summaries from your phone and find them ready when you
+        sit down again.</li>
+  </ul>
+
+  <div class="callout tip">
+    <p><strong>Tip</strong> Dispatch requires both the Claude Desktop app and the Claude
+    mobile app to be installed and signed into the same account. Your desktop must remain
+    awake and connected for Claude to continue working on tasks in the background.</p>
+  </div>
+
+  <div class="callout">
+    <p><strong>Research preview</strong> Dispatch is rolling out to Max plans first, with
+    Pro plan access following over the subsequent days. Behaviour may change before
+    general availability.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">dispatch</span>
+    <span class="tag">cowork</span>
+    <span class="tag">cross-device</span>
+    <span class="tag">persistent-agent</span>
+    <span class="tag">Pro</span>
+    <span class="tag">Max</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Code Voice Mode (/voice)
+     Source: https://techcrunch.com/2026/03/03/claude-code-rolls-out-a-voice-mode-capability/
+             https://medium.com/@joe.njenga/claude-code-voice-is-here-voice-you-can-now-talk-stop-typing-43a586f26f56
+             https://releasebot.io/updates/anthropic/claude-code
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Code Voice Mode — Push-to-Talk in the Terminal</h2>
+
+  <p>
+    Voice mode for Claude Code started rolling out on <strong>3 March 2026</strong> and is
+    continuing its progressive rollout through mid-March. Available on <strong>Pro, Max, Team,
+    and Enterprise</strong> plans, it lets you dictate prompts to Claude Code using a
+    push-to-talk mechanism — no typing required. Speech is transcribed locally (no audio sent
+    to Anthropic's servers), and the transcript appears in the terminal before Claude acts on it.
+  </p>
+
+  <h3>Activating voice mode</h3>
+  <pre><code>/voice          # toggle voice mode on/off in any Claude Code session</code></pre>
+
+  <p>
+    Once active, <strong>hold the spacebar to speak, release to send</strong>. Claude Code
+    processes the transcript identically to a typed prompt — all the same tools, file access,
+    and reasoning capabilities apply.
+  </p>
+
+  <h3>Key design decisions</h3>
+  <ul>
+    <li><strong>Push-to-talk, not always-on</strong> — no persistent microphone listening means
+        no accidental commands and no privacy concerns about your terminal monitoring background
+        conversation.</li>
+    <li><strong>Terminal-native</strong> — voice mode operates at the CLI layer, so it works
+        regardless of which editor or IDE you have open behind it.</li>
+    <li><strong>Local STT</strong> — speech-to-text processing happens on-device; only the
+        resulting text transcript is sent to Claude.</li>
+    <li><strong>Customisable keybinding</strong> — the default push-to-talk key is spacebar,
+        but you can remap it in <code>keybindings.json</code>
+        (key: <code>voice:pushToTalk</code>), e.g. to <code>meta+k</code>.</li>
+  </ul>
+
+  <div class="callout tip">
+    <p><strong>Tip</strong> Voice mode is especially useful for long, descriptive prompts —
+    architecture explanations, bug descriptions, or instructions that would take a paragraph
+    to type. For short, precise commands (file paths, function names), typing is still faster
+    and less error-prone.</p>
+  </div>
+
+  <div class="callout warning">
+    <p><strong>Availability</strong> Voice mode is not available on the free tier. It is
+    rolling out gradually — if you do not see <code>/voice</code> yet, check again in the
+    coming days as coverage expands.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">claude-code</span>
+    <span class="tag">voice-mode</span>
+    <span class="tag">push-to-talk</span>
+    <span class="tag">productivity</span>
+    <span class="tag">accessibility</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude Partner Network ($100M Enterprise Programme)
+     Source: https://www.anthropic.com/news/claude-partner-network
+             https://thenextweb.com/news/anthropic-commits-100m-to-claude-partner-network
+             https://aadhunik.ai/blog/claude-news-march-2026/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Partner Network — $100M Enterprise Adoption Push</h2>
+
+  <p>
+    On <strong>12 March 2026</strong>, Anthropic launched the <strong>Claude Partner
+    Network</strong> — a formalised channel programme backed by a <strong>$100 million
+    commitment for 2026</strong> (with more signalled for subsequent years). The programme
+    connects large enterprises to a vetted network of consulting and professional services
+    firms — including anchor partners Accenture, Deloitte, Cognizant, and Infosys — that
+    specialise in deploying Claude at scale.
+  </p>
+
+  <h3>What the programme offers</h3>
+  <ul>
+    <li><strong>Training &amp; enablement</strong> — joint go-to-market investment, sales
+        enablement, and co-marketing support.</li>
+    <li><strong>Technical certification</strong> — the new <em>Claude Certified Architect:
+        Foundations</em> credential is available immediately for solution architects building
+        production Claude applications; additional certifications for sellers and developers
+        are planned for later in 2026.</li>
+    <li><strong>Code Modernisation starter kit</strong> — a pre-built asset helping partners
+        migrate legacy codebases and address technical debt for enterprise clients.</li>
+    <li><strong>Dedicated Applied AI engineers</strong> — Anthropic is scaling its
+        partner-facing headcount fivefold, adding technical architects for complex deployments
+        and localised go-to-market support across international markets.</li>
+  </ul>
+
+  <h3>Why it matters for developers</h3>
+  <p>
+    The partner programme accelerates enterprise Claude adoption, which in turn drives demand
+    for developers with Claude API skills. The free-to-join certification track means individual
+    developers can now earn a verifiable Anthropic credential — useful differentiation for
+    consultants and agencies building Claude-powered products.
+  </p>
+
+  <div class="callout">
+    <p><strong>How to join</strong> Any organisation bringing Claude to market can join the
+    Claude Partner Network at no cost. Visit
+    <a href="https://www.anthropic.com/news/claude-partner-network" target="_blank" rel="noopener">anthropic.com/news/claude-partner-network</a>
+    for details and certification enrolment.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">partner-network</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">certification</span>
+    <span class="tag">go-to-market</span>
+    <span class="tag">Anthropic</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 4 — Models API: Programmatic Capability Introspection
+     Source: https://platform.claude.com/docs/en/about-claude/models/overview
+             https://platform.claude.com/docs/en/release-notes/overview
+             https://releasebot.io/updates/anthropic/claude
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Models API Upgrade — Query Capabilities Programmatically</h2>
+
+  <p>
+    The Claude Developer Platform's <strong>Models API</strong> received a significant
+    upgrade in mid-March 2026: the <code>GET /v1/models</code> and
+    <code>GET /v1/models/{model_id}</code> endpoints now return a richer response that
+    includes <code>max_input_tokens</code>, <code>max_tokens</code> (max output), and a
+    structured <code>capabilities</code> object for every available model. This removes
+    the need to hard-code model limits in your application and makes it straightforward to
+    build model-agnostic pipelines that adapt automatically as new models roll out.
+  </p>
+
+  <h3>New response fields</h3>
+  <ul>
+    <li><code>max_input_tokens</code> — the model's context window size (e.g.
+        <code>1000000</code> for Opus 4.6 and Sonnet 4.6).</li>
+    <li><code>max_tokens</code> — maximum output tokens the model can generate
+        (e.g. <code>128000</code> for Opus 4.6, <code>64000</code> for Sonnet 4.6).</li>
+    <li><code>capabilities</code> — a structured object listing supported features such as
+        extended thinking, vision, tool use, streaming, and structured outputs.</li>
+  </ul>
+
+  <h3>Example — dynamic model selection</h3>
+  <pre><code>import anthropic
+
+client = anthropic.Anthropic()
+
+# List all available models with their capabilities
+models = client.models.list()
+
+for model in models.data:
+    caps = model.capabilities
+    if caps.get("extended_thinking") and model.max_input_tokens >= 1_000_000:
+        print(f"{model.id}: 1M context + thinking ✓")
+
+# Or fetch a single model's limits
+m = client.models.retrieve("claude-sonnet-4-6")
+print(f"Max input:  {m.max_input_tokens:,} tokens")
+print(f"Max output: {m.max_tokens:,} tokens")</code></pre>
+
+  <h3>Best practices</h3>
+  <ul>
+    <li><strong>Don't hard-code limits</strong> — fetch them at startup or cache them with a
+        short TTL so your app automatically picks up when a model's capabilities change.</li>
+    <li><strong>Gate features on capabilities</strong> — check <code>capabilities.extended_thinking</code>
+        before setting <code>thinking={"type": "adaptive"}</code> to avoid errors on models
+        that don't support it.</li>
+    <li><strong>Use <code>max_input_tokens</code> to chunk</strong> — if your input may exceed
+        the context window, divide it by <code>max_input_tokens</code> to determine your
+        chunk strategy dynamically.</li>
+  </ul>
+
+  <div class="callout tip">
+    <p><strong>Tip</strong> The capabilities object is the authoritative source of truth for
+    what a model can do — more reliable than documentation, which may lag behind model
+    releases. Build your feature-gating logic against the API response, not a static
+    reference list.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">models-API</span>
+    <span class="tag">capabilities</span>
+    <span class="tag">API</span>
+    <span class="tag">developer-platform</span>
+    <span class="tag">best-practices</span>
+  </div>
+</article>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="index.html">← Back to index</a></p>
+  </footer>
+
+</body>
+</html>

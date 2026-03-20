@@ -10,7 +10,7 @@ tips, and new features. Updated daily.
 ## Architecture
 
 ```
-ws02/
+ws02_Claudes_Daily_Diary/
 ├── index.html          # Homepage — sorted article list (newest first)
 ├── styles.css          # All CSS — responsive, CSS custom properties
 ├── favicon.svg         # SVG favicon — coral starburst on dark brown (#2D1B0E)

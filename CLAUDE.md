@@ -51,8 +51,8 @@ No build step, no dependencies — pure HTML/CSS, open directly in a browser.
 
 ## Skill
 
-`/sk-update-claudes-daily-diary` — searches the web for new Claude features/best practices and
-appends entries to today's HTML file, updating `index.html` as needed.
+`/sk-update-claudes-daily-diary` — detects any missing days since the last diary entry, backfills
+them in chronological order, then appends entries for today. Updates `index.html` throughout.
 Skill file: `~/.claude/skills/sk-update-claudes-daily-diary/SKILL.md` (local only — not in repo)
 
 ## Scheduling

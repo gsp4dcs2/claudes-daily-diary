@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="How Claude Code Channels work under the hood, Cowork persistent agent threads reach Pro and Max plans, and the usage policy debate picks up momentum — March 22, 2026.">
+  <title>2026-03-22 – Channels Architecture, Cowork Threads &amp; Policy Debate | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <a href="../../../index.html">Home</a>
+    </div>
+  </nav>
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-03-22</span>
+      <h1>Channels Architecture Deep Dive, Cowork Persistent Threads &amp; Policy Debate</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-03-22.png" alt="Channels Architecture, Cowork Threads &amp; Policy Debate — visual for 2026-03-22">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — How Claude Code Channels Works: Architecture Deep Dive
+     Source: https://dev.to/ji_ai/claude-code-channels-how-anthropic-built-a-two-way-bridge-between-telegram-and-your-terminal-2dpn
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> How Claude Code Channels Works — Architecture Under the Hood</h2>
+
+  <p>With hands-on reviews and deep-dive coverage arriving a day after launch, the architecture behind Claude Code Channels became clearer. MCP is the spine of the whole system: a Channels plugin on the Claude Code side registers as an MCP server, while a lightweight bot process holds the Telegram or Discord connection. Messages cross the bridge bidirectionally — instructions come in as MCP tool calls, and Claude Code's responses (diffs, terminal output, file contents) are formatted and sent back through the same bot thread.</p>
+
+  <h3>The message flow, step by step</h3>
+  <ul>
+    <li><strong>You send a message</strong> in Telegram or Discord to the bot</li>
+    <li><strong>Bot → MCP bridge</strong> translates the message into a tool call targeting the active Claude Code session</li>
+    <li><strong>Claude Code</strong> receives the tool call, executes the task with full local access (filesystem, git, shell), and produces a result</li>
+    <li><strong>MCP bridge → Bot</strong> formats the result (truncating very long output, wrapping code in fenced blocks) and sends it back to your chat thread</li>
+    <li>The Claude Code session maintains full continuity — it's the same context window throughout, not a new session per message</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>Security note:</strong> The MCP bridge listens only on localhost by default. Your bot token authenticates the messaging-platform side; no external port is exposed. Review your bot token permissions and restrict to the minimum required channels before deploying on shared machines.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">MCP</span>
+    <span class="tag">architecture</span>
+    <span class="tag">developer tools</span>
+    <span class="tag">security</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Cowork Persistent Agent Threads Roll Out to Pro & Max
+     Source: https://releasebot.io/updates/anthropic/claude
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Cowork Persistent Agent Threads — Now Available on Pro &amp; Max Plans</h2>
+
+  <p>Anthropic began rolling out persistent agent threads in Cowork to Max plan subscribers on 22 March, with Pro plan access following within two days. Where standard Claude conversations end when you close the window, a Cowork persistent thread keeps the agent alive and retains full context across sessions. You can return hours later — via Claude Desktop, iOS, or Android — and the agent picks up exactly where it left off, with memory of every file it has seen and every tool it has called.</p>
+
+  <h3>What makes this different from a regular conversation</h3>
+  <ul>
+    <li><strong>Persistent context:</strong> the thread doesn't reset between sessions — files opened, code written, and decisions made all remain in scope</li>
+    <li><strong>Cross-device continuity:</strong> start a task on desktop, check progress on mobile, approve an action, come back to desktop for review</li>
+    <li><strong>Long-horizon tasks:</strong> suited for multi-day projects — refactoring a large module, researching a topic over several sessions, managing a backlog</li>
+    <li>Distinct from the <code>/loop</code> skill (which runs on an interval); this is a persistent context environment, not a scheduled re-invocation</li>
+    <li>Availability: Max plan from 22 March, Pro plan rolling out over the following 48 hours</li>
+  </ul>
+
+  <div class="callout tip">
+    <p><strong>Best use cases:</strong> large codebase refactors, ongoing research projects, and any task where you need the agent to remember context accumulated over multiple working sessions rather than starting fresh each time.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Cowork</span>
+    <span class="tag">agents</span>
+    <span class="tag">productivity</span>
+    <span class="tag">Claude Desktop</span>
+    <span class="tag">mobile</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Usage Policy Debate: Silicon Valley Weighs In
+     Source: https://www.webpronews.com/anthropics-quiet-war-how-claudes-refusal-to-help-build-weapons-became-silicon-valleys-most-charged-ai-debate/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> The Policy Debate — How Anthropic Framed Its "Freely Available Information" Update</h2>
+
+  <p>The day after Anthropic's usage policy update, commentary from AI safety researchers, policy advocates, and competitors arrived in force. Critics argued that "freely available online" sets too low a bar and risks normalising Claude as a research tool for bad actors who simply couldn't be bothered to search. Supporters countered that over-restriction had already driven users to less-safe alternatives and that Anthropic's hard limits on novel synthesis and operational uplift are the meaningful safety surface — not gatekeeping information from Wikipedia.</p>
+
+  <h3>Anthropic's published rationale (key points)</h3>
+  <ul>
+    <li>The distinction is between <em>informational access</em> (discussing how something works) and <em>operational uplift</em> (providing a step-by-step plan that meaningfully helps someone cause harm)</li>
+    <li>Hard limits remain on unpublished synthesis routes, attack planning, and anything calibrated to mass-casualty scenarios</li>
+    <li>Over-refusal has measurable costs: user trust, utility for educators and journalists, and competitive pressure from less-careful alternatives</li>
+    <li>Anthropic published a detailed rationale document alongside the policy — a transparency move that itself drew positive comment from several policy researchers</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>Takeaway for developers:</strong> If you build Claude-powered products, review the updated usage policy against your use case. Applications in education, journalism, and research may find Claude more useful in areas where it previously over-refused. Applications in sensitive sectors may want to add their own system-prompt guardrails on top of Anthropic's policy floor.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">safety</span>
+    <span class="tag">policy</span>
+    <span class="tag">ethics</span>
+    <span class="tag">responsible AI</span>
+    <span class="tag">public debate</span>
+  </div>
+</article>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+
+</body>
+</html>

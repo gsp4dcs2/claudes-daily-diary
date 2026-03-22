@@ -613,6 +613,135 @@ def img_malevich():
     return base.convert("RGB")
 
 
+def img_seurat_20260321():
+    """Georges Seurat pointillist style — messaging/channels network theme."""
+    base = Image.new("RGB", (W, H), (12, 18, 45))   # deep navy
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Background dot field — faint, low-saturation scatter
+    for _ in range(3000):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        r = rng.randint(1, 3)
+        val = rng.randint(30, 80)
+        draw.ellipse([(x-r, y-r), (x+r, y+r)], fill=(val, val+10, val+30))
+
+    # 2. Three glowing node circles representing network hubs
+    nodes = [(280, 200), (620, 340), (960, 180)]
+    halo_colours = [
+        [(255,80,40), (255,140,60), (255,200,120), (255,240,200)],
+        [(40,120,255), (80,180,255), (140,220,255), (210,240,255)],
+        [(60,200,80), (100,230,100), (160,250,140), (220,255,200)],
+    ]
+    for (nx, ny), hcols in zip(nodes, halo_colours):
+        for radius, col in zip([120, 80, 45, 20], hcols):
+            nl = layer()
+            nd = ImageDraw.Draw(nl)
+            # Fill halo with tiny dots
+            for _ in range(600):
+                angle = rng.uniform(0, 2 * math.pi)
+                dist = rng.uniform(0, radius)
+                dx = int(nx + dist * math.cos(angle))
+                dy = int(ny + dist * math.sin(angle))
+                dr = rng.randint(1, 4)
+                alpha = int(180 * (1 - dist / radius))
+                nd.ellipse([(dx-dr, dy-dr), (dx+dr, dy+dr)],
+                           fill=(col[0], col[1], col[2], alpha))
+            base = comp(base, nl)
+
+    # 3. Connection arcs between nodes — dense dot trails
+    arc_pairs = [(nodes[0], nodes[1]), (nodes[1], nodes[2]), (nodes[0], nodes[2])]
+    arc_colours = [(255, 160, 60), (100, 180, 255), (140, 255, 140)]
+    for (ax, ay), (bx, by) in arc_pairs:
+        al = layer()
+        ad = ImageDraw.Draw(al)
+        for t_i in range(200):
+            t = t_i / 199
+            mx = ax + (bx - ax) * t
+            my = ay + (by - ay) * t - 60 * math.sin(math.pi * t)   # arc bow
+            dr = rng.randint(2, 5)
+            col = arc_colours[arc_pairs.index(((ax, ay), (bx, by)))]
+            alpha = int(200 * math.sin(math.pi * t))
+            ad.ellipse([(mx-dr, my-dr), (mx+dr, my+dr)],
+                       fill=(col[0], col[1], col[2], alpha))
+        base = comp(base, al)
+
+    # 4. Foreground spectral scatter — bright dots across full canvas
+    spectral = [
+        (255, 50, 50), (255, 140, 0), (255, 230, 0),
+        (50, 220, 80), (50, 150, 255), (180, 80, 255),
+    ]
+    fl = layer()
+    fd = ImageDraw.Draw(fl)
+    for _ in range(1200):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        r = rng.randint(1, 4)
+        col = rng.choice(spectral)
+        fd.ellipse([(x-r, y-r), (x+r, y+r)],
+                   fill=(col[0], col[1], col[2], rng.randint(60, 180)))
+    base = comp(base, fl)
+
+    return base
+
+
+def img_leger_20260322():
+    """Fernand Leger mechanical/industrial style — architecture & policy theme."""
+    base = Image.new("RGB", (W, H), (28, 28, 32))   # near-black charcoal
+
+    # 1. Bold flat background bands
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bd.rectangle([(0, 0), (W, 210)], fill=(50, 50, 58, 255))
+    bd.rectangle([(0, 420), (W, H)], fill=(42, 42, 50, 255))
+    base = comp(base, bl)
+
+    # 2. Large mechanical circles — Leger's signature tubular forms
+    circles = [
+        (160, 315, 200, (210, 30, 30, 220)),    # big red
+        (560, 180, 160, (235, 200, 0, 200)),     # yellow
+        (920, 380, 180, (30, 90, 200, 220)),     # blue
+        (760, 120, 90,  (210, 30, 30, 180)),     # small red
+        (340, 490, 110, (235, 200, 0, 160)),     # small yellow
+        (1080, 200, 120,(30, 90, 200, 180)),     # small blue
+    ]
+    for cx, cy, r, col in circles:
+        cl = layer()
+        cd = ImageDraw.Draw(cl)
+        # Thick outline ring — Leger's bold black contour
+        cd.ellipse([(cx-r, cy-r), (cx+r, cy+r)], fill=col, outline=(0,0,0,255), width=8)
+        # Inner highlight
+        cd.ellipse([(cx-r//3, cy-r//2), (cx+r//5, cy-r//4)],
+                   fill=(255, 255, 255, 80))
+        base = comp(base, cl)
+
+    # 3. Mechanical cylinders / pipe shapes (rectangles with rounded caps)
+    pipes = [
+        (380, 100, 480, 560, (28, 28, 32, 255), 12),   # dark vertical bar
+        (700, 260, 1150, 320, (210, 30, 30, 200), 8),   # red horizontal bar
+        (50,  380, 600,  430, (30, 90, 200, 200), 8),   # blue horizontal bar
+        (820, 50,  870,  580, (235, 200, 0, 180), 8),   # yellow vertical
+    ]
+    for x0, y0, x1, y1, col, w in pipes:
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        pd.rectangle([(x0, y0), (x1, y1)], fill=col, outline=(0,0,0,255), width=w)
+        base = comp(base, pl)
+
+    # 4. Grid of small machine-bolt dots — Leger's industrial texture
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    for gx in range(60, W, 120):
+        for gy in range(60, H, 120):
+            r = 10
+            dd.ellipse([(gx-r, gy-r), (gx+r, gy+r)],
+                       fill=(200, 195, 185, 140), outline=(0,0,0,200), width=3)
+    base = comp(base, dl)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -623,7 +752,9 @@ DAYS = [
     ("2026-03-17", img_klee,       "Agent Teams",      "Paul Klee"),
     ("2026-03-18", img_delaunay,   "Dispatch",         "Robert Delaunay"),
     ("2026-03-19", img_miro,       "/ loop",           "Joan Miro"),
-    ("2026-03-20", img_malevich,   "Security",         "Kazimir Malevich"),
+    ("2026-03-20", img_malevich,          "Security",    "Kazimir Malevich"),
+    ("2026-03-21", img_seurat_20260321,   "Channels",    "Georges Seurat"),
+    ("2026-03-22", img_leger_20260322,    "Policy",      "Fernand Léger"),
 ]
 
 os.makedirs(OUT, exist_ok=True)

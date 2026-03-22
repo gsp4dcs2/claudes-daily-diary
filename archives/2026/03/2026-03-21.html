@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Claude Code Channels bring Telegram &amp; Discord to your terminal, a usage policy update, --bare flag for CI pipelines, and extended thinking display options — March 21, 2026.">
+  <title>2026-03-21 – Code Channels, Policy Update, CI Flags &amp; Extended Thinking | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <a href="../../../index.html">Home</a>
+    </div>
+  </nav>
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-03-21</span>
+      <h1>Claude Code Channels, Policy Update, CI Flags &amp; Extended Thinking Display</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-03-21.png" alt="Claude Code Channels, Policy Update, CI Flags &amp; Extended Thinking — visual for 2026-03-21">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code Channels: Telegram & Discord Integration
+     Source: https://venturebeat.com/orchestration/anthropic-just-shipped-an-openclaw-killer-called-claude-code-channels
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Code Channels — Message Your Agent from Telegram or Discord</h2>
+
+  <p>Anthropic shipped Claude Code Channels as a research preview on 21 March 2026, letting you send instructions from Telegram or Discord directly into a running Claude Code session on your local machine. The session responds with full filesystem, MCP, and git access — then replies back through the same chat thread. For developers who spend time away from their desk, this means you can kick off a refactor, check agent progress, or request a build report without ever opening a terminal.</p>
+
+  <h3>How it works</h3>
+  <ul>
+    <li>Claude Code v2.1.80+ exposes a Channels plugin that registers with Telegram or Discord via a bot token</li>
+    <li>Messages are routed through MCP — the same open standard used for local tool extensions</li>
+    <li>Bidirectional: instructions flow in, results (diffs, test output, error logs) flow back out as formatted messages</li>
+    <li>The agent retains full context of the open session — no cold start with each message</li>
+    <li>Community-requested next targets: Slack, WhatsApp, and iMessage</li>
+  </ul>
+
+  <div class="callout tip">
+    <p><strong>Get started:</strong> Update to Claude Code v2.1.80+, run <code>/channels setup</code> in your session, and follow the bot-token wizard for your preferred platform. Full setup takes under five minutes.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">MCP</span>
+    <span class="tag">productivity</span>
+    <span class="tag">developer tools</span>
+    <span class="tag">mobile</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Anthropic Usage Policy Update: Freely Available Information
+     Source: https://www.anthropic.com/news/usage-policy-update
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Anthropic's Usage Policy Update — Publicly Available Information Now Permitted</h2>
+
+  <p>Anthropic updated Claude's usage policy to allow responses about weapons, explosives, and regulated substances when the information is already freely and widely available online. The core reasoning: if a user can retrieve the same content from a standard web search in under a minute, refusing to discuss it creates friction without meaningfully reducing risk. Claude still maintains hard limits on novel synthesis routes, non-public technical details, and anything that would provide meaningful operational uplift to someone attempting mass harm — those limits are unchanged.</p>
+
+  <h3>What changed</h3>
+  <ul>
+    <li><strong>Permitted:</strong> discussing publicly documented properties of common chemicals, historical weapons systems, and regulated substances covered extensively in textbooks and online references</li>
+    <li><strong>Still blocked:</strong> novel or unpublished synthesis methods, step-by-step operational guidance for attacks, and anything calibrated to meaningfully assist mass-casualty scenarios</li>
+    <li>The update represents a calibration, not a rollback — Anthropic frames it as aligning Claude's behaviour with realistic threat models rather than symbolic caution</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>Why this matters:</strong> Over-refusal has a real cost — it degrades trust, pushes users to less-safe alternatives, and makes Claude less useful for legitimate researchers, educators, and journalists. Anthropic is trying to thread the needle between meaningful safety and unnecessary paternalism.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">safety</span>
+    <span class="tag">policy</span>
+    <span class="tag">responsible AI</span>
+    <span class="tag">usage policy</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude Code --bare Flag and --channels Permission Relay
+     Source: https://releasebot.io/updates/anthropic/claude-code
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Code Gets <code>--bare</code> Flag for CI Pipelines &amp; Permission Relay for Channels</h2>
+
+  <p>The same Claude Code release that shipped Channels also introduced two significant improvements for power users. The <code>--bare</code> flag strips Claude Code down to essentials when running in headless <code>-p</code> mode — skipping hooks, LSP sync, plugin directory walks, and skill loading. This makes Claude Code far easier to embed in CI/CD pipelines where startup overhead and side-effects matter. Alongside it, the <code>--channels</code> permission relay allows a channel server that declares the <code>permission</code> capability to forward tool-approval prompts directly to your mobile device — closing the oversight loop for long-running background agents.</p>
+
+  <h3>Key improvements in this release</h3>
+  <ul>
+    <li><code>--bare</code> on <code>claude -p</code> calls: no hooks, no LSP, no plugin scan — clean, fast, scriptable</li>
+    <li><code>--channels</code> relay: tool-approval prompts appear in Telegram/Discord, letting you approve or deny from your phone</li>
+    <li>Bug fix: multiple concurrent Claude Code sessions no longer trigger repeated OAuth re-authentication</li>
+    <li>Minimum version for all Channels features: Claude Code v2.1.80+</li>
+  </ul>
+
+  <div class="callout tip">
+    <p><strong>CI tip:</strong> Use <code>claude -p --bare "your task"</code> in GitHub Actions or similar pipelines to avoid plugin initialisation noise in your logs and shave seconds off each run.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">CI/CD</span>
+    <span class="tag">automation</span>
+    <span class="tag">developer tools</span>
+    <span class="tag">permissions</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 4 — Extended Thinking display: "omitted" Option
+     Source: https://releasebot.io/updates/anthropic
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Extended Thinking Gets <code>display: "omitted"</code> — Faster Streaming Without Losing State</h2>
+
+  <p>Anthropic added a <code>thinking.display: "omitted"</code> option to the API's extended thinking configuration. When set, the API returns thinking blocks with an empty <code>thinking</code> field rather than the full chain-of-thought text — but critically, the cryptographic signature is still preserved. This means multi-turn continuity is maintained even when thinking content is stripped from the streamed response, because Claude can still verify the integrity of prior thinking blocks without re-reading them.</p>
+
+  <h3>Why use it</h3>
+  <ul>
+    <li><strong>Bandwidth:</strong> extended thinking blocks can be very large; omitting them from the stream can reduce response size significantly for long reasoning chains</li>
+    <li><strong>Latency:</strong> less data to transfer means faster time-to-first-useful-token for the visible response</li>
+    <li><strong>Multi-turn integrity:</strong> the signature means Claude still trusts its own prior reasoning in follow-up turns, even without seeing the full text again</li>
+    <li>Ideal for production apps that use extended thinking internally but never surface the chain-of-thought to end users</li>
+  </ul>
+
+  <pre><code>response = client.messages.create(
+    model="claude-opus-4-6",
+    thinking={
+        "type": "enabled",
+        "budget_tokens": 8000,
+        "display": "omitted"   # ← new option
+    },
+    messages=[...]
+)</code></pre>
+
+  <div class="tag-list">
+    <span class="tag">extended thinking</span>
+    <span class="tag">API</span>
+    <span class="tag">streaming</span>
+    <span class="tag">performance</span>
+    <span class="tag">developer tools</span>
+  </div>
+</article>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+
+</body>
+</html>

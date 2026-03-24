@@ -441,6 +441,53 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
   text-overflow: ellipsis;
 }
 
+/* ── Show-more / older entries ───────────────────────────── */
+.article-list li.list-hidden { display: none; }
+
+.article-list-footer {
+  margin-top: 20px;
+  text-align: center;
+}
+.btn-show-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 28px;
+  font-size: 0.875rem;
+  font-family: var(--font);
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, box-shadow 0.15s;
+}
+.btn-show-more:hover {
+  border-color: var(--primary-light);
+  color: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+.btn-show-more .more-count {
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+/* Month group headings — injected by JS when expanded */
+.month-divider {
+  list-style: none;
+  padding: 20px 4px 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+  cursor: default;
+}
+.month-divider:first-child { border-top: none; padding-top: 0; }
+
 /* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 600px) {
   .site-header { min-height: 220px; }

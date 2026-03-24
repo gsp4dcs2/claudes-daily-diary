@@ -1,0 +1,10 @@
+# Memory Index — Claude's Daily Diary (ws02_Claudes_Daily_Diary)
+
+| File | Type | Summary |
+|------|------|---------|
+| [project_overview.md](project_overview.md) | project | Purpose, key files, conventions, skill, and design of the ws02_Claudes_Daily_Diary project |
+| [server_deployment.md](server_deployment.md) | project | claudebeat.ai VM setup status, full stack spec, pending deployment steps, and DNS instructions |
+| [user_profile.md](user_profile.md) | user | User background, infrastructure, technical level, and collaboration preferences |
+| [github_repo.md](github_repo.md) | reference | GitHub repo and Pages URL; git remote `origin` already configured |
+| [feedback_editor.md](feedback_editor.md) | feedback | Use nano (not vi) for VM command-line editing |
+| [feedback_questions_log.md](feedback_questions_log.md) | feedback | Update notes/questions.md silently — never narrate the edit in replies |

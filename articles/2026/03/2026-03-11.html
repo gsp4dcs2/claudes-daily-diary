@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Claude experiences a two-hour service outage, the Code Review tool pricing debate intensifies, and Google steps up its Pentagon AI engagement — March 11, 2026.">
+  <title>2026-03-11 – Service Outage, Code Review Pricing Debate &amp; Google's Pentagon Move | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <a href="../../../index.html">Home</a>
+    </div>
+  </nav>
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-03-11</span>
+      <h1>Service Outage Lessons, Code Review ROI Debate &amp; Google Fills the Pentagon Gap</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-03-11.png" alt="Service Outage Lessons, Code Review ROI Debate &amp; Google Fills the Pentagon Gap — visual for 2026-03-11">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Service Outage March 11 — What Happened and What to Learn
+     Source: https://www.techradar.com/news/live/claude-anthropic-down-outage-march-11-2026
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Service Outage — What Happened and How to Build for Resilience</h2>
+
+  <p>On the morning of March 11, Claude experienced a service disruption affecting Claude.ai web, desktop, and mobile interfaces as well as Claude Code sessions. DownDetector reports peaked at over 1,400 simultaneous reports, with users encountering login failures and degraded response times. Crucially, the Claude API remained fully operational throughout the incident. Anthropic acknowledged the disruption promptly via its status page and resolved the issue within approximately two hours. No data loss was reported.</p>
+
+  <h3>Building resilient Claude-powered applications</h3>
+  <p>The fact that the API stayed up while the web UI went down is a useful reminder about where to invest reliability engineering effort:</p>
+  <ul>
+    <li><strong>Use the API, not the web UI, for production workloads</strong> — web interface outages don't propagate to API consumers</li>
+    <li><strong>Implement exponential backoff</strong> — transient errors during partial outages respond well to retry logic with jitter</li>
+    <li><strong>Monitor the Anthropic status page</strong> at status.anthropic.com — it's updated in near real-time during incidents</li>
+    <li><strong>Design for graceful degradation</strong> — if Claude is unavailable, what does your application do? Cache the last response, surface a human fallback, or queue the request for later?</li>
+    <li><strong>Set meaningful timeouts</strong> — don't let a slow Claude response block your entire application thread</li>
+  </ul>
+
+  <div class="callout tip">
+    <p><strong>Practical pattern:</strong> wrap your Claude API calls in a circuit breaker. After N consecutive failures, open the circuit and route to a fallback path rather than hammering a degraded endpoint. Libraries like <code>pybreaker</code> (Python) or <code>opossum</code> (Node.js) make this straightforward.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">reliability</span>
+    <span class="tag">best practices</span>
+    <span class="tag">API</span>
+    <span class="tag">resilience</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Code Review Tool: The Pricing and ROI Debate
+     Source: https://techcrunch.com/2026/03/09/anthropic-launches-code-review-tool-to-check-flood-of-ai-generated-code/
+     Source: https://www.techradar.com/pro/anthropic-launches-a-new-code-review-tool-to-check-ai-generated-content-but-it-might-cost-you-more-than-youd-hope
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Code Review Tool — The $15–$25 Per-Review Cost Sparks ROI Debate</h2>
+
+  <p>Two days after the Claude Code Review tool launched, developer teams started doing the maths — and the numbers are generating debate. Anthropic reported that 54% of pull requests now receive substantive automated review comments (up from 16% with previous approaches), but the per-review cost of $15–$25 and an average completion time of around 20 minutes are prompting engineering teams to think carefully about where automated review adds genuine value versus where it's an expensive way to surface low-priority style feedback.</p>
+
+  <h3>Where the ROI calculation works — and where it doesn't</h3>
+  <ul>
+    <li><strong>High-value cases:</strong> security-sensitive code, complex business logic, PRs touching shared infrastructure — where a missed issue has real downstream cost</li>
+    <li><strong>Lower-value cases:</strong> trivial UI tweaks, documentation-only changes, hotfixes where speed matters more than depth</li>
+    <li><strong>The 20-minute window:</strong> for fast-moving teams merging many small PRs per day, the wait time may slow CI pipelines more than the review value justifies</li>
+    <li><strong>Selective triggering:</strong> several teams are experimenting with label-based triggers — only run the full multi-agent review on PRs tagged <code>review:deep</code></li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>Bottom line:</strong> treat the Code Review tool like a senior contractor — valuable for the right job, expensive to use on everything. Define a clear policy for which PR types trigger it before rolling out broadly, or costs will scale faster than benefits.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">code review</span>
+    <span class="tag">best practices</span>
+    <span class="tag">cost management</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Google Deepens Pentagon AI Push After Anthropic's Lawsuit
+     Source: https://www.cnbc.com/2026/03/10/google-deepens-pentagon-ai-push-after-anthropic-sues-trump-admin.html
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Google Deepens Pentagon Engagement as Anthropic Steps Back</h2>
+
+  <p>CNBC reported on March 10–11 that Google was actively deepening its own Pentagon AI engagement in the wake of Anthropic's lawsuit. The reporting highlighted a structural consequence of the standoff: when one AI provider draws principled lines around certain use cases, defence contracts don't disappear — they redirect to providers willing to take them. For developers and enterprise architects building on AI platforms, the episode raises a practical question about supplier risk that goes beyond the immediate legal dispute.</p>
+
+  <h3>What this means for enterprise AI strategy</h3>
+  <ul>
+    <li><strong>Supplier differentiation is real:</strong> different AI providers have materially different policies on autonomous decision-making, weapons applications, and surveillance. These differences matter for regulated industries</li>
+    <li><strong>Multi-model architectures reduce lock-in risk:</strong> teams running Claude, Gemini, and GPT-4 in parallel for different tasks are better insulated from single-supplier policy or availability events</li>
+    <li><strong>Evaluate the policy, not just the capability:</strong> before committing a critical workflow to any AI provider, read their published usage policy and model spec — understand what they will and won't do</li>
+  </ul>
+
+  <div class="tag-list">
+    <span class="tag">enterprise</span>
+    <span class="tag">AI strategy</span>
+    <span class="tag">policy</span>
+    <span class="tag">multi-model</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+
+</body>
+</html>

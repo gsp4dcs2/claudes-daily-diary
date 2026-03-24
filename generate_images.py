@@ -742,6 +742,162 @@ def img_leger_20260322():
     return base
 
 
+def img_franz_marc_20260310():
+    """Franz Marc — jewel-toned, stylised organic forms — APAC expansion / new territory."""
+    # Rich cobalt background
+    base = Image.new("RGB", (W, H), (18, 42, 105))
+
+    # 1. Large stylised animal/landscape shape — Franz Marc's signature
+    # Rolling hills / organic forms in emerald and gold
+    fl = layer()
+    fd = ImageDraw.Draw(fl)
+    # Sweeping cobalt-to-emerald hill form across lower half
+    fd.polygon([(0, 420), (300, 280), (600, 350), (900, 240), (1200, 320), (1200, 630), (0, 630)],
+               fill=(22, 140, 90, 230))
+    base = comp(base, fl)
+
+    # 2. Second organic hill in teal — depth layer
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    sd.polygon([(0, 500), (200, 380), (500, 440), (800, 360), (1100, 430), (1200, 400),
+                (1200, 630), (0, 630)], fill=(18, 110, 130, 200))
+    base = comp(base, sl)
+
+    # 3. Large stylised sun/moon disc — warm amber
+    ol = layer()
+    od = ImageDraw.Draw(ol)
+    od.ellipse([(820, 30), (1100, 310)], fill=(220, 160, 20, 200))
+    # Inner highlight
+    od.ellipse([(870, 70), (1050, 250)], fill=(240, 200, 60, 120))
+    base = comp(base, ol)
+
+    # 4. Abstract animal forms — Marc's horses/deer as geometric colour masses
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    # Blue stylised horse body (left)
+    ad.ellipse([(60, 180), (320, 400)], fill=(40, 80, 200, 180))
+    ad.polygon([(60, 300), (0, 200), (100, 160)], fill=(40, 80, 200, 160))  # head
+    # Red-orange form (right foreground)
+    ad.ellipse([(280, 300), (520, 500)], fill=(200, 70, 30, 190))
+    base = comp(base, al)
+
+    # 5. Jewel-tone scatter — Marc's characteristic gem-like colour accents
+    jl = layer()
+    jd = ImageDraw.Draw(jl)
+    jewels = [(160, 60, (180, 30, 120, 180)),   # magenta
+              (500, 120, (220, 180, 20, 180)),   # gold
+              (700, 200, (30, 160, 200, 170)),   # cyan
+              (1050, 380, (140, 30, 180, 170)),  # purple
+              (350, 480, (220, 100, 20, 160)),   # amber
+              (900, 500, (30, 140, 80, 160))]    # green
+    for jx, jy, jcol in jewels:
+        jr = rng.randint(28, 52)
+        jd.ellipse([(jx-jr, jy-jr), (jx+jr, jy+jr)], fill=jcol)
+    base = comp(base, jl)
+
+    return base
+
+
+def img_calder_20260311():
+    """Alexander Calder — primary shapes on thin lines, mobile balance — mixed/flexible day."""
+    # White background
+    base = Image.new("RGB", (W, H), (250, 250, 250))
+
+    # 1. Thin black structural lines — Calder's mobile wires
+    wl = layer()
+    wd = ImageDraw.Draw(wl)
+    # Main horizontal spine
+    wd.line([(100, 180), (1100, 180)], fill=(15, 15, 15, 255), width=3)
+    # Drooping sub-arms
+    wd.line([(250, 180), (250, 320)], fill=(15, 15, 15, 255), width=2)
+    wd.line([(550, 180), (480, 400)], fill=(15, 15, 15, 255), width=2)
+    wd.line([(550, 180), (640, 380)], fill=(15, 15, 15, 255), width=2)
+    wd.line([(850, 180), (800, 340)], fill=(15, 15, 15, 255), width=2)
+    wd.line([(850, 180), (950, 420)], fill=(15, 15, 15, 255), width=2)
+    wd.line([(1050, 180), (1050, 300)], fill=(15, 15, 15, 255), width=2)
+    # Lower sub-arms
+    wd.line([(480, 400), (380, 520)], fill=(15, 15, 15, 255), width=2)
+    wd.line([(480, 400), (560, 500)], fill=(15, 15, 15, 255), width=2)
+    wd.line([(950, 420), (880, 540)], fill=(15, 15, 15, 255), width=2)
+    wd.line([(950, 420), (1040, 540)], fill=(15, 15, 15, 255), width=2)
+    # Vertical anchor line from top
+    wd.line([(600, 0), (600, 180)], fill=(15, 15, 15, 255), width=3)
+    base = comp(base, wl)
+
+    # 2. Calder's flat primary colour shapes hanging from the wires
+    shapes = [
+        # (x, y, size, shape, colour)
+        (250, 355, 50, 'circle', (220, 30, 30, 255)),     # red circle
+        (800, 355, 55, 'circle', (30, 80, 200, 255)),     # blue circle
+        (1050, 320, 40, 'rect',  (220, 185, 0, 255)),     # yellow rect
+        (380, 545, 48, 'circle', (220, 30, 30, 255)),     # red circle lower
+        (560, 520, 44, 'rect',   (30, 80, 200, 255)),     # blue rect
+        (880, 560, 46, 'circle', (220, 185, 0, 255)),     # yellow circle
+        (1040, 560, 42, 'rect',  (220, 30, 30, 255)),     # red rect
+        (640, 400, 38, 'circle', (15, 140, 70, 255)),     # green circle
+    ]
+    for sx, sy, sz, stype, scol in shapes:
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        if stype == 'circle':
+            pd.ellipse([(sx-sz, sy-sz), (sx+sz, sy+sz)], fill=scol)
+        else:
+            pd.rectangle([(sx-sz, sy-sz//2), (sx+sz, sy+sz//2)], fill=scol)
+        base = comp(base, pl)
+
+    # 3. Small black pivot dots at wire junctions
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    pivots = [(250, 180), (550, 180), (850, 180), (1050, 180),
+              (480, 400), (640, 380), (800, 340), (950, 420), (600, 180)]
+    for px, py in pivots:
+        dd.ellipse([(px-6, py-6), (px+6, py+6)], fill=(15, 15, 15, 255))
+    base = comp(base, dl)
+
+    return base
+
+
+def img_rothko_20260312():
+    """Mark Rothko colour field — luminous bands — certification/launch day reflective quality."""
+    # Deep charcoal background
+    base = Image.new("RGB", (W, H), (28, 22, 18))
+
+    def soft_band(img, y0, y1, colour, feather=60):
+        """Draw a soft-edged Rothko colour band."""
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        r, g, b = colour
+        # Core solid band
+        bd.rectangle([(80, y0 + feather), (W - 80, y1 - feather)], fill=(r, g, b, 220))
+        # Feathered edges — top
+        for i in range(feather):
+            alpha = int(180 * (i / feather))
+            bd.rectangle([(80 + i, y0 + i), (W - 80 - i, y0 + i + 1)], fill=(r, g, b, alpha))
+        # Feathered edges — bottom
+        for i in range(feather):
+            alpha = int(180 * ((feather - i) / feather))
+            bd.rectangle([(80 + i, y1 - i - 1), (W - 80 - i, y1 - i)], fill=(r, g, b, alpha))
+        return comp(img, bl)
+
+    # Three luminous Rothko bands
+    # Top — deep burgundy-crimson
+    base = soft_band(base, 40, 240, (140, 28, 42), feather=55)
+    # Middle — warm amber-gold (widest, most luminous)
+    base = soft_band(base, 220, 430, (195, 120, 30), feather=65)
+    # Bottom — muted terracotta-rust
+    base = soft_band(base, 400, 590, (160, 65, 40), feather=55)
+
+    # Luminous inner glow on middle band
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for i in range(40):
+        alpha = int(60 * (1 - i / 40))
+        gd.rectangle([(200 + i, 260 + i), (W - 200 - i, 390 - i)], fill=(240, 200, 80, alpha))
+    base = comp(base, gl)
+
+    return base
+
+
 def img_lissitzky_20260323():
     """El Lissitzky Constructivism — computer use / tooling theme."""
     # Cream/white background
@@ -869,6 +1025,9 @@ def img_moholy_20260324():
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
+    ("2026-03-10", img_franz_marc_20260310,  "APAC Expansion",  "Franz Marc"),
+    ("2026-03-11", img_calder_20260311,      "Balance",         "Alexander Calder"),
+    ("2026-03-12", img_rothko_20260312,      "Certification",   "Mark Rothko"),
     ("2026-03-13", img_kandinsky,  "Getting Started",  "Wassily Kandinsky"),
     ("2026-03-14", img_mondrian,   "1M Context",       "Piet Mondrian"),
     ("2026-03-15", img_futurism,   "Fast Mode",        "Giacomo Balla"),

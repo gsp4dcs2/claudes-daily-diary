@@ -742,6 +742,130 @@ def img_leger_20260322():
     return base
 
 
+def img_lissitzky_20260323():
+    """El Lissitzky Constructivism — computer use / tooling theme."""
+    # Cream/white background
+    base = Image.new("RGB", (W, H), (245, 242, 232))
+
+    # 1. Large bold diagonal red bar — Lissitzky's signature red wedge
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.polygon([(0, 420), (580, 0), (680, 0), (100, 420)], fill=(210, 25, 25, 240))
+    base = comp(base, rl)
+
+    # 2. Heavy black horizontal bar — constructivist structure
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bd.rectangle([(0, 280), (1200, 330)], fill=(15, 15, 15, 255))
+    base = comp(base, bl)
+
+    # 3. Bold black vertical bar — right side anchor
+    vl = layer()
+    vd = ImageDraw.Draw(vl)
+    vd.rectangle([(880, 0), (940, 630)], fill=(15, 15, 15, 255))
+    base = comp(base, vl)
+
+    # 4. Red circle — Lissitzky's focal point element
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    cd.ellipse([(980, 60), (1160, 240)], fill=(210, 25, 25, 230))
+    base = comp(base, cl)
+
+    # 5. Thin diagonal black lines — constructivist grid tension
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    for i in range(6):
+        x_off = i * 60
+        ld.line([(700 + x_off, 0), (700 + x_off - 180, 280)], fill=(15, 15, 15, 200), width=4)
+    base = comp(base, ll)
+
+    # 6. Small black filled square — geometric punctuation
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    sd.rectangle([(60, 60), (200, 200)], fill=(15, 15, 15, 255))
+    # White inner square — negative space
+    sd.rectangle([(90, 90), (170, 170)], fill=(245, 242, 232, 255))
+    base = comp(base, sl)
+
+    # 7. Red thin diagonal accent lines — lower right
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(5):
+        y_off = i * 30
+        ad.line([(950, 380 + y_off), (1190, 460 + y_off)], fill=(210, 25, 25, 180), width=3)
+    base = comp(base, al)
+
+    return base
+
+
+def img_moholy_20260324():
+    """László Moholy-Nagy Bauhaus — transparency, IPO, court theme."""
+    # White background
+    base = Image.new("RGB", (W, H), (252, 252, 252))
+
+    # 1. Large transparent overlapping circles — Moholy-Nagy's core motif
+    circles = [
+        (300, 220, 220, (220, 40, 40, 90)),    # red
+        (520, 300, 200, (30, 80, 200, 80)),    # blue
+        (420, 180, 180, (240, 200, 0, 70)),    # yellow
+        (680, 260, 160, (30, 80, 200, 70)),    # blue smaller
+        (260, 380, 140, (220, 40, 40, 60)),    # red smaller
+    ]
+    for cx, cy, r, col in circles:
+        cl = layer()
+        cd = ImageDraw.Draw(cl)
+        cd.ellipse([(cx-r, cy-r), (cx+r, cy+r)], fill=col, outline=(0, 0, 0, 120), width=3)
+        base = comp(base, cl)
+
+    # 2. Overlapping semi-transparent rectangles — Bauhaus geometry
+    rects = [
+        (700, 80, 1100, 380, (30, 80, 200, 50)),   # large blue rect
+        (820, 180, 1180, 500, (220, 40, 40, 45)),   # large red rect
+        (750, 300, 1050, 580, (240, 200, 0, 55)),   # yellow rect
+    ]
+    for x0, y0, x1, y1, col in rects:
+        rl = layer()
+        rd = ImageDraw.Draw(rl)
+        rd.rectangle([(x0, y0), (x1, y1)], fill=col, outline=(0, 0, 0, 100), width=2)
+        base = comp(base, rl)
+
+    # 3. Thin black structural lines — Bauhaus grid
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    # Horizontal
+    for y in [160, 315, 470]:
+        gd.line([(0, y), (1200, y)], fill=(20, 20, 20, 180), width=2)
+    # Vertical
+    for x in [420, 700, 950]:
+        gd.line([(x, 0), (x, 630)], fill=(20, 20, 20, 180), width=2)
+    base = comp(base, gl)
+
+    # 4. Solid primary accent shapes — small anchors
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    # Black filled circle top-right
+    ad.ellipse([(1050, 30), (1150, 130)], fill=(15, 15, 15, 255))
+    # Red small square bottom-left
+    ad.rectangle([(40, 490), (160, 590)], fill=(210, 25, 25, 255))
+    # Yellow triangle lower centre
+    ad.polygon([(560, 580), (640, 420), (720, 580)], fill=(220, 185, 0, 220))
+    base = comp(base, al)
+
+    # 5. Scatter of tiny primary dots — photogram texture
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    dot_cols = [(210, 25, 25, 160), (30, 80, 200, 160), (220, 185, 0, 160), (15, 15, 15, 140)]
+    for _ in range(120):
+        dx = rng.randint(0, W)
+        dy = rng.randint(0, H)
+        dr = rng.randint(3, 9)
+        col = dot_cols[rng.randint(0, 3)]
+        dd.ellipse([(dx-dr, dy-dr), (dx+dr, dy+dr)], fill=col)
+    base = comp(base, dl)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -754,7 +878,9 @@ DAYS = [
     ("2026-03-19", img_miro,       "/ loop",           "Joan Miro"),
     ("2026-03-20", img_malevich,          "Security",    "Kazimir Malevich"),
     ("2026-03-21", img_seurat_20260321,   "Channels",    "Georges Seurat"),
-    ("2026-03-22", img_leger_20260322,    "Policy",      "Fernand Léger"),
+    ("2026-03-22", img_leger_20260322,       "Policy",        "Fernand Léger"),
+    ("2026-03-23", img_lissitzky_20260323,  "Computer Use",  "El Lissitzky"),
+    ("2026-03-24", img_moholy_20260324,     "IPO & Court",   "László Moholy-Nagy"),
 ]
 
 os.makedirs(OUT, exist_ok=True)
@@ -773,4 +899,4 @@ for date, fn, kw, artist in DAYS:
     print(f"  OK  {date}  ->  {main_path}")
     print(f"      {date}-thumb  ->  {thumb_path}")
 
-print("\nDone! All 16 files generated.")
+print(f"\nDone! All {len(DAYS) * 2} files generated.")

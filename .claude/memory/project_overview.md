@@ -44,7 +44,22 @@ this into a real public publication that covers its own costs through display ad
 2. **Artist-style teaser images** — each day has a unique 1200×630 image inspired by a historic artist
 3. **Index thumbnails** — 96×96 center-crop shown left of every list item in index.html
 4. **Automated skill** `/sk-update-claudes-daily-diary` — researches news, writes HTML, generates artist image, updates index + SEARCH_INDEX
-5. **Artist palette** — 15 artists documented in SKILL.md Step 3c with topic-matching guidance
+5. **Artist palette** — 15 artists documented in SKILL.md Step 3c with topic-matching guidance; user suggested extending with vinyl cover artists (Warhol, Peter Blake, Storm Thorgerson, Reid Miles, Jamie Reid)
+6. **Retrospective backfill skill** `/sk-backfill-claudebeat {yyyy-mm-dd}` — fills missing dates before the oldest article with no-future-knowledge rule; all entries tagged `retrospective`; inserts into bottom of article list and end of SEARCH_INDEX
+7. **Show-more pagination** — index page shows 7 most recent entries by default; "Show all entries (N older)" button reveals full list with month-group headings injected dynamically; search overrides show-more state automatically
+8. **Editorial source whitelist** — `notes/sources.md` defines ✅/🔍/❌ source tiers and four content guardrails (no political commentary, no speculation as fact, no culture-war adjacency, Anthropic-relevance test)
+
+## Content coverage
+
+Currently 2026-03-01 through 2026-03-24 (24 days). Entries 03-01 to 03-09 are retrospective (backfilled).
+
+## Known technical note — generate_images.py rng
+
+The module uses a single `rng = Random(42)` shared across all motif functions. Adding new dated functions that call `rng` shifts the random state for all subsequent rng-using functions. When backfilling, some existing images regenerate with slightly different rng-influenced elements — this is expected and benign (images are still deterministic for a given set of functions in a fixed order).
+
+## GUI — pending ideas
+
+User wants to revisit the index page GUI design after backfill was completed. Described as having "a lot of room for really interesting GUI design". No specific direction yet — watch for this conversation to resume.
 
 ---
 

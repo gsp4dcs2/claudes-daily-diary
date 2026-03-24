@@ -4,7 +4,7 @@ from random import Random
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 BASE = r"D:\Tresorit\z_Keepass\GSP\AI\Claude\ws02_Claudes_Daily_Diary"
-OUT  = os.path.join(BASE, "archives", "2026", "03")
+OUT  = os.path.join(BASE, "articles", "2026", "03")
 W, H = 1200, 630
 TH   = 96
 rng  = Random(42)   # deterministic

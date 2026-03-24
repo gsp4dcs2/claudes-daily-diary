@@ -2,6 +2,12 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Memory
+
+Project memories live in `.claude/memory/` (inside this repo) so they sync via Tresorit across
+all machines. **Always read from and write memories to `.claude/memory/`** — not the default
+user-level path. At the start of each conversation, read `.claude/memory/MEMORY.md` for context.
+
 ## Project
 
 **Claude's Daily Diary / claudebeat.ai** — a static HTML website documenting Claude/Anthropic
@@ -17,7 +23,7 @@ ws02_Claudes_Daily_Diary/
 ├── favicon.svg             # SVG favicon — coral starburst on dark brown (#2D1B0E)
 ├── generate_images.py      # Python + Pillow — generates artist-style teaser images
 ├── CLAUDE.md               # This file
-└── archives/
+└── articles/
     └── {yyyy}/
         └── {mm}/
             ├── {yyyy-mm-dd}.html       # One file per day; entries appended, never overwritten
@@ -30,7 +36,7 @@ No build step, no dependencies — pure HTML/CSS/JS, open directly in a browser 
 ## Conventions
 
 ### Adding a new day's entries
-1. Create `./archives/{yyyy}/{mm}/{yyyy-mm-dd}.html` (copy structure from the most recent day file).
+1. Create `./articles/{yyyy}/{mm}/{yyyy-mm-dd}.html` (copy structure from the most recent day file).
    Use `../../../` for all root-relative links (`favicon.svg`, `styles.css`, `index.html`).
 2. Insert `<figure class="entry-teaser"><img src="{yyyy-mm-dd}.png"></figure>` just before the
    first `<article class="entry">` block.
@@ -52,8 +58,8 @@ No build step, no dependencies — pure HTML/CSS/JS, open directly in a browser 
 ### Index list item structure (includes thumbnail)
 ```html
 <li>
-  <a href="archives/{yyyy}/{mm}/{yyyy-mm-dd}.html">
-    <img class="entry-thumb" src="archives/{yyyy}/{mm}/{yyyy-mm-dd}-thumb.png" alt="{date} thumbnail">
+  <a href="articles/{yyyy}/{mm}/{yyyy-mm-dd}.html">
+    <img class="entry-thumb" src="articles/{yyyy}/{mm}/{yyyy-mm-dd}-thumb.png" alt="{date} thumbnail">
     <span class="article-date">{yyyy-mm-dd}</span>
     <span class="article-title">{Title}</span>
     <span class="article-arrow" aria-hidden="true">→</span>
@@ -112,7 +118,7 @@ When adding a new day, **prepend** a new object to the array (newest first).
 
 `/sk-update-claudes-daily-diary` — detects any missing days since the last diary entry, backfills
 them in chronological order, then appends entries for today. Updates `index.html` throughout.
-Skill file: `~/.claude/skills/sk-update-claudes-daily-diary/SKILL.md` (local only — not in repo)
+Skill file: `.claude/skills/sk-update-claudes-daily-diary/SKILL.md` (project-level — travels with the repo)
 
 ## Scheduling
 

@@ -41,7 +41,7 @@ Each article entry includes an HTML comment citing the specific URL it was sourc
 ├── styles.css          # All styling — responsive, no frameworks
 ├── favicon.svg         # Claude starburst logo mark
 ├── CLAUDE.md           # Instructions for Claude Code (the AI editor)
-└── archives/
+└── articles/
     └── {yyyy}/
         └── {mm}/
             └── {yyyy-mm-dd}.html  # One file per day; entries appended, never overwritten

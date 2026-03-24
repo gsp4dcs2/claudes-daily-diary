@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Developers question whether to use Claude for defence-adjacent startup work, and Anthropic's guidance on building resilient apps during platform uncertainty is examined — March 8, 2026.">
+  <title>2026-03-08 – Defence-Adjacent Startups, Platform Resilience &amp; Prompt Caching Deep Dive | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-03-08</span>
+      <h1>Claude in Defence-Adjacent Startups, Platform Resilience &amp; Prompt Caching in Practice</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-03-08.png" alt="Claude in Defence-Adjacent Startups, Platform Resilience &amp; Prompt Caching in Practice — visual for 2026-03-08">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Defence-Adjacent Startups: Should You Use Claude?
+     Source: https://techcrunch.com/2026/03/08/anthropic-pentagon-dispute-what-it-means-for-defense-startups/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Should Defence-Adjacent Startups Use Claude? A Clear Framework</h2>
+
+  <p>TechCrunch has published a detailed piece this weekend addressing the most practical question that has been surfacing in developer forums and startup communities throughout the week: for startups working at the intersection of technology and defence — from logistics optimisation to satellite data analysis to veteran services — does the Pentagon's supply chain designation change the risk calculus of building on Claude? The answer is more nuanced than yes or no, and the piece provides a useful framework for founders and engineering leads trying to make an informed decision rather than a reactive one.</p>
+
+  <h3>A practical framework for the decision</h3>
+  <ul>
+    <li><strong>Direct DoD contractor? Review carefully:</strong> if your company holds or seeks direct DoD prime or sub-contracts, your compliance team needs to assess whether the designation requires certification of non-use — this is the narrow category actually affected</li>
+    <li><strong>Dual-use civilian/defence work? Likely unaffected:</strong> startups working in sectors with both civilian and defence applications — cybersecurity, logistics, geospatial — and not holding direct DoD contracts are not within the scope of the designation</li>
+    <li><strong>Defence-adjacent civilian work? No change:</strong> veteran services, government procurement platforms, defence industry HR and training tools — none of these fall within the supply chain risk framework unless they involve direct DoD contracts</li>
+    <li><strong>The practical hedge:</strong> for any startup in an uncertain position, building a model-agnostic abstraction layer (so Claude, GPT-4, or Gemini can be swapped without a re-architecture) is good engineering practice regardless — and becomes specifically valuable in a volatile regulatory environment</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>Bottom line for most startups:</strong> the designation affects a narrow slice of the AI vendor ecosystem that is in direct contractual relationship with the DoD. For the vast majority of startups — including those with defence sector customers — Claude's commercial availability is unchanged. The correct response to uncertainty is a documented risk assessment, not a platform switch.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">startups</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">compliance</span>
+    <span class="tag">AI policy</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Prompt Caching Deep Dive
+     Source: https://www.anthropic.com/news/prompt-caching
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Prompt Caching in Production — A Deep Dive for Cost-Conscious Developers</h2>
+
+  <p>With millions of new users arriving daily and API traffic at record levels, prompt caching — Anthropic's mechanism for reusing the computed key-value state of a large system prompt across multiple requests — has become one of the most discussed cost and latency optimisations in the developer community. The feature has been generally available since late 2025 and the documentation is thorough, but real-world production usage is surfacing patterns and edge cases that are worth understanding before designing your caching strategy. This entry summarises the practical lessons that have emerged from developers sharing their experiences in the Anthropic developer community and on social media.</p>
+
+  <h3>How prompt caching works and when it pays off</h3>
+  <ul>
+    <li><strong>What gets cached:</strong> the prefix of your prompt — typically the system prompt and any large context block — is cached server-side after its first use; subsequent requests that share the identical prefix pay a reduced input token price and see dramatically lower time-to-first-token</li>
+    <li><strong>Cache hit conditions:</strong> the cached prefix must be byte-identical — any change, including whitespace, breaks the cache; design your system prompt to be stable and put any dynamic content at the end, after the cache boundary marker</li>
+    <li><strong>Cost structure:</strong> cached input tokens are priced at approximately 10% of standard input token price; write tokens (first use) are priced at 125% — so you need approximately 2 cache hits to break even, and the economics improve substantially with more</li>
+    <li><strong>Cache lifetime:</strong> caches expire after 5 minutes of non-use; for high-traffic applications this is rarely an issue, but low-traffic applications with large system prompts may see sporadic cache misses</li>
+    <li><strong>Best use cases:</strong> large RAG context blocks, long coding context files, multi-document analysis with a shared document set, and any application where the system prompt exceeds ~1,000 tokens and requests are frequent</li>
+  </ul>
+
+  <div class="callout tip">
+    <p><strong>Quick win:</strong> if your application has a system prompt longer than 2,000 tokens and handles more than a few requests per hour, enabling prompt caching is one of the highest-ROI optimisations available — typically reducing both cost and latency by 50–80% on the cached portion of the prompt.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">prompt caching</span>
+    <span class="tag">API</span>
+    <span class="tag">cost optimisation</span>
+    <span class="tag">best practices</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

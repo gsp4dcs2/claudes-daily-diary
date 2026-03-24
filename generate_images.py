@@ -1022,9 +1022,482 @@ def img_moholy_20260324():
     return base
 
 
+def img_klimt_20260301():
+    """Gustav Klimt — App Store No.1 viral surge + API best practices."""
+    base = Image.new("RGB", (W, H), (12, 8, 20))
+
+    # 1. Dense gold spiral field — Klimt's mosaic-gold background
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    for _ in range(320):
+        sx = rng.randint(0, W)
+        sy = rng.randint(0, H)
+        sr = rng.randint(2, 7)
+        alpha = rng.randint(80, 200)
+        sd.ellipse([(sx-sr, sy-sr), (sx+sr, sy+sr)], fill=(218, 165, 32, alpha))
+    base = comp(base, sl)
+
+    # 2. Large Klimt-style portrait oval — central composition
+    ol = layer()
+    od = ImageDraw.Draw(ol)
+    od.ellipse([(350, 60), (850, 420)], fill=(44, 28, 12, 210), outline=(218, 165, 32, 255), width=6)
+    base = comp(base, ol)
+
+    # 3. Mosaic fragments — gold/teal/rust geometric patches
+    ml = layer()
+    md = ImageDraw.Draw(ml)
+    patches = [
+        (120, 80,  220, 160, (218, 165, 32, 160)),
+        (940, 100, 1060, 200, (30, 130, 120, 160)),
+        (80,  440, 200, 540, (180, 80, 20, 150)),
+        (1000, 380, 1150, 500, (218, 165, 32, 140)),
+        (200, 540, 360, 620, (30, 130, 120, 140)),
+        (860, 520, 1060, 610, (180, 80, 20, 130)),
+    ]
+    for px0, py0, px1, py1, col in patches:
+        md.rectangle([(px0, py0), (px1, py1)], fill=col)
+    base = comp(base, ml)
+
+    # 4. Gold spiral arcs on the oval — Klimt's decorative layering
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(8):
+        angle_start = i * 45
+        r_var = 60 + i * 15
+        ad.arc([(600 - r_var, 200 - r_var), (600 + r_var, 200 + r_var)],
+               start=angle_start, end=angle_start + 120,
+               fill=(218, 165, 32, 160 - i * 12), width=4)
+    base = comp(base, al)
+
+    # 5. Teal/rust accent dots — mosaic tesserae
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    accent_colors = [(30, 130, 120, 200), (180, 80, 20, 200), (218, 165, 32, 220)]
+    for _ in range(80):
+        dx = rng.randint(0, W)
+        dy = rng.randint(0, H)
+        dr = rng.randint(4, 10)
+        col = accent_colors[rng.randint(0, 2)]
+        dd.ellipse([(dx-dr, dy-dr), (dx+dr, dy+dr)], fill=col)
+    base = comp(base, dl)
+
+    return base
+
+
+def img_mondrian_20260302():
+    """Piet Mondrian — outage / memory / migration grid."""
+    base = Image.new("RGB", (W, H), (245, 241, 228))
+    draw = ImageDraw.Draw(base)
+
+    YELLOW = (255, 210, 0)
+    RED    = (218, 38, 38)
+    BLUE   = (28, 76, 196)
+    BLACK  = (18, 18, 18)
+    BW     = 14
+
+    # Grid coordinates
+    vx = [0, 180, 340, 520, 700, 870, 1050, W]
+    hy = [0, 100, 220, 360, 480, H]
+
+    # 1. Vertical black lines
+    for x in vx[1:-1]:
+        draw.rectangle([(x - BW//2, 0), (x + BW//2, H)], fill=BLACK)
+
+    # 2. Horizontal black lines
+    for y in hy[1:-1]:
+        draw.rectangle([(0, y - BW//2), (W, y + BW//2)], fill=BLACK)
+
+    # 3. Coloured rectangles in selected cells
+    inset = BW // 2 + 2
+    coloured = [
+        (0, 0, RED),   (3, 2, BLUE),  (5, 0, RED),
+        (1, 3, YELLOW),(4, 1, BLUE),  (2, 4, RED),
+        (6, 2, YELLOW),(0, 4, BLUE),  (5, 3, YELLOW),
+    ]
+    for ci, ri, col in coloured:
+        x0 = vx[ci] + inset
+        y0 = hy[ri] + inset
+        x1 = vx[ci + 1] - inset
+        y1 = hy[ri + 1] - inset
+        draw.rectangle([(x0, y0), (x1, y1)], fill=col)
+
+    return base
+
+
+def img_rothko_20260303():
+    """Mark Rothko Colour Field — AI governance / deep context."""
+    # Three hazy stacked colour bands
+    base = Image.new("RGB", (W, H), (28, 18, 48))
+
+    # 1. Top band — deep indigo/violet
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    td.rectangle([(0, 0), (W, 240)], fill=(55, 30, 110, 230))
+    base = comp(base, tl)
+
+    # 2. Middle band — rich burnt sienna
+    ml = layer()
+    md = ImageDraw.Draw(ml)
+    md.rectangle([(0, 210), (W, 440)], fill=(168, 62, 28, 220))
+    base = comp(base, ml)
+
+    # 3. Lower band — muted warm gold
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    ld.rectangle([(0, 410), (W, H)], fill=(192, 138, 38, 200))
+    base = comp(base, ll)
+
+    # 4. Luminous soft edge — blur simulation via thin translucent strips
+    for i in range(20):
+        el = layer()
+        ed = ImageDraw.Draw(el)
+        alpha = 30 - i
+        ed.rectangle([(0, 230 + i * 2), (W, 232 + i * 2)], fill=(255, 140, 60, alpha))
+        ed.rectangle([(0, 406 - i * 2), (W, 408 - i * 2)], fill=(255, 200, 60, alpha))
+        base = comp(base, el)
+
+    # 5. Warm centre glow
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    gd.ellipse([(200, 180), (1000, 460)], fill=(220, 100, 40, 40))
+    base = comp(base, gl)
+
+    return base
+
+
+def img_malevich_20260304():
+    """Kazimir Malevich — Pentagon supply chain designation — safety absolutes."""
+    base = Image.new("RGB", (W, H), (238, 234, 218))
+
+    # 1. Large tilted black square — Suprematist anchor
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    cx, cy, s = 580, 270, 220
+    angle_pts = [
+        (cx - s, cy - 30), (cx + 30, cy - s),
+        (cx + s, cy + 30), (cx - 30, cy + s),
+    ]
+    bd.polygon(angle_pts, fill=(18, 18, 18, 255))
+    base = comp(base, bl)
+
+    # 2. Bold red rectangle — Malevich's primary accent
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.rectangle([(820, 80), (1130, 210)], fill=(210, 28, 28, 240))
+    base = comp(base, rl)
+
+    # 3. Navy elongated shape — tilted
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    nd.polygon([(80, 480), (340, 420), (420, 580), (160, 620)], fill=(28, 40, 120, 230))
+    base = comp(base, nl)
+
+    # 4. Yellow thin bar — diagonal
+    yl = layer()
+    yd = ImageDraw.Draw(yl)
+    yd.polygon([(700, 460), (1180, 400), (1185, 440), (705, 500)], fill=(235, 195, 0, 220))
+    base = comp(base, yl)
+
+    # 5. Small white circle — Suprematist floating element
+    wl = layer()
+    wd = ImageDraw.Draw(wl)
+    wd.ellipse([(160, 80), (290, 210)], fill=(238, 234, 218, 240), outline=(18, 18, 18, 200), width=3)
+    base = comp(base, wl)
+
+    return base
+
+
+def img_lissitzky_20260305():
+    """El Lissitzky — Anthropic public statement / labour market research."""
+    base = Image.new("RGB", (W, H), (244, 241, 230))
+
+    # 1. Red diagonal wedge — Lissitzky 'Beat the Whites' motif
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.polygon([(0, 540), (620, 0), (730, 0), (115, 540)], fill=(208, 22, 22, 240))
+    base = comp(base, rl)
+
+    # 2. Bold black vertical bar — right anchor
+    vl = layer()
+    vd = ImageDraw.Draw(vl)
+    vd.rectangle([(860, 0), (920, H)], fill=(15, 15, 15, 255))
+    base = comp(base, vl)
+
+    # 3. Heavy black horizontal bar — structural rule
+    hl = layer()
+    hd = ImageDraw.Draw(hl)
+    hd.rectangle([(0, 300), (W, 348)], fill=(15, 15, 15, 255))
+    base = comp(base, hl)
+
+    # 4. Red circle — upper right focal point
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    cd.ellipse([(960, 50), (1150, 240)], fill=(208, 22, 22, 220))
+    base = comp(base, cl)
+
+    # 5. Parallel thin black lines — upper right hatching
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    for i in range(7):
+        ox = i * 50
+        ld.line([(720 + ox, 0), (720 + ox - 160, 298)], fill=(15, 15, 15, 180), width=3)
+    base = comp(base, ll)
+
+    # 6. Black framed square — lower left logo element
+    sql = layer()
+    sqd = ImageDraw.Draw(sql)
+    sqd.rectangle([(50, 50), (200, 200)], fill=(15, 15, 15, 255))
+    sqd.rectangle([(78, 78), (172, 172)], fill=(244, 241, 230, 255))
+    base = comp(base, sql)
+
+    return base
+
+
+def img_balla_20260306():
+    """Giacomo Balla Futurism — 1M daily sign-ups, viral growth speed."""
+    base = Image.new("RGB", (W, H), (10, 10, 18))
+
+    # Vanishing point at center-left
+    vp = (180, 315)
+
+    # 1. Radiating coloured planes from VP — Balla's speed vectors
+    colours = [
+        (230, 60, 40, 200), (240, 180, 0, 190), (40, 120, 220, 190),
+        (180, 40, 200, 160), (40, 200, 100, 160), (230, 60, 40, 140),
+        (240, 180, 0, 140), (40, 120, 220, 140),
+    ]
+    angles = [i * (360 / len(colours)) for i in range(len(colours))]
+    for i, (col, ang) in enumerate(zip(colours, angles)):
+        rad = math.radians(ang)
+        ex = int(vp[0] + 1400 * math.cos(rad))
+        ey = int(vp[1] + 1400 * math.sin(rad))
+        rad2 = math.radians(ang + 360 / len(colours))
+        ex2 = int(vp[0] + 1400 * math.cos(rad2))
+        ey2 = int(vp[1] + 1400 * math.sin(rad2))
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        pd.polygon([vp, (ex, ey), (ex2, ey2)], fill=col)
+        base = comp(base, pl)
+
+    # 2. Motion lines radiating outward
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    for i in range(24):
+        ang = i * 15
+        rad = math.radians(ang)
+        lx = int(vp[0] + 900 * math.cos(rad))
+        ly = int(vp[1] + 900 * math.sin(rad))
+        ld.line([vp, (lx, ly)], fill=(255, 255, 255, 50), width=2)
+    base = comp(base, ll)
+
+    # 3. Bright white flash at VP
+    fl = layer()
+    fd = ImageDraw.Draw(fl)
+    fd.ellipse([(vp[0]-50, vp[1]-50), (vp[0]+50, vp[1]+50)], fill=(255, 255, 255, 220))
+    base = comp(base, fl)
+
+    # 4. Speed arc streaks — concentric arcs from VP
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for r in [120, 200, 310, 450]:
+        ad.arc([(vp[0]-r, vp[1]-r), (vp[0]+r, vp[1]+r)],
+               start=340, end=200, fill=(255, 255, 255, 100), width=3)
+    base = comp(base, al)
+
+    return base
+
+
+def img_klee_20260307():
+    """Paul Klee — multi-agent architecture / whoa moment."""
+    base = Image.new("RGB", (W, H), (22, 18, 28))
+
+    GRID_W = 10
+    GRID_H = 7
+    cw = W // GRID_W
+    ch = H // GRID_H
+
+    # 1. Warm-to-cool colour grid cells
+    warm = [(200, 90, 20), (210, 130, 10), (180, 60, 40)]
+    cool = [(20, 80, 170), (40, 130, 140), (60, 40, 120)]
+    cell_colors = []
+    for row in range(GRID_H):
+        for col in range(GRID_W):
+            t = col / (GRID_W - 1)
+            r_blend = (1 - t)
+            if row % 2 == 0:
+                src = warm[row % len(warm)]
+                dst = cool[col % len(cool)]
+            else:
+                src = cool[row % len(cool)]
+                dst = warm[col % len(warm)]
+            col_rgb = tuple(int(src[k] * (1-t) + dst[k] * t) for k in range(3))
+            alpha = rng.randint(160, 220)
+            cell_colors.append(col_rgb + (alpha,))
+
+    for idx, col in enumerate(cell_colors):
+        row = idx // GRID_W
+        ci  = idx % GRID_W
+        x0, y0 = ci * cw, row * ch
+        cl = layer()
+        cd = ImageDraw.Draw(cl)
+        cd.rectangle([(x0 + 3, y0 + 3), (x0 + cw - 3, y0 + ch - 3)], fill=col)
+        base = comp(base, cl)
+
+    # 2. Dark grid lines
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for c in range(GRID_W + 1):
+        gd.line([(c * cw, 0), (c * cw, H)], fill=(18, 15, 25, 255), width=4)
+    for r in range(GRID_H + 1):
+        gd.line([(0, r * ch), (W, r * ch)], fill=(18, 15, 25, 255), width=4)
+    base = comp(base, gl)
+
+    # 3. White node circles at grid intersections
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    for ci in range(GRID_W + 1):
+        for ri in range(GRID_H + 1):
+            r = 7
+            nd.ellipse([(ci*cw - r, ri*ch - r), (ci*cw + r, ri*ch + r)],
+                       fill=(255, 255, 255, 200), outline=(18, 15, 25, 255), width=2)
+    base = comp(base, nl)
+
+    # 4. Connector lines between select nodes — "agent network"
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    connections = [(0,0,3,2),(1,1,4,0),(2,2,5,3),(3,0,6,2),(5,1,8,3),(6,0,9,1),(2,4,7,5),(4,3,7,4)]
+    for c1, r1, c2, r2 in connections:
+        ad.line([(c1*cw, r1*ch), (c2*cw, r2*ch)], fill=(255, 230, 80, 120), width=3)
+    base = comp(base, al)
+
+    return base
+
+
+def img_delaunay_20260308():
+    """Robert Delaunay — prompt caching / cross-platform signals / spectral rings."""
+    base = Image.new("RGB", (W, H), (14, 12, 32))
+
+    # 1. Large overlapping spectral ring discs
+    discs = [
+        (300, 260, 260),
+        (700, 200, 220),
+        (520, 400, 190),
+        (950, 350, 240),
+        (150, 450, 180),
+    ]
+    spectrum = [
+        (220, 30, 30), (220, 120, 0), (200, 200, 0),
+        (30, 180, 30), (0, 100, 210), (100, 0, 200),
+    ]
+    for cx, cy, max_r in discs:
+        for i, col in enumerate(reversed(spectrum)):
+            r = max_r - i * (max_r // len(spectrum))
+            if r <= 0:
+                continue
+            rl = layer()
+            rd = ImageDraw.Draw(rl)
+            alpha = 180 - i * 18
+            rd.ellipse([(cx-r, cy-r), (cx+r, cy+r)], fill=col + (alpha,))
+            base = comp(base, rl)
+
+    # 2. White centre sparks at each disc centre
+    wl = layer()
+    wd = ImageDraw.Draw(wl)
+    for cx, cy, _ in discs:
+        wd.ellipse([(cx-10, cy-10), (cx+10, cy+10)], fill=(255, 255, 255, 220))
+    base = comp(base, wl)
+
+    # 3. Thin white radiating lines from largest disc
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    for i in range(16):
+        ang = i * (360 / 16)
+        rad = math.radians(ang)
+        lx = int(300 + 320 * math.cos(rad))
+        ly = int(260 + 320 * math.sin(rad))
+        ld.line([(300, 260), (lx, ly)], fill=(255, 255, 255, 60), width=1)
+    base = comp(base, ll)
+
+    # 4. Small scattered spectrum dots — signal noise
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    for i in range(100):
+        dx = rng.randint(0, W)
+        dy = rng.randint(0, H)
+        dr = rng.randint(3, 8)
+        col = spectrum[rng.randint(0, len(spectrum)-1)]
+        dd.ellipse([(dx-dr, dy-dr), (dx+dr, dy+dr)], fill=col + (140,))
+    base = comp(base, dl)
+
+    return base
+
+
+def img_miro_20260309():
+    """Joan Miró — Anthropic files lawsuit + M365 E7 bundle — bold biomorphic."""
+    base = Image.new("RGB", (W, H), (22, 18, 72))
+
+    # 1. Large biomorphic blob — red primary
+    b1 = layer()
+    b1d = ImageDraw.Draw(b1)
+    b1d.ellipse([(80, 120), (420, 440)], fill=(218, 32, 32, 210))
+    base = comp(base, b1)
+
+    # 2. Yellow irregular blob — middle
+    b2 = layer()
+    b2d = ImageDraw.Draw(b2)
+    b2d.polygon([(520, 60), (720, 40), (780, 180), (690, 320), (510, 280), (440, 140)],
+                fill=(238, 200, 0, 200))
+    base = comp(base, b2)
+
+    # 3. Blue large rounded shape — right
+    b3 = layer()
+    b3d = ImageDraw.Draw(b3)
+    b3d.ellipse([(820, 200), (1140, 520)], fill=(30, 80, 210, 190))
+    base = comp(base, b3)
+
+    # 4. Black bold outlines / contour lines
+    ol = layer()
+    od = ImageDraw.Draw(ol)
+    od.ellipse([(80, 120), (420, 440)], outline=(10, 8, 18, 255), width=8)
+    od.polygon([(520, 60), (720, 40), (780, 180), (690, 320), (510, 280), (440, 140)],
+               outline=(10, 8, 18, 255), width=6)
+    od.ellipse([(820, 200), (1140, 520)], outline=(10, 8, 18, 255), width=8)
+    base = comp(base, ol)
+
+    # 5. Miró stars — scattered asterisk stars
+    stl = layer()
+    std = ImageDraw.Draw(stl)
+    stars = [(250, 80), (600, 520), (950, 100), (1100, 420), (400, 560), (730, 350)]
+    for sx, sy in stars:
+        for ang in range(0, 360, 60):
+            rad = math.radians(ang)
+            ex = int(sx + 28 * math.cos(rad))
+            ey = int(sy + 28 * math.sin(rad))
+            std.line([(sx, sy), (ex, ey)], fill=(255, 255, 255, 230), width=4)
+        std.ellipse([(sx-7, sy-7), (sx+7, sy+7)], fill=(255, 255, 255, 255))
+    base = comp(base, stl)
+
+    # 6. Fine black line connecting blobs — Miró's characteristic thin connector
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    ld.line([(250, 280), (520, 180), (820, 360)], fill=(10, 8, 18, 200), width=5)
+    base = comp(base, ll)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
+    ("2026-03-01", img_klimt_20260301,      "App Store No.1",  "Gustav Klimt"),
+    ("2026-03-02", img_mondrian_20260302,   "Outage & Memory", "Piet Mondrian"),
+    ("2026-03-03", img_rothko_20260303,     "Governance",      "Mark Rothko"),
+    ("2026-03-04", img_malevich_20260304,   "Supply Chain",    "Kazimir Malevich"),
+    ("2026-03-05", img_lissitzky_20260305,  "Public Statement","El Lissitzky"),
+    ("2026-03-06", img_balla_20260306,      "1M Sign-Ups",     "Giacomo Balla"),
+    ("2026-03-07", img_klee_20260307,       "Whoa Moment",     "Paul Klee"),
+    ("2026-03-08", img_delaunay_20260308,   "Prompt Caching",  "Robert Delaunay"),
+    ("2026-03-09", img_miro_20260309,       "Lawsuit Filed",   "Joan Miró"),
     ("2026-03-10", img_franz_marc_20260310,  "APAC Expansion",  "Franz Marc"),
     ("2026-03-11", img_calder_20260311,      "Balance",         "Alexander Calder"),
     ("2026-03-12", img_rothko_20260312,      "Certification",   "Mark Rothko"),

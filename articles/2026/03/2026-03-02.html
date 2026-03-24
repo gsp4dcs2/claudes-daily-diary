@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Claude goes down for two hours under unprecedented demand, persistent memory lands on the free plan, and a practical migration guide goes viral — March 2, 2026.">
+  <title>2026-03-02 – Outage &amp; Demand Surge, Free Memory &amp; Switching Guide | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-03-02</span>
+      <h1>Outage Under "Unprecedented Demand", Free Memory &amp; The Great ChatGPT Migration</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-03-02.png" alt="Outage Under Unprecedented Demand, Free Memory &amp; The Great ChatGPT Migration — visual for 2026-03-02">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Outage Due to Unprecedented Demand
+     Source: https://www.bloomberg.com/news/articles/2026-03-02/anthropic-s-claude-chatbot-goes-down-for-thousands-of-users
+     Source: https://techcrunch.com/2026/03/02/anthropics-claude-reports-widespread-outage/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Goes Down for Two Hours — "Unprecedented Demand" Cited</h2>
+
+  <p>Claude.ai and all consumer-facing Anthropic applications went offline on the morning of March 2, with nearly 2,000 simultaneous outage reports peaking at around 6:40 a.m. ET on DownDetector. Anthropic cited "unprecedented demand" driven by the App Store surge as the cause. The Claude API remained fully operational throughout the incident — enterprise customers saw no interruption. Service was fully restored the same morning. The episode is a textbook illustration of why consumer app infrastructure and API infrastructure need to be planned and scaled separately.</p>
+
+  <h3>Lessons from a demand-driven outage</h3>
+  <ul>
+    <li>Consumer app layer and API layer are independent — the API stayed up while the web UI went down</li>
+    <li>Demand spikes from viral moments are front-loaded and fast: the surge hit overnight into the morning, before Anthropic could scale proactively</li>
+    <li>Anthropic's status page and social channels acknowledged the incident quickly — transparent communication during outages builds trust even when the service itself is failing</li>
+    <li>For developers: if your product was built on Claude.ai's web interface rather than the API, today's outage would have taken your users down with it</li>
+  </ul>
+
+  <div class="tag-list">
+    <span class="tag">outage</span>
+    <span class="tag">reliability</span>
+    <span class="tag">infrastructure</span>
+    <span class="tag">API</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Persistent Memory Comes to the Free Plan
+     Source: https://www.engadget.com/ai/anthropic-brings-memory-to-claudes-free-plan-220729070.html
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Persistent Memory Now Available on Claude's Free Plan</h2>
+
+  <p>Anthropic has extended persistent memory — previously available only to paid subscribers — to all free-tier Claude users. Claude can now retain information across conversations by default: preferences, context, ongoing projects, and personal details that users choose to share. Users have full control, with options to pause memory collection, review what has been stored, and permanently delete individual memories or the entire store at any time. The timing is notable: with over a million new free users arriving daily, giving them memory from their first session lowers the barrier to forming a productive habit with the tool.</p>
+
+  <h3>How to make the most of Claude's memory</h3>
+  <ul>
+    <li><strong>Tell it who you are upfront:</strong> say "I'm a backend engineer working in Python, primarily building data pipelines" and Claude will calibrate answers accordingly across future sessions</li>
+    <li><strong>Store project context:</strong> "I'm working on a project called X — here's the architecture summary" avoids repeating context at the start of every conversation</li>
+    <li><strong>Review regularly:</strong> open Settings → Memory to see exactly what Claude has stored and remove anything outdated or incorrect</li>
+    <li><strong>Use it alongside CLAUDE.md:</strong> for power users in Claude Code, persistent memory complements the project-level CLAUDE.md file — one handles personal preferences, the other handles project-specific context</li>
+  </ul>
+
+  <div class="tag-list">
+    <span class="tag">memory</span>
+    <span class="tag">free plan</span>
+    <span class="tag">Claude.ai</span>
+    <span class="tag">personalisation</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — The Great ChatGPT Migration Guide Goes Viral
+     Source: https://techcrunch.com/2026/03/02/users-are-ditching-chatgpt-for-claude-heres-how-to-make-the-switch/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> How to Switch from ChatGPT to Claude — The Migration Guide</h2>
+
+  <p>TechCrunch published a detailed migration guide on March 2 as hundreds of thousands of users searched for practical switching advice. The guide covers exporting your ChatGPT conversation history, deleting stored memory from OpenAI, and importing context into Claude using the new memory feature. With Claude recording 149,000 daily downloads versus 124,000 for ChatGPT in the same period, the switching movement is more than a social media trend — it represents a genuine shift in where developers and power users are investing their AI time.</p>
+
+  <h3>The practical switching checklist</h3>
+  <ul>
+    <li><strong>Export ChatGPT data:</strong> Settings → Data Controls → Export — you'll receive a zip file with all conversations</li>
+    <li><strong>Delete ChatGPT memory:</strong> Settings → Personalization → Memory → Clear — prevents old context leaking into future sessions</li>
+    <li><strong>Set up Claude memory:</strong> tell Claude your name, role, preferences, and any ongoing projects in your first conversation</li>
+    <li><strong>Recreate custom GPTs as Projects:</strong> Claude Projects (paid tiers) replicate the custom instruction sets that power users built in ChatGPT's GPT Builder</li>
+    <li><strong>Bookmark claude.ai or install the desktop app:</strong> reduce friction — if switching requires extra steps, the old habit wins</li>
+  </ul>
+
+  <div class="callout tip">
+    <p><strong>Developer note:</strong> if you are switching API providers, review Claude's differences in message format, system prompt handling, and tool use schema. The Anthropic API is not a drop-in replacement for the OpenAI SDK — but migration guides and compatibility libraries are available.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">migration</span>
+    <span class="tag">ChatGPT</span>
+    <span class="tag">Claude.ai</span>
+    <span class="tag">getting started</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Claude surges to the top of the US App Store and daily sign-ups quadruple, while developers look at what the growth means for API reliability and planning — March 1, 2026.">
+  <title>2026-03-01 – App Store No.1 &amp; Building for Viral Growth | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-03-01</span>
+      <h1>Claude Hits the Top of the App Store &amp; What Viral Growth Means for Developers</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-03-01.png" alt="Claude Hits the Top of the App Store &amp; What Viral Growth Means for Developers — visual for 2026-03-01">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Surges to App Store No.1
+     Source: https://techcrunch.com/2026/03/01/anthropics-claude-rises-to-no-2-in-the-app-store-following-pentagon-dispute/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Surges to the Top of the US App Store</h2>
+
+  <p>Claude has reached the top position in Apple's US App Store free app chart, with daily sign-ups reported to have quadrupled and free active users up more than 60% since January. TechCrunch reports the app climbed from a consistent top-10 position into the top spot as a wave of new users sought out alternatives following heightened media coverage of Anthropic. The surge is driven by both organic curiosity and an active migration movement on Reddit and X, where users are sharing step-by-step guides for switching to Claude from competing AI assistants.</p>
+
+  <h3>What the numbers look like</h3>
+  <ul>
+    <li>Daily App Store downloads surpass competing AI apps on both iOS and Android</li>
+    <li>Sign-up rate quadrupled compared to the January 2026 baseline</li>
+    <li>Free active users up more than 60% since the start of the year</li>
+    <li>Server load is significant — Anthropic's infrastructure is handling demand it was not designed to absorb at this pace</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>For Anthropic:</strong> App Store rankings translate directly into brand awareness and top-of-funnel growth — the kind that money cannot easily buy. The challenge now is converting free-tier surge users into long-term paid subscribers before the novelty fades.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">growth</span>
+    <span class="tag">Claude.ai</span>
+    <span class="tag">App Store</span>
+    <span class="tag">consumer</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Building on Claude When Demand is Unpredictable
+     Source: Best practices synthesis from Anthropic docs
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Building on Claude During Demand Spikes — API vs. Web UI Reliability</h2>
+
+  <p>When a platform experiences viral growth, the infrastructure under the consumer-facing layer is the first thing under pressure. For developers building Claude-powered applications, the current surge is a useful reminder of a fundamental architectural principle: the Claude API and Claude.ai are separate systems with separate availability profiles. Consumer web interface outages do not propagate to API consumers — a critical distinction for anyone running production workloads.</p>
+
+  <h3>Key architectural decisions for resilient Claude apps</h3>
+  <ul>
+    <li><strong>Always use the API for production:</strong> consumer app availability is a separate concern from API uptime; the two can and do diverge during high-load events</li>
+    <li><strong>Pre-provision rate limits:</strong> if you anticipate growth, contact Anthropic's enterprise team to increase your tier proactively — don't wait for 429s in production</li>
+    <li><strong>Implement exponential backoff:</strong> transient rate-limit errors during high-demand periods resolve themselves; your code should retry gracefully with jitter rather than failing loudly</li>
+    <li><strong>Cache aggressively:</strong> identical prompts returning identical results are prime candidates for a local or CDN cache layer — reduces API spend and latency simultaneously</li>
+    <li><strong>Monitor status.anthropic.com:</strong> subscribe to the RSS feed or use a status page monitoring service to get incident notifications before your users do</li>
+  </ul>
+
+  <div class="callout tip">
+    <p><strong>Prompt caching:</strong> Anthropic's prompt caching feature (generally available since late 2025) can dramatically reduce both latency and cost when your system prompt is large and stable. With millions of new users potentially hitting Claude-powered products right now, every token saved at the cache layer compounds quickly.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">best practices</span>
+    <span class="tag">API</span>
+    <span class="tag">reliability</span>
+    <span class="tag">caching</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

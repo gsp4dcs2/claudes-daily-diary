@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A prominent tech investor describes a pivotal Claude demo and the AI industry continues a week of unprecedented public debate about safety and governance — March 7, 2026.">
+  <title>2026-03-07 – "Whoa Moment", Industry Debate &amp; Developer Multi-Agent Patterns | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-03-07</span>
+      <h1>The "Whoa Moment", an Industry at Inflection &amp; Multi-Agent Architecture for Developers</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-03-07.png" alt="The Whoa Moment, an Industry at Inflection &amp; Multi-Agent Architecture for Developers — visual for 2026-03-07">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Emil Michael "Whoa Moment" with Claude
+     Source: https://fortune.com/2026/03/07/former-uber-cto-claude-demo-changed-mind-on-ai/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> "It Changed How I See AI Entirely" — Emil Michael on His Claude Demo</h2>
+
+  <p>Fortune has published a profile of Emil Michael — former Uber executive and prominent technology investor — in which he describes a private Claude demonstration that he characterises as a "genuine inflection moment" in his thinking about frontier AI. Michael, who had been publicly sceptical about whether large language models represented a qualitative leap beyond previous software, describes a session in which Claude autonomously planned and partly executed a multi-step technical analysis without prompting for clarification. He describes the experience as a "whoa moment" — a phrase that circulated widely on technology social media throughout the day. The piece is notable less for the technical specifics than for the profile of the individual: Michael is well-connected in both Silicon Valley investment circles and Washington policy networks.</p>
+
+  <h3>Why this moment is resonating in developer communities</h3>
+  <ul>
+    <li><strong>The credibility gap is closing:</strong> for years, enterprise AI adoption was slowed by decision-makers who had not personally experienced frontier models — anecdotes like Michael's are accelerating the education of non-technical executives</li>
+    <li><strong>Multi-step autonomy is the key threshold:</strong> the capability that tends to produce these "whoa" responses is not raw text quality but the ability to plan, execute, and self-correct across sequential steps without hand-holding</li>
+    <li><strong>Washington adjacency matters here:</strong> Michael's network positioning means the account is likely to reach policymakers who shape the regulatory environment in which Anthropic is currently operating</li>
+  </ul>
+
+  <div class="tag-list">
+    <span class="tag">enterprise adoption</span>
+    <span class="tag">AI capability</span>
+    <span class="tag">autonomous agents</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Multi-Agent Architecture Patterns for Developers
+     Source: https://www.anthropic.com/research/building-effective-agents
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Multi-Agent Architecture Patterns — When to Orchestrate and When to Delegate</h2>
+
+  <p>As the AI industry conversation fixates on policy and governance this week, Anthropic's documentation team has updated its "Building Effective Agents" guidance — a resource that has become one of the most-referenced technical documents in the developer community since Claude's agentic capabilities expanded. The update addresses a recurring confusion in production deployments: when to use a single Claude instance with a long context window versus when to build a multi-agent architecture where a coordinator delegates to specialised sub-agents. The guidance is grounded in production data from enterprise API customers and is clear that multi-agent architectures carry real overhead costs that are not always justified.</p>
+
+  <h3>The core decision framework</h3>
+  <ul>
+    <li><strong>Use a single agent when:</strong> the task is sequential, dependencies between steps are tight, and parallelism provides little benefit — adding orchestration overhead degrades rather than improves performance in these cases</li>
+    <li><strong>Use multi-agent when:</strong> tasks are genuinely parallelisable, when different sub-tasks require different specialist prompts or tool sets, or when the total work exceeds a single context window</li>
+    <li><strong>Orchestrator design:</strong> the orchestrator agent should focus on decomposition, delegation, and synthesis — it should not attempt to do the domain work itself; keep it thin and its context clean</li>
+    <li><strong>Error handling:</strong> multi-agent systems fail in ways that single-agent systems do not; budget explicit tokens for sub-agent failure reporting and design the orchestrator to retry or escalate gracefully</li>
+    <li><strong>Start simple:</strong> the guidance explicitly recommends beginning with the simplest architecture that could work — premature orchestration is a common source of production bugs in agentic systems</li>
+  </ul>
+
+  <div class="callout tip">
+    <p><strong>Practical starting point:</strong> before building a multi-agent system, try increasing the context window and structuring the task as a single long prompt. Anthropic's research shows this is faster, cheaper, and more reliable than an orchestrated architecture for the majority of tasks that developers initially reach for multi-agent to solve.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">multi-agent</span>
+    <span class="tag">architecture</span>
+    <span class="tag">best practices</span>
+    <span class="tag">agentic AI</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

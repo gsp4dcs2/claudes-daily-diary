@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Claude Code Auto Mode threads safety and speed, Anthropic's 81,000-person user study reveals what people really want from AI, and Claude Code v2.1.83 ships new hooks and config tools — March 25, 2026.">
+  <title>2026-03-25 – Auto Mode, 81K Voices &amp; Changelog Highlights | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <a href="../../../index.html">Home</a>
+    </div>
+  </nav>
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-03-25</span>
+      <h1>Auto Mode, 81K Voices &amp; Changelog Highlights</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-03-25.png" alt="Auto Mode, 81K Voices &amp; Changelog Highlights — visual for 2026-03-25">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code Auto Mode
+     Source: https://techcrunch.com/2026/03/24/anthropic-hands-claude-code-more-control-but-keeps-it-on-a-leash/
+     Source: https://9to5mac.com/2026/03/24/claude-code-gives-developers-auto-mode-a-safer-alternative-to-skipping-permissions/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Code Auto Mode — The Middle Ground Between Speed and Control</h2>
+
+  <p>Anthropic shipped a research preview of <strong>Auto Mode</strong> for Claude Code on March 24 — a new operating level designed to sit squarely between two extremes that developers have long had to choose between: constant approval prompts (safe but slow) and <code>--dangerously-skip-permissions</code> (fast but scary). Auto Mode threads that needle by adding an AI classifier layer that reviews each tool call before execution, approving the safe ones silently and blocking — or escalating — the risky ones.</p>
+
+  <h3>How the classifier works</h3>
+  <ul>
+    <li><strong>Before each tool call</strong>, a secondary model checks the proposed action against a risk rubric: is this destructive (mass delete, format disk)? Is it exfiltrating sensitive data? Does it show signs of prompt injection?</li>
+    <li><strong>Safe actions</strong> — file reads, writes to expected paths, running scoped tests — proceed automatically without a permission prompt</li>
+    <li><strong>Risky actions</strong> are blocked; if Claude repeatedly attempts the same blocked action, it surfaces a permission prompt to the user rather than looping silently</li>
+    <li>The classifier itself runs quickly enough that it doesn't meaningfully slow down the agent loop</li>
+  </ul>
+
+  <h3>Availability and caveats</h3>
+  <ul>
+    <li>Available immediately to <strong>Claude Teams</strong> users as a research preview; rolling out to Enterprise and API customers in the coming days</li>
+    <li>Anthropic is explicit: auto mode reduces risk compared to skipping all permissions, but does not eliminate it — still recommended for use in isolated environments</li>
+    <li>The feature is an extension of the existing architecture, not a rewrite; your existing Claude Code configuration and hooks continue to work alongside it</li>
+  </ul>
+
+  <div class="callout tip">
+    <p><strong>Best practice for adopting Auto Mode:</strong> Start with low-stakes repositories and observe which actions Claude takes silently vs. which it escalates. After a few runs you'll develop intuition for what the classifier approves, and can calibrate your task scoping accordingly. Pair with Claude Code's <code>--verbose</code> flag during the learning phase to see the full tool-call log.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">auto mode</span>
+    <span class="tag">safety</span>
+    <span class="tag">permissions</span>
+    <span class="tag">developer tools</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — What 81,000 People Want From AI
+     Source: https://www.anthropic.com/81k-interviews
+     Source: https://www.cnbc.com/2026/03/20/anthropic-whos-most-optimistic-about-ai-and-who-isnt.html
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> What 81,000 People Want From AI — Anthropic's Landmark User Study</h2>
+
+  <p>Anthropic published what it describes as <strong>the largest and most multilingual qualitative study ever conducted</strong> — 80,508 conversations with Claude users across 159 countries in 70 languages, conducted in December 2025 using Anthropic Interviewer, an AI-powered conversational research tool. The March 18 publication crystallises a picture of how real people think about AI: not as a chatbot novelty, but as a lever on the most important dimensions of their lives — work, money, time, and meaning.</p>
+
+  <h3>What people want (top visions)</h3>
+  <ul>
+    <li><strong>Professional excellence</strong> (18.8%) — automate routine tasks to reclaim time for higher-value work</li>
+    <li><strong>Personal transformation</strong> (13.7%) — growth, emotional wellbeing, life coaching</li>
+    <li><strong>Life management</strong> (13.5%) — organisational support, reducing mental burden</li>
+    <li><strong>Financial independence</strong> (9.7%) — economic security and income generation, especially prominent in emerging markets</li>
+  </ul>
+
+  <h3>Where AI has actually delivered</h3>
+  <ul>
+    <li><strong>Productivity</strong> (32%) — accelerated work and task automation</li>
+    <li><strong>Cognitive partnership</strong> (17.2%) — brainstorming and creative collaboration</li>
+    <li><strong>Technical accessibility</strong> (8.7%) — enabling non-specialists to build software and tools</li>
+  </ul>
+
+  <h3>Top concerns</h3>
+  <ul>
+    <li><strong>Unreliability / hallucinations</strong> (26.7%) — the biggest single concern globally</li>
+    <li><strong>Jobs &amp; economy</strong> (22.3%) — displacement and widening inequality</li>
+    <li><strong>Autonomy &amp; agency loss</strong> (21.9%) — fear of ceding human decision-making</li>
+    <li><strong>Cognitive atrophy</strong> (16.3%) — skill loss from over-reliance; notably, educators report this at 24% — higher than the 17% baseline</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>The geographic split:</strong> Sub-Saharan Africa, South Asia and Latin America are significantly more optimistic than North America and Western Europe. Lower/middle-income users frame AI as a "ladder up" — bypass capital barriers, build businesses, access expertise. Higher-income regions focus on governance gaps and surveillance concerns. 67% of all respondents expressed net positive sentiment; 81% said AI was already making progress toward their vision.</p>
+  </div>
+
+  <p>The study also identified five "light and shade" tensions where the same users simultaneously experience benefit and worry — most sharply for emotional support (16% benefit, 12% fear dependency) and time-saving (50% gain time, 18% feel a "productivity treadmill" instead). These are not separate camps of optimists and pessimists: they are the same people, holding both things at once.</p>
+
+  <div class="tag-list">
+    <span class="tag">research</span>
+    <span class="tag">user study</span>
+    <span class="tag">global</span>
+    <span class="tag">Anthropic</span>
+    <span class="tag">AI impact</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude Code v2.1.83 Changelog Highlights
+     Source: https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Code v2.1.83 — New Hooks, Drop-In Config &amp; Transcript Search</h2>
+
+  <p>The latest Claude Code release (v2.1.83) ships four quality-of-life improvements that, taken together, make the tool significantly more scriptable, observable, and comfortable to use in larger, longer sessions. None of these are headline features, but they're the kind of sharp edges that become obvious once you're running Claude Code as a daily driver.</p>
+
+  <h3>What's new</h3>
+  <ul>
+    <li>
+      <strong><code>managed-settings.d/</code> drop-in directory</strong> — drop JSON snippet files into this directory and Claude Code merges them into its config at startup. This is a huge win for teams managing Claude Code across many machines via configuration management tools: each tool (Homebrew, Ansible, a company dotfiles repo) can own its own snippet without overwriting a monolithic <code>settings.json</code>.
+    </li>
+    <li>
+      <strong><code>CwdChanged</code> and <code>FileChanged</code> hook events</strong> — two new lifecycle hooks let you react when Claude Code changes its working directory or when a file it was editing is saved. Use cases: auto-run linters on changed files, trigger test suites, update a project-specific context file, or post a webhook when Claude writes to a watched path.
+    </li>
+    <li>
+      <strong>Transcript search (<code>/</code> key)</strong> — press <code>/</code> inside transcript mode to open an inline search over the full session history. Essential for long multi-hour sessions where you need to find a specific tool call, error message, or decision point without scrolling.
+    </li>
+    <li>
+      <strong>Pasted image reference chips</strong> — when you paste an image into the Claude Code prompt, a small chip now appears confirming the attachment, with a preview and remove button. Removes the guesswork about whether your screenshot actually got attached.
+    </li>
+  </ul>
+
+  <div class="callout tip">
+    <p><strong>Hook recipe — auto-lint on FileChanged:</strong></p>
+    <pre><code>{
+  "hooks": {
+    "FileChanged": [
+      {
+        "matcher": "**/*.py",
+        "hooks": [{ "type": "command", "command": "ruff check --fix $CLAUDE_FILE_PATH" }]
+      }
+    ]
+  }
+}</code></pre>
+    <p>Drop this in your <code>managed-settings.d/</code> directory and every Python file Claude edits gets auto-linted before you review the diff.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">changelog</span>
+    <span class="tag">hooks</span>
+    <span class="tag">configuration</span>
+    <span class="tag">developer tools</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 4 — Vercept Closes / OSWorld 72.5%
+     Source: https://www.anthropic.com/news/acquires-vercept
+     Source: https://techcrunch.com/2026/02/25/anthropic-acquires-vercept-ai-startup-agents-computer-use-founders-investors/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Vercept Closes, OSWorld Hits 72.5% — Claude's Computer Use Comes of Age</h2>
+
+  <p>March 25 marked a quiet but significant milestone: Anthropic wound down Vercept's external product as the February acquisition formally completed. Vercept — founded by Kiana Ehsani, Luca Weihs, and Ross Girshick — built <em>Vy</em>, a cloud-hosted AI agent that operated a remote Apple MacBook to complete complex multi-step tasks. Their speciality was high-precision visual perception within live software interfaces: the exact capability Anthropic needed to make Mac Computer Use genuinely reliable. The team is now fully inside Anthropic working on what the company describes as "some of the hardest problems" in agentic AI.</p>
+
+  <h3>The benchmark that puts it in context</h3>
+  <p>Coinciding with the integration, Anthropic published an updated <strong>OSWorld</strong> score for Claude Sonnet 4.6: <strong>72.5%</strong>. OSWorld is the standard evaluation for AI computer-use ability — tasks like filling web forms across multiple browser tabs, navigating complex spreadsheets, and managing files across applications. The trajectory tells the story:</p>
+
+  <ul>
+    <li><strong>Late 2024:</strong> under 15% — computer use worked in demos but failed on real workflows</li>
+    <li><strong>Mid 2025:</strong> ~38% — usable for simple, single-application tasks</li>
+    <li><strong>March 2026 (Sonnet 4.6):</strong> 72.5% — approaching human performance on the benchmark suite</li>
+  </ul>
+
+  <p>That is roughly a <strong>5× improvement in 15 months</strong>. For comparison, human performance on OSWorld sits at around 72–74%, meaning Claude is now within the noise of an average human on this measure — and considerably faster.</p>
+
+  <div class="callout tip">
+    <p><strong>What this means for Claude Code users:</strong> the Auto Mode and Dispatch workflows covered earlier this week are only as useful as the underlying computer-use accuracy. A 72.5% OSWorld score means roughly 3 in 4 GUI interactions succeed on the first attempt — practical for supervised use, but still worth giving Claude clear stopping conditions and running in a sandboxed environment for anything sensitive.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">computer use</span>
+    <span class="tag">Vercept</span>
+    <span class="tag">OSWorld</span>
+    <span class="tag">benchmarks</span>
+    <span class="tag">Anthropic</span>
+    <span class="tag">acquisitions</span>
+  </div>
+</article>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+
+</body>
+</html>

@@ -1486,6 +1486,85 @@ def img_miro_20260309():
     return base
 
 
+def img_franz_marc_20260325():
+    """Franz Marc — rich jewel tones, stylised figures — 81k voices / human diversity theme."""
+    # Deep cobalt background — Franz Marc's signature jewel-tone richness
+    base = Image.new("RGB", (W, H), (18, 38, 108))
+
+    # 1. Large emerald green organic form — lower left (earth / grounding)
+    g1 = layer()
+    g1d = ImageDraw.Draw(g1)
+    g1d.ellipse([(-60, 280), (420, 680)], fill=(20, 160, 80, 200))
+    base = comp(base, g1)
+
+    # 2. Crimson curved shape — upper right (passion / energy)
+    r1 = layer()
+    r1d = ImageDraw.Draw(r1)
+    r1d.ellipse([(780, -60), (1280, 380)], fill=(200, 30, 50, 190))
+    base = comp(base, r1)
+
+    # 3. Amber/gold diagonal wedge — centre sweep (light / aspiration)
+    a1 = layer()
+    a1d = ImageDraw.Draw(a1)
+    a1d.polygon([(300, 580), (700, 80), (900, 120), (500, 630)], fill=(220, 170, 20, 170))
+    base = comp(base, a1)
+
+    # 4. Deep violet arc shape — upper left (mystery / concern)
+    v1 = layer()
+    v1d = ImageDraw.Draw(v1)
+    v1d.pieslice([(-100, -100), (500, 400)], start=0, end=80, fill=(100, 20, 180, 160))
+    base = comp(base, v1)
+
+    # 5. Teal overlapping ellipse — mid-right (balance / connection)
+    t1 = layer()
+    t1d = ImageDraw.Draw(t1)
+    t1d.ellipse([(680, 280), (1100, 620)], fill=(0, 160, 180, 150))
+    base = comp(base, t1)
+
+    # 6. Bold black contour outlines — Franz Marc's defining outline language
+    ol = layer()
+    od = ImageDraw.Draw(ol)
+    od.ellipse([(-60, 280), (420, 680)], outline=(8, 8, 20, 255), width=7)
+    od.ellipse([(780, -60), (1280, 380)], outline=(8, 8, 20, 255), width=7)
+    od.ellipse([(680, 280), (1100, 620)], outline=(8, 8, 20, 255), width=5)
+    od.pieslice([(-100, -100), (500, 400)], start=0, end=80, outline=(8, 8, 20, 255), width=5)
+    base = comp(base, ol)
+
+    # 7. Scattered small jewel circles — representing 159 countries / 81k voices
+    dots = layer()
+    dd = ImageDraw.Draw(dots)
+    jewel_cols = [
+        (220, 60, 60, 210), (30, 200, 100, 200), (240, 190, 10, 210),
+        (60, 80, 220, 200), (200, 80, 180, 200), (0, 200, 200, 190),
+        (240, 130, 30, 210), (80, 40, 200, 200),
+    ]
+    dot_positions = [
+        (160, 140), (340, 220), (520, 340), (640, 480), (820, 180),
+        (980, 400), (1100, 140), (200, 520), (460, 160), (760, 540),
+        (1040, 520), (580, 80), (880, 350), (300, 390), (700, 260),
+        (1150, 300), (100, 400), (440, 550), (960, 80),
+    ]
+    radii_dots = [22, 16, 28, 18, 24, 14, 20, 26, 12, 18, 22, 16, 20, 14, 24, 18, 12, 16, 20]
+    for i, (px, py) in enumerate(dot_positions):
+        col = jewel_cols[i % len(jewel_cols)]
+        r = radii_dots[i % len(radii_dots)]
+        dl2 = layer()
+        dd2 = ImageDraw.Draw(dl2)
+        dd2.ellipse([(px-r, py-r), (px+r, py+r)], fill=col, outline=(8, 8, 20, 200), width=2)
+        base = comp(base, dl2)
+
+    # 8. White highlight strokes — Franz Marc's luminous edge detail
+    hl = layer()
+    hd = ImageDraw.Draw(hl)
+    hd.line([(320, 80), (520, 240)], fill=(255, 255, 255, 100), width=3)
+    hd.line([(700, 100), (820, 280)], fill=(255, 255, 255, 80), width=2)
+    hd.line([(200, 300), (380, 440)], fill=(255, 255, 255, 70), width=2)
+    hd.line([(900, 200), (1050, 360)], fill=(255, 255, 255, 90), width=3)
+    base = comp(base, hl)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -1513,6 +1592,7 @@ DAYS = [
     ("2026-03-22", img_leger_20260322,       "Policy",        "Fernand Léger"),
     ("2026-03-23", img_lissitzky_20260323,  "Computer Use",  "El Lissitzky"),
     ("2026-03-24", img_moholy_20260324,     "IPO & Court",   "László Moholy-Nagy"),
+    ("2026-03-25", img_franz_marc_20260325, "Voices",        "Franz Marc"),
 ]
 
 os.makedirs(OUT, exist_ok=True)

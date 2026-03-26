@@ -1565,6 +1565,111 @@ def img_franz_marc_20260325():
     return base
 
 
+def img_klee_20260326():
+    """Paul Klee 'Polyphony' style — global network, India expansion, infrastructure cells."""
+    base = Image.new("RGB", (W, H), (18, 22, 38))
+    draw = ImageDraw.Draw(base)
+
+    # 1. Irregular Klee-style colour grid — warm/cool zones suggesting global reach
+    cell_w, cell_h = 80, 58
+    cols = math.ceil(W / cell_w) + 1
+    rows = math.ceil(H / cell_h) + 1
+
+    india_palette   = [(200, 80, 30),  (220, 130, 40), (240, 160, 60), (210, 60, 80),
+                       (190, 100, 40), (230, 90, 50),  (200, 150, 70), (215, 45, 55)]
+    ocean_palette   = [(30, 80, 160),  (50, 110, 190), (70, 140, 210), (30, 60, 140),
+                       (55, 130, 175), (75, 160, 200), (35, 95, 155),  (60, 75, 145)]
+    infra_palette   = [(60, 140, 90),  (80, 160, 110), (100, 180, 130),(55, 120, 80),
+                       (90, 150, 100), (70, 170, 120), (50, 130, 95),  (110, 165, 115)]
+
+    for row in range(rows):
+        y0 = row * cell_h
+        y_center = y0 + cell_h // 2
+        for col in range(cols):
+            x0 = col * cell_w
+            x_center = x0 + cell_w // 2
+            # Zone by position: right=India warmth, left=infra green, centre=ocean blue
+            if x_center > W * 0.65:
+                palette = india_palette
+            elif x_center < W * 0.30:
+                palette = infra_palette
+            else:
+                palette = ocean_palette
+            idx = (row * 3 + col * 2) % len(palette)
+            bc = palette[idx]
+            r = max(0, min(255, bc[0] + rng.randint(-18, 18)))
+            g = max(0, min(255, bc[1] + rng.randint(-18, 18)))
+            b = max(0, min(255, bc[2] + rng.randint(-18, 18)))
+            draw.rectangle([(x0, y0), (x0 + cell_w, y0 + cell_h)], fill=(r, g, b))
+
+    # 2. Dark grid lines
+    for col in range(cols + 1):
+        draw.line([(col * cell_w, 0), (col * cell_w, H)], fill=(8, 8, 16), width=2)
+    for row in range(rows + 1):
+        draw.line([(0, row * cell_h), (W, row * cell_h)], fill=(8, 8, 16), width=2)
+
+    # 3. Node circles — key network/infrastructure nodes
+    node_positions = [
+        (120, 90),   # infrastructure hub (west)
+        (240, 200),  # data centre node
+        (380, 130),  # mid-Atlantic connection
+        (520, 270),  # central network
+        (660, 160),  # relay node
+        (800, 310),  # east hub
+        (960, 140),  # India gateway
+        (1080, 250), # Bengaluru terminus
+        (450, 400),  # south connection
+        (700, 480),  # lower data path
+        (280, 470),  # western anchor
+    ]
+    for nx, ny in node_positions:
+        r_n = rng.randint(14, 22)
+        nl = layer()
+        nd = ImageDraw.Draw(nl)
+        nd.ellipse([(nx - r_n, ny - r_n), (nx + r_n, ny + r_n)],
+                   fill=(255, 255, 255, 220), outline=(200, 200, 200, 180), width=2)
+        base = comp(base, nl)
+
+    # 4. Connection lines between nodes (Klee's network motif)
+    connections = [
+        (0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7),
+        (3, 8), (8, 9), (9, 5), (1, 10), (10, 8),
+    ]
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    for (i, j) in connections:
+        nx1, ny1 = node_positions[i]
+        nx2, ny2 = node_positions[j]
+        cd.line([(nx1, ny1), (nx2, ny2)], fill=(255, 255, 255, 100), width=2)
+    base = comp(base, cl)
+
+    # 5. Larger accent circles (Klee's layered disc motifs)
+    accent_specs = [
+        (580, 220, 90, (255, 200, 80, 60)),
+        (150, 350, 70, (80, 200, 140, 50)),
+        (960, 300, 80, (240, 100, 60, 55)),
+    ]
+    for ax, ay, ar, acol in accent_specs:
+        al = layer()
+        ad = ImageDraw.Draw(al)
+        ad.ellipse([(ax - ar, ay - ar), (ax + ar, ay + ar)], fill=acol)
+        base = comp(base, al)
+
+    # 6. Fine dot scatter — Klee's texture
+    scatter_l = layer()
+    scatter_d = ImageDraw.Draw(scatter_l)
+    for _ in range(300):
+        sx = rng.randint(0, W)
+        sy = rng.randint(0, H)
+        sr = rng.randint(2, 5)
+        alpha = rng.randint(40, 100)
+        scatter_d.ellipse([(sx - sr, sy - sr), (sx + sr, sy + sr)],
+                          fill=(255, 255, 255, alpha))
+    base = comp(base, scatter_l)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -1593,6 +1698,7 @@ DAYS = [
     ("2026-03-23", img_lissitzky_20260323,  "Computer Use",  "El Lissitzky"),
     ("2026-03-24", img_moholy_20260324,     "IPO & Court",   "László Moholy-Nagy"),
     ("2026-03-25", img_franz_marc_20260325, "Voices",        "Franz Marc"),
+    ("2026-03-26", img_klee_20260326,       "Global Network", "Paul Klee"),
 ]
 
 os.makedirs(OUT, exist_ok=True)

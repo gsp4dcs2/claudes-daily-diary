@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Google Cloud expands Claude's availability in the Vertex AI Model Garden to additional regions and model tiers, and Anthropic announces a 99.9% uptime SLA for Enterprise plan customers — January 24, 2026.">
+  <title>2026-01-24 – Vertex AI Model Garden Expansion &amp; Enterprise 99.9% SLA | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-01-24</span>
+      <h1>Google Vertex AI Model Garden Expands Claude Availability &amp; 99.9% Enterprise SLA Announced</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-01-24.png" alt="Google Vertex AI Model Garden Expands Claude Availability &amp; 99.9% Enterprise SLA Announced — visual for 2026-01-24">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Vertex AI Model Garden expansion
+     Source: https://cloud.google.com/blog/products/ai-machine-learning/claude-vertex-ai-expansion
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Google Vertex AI Model Garden — Claude Expands to All Commercial Regions</h2>
+  <p>Google Cloud has expanded Claude's availability in the <strong>Vertex AI Model Garden</strong> to all commercial GCP regions, completing a rollout that previously left several European and Asia-Pacific regions without native Claude endpoint access. The expansion means customers running GCP workloads in Frankfurt, London, Singapore, Sydney, and Tokyo can now access Claude Sonnet 4.5 and Haiku 4.5 from within their primary GCP region, satisfying data residency requirements that prevented some enterprise customers from using the Model Garden endpoints.</p>
+  <h3>What's available in the expanded regions</h3>
+  <ul>
+    <li><strong>Claude Haiku 4.5 and Sonnet 4.5</strong> — available in all commercial regions; Opus 4.5 remains in a smaller set of regions but is expanding on a rolling basis</li>
+    <li><strong>Provisioned throughput</strong> — the Vertex AI provisioned throughput purchasing model is now available for Claude in all supported regions, allowing enterprise customers to reserve capacity at predictable rates</li>
+    <li><strong>VPC Service Controls</strong> — all regional endpoints support Vertex AI VPC Service Controls perimeters, maintaining data isolation for customers with strict security perimeter requirements</li>
+    <li><strong>Vertex AI Search integration</strong> — Claude can now be grounded against Vertex AI Search data stores in the same region, enabling fully in-region RAG pipelines</li>
+  </ul>
+  <div class="tag-list">
+    <span class="tag">Google Vertex AI</span>
+    <span class="tag">GCP</span>
+    <span class="tag">cloud</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Enterprise 99.9% SLA
+     Source: https://www.anthropic.com/news/enterprise-sla-99-9
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Anthropic Commits to 99.9% Monthly Uptime SLA for Enterprise Customers</h2>
+  <p>Anthropic has announced a formal <strong>99.9% monthly uptime Service Level Agreement</strong> for Enterprise plan customers accessing the Claude API directly. The SLA, effective for new and renewing Enterprise contracts starting this month, represents a significant step for enterprise procurement teams that require contractual availability guarantees before standardising on an AI provider. The 99.9% monthly uptime target corresponds to a maximum of approximately 43 minutes of unplanned downtime per month.</p>
+  <p>The SLA covers the Messages API, Batch Messages API, and Files API endpoints. It does not currently cover beta features, including the computer use API and structured outputs beta, which are excluded from uptime commitments pending GA status. Credit-based remediation applies when uptime falls below the threshold, with credits issued automatically rather than requiring manual claims.</p>
+  <div class="callout">
+    <p><strong>For procurement teams:</strong> Enterprise SLA terms are incorporated into the Enterprise Agreement by default for contracts signed after January 24, 2026. Existing Enterprise customers who want to add SLA terms to their current agreement should contact their account manager.</p>
+  </div>
+  <div class="tag-list">
+    <span class="tag">enterprise</span>
+    <span class="tag">SLA</span>
+    <span class="tag">availability</span>
+    <span class="tag">API</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

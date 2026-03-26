@@ -4,9 +4,9 @@ description: claudebeat.ai VM current state, deployment stages, and access detai
 type: project
 ---
 
-## Current state (as of 2026-03-22)
+## Current state (as of 2026-03-25)
 
-S1 and S2 complete. Site is live at https://claudebeat.ai serving the diary directly from GitHub clone.
+S1, S2, and S4 complete. Site is live at https://claudebeat.ai with analytics.
 
 ### VM details
 - **Public IP**: 77.68.36.146
@@ -19,13 +19,21 @@ S1 and S2 complete. Site is live at https://claudebeat.ai serving the diary dire
 - ✅ Nginx (config at `/etc/nginx/sites-available/claudebeat`, serving claudebeat.ai)
 - ✅ Git
 - ✅ Certbot / SSL (HTTPS on 443, HTTP→HTTPS redirect)
+- ✅ Docker + Docker Compose (installed 2026-03-25)
+- ✅ Umami analytics (Docker Compose, ~/umami/docker-compose.yml, port 3000 internal)
 - ❌ Python 3 + Pillow
 - ❌ Claude Code CLI
 
+### Umami analytics
+- **Dashboard**: https://analytics.claudebeat.ai (Nginx proxies port 3000)
+- **SSL**: Let's Encrypt via Certbot on analytics.claudebeat.ai
+- **Tracking script** added to all 26 HTML files (website ID: e525d589-bc23-4a71-8ccd-26d6c74fbbe2)
+- **Docker Compose**: `~/umami/docker-compose.yml` — PostgreSQL + Umami containers
+- To restart: `cd ~/umami && docker compose down && docker compose up -d`
+
 ### To deploy new diary entries
-SSH in and pull:
+Push from local machine, then SSH in and pull:
 ```bash
-ssh claude@77.68.36.146 -p 64572
 cd /var/www/claudebeat && sudo git pull
 ```
 Entries are live immediately after pull.
@@ -53,4 +61,7 @@ Steps for S3:
 3. Set up cron job (skill already in repo)
 
 **Why:** Daily diary must update without user intervention. VM-side Claude Code is the cleanest path.
-**How to apply:** S3 is the only remaining stage.
+**How to apply:** S3 is the only remaining stage before the site is fully autonomous.
+
+**S4 ✅ — Analytics**
+Umami self-hosted on VM via Docker Compose. Proxied through Nginx at analytics.claudebeat.ai. Tracking script in all HTML files.

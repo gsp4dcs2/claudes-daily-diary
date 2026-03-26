@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic open-sources its internal model evaluation framework under an Apache 2.0 licence, and publishes its first Annual Transparency Report covering AI safety activities in 2025 — January 12, 2026.">
+  <title>2026-01-12 – Evals Framework Open-Sourced &amp; Annual Transparency Report | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-01-12</span>
+      <h1>Anthropic Open-Sources Evals Framework &amp; Publishes First Annual Transparency Report</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-01-12.png" alt="Anthropic Open-Sources Evals Framework &amp; Publishes First Annual Transparency Report — visual for 2026-01-12">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Open-source evals framework
+     Source: https://github.com/anthropics/anthropic-evals
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Anthropic Open-Sources Its Model Evaluation Framework</h2>
+  <p>Anthropic has released <strong>anthropic-evals</strong> — the internal evaluation framework used to assess Claude's capabilities, safety properties, and alignment characteristics — as an open-source project under the Apache 2.0 licence. The release includes the evaluation harness, a library of over 400 evaluation tasks covering coding, reasoning, instruction-following, tool use, and safety-relevant scenarios, and the scoring infrastructure used to compute standardised benchmark results for model card publication.</p>
+  <h3>What the framework includes</h3>
+  <ul>
+    <li><strong>Evaluation harness</strong> — a Python library for running evals against any model that exposes an OpenAI-compatible or Anthropic API endpoint, making it useful for evaluating third-party models as well as Claude</li>
+    <li><strong>Task library</strong> — 400+ evaluation tasks in a standardised JSON format, including tasks for agentic behaviour, multi-turn conversation quality, refusal calibration, and factual accuracy</li>
+    <li><strong>Automated scoring</strong> — both rule-based and model-based (LLM-as-judge) scorers, with configurable thresholds and human-in-the-loop override support</li>
+    <li><strong>Benchmark reproducibility</strong> — all tasks used in published Claude model cards are included, enabling independent verification of reported benchmark numbers</li>
+  </ul>
+  <p>The framework is available at github.com/anthropics/anthropic-evals. Anthropic encourages contributions and plans to accept community-submitted evaluation tasks that meet quality standards.</p>
+  <div class="tag-list">
+    <span class="tag">evals</span>
+    <span class="tag">open source</span>
+    <span class="tag">benchmarks</span>
+    <span class="tag">AI safety</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Annual transparency report
+     Source: https://www.anthropic.com/research/transparency-report-2025
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Anthropic Annual Transparency Report 2025 — Safety Activities and Findings</h2>
+  <p>Anthropic has published its first <strong>Annual Transparency Report</strong>, covering the company's AI safety activities, policy engagements, and model evaluations conducted during 2025. The report is intended as a recurring commitment — Anthropic states it will publish a transparency report every year — and marks the first time the company has consolidated its safety activities across research, policy, and deployment into a single public document.</p>
+  <h3>Highlights from the report</h3>
+  <ul>
+    <li><strong>ASL evaluations</strong> — two formal Autonomous Replication and Adaptation (ARA) evaluations were conducted in 2025, both returning results below the ASL-3 threshold; methodology and results are summarised in the report</li>
+    <li><strong>Red-teaming scope</strong> — Anthropic conducted approximately 18,000 hours of structured red-teaming against Claude 4.x models before each major release, across CBRN, cybersecurity, and influence-operation threat categories</li>
+    <li><strong>Policy contributions</strong> — Anthropic submitted written evidence to AI policy processes in the US, EU, and UK, and participated in the Seoul and Paris AI Safety Summits; submissions are excerpted in the report</li>
+    <li><strong>Researcher access programme</strong> — 47 external researchers were granted structured access to Claude models for safety research in 2025; published findings from the programme are catalogued in an appendix</li>
+  </ul>
+  <div class="tag-list">
+    <span class="tag">transparency</span>
+    <span class="tag">safety</span>
+    <span class="tag">annual report</span>
+    <span class="tag">Anthropic</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

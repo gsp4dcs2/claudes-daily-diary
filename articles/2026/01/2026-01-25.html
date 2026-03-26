@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic launches its Trust Center providing security documentation and compliance reports for enterprise customers, and publishes a detailed guide on the operator trust levels hierarchy — January 25, 2026.">
+  <title>2026-01-25 – Anthropic Trust Center Launches &amp; Operator Trust Levels Guide | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-01-25</span>
+      <h1>Anthropic Trust Center Launches &amp; Operator Trust Levels Guide Published</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-01-25.png" alt="Anthropic Trust Center Launches &amp; Operator Trust Levels Guide Published — visual for 2026-01-25">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Trust Center launch
+     Source: https://trust.anthropic.com
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Anthropic Trust Center — Security Documentation and Compliance Hub</h2>
+  <p>Anthropic has launched <strong>trust.anthropic.com</strong>, a dedicated Trust Center providing security documentation, compliance certifications, and privacy information for enterprise customers and their procurement and security teams. The Trust Center consolidates documentation that was previously scattered across several locations and adds new materials that were unavailable publicly until today, including the full SOC 2 Type II executive summary, Anthropic's sub-processor list, and the data processing addendum (DPA) template for GDPR compliance.</p>
+  <h3>What's available in the Trust Center</h3>
+  <ul>
+    <li><strong>Compliance certifications</strong> — SOC 2 Type II executive summary (full report available under NDA), ISO 27001 certificate, and a summary of the audit scope and findings</li>
+    <li><strong>Security overview</strong> — a public-facing document describing Anthropic's security architecture, including encryption at rest and in transit, access control models, and incident response procedures</li>
+    <li><strong>Privacy documentation</strong> — GDPR DPA template, sub-processor list with last-updated dates, and data retention policy summaries for different API usage tiers</li>
+    <li><strong>Penetration testing summary</strong> — an annual summary of external penetration testing scope and high-level findings, without disclosing exploitable details</li>
+  </ul>
+  <p>Access to the full SOC 2 Type II report and other restricted documents can be requested through a form on the Trust Center, with review typically completed within two business days.</p>
+  <div class="tag-list">
+    <span class="tag">Trust Center</span>
+    <span class="tag">security</span>
+    <span class="tag">compliance</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Operator trust levels guide
+     Source: https://platform.claude.com/docs/en/guides/operator-trust-levels
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Operator Trust Levels — Practical Guide to the Four-Tier Hierarchy</h2>
+  <p>Anthropic has published a practical guide to the <strong>operator trust levels</strong> system introduced in the January model specification refresh, aimed at developers who want to design their system prompts and deployment architectures with a clear understanding of how Claude weights instructions from different sources. The guide moves beyond the high-level description in the model spec to provide worked examples and troubleshooting guidance for common deployment patterns.</p>
+  <h3>The four tiers explained</h3>
+  <ul>
+    <li><strong>Anthropic</strong> — the training-time layer; Claude's values, capabilities, and absolute constraints are set here and cannot be overridden at runtime by any instruction source</li>
+    <li><strong>Operator</strong> — the system prompt; operators can expand or restrict Claude's default behaviours within the limits Anthropic permits, and can grant users elevated permissions up to (but not exceeding) operator level</li>
+    <li><strong>User</strong> — the human turn; users operate within the space operators define; by default users have less latitude than operators but can be explicitly granted more by the system prompt</li>
+    <li><strong>Environment</strong> — tool outputs and retrieved content; Claude treats this tier with the most scepticism, as it represents untrusted external data that may contain injection attempts</li>
+  </ul>
+  <p>The guide includes a decision flowchart for diagnosing trust-level conflicts and a table of common deployment scenarios showing which tier controls the relevant instruction in each case.</p>
+  <div class="tag-list">
+    <span class="tag">operators</span>
+    <span class="tag">trust levels</span>
+    <span class="tag">system prompts</span>
+    <span class="tag">agentic</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

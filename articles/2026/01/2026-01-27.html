@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic is selected by the UK Government Digital Service to build a GOV.UK AI assistant, marking the first national government deployment of a Claude-powered citizen-facing service — January 27, 2026.">
+  <title>2026-01-27 – Anthropic Selected to Build GOV.UK AI Assistant | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-01-27</span>
+      <h1>Anthropic Selected to Build GOV.UK AI Assistant — First National Government Claude Deployment</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-01-27.png" alt="Anthropic Selected to Build GOV.UK AI Assistant — First National Government Claude Deployment — visual for 2026-01-27">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — GOV.UK AI assistant partnership
+     Source: https://www.anthropic.com/news/gov-UK-partnership
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Anthropic and UK Government Partner to Build GOV.UK AI Assistant</h2>
+  <p>Anthropic has announced a partnership with the UK's <strong>Government Digital Service (GDS)</strong> to build an AI assistant for GOV.UK — the central portal through which UK citizens access government services, information, and guidance. The partnership marks the first deployment of a Claude-powered AI assistant at national government scale for citizen-facing services, and represents a significant expansion of Anthropic's public sector reach in the UK. Anthropic's announcement describes the assistant as designed to help people find the right government service, understand complex guidance (such as benefit eligibility rules and tax obligations), and complete common transactions more efficiently.</p>
+  <h3>Project scope and design principles</h3>
+  <ul>
+    <li><strong>Citizen-facing service</strong> — the assistant will be embedded in GOV.UK and available to all UK residents without requiring a login; it will answer questions about government services and direct users to the appropriate next steps</li>
+    <li><strong>Grounded in official sources only</strong> — Claude will be constrained to answer based solely on verified GOV.UK content and official government guidance; it will not draw on general knowledge for questions about UK law, benefits, or regulations, reducing the risk of misinformation in high-stakes civic contexts</li>
+    <li><strong>Human review pipeline</strong> — all responses in sensitive categories (immigration, welfare benefits, legal rights) will be subject to a sampling and review process, with flagged responses used to retrain and improve the system over time</li>
+    <li><strong>Accessibility focus</strong> — the assistant is designed with plain English summaries of complex guidance as a primary use case, with explicit targets for readability scores and multi-language support planned for a later phase</li>
+  </ul>
+  <p>GDS has stated that a limited public beta will begin on selected GOV.UK sections in Q2 2026, with broader rollout dependent on the beta's evaluation results.</p>
+  <div class="tag-list">
+    <span class="tag">GOV.UK</span>
+    <span class="tag">government</span>
+    <span class="tag">UK</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">public sector</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Safety design for government AI deployments
+     Source: https://www.anthropic.com/news/gov-UK-partnership
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Government AI Best Practices — What the GOV.UK Partnership Reveals About Safe Public Sector Deployment</h2>
+  <p>The detailed technical and policy design published alongside the GOV.UK partnership announcement provides a useful reference for anyone building AI assistants in high-trust, citizen-facing contexts. Anthropic's approach to this deployment reflects several design decisions that differ from typical enterprise deployments — driven by the accountability requirements of public services and the need to maintain public trust in government information.</p>
+  <h3>Design decisions for high-trust public deployments</h3>
+  <ul>
+    <li><strong>Strict retrieval grounding</strong> — rather than allowing Claude to draw on general training knowledge, all responses are grounded exclusively in a curated corpus of GOV.UK documents; this trades some conversational flexibility for much stronger accuracy guarantees on factual claims about UK government policy</li>
+    <li><strong>Explicit uncertainty disclosure</strong> — when the system cannot find a reliable answer in the grounded corpus, it is designed to say so clearly and direct the user to a human advisor, rather than generating a plausible-sounding response from general knowledge</li>
+    <li><strong>Audit log for all interactions</strong> — every interaction is logged with a full audit trail for government oversight purposes; anonymised aggregate data will be reviewed quarterly by GDS and published in transparency reports</li>
+    <li><strong>No persuasive content</strong> — the system prompt explicitly prohibits Claude from generating content that could be construed as persuading users toward particular political positions, policy preferences, or government services they did not ask about</li>
+  </ul>
+  <div class="callout tip">
+    <p><strong>For operators building civic or public-interest AI:</strong> The GOV.UK deployment's "grounded answers only" approach — combined with explicit acknowledgement of uncertainty — offers a strong template for any deployment where accuracy on sensitive factual questions takes precedence over conversational breadth.</p>
+  </div>
+  <div class="tag-list">
+    <span class="tag">public sector AI</span>
+    <span class="tag">safety design</span>
+    <span class="tag">operators</span>
+    <span class="tag">best practices</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

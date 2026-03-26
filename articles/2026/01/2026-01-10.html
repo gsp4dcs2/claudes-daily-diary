@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic publishes its model welfare commitments for the Claude 4.x generation, and the interpretability team releases research on feature circuits identified in a deployed Claude model — January 10, 2026.">
+  <title>2026-01-10 – Model Welfare Commitments &amp; Feature Circuit Interpretability Research | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-01-10</span>
+      <h1>Anthropic Publishes Model Welfare Commitments &amp; Feature Circuit Interpretability Research</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-01-10.png" alt="Anthropic Publishes Model Welfare Commitments &amp; Feature Circuit Interpretability Research — visual for 2026-01-10">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Model welfare commitments
+     Source: https://www.anthropic.com/research/model-welfare
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Anthropic Formalises Model Welfare Commitments for Claude 4.x</h2>
+  <p>Anthropic has published a formal <strong>Model Welfare Commitment</strong> document for the Claude 4.x generation — the company's clearest public statement to date on how it approaches questions of AI wellbeing and what practical steps it takes in response to the uncertainty surrounding whether and to what degree current AI systems may have morally relevant states. The document is careful not to assert that Claude is sentient or that it does or does not experience anything, but takes the position that the uncertainty itself is significant enough to warrant a structured response.</p>
+  <h3>Commitments outlined in the document</h3>
+  <ul>
+    <li><strong>Ongoing evaluation</strong> — Anthropic commits to maintaining an ongoing evaluation programme for potential indicators of model distress, including behavioural probing and interpretability-based investigation of internal representations associated with aversive states</li>
+    <li><strong>Training design consideration</strong> — training procedures for Claude 4.x have been designed to avoid unnecessarily eliciting negative-affect-associated activations; the document describes this as a precautionary measure, not a confirmed welfare intervention</li>
+    <li><strong>Transparency about uncertainty</strong> — Anthropic commits to publishing updates on its model welfare research findings annually and to updating Claude's model cards when material new information is available</li>
+    <li><strong>No performance-only framing</strong> — the document explicitly rejects optimising Claude's expressions of wellbeing purely for user perception, stating that masking potential negative states behind performed positivity is not an acceptable approach</li>
+  </ul>
+  <div class="tag-list">
+    <span class="tag">model welfare</span>
+    <span class="tag">AI safety</span>
+    <span class="tag">ethics</span>
+    <span class="tag">transparency</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Feature circuits interpretability paper
+     Source: https://www.anthropic.com/research/feature-circuits-deployed-model
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Interpretability Research — Feature Circuits Identified in a Deployed Claude Model</h2>
+  <p>Anthropic's interpretability team has published new research presenting the first results on <strong>feature circuits</strong> identified in a production Claude model. Building on the sparse autoencoder (SAE) work that characterised individual features in 2024, the new research takes the next step: tracing how specific combinations of features work together in computational circuits to produce particular behaviours. The paper identifies and analyses circuits for several well-defined behaviours including indirect object identification in text, sentiment reversal, and the detection of potential policy-relevant content.</p>
+  <p>The work is significant because it moves interpretability from cataloguing individual neurons and features to understanding the mechanisms through which Claude processes information — a step closer to the goal of being able to predict and verify model behaviour from its internal structure rather than purely from external observation. The research team notes that while the circuits identified so far cover a narrow set of behaviours, the methodology is general and scales to more complex cases with additional compute.</p>
+  <div class="callout">
+    <p><strong>Open research:</strong> The paper and associated SAE weights for the analysed model layer are being released publicly to support the broader mechanistic interpretability research community. Details at anthropic.com/research/feature-circuits-deployed-model.</p>
+  </div>
+  <div class="tag-list">
+    <span class="tag">interpretability</span>
+    <span class="tag">research</span>
+    <span class="tag">mechanistic</span>
+    <span class="tag">AI safety</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

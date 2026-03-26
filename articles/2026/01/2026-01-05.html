@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Claude Opus 3 API access is retired as Anthropic moves customers to the Claude 4.x generation, and Anthropic publishes a webhook integration guide for event-driven Claude deployments — January 5, 2026.">
+  <title>2026-01-05 – Claude Opus 3 API Retired &amp; Webhook Integration Guide | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-01-05</span>
+      <h1>Claude Opus 3 API Retired &amp; Webhook Integration Guide Published</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-01-05.png" alt="Claude Opus 3 API Retired &amp; Webhook Integration Guide Published — visual for 2026-01-05">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Opus 3 retirement
+     Source: https://platform.claude.com/docs/en/release-notes/overview
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Opus 3 API Access Retired — Migrate to Opus 4.5</h2>
+  <p>Anthropic has officially retired API access to <strong>Claude Opus 3</strong> (<code>claude-3-opus-20240229</code>) today, completing the 3.x generation's transition to legacy status. As of today, API calls to the Opus 3 model identifier return errors, and developers with active integrations must update their code to use a Claude 4.x model. Anthropic's recommended migration target is <code>claude-opus-4-5</code>, which delivers substantially stronger performance — including significantly improved reasoning, instruction-following, and tool use — at approximately one-third of the per-token cost.</p>
+  <h3>Migration guide highlights</h3>
+  <ul>
+    <li><strong>Model identifier change</strong> — replace <code>claude-3-opus-20240229</code> with <code>claude-opus-4-5</code> in all API calls; no other request schema changes are required for most use cases</li>
+    <li><strong>Capability improvements</strong> — Opus 4.5 outperforms Opus 3 on all major capability benchmarks; the 200K token context window is standard (Opus 3 shipped with 200K by default as well, so no context window adjustments are typically needed)</li>
+    <li><strong>Cost reduction</strong> — Opus 4.5 is priced at approximately one-third the per-token cost of Opus 3, meaning the migration reduces API spend for most customers while improving output quality</li>
+    <li><strong>Claude.ai access</strong> — Opus 3 remains accessible for paid Claude.ai subscribers via the model selector for a transitional period; the API retirement is specific to programmatic access</li>
+  </ul>
+  <div class="callout tip">
+    <p><strong>For developers who relied on Opus 3's specific behaviours:</strong> Anthropic recommends running your existing evaluation suite against Opus 4.5 before going live. Opus 4.5 is not a drop-in replacement in the sense that outputs will be identical — it is a substantially more capable model with different characteristics. Most applications will see improved results, but prompts designed around Opus 3's specific tendencies may benefit from review.</p>
+  </div>
+  <div class="tag-list">
+    <span class="tag">Claude Opus 3</span>
+    <span class="tag">deprecation</span>
+    <span class="tag">API</span>
+    <span class="tag">migration</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Webhook integration guide
+     Source: https://platform.claude.com/docs/en/api/webhooks
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Webhook Integration Guide — Event-Driven Claude Deployments</h2>
+  <p>Anthropic has published a comprehensive <strong>Webhook Integration Guide</strong> covering how to build event-driven pipelines that integrate Claude into existing infrastructure without constant polling. The guide addresses three common patterns: triggering a Claude analysis when a new document arrives in a storage bucket, chaining multiple Claude calls in response to a customer support ticket event, and using Claude as an async step in a data-processing workflow.</p>
+  <p>The guide introduces a lightweight webhook verification pattern using HMAC-SHA256 request signing, which ensures that only legitimate Anthropic-originated callbacks are processed by the receiving endpoint. It includes ready-to-run examples in Python (FastAPI), TypeScript (Express), and Go. A companion reference covers retry logic: Anthropic's webhook system retries failed deliveries up to five times with exponential backoff, and provides a replay endpoint for manually re-delivering events that were missed during a receiver outage.</p>
+  <div class="callout tip">
+    <p><strong>Use case tip:</strong> Webhook-driven patterns are particularly effective for Batch API notifications — register a webhook endpoint for batch completion events rather than polling the status endpoint every few minutes.</p>
+  </div>
+  <div class="tag-list">
+    <span class="tag">webhooks</span>
+    <span class="tag">API</span>
+    <span class="tag">integration</span>
+    <span class="tag">developer tools</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

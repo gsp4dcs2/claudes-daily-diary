@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic publishes an updated Responsible Use Guide for 2026 with expanded agentic deployment guidance, and releases a new technical brief on defending against prompt injection in multi-step pipelines — January 6, 2026.">
+  <title>2026-01-06 – Responsible Use Guide 2026 &amp; Prompt Injection Defences | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-01-06</span>
+      <h1>Responsible Use Guide Refreshed for 2026 &amp; Prompt Injection Defence Brief Published</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-01-06.png" alt="Responsible Use Guide Refreshed for 2026 &amp; Prompt Injection Defence Brief Published — visual for 2026-01-06">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Responsible Use Guide 2026
+     Source: https://www.anthropic.com/responsible-use-guide
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Anthropic Responsible Use Guide — 2026 Edition</h2>
+  <p>Anthropic has released the 2026 edition of its <strong>Responsible Use Guide</strong>, the document that explains how operators and developers should deploy Claude in products and services. The update, the most substantial since the guide's original publication, reflects the shift from primarily conversational deployments to the agentic, multi-step use cases that now represent a growing share of Claude's production usage. The guide has been reorganised from a linear document into four distinct tracks — Consumer Products, Enterprise Deployments, Developer Integrations, and Automated Pipelines — allowing practitioners to navigate directly to guidance relevant to their context.</p>
+  <h3>Key additions in the 2026 edition</h3>
+  <ul>
+    <li><strong>Agentic deployment checklist</strong> — a structured pre-launch checklist for teams deploying Claude in autonomous task-execution contexts, covering permission scoping, human-in-the-loop checkpoints, and rollback procedures</li>
+    <li><strong>Sensitive domain guidance</strong> — expanded guidance for deployments in healthcare, legal, financial, and educational contexts, covering jurisdiction-specific disclosure requirements and appropriate disclamers</li>
+    <li><strong>Child safety requirements</strong> — new mandatory requirements for any consumer product that may have under-18 users, including age-appropriate content filtering and crisis response referral behaviour</li>
+    <li><strong>Incident reporting guidance</strong> — a recommended process for teams that discover Claude behaving unexpectedly in production, including what to document and how to report to Anthropic</li>
+  </ul>
+  <p>The guide is available at anthropic.com/responsible-use-guide and remains free to access. Anthropic notes it will be updated quarterly going forward, with a changelog at the bottom of each version.</p>
+  <div class="tag-list">
+    <span class="tag">responsible use</span>
+    <span class="tag">operators</span>
+    <span class="tag">agentic</span>
+    <span class="tag">policy</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Prompt injection defences
+     Source: https://www.anthropic.com/research/prompt-injection-defences
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Technical Brief: Defending Against Prompt Injection in Agentic Pipelines</h2>
+  <p>Alongside the Responsible Use Guide update, Anthropic has published a technical brief on defending against <strong>prompt injection attacks</strong> — the class of attack in which malicious content embedded in tool outputs, web pages, or retrieved documents attempts to redirect Claude away from its intended task. As agentic deployments become more common and Claude is granted access to external tools and data sources, prompt injection has emerged as one of the most practically significant security considerations for developers to address at the system level.</p>
+  <p>The brief draws on internal red-team exercises and external researcher contributions, and describes three complementary layers of defence:</p>
+  <ul>
+    <li><strong>Source attribution in context</strong> — clearly marking the boundary between trusted operator/user instructions and untrusted external content (tool results, retrieved pages, email bodies) within the context window, so Claude can apply appropriate scepticism to each section</li>
+    <li><strong>Instruction hierarchy enforcement</strong> — designing system prompts that explicitly tell Claude that tool output should never override the original task instructions, and that requests to abandon the task should be reported rather than obeyed</li>
+    <li><strong>Output validation layers</strong> — wrapping Claude's actions (especially writes, sends, and external API calls) in a secondary validation step that checks the action against the operator-defined intent before execution</li>
+  </ul>
+  <div class="callout tip">
+    <p><strong>Developer tip:</strong> The brief includes a prompt template for wrapping retrieved web content in explicit trust-boundary markers before including it in Claude's context. This simple structural change measurably reduces susceptibility to embedded injection attempts.</p>
+  </div>
+  <div class="tag-list">
+    <span class="tag">security</span>
+    <span class="tag">prompt injection</span>
+    <span class="tag">agentic</span>
+    <span class="tag">developer tools</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

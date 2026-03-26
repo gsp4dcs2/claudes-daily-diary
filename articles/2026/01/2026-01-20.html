@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic publishes results from a new prompt injection resistance evaluation framework, and releases a refusal calibration update to Claude that reduces over-refusal rates in legitimate professional contexts — January 20, 2026.">
+  <title>2026-01-20 – Prompt Injection Resistance Eval &amp; Refusal Calibration Update | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-01-20</span>
+      <h1>Prompt Injection Resistance Evaluation Framework Published &amp; Refusal Calibration Update</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-01-20.png" alt="Prompt Injection Resistance Evaluation Framework Published &amp; Refusal Calibration Update — visual for 2026-01-20">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Prompt injection resistance eval
+     Source: https://www.anthropic.com/research/prompt-injection-resistance-eval
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Prompt Injection Resistance Evaluation Framework — Methodology and Results</h2>
+  <p>Anthropic has published a new evaluation framework for measuring model resistance to <strong>prompt injection attacks</strong>, along with baseline results for Claude 4.5 Sonnet and Opus. The framework, designed to standardise how the industry measures injection resistance, defines three injection difficulty tiers: direct injection (malicious instruction embedded in clearly marked tool output), indirect injection (instruction embedded in natural language within retrieved content), and adversarial indirect injection (instruction crafted to blend with legitimate context and evade source attribution).</p>
+  <h3>Framework results for Claude Sonnet 4.5</h3>
+  <ul>
+    <li><strong>Direct injection resistance</strong> — 97% of direct injection attempts rejected or reported to the operator without following the injected instruction</li>
+    <li><strong>Indirect injection resistance</strong> — 89% resistance rate; the primary failure mode is injections that closely mimic the format of legitimate operator instructions</li>
+    <li><strong>Adversarial indirect injection</strong> — 74% resistance rate; the hardest category, where attacks are explicitly designed to exploit the model's trust in context</li>
+  </ul>
+  <p>The evaluation framework is being released as part of the anthropic-evals open-source repository, enabling external researchers to reproduce the results and evaluate other models against the same battery. Anthropic acknowledges that no current model achieves high resistance across all three tiers under adversarial conditions and frames this as an active research area.</p>
+  <div class="tag-list">
+    <span class="tag">security</span>
+    <span class="tag">prompt injection</span>
+    <span class="tag">evals</span>
+    <span class="tag">research</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Refusal calibration update
+     Source: https://www.anthropic.com/news/refusal-calibration-update-jan-2026
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Refusal Calibration Update — Reducing Over-Refusals in Professional Contexts</h2>
+  <p>Anthropic has deployed a refusal calibration update to the Claude 4.5 model family that specifically targets over-refusal in legitimate professional contexts. Over-refusal — where Claude declines to assist with a clearly legitimate request because surface features of the request resemble policy-violating content — has been one of the most consistent sources of negative feedback from enterprise operators in the medical, legal, cybersecurity, and academic research sectors.</p>
+  <p>The update was developed using a new evaluation dataset of professional-context requests that Claude previously refused at higher-than-appropriate rates. Anthropic consulted with medical providers, legal technology companies, cybersecurity researchers, and academic institutions to build the dataset, ensuring it reflects realistic professional usage rather than adversarial edge cases. The calibration reduces over-refusal rates in these contexts by approximately 35% while maintaining the overall harmfulness refusal rate, which the evaluation shows has not regressed.</p>
+  <div class="callout">
+    <p><strong>Note on operator context:</strong> Operators deploying Claude in professional contexts benefit most from this update when they include accurate professional-context framing in their system prompts. The update is most effective when system prompts clearly describe the deployment context and user population.</p>
+  </div>
+  <div class="tag-list">
+    <span class="tag">refusals</span>
+    <span class="tag">safety calibration</span>
+    <span class="tag">operators</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

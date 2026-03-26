@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic publishes research on faithfulness improvements in the 200K context window, and releases a long-document processing guide with best practices for retrieval, chunking, and summarisation at scale — January 15, 2026.">
+  <title>2026-01-15 – 200K Context Faithfulness Research &amp; Long-Document Processing Guide | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-01-15</span>
+      <h1>200K Context Faithfulness Improvements &amp; Long-Document Processing Guide Released</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-01-15.png" alt="200K Context Faithfulness Improvements &amp; Long-Document Processing Guide Released — visual for 2026-01-15">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — 200K context faithfulness
+     Source: https://www.anthropic.com/research/context-faithfulness-200k
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Research Update — Improved Faithfulness Across the Full 200K Context Window</h2>
+  <p>Anthropic's research team has published findings on improvements to Claude's faithfulness when operating across the full 200K token context window. A known limitation of large-context language models is the tendency for information retrieval quality to degrade for content that appears in the middle of the context — sometimes described informally as the "lost in the middle" problem. The research shows that targeted training improvements in Claude 4.5 Sonnet and Opus have substantially reduced this effect compared to the 3.x generation.</p>
+  <h3>Key findings</h3>
+  <ul>
+    <li><strong>Middle-of-context recall</strong> — on a standardised multi-document retrieval evaluation, Sonnet 4.5 achieves 91% recall of information placed in the middle third of a 200K context, compared to 74% for Claude 3.7 Sonnet on the same evaluation</li>
+    <li><strong>Citation accuracy</strong> — when asked to cite specific passages from long documents, Claude 4.5 Sonnet produces accurate citations in 88% of cases versus 71% for the previous generation</li>
+    <li><strong>Instruction adherence at depth</strong> — complex multi-part instructions embedded deep within long contexts are followed at near the same rate as the same instructions at the start of the context</li>
+  </ul>
+  <p>The improvements are most material for enterprise use cases involving long legal documents, technical specifications, and multi-party contract analysis where information is distributed throughout large documents rather than concentrated at the beginning.</p>
+  <div class="tag-list">
+    <span class="tag">context window</span>
+    <span class="tag">faithfulness</span>
+    <span class="tag">research</span>
+    <span class="tag">long documents</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Long-document processing guide
+     Source: https://platform.claude.com/docs/en/guides/long-documents
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> New Guide — Long-Document Processing with Claude</h2>
+  <p>Anthropic has published a new <strong>Long-Document Processing Guide</strong> that covers the practical engineering decisions involved in building Claude-powered workflows for large documents and corpora. The guide is aimed at developers building document analysis, contract review, research synthesis, and knowledge base applications, and addresses the recurring questions about when to use the full context window versus retrieval-augmented generation (RAG).</p>
+  <h3>Guide structure</h3>
+  <ul>
+    <li><strong>Context vs. RAG decision framework</strong> — a decision tree for choosing between fitting the full document in context (for documents under ~150K tokens) versus using chunked retrieval (for larger corpora or when cost is a primary constraint)</li>
+    <li><strong>Chunking strategies</strong> — comparison of semantic chunking, sentence-window chunking, and hierarchical summarisation approaches, with benchmarked recall trade-offs for each</li>
+    <li><strong>Prompt patterns for document analysis</strong> — reusable prompt templates for document summarisation, question-answering over long texts, comparative analysis of multiple documents, and extracting structured data from unstructured long-form content</li>
+    <li><strong>Cost management</strong> — strategies for reducing input token cost on large documents, including selective context loading and prompt caching for static preambles</li>
+  </ul>
+  <div class="tag-list">
+    <span class="tag">long documents</span>
+    <span class="tag">RAG</span>
+    <span class="tag">developer tools</span>
+    <span class="tag">best practices</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

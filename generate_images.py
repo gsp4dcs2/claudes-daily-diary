@@ -2307,9 +2307,626 @@ def img_miro_20260228():
     return base
 
 
+# ── January 2026 retrospective motif functions ───────────────────────────────
+
+def img_rothko_20260101():
+    """Mark Rothko Colour Field — year in review, long contemplation."""
+    base = Image.new("RGB", (W, H), (18, 10, 8))
+    bands = [(30, 14, 6), (110, 35, 20), (180, 70, 30), (220, 120, 50), (160, 55, 25)]
+    band_h = H // len(bands)
+    for i, col in enumerate(bands):
+        bl = layer(); ImageDraw.Draw(bl).rectangle([(0, i*band_h), (W, (i+1)*band_h+20)], fill=(*col, 200))
+        base = comp(base, bl)
+    glow = layer()
+    for r in [200, 150, 100]:
+        gl = layer(); ImageDraw.Draw(gl).ellipse([(W//2-r*3, H//2-r), (W//2+r*3, H//2+r)], fill=(220, 120, 50, 30)); base = comp(base, gl)
+    edge = layer(); ed = ImageDraw.Draw(edge)
+    for y in range(0, H, 4):
+        alpha = int(30 * abs(math.sin(y / 40)))
+        ed.line([(0, y), (W, y)], fill=(255, 200, 120, alpha), width=1)
+    base = comp(base, edge)
+    return base
+
+
+def img_mondrian_20260102():
+    """Piet Mondrian grid — SDK structured outputs."""
+    base = Image.new("RGB", (W, H), (242, 238, 220))
+    draw = ImageDraw.Draw(base)
+    YELLOW, RED, BLUE, BLACK = (255, 210, 0), (215, 35, 35), (25, 75, 195), (15, 15, 15)
+    gx = [0, 100, 220, 350, 480, 610, 730, 860, 980, 1100, W]
+    gy = [0, 90, 180, 270, 360, 450, 540, H]
+    bw = 14
+    for x in gx[1:-1]: draw.rectangle([(x-bw//2,0),(x+bw//2,H)], fill=YELLOW)
+    for y in gy[1:-1]: draw.rectangle([(0,y-bw//2),(W,y+bw//2)], fill=YELLOW)
+    cells = [(0,0,RED),(2,2,BLUE),(4,1,RED),(6,3,BLUE),(1,4,RED),(5,0,BLUE),(3,5,RED),(7,2,BLUE),(1,1,YELLOW),(5,4,YELLOW)]
+    for ci, cj, col in cells:
+        x0 = gx[ci]+bw//2+2; y0 = gy[cj]+bw//2+2
+        x1 = gx[ci+1]-bw//2-2; y1 = gy[cj+1]-bw//2-2
+        if x1>x0 and y1>y0: draw.rectangle([(x0,y0),(x1,y1)], fill=col)
+    for x in gx[1:-1]:
+        for y in gy[1:-1]: draw.rectangle([(x-bw//2,y-bw//2),(x+bw//2,y+bw//2)], fill=BLACK)
+    return base
+
+
+def img_klimt_20260103():
+    """Gustav Klimt mosaic — Haiku 4.5 launch, craftsmanship."""
+    base = Image.new("RGB", (W, H), (12, 8, 6))
+    spiral = layer(); sd = ImageDraw.Draw(spiral)
+    for i in range(60):
+        a = math.radians(i * 22)
+        r2 = 20 + i * 8
+        cx2 = int(600 + r2 * math.cos(a)); cy2 = int(315 + r2 * math.sin(a))
+        sd.arc([(cx2-r2//2,cy2-r2//2),(cx2+r2//2,cy2+r2//2)], a*10, a*10+180, fill=(212,175,55,rng.randint(80,200)), width=rng.randint(1,4))
+    base = comp(base, spiral)
+    mosaic = layer(); md = ImageDraw.Draw(mosaic)
+    for _ in range(300):
+        mx = rng.randint(0,W-16); my = rng.randint(0,H-16); sz = rng.randint(4,16)
+        mc = [(212,175,55),(0,120,120),(150,55,25),(190,170,70),(75,35,110)][rng.randint(0,4)]
+        md.rectangle([(mx,my),(mx+sz,my+sz)], fill=(*mc, rng.randint(110,210)))
+    base = comp(base, mosaic)
+    face = layer(); fd = ImageDraw.Draw(face)
+    fd.ellipse([(420,60),(780,450)], fill=(212,175,55,50), outline=(212,175,55,170), width=5)
+    base = comp(base, face)
+    glow2 = layer(); gd2 = ImageDraw.Draw(glow2)
+    for _ in range(80):
+        cx3=rng.randint(0,W); cy3=rng.randint(0,H); r3=rng.randint(6,50)
+        gd2.arc([(cx3-r3,cy3-r3),(cx3+r3,cy3+r3)], rng.randint(0,360), rng.randint(10,340), fill=(212,175,55,rng.randint(60,180)), width=rng.randint(1,4))
+    base = comp(base, glow2)
+    return base
+
+
+def img_miro_20260104():
+    """Joan Miró biomorphic — team collaboration / Projects."""
+    base = Image.new("RGB", (W, H), (18, 16, 55))
+    blobs = [(220,180,90,70,(215,45,45)),(560,280,120,85,(255,195,0)),(950,170,85,65,(45,175,215)),(130,410,75,55,(45,195,75)),(750,420,105,75,(215,95,195)),(460,120,65,50,(255,135,0)),(1080,340,70,55,(255,90,90))]
+    for cx,cy,rw,rh,col in blobs:
+        bl = layer(); ImageDraw.Draw(bl).ellipse([(cx-rw,cy-rh),(cx+rw,cy+rh)], fill=(*col,225), outline=(0,0,0,255), width=4)
+        base = comp(base, bl)
+    for sx,sy in [(300,90),(720,190),(1000,340),(185,310),(870,115),(580,470),(420,350)]:
+        stl = layer(); std = ImageDraw.Draw(stl)
+        for ang in range(0,360,60):
+            rad = math.radians(ang); std.ellipse([(sx+int(20*math.cos(rad))-4,sy+int(20*math.sin(rad))-4),(sx+int(20*math.cos(rad))+4,sy+int(20*math.sin(rad))+4)], fill=(255,255,255,215))
+        base = comp(base, stl)
+    ll = layer(); ld = ImageDraw.Draw(ll)
+    ld.line([(80,340),(380,140),(680,390),(980,190),(1130,440)], fill=(0,0,0,255), width=4)
+    base = comp(base, ll)
+    return base
+
+
+def img_delaunay_20260105():
+    """Robert Delaunay rings — voice / webhooks / signals."""
+    base = Image.new("RGB", (W, H), (12, 10, 28))
+    centres = [(350, 300), (750, 280), (1050, 320), (180, 200)]
+    spectrum = [(220,30,50),(255,120,0),(255,215,0),(40,200,80),(0,160,255),(120,40,220)]
+    for cx, cy in centres:
+        for i, col in enumerate(spectrum):
+            r4 = 60 + i * 55
+            rl = layer(); ImageDraw.Draw(rl).ellipse([(cx-r4,cy-r4),(cx+r4,cy+r4)], fill=(*col, 40), outline=(*col, 160), width=3)
+            base = comp(base, rl)
+    cross = layer(); cd = ImageDraw.Draw(cross)
+    for cx,cy in centres:
+        cd.line([(cx-90,cy),(cx+90,cy)], fill=(255,255,255,60), width=1)
+        cd.line([(cx,cy-90),(cx,cy+90)], fill=(255,255,255,60), width=1)
+    base = comp(base, cross)
+    return base
+
+
+def img_malevich_20260106():
+    """Kazimir Malevich geometric — responsible use / security."""
+    base = Image.new("RGB", (W, H), (235, 228, 210))
+    shapes = [
+        ([(150,100),(450,100),(480,350),(120,350)], (20,20,20)),
+        ([(700,80),(950,80),(980,280),(670,280)], (200,30,30)),
+        ([(550,350),(800,350),(820,530),(530,530)], (20,60,180)),
+        ([(900,380),(1150,380),(1170,550),(880,550)], (220,190,0)),
+        ([(100,420),(300,420),(320,580),(80,580)], (20,20,20)),
+    ]
+    for pts, col in shapes:
+        sl = layer(); ImageDraw.Draw(sl).polygon(pts, fill=(*col,220), outline=(0,0,0,255)); base = comp(base, sl)
+    return base
+
+
+def img_seurat_20260107():
+    """Georges Seurat pointillism — token analytics / developer data."""
+    base = Image.new("RGB", (W, H), (16, 22, 52))
+    dot_layer = layer(); dd = ImageDraw.Draw(dot_layer)
+    for _ in range(5000):
+        dx = rng.randint(0,W); dy = rng.randint(0,H)
+        cx5,cy5 = W*0.5, H*0.5
+        dist = math.hypot(dx-cx5, dy-cy5)
+        bright = max(0, 1-dist/480)
+        r5 = int(15+bright*240); g5 = int(30+bright*190); b5 = int(90+bright*165)
+        hs = rng.randint(-25,25); dr5 = rng.randint(2,5)
+        dd.ellipse([(dx-dr5,dy-dr5),(dx+dr5,dy+dr5)], fill=(min(255,r5+hs),min(255,g5),min(255,b5),rng.randint(150,235)))
+    base = comp(base, dot_layer)
+    rings = layer(); rd5 = ImageDraw.Draw(rings)
+    for rad5 in [70,150,230,320,420]:
+        rd5.arc([(W//2-rad5,H//2-rad5),(W//2+rad5,H//2+rad5)], 0, 360, fill=(255,210,90,50), width=2)
+    base = comp(base, rings)
+    return base
+
+
+def img_calder_20260108():
+    """Alexander Calder mobile — Azure / balanced infrastructure."""
+    base = Image.new("RGB", (W, H), (246,243,238))
+    arms = layer(); ad = ImageDraw.Draw(arms)
+    ad.line([(180,70),(1020,70)], fill=(18,18,18,255), width=4)
+    ad.line([(600,70),(600,210)], fill=(18,18,18,255), width=3)
+    ad.line([(180,70),(180,190)], fill=(18,18,18,255), width=3)
+    ad.line([(1020,70),(1020,190)], fill=(18,18,18,255), width=3)
+    ad.line([(290,290),(810,290)], fill=(18,18,18,255), width=3)
+    ad.line([(290,290),(290,430)], fill=(18,18,18,255), width=2)
+    ad.line([(810,290),(810,430)], fill=(18,18,18,255), width=2)
+    ad.line([(180,190),(480,190)], fill=(18,18,18,255), width=2)
+    ad.line([(330,190),(330,360)], fill=(18,18,18,255), width=2)
+    base = comp(base, arms)
+    ellipses = [
+        ((120,150,260,260),(215,40,40)),((560,50,720,210),(18,75,195)),((960,150,1080,280),(215,195,0)),
+        ((240,390,380,520),(215,95,18)),((740,385,880,520),(38,155,75)),((290,310,410,420),(155,18,175)),
+        ((155,190,275,300),(0,155,195)),
+    ]
+    for bounds,col in ellipses:
+        el = layer(); ImageDraw.Draw(el).ellipse(bounds, fill=(*col,225)); base = comp(base, el)
+    return base
+
+
+def img_lissitzky_20260109():
+    """El Lissitzky constructivist — Claude Code CLI / developer tooling."""
+    base = Image.new("RGB", (W, H), (238, 232, 215))
+    bars = [
+        ((60,40,280,130), (185,20,20)),
+        ((340,80,700,180), (20,20,20)),
+        ((80,200,500,280), (185,20,20)),
+        ((560,160,900,240), (20,20,20)),
+        ((200,320,600,400), (185,20,20)),
+        ((650,300,1100,380), (20,20,20)),
+        ((100,440,420,510), (185,20,20)),
+        ((480,420,850,500), (20,20,20)),
+    ]
+    for (x0,y0,x1,y1), col in bars:
+        sl = layer(); ImageDraw.Draw(sl).rectangle([(x0,y0),(x1,y1)], fill=(*col,210)); base = comp(base, sl)
+    circles = [(320,220,40,(185,20,20)),(800,120,55,(20,20,20)),(550,460,35,(185,20,20))]
+    for cx,cy,r,col in circles:
+        cl = layer(); ImageDraw.Draw(cl).ellipse([(cx-r,cy-r),(cx+r,cy+r)], fill=(*col,180), outline=(0,0,0,255), width=3); base = comp(base, cl)
+    return base
+
+
+def img_franz_marc_20260110():
+    """Franz Marc jewel tones — model welfare / interpretability."""
+    base = Image.new("RGB", (W, H), (8, 35, 75))
+    panels = [((0,0,380,H),(0,115,155,115)),((350,0,730,H),(18,75,35,115)),((700,0,W,H),(95,18,115,115))]
+    for r,c in [(b,col) for b,col in panels]:
+        pl = layer(); ImageDraw.Draw(pl).rectangle(r, fill=c); base = comp(base, pl)
+    for pts,col in [([(90,380),(280,190),(480,340),(680,140),(880,290),(1100,90)],(250,195,75)),
+                    ([(40,280),(240,490),(440,265),(640,465),(840,185),(1100,380)],(90,215,255))]:
+        ll = layer(); ImageDraw.Draw(ll).line(pts, fill=(*col,175), width=6); base = comp(base, ll)
+    for cx,cy,r,col in [(290,240,75,(250,195,75)),(680,360,95,(90,215,255)),(980,185,65,(215,95,195))]:
+        el = layer(); ImageDraw.Draw(el).ellipse([(cx-r,cy-r),(cx+r,cy+r)], fill=(*col,155), outline=(255,255,255,95), width=3); base = comp(base, el)
+    return base
+
+
+def img_balla_20260111():
+    """Giacomo Balla Futurism — Cowork macOS launch / speed."""
+    base = Image.new("RGB", (W, H), (7, 7, 11))
+    vx, vy = 580, 310
+    cols6 = [(215,55,18),(255,135,0),(195,195,0),(55,195,215),(95,55,195),(215,18,95)]
+    for i in range(24):
+        ang = math.radians(i*15); L = rng.randint(280,680)
+        ex = int(vx+L*math.cos(ang)); ey = int(vy+L*math.sin(ang))
+        pl = layer(); ImageDraw.Draw(pl).line([(vx,vy),(ex,ey)], fill=(*cols6[i%6],135), width=rng.randint(2,8)); base = comp(base, pl)
+    for i in range(12):
+        ang = math.radians(i*30+8); L2 = rng.randint(180,480)
+        ex2 = int(vx+L2*math.cos(ang)); ey2 = int(vy+L2*math.sin(ang))
+        pw = rng.randint(18,75); ph = rng.randint(9,38)
+        sx5 = (vx+ex2)//2; sy5 = (vy+ey2)//2
+        pl2 = layer(); ImageDraw.Draw(pl2).ellipse([(sx5-pw,sy5-ph),(sx5+pw,sy5+ph)], fill=(*cols6[i%4],95)); base = comp(base, pl2)
+    core = layer(); ImageDraw.Draw(core).ellipse([(vx-18,vy-18),(vx+18,vy+18)], fill=(255,255,255,235)); base = comp(base, core)
+    return base
+
+
+def img_moholy_20260112():
+    """László Moholy-Nagy Bauhaus — open source evals / transparency."""
+    base = Image.new("RGB", (W, H), (250, 247, 242))
+    circles_data = [(350,300,200,(255,80,20)),(700,280,180,(20,100,220)),(550,320,160,(220,200,0)),(900,250,140,(20,180,100)),(200,200,120,(180,20,180))]
+    for cx,cy,r,col in circles_data:
+        cl = layer(); ImageDraw.Draw(cl).ellipse([(cx-r,cy-r),(cx+r,cy+r)], fill=(*col,55), outline=(*col,180), width=4); base = comp(base, cl)
+    rects = [(100,50,320,180,(20,100,220)),(750,100,970,250,(255,80,20)),(400,400,650,570,(20,180,100)),(900,380,1150,540,(220,200,0))]
+    for x0,y0,x1,y1,col in rects:
+        rl = layer(); ImageDraw.Draw(rl).rectangle([(x0,y0),(x1,y1)], fill=(*col,40), outline=(*col,160), width=3); base = comp(base, rl)
+    ll = layer(); ld = ImageDraw.Draw(ll)
+    ld.line([(0,H//2),(W,H//2)], fill=(20,20,20,100), width=2)
+    ld.line([(W//2,0),(W//2,H)], fill=(20,20,20,100), width=2)
+    base = comp(base, ll)
+    return base
+
+
+def img_kandinsky_20260113():
+    """Wassily Kandinsky — extended thinking GA / prompting guide."""
+    base = Image.new("RGB", (W, H), (16, 32, 68))
+    grid = layer(); gd = ImageDraw.Draw(grid)
+    for off in range(-H,W+H,58):
+        gd.line([(off,0),(off+H,H)], fill=(255,255,255,22), width=1)
+        gd.line([(off,0),(off-H,H)], fill=(255,255,255,22), width=1)
+    base = comp(base, grid)
+    s1 = layer(); ImageDraw.Draw(s1).ellipse([(610,10),(1080,380)], fill=(255,210,0,225)); base = comp(base, s1)
+    s2 = layer(); ImageDraw.Draw(s2).polygon([(190,510),(460,510),(325,170)], fill=(215,28,48,215)); base = comp(base, s2)
+    s3 = layer(); ImageDraw.Draw(s3).pieslice([(820,270),(1175,570)], 195, 355, fill=(28,88,215,195)); base = comp(base, s3)
+    s4 = layer(); ImageDraw.Draw(s4).ellipse([(95,75),(255,235)], fill=(255,115,18,215)); base = comp(base, s4)
+    s5 = layer(); ImageDraw.Draw(s5).polygon([(530,340),(625,245),(720,340),(625,435)], fill=(38,175,88,195)); base = comp(base, s5)
+    ll = layer(); ld = ImageDraw.Draw(ll)
+    ld.line([(0,395),(395,95)], fill=(0,0,0,255), width=4)
+    ld.line([(495,595),(895,195)], fill=(255,255,255,195), width=3)
+    base = comp(base, ll)
+    return base
+
+
+def img_leger_20260114():
+    """Fernand Léger mechanical — Bedrock cross-region / infrastructure."""
+    base = Image.new("RGB", (W, H), (20, 20, 25))
+    outlines = [
+        ((80,60,280,220), (220,50,50)),
+        ((320,100,600,280), (255,160,0)),
+        ((650,60,850,200), (50,180,220)),
+        ((900,120,1150,300), (220,220,50)),
+        ((100,320,380,520), (255,160,0)),
+        ((420,360,700,560), (50,220,100)),
+        ((750,340,1000,530), (220,50,50)),
+    ]
+    for (x0,y0,x1,y1), col in outlines:
+        sl = layer(); ImageDraw.Draw(sl).rectangle([(x0,y0),(x1,y1)], fill=(*col,35), outline=(*col,220), width=5); base = comp(base, sl)
+    circles2 = [(180,320,50,(255,160,0)),(550,190,60,(220,50,50)),(870,220,45,(50,220,100)),(1050,440,55,(50,180,220))]
+    for cx,cy,r,col in circles2:
+        cl = layer(); ImageDraw.Draw(cl).ellipse([(cx-r,cy-r),(cx+r,cy+r)], fill=(*col,55), outline=(*col,220), width=5); base = comp(base, cl)
+    return base
+
+
+def img_rothko_20260115():
+    """Mark Rothko Colour Field — long context faithfulness / depth."""
+    base = Image.new("RGB", (W, H), (10, 6, 14))
+    bands2 = [(40,18,55), (90,40,120), (140,70,170), (80,30,110), (30,10,45)]
+    bh2 = H//len(bands2)
+    for i,col in enumerate(bands2):
+        bl2 = layer(); ImageDraw.Draw(bl2).rectangle([(0,i*bh2),(W,(i+1)*bh2+18)], fill=(*col,205)); base = comp(base, bl2)
+    for r6 in [180,130,80]:
+        gl2 = layer(); ImageDraw.Draw(gl2).ellipse([(W//2-r6*3,H//2-r6),(W//2+r6*3,H//2+r6)], fill=(170,100,220,28)); base = comp(base, gl2)
+    edge2 = layer(); ed2 = ImageDraw.Draw(edge2)
+    for y2 in range(0,H,4):
+        a2 = int(25*abs(math.sin(y2/38))); ed2.line([(0,y2),(W,y2)], fill=(200,150,255,a2), width=1)
+    base = comp(base, edge2)
+    return base
+
+
+def img_klimt_20260116():
+    """Gustav Klimt gold mosaic — Sonnet 4.5 update / refinement."""
+    base = Image.new("RGB", (W, H), (10, 6, 4))
+    spiral2 = layer(); sd2 = ImageDraw.Draw(spiral2)
+    for i in range(55):
+        a7 = math.radians(i*24); r7 = 18+i*9
+        cx7 = int(550+r7*math.cos(a7)); cy7 = int(280+r7*math.sin(a7))
+        sd2.arc([(cx7-r7//2,cy7-r7//2),(cx7+r7//2,cy7+r7//2)], a7*8, a7*8+200, fill=(200,165,45,rng.randint(75,195)), width=rng.randint(1,4))
+    base = comp(base, spiral2)
+    mos2 = layer(); md2 = ImageDraw.Draw(mos2)
+    for _ in range(280):
+        mx2=rng.randint(0,W-14); my2=rng.randint(0,H-14); sz2=rng.randint(4,15)
+        mc2 = [(200,165,45),(0,110,110),(145,50,22),(185,165,65),(70,32,105)][rng.randint(0,4)]
+        md2.rectangle([(mx2,my2),(mx2+sz2,my2+sz2)], fill=(*mc2,rng.randint(105,205)))
+    base = comp(base, mos2)
+    face2 = layer(); fd2 = ImageDraw.Draw(face2)
+    fd2.ellipse([(900,60),(1160,400)], fill=(200,165,45,45), outline=(200,165,45,165), width=5)
+    base = comp(base, face2)
+    return base
+
+
+def img_mondrian_20260117():
+    """Piet Mondrian grid — structured outputs / JSON schema."""
+    base = Image.new("RGB", (W, H), (240, 235, 218))
+    draw17 = ImageDraw.Draw(base)
+    Y2,R2,B2,BK2 = (255,205,0),(210,30,30),(20,70,190),(12,12,12)
+    gx2 = [0,90,210,340,470,610,740,870,1000,1110,W]
+    gy2 = [0,85,175,265,355,445,535,H]
+    bw2 = 15
+    for x in gx2[1:-1]: draw17.rectangle([(x-bw2//2,0),(x+bw2//2,H)], fill=Y2)
+    for y in gy2[1:-1]: draw17.rectangle([(0,y-bw2//2),(W,y+bw2//2)], fill=Y2)
+    cells2 = [(1,0,R2),(3,2,B2),(5,1,R2),(7,3,B2),(0,4,R2),(4,5,B2),(8,2,R2),(2,4,B2),(6,0,Y2)]
+    for ci2,cj2,col17 in cells2:
+        x02=gx2[ci2]+bw2//2+2; y02=gy2[cj2]+bw2//2+2; x12=gx2[ci2+1]-bw2//2-2; y12=gy2[cj2+1]-bw2//2-2
+        if x12>x02 and y12>y02: draw17.rectangle([(x02,y02),(x12,y12)], fill=col17)
+    for x in gx2[1:-1]:
+        for y in gy2[1:-1]: draw17.rectangle([(x-bw2//2,y-bw2//2),(x+bw2//2,y+bw2//2)], fill=BK2)
+    return base
+
+
+def img_miro_20260118():
+    """Joan Miró — chained automations / computer use multi-screen."""
+    base = Image.new("RGB", (W, H), (16, 14, 52))
+    blobs18 = [(200,190,85,68,(210,42,42)),(540,270,118,82,(255,190,0)),(920,165,82,62,(42,170,210)),(120,405,72,52,(42,190,72)),(720,415,102,72,(210,92,192)),(440,115,62,48,(255,130,0)),(1060,330,68,52,(255,85,85)),(330,450,58,44,(0,205,205))]
+    for cx,cy,rw,rh,col in blobs18:
+        bl = layer(); ImageDraw.Draw(bl).ellipse([(cx-rw,cy-rh),(cx+rw,cy+rh)], fill=(*col,222), outline=(0,0,0,255), width=4); base = comp(base, bl)
+    for sx,sy in [(280,85),(700,185),(980,330),(175,305),(850,108),(560,465),(410,345),(900,430)]:
+        stl = layer(); std = ImageDraw.Draw(stl)
+        for ang in range(0,360,60):
+            rad=math.radians(ang); std.ellipse([(sx+int(18*math.cos(rad))-4,sy+int(18*math.sin(rad))-4),(sx+int(18*math.cos(rad))+4,sy+int(18*math.sin(rad))+4)], fill=(255,255,255,212))
+        base = comp(base, stl)
+    ll18 = layer(); ld18 = ImageDraw.Draw(ll18)
+    ld18.line([(75,325),(375,135),(675,380),(975,180),(1125,435)], fill=(0,0,0,255), width=4)
+    base = comp(base, ll18)
+    return base
+
+
+def img_seurat_20260119():
+    """Georges Seurat — 1M developers / data density."""
+    base = Image.new("RGB", (W, H), (12, 18, 48))
+    dl19 = layer(); dd19 = ImageDraw.Draw(dl19)
+    for _ in range(5500):
+        dx=rng.randint(0,W); dy=rng.randint(0,H)
+        cx19,cy19 = W*0.45, H*0.5; dist19=math.hypot(dx-cx19,dy-cy19)
+        bright19=max(0,1-dist19/460)
+        r19=int(18+bright19*237); g19=int(35+bright19*195); b19=int(85+bright19*170)
+        hs19=rng.randint(-28,28); dr19=rng.randint(2,5)
+        dd19.ellipse([(dx-dr19,dy-dr19),(dx+dr19,dy+dr19)], fill=(min(255,r19+hs19),min(255,g19),min(255,b19),rng.randint(145,232)))
+    base = comp(base, dl19)
+    rl19 = layer(); rd19 = ImageDraw.Draw(rl19)
+    for rad19 in [65,140,220,310,410]:
+        rd19.arc([(W//2-rad19-80,H//2-rad19),(W//2+rad19-80,H//2+rad19)], 0, 360, fill=(255,205,85,48), width=2)
+    base = comp(base, rl19)
+    return base
+
+
+def img_malevich_20260120():
+    """Kazimir Malevich — prompt injection eval / safety."""
+    base = Image.new("RGB", (W, H), (232, 225, 208))
+    shapes20 = [
+        ([(130,90),(430,90),(460,340),(100,340)], (18,18,18)),
+        ([(680,70),(930,70),(960,270),(650,270)], (195,28,28)),
+        ([(540,340),(790,340),(810,520),(520,520)], (18,58,178)),
+        ([(890,370),(1140,370),(1160,540),(870,540)], (215,185,0)),
+        ([(90,410),(290,410),(310,570),(70,570)], (195,28,28)),
+    ]
+    for pts,col in shapes20:
+        sl = layer(); ImageDraw.Draw(sl).polygon(pts, fill=(*col,215), outline=(0,0,0,255)); base = comp(base, sl)
+    return base
+
+
+def img_delaunay_20260121():
+    """Robert Delaunay rings — MCP 500 servers / signals."""
+    base = Image.new("RGB", (W, H), (10, 8, 26))
+    centres21 = [(320,295),(720,275),(1030,315),(165,195),(880,420)]
+    spec21 = [(215,28,48),(255,115,0),(255,210,0),(38,195,78),(0,155,250),(115,38,215)]
+    for cx,cy in centres21:
+        for i,col in enumerate(spec21):
+            r21=55+i*50; rl=layer(); ImageDraw.Draw(rl).ellipse([(cx-r21,cy-r21),(cx+r21,cy+r21)], fill=(*col,38), outline=(*col,155), width=3); base=comp(base,rl)
+    return base
+
+
+def img_balla_20260122():
+    """Giacomo Balla Futurism — streaming TTFT / speed."""
+    base = Image.new("RGB", (W, H), (6, 6, 10))
+    vx2,vy2 = 620,305
+    cols22 = [(210,52,16),(250,130,0),(190,190,0),(52,190,210),(92,52,190),(210,16,92)]
+    for i in range(26):
+        ang2=math.radians(i*13.8); L22=rng.randint(260,720)
+        ex22=int(vx2+L22*math.cos(ang2)); ey22=int(vy2+L22*math.sin(ang2))
+        pl22=layer(); ImageDraw.Draw(pl22).line([(vx2,vy2),(ex22,ey22)], fill=(*cols22[i%6],128), width=rng.randint(2,9)); base=comp(base,pl22)
+    for i in range(14):
+        ang3=math.radians(i*25.7+5); L23=rng.randint(160,460)
+        ex23=int(vx2+L23*math.cos(ang3)); ey23=int(vy2+L23*math.sin(ang3))
+        pw2=rng.randint(16,72); ph2=rng.randint(8,36)
+        sx6=(vx2+ex23)//2; sy6=(vy2+ey23)//2
+        pl23=layer(); ImageDraw.Draw(pl23).ellipse([(sx6-pw2,sy6-ph2),(sx6+pw2,sy6+ph2)], fill=(*cols22[i%4],88)); base=comp(base,pl23)
+    core2=layer(); ImageDraw.Draw(core2).ellipse([(vx2-16,vy2-16),(vx2+16,vy2+16)], fill=(255,255,255,228)); base=comp(base,core2)
+    return base
+
+
+def img_klee_20260123():
+    """Paul Klee colour grid — agent teams preview / multi-agent cells."""
+    base = Image.new("RGB", (W, H), (30, 25, 18))
+    WARM = [(220,120,40),(215,90,30),(200,150,50),(185,75,25),(230,170,60)]
+    COOL = [(40,120,185),(30,90,160),(55,155,195),(25,75,145),(60,175,215)]
+    gw, gh = W//10, H//7
+    for ci in range(10):
+        for cj in range(7):
+            palette = WARM if (ci+cj)%2==0 else COOL
+            col23 = palette[(ci*3+cj*2)%5]
+            x0=ci*gw; y0=cj*gh; x1=x0+gw; y1=y0+gh
+            cl23=layer(); ImageDraw.Draw(cl23).rectangle([(x0,y0),(x1,y1)], fill=(*col23, 185)); base=comp(base,cl23)
+    nodes=layer(); nd=ImageDraw.Draw(nodes)
+    for ci in range(1,10):
+        for cj in range(1,7):
+            r8=8; nd.ellipse([(ci*gw-r8,cj*gh-r8),(ci*gw+r8,cj*gh+r8)], fill=(255,255,255,200), outline=(40,40,40,255), width=2)
+    base=comp(base,nodes)
+    dark=layer(); dd2=ImageDraw.Draw(dark)
+    for ci in range(11): dd2.line([(ci*gw,0),(ci*gw,H)], fill=(20,15,10,180), width=2)
+    for cj in range(8): dd2.line([(0,cj*gh),(W,cj*gh)], fill=(20,15,10,180), width=2)
+    base=comp(base,dark)
+    return base
+
+
+def img_leger_20260124():
+    """Fernand Léger — Vertex AI expansion / cloud infrastructure."""
+    base = Image.new("RGB", (W, H), (18, 18, 22))
+    outlines24 = [
+        ((70,55,270,215), (215,45,45)),
+        ((310,95,590,275), (250,155,0)),
+        ((640,55,840,195), (45,175,215)),
+        ((890,115,1140,295), (215,215,45)),
+        ((90,315,370,515), (250,155,0)),
+        ((410,355,690,555), (45,215,95)),
+        ((740,335,990,525), (215,45,45)),
+        ((1010,310,1170,490), (45,175,215)),
+    ]
+    for (x0,y0,x1,y1),col in outlines24:
+        sl=layer(); ImageDraw.Draw(sl).rectangle([(x0,y0),(x1,y1)], fill=(*col,32), outline=(*col,215), width=5); base=comp(base,sl)
+    for cx,cy,r,col in [(165,315,48,(250,155,0)),(540,185,58,(215,45,45)),(860,215,43,(45,215,95)),(1040,435,52,(45,175,215))]:
+        cl=layer(); ImageDraw.Draw(cl).ellipse([(cx-r,cy-r),(cx+r,cy+r)], fill=(*col,52), outline=(*col,215), width=5); base=comp(base,cl)
+    return base
+
+
+def img_moholy_20260125():
+    """László Moholy-Nagy — Trust Center / open transparency."""
+    base = Image.new("RGB", (W, H), (248,244,240))
+    for cx,cy,r,col in [(340,295,195,(255,75,18)),(690,275,175,(18,95,215)),(540,315,158,(215,195,0)),(890,245,138,(18,175,95)),(195,195,118,(175,18,175))]:
+        cl=layer(); ImageDraw.Draw(cl).ellipse([(cx-r,cy-r),(cx+r,cy+r)], fill=(*col,52), outline=(*col,178), width=4); base=comp(base,cl)
+    for x0,y0,x1,y1,col in [(95,45,315,175,(18,95,215)),(740,95,960,245,(255,75,18)),(390,395,640,565,(18,175,95)),(890,375,1140,535,(215,195,0))]:
+        rl=layer(); ImageDraw.Draw(rl).rectangle([(x0,y0),(x1,y1)], fill=(*col,38), outline=(*col,155), width=3); base=comp(base,rl)
+    ll25=layer(); ld25=ImageDraw.Draw(ll25)
+    ld25.line([(0,H//2),(W,H//2)], fill=(18,18,18,95), width=2)
+    ld25.line([(W//2,0),(W//2,H)], fill=(18,18,18,95), width=2)
+    base=comp(base,ll25)
+    return base
+
+
+def img_lissitzky_20260126():
+    """El Lissitzky — CLAUDE.md v2 / permission management."""
+    base = Image.new("RGB", (W, H), (235,228,212))
+    bars26 = [
+        ((55,38,275,128), (180,18,18)),
+        ((335,78,695,178), (18,18,18)),
+        ((75,198,495,278), (180,18,18)),
+        ((555,158,895,238), (18,18,18)),
+        ((195,318,595,398), (180,18,18)),
+        ((645,298,1095,378), (18,18,18)),
+        ((95,438,415,508), (18,18,18)),
+        ((475,418,845,498), (180,18,18)),
+    ]
+    for (x0,y0,x1,y1),col in bars26:
+        sl=layer(); ImageDraw.Draw(sl).rectangle([(x0,y0),(x1,y1)], fill=(*col,205)); base=comp(base,sl)
+    for cx,cy,r,col in [(315,218,38,(180,18,18)),(790,118,52,(18,18,18)),(545,458,32,(180,18,18))]:
+        cl=layer(); ImageDraw.Draw(cl).ellipse([(cx-r,cy-r),(cx+r,cy+r)], fill=(*col,175), outline=(0,0,0,255), width=3); base=comp(base,cl)
+    return base
+
+
+def img_klimt_20260127():
+    """Gustav Klimt — character consistency / ethics update."""
+    base = Image.new("RGB", (W, H), (8, 4, 2))
+    spiral27=layer(); sd27=ImageDraw.Draw(spiral27)
+    for i in range(65):
+        a27=math.radians(i*20); r27=22+i*7
+        cx27=int(500+r27*math.cos(a27)); cy27=int(320+r27*math.sin(a27))
+        sd27.arc([(cx27-r27//2,cy27-r27//2),(cx27+r27//2,cy27+r27//2)], a27*9, a27*9+185, fill=(205,168,48,rng.randint(72,188)), width=rng.randint(1,4))
+    base=comp(base,spiral27)
+    mos27=layer(); md27=ImageDraw.Draw(mos27)
+    for _ in range(320):
+        mx27=rng.randint(0,W-15); my27=rng.randint(0,H-15); sz27=rng.randint(3,14)
+        mc27=[(205,168,48),(0,105,105),(142,48,20),(182,162,62),(68,30,102)][rng.randint(0,4)]
+        md27.rectangle([(mx27,my27),(mx27+sz27,my27+sz27)], fill=(*mc27,rng.randint(100,202)))
+    base=comp(base,mos27)
+    face27=layer(); fd27=ImageDraw.Draw(face27)
+    fd27.ellipse([(100,50),(420,420)], fill=(205,168,48,42), outline=(205,168,48,162), width=5)
+    base=comp(base,face27)
+    return base
+
+
+def img_kandinsky_20260128():
+    """Wassily Kandinsky — budget_tokens / reasoning guide."""
+    base = Image.new("RGB", (W, H), (14, 30, 64))
+    grid28=layer(); gd28=ImageDraw.Draw(grid28)
+    for off in range(-H,W+H,55):
+        gd28.line([(off,0),(off+H,H)], fill=(255,255,255,20), width=1)
+        gd28.line([(off,0),(off-H,H)], fill=(255,255,255,20), width=1)
+    base=comp(base,grid28)
+    s1=layer(); ImageDraw.Draw(s1).ellipse([(580,15),(1060,385)], fill=(255,205,0,222)); base=comp(base,s1)
+    s2=layer(); ImageDraw.Draw(s2).polygon([(180,505),(455,505),(318,165)], fill=(212,26,46,212)); base=comp(base,s2)
+    s3=layer(); ImageDraw.Draw(s3).pieslice([(815,265),(1170,565)], 192, 352, fill=(26,85,212,192)); base=comp(base,s3)
+    s4=layer(); ImageDraw.Draw(s4).ellipse([(88,72),(248,232)], fill=(255,112,16,212)); base=comp(base,s4)
+    s5=layer(); ImageDraw.Draw(s5).arc([(48,48),(548,548)], 255, 68, fill=(0,0,0,255), width=8); base=comp(base,s5)
+    ll28=layer(); ld28=ImageDraw.Draw(ll28)
+    ld28.line([(0,392),(392,92)], fill=(0,0,0,255), width=4)
+    ld28.line([(492,592),(892,192)], fill=(255,255,255,192), width=3)
+    base=comp(base,ll28)
+    return base
+
+
+def img_calder_20260129():
+    """Alexander Calder mobile — JetBrains IDE beta / adaptive tools."""
+    base = Image.new("RGB", (W, H), (244,241,236))
+    arms29=layer(); ad29=ImageDraw.Draw(arms29)
+    ad29.line([(160,65),(1040,65)], fill=(16,16,16,255), width=4)
+    ad29.line([(600,65),(600,205)], fill=(16,16,16,255), width=3)
+    ad29.line([(160,65),(160,185)], fill=(16,16,16,255), width=3)
+    ad29.line([(1040,65),(1040,185)], fill=(16,16,16,255), width=3)
+    ad29.line([(270,285),(820,285)], fill=(16,16,16,255), width=3)
+    ad29.line([(270,285),(270,425)], fill=(16,16,16,255), width=2)
+    ad29.line([(820,285),(820,425)], fill=(16,16,16,255), width=2)
+    ad29.line([(160,185),(460,185)], fill=(16,16,16,255), width=2)
+    ad29.line([(310,185),(310,355)], fill=(16,16,16,255), width=2)
+    base=comp(base,arms29)
+    ellipses29 = [
+        ((100,145,240,255),(212,38,38)),((560,45,720,205),(16,72,192)),((980,145,1100,275),(212,192,0)),
+        ((230,385,370,515),(212,92,16)),((750,380,890,515),(36,152,72)),((270,305,390,415),(152,16,172)),
+        ((145,185,265,295),(0,152,192)),
+    ]
+    for bounds,col in ellipses29:
+        el=layer(); ImageDraw.Draw(el).ellipse(bounds, fill=(*col,222)); base=comp(base,el)
+    return base
+
+
+def img_seurat_20260130():
+    """Georges Seurat — January performance report / caching analytics."""
+    base = Image.new("RGB", (W, H), (14, 20, 50))
+    dl30=layer(); dd30=ImageDraw.Draw(dl30)
+    for _ in range(5200):
+        dx=rng.randint(0,W); dy=rng.randint(0,H)
+        cx30,cy30=W*0.6,H*0.42; dist30=math.hypot(dx-cx30,dy-cy30)
+        bright30=max(0,1-dist30/490)
+        r30=int(16+bright30*239); g30=int(32+bright30*188); b30=int(88+bright30*167)
+        hs30=rng.randint(-27,27); dr30=rng.randint(2,5)
+        dd30.ellipse([(dx-dr30,dy-dr30),(dx+dr30,dy+dr30)], fill=(min(255,r30+hs30),min(255,g30),min(255,b30),rng.randint(148,236)))
+    base=comp(base,dl30)
+    rl30=layer(); rd30=ImageDraw.Draw(rl30)
+    for rad30 in [68,148,228,318,418]:
+        rd30.arc([(W//2-rad30+100,H//2-rad30),(W//2+rad30+100,H//2+rad30)], 0, 360, fill=(255,205,88,46), width=2)
+    base=comp(base,rl30)
+    return base
+
+
+def img_franz_marc_20260131():
+    """Franz Marc jewel tones — January safety summary / welfare."""
+    base = Image.new("RGB", (W, H), (6, 32, 72))
+    panels31 = [((0,0,370,H),(0,112,148,112)),((340,0,720,H),(16,72,32,112)),((690,0,W,H),(92,16,112,112))]
+    for r,c in panels31:
+        pl=layer(); ImageDraw.Draw(pl).rectangle(r, fill=c); base=comp(base,pl)
+    for pts,col in [([(85,375),(275,185),(475,330),(675,130),(875,280),(1095,82)],(245,188,68)),
+                    ([(35,272),(235,482),(435,258),(635,458),(835,178),(1095,372)],(82,208,248))]:
+        ll=layer(); ImageDraw.Draw(ll).line(pts, fill=(*col,172), width=6); base=comp(base,ll)
+    for cx,cy,r,col in [(278,232,72,(245,188,68)),(668,352,92,(82,208,248)),(968,178,62,(208,92,188))]:
+        el=layer(); ImageDraw.Draw(el).ellipse([(cx-r,cy-r),(cx+r,cy+r)], fill=(*col,148), outline=(255,255,255,92), width=3); base=comp(base,el)
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
+    ("2026-01-01", img_rothko_20260101,     "Year Review",     "Mark Rothko"),
+    ("2026-01-02", img_mondrian_20260102,   "SDK Update",      "Piet Mondrian"),
+    ("2026-01-03", img_klimt_20260103,      "Haiku 4.5",       "Gustav Klimt"),
+    ("2026-01-04", img_miro_20260104,       "Team Projects",   "Joan Miró"),
+    ("2026-01-05", img_delaunay_20260105,   "Voice Webhooks",  "Robert Delaunay"),
+    ("2026-01-06", img_malevich_20260106,   "Responsible Use", "Kazimir Malevich"),
+    ("2026-01-07", img_seurat_20260107,     "500B Tokens",     "Georges Seurat"),
+    ("2026-01-08", img_calder_20260108,     "Azure GA",        "Alexander Calder"),
+    ("2026-01-09", img_lissitzky_20260109,  "Claude Code v2",  "El Lissitzky"),
+    ("2026-01-10", img_franz_marc_20260110, "Model Welfare",   "Franz Marc"),
+    ("2026-01-11", img_balla_20260111,      "Cowork macOS",    "Giacomo Balla"),
+    ("2026-01-12", img_moholy_20260112,     "Open Evals",      "László Moholy-Nagy"),
+    ("2026-01-13", img_kandinsky_20260113,  "Thinking GA",     "Wassily Kandinsky"),
+    ("2026-01-14", img_leger_20260114,      "Bedrock Infra",   "Fernand Léger"),
+    ("2026-01-15", img_rothko_20260115,     "Long Context",    "Mark Rothko"),
+    ("2026-01-16", img_klimt_20260116,      "Sonnet Update",   "Gustav Klimt"),
+    ("2026-01-17", img_mondrian_20260117,   "Struct Outputs",  "Piet Mondrian"),
+    ("2026-01-18", img_miro_20260118,       "Automations",     "Joan Miró"),
+    ("2026-01-19", img_seurat_20260119,     "1M Developers",   "Georges Seurat"),
+    ("2026-01-20", img_malevich_20260120,   "Injection Eval",  "Kazimir Malevich"),
+    ("2026-01-21", img_delaunay_20260121,   "MCP 500",         "Robert Delaunay"),
+    ("2026-01-22", img_balla_20260122,      "TTFT Speed",      "Giacomo Balla"),
+    ("2026-01-23", img_klee_20260123,       "Agent Preview",   "Paul Klee"),
+    ("2026-01-24", img_leger_20260124,      "Vertex GA",       "Fernand Léger"),
+    ("2026-01-25", img_moholy_20260125,     "Trust Center",    "László Moholy-Nagy"),
+    ("2026-01-26", img_lissitzky_20260126,  "CLAUDE.md v2",    "El Lissitzky"),
+    ("2026-01-27", img_klimt_20260127,      "Character",       "Gustav Klimt"),
+    ("2026-01-28", img_kandinsky_20260128,  "Budget Tokens",   "Wassily Kandinsky"),
+    ("2026-01-29", img_calder_20260129,     "JetBrains Beta",  "Alexander Calder"),
+    ("2026-01-30", img_seurat_20260130,     "Perf Report",     "Georges Seurat"),
+    ("2026-01-31", img_franz_marc_20260131, "Safety Summary",  "Franz Marc"),
     ("2026-02-01", img_klee_20260201,        "Cowork Launch",   "Paul Klee"),
     ("2026-02-02", img_leger_20260202,       "Data Residency",  "Fernand Léger"),
     ("2026-02-03", img_mondrian_20260203,    "Haiku Sunset",    "Piet Mondrian"),

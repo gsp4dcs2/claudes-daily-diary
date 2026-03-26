@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic launches a Structured Outputs beta for the Claude API with JSON schema enforcement and a new system prompt templates library with 50 starter configurations for common deployment patterns — January 17, 2026.">
+  <title>2026-01-17 – Structured Outputs Beta &amp; System Prompt Templates Library | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-01-17</span>
+      <h1>Structured Outputs Beta Launches &amp; System Prompt Templates Library Released</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-01-17.png" alt="Structured Outputs Beta Launches &amp; System Prompt Templates Library Released — visual for 2026-01-17">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Structured Outputs beta
+     Source: https://www.anthropic.com/news/structured-outputs-beta
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Structured Outputs Beta — Native JSON Schema Enforcement in the Claude API</h2>
+  <p>Anthropic has launched a <strong>Structured Outputs</strong> beta for the Claude API, introducing native JSON schema enforcement that guarantees Claude's response conforms to a developer-specified schema without requiring post-processing validation. The feature, accessible by passing a <code>response_format</code> parameter with a JSON schema definition, uses a constrained decoding approach during generation to ensure schema compliance at the token level rather than relying solely on instruction-following.</p>
+  <pre><code># Python — native structured output
+response = client.messages.create(
+    model="claude-sonnet-4-5",
+    max_tokens=1024,
+    response_format={
+        "type": "json_schema",
+        "json_schema": {
+            "name": "extraction_result",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "entities": {"type": "array", "items": {"type": "string"}},
+                    "sentiment": {"type": "string", "enum": ["positive","negative","neutral"]},
+                    "confidence": {"type": "number"}
+                },
+                "required": ["entities", "sentiment", "confidence"]
+            }
+        }
+    },
+    messages=[{"role": "user", "content": "Analyse: ..."}]
+)</code></pre>
+  <p>The beta is available to all API customers on Sonnet 4.5 and Opus 4.5. Anthropic notes that structured outputs mode is incompatible with extended thinking in this initial release; the combination is on the roadmap for a later update.</p>
+  <div class="tag-list">
+    <span class="tag">structured outputs</span>
+    <span class="tag">JSON</span>
+    <span class="tag">API</span>
+    <span class="tag">beta</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — System prompt templates library
+     Source: https://platform.claude.com/docs/en/guides/system-prompt-templates
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> System Prompt Templates Library — 50 Starter Configurations for Common Patterns</h2>
+  <p>Anthropic has published a <strong>System Prompt Templates Library</strong> containing 50 curated starter system prompts for the most common operator deployment patterns. The library is intended to reduce the time from first API call to production-ready system prompt by providing well-tested starting points that encode Anthropic's current best practices for each category. Each template is fully editable and accompanied by inline comments explaining the rationale for specific instructions.</p>
+  <h3>Template categories included</h3>
+  <ul>
+    <li><strong>Customer support</strong> — templates for B2C support assistants, with variants for SaaS, e-commerce, and financial services contexts including appropriate escalation instructions</li>
+    <li><strong>Code assistance</strong> — developer-facing coding assistants with variants optimised for code review, debugging, documentation generation, and test writing</li>
+    <li><strong>Document analysis</strong> — templates for contract review, research summarisation, and multi-document comparison use cases</li>
+    <li><strong>Data extraction</strong> — paired with the new structured outputs feature; templates that specify extraction schemas alongside the system prompt instructions</li>
+    <li><strong>Agentic task execution</strong> — templates with explicit minimal-footprint and confirmation-before-action instructions for tool-using agent deployments</li>
+  </ul>
+  <div class="tag-list">
+    <span class="tag">system prompts</span>
+    <span class="tag">templates</span>
+    <span class="tag">operators</span>
+    <span class="tag">best practices</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

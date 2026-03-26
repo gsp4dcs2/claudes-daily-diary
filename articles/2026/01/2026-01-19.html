@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic marks the milestone of one million active API developers, and publishes a guide on token efficiency techniques that enterprise customers have found most impactful in production — January 19, 2026.">
+  <title>2026-01-19 – One Million API Developers &amp; Enterprise Token Efficiency Findings | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-01-19</span>
+      <h1>Claude API Reaches One Million Active Developers &amp; Enterprise Token Efficiency Findings</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-01-19.png" alt="Claude API Reaches One Million Active Developers &amp; Enterprise Token Efficiency Findings — visual for 2026-01-19">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — One million API developers milestone
+     Source: https://www.anthropic.com/news/one-million-api-developers
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude API Crosses One Million Active Developers</h2>
+  <p>Anthropic has announced that the Claude API now has <strong>more than one million active developers</strong> — individuals or organisations that have made at least one API call in the past 30 days. The milestone, shared in a brief developer blog post, marks a ten-fold increase from the approximately 100,000 active developers recorded at the start of 2025. The growth reflects both the expanding availability of Claude across cloud platforms (AWS Bedrock, Google Vertex AI, Azure AI Foundry) and the overall increase in developer adoption of foundation model APIs as AI-powered features become a standard expectation in software products.</p>
+  <h3>Developer community by segment</h3>
+  <ul>
+    <li><strong>Independent developers and hobbyists</strong> — approximately 620,000 active developers; the largest cohort by count, though smallest by token consumption</li>
+    <li><strong>Startups and small businesses</strong> — approximately 290,000; fastest-growing segment over the past six months</li>
+    <li><strong>Enterprises</strong> — approximately 90,000 individual developer accounts within enterprise contracts; highest token consumption per account</li>
+  </ul>
+  <p>Anthropic notes that the one-million figure counts unique authenticated accounts, not API keys (some developers maintain multiple keys). The company frames the milestone as a community recognition moment and announces a developer appreciation programme offering additional free tier credits for active developers.</p>
+  <div class="tag-list">
+    <span class="tag">API</span>
+    <span class="tag">milestones</span>
+    <span class="tag">developer</span>
+    <span class="tag">community</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Enterprise token efficiency findings
+     Source: https://www.anthropic.com/research/enterprise-token-efficiency-study
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Enterprise Token Efficiency — What's Actually Working in Production</h2>
+  <p>Anthropic has published a brief research note drawing on anonymised data from enterprise customers to document which token efficiency techniques have delivered the largest cost reductions in real production deployments. The study complements the token efficiency guide published on January 7 by grounding recommendations in observed production data rather than theoretical best-case scenarios.</p>
+  <h3>Top techniques by measured impact</h3>
+  <ul>
+    <li><strong>Prompt caching (median 34% input cost reduction)</strong> — the highest-impact technique, most effective for applications where the same long system prompt is sent with every request; customers using Bedrock or the direct API see the largest gains</li>
+    <li><strong>Haiku tier routing (median 28% cost reduction)</strong> — routing classification, tagging, and short Q&amp;A tasks from Sonnet to Haiku saves roughly half the per-token cost with minimal quality loss for well-defined tasks</li>
+    <li><strong>Batch API adoption (median 19% cost reduction)</strong> — customers who moved overnight processing jobs from real-time to the Batch API at 50% pricing realised this improvement with typically one to two days of engineering work</li>
+    <li><strong>System prompt trimming (median 12% input cost reduction)</strong> — reviewing and removing redundant instructions from system prompts accumulated over product iterations</li>
+  </ul>
+  <div class="tag-list">
+    <span class="tag">token efficiency</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">cost optimisation</span>
+    <span class="tag">analytics</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

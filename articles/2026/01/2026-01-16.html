@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic releases a targeted instruction-following improvement update to Claude Sonnet 4.5, and publishes a refreshed model card documenting the changes and updated capability evaluations — January 16, 2026.">
+  <title>2026-01-16 – Sonnet 4.5 Instruction-Following Update &amp; Refreshed Model Card | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-01-16</span>
+      <h1>Claude Sonnet 4.5 Instruction-Following Update Ships &amp; Refreshed Model Card Published</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-01-16.png" alt="Claude Sonnet 4.5 Instruction-Following Update Ships &amp; Refreshed Model Card Published — visual for 2026-01-16">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Sonnet 4.5 instruction-following update
+     Source: https://www.anthropic.com/news/sonnet-4-5-instruction-following-update
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Sonnet 4.5 — Targeted Instruction-Following Improvement Update</h2>
+  <p>Anthropic has released an update to <strong>Claude Sonnet 4.5</strong> targeting instruction-following consistency, particularly in complex system prompts and multi-turn conversations with multiple simultaneous constraints. The update does not change the model version identifier (<code>claude-sonnet-4-5</code>) — it is an improvement to the same model checkpoint that improves behaviour without requiring code changes from developers. Anthropic's practice of releasing targeted behavioural improvements within a stable model alias means existing integrations benefit automatically.</p>
+  <h3>Improvements in this update</h3>
+  <ul>
+    <li><strong>Constraint persistence across turns</strong> — constraints specified in the system prompt (such as output format, response language, or persona restrictions) are now maintained more reliably across long conversations where earlier instructions might previously have been partially overridden by later user messages</li>
+    <li><strong>Nested instruction resolution</strong> — when the system prompt and a user message contain related but not identical instructions, Claude is now better at identifying the correct interpretation rather than arbitrarily favouring one source</li>
+    <li><strong>Operator format compliance</strong> — JSON-only output mode and other strict operator-specified formats show improved compliance rates on the instruction-following benchmark, up from 94% to 98% on the internal evaluation suite</li>
+  </ul>
+  <div class="tag-list">
+    <span class="tag">Sonnet 4.5</span>
+    <span class="tag">instruction following</span>
+    <span class="tag">model update</span>
+    <span class="tag">operators</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Updated model card
+     Source: https://www.anthropic.com/research/model-card-sonnet-4-5-jan2026
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Refreshed Sonnet 4.5 Model Card — Updated Evaluations and Failure Mode Notes</h2>
+  <p>Alongside the instruction-following update, Anthropic has published a refreshed model card for Claude Sonnet 4.5 that reflects the updated model's current evaluation results and adds new entries to the Known Failure Modes section introduced in the January model card refresh. The model card is updated to version 1.2 and includes benchmark results run against the updated checkpoint.</p>
+  <h3>Notable model card updates</h3>
+  <ul>
+    <li><strong>Updated benchmark table</strong> — MMLU, HumanEval, and instruction-following benchmark numbers now reflect the updated January checkpoint, with delta annotations showing changes from the initial November release</li>
+    <li><strong>New failure mode entries</strong> — two new failure modes are documented: a tendency to over-literalise format instructions when no formatting is necessary, and occasional inconsistency when asked to maintain a numbered list structure across more than 15 turns</li>
+    <li><strong>Extended thinking interaction notes</strong> — a new section describes how the instruction-following improvements interact with extended thinking mode, noting that thinking-token usage tends to improve constraint adherence in complex multi-part instructions</li>
+  </ul>
+  <p>The updated model card is available at anthropic.com/research/model-card-sonnet-4-5 and reflects Anthropic's commitment to maintaining living documentation that tracks model behaviour across updates.</p>
+  <div class="tag-list">
+    <span class="tag">model cards</span>
+    <span class="tag">Sonnet 4.5</span>
+    <span class="tag">documentation</span>
+    <span class="tag">transparency</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

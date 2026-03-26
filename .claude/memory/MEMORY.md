@@ -8,3 +8,4 @@
 | [github_repo.md](github_repo.md) | reference | GitHub repo and Pages URL; git remote `origin` already configured |
 | [feedback_editor.md](feedback_editor.md) | feedback | Use nano (not vi) for VM command-line editing |
 | [feedback_questions_log.md](feedback_questions_log.md) | feedback | Update notes/questions.md silently — never narrate the edit in replies |
+| [feedback_commit_push.md](feedback_commit_push.md) | feedback | Always commit + push together — never stop at commit alone |

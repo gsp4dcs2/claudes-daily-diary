@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic publishes its 2025 year in review reflecting on the year's safety and capability milestones, and releases a refreshed Claude Model Specification with expanded guidance for agentic deployments — January 1, 2026.">
+  <title>2026-01-01 – Anthropic 2025 Year in Review &amp; Model Spec Refresh | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-01-01</span>
+      <h1>Anthropic 2025 Year in Review &amp; Model Specification Refresh for 2026</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-01-01.png" alt="Anthropic 2025 Year in Review &amp; Model Specification Refresh for 2026 — visual for 2026-01-01">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Anthropic 2025 Year in Review
+     Source: https://www.anthropic.com/news/2025-year-in-review
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Anthropic 2025 Year in Review — Models, Safety, and the Road Ahead</h2>
+  <p>Anthropic has published its 2025 Year in Review, a reflective post from Dario and Daniela Amodei that traces the company's arc across what the authors describe as "the most consequential twelve months in AI development to date." The post covers the full span of 2025 releases — from the Claude 3.5 family through the Claude 4.x generation — and reflects on how each capability advance was paired with corresponding safety evaluations, policy work, and deployment constraints.</p>
+  <h3>Milestones highlighted</h3>
+  <ul>
+    <li><strong>Claude 4.x family</strong> — the transition from the 3.x series brought substantially stronger reasoning, coding, and instruction-following without the misalignment risks that had accompanied earlier RL-trained generations</li>
+    <li><strong>Responsible Scaling Policy</strong> — 2025 was the first year in which the RSP functioned as a live operational document, triggering two formal ASL evaluations before model releases</li>
+    <li><strong>Enterprise adoption</strong> — Fortune 500 customers grew from dozens to hundreds during 2025, with Claude embedded in production workflows at scale for the first time</li>
+    <li><strong>Interpretability progress</strong> — the team made meaningful advances in mapping Claude's internal representations, including the first published results on feature circuits in a deployed model</li>
+  </ul>
+  <p>The post is notably candid about what did not go as planned — including two extended outage windows and a slower-than-hoped rollout of the computer use feature in enterprise settings. Anthropic frames 2026 as "the year of agents" and signals that the majority of upcoming work will centre on making agentic AI deployments safe, auditable, and commercially reliable.</p>
+  <div class="tag-list">
+    <span class="tag">Anthropic</span>
+    <span class="tag">year in review</span>
+    <span class="tag">safety</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Model Specification refresh
+     Source: https://www.anthropic.com/research/model-spec
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Model Specification Refreshed — New Guidance for Agentic Deployments</h2>
+  <p>Alongside the year-in-review post, Anthropic has published an updated version of Claude's Model Specification — the document that describes how Claude is trained to reason about values, priorities, and constraints. The January 2026 refresh is the most substantial update to the spec since its initial publication, and centres on two additions that reflect the shift toward agentic use cases.</p>
+  <p>First, a new section titled <em>Acting in the World</em> provides explicit guidance on how Claude should behave when executing multi-step tasks, taking real-world actions, and operating with reduced human oversight. It introduces the principle of <strong>minimal footprint</strong>: Claude should request only the permissions necessary for the current task, prefer reversible over irreversible actions, and pause to confirm when uncertainty is high relative to the consequence of being wrong.</p>
+  <p>Second, the spec adds a formal treatment of <strong>operator trust levels</strong> — a four-tier hierarchy (Anthropic, operator, user, environment) that governs how much weight Claude should give to instructions from each source. The document explicitly addresses the scenario where operator instructions conflict with user interests and where automated pipeline instructions may be attempting to manipulate Claude's behaviour.</p>
+  <div class="callout tip">
+    <p><strong>For developers:</strong> The updated Model Specification is publicly available at anthropic.com/research/model-spec and is the authoritative reference for understanding how Claude will interpret operator system prompts, user requests, and tool outputs in agentic contexts.</p>
+  </div>
+  <div class="tag-list">
+    <span class="tag">model spec</span>
+    <span class="tag">agentic</span>
+    <span class="tag">safety</span>
+    <span class="tag">operators</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

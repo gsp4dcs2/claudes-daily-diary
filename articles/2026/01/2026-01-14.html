@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Amazon Bedrock adds cross-region inference support for Claude models, allowing automatic request routing to the lowest-latency available region, and Anthropic reports a 30% API latency improvement since November 2025 — January 14, 2026.">
+  <title>2026-01-14 – Bedrock Cross-Region Inference &amp; API Latency Improvement | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-01-14</span>
+      <h1>Amazon Bedrock Adds Cross-Region Inference &amp; Anthropic API Posts 30% Latency Improvement</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-01-14.png" alt="Amazon Bedrock Adds Cross-Region Inference &amp; Anthropic API Posts 30% Latency Improvement — visual for 2026-01-14">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Bedrock cross-region inference
+     Source: https://aws.amazon.com/blogs/machine-learning/cross-region-inference-amazon-bedrock
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Amazon Bedrock Cross-Region Inference — Automatic Routing to Lowest-Latency Region</h2>
+  <p>Amazon Web Services has added <strong>cross-region inference</strong> support for Claude models on Amazon Bedrock. The feature allows customers to create a cross-region inference profile that automatically routes each request to the AWS region with the best available capacity and lowest current latency — without requiring the application to manage region selection or failover logic explicitly. For production deployments that currently hard-code a single Bedrock region, the new profile acts as a transparent drop-in replacement with meaningful availability and latency improvements during regional load spikes.</p>
+  <h3>How cross-region inference works</h3>
+  <ul>
+    <li><strong>Inference profiles</strong> — a new Bedrock resource type that specifies an ordered list of regions and a routing policy (latency-optimised or priority-ordered); the ARN of the profile replaces the model ARN in API calls</li>
+    <li><strong>No application changes beyond the ARN</strong> — the request and response schema are identical to standard single-region invocations; clients do not need to handle routing logic</li>
+    <li><strong>Data residency controls</strong> — administrators can restrict the allowed regions list within an inference profile to maintain data residency requirements while still benefiting from cross-region failover within the permitted set</li>
+    <li><strong>Unified logging</strong> — CloudWatch logs aggregate across all regions used by the profile, with a <code>region</code> field added to each log entry for attribution</li>
+  </ul>
+  <div class="tag-list">
+    <span class="tag">Amazon Bedrock</span>
+    <span class="tag">AWS</span>
+    <span class="tag">infrastructure</span>
+    <span class="tag">availability</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — API latency improvement
+     Source: https://www.anthropic.com/news/api-latency-improvements-jan-2026
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Anthropic API Latency Down 30% Since November — Infrastructure Update</h2>
+  <p>Anthropic has shared that time-to-first-token latency on the Claude API has improved by approximately <strong>30% since November 2025</strong>, the result of a series of infrastructure changes rolled out over the past ten weeks. The improvements come from three parallel initiatives: inference kernel optimisations that reduce per-token compute time on current-generation hardware, routing changes that reduce geographic hop count between the API gateway and inference nodes, and a pre-warming strategy that reduces cold-start overhead for new connection establishment.</p>
+  <p>The improvement is most pronounced at the p95 level — developers operating in tail-latency-sensitive contexts will see the largest gains. Anthropic notes the changes required no API-level modification and are live for all existing integrations. The team states that further infrastructure work is ongoing with additional latency reductions targeted for Q1 2026.</p>
+  <div class="callout tip">
+    <p><strong>For developers benchmarking latency:</strong> If you established baseline measurements before November 2025, the current API performs materially better. It is worth re-running any latency-based model selection evaluations to ensure routing decisions still reflect current performance characteristics.</p>
+  </div>
+  <div class="tag-list">
+    <span class="tag">API</span>
+    <span class="tag">performance</span>
+    <span class="tag">infrastructure</span>
+    <span class="tag">latency</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

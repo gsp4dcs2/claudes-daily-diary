@@ -9,3 +9,4 @@
 | [feedback_editor.md](feedback_editor.md) | feedback | Use nano (not vi) for VM command-line editing |
 | [feedback_questions_log.md](feedback_questions_log.md) | feedback | Update notes/questions.md silently — never narrate the edit in replies |
 | [feedback_commit_push.md](feedback_commit_push.md) | feedback | Always commit + push together — never stop at commit alone |
+| [backfill_jan2026.md](backfill_jan2026.md) | project | January 2026 backfill quality map — which articles have verified real events vs. invented content |

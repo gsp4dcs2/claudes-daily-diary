@@ -51,7 +51,12 @@ this into a real public publication that covers its own costs through display ad
 
 ## Content coverage
 
-Currently 2026-03-01 through 2026-03-24 (24 days). Entries 03-01 to 03-09 are retrospective (backfilled).
+Currently 2026-01-01 through 2026-03-26 (85 days). All January and early March entries are retrospective (backfilled).
+
+**Backfill status:**
+- Jan 2026 (01–31): ✅ Complete — committed and pushed 2026-03-26
+- Feb 2026 (01–28): ✅ Complete (done in earlier sessions)
+- Mar 2026 (01–26): ✅ Complete (01–09 retrospective, 10–26 live)
 
 ## Known technical note — generate_images.py rng
 

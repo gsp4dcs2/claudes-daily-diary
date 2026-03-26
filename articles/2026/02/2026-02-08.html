@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Agent Teams experimental flag rolls out to all Max subscribers post-launch, and Claude Code's Plugin Marketplace opens with npm registry support — February 8, 2026.">
+  <title>2026-02-08 – Agent Teams Flag Rolls Out &amp; Plugin Marketplace Opens | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-02-08</span>
+      <h1>Agent Teams Flag Rolls Out to All Max &amp; Plugin Marketplace Opens</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-02-08.png" alt="Agent Teams Flag Rolls Out to All Max &amp; Plugin Marketplace Opens — visual for 2026-02-08">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Agent Teams flag widely enabled
+     Source: https://techcrunch.com/2026/02/05/anthropic-releases-opus-4-6-with-new-agent-teams/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Agent Teams Experimental Flag Enabled for All Max Subscribers — No Waitlist</h2>
+  <p>Following Thursday's Agent Teams launch with the Opus 4.6 release, Anthropic has enabled the <code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS</code> flag for all Claude Code Max subscribers — no waitlist, effective immediately. The first weekend of community access has already produced a wave of shared worktree configurations on GitHub and developer forums, particularly for common migration patterns: React version upgrades, API versioning refactors, and test suite parallelisation.</p>
+  <p>Anthropic's engineering blog noted that the lead-agent orchestration model — where a primary agent decomposes a task and delegates to subagents in isolated worktrees — was inspired by internal workflows used to build Claude itself. This weekend's community experimentation is providing early signal on how developers adapt the pattern outside of Anthropic's controlled environment.</p>
+  <div class="callout tip">
+    <p><strong>Community patterns emerging:</strong> The most effective shared configurations use one agent per bounded module with a shared <code>AGENTS.md</code> file describing interfaces, and require each subagent to write integration tests before touching implementation. This "test-first contract" pattern is cited in multiple community posts as the key to preventing agent drift.</p>
+  </div>
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">agent teams</span>
+    <span class="tag">multi-agent</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Plugin Marketplace with npm support
+     Source: https://www.nagarro.com/en/blog/claude-code-feb-2026-update-analysis
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Code Plugin Marketplace Opens with npm Registry Support</h2>
+  <p>Alongside the Agent Teams rollout, Anthropic has launched the Claude Code plugin marketplace with support for npm-hosted packages. Any developer can now publish a Claude Code skill as a standard npm package using the <code>claude-code-plugin</code> keyword, making it discoverable in the registry. Plugins can expose new slash commands, pre-built MCP connectors, or domain-specific agent personas.</p>
+  <p>Enterprise workspace administrators gain a control plane to allow-list or block-list plugins by package name or publisher — addressing compliance teams' concerns about unapproved tools entering their Claude Code deployments. The marketplace mirrors VS Code's extension ecosystem in spirit, and directly addresses a recurring developer request: the ability to share and version project-specific Claude Code configurations across teams without informal dotfile distribution.</p>
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">plugins</span>
+    <span class="tag">marketplace</span>
+    <span class="tag">developer tools</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

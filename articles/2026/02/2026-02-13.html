@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic launches an Enterprise Analytics API for programmatic usage visibility, and the VS Code Claude Code extension gets live-updating plan preview — February 13, 2026.">
+  <title>2026-02-13 – Enterprise Analytics API &amp; VS Code Plan Preview | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-02-13</span>
+      <h1>Enterprise Analytics API &amp; VS Code Plan Preview Improvements</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-02-13.png" alt="Enterprise Analytics API &amp; VS Code Plan Preview Improvements — visual for 2026-02-13">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Enterprise Analytics API
+     Source: https://releasebot.io/updates/anthropic/claude-apps
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Enterprise Analytics API — Programmatic Usage &amp; Cost Visibility</h2>
+  <p>Anthropic has launched the <strong>Enterprise Analytics API</strong>, giving workspace administrators programmatic access to daily usage and engagement data across Claude, Claude Code, and Cowork. Each endpoint returns a per-organisation, per-day snapshot covering request counts, token consumption, active user counts, and tool-call breakdowns. The API is accessible to Enterprise plan owners via standard REST calls.</p>
+  <h3>What you can build with it</h3>
+  <ul>
+    <li><strong>Cost attribution dashboards</strong> — pipe data into Snowflake, BigQuery, or Tableau to track spend by team, project, or user</li>
+    <li><strong>Budget alerts</strong> — trigger Slack or PagerDuty notifications when daily token spend crosses a threshold</li>
+    <li><strong>Usage anomaly detection</strong> — flag unusual spikes that may indicate runaway agent loops or misuse</li>
+    <li><strong>ROI reporting</strong> — correlate AI usage data with engineering output metrics for executive reporting</li>
+  </ul>
+  <p>Previously, spend visibility required manual Console exports — a workflow that did not scale for organisations managing hundreds of developer seats. The Analytics API is the most-requested Enterprise feature since SSO, according to Anthropic's customer success team.</p>
+  <div class="tag-list">
+    <span class="tag">enterprise</span>
+    <span class="tag">analytics</span>
+    <span class="tag">API</span>
+    <span class="tag">cost management</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — VS Code Plan Preview improvement
+     Source: https://www.nagarro.com/en/blog/claude-code-feb-2026-update-analysis
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> VS Code Plan Preview — Live Iteration Feedback in Claude Code</h2>
+  <p>A targeted improvement has landed in the Claude Code VS Code extension: the <strong>plan preview panel now auto-updates</strong> as Claude iterates on its execution plan, rather than displaying a static snapshot taken at task start. Two companion changes ship alongside it:</p>
+  <ul>
+    <li>The comment overlay on the plan is suppressed until the plan is stable enough to review, eliminating the visual noise of watching Claude edit its own reasoning mid-stream</li>
+    <li>The preview pane stays open when a developer rejects a plan, allowing Claude to revise in-place rather than opening a new panel — preserving context and reducing click overhead</li>
+  </ul>
+  <p>Together these changes tighten the review loop for developers who use the approval workflow before letting Claude write to disk. The previous behaviour — where rejecting a plan caused a fresh blank panel to open — was a frequently cited friction point in Claude Code user interviews.</p>
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">VS Code</span>
+    <span class="tag">developer experience</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

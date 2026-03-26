@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic publishes its Economic Primitives framework outlining how AI systems should reason about cost and value, and the Claude API gains improved server-sent event streaming with better reconnection handling — February 16, 2026.">
+  <title>2026-02-16 – Economic Primitives Framework &amp; API Streaming Improvements | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-02-16</span>
+      <h1>Economic Primitives for AI &amp; API Streaming Reconnection Improvements</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-02-16.png" alt="Economic Primitives for AI &amp; API Streaming Reconnection Improvements — visual for 2026-02-16">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Economic Primitives framework
+     Source: https://www.anthropic.com/research/economic-primitives
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Economic Primitives — How AI Systems Should Reason About Cost and Value</h2>
+  <p>Anthropic's research team has published a new position paper titled <em>Economic Primitives for AI Systems</em>, providing a structured framework for how AI agents should think about resource expenditure and value creation during extended task execution. As AI systems take on longer-horizon tasks with real-world cost implications — compute spend, API calls, human time — the absence of a principled economic model has led to wasteful and sometimes counterproductive agent behaviour in production.</p>
+  <h3>The four core primitives proposed</h3>
+  <ul>
+    <li><strong>Task value estimation</strong> — before beginning a multi-step task, an agent should form a prior estimate of the expected value of completing it, factoring in uncertainty</li>
+    <li><strong>Marginal cost accounting</strong> — each action should be evaluated against its marginal cost (tokens, wall-clock time, external API credits) and the incremental value it is expected to add</li>
+    <li><strong>Abandonment thresholds</strong> — agents should have explicit stopping criteria; continuing a task when expected value drops below accumulated cost is economically irrational</li>
+    <li><strong>Delegation economics</strong> — when spawning sub-agents, the orchestrator should explicitly budget their resource envelope and enforce it</li>
+  </ul>
+  <p>The paper includes worked examples from real Claude Code agentic runs that demonstrate cost overruns, redundant tool calls, and unnecessary sub-agent spawning that the framework would have prevented. Anthropic notes it is evaluating which primitives to encode directly into future model training versus which to implement at the agentic scaffolding layer.</p>
+  <div class="tag-list">
+    <span class="tag">research</span>
+    <span class="tag">agentic</span>
+    <span class="tag">economics</span>
+    <span class="tag">multi-agent</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — API streaming reconnection improvements
+     Source: https://platform.claude.com/docs/en/api/streaming
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude API — Improved SSE Streaming with Reconnection Support</h2>
+  <p>The Claude API has received a targeted improvement to its server-sent event (SSE) streaming implementation: responses now carry a <strong><code>X-Response-Id</code> header</strong> and support a corresponding <code>Last-Event-ID</code> reconnect header. If a streaming connection drops mid-response, clients can reconnect and resume from the last successfully delivered event rather than re-submitting the full request from scratch.</p>
+  <p>For most interactive applications this change is transparent — the Anthropic SDK handles reconnection automatically. For developers who consume the raw SSE stream, the reconnect header must be forwarded with any retry request. Anthropic notes that this eliminates a common class of duplicate-response bugs in long-running agentic workflows where a network blip previously caused the full generation to repeat from token zero.</p>
+  <div class="callout tip">
+    <p><strong>SDK behaviour:</strong> The Python and TypeScript SDKs both handle reconnection automatically in streaming mode. Set <code>max_retries=3</code> on the client constructor to control the retry limit. Reconnects do not consume additional tokens — the billing event is anchored to the initial request.</p>
+  </div>
+  <div class="tag-list">
+    <span class="tag">API</span>
+    <span class="tag">streaming</span>
+    <span class="tag">reliability</span>
+    <span class="tag">developer tools</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

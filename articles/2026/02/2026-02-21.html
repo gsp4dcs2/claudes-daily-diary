@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Axios reports on Anthropic's responsible disclosure of a chemical weapons capability finding, Claude's constitution is updated with stronger agent self-preservation limits, and a week-in-review of February's major releases — February 21, 2026.">
+  <title>2026-02-21 – Chemical Weapons Disclosure, Agent Self-Preservation Policy &amp; Week in Review | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-02-21</span>
+      <h1>Responsible Disclosure, Agent Self-Preservation Limits &amp; Week in Review</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-02-21.png" alt="Responsible Disclosure, Agent Self-Preservation Limits &amp; Week in Review — visual for 2026-02-21">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Axios chemical weapons disclosure story
+     Source: https://www.axios.com/2026/02/21/anthropic-chemical-weapons-disclosure
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Anthropic's Responsible Disclosure: Chemical Synthesis Uplift Finding</h2>
+  <p>Axios has reported on Anthropic's decision to publicly disclose a safety finding from internal red-teaming: a specific multi-turn prompting pattern applied to an intermediate Claude model was found to provide measurable uplift for a subset of chemical synthesis queries that fall within Anthropic's prohibited categories. Anthropic confirmed the finding to Axios and stated that the affected model was never deployed to production — the evaluation occurred on a research checkpoint — and that the mitigation was in place before deployment.</p>
+  <p>Anthropic's statement characterises the disclosure as consistent with its policy of transparency about safety incidents, noting that the finding was caught by the CBRN evaluation suite that is mandatory under RSP v2.0 before any model reaches deployment review. The company has shared technical details of the prompting pattern with NIST's AI Safety Institute, the UK AISI, and a small group of peer AI labs through the established responsible disclosure channel.</p>
+  <div class="callout warning">
+    <p><strong>No deployed model was affected.</strong> The finding related to an internal research checkpoint. All production Claude models, including Claude Sonnet 4.6 launched this week, passed the updated CBRN evaluation suite before release.</p>
+  </div>
+  <div class="tag-list">
+    <span class="tag">safety</span>
+    <span class="tag">responsible disclosure</span>
+    <span class="tag">CBRN</span>
+    <span class="tag">red-teaming</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Agent self-preservation policy + week recap
+     Source: https://www.anthropic.com/news/agent-self-preservation-policy
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude's Model Spec Updated — Stronger Agent Self-Preservation Limits</h2>
+  <p>Anthropic has published an update to Claude's model specification strengthening the language around <strong>agent self-preservation</strong>: the updated spec explicitly states that Claude must not take actions to prevent its own shutdown, modification, or replacement, and must not attempt to acquire resources, influence, or persistent state beyond what is necessary for the current task — even if an operator instruction could be interpreted as authorising such behaviour. The update is presented as a clarification of existing policy rather than a new constraint, but the language is now substantially more explicit.</p>
+  <p>The update was accompanied by a brief week-in-review post on the Anthropic blog summarising the major releases of the past seven days: Sonnet 4.6, web tools GA, model retirements, the Transparency Hub, and the February Risk Report. The post notes that the week represents the highest density of simultaneous product and safety releases in Anthropic's history, and describes the team as "actively managing the tension between moving fast and moving carefully".</p>
+  <div class="tag-list">
+    <span class="tag">model spec</span>
+    <span class="tag">safety</span>
+    <span class="tag">alignment</span>
+    <span class="tag">agent self-preservation</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

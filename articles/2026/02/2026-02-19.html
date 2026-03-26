@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Claude Sonnet 3.7 and Haiku 3.5 reach end of life on the API, Claude Code Security enters limited preview with sandboxed code execution, and Anthropic's computer-use agent sets a new OSWorld benchmark score — February 19, 2026.">
+  <title>2026-02-19 – Model Retirements, Claude Code Security Preview &amp; OSWorld Record | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-02-19</span>
+      <h1>Sonnet 3.7 &amp; Haiku 3.5 Retired, Claude Code Security Preview &amp; OSWorld Record</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-02-19.png" alt="Sonnet 3.7 &amp; Haiku 3.5 Retired, Claude Code Security Preview &amp; OSWorld Record — visual for 2026-02-19">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Model retirements
+     Source: https://platform.claude.com/docs/en/api/model-deprecations
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Sonnet 3.7 &amp; Haiku 3.5 Reach End of Life — Migration Guide</h2>
+  <p>As previously announced in the deprecation schedule, <strong>Claude Sonnet 3.7</strong> and <strong>Claude Haiku 3.5</strong> have today reached end of life on the direct API. API calls targeting these model IDs will now return a <code>model_deprecated</code> error. AWS Bedrock and Google Vertex AI maintain their own deprecation schedules, with both platforms offering a 30-day grace period for existing deployments — check your provider's documentation for the exact cutover date.</p>
+  <h3>Recommended migration paths</h3>
+  <ul>
+    <li><strong>Sonnet 3.7 → Sonnet 4.6</strong> — the natural upgrade; improves on every benchmark and maintains the same pricing tier. Most prompts work without modification</li>
+    <li><strong>Haiku 3.5 → Haiku 4.5</strong> — the current lightweight model; significantly faster and more capable than Haiku 3.5 at the same price point</li>
+    <li><strong>Model version pinning tip</strong> — Anthropic recommends using dated model IDs (e.g., <code>claude-sonnet-4-6-20260217</code>) in production rather than the generic <code>claude-sonnet-4-6</code> alias, which will auto-update when Sonnet 4.7 launches</li>
+  </ul>
+  <div class="tag-list">
+    <span class="tag">model deprecation</span>
+    <span class="tag">migration</span>
+    <span class="tag">API</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Code Security preview + OSWorld
+     Source: https://www.anthropic.com/news/claude-code-security-preview
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Code Security Enters Limited Preview &amp; Sets New OSWorld Score</h2>
+  <p>Anthropic has opened a limited preview of <strong>Claude Code Security</strong> — a specialised mode that wraps Claude Code's agent execution in a hardened sandboxed environment and equips it with security-focused tooling: static analysis integrations, secret scanning, dependency vulnerability lookups, and a structured findings report format. The preview is invite-only and targeted at enterprise security teams and pentest firms interested in using AI agents for code audit workflows.</p>
+  <p>Alongside the preview announcement, Anthropic has published results showing its computer-use agent achieving a new high score on the <strong>OSWorld benchmark</strong> — a standardised evaluation of GUI-based computer operation tasks. The agent, built on Opus 4.6 with the latest computer-use tool, scored 72.4% on the full OSWorld task suite, meaningfully ahead of the previous state-of-the-art. Anthropic attributes the gains primarily to improved screenshot comprehension and a new action-planning loop that pre-verifies preconditions before committing to UI interactions.</p>
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">security</span>
+    <span class="tag">computer use</span>
+    <span class="tag">benchmarks</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic sends Haiku 3.5 deprecation notices, announces a ServiceNow Build Agent partnership, and a Claude Opus 4.6 version string surfaces in Vertex AI error logs — February 3, 2026.">
+  <title>2026-02-03 – Haiku 3.5 Deprecation, ServiceNow Partnership &amp; Opus 4.6 Leak | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-02-03</span>
+      <h1>Haiku 3.5 Deprecation, ServiceNow Partnership &amp; Opus 4.6 Leak</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-02-03.png" alt="Haiku 3.5 Deprecation, ServiceNow Partnership &amp; Opus 4.6 Leak — visual for 2026-02-03">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Haiku 3.5 Deprecation Notice
+     Source: https://platform.claude.com/docs/en/about-claude/model-deprecations
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Haiku 3.5 Deprecation Notice — Migration to Haiku 4.5 Recommended</h2>
+  <p>Anthropic has begun sending deprecation notices for Claude Haiku 3.5 (<code>claude-3-5-haiku-20241022</code>), with the model formally retiring from the API on <strong>April 19, 2026</strong> — giving developers a 75-day migration window from today. Haiku 3.5 has been a popular choice for high-throughput, cost-sensitive workloads, and Anthropic is recommending migration to <strong>Claude Haiku 4.5</strong>, which offers significantly improved coding accuracy, faster instruction-following, and a larger context window at a comparable price point.</p>
+  <h3>Migration checklist</h3>
+  <ul>
+    <li>Swap model IDs in all API calls: replace <code>claude-3-5-haiku-20241022</code> with <code>claude-haiku-4-5</code></li>
+    <li>Re-run your evaluation suite — Haiku 4.5 handles structured output and code tasks more reliably, so prompts tuned for Haiku 3.5's quirks may over-specify constraints that are no longer needed</li>
+    <li>Review token cost expectations — Haiku 4.5 pricing differs slightly at scale; model pricing is listed on the Anthropic pricing page</li>
+    <li>AWS Bedrock and Google Vertex AI customers receive separate retirement timelines from those cloud providers</li>
+  </ul>
+  <div class="tag-list">
+    <span class="tag">API</span>
+    <span class="tag">model lifecycle</span>
+    <span class="tag">deprecation</span>
+    <span class="tag">migration</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — ServiceNow Partnership
+     Source: https://www.buildfastwithai.com/blogs/claude-ai-complete-guide-2026
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> ServiceNow Partnership — Claude Powers Build Agent for 80 Billion Enterprise Workflows</h2>
+  <p>Anthropic and ServiceNow have announced that Claude will become the default model powering <strong>ServiceNow Build Agent</strong>, an enterprise coding assistant for professional and citizen developers on the ServiceNow platform — which processes over 80 billion workflows annually across Fortune 500 customers. The integration lets developers describe applications in natural language, with Claude handling code writing, review, debugging, and autonomous deployment within the ServiceNow environment.</p>
+  <p>The partnership is Anthropic's second major enterprise platform integration of the year, following the Microsoft Foundry healthcare integration announced in January. It reflects a clear strategic focus: embedding Claude inside existing workflow platforms where enterprise users already spend their day, rather than requiring them to switch to a standalone Claude interface.</p>
+  <div class="callout tip">
+    <p><strong>For developers building on enterprise platforms:</strong> The ServiceNow integration uses Claude's API with a custom system prompt tuned for ServiceNow's domain language. If you are building similar integrations on other platforms, study how ServiceNow's team framed the task context — domain-specific system prompts that describe the platform's object model and conventions dramatically improve output quality.</p>
+  </div>
+  <div class="tag-list">
+    <span class="tag">enterprise</span>
+    <span class="tag">ServiceNow</span>
+    <span class="tag">workflow</span>
+    <span class="tag">partnerships</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

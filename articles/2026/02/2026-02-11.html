@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The web fetch tool v20260209 ships with AI-powered dynamic filtering, and fine-grained tool streaming reaches general availability across all API platforms — February 11, 2026.">
+  <title>2026-02-11 – Web Fetch Dynamic Filtering &amp; Fine-Grained Streaming GA | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-02-11</span>
+      <h1>Web Fetch Dynamic Filtering &amp; Fine-Grained Tool Streaming Reach GA</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-02-11.png" alt="Web Fetch Dynamic Filtering &amp; Fine-Grained Tool Streaming Reach GA — visual for 2026-02-11">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Web Fetch Tool v20260209 with dynamic filtering
+     Source: https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Web Fetch &amp; Web Search Tools — Dynamic Filtering with Sandboxed Code Execution</h2>
+  <p>Anthropic has shipped updated versions of both the hosted web search and web fetch tools — <code>web_search_20260209</code> and <code>web_fetch_20260209</code> — introducing dynamic filtering powered by sandboxed code execution. Instead of dumping entire fetched pages into the context window, Claude now writes and runs lightweight filter code at retrieval time, keeping only the passages relevant to the current task.</p>
+  <h3>Measured improvements</h3>
+  <ul>
+    <li><strong>~11% accuracy improvement</strong> on BrowseComp and DeepSearchQA benchmarks</li>
+    <li><strong>~24% fewer input tokens</strong> consumed per agentic search workflow</li>
+    <li><strong>Code execution is free</strong> when bundled with a web search or web fetch call under the new pricing structure</li>
+  </ul>
+  <p>Migrate by updating the tool version string in your API calls from <code>web_search_20250305</code> to <code>web_search_20260209</code>. The new version is backward-compatible — no other changes are required.</p>
+  <div class="tag-list">
+    <span class="tag">API</span>
+    <span class="tag">web fetch</span>
+    <span class="tag">developer tools</span>
+    <span class="tag">agentic</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Fine-Grained Tool Streaming GA
+     Source: https://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Fine-Grained Tool Streaming Reaches General Availability</h2>
+  <p>Anthropic has removed the beta header requirement for fine-grained tool streaming, making it generally available across the Claude API, Amazon Bedrock, Google Vertex AI, and Microsoft Foundry. The feature allows streaming of tool-call parameter values without buffering or JSON validation, significantly reducing time-to-first-byte for tool responses that carry large payloads — code diffs, document blobs, or database query results.</p>
+  <p>Enable it by setting <code>eager_input_streaming: true</code> on any tool definition. One important caveat: callers must handle partial or invalid JSON inputs as an edge case, since parameters arrive incrementally before the full value is available.</p>
+  <pre><code>{
+  "tools": [{
+    "name": "write_file",
+    "eager_input_streaming": true,
+    "input_schema": { ... }
+  }]
+}</code></pre>
+  <p>This is particularly valuable in Claude Code-style agents where large file writes need to begin streaming to disk before the model has finished generating the full content — reducing perceived latency in interactive workflows.</p>
+  <div class="tag-list">
+    <span class="tag">API</span>
+    <span class="tag">streaming</span>
+    <span class="tag">tool use</span>
+    <span class="tag">developer tools</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

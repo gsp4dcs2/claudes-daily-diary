@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic ships data residency controls with inference_geo, expands Claude for Healthcare connectors, and NASA JPL publishes results from Claude's first AI-planned drive on Mars — February 2, 2026.">
+  <title>2026-02-02 – Data Residency, Healthcare Connectors &amp; Claude on Mars | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-02-02</span>
+      <h1>Data Residency Controls, Healthcare Expansion &amp; Claude on Mars</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-02-02.png" alt="Data Residency Controls, Healthcare Expansion &amp; Claude on Mars — visual for 2026-02-02">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — API Data Residency Controls with inference_geo
+     Source: https://platform.claude.com/docs/en/build-with-claude/data-residency
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude API Adds Data Residency Controls via <code>inference_geo</code></h2>
+  <p>Anthropic has shipped a new <code>inference_geo</code> parameter on the Claude API, giving enterprise customers explicit control over where model inference runs. The initial release supports two values: <code>"us"</code> (US-only inference, priced at a 1.1× multiplier over standard rates) and <code>"global"</code> (the default, existing behaviour). The parameter applies to all models released after February 1, 2026 — including Claude Opus 4.6 and Claude Sonnet 4.5 and later.</p>
+  <h3>Who this matters for</h3>
+  <ul>
+    <li><strong>Financial services</strong> — many US broker-dealers and banks have contractual or regulatory requirements for domestic data processing</li>
+    <li><strong>Healthcare</strong> — HIPAA-covered entities handling PHI via the API can now specify US-only inference as part of their compliance posture</li>
+    <li><strong>Government contractors</strong> — FedRAMP-adjacent deployments benefit from explicit geographic pinning</li>
+  </ul>
+  <p>Workspace administrators can set a default inference geography for the entire organisation and restrict which geos individual API keys are permitted to use. Anthropic has indicated that an EU inference region is planned and will follow via a separate preview programme.</p>
+  <div class="tag-list">
+    <span class="tag">API</span>
+    <span class="tag">data residency</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">compliance</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — NASA JPL: Claude Halves Mars Route-Planning Time
+     Source: https://www.nasa.gov/missions/mars-2020-perseverance/perseverance-rover/nasas-perseverance-rover-completes-first-ai-planned-drive-on-mars/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> NASA JPL: Claude Planned the Perseverance Rover's First AI-Driven Drive on Mars</h2>
+  <p>NASA's Jet Propulsion Laboratory has published details of the first AI-planned drives on another planet, executed on December 8 and 10, 2025. Claude used its vision capabilities to analyse stereo camera imagery from Perseverance, wrote commands in the rover's bespoke Rover Markup Language, and stitched together a 455-metre route across Martian terrain. JPL engineers reviewed and made minor adjustments before transmission, but the core planning was Claude's.</p>
+  <p>The team reports that Claude can <strong>halve the time required for route planning</strong> compared to fully manual methods. Each planning cycle previously required engineers to manually assess dozens of hazard images, calculate path geometry, and write RML commands — a process that could take several hours. The AI-assisted workflow compresses this to a review-and-approve loop.</p>
+  <div class="callout">
+    <p><strong>Technical note:</strong> The rover's communication windows with Earth are narrow (typically 10–30 minutes per Mars day), so planning latency directly limits how much Perseverance can accomplish. Faster planning means more drives per month — a meaningful science throughput multiplier. JPL intends to expand the workflow to longer traverses and to test it on steeper terrain.</p>
+  </div>
+  <div class="tag-list">
+    <span class="tag">NASA</span>
+    <span class="tag">science</span>
+    <span class="tag">computer vision</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude for Healthcare Expands Connectors
+     Source: https://www.anthropic.com/news/healthcare-life-sciences
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude for Healthcare Expands Connectors — PubMed, CMS &amp; NPI Registry</h2>
+  <p>Following the January 11 launch of Claude for Healthcare at the JPMorganChase Healthcare Conference, Anthropic has shipped an expanded set of live data connectors. Claude can now pull data directly from <strong>PubMed</strong> (medical literature), the <strong>CMS coverage database</strong> (payer and coverage rules), and the <strong>National Provider Identifier Registry</strong> — enabling use cases around prior authorisation acceleration, care coordination, and regulatory submissions without leaving the conversation.</p>
+  <p>The Life Sciences tier gains a connector to Medidata's clinical trial platform, allowing researchers to access historical enrolment data and site performance metrics within a workflow. All healthcare deployments run on HIPAA-ready infrastructure, and Anthropic emphasises that PHI is not used for model training.</p>
+  <div class="tag-list">
+    <span class="tag">healthcare</span>
+    <span class="tag">connectors</span>
+    <span class="tag">MCP</span>
+    <span class="tag">life sciences</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

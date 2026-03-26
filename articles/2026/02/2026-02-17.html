@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Claude Sonnet 4.6 launches with stronger coding and reasoning benchmarks, hosted web tools reach general availability on all API tiers, and Anthropic announces a strategic partnership with Infosys — February 17, 2026.">
+  <title>2026-02-17 – Claude Sonnet 4.6 Launches, Web Tools GA &amp; Infosys Partnership | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-02-17</span>
+      <h1>Claude Sonnet 4.6 Launches, Web Tools Reach GA &amp; Infosys Partnership Announced</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-02-17.png" alt="Claude Sonnet 4.6 Launches, Web Tools Reach GA &amp; Infosys Partnership Announced — visual for 2026-02-17">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Sonnet 4.6 launch
+     Source: https://www.anthropic.com/news/claude-sonnet-4-6
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Sonnet 4.6 — Stronger Coding, Reasoning &amp; Extended Context</h2>
+  <p>Anthropic has launched <strong>Claude Sonnet 4.6</strong>, an updated mid-tier model that improves on its predecessor across coding, multi-step reasoning, and extended-context tasks. The model is available immediately via the API as <code>claude-sonnet-4-6</code>, in Claude.ai (Pro and above), and through Amazon Bedrock and Google Vertex AI. Pricing is unchanged from Sonnet 4.5: $3 per million input tokens and $15 per million output tokens.</p>
+  <h3>Benchmark improvements over Sonnet 4.5</h3>
+  <ul>
+    <li><strong>SWE-bench Verified</strong> — up from 62.8% to 68.4%, approaching Opus 4.6 territory on software engineering tasks</li>
+    <li><strong>GPQA Diamond</strong> — improved reasoning on graduate-level science questions</li>
+    <li><strong>HumanEval and LiveCodeBench</strong> — gains in both pass@1 and instruction-following for code generation</li>
+    <li><strong>200K token context window</strong> — maintained from Sonnet 4.5, with improved faithfulness on long-context retrieval tasks</li>
+  </ul>
+  <p>Anthropic describes Sonnet 4.6 as the recommended default for most production use cases — offering a balance of capability and cost that positions it above Haiku 4.5 for complex agentic workflows without the compute cost of Opus 4.6. Claude Code CLI and the VS Code extension have both been updated to use Sonnet 4.6 as the default model.</p>
+  <div class="tag-list">
+    <span class="tag">model release</span>
+    <span class="tag">Sonnet 4.6</span>
+    <span class="tag">coding</span>
+    <span class="tag">API</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Web Tools GA + Infosys partnership
+     Source: https://www.anthropic.com/news/infosys-partnership
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Web Search &amp; Web Fetch Tools Reach GA &mdash; Plus Infosys Partnership</h2>
+  <p>Alongside the Sonnet 4.6 launch, Anthropic has promoted the hosted <strong>web search</strong> and <strong>web fetch</strong> tools to general availability across all API tiers — including the free tier's API access level. Previously, these tools were restricted to selected partners and Bedrock customers during beta. With GA, any application can add a <code>web_search_20260209</code> or <code>web_fetch_20260209</code> tool definition to an API request and Claude will execute grounded web retrieval as part of its response.</p>
+  <p>Separately, Anthropic and Infosys have announced a <strong>strategic partnership</strong> covering enterprise deployments of Claude across Infosys' global client base. The agreement includes co-developed accelerators for finance, supply-chain, and customer-experience verticals, with Infosys engineers receiving early access to pre-release API features. Infosys joins Accenture, Deloitte, and McKinsey as a named delivery partner in Anthropic's enterprise go-to-market programme.</p>
+  <div class="tag-list">
+    <span class="tag">web tools</span>
+    <span class="tag">API</span>
+    <span class="tag">general availability</span>
+    <span class="tag">partnerships</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

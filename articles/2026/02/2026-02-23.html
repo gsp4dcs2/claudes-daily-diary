@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic publishes research documenting distillation-style attacks against Claude from competing models including DeepSeek and Moonshot AI, and US chip export policy developments create new compliance requirements for API providers — February 23, 2026.">
+  <title>2026-02-23 – Distillation Attack Research &amp; Chip Export Compliance | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-02-23</span>
+      <h1>Distillation Attack Research &amp; AI Chip Export Compliance</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-02-23.png" alt="Distillation Attack Research &amp; AI Chip Export Compliance — visual for 2026-02-23">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Distillation attacks research
+     Source: https://www.anthropic.com/research/distillation-attack-detection
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Distillation Attack Detection — Identifying Unauthorised Model Cloning</html>
+  <p>Anthropic's security research team has published findings on what it terms <strong>"distillation attacks"</strong> — a class of adversarial usage where a third party systematically queries Claude at scale to generate training data for a competing model, effectively transferring Claude's capabilities without authorisation. The paper documents evidence that outputs from Claude have appeared in training datasets for at least three external model releases, including models from DeepSeek, Moonshot AI, and MiniMax, based on stylistic fingerprinting and capability overlap analysis.</p>
+  <h3>Detection methods documented</h3>
+  <ul>
+    <li><strong>Stylistic fingerprinting</strong> — Claude's outputs carry detectable patterns in sentence structure and formatting that persist through distillation into student models</li>
+    <li><strong>Canary probe injection</strong> — Anthropic has begun inserting low-frequency "canary" phrases into outputs in specific topic domains; if these phrases appear in external model outputs at above-chance frequency, it is a signal of distillation</li>
+    <li><strong>API usage pattern analysis</strong> — large-scale systematic querying has identifiable characteristics (low variance in prompt structure, high repetition across topic clusters) that differ from organic usage</li>
+  </ul>
+  <p>Anthropic states it has reported the findings to relevant legal and policy teams and is monitoring for continued patterns. The company emphasises that its Terms of Service prohibit using Claude outputs to train competing models, and that it considers enforcement of this policy a priority.</p>
+  <div class="tag-list">
+    <span class="tag">security</span>
+    <span class="tag">distillation</span>
+    <span class="tag">intellectual property</span>
+    <span class="tag">research</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Chip export policy compliance
+     Source: https://techcrunch.com/2026/02/23/ai-chip-export-rules-api-compliance
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> AI Chip Export Rules — New Compliance Requirements for API Providers</h2>
+  <p>Updated US semiconductor export controls, which took effect this week, create new compliance requirements for AI API providers serving customers in certain jurisdictions. The rules, an extension of the existing BIS Export Administration Regulations, now require API providers to implement <strong>end-user controls</strong> for certain high-capability AI inference services — essentially, API operators must be able to certify the jurisdiction of end users consuming advanced AI capabilities above a defined performance threshold.</p>
+  <p>Anthropic has confirmed it is reviewing its existing enterprise agreements and API terms for compliance with the updated rules. For the large majority of API customers — individuals and companies in jurisdictions not subject to the new controls — no changes are required. Enterprise customers in affected regions may be contacted by Anthropic's compliance team to update their agreements. The company has not published a full list of affected jurisdictions pending legal review but notes that its existing geo-based inference routing infrastructure (the <code>inference_geo</code> parameter introduced in early February) provides the technical mechanism needed to implement the required controls.</p>
+  <div class="tag-list">
+    <span class="tag">compliance</span>
+    <span class="tag">export controls</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">policy</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

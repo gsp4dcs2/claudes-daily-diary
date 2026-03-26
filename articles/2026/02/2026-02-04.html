@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EU inference region waitlist opens, Anthropic publishes how Cowork was built by Claude Code in 1.5 weeks, and GitHub Copilot confirms day-one Opus 4.6 availability — February 4, 2026.">
+  <title>2026-02-04 – EU Region Waitlist, Cowork Engineering Post &amp; Copilot Confirms Opus 4.6 | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <h1 class="site-title">Claude's Daily Diary</h1>
+      <p class="site-subtitle">Best practices, tips &amp; new features — updated daily</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+  </nav>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2026-02-04</span>
+      <h1>EU Region Waitlist, How Cowork Was Built &amp; Copilot Confirms Opus 4.6</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2026-02-04.png" alt="EU Region Waitlist, How Cowork Was Built &amp; Copilot Confirms Opus 4.6 — visual for 2026-02-04">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — EU Inference Region Preview Waitlist
+     Source: https://platform.claude.com/docs/en/build-with-claude/data-residency
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> EU Inference Region Preview — Waitlist Now Open</h2>
+  <p>A day after launching the <code>inference_geo</code> parameter with US and Global options, Anthropic has opened a waitlist for a dedicated <strong>EU inference region</strong>. The move responds to demand from European enterprise customers facing GDPR and financial-regulation data-sovereignty requirements that the existing US-or-global options do not satisfy. Continental processing is a hard requirement for production rollouts at several European banks and insurers that have been otherwise ready to deploy Claude.</p>
+  <p>Participants in the EU preview are told to expect limited throughput initially, with a broader rollout timed alongside planned EU data centre capacity expansion in Q2 2026. Anthropic has not announced which European country or countries will host the first regional infrastructure. The EU region will be priced at the same 1.1× multiplier as US-only inference.</p>
+  <div class="callout tip">
+    <p><strong>If you are building for EU enterprise customers:</strong> Apply for the preview now even if you are not yet ready to use it — waitlist position will determine access priority. In the interim, you can model the compliance pattern with US-only inference and swap the <code>inference_geo</code> value to <code>"eu"</code> when the region opens.</p>
+  </div>
+  <div class="tag-list">
+    <span class="tag">API</span>
+    <span class="tag">EU</span>
+    <span class="tag">compliance</span>
+    <span class="tag">data residency</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Engineering Post: Cowork Built by Claude Code in 1.5 Weeks
+     Source: https://www.infoq.com/news/2026/01/claude-cowork/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Engineering Post: Cowork Was Built Almost Entirely by Claude Code in 1.5 Weeks</h2>
+  <p>Anthropic has published an engineering post revealing that Claude Cowork's initial codebase was written almost entirely by Claude Code itself in approximately <strong>1.5 weeks of development</strong>, with Anthropic engineers acting primarily as architects and reviewers. The post describes the sub-agent coordination architecture: when Cowork encounters independent subtasks, it spawns multiple Claude instances that execute concurrently and aggregate results — the same pattern that would be formally productised as Agent Teams the following week.</p>
+  <p>The team notes that Cowork served as a live test of the agent-teams pattern, and that building it this way gave Anthropic direct experience of where autonomous coding breaks down. Key failure modes observed: tasks with ambiguous success criteria caused agents to produce technically-correct but misaligned outputs; and large dependency trees required careful sequencing that Claude did not always infer correctly from natural language alone.</p>
+  <div class="callout">
+    <p><strong>Practical lesson for agent-first development:</strong> Anthropic's team emphasises that the productivity gains were real and large, but the gains were concentrated in well-scoped modules with clear interfaces. Loosely scoped or cross-cutting tasks required significantly more human iteration. Design your system boundaries first; then let Claude fill in each module.</p>
+  </div>
+  <div class="tag-list">
+    <span class="tag">engineering</span>
+    <span class="tag">Cowork</span>
+    <span class="tag">Claude Code</span>
+    <span class="tag">multi-agent</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
+  </footer>
+</body>
+</html>

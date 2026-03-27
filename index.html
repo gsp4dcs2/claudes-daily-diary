@@ -12,6 +12,7 @@
 <body>
 
   <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
   <header class="site-header">
     <div class="header-inner">
       <!-- Claude logo mark (SVG) -->
@@ -32,29 +33,37 @@
           <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
         </g>
       </svg>
-      <h1 class="site-title">Claude's Daily Diary</h1>
-      <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
     </div>
   </header>
 
   <!-- ── Nav ────────────────────────────────────────── -->
   <nav class="site-nav" aria-label="Site navigation">
     <div class="nav-inner">
-      <a href="index.html" class="active">Home</a>
+      <a href="index.html" id="btn-home" class="active">Home</a>
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label" title="Jump to current month">March &#8217;26</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <button class="nav-tab" id="btn-search-tab">Search</button>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="Search entries…" autocomplete="off"
+             aria-label="Search diary entries" hidden>
     </div>
   </nav>
+  </div><!-- /.site-top -->
 
   <!-- ── Main ───────────────────────────────────────── -->
   <main class="site-main">
-    <p class="section-label">All entries — most recent first</p>
 
-    <div class="search-box">
-      <input type="search" id="diary-search"
-             placeholder="Search entries…" autocomplete="off"
-             aria-label="Search diary entries">
-    </div>
+    <!-- ── Home view ──────────────────────────────────────── -->
+    <div id="home-view">
 
-    <ul class="article-list">
+      <ul class="article-list">
       <!-- Newest entries at the top. Format: {yyyy-mm-dd} – {title} -->
 
       <li>
@@ -923,10 +932,16 @@
 
       <!-- Future entries will be prepended above this comment -->
     </ul>
+    <p id="no-entries" class="empty-month" hidden>No entries this month for now — please come back soon :)</p>
+    </div><!-- /#home-view -->
 
-    <div id="search-no-results" hidden>
-      No entries match "<span id="search-query-echo"></span>"
-    </div>
+    <!-- ── Search view ────────────────────────────────────── -->
+    <div id="search-view" hidden>
+
+      <ul class="article-list" id="search-results"></ul>
+      <p id="search-no-results" hidden>No entries match &#8220;<span id="search-query-echo"></span>&#8221;</p>
+    </div><!-- /#search-view -->
+
   </main>
 
   <!-- ── Footer ─────────────────────────────────────── -->
@@ -1459,51 +1474,179 @@
     }
   ];
 
-  /* ── Search ──────────────────────────────────────────────── */
+  /* ── Month Navigator + Search ───────────────────────────── */
   (function () {
-    const input = document.getElementById('diary-search');
-    const list  = document.querySelector('.article-list');
-    const noRes = document.getElementById('search-no-results');
-    const echo  = document.getElementById('search-query-echo');
+    const btnHome       = document.getElementById('btn-home');
+    const btnPrev       = document.getElementById('btn-prev');
+    const btnNext       = document.getElementById('btn-next');
+    const btnMonthLabel = document.getElementById('month-label');
+    const monthLabelEl  = btnMonthLabel;
 
-    input.addEventListener('input', function () {
-      const q = this.value.trim().toLowerCase();
+    const homeView      = document.getElementById('home-view');
+    const searchView    = document.getElementById('search-view');
+    const btnSearchTab  = document.getElementById('btn-search-tab');
+    const artList       = document.querySelector('#home-view .article-list');
+    const allItems      = Array.from(artList.querySelectorAll('li'));
+    const noEntries     = document.getElementById('no-entries');
+    const searchInput   = document.getElementById('diary-search');
+    const searchResults = document.getElementById('search-results');
+    const noResults     = document.getElementById('search-no-results');
+    const queryEcho     = document.getElementById('search-query-echo');
 
-      // Clear previous snippets and reset visibility
-      list.querySelectorAll('li').forEach(li => {
-        const s = li.querySelector('.search-snippet');
-        if (s) s.remove();
-        li.hidden = false;
+    // Build sorted unique month list from article dates
+    const monthsSet = new Set();
+    allItems.forEach(li => {
+      const d = li.querySelector('.article-date');
+      if (d) monthsSet.add(d.textContent.trim().slice(0, 7));
+    });
+    const months      = [...monthsSet].sort();
+    const oldestMonth = months[0];
+
+    const today   = new Date();
+    const todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+
+    function fmtLabel(ym) {
+      const [y, m] = ym.split('-');
+      const name = new Date(+y, +m - 1, 1).toLocaleString('en-GB', { month: 'long' });
+      return name + " '" + y.slice(2);
+    }
+
+    function shiftMonth(ym, delta) {
+      const [y, m] = ym.split('-').map(Number);
+      const d = new Date(y, m - 1 + delta, 1);
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+    }
+
+    const params     = new URLSearchParams(window.location.search);
+    const paramMonth = params.get('month');
+    let currentMonth = (paramMonth && /^\d{4}-\d{2}$/.test(paramMonth)) ? paramMonth : todayYM;
+    let currentMode  = 'home';
+
+    function renderMonth(ym) {
+      let visible = 0;
+      allItems.forEach(li => {
+        const d   = li.querySelector('.article-date');
+        const hit = d && d.textContent.trim().startsWith(ym);
+        li.hidden = !hit;
+        if (hit) visible++;
       });
+      noEntries.hidden = visible > 0;
+      const label = fmtLabel(ym);
+      monthLabelEl.textContent = label;
 
-      if (!q) { noRes.hidden = true; return; }
+      btnPrev.disabled = ym <= oldestMonth;
+      btnNext.disabled = ym >= todayYM;
+    }
 
-      let matched = 0;
-      list.querySelectorAll('li').forEach(li => {
-        const href  = li.querySelector('a')?.getAttribute('href');
-        const entry = SEARCH_INDEX.find(e => e.url === href);
-        const hay   = entry ? (entry.title + ' ' + entry.text).toLowerCase() : '';
-        const hit   = hay.includes(q);
-        li.hidden   = !hit;
-        if (hit && entry) {
-          matched++;
-          const idx = entry.text.toLowerCase().indexOf(q);
-          if (idx !== -1) {
-            const start = Math.max(0, idx - 40);
-            const end   = Math.min(entry.text.length, idx + q.length + 60);
-            const snip  = (start > 0 ? '…' : '') +
-                          entry.text.slice(start, end) +
-                          (end < entry.text.length ? '…' : '');
-            const span  = document.createElement('span');
-            span.className = 'search-snippet';
-            span.textContent = snip;
-            li.appendChild(span);
-          }
+    function goMonth(ym) {
+      sessionStorage.setItem('scroll_' + currentMonth, String(Math.round(window.scrollY)));
+      currentMonth = ym;
+      renderMonth(ym);
+      history.pushState({ month: ym }, '', '?month=' + ym);
+      const saved = sessionStorage.getItem('scroll_' + ym);
+      if (saved !== null) {
+        window.scrollTo({ top: +saved, behavior: 'instant' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function setMode(mode) {
+      // Save search scroll position when leaving search
+      if (currentMode === 'search') {
+        sessionStorage.setItem('scroll_search', String(Math.round(window.scrollY)));
+      }
+      currentMode = mode;
+      homeView.hidden   = mode !== 'home';
+      searchView.hidden = mode !== 'search';
+      btnSearchTab.classList.toggle('active', mode === 'search');
+      btnHome.classList.toggle('active',      mode === 'home');
+      searchInput.hidden = mode !== 'search';
+      if (mode === 'search') {
+        // Restore saved query (survives back-navigation to this page)
+        const savedQuery = sessionStorage.getItem('search_query') || '';
+        if (savedQuery && !searchInput.value) {
+          searchInput.value = savedQuery;
+          searchInput.dispatchEvent(new Event('input'));
         }
-      });
+        searchInput.focus();
+        // Restore previous scroll position in search view
+        const saved = sessionStorage.getItem('scroll_search');
+        if (saved !== null) window.scrollTo({ top: +saved, behavior: 'instant' });
+      }
+    }
 
-      echo.textContent = this.value.trim();
-      noRes.hidden = matched > 0;
+    // Init
+    renderMonth(currentMonth);
+    history.replaceState({ month: currentMonth }, '', '?month=' + currentMonth);
+    if (params.get('search') === '1') setMode('search');
+
+    btnPrev.addEventListener('click', () => { if (!btnPrev.disabled) goMonth(shiftMonth(currentMonth, -1)); });
+    btnNext.addEventListener('click', () => { if (!btnNext.disabled) goMonth(shiftMonth(currentMonth, +1)); });
+    // N3 — month label: switch to home view and restore scroll for current month
+    btnMonthLabel.addEventListener('click', () => {
+      if (currentMode !== 'home') setMode('home');
+      const saved = sessionStorage.getItem('scroll_' + currentMonth);
+      window.scrollTo({ top: saved !== null ? +saved : 0, behavior: 'smooth' });
+    });
+    // N2 — Home: always jump to today's month and restore its scroll
+    btnHome.addEventListener('click', e => {
+      e.preventDefault();
+      const wasSearch = currentMode !== 'home';
+      if (wasSearch) setMode('home');
+      if (currentMonth !== todayYM || wasSearch) {
+        goMonth(todayYM);
+      } else {
+        const saved = sessionStorage.getItem('scroll_' + todayYM);
+        window.scrollTo({ top: saved !== null ? +saved : 0, behavior: 'smooth' });
+      }
+    });
+    btnSearchTab.addEventListener('click', () => setMode('search'));
+    window.addEventListener('popstate', e => {
+      if (e.state && e.state.month) {
+        currentMonth = e.state.month;
+        renderMonth(e.state.month);
+        setMode('home');
+        const saved = sessionStorage.getItem('scroll_' + e.state.month);
+        if (saved !== null) window.scrollTo({ top: +saved, behavior: 'instant' });
+      }
+    });
+
+    // Search
+    const catIcons  = { news: '🧭', practice: '✅', tips: '💡' };
+    const catLabels = { news: 'Daily News', practice: 'Best Practices', tips: "Tips 'n' Tricks" };
+    searchInput.addEventListener('input', function () {
+      const q = this.value.trim().toLowerCase();
+      sessionStorage.setItem('search_query', this.value.trim());
+      searchResults.innerHTML = '';
+      if (!q) { noResults.hidden = true; return; }
+      const hits = SEARCH_INDEX.filter(e => (e.title + ' ' + e.text).toLowerCase().includes(q));
+      hits.forEach(entry => {
+        const idx  = entry.text.toLowerCase().indexOf(q);
+        let   snip = '';
+        if (idx !== -1) {
+          const s = Math.max(0, idx - 40);
+          const e = Math.min(entry.text.length, idx + q.length + 60);
+          snip = (s > 0 ? '…' : '') + entry.text.slice(s, e) + (e < entry.text.length ? '…' : '');
+        }
+        const thumb  = entry.url.replace('.html', '-thumb.png');
+        const icon   = catIcons[entry.cat]  || '🧭';
+        const clabel = catLabels[entry.cat] || 'Daily News';
+        const li = document.createElement('li');
+        li.innerHTML =
+          `<a href="${entry.url}">` +
+            `<img class="entry-thumb" src="${thumb}" alt="${entry.date} thumbnail">` +
+            `<div class="entry-meta">` +
+              `<span class="article-date">${entry.date}</span>` +
+              `<div class="entry-bottom"><span class="cat-icon" title="${clabel}">${icon}</span> ` +
+              `<span class="article-title">${entry.title}</span></div>` +
+              (snip ? `<span class="search-snippet">${snip}</span>` : '') +
+            `</div>` +
+          `</a>`;
+        searchResults.appendChild(li);
+      });
+      queryEcho.textContent = this.value.trim();
+      noResults.hidden = hits.length > 0;
     });
   })();
   </script>

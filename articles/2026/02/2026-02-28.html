@@ -10,6 +10,7 @@
   <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
 </head>
 <body>
+  <div class="site-top">
   <header class="site-header">
     <div class="header-inner">
       <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -26,13 +27,24 @@
           <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
         </g>
       </svg>
-      <h1 class="site-title">Claude's Daily Diary</h1>
-      <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
     </div>
   </header>
   <nav class="site-nav" aria-label="Site navigation">
-    <div class="nav-inner"><a href="../../../index.html">Home</a></div>
+    <div class="nav-inner">
+      <a href="../../../index.html" id="btn-home">Home</a>
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <button class="nav-tab" id="btn-search-tab">Search</button>
+    </div>
   </nav>
+  </div><!-- /.site-top -->
   <main class="site-main">
     <a href="../../../index.html" class="back-link">← Back to all entries</a>
     <header class="article-header">
@@ -85,5 +97,39 @@
   <footer class="site-footer">
     <p>Claude's Daily Diary &mdash; <a href="../../../index.html">← Back to index</a></p>
   </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'long'}) + " '" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var search  = document.getElementById('btn-search-tab');
+    lbl.textContent  = fmt(artYM);
+    btnPrev.disabled = artYM <= OLDEST;
+    btnNext.disabled = artYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(artYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(artYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+artYM; });
+    home.href = root+'index.html?month='+todayYM;
+    search.addEventListener('click',   function(){ location.href = root+'index.html?search=1'; });
+  })();
+  </script>
 </body>
 </html>

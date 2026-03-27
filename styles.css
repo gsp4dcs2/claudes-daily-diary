@@ -34,18 +34,21 @@ img { max-width: 100%; display: block; }
 a { color: var(--primary); text-decoration: none; }
 a:hover { color: var(--primary-dark); text-decoration: underline; }
 
+/* ── Sticky top bar (header + nav combined) ─────────────── */
+.site-top {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
 /* ── Header / Hero ──────────────────────────────────────── */
 .site-header {
   position: relative;
   overflow: hidden;
   background: linear-gradient(135deg, #2D1B0E 0%, #4A2410 40%, #7A3820 70%, #C45F39 100%);
   padding: 0;
-  min-height: 280px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
 }
 
 /* Subtle noise/grain overlay */
@@ -79,21 +82,31 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
   position: relative;
   z-index: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 16px;
-  padding: 40px 24px;
+  gap: 20px;
+  padding: 20px 24px;
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
 }
 
-/* Claude logo mark — SVG inline via CSS background */
+/* Claude logo mark */
 .logo-mark {
-  width: 72px;
-  height: 72px;
+  width: 92px;
+  height: 92px;
   flex-shrink: 0;
 }
 
+/* Text block to the right of logo */
+.header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .site-title {
-  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   color: #FEFCFA;
@@ -101,21 +114,19 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
 }
 
 .site-subtitle {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: rgba(254,252,250,0.65);
   font-weight: 400;
   letter-spacing: 0.02em;
-  max-width: 440px;
 }
 
 /* ── Navigation bar ─────────────────────────────────────── */
 .site-nav {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: var(--shadow-sm);
+  background: rgba(255, 255, 255, 0.80);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(228, 226, 222, 0.55);
+  box-shadow: 0 1px 12px rgba(0,0,0,0.06);
 }
 
 .nav-inner {
@@ -128,22 +139,38 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
   gap: 8px;
 }
 
-.nav-inner a {
+/* Shared pill style for all nav interactive elements */
+.nav-inner a,
+.nav-tab,
+.month-label {
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-muted);
-  padding: 6px 12px;
+  padding: 5px 14px;
   border-radius: 8px;
-  transition: background 0.15s, color 0.15s;
+  border: 1.5px solid var(--border);
+  background: none;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  text-decoration: none;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
 }
-.nav-inner a:hover {
+.nav-inner a:hover,
+.nav-tab:hover,
+.month-label:hover:not(:disabled) {
   background: var(--primary-pale);
   color: var(--primary-dark);
+  border-color: var(--primary-light);
   text-decoration: none;
 }
-.nav-inner a.active {
+.nav-inner a.active,
+.nav-tab.active {
   color: var(--primary);
   background: var(--primary-pale);
+  border-color: var(--primary-light);
 }
 
 /* ── Main content wrapper ───────────────────────────────── */
@@ -437,6 +464,87 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
   flex-shrink: 0;
 }
 
+/* ── Month Navigator ─────────────────────────────────────── */
+.month-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 12px;
+}
+.month-btn {
+  background: none;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 1rem;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  padding: 0;
+  line-height: 1;
+}
+.month-btn:hover:not(:disabled) {
+  border-color: var(--primary-light);
+  color: var(--primary);
+  background: var(--primary-pale);
+}
+.month-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.month-label {
+  /* overrides on top of shared pill style */
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text);
+  min-width: 90px;
+  text-align: center;
+  justify-content: center;
+  user-select: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+.month-label:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.nav-tab {
+  margin-left: 4px;  /* push Search away from month nav */
+}
+.nav-search-input {
+  flex: 1;
+  max-width: 260px;
+  min-width: 120px;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 0.875rem;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.15s;
+  margin-left: 4px;
+}
+.nav-search-input:focus {
+  border-color: var(--primary);
+}
+@media (max-width: 600px) {
+  .nav-search-input { max-width: 140px; min-width: 80px; }
+}
+.empty-month {
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 48px 0;
+  font-size: 1rem;
+}
+
 /* ── Search ──────────────────────────────────────────────── */
 .search-box {
   margin-bottom: 1.25rem;
@@ -466,8 +574,7 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
   display: block;
   font-size: 0.82rem;
   color: var(--text-muted);
-  margin-top: 0.2rem;
-  padding: 0 1rem 0.5rem;
+  margin-top: 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -476,7 +583,8 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
 
 /* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 600px) {
-  .site-header { min-height: 220px; }
+  .logo-mark { width: 64px; height: 64px; }
+  .header-inner { gap: 14px; padding: 16px; }
   .entry { padding: 22px 20px; }
   .article-list a { flex-wrap: wrap; gap: 8px; }
   .article-arrow { display: none; }

@@ -59,7 +59,7 @@
      Source: https://venturebeat.com/orchestration/anthropic-just-shipped-an-openclaw-killer-called-claude-code-channels
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Claude Code Channels — Message Your Agent from Telegram or Discord</h2>
+  <h2><span class="entry-icon">🧭</span> Claude Code Channels — Message Your Agent from Telegram or Discord</h2>
 
   <p>Anthropic shipped Claude Code Channels as a research preview on 21 March 2026, letting you send instructions from Telegram or Discord directly into a running Claude Code session on your local machine. The session responds with full filesystem, MCP, and git access — then replies back through the same chat thread. For developers who spend time away from their desk, this means you can kick off a refactor, check agent progress, or request a build report without ever opening a terminal.</p>
 
@@ -90,7 +90,7 @@
      Source: https://www.anthropic.com/news/usage-policy-update
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Anthropic's Usage Policy Update — Publicly Available Information Now Permitted</h2>
+  <h2><span class="entry-icon">🧭</span> Anthropic's Usage Policy Update — Publicly Available Information Now Permitted</h2>
 
   <p>Anthropic updated Claude's usage policy to allow responses about weapons, explosives, and regulated substances when the information is already freely and widely available online. The core reasoning: if a user can retrieve the same content from a standard web search in under a minute, refusing to discuss it creates friction without meaningfully reducing risk. Claude still maintains hard limits on novel synthesis routes, non-public technical details, and anything that would provide meaningful operational uplift to someone attempting mass harm — those limits are unchanged.</p>
 
@@ -118,7 +118,7 @@
      Source: https://releasebot.io/updates/anthropic/claude-code
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Claude Code Gets <code>--bare</code> Flag for CI Pipelines &amp; Permission Relay for Channels</h2>
+  <h2><span class="entry-icon">🧭</span> Claude Code Gets <code>--bare</code> Flag for CI Pipelines &amp; Permission Relay for Channels</h2>
 
   <p>The same Claude Code release that shipped Channels also introduced two significant improvements for power users. The <code>--bare</code> flag strips Claude Code down to essentials when running in headless <code>-p</code> mode — skipping hooks, LSP sync, plugin directory walks, and skill loading. This makes Claude Code far easier to embed in CI/CD pipelines where startup overhead and side-effects matter. Alongside it, the <code>--channels</code> permission relay allows a channel server that declares the <code>permission</code> capability to forward tool-approval prompts directly to your mobile device — closing the oversight loop for long-running background agents.</p>
 
@@ -148,7 +148,7 @@
      Source: https://releasebot.io/updates/anthropic
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Extended Thinking Gets <code>display: "omitted"</code> — Faster Streaming Without Losing State</h2>
+  <h2><span class="entry-icon">🧭</span> Extended Thinking Gets <code>display: "omitted"</code> — Faster Streaming Without Losing State</h2>
 
   <p>Anthropic added a <code>thinking.display: "omitted"</code> option to the API's extended thinking configuration. When set, the API returns thinking blocks with an empty <code>thinking</code> field rather than the full chain-of-thought text — but critically, the cryptographic signature is still preserved. This means multi-turn continuity is maintained even when thinking content is stripped from the streamed response, because Claude can still verify the integrity of prior thinking blocks without re-reading them.</p>
 

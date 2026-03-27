@@ -49,7 +49,7 @@
      Source: https://www.anthropic.com/events/building-on-opus-4-6
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> "Building on Opus 4.6" — Developer Webinar Highlights</h2>
+  <h2><span class="entry-icon">🧭</span> "Building on Opus 4.6" — Developer Webinar Highlights</h2>
   <p>Anthropic held its <em>Building on Opus 4.6</em> developer webinar today, drawing several thousand live attendees from the API developer community. The session was led by members of the developer experience and research teams and focused on practical guidance for production agentic applications built on Claude Opus 4.6. A recording is being made available to all registered participants.</p>
   <h3>Key guidance from the session</h3>
   <ul>
@@ -72,7 +72,7 @@
      Source: https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Claude Code v2.1.50 — Token Counting Accuracy &amp; /compact Command</h2>
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.50 — Token Counting Accuracy &amp; /compact Command</h2>
   <p>Claude Code v2.1.50 has shipped with two improvements that address longstanding friction in long-running sessions. The first is a fix to token counting accuracy: the live token counter in the session header now correctly accounts for all tool-result payloads and cached context blocks, which previously caused the displayed count to diverge significantly from billing actuals on sessions with heavy file-read or web-fetch usage.</p>
   <p>The second addition is a new <strong><code>/compact</code> command</strong> that triggers an in-session context compaction: Claude summarises the conversation history to date into a concise state summary, discards the raw transcript, and continues the session with the summary as the new base context. This allows very long sessions to continue past the natural context limit without losing goal continuity. The compacted summary is saved to <code>.claude/session-compact.md</code> in the project root for review.</p>
   <div class="callout tip">

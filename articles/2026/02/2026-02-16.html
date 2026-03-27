@@ -49,7 +49,7 @@
      Source: https://www.anthropic.com/research/economic-primitives
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Economic Primitives — How AI Systems Should Reason About Cost and Value</h2>
+  <h2><span class="entry-icon">✅</span> Economic Primitives — How AI Systems Should Reason About Cost and Value</h2>
   <p>Anthropic's research team has published a new position paper titled <em>Economic Primitives for AI Systems</em>, providing a structured framework for how AI agents should think about resource expenditure and value creation during extended task execution. As AI systems take on longer-horizon tasks with real-world cost implications — compute spend, API calls, human time — the absence of a principled economic model has led to wasteful and sometimes counterproductive agent behaviour in production.</p>
   <h3>The four core primitives proposed</h3>
   <ul>
@@ -73,7 +73,7 @@
      Source: https://platform.claude.com/docs/en/api/streaming
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Claude API — Improved SSE Streaming with Reconnection Support</h2>
+  <h2><span class="entry-icon">✅</span> Claude API — Improved SSE Streaming with Reconnection Support</h2>
   <p>The Claude API has received a targeted improvement to its server-sent event (SSE) streaming implementation: responses now carry a <strong><code>X-Response-Id</code> header</strong> and support a corresponding <code>Last-Event-ID</code> reconnect header. If a streaming connection drops mid-response, clients can reconnect and resume from the last successfully delivered event rather than re-submitting the full request from scratch.</p>
   <p>For most interactive applications this change is transparent — the Anthropic SDK handles reconnection automatically. For developers who consume the raw SSE stream, the reconnect header must be forwarded with any retry request. Anthropic notes that this eliminates a common class of duplicate-response bugs in long-running agentic workflows where a network blip previously caused the full generation to repeat from token zero.</p>
   <div class="callout tip">

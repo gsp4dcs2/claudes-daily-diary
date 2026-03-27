@@ -49,7 +49,7 @@
      Source: https://venturebeat.com/technology/anthropics-claude-cowork-finally-lands-on-windows-and-it-wants-to-automate
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Claude Cowork Arrives on Windows — Full Feature Parity from Day One</h2>
+  <h2><span class="entry-icon">🧭</span> Claude Cowork Arrives on Windows — Full Feature Parity from Day One</h2>
   <p>Claude Cowork is now available on Windows, bringing the file-managing desktop agent to roughly 70% of the global desktop computing market. The Windows release ships with <strong>full feature parity</strong> with the macOS version: file access, multi-step task execution, Office integration (the Excel and PowerPoint integrations previewed yesterday), and MCP connectors for integrating external services. Persistent agent threads are available to Pro and Max plan subscribers.</p>
   <p>The launch is particularly significant for enterprise customers whose IT fleets are predominantly Windows — a segment that had been waiting since the January macOS launch. Microsoft's own IT team was among the early access participants cited in Anthropic's announcement, which noted that Windows Cowork integrates with Windows Credential Manager for secure secrets handling.</p>
   <div class="callout tip">
@@ -69,7 +69,7 @@
      Source: https://www.nagarro.com/en/blog/claude-code-feb-2026-update-analysis
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Claude Code: 500ms Faster Startup &amp; Native Git Worktree Agent Isolation</h2>
+  <h2><span class="entry-icon">🧭</span> Claude Code: 500ms Faster Startup &amp; Native Git Worktree Agent Isolation</h2>
   <p>A Claude Code point release this week delivers two improvements that developers using Agent Teams will immediately notice. First, a <strong>500ms startup-time reduction</strong> achieved by deferring <code>SessionStart</code> hook execution until after the initial UI render — making Claude Code feel substantially snappier when opening new sessions. Second, agents running inside Agent Teams sessions can now declaratively run in isolated git worktrees, so each parallel subagent operates on its own branch without file-system collisions.</p>
   <p>The worktree isolation flag is available as an opt-in property on any subagent spawned via <code>TeammateTool</code>, and integrates cleanly with existing PR review pipelines. Worktree startup time was also improved by reading git refs directly, skipping redundant remote fetches on large repositories.</p>
   <pre><code>// In your agent team configuration:

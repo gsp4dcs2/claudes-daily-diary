@@ -49,7 +49,7 @@
      Source: https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Web Fetch &amp; Web Search Tools — Dynamic Filtering with Sandboxed Code Execution</h2>
+  <h2><span class="entry-icon">🧭</span> Web Fetch &amp; Web Search Tools — Dynamic Filtering with Sandboxed Code Execution</h2>
   <p>Anthropic has shipped updated versions of both the hosted web search and web fetch tools — <code>web_search_20260209</code> and <code>web_fetch_20260209</code> — introducing dynamic filtering powered by sandboxed code execution. Instead of dumping entire fetched pages into the context window, Claude now writes and runs lightweight filter code at retrieval time, keeping only the passages relevant to the current task.</p>
   <h3>Measured improvements</h3>
   <ul>
@@ -72,7 +72,7 @@
      Source: https://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Fine-Grained Tool Streaming Reaches General Availability</h2>
+  <h2><span class="entry-icon">🧭</span> Fine-Grained Tool Streaming Reaches General Availability</h2>
   <p>Anthropic has removed the beta header requirement for fine-grained tool streaming, making it generally available across the Claude API, Amazon Bedrock, Google Vertex AI, and Microsoft Foundry. The feature allows streaming of tool-call parameter values without buffering or JSON validation, significantly reducing time-to-first-byte for tool responses that carry large payloads — code diffs, document blobs, or database query results.</p>
   <p>Enable it by setting <code>eager_input_streaming: true</code> on any tool definition. One important caveat: callers must handle partial or invalid JSON inputs as an edge case, since parameters arrive incrementally before the full value is available.</p>
   <pre><code>{

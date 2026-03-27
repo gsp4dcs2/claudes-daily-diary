@@ -49,7 +49,7 @@
      Source: https://aws.amazon.com/blogs/machine-learning/cross-region-inference-amazon-bedrock
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Amazon Bedrock Cross-Region Inference — Automatic Routing to Lowest-Latency Region</h2>
+  <h2><span class="entry-icon">🧭</span> Amazon Bedrock Cross-Region Inference — Automatic Routing to Lowest-Latency Region</h2>
   <p>Amazon Web Services has added <strong>cross-region inference</strong> support for Claude models on Amazon Bedrock. The feature allows customers to create a cross-region inference profile that automatically routes each request to the AWS region with the best available capacity and lowest current latency — without requiring the application to manage region selection or failover logic explicitly. For production deployments that currently hard-code a single Bedrock region, the new profile acts as a transparent drop-in replacement with meaningful availability and latency improvements during regional load spikes.</p>
   <h3>How cross-region inference works</h3>
   <ul>
@@ -72,7 +72,7 @@
      Source: https://www.anthropic.com/news/api-latency-improvements-jan-2026
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Anthropic API Latency Down 30% Since November — Infrastructure Update</h2>
+  <h2><span class="entry-icon">🧭</span> Anthropic API Latency Down 30% Since November — Infrastructure Update</h2>
   <p>Anthropic has shared that time-to-first-token latency on the Claude API has improved by approximately <strong>30% since November 2025</strong>, the result of a series of infrastructure changes rolled out over the past ten weeks. The improvements come from three parallel initiatives: inference kernel optimisations that reduce per-token compute time on current-generation hardware, routing changes that reduce geographic hop count between the API gateway and inference nodes, and a pre-warming strategy that reduces cold-start overhead for new connection establishment.</p>
   <p>The improvement is most pronounced at the p95 level — developers operating in tail-latency-sensitive contexts will see the largest gains. Anthropic notes the changes required no API-level modification and are live for all existing integrations. The team states that further infrastructure work is ongoing with additional latency reductions targeted for Q1 2026.</p>
   <div class="callout tip">

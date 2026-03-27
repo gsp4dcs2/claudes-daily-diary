@@ -49,7 +49,7 @@
      Source: https://www.anthropic.com/news/claude-code-security-enterprise
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Claude Code Security — Now Available to All Enterprise Plan Customers</h2>
+  <h2><span class="entry-icon">🧭</span> Claude Code Security — Now Available to All Enterprise Plan Customers</h2>
   <p>Following three days in limited preview, <strong>Claude Code Security</strong> is now available to all Enterprise plan customers without a waitlist. The mode can be activated via a toggle in the workspace admin console and applies to all Claude Code sessions for users in the workspace. When active, every code execution request is routed through a hardened sandbox, and all generated or modified code is automatically scanned for secrets, CVEs in imported packages, and common vulnerability patterns before being written to disk.</p>
   <h3>What the security mode adds</h3>
   <ul>
@@ -73,7 +73,7 @@
      Source: https://www.anthropic.com/research/sandboxed-code-execution-architecture
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Sandboxed Code Execution — Architecture Deep Dive</h2>
+  <h2><span class="entry-icon">🧭</span> Sandboxed Code Execution — Architecture Deep Dive</h2>
   <p>Anthropic has published a detailed technical post explaining the architecture behind the sandboxed code execution environment that powers both the dynamic web filtering feature (launched February 11) and Claude Code Security. The post describes a three-layer isolation model: a gVisor-based kernel sandbox at the lowest level, a time-and-memory-bounded execution budget enforced by a custom supervisor process, and an output validation layer that intercepts and normalises the sandbox's stdout/stderr before returning results to Claude.</p>
   <p>Each sandbox instance is ephemeral — provisioned per tool call and destroyed immediately after — with no persistent filesystem access and no network egress. The post notes that the design deliberately trades flexibility for auditability: a sandbox that cannot reach the network or retain state produces outputs that are structurally easier to reason about from a security perspective, even at the cost of excluding use cases that require persistent state.</p>
   <div class="tag-list">

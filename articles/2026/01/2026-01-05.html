@@ -49,7 +49,7 @@
      Source: https://platform.claude.com/docs/en/release-notes/overview
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Claude Opus 3 API Access Retired — Migrate to Opus 4.5</h2>
+  <h2><span class="entry-icon">🧭</span> Claude Opus 3 API Access Retired — Migrate to Opus 4.5</h2>
   <p>Anthropic has officially retired API access to <strong>Claude Opus 3</strong> (<code>claude-3-opus-20240229</code>) today, completing the 3.x generation's transition to legacy status. As of today, API calls to the Opus 3 model identifier return errors, and developers with active integrations must update their code to use a Claude 4.x model. Anthropic's recommended migration target is <code>claude-opus-4-5</code>, which delivers substantially stronger performance — including significantly improved reasoning, instruction-following, and tool use — at approximately one-third of the per-token cost.</p>
   <h3>Migration guide highlights</h3>
   <ul>
@@ -75,7 +75,7 @@
      Source: https://platform.claude.com/docs/en/api/webhooks
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Webhook Integration Guide — Event-Driven Claude Deployments</h2>
+  <h2><span class="entry-icon">🧭</span> Webhook Integration Guide — Event-Driven Claude Deployments</h2>
   <p>Anthropic has published a comprehensive <strong>Webhook Integration Guide</strong> covering how to build event-driven pipelines that integrate Claude into existing infrastructure without constant polling. The guide addresses three common patterns: triggering a Claude analysis when a new document arrives in a storage bucket, chaining multiple Claude calls in response to a customer support ticket event, and using Claude as an async step in a data-processing workflow.</p>
   <p>The guide introduces a lightweight webhook verification pattern using HMAC-SHA256 request signing, which ensures that only legitimate Anthropic-originated callbacks are processed by the receiving endpoint. It includes ready-to-run examples in Python (FastAPI), TypeScript (Express), and Go. A companion reference covers retry logic: Anthropic's webhook system retries failed deliveries up to five times with exponential backoff, and provides a replay endpoint for manually re-delivering events that were missed during a receiver outage.</p>
   <div class="callout tip">

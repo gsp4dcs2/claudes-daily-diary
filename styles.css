@@ -294,7 +294,9 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
 }
 
 .entry h2 .entry-icon {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
 .entry h3 {

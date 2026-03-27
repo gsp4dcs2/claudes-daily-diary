@@ -898,6 +898,51 @@ def img_rothko_20260312():
     return base
 
 
+def img_rothko_20260327():
+    """Mark Rothko colour field — deep mystery of a leaked model, legal weight, financial horizon."""
+    # Very deep near-black background — sense of depth and revelation
+    base = Image.new("RGB", (W, H), (18, 14, 22))
+
+    def soft_band(img, y0, y1, colour, feather=70):
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        r, g, b = colour
+        bd.rectangle([(60, y0 + feather), (W - 60, y1 - feather)], fill=(r, g, b, 210))
+        for i in range(feather):
+            alpha = int(180 * (i / feather))
+            bd.rectangle([(60 + i, y0 + i), (W - 60 - i, y0 + i + 1)], fill=(r, g, b, alpha))
+        for i in range(feather):
+            alpha = int(180 * ((feather - i) / feather))
+            bd.rectangle([(60 + i, y1 - i - 1), (W - 60 - i, y1 - i)], fill=(r, g, b, alpha))
+        return comp(img, bl)
+
+    # Top band — deep violet-indigo: mystery of Mythos
+    base = soft_band(base, 30, 230, (68, 28, 110), feather=65)
+    # Middle band — warm gold: legal victory, the turning point
+    base = soft_band(base, 210, 430, (185, 130, 25), feather=75)
+    # Bottom band — cool steel-blue: the financial horizon of an IPO
+    base = soft_band(base, 405, 600, (28, 72, 120), feather=60)
+
+    # Inner luminous glow on the gold band — the moment of revelation
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for i in range(50):
+        alpha = int(70 * (1 - i / 50))
+        gd.rectangle([(180 + i, 265 + i), (W - 180 - i, 375 - i)], fill=(255, 215, 80, alpha))
+    base = comp(base, gl)
+
+    # Subtle violet bloom at the top — the leak emerging from darkness
+    bl2 = layer()
+    bd2 = ImageDraw.Draw(bl2)
+    for i in range(80):
+        alpha = int(40 * (1 - i / 80))
+        bd2.ellipse([(W//2 - 200 - i*2, 20 - i), (W//2 + 200 + i*2, 180 + i)],
+                    fill=(140, 60, 200, alpha))
+    base = comp(base, bl2)
+
+    return base
+
+
 def img_lissitzky_20260323():
     """El Lissitzky Constructivism — computer use / tooling theme."""
     # Cream/white background
@@ -2981,6 +3026,7 @@ DAYS = [
     ("2026-03-24", img_moholy_20260324,     "IPO & Court",   "László Moholy-Nagy"),
     ("2026-03-25", img_franz_marc_20260325, "Voices",        "Franz Marc"),
     ("2026-03-26", img_klee_20260326,       "Global Network", "Paul Klee"),
+    ("2026-03-27", img_rothko_20260327,     "Mythos",         "Mark Rothko"),
 ]
 
 for date, fn, kw, artist in DAYS:

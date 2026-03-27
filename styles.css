@@ -509,8 +509,29 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
   color: #c5afa6;
   cursor: not-allowed;
 }
-.nav-tab {
-  margin-left: 0;
+.nav-count {
+  min-width: 36px;
+  height: 32px;
+  padding: 0 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: #e8734a;
+  background: #fdf0eb;
+  border: 1.5px solid #f4a07d;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav-count:hover {
+  background: #f9e0d5;
+  border-color: #e8734a;
+  color: #c45f39;
 }
 .nav-search-input {
   width: 100px;

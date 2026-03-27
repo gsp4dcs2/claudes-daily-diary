@@ -534,7 +534,9 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
   color: #c45f39;
 }
 .nav-search-input {
-  width: 120px;
+  flex: 1;
+  min-width: 60px;
+  max-width: 180px;
   height: 32px;
   padding: 0 34px 0 12px;   /* right padding makes room for the icon */
   font-size: 0.875rem;
@@ -555,11 +557,12 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
   border-color: #e8734a;
 }
 
-/* Mobile: shrink search input so it fits alongside the other nav elements */
+/* Mobile: suppress native browser search icon (magnifying glass eats input width) */
 @media (max-width: 600px) {
-  .nav-search-input {
-    width: 90px;
-  }
+  .nav-search-input::-webkit-search-decoration,
+  .nav-search-input::-webkit-search-cancel-button,
+  .nav-search-input::-webkit-search-results-button,
+  .nav-search-input::-webkit-search-results-decoration { display: none; }
 }
 .empty-month {
   text-align: center;

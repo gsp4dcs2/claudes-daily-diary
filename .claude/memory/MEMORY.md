@@ -10,3 +10,4 @@
 | [feedback_questions_log.md](feedback_questions_log.md) | feedback | Update notes/questions.md silently — never narrate the edit in replies |
 | [feedback_commit_push.md](feedback_commit_push.md) | feedback | Always commit + push together — never stop at commit alone |
 | [backfill_jan2026.md](backfill_jan2026.md) | project | January 2026 backfill quality map — which articles have verified real events vs. invented content |
+| [feedback_nav_behaviour.md](feedback_nav_behaviour.md) | feedback | Golden rule for nav-bar state, search persistence rules, month label source priority, and confirmed acceptable UX trade-offs |

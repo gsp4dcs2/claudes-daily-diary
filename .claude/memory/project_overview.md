@@ -51,20 +51,32 @@ this into a real public publication that covers its own costs through display ad
 
 ## Content coverage
 
-Currently 2026-01-01 through 2026-03-26 (85 days). All January and early March entries are retrospective (backfilled).
+Currently 2026-01-01 through 2026-03-27 (86 days). All January and early March entries are retrospective (backfilled).
 
 **Backfill status:**
-- Jan 2026 (01–31): ✅ Complete — committed and pushed 2026-03-26
-- Feb 2026 (01–28): ✅ Complete (done in earlier sessions)
-- Mar 2026 (01–26): ✅ Complete (01–09 retrospective, 10–26 live)
+- Jan 2026 (01–31): ✅ Complete
+- Feb 2026 (01–28): ✅ Complete
+- Mar 2026 (01–27): ✅ Complete (01–09 retrospective, 10–27 live)
 
 ## Known technical note — generate_images.py rng
 
 The module uses a single `rng = Random(42)` shared across all motif functions. Adding new dated functions that call `rng` shifts the random state for all subsequent rng-using functions. When backfilling, some existing images regenerate with slightly different rng-influenced elements — this is expected and benign (images are still deterministic for a given set of functions in a fixed order).
 
-## GUI — pending ideas
+## Nav UI — COMPLETE (as of 2026-03-27)
 
-User wants to revisit the index page GUI design after backfill was completed. Described as having "a lot of room for really interesting GUI design". No specific direction yet — watch for this conversation to resume.
+Full coral palette nav bar is polished and live. Key behaviours:
+- `[<|Month'yy|>]` — segmented control, shows user's last browsed month (not article's own month)
+- `[search...]` — flex width (fills available space), always visible, search text persists via `?sq=` URL param
+- `[{n}]` — dynamic count: article count in month view, hit count in search view
+- Article pages pass `?from_month=` in search result links so month label stays correct on `file://`
+- Only `?search=1` or `?sq=` URL params trigger search mode on init (not stale sessionStorage alone)
+- Search text clearing when navigating months from an article is intentional and correct UX
+
+## Next session agenda
+
+1. **SEO** — sitemap.xml, robots.txt, Google Search Console submission, meta tags audit
+2. **Advertising** — Google AdSense application, ad placement strategy
+3. **Autonomous daily update (S3)** — install Claude Code CLI on VM, set up cron job
 
 ---
 

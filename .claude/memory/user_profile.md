@@ -30,8 +30,9 @@ type: user
 
 ## Current focus
 
-S1 and S2 complete. claudebeat.ai is live with HTTPS. Diary entries deploy via `sudo git pull` on the VM after pushing to GitHub. S3 (autonomous daily update) is the only remaining stage — install Claude Code CLI on VM, set up cron job.
+Site is live at claudebeat.ai with HTTPS, analytics, and 86 days of content (2026-01-01 to 2026-03-27). Nav UI is fully polished. Deployment is manual (push to GitHub → `sudo git pull` on VM).
 
-Content is live from 2026-03-01 to 2026-03-24. Backfill complete. Show-more pagination live.
-
-Next session: user wants to explore more ambitious GUI / visual design for the index page — they said there is "a lot of room for really interesting GUI design" and will come back with ideas.
+**Next session priorities (user's words: "SEO and advertising opportunities to recoup costs"):**
+1. SEO — sitemap.xml, robots.txt, Google Search Console, meta tags
+2. Advertising — Google AdSense application, ad unit placement
+3. S3 — autonomous daily cron update (Claude Code CLI on VM)

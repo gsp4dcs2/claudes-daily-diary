@@ -27,7 +27,7 @@ S1, S2, and S4 complete. Site is live at https://claudebeat.ai with analytics.
 ### Umami analytics
 - **Dashboard**: https://analytics.claudebeat.ai (Nginx proxies port 3000)
 - **SSL**: Let's Encrypt via Certbot on analytics.claudebeat.ai
-- **Tracking script** added to all 26 HTML files (website ID: e525d589-bc23-4a71-8ccd-26d6c74fbbe2)
+- **Tracking script** added to all 86+ HTML files (website ID: e525d589-bc23-4a71-8ccd-26d6c74fbbe2)
 - **Docker Compose**: `~/umami/docker-compose.yml` — PostgreSQL + Umami containers
 - To restart: `cd ~/umami && docker compose down && docker compose up -d`
 

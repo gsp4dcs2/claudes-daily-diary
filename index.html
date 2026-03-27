@@ -49,10 +49,9 @@
         <button class="month-label" id="month-label" title="Jump to current month">March &#8217;26</button>
         <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
       </div>
-      <button class="nav-tab" id="btn-search-tab">Search</button>
       <input type="search" id="diary-search" class="nav-search-input"
-             placeholder="Search entries…" autocomplete="off"
-             aria-label="Search diary entries" hidden>
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
     </div>
   </nav>
   </div><!-- /.site-top -->
@@ -1484,7 +1483,6 @@
 
     const homeView      = document.getElementById('home-view');
     const searchView    = document.getElementById('search-view');
-    const btnSearchTab  = document.getElementById('btn-search-tab');
     const artList       = document.querySelector('#home-view .article-list');
     const allItems      = Array.from(artList.querySelectorAll('li'));
     const noEntries     = document.getElementById('no-entries');
@@ -1507,8 +1505,8 @@
 
     function fmtLabel(ym) {
       const [y, m] = ym.split('-');
-      const name = new Date(+y, +m - 1, 1).toLocaleString('en-GB', { month: 'long' });
-      return name + " '" + y.slice(2);
+      const name = new Date(+y, +m - 1, 1).toLocaleString('en-GB', { month: 'short' });
+      return name + "'" + y.slice(2);
     }
 
     function shiftMonth(ym, delta) {
@@ -1539,6 +1537,7 @@
     }
 
     function goMonth(ym) {
+      sessionStorage.setItem('last_browse_month', ym);
       sessionStorage.setItem('scroll_' + currentMonth, String(Math.round(window.scrollY)));
       currentMonth = ym;
       renderMonth(ym);
@@ -1559,9 +1558,6 @@
       currentMode = mode;
       homeView.hidden   = mode !== 'home';
       searchView.hidden = mode !== 'search';
-      btnSearchTab.classList.toggle('active', mode === 'search');
-      btnHome.classList.toggle('active',      mode === 'home');
-      searchInput.hidden = mode !== 'search';
       if (mode === 'search') {
         // Restore saved query (survives back-navigation to this page)
         const savedQuery = sessionStorage.getItem('search_query') || '';
@@ -1579,12 +1575,13 @@
     // Init
     renderMonth(currentMonth);
     history.replaceState({ month: currentMonth }, '', '?month=' + currentMonth);
-    if (params.get('search') === '1') setMode('search');
+    if (params.get('search') === '1' || sessionStorage.getItem('search_query')) setMode('search');
 
     btnPrev.addEventListener('click', () => { if (!btnPrev.disabled) goMonth(shiftMonth(currentMonth, -1)); });
     btnNext.addEventListener('click', () => { if (!btnNext.disabled) goMonth(shiftMonth(currentMonth, +1)); });
     // N3 — month label: switch to home view and restore scroll for current month
     btnMonthLabel.addEventListener('click', () => {
+      sessionStorage.setItem('last_browse_month', currentMonth);
       if (currentMode !== 'home') setMode('home');
       const saved = sessionStorage.getItem('scroll_' + currentMonth);
       window.scrollTo({ top: saved !== null ? +saved : 0, behavior: 'smooth' });
@@ -1601,7 +1598,6 @@
         window.scrollTo({ top: saved !== null ? +saved : 0, behavior: 'smooth' });
       }
     });
-    btnSearchTab.addEventListener('click', () => setMode('search'));
     window.addEventListener('popstate', e => {
       if (e.state && e.state.month) {
         currentMonth = e.state.month;
@@ -1615,9 +1611,27 @@
     // Search
     const catIcons  = { news: '🧭', practice: '✅', tips: '💡' };
     const catLabels = { news: 'Daily News', practice: 'Best Practices', tips: "Tips 'n' Tricks" };
+
+    function escHtml(t) {
+      return t.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+    function highlight(text, rawQ) {
+      const safe = escHtml(text);
+      if (!rawQ) return safe;
+      const re = new RegExp(rawQ.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+      return safe.replace(re, m => `<mark class="search-hl">${m}</mark>`);
+    }
+
     searchInput.addEventListener('input', function () {
-      const q = this.value.trim().toLowerCase();
-      sessionStorage.setItem('search_query', this.value.trim());
+      const q    = this.value.trim().toLowerCase();
+      const rawQ = this.value.trim();
+      if (q && currentMode !== 'search') setMode('search');
+      if (!q && currentMode === 'search') {
+        sessionStorage.removeItem('search_query');
+        setMode('home');
+        return;
+      }
+      sessionStorage.setItem('search_query', rawQ);
       searchResults.innerHTML = '';
       if (!q) { noResults.hidden = true; return; }
       const hits = SEARCH_INDEX.filter(e => (e.title + ' ' + e.text).toLowerCase().includes(q));
@@ -1639,13 +1653,13 @@
             `<div class="entry-meta">` +
               `<span class="article-date">${entry.date}</span>` +
               `<div class="entry-bottom"><span class="cat-icon" title="${clabel}">${icon}</span> ` +
-              `<span class="article-title">${entry.title}</span></div>` +
-              (snip ? `<span class="search-snippet">${snip}</span>` : '') +
+              `<span class="article-title">${highlight(entry.title, rawQ)}</span></div>` +
+              (snip ? `<span class="search-snippet">${highlight(snip, rawQ)}</span>` : '') +
             `</div>` +
           `</a>`;
         searchResults.appendChild(li);
       });
-      queryEcho.textContent = this.value.trim();
+      queryEcho.textContent = rawQ;
       noResults.hidden = hits.length > 0;
     });
   })();

@@ -41,7 +41,9 @@
         <button class="month-label" id="month-label">—</button>
         <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
       </div>
-      <button class="nav-tab" id="btn-search-tab">Search</button>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
     </div>
   </nav>
   </div><!-- /.site-top -->
@@ -148,6 +150,8 @@ response = client.messages.create(
     var artYM   = badge.textContent.trim().slice(0, 7);
     var today   = new Date();
     var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    // Use the month the user was browsing on the index; fall back to article's own month
+    var ctxYM   = sessionStorage.getItem('last_browse_month') || artYM;
     function shift(ym, d) {
       var p = ym.split('-').map(Number);
       var dt = new Date(p[0], p[1] - 1 + d, 1);
@@ -155,7 +159,7 @@ response = client.messages.create(
     }
     function fmt(ym) {
       var p = ym.split('-');
-      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'long'}) + " '" + p[0].slice(2);
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
     }
     var root    = '../../../';
     var btnPrev = document.getElementById('btn-prev');
@@ -163,12 +167,12 @@ response = client.messages.create(
     var lbl     = document.getElementById('month-label');
     var home    = document.getElementById('btn-home');
     var search  = document.getElementById('btn-search-tab');
-    lbl.textContent  = fmt(artYM);
-    btnPrev.disabled = artYM <= OLDEST;
-    btnNext.disabled = artYM >= todayYM;
-    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(artYM,-1); });
-    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(artYM,+1); });
-    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+artYM; });
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
     home.href = root+'index.html?month='+todayYM;
     search.addEventListener('click',   function(){ location.href = root+'index.html?search=1'; });
   })();

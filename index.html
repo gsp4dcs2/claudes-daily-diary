@@ -43,7 +43,6 @@
   <!-- ── Nav ────────────────────────────────────────── -->
   <nav class="site-nav" aria-label="Site navigation">
     <div class="nav-inner">
-      <a href="index.html" id="btn-home" class="active">Home</a>
       <div class="month-nav" id="month-nav">
         <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
         <button class="month-label" id="month-label" title="Jump to current month">March &#8217;26</button>
@@ -52,6 +51,7 @@
       <input type="search" id="diary-search" class="nav-search-input"
              placeholder="search..." autocomplete="off"
              aria-label="Search diary entries">
+      <button id="btn-home" class="nav-count" title="Home">—</button>
     </div>
   </nav>
   </div><!-- /.site-top -->
@@ -1517,7 +1517,9 @@
 
     const params     = new URLSearchParams(window.location.search);
     const paramMonth = params.get('month');
-    let currentMonth = (paramMonth && /^\d{4}-\d{2}$/.test(paramMonth)) ? paramMonth : todayYM;
+    let currentMonth = (paramMonth && /^\d{4}-\d{2}$/.test(paramMonth))
+                       ? paramMonth
+                       : (sessionStorage.getItem('last_browse_month') || todayYM);
     let currentMode  = 'home';
 
     function renderMonth(ym) {
@@ -1531,7 +1533,7 @@
       noEntries.hidden = visible > 0;
       const label = fmtLabel(ym);
       monthLabelEl.textContent = label;
-
+      btnHome.textContent = visible;
       btnPrev.disabled = ym <= oldestMonth;
       btnNext.disabled = ym >= todayYM;
     }
@@ -1561,10 +1563,8 @@
       if (mode === 'search') {
         // Restore saved query (survives back-navigation to this page)
         const savedQuery = sessionStorage.getItem('search_query') || '';
-        if (savedQuery && !searchInput.value) {
-          searchInput.value = savedQuery;
-          searchInput.dispatchEvent(new Event('input'));
-        }
+        if (savedQuery && !searchInput.value) searchInput.value = savedQuery;
+        if (searchInput.value) runSearch(searchInput.value);
         searchInput.focus();
         // Restore previous scroll position in search view
         const saved = sessionStorage.getItem('scroll_search');
@@ -1572,10 +1572,16 @@
       }
     }
 
+    // Search lookup tables — must be declared before init calls runSearch via setMode
+    const catIcons  = { news: '🧭', practice: '✅', tips: '💡' };
+    const catLabels = { news: 'Daily News', practice: 'Best Practices', tips: "Tips 'n' Tricks" };
+
     // Init
     renderMonth(currentMonth);
     if (paramMonth) history.replaceState({ month: currentMonth }, '', '?month=' + currentMonth);
-    if (params.get('search') === '1' || sessionStorage.getItem('search_query')) setMode('search');
+    const paramSq = params.get('sq');
+    if (paramSq) { searchInput.value = paramSq; sessionStorage.setItem('search_query', paramSq); }
+    if (params.get('search') === '1' || paramSq) setMode('search');
 
     btnPrev.addEventListener('click', () => { if (!btnPrev.disabled) goMonth(shiftMonth(currentMonth, -1)); });
     btnNext.addEventListener('click', () => { if (!btnNext.disabled) goMonth(shiftMonth(currentMonth, +1)); });
@@ -1608,10 +1614,6 @@
       }
     });
 
-    // Search
-    const catIcons  = { news: '🧭', practice: '✅', tips: '💡' };
-    const catLabels = { news: 'Daily News', practice: 'Best Practices', tips: "Tips 'n' Tricks" };
-
     function escHtml(t) {
       return t.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     }
@@ -1622,16 +1624,8 @@
       return safe.replace(re, m => `<mark class="search-hl">${m}</mark>`);
     }
 
-    searchInput.addEventListener('input', function () {
-      const q    = this.value.trim().toLowerCase();
-      const rawQ = this.value.trim();
-      if (q && currentMode !== 'search') setMode('search');
-      if (!q && currentMode === 'search') {
-        sessionStorage.removeItem('search_query');
-        setMode('home');
-        return;
-      }
-      sessionStorage.setItem('search_query', rawQ);
+    function runSearch(rawQ) {
+      const q = rawQ.trim().toLowerCase();
       searchResults.innerHTML = '';
       if (!q) { noResults.hidden = true; return; }
       const hits = SEARCH_INDEX.filter(e => (e.title + ' ' + e.text).toLowerCase().includes(q));
@@ -1648,7 +1642,7 @@
         const clabel = catLabels[entry.cat] || 'Daily News';
         const li = document.createElement('li');
         li.innerHTML =
-          `<a href="${entry.url}">` +
+          `<a href="${entry.url}?sq=${encodeURIComponent(rawQ)}&from_month=${currentMonth}">` +
             `<img class="entry-thumb" src="${thumb}" alt="${entry.date} thumbnail">` +
             `<div class="entry-meta">` +
               `<span class="article-date">${entry.date}</span>` +
@@ -1661,6 +1655,23 @@
       });
       queryEcho.textContent = rawQ;
       noResults.hidden = hits.length > 0;
+      btnHome.textContent = hits.length;
+    }
+
+    searchInput.addEventListener('focus', function () {
+      if (this.value.trim() && currentMode !== 'search') setMode('search');
+    });
+
+    searchInput.addEventListener('input', function () {
+      const rawQ = this.value.trim();
+      if (rawQ && currentMode !== 'search') setMode('search');
+      if (!rawQ && currentMode === 'search') {
+        sessionStorage.removeItem('search_query');
+        setMode('home');
+        return;
+      }
+      sessionStorage.setItem('search_query', rawQ);
+      runSearch(rawQ);
     });
   })();
   </script>

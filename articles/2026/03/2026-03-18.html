@@ -39,7 +39,6 @@
   <!-- ── Nav ────────────────────────────────────────── -->
   <nav class="site-nav" aria-label="Site navigation">
     <div class="nav-inner">
-      <a href="../../../index.html" id="btn-home">Home</a>
       <div class="month-nav" id="month-nav">
         <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
         <button class="month-label" id="month-label">—</button>
@@ -48,6 +47,7 @@
       <input type="search" id="diary-search" class="nav-search-input"
              placeholder="search..." autocomplete="off"
              aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
     </div>
   </nav>
   </div><!-- /.site-top -->
@@ -338,7 +338,8 @@ print(f"Max output: {m.max_tokens:,} tokens")</code></pre>
     var today   = new Date();
     var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
     // Use the month the user was browsing on the index; fall back to article's own month
-    var ctxYM   = sessionStorage.getItem('last_browse_month') || artYM;
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
     function shift(ym, d) {
       var p = ym.split('-').map(Number);
       var dt = new Date(p[0], p[1] - 1 + d, 1);
@@ -354,8 +355,8 @@ print(f"Max output: {m.max_tokens:,} tokens")</code></pre>
     var lbl     = document.getElementById('month-label');
     var home    = document.getElementById('btn-home');
     var search  = document.getElementById('diary-search');
-    var savedQ  = sessionStorage.getItem('search_query');
-    if (savedQ) search.value = savedQ;
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
     lbl.textContent  = fmt(ctxYM);
     btnPrev.disabled = ctxYM <= OLDEST;
     btnNext.disabled = ctxYM >= todayYM;
@@ -363,7 +364,7 @@ print(f"Max output: {m.max_tokens:,} tokens")</code></pre>
     btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
     lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
     home.href = root+'index.html?month='+todayYM;
-    search.addEventListener('focus',   function(){ location.href = root+'index.html?search=1'; });
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
   })();
   </script>
 </body>

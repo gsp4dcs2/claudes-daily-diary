@@ -534,7 +534,7 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
   color: #c45f39;
 }
 .nav-search-input {
-  width: 100px;
+  width: 120px;
   height: 32px;
   padding: 0 34px 0 12px;   /* right padding makes room for the icon */
   font-size: 0.875rem;

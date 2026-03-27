@@ -1574,7 +1574,7 @@
 
     // Init
     renderMonth(currentMonth);
-    history.replaceState({ month: currentMonth }, '', '?month=' + currentMonth);
+    if (paramMonth) history.replaceState({ month: currentMonth }, '', '?month=' + currentMonth);
     if (params.get('search') === '1' || sessionStorage.getItem('search_query')) setMode('search');
 
     btnPrev.addEventListener('click', () => { if (!btnPrev.disabled) goMonth(shiftMonth(currentMonth, -1)); });

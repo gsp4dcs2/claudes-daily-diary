@@ -114,6 +114,8 @@ existing article, updating:
 - `<title>` → `{yyyy-mm-dd} – {Title} | Claude's Daily Diary`
 - `<meta name="description">` accordingly
 - `<span class="date-badge">` → the entry date
+- category badge immediately after the date-badge (see category table in CLAUDE.md)
+  e.g. `<span class="cat-badge cat-news">🧭 Daily News</span>` — most retrospective days are `news`
 - `<h1>` in `.article-header` → a title summarising the day's topics
 
 All root-relative links must use `../../../`:
@@ -192,6 +194,7 @@ existing entries, maintaining oldest-last order. Insert above the
   <a href="articles/{yyyy}/{mm}/{yyyy-mm-dd}.html">
     <img class="entry-thumb" src="articles/{yyyy}/{mm}/{yyyy-mm-dd}-thumb.png" alt="{yyyy-mm-dd} thumbnail">
     <span class="article-date">{yyyy-mm-dd}</span>
+    <span class="cat-icon" title="{Label}">{icon}</span>
     <span class="article-title">{Short title}</span>
     <span class="article-arrow" aria-hidden="true">→</span>
   </a>
@@ -208,12 +211,13 @@ after all existing entries. Strip HTML tags from the entry bodies for the `text`
 
 ```js
     {
-      date: "{yyyy-mm-dd}",
+      date: "{yyyy-mm-dd}", cat: "{key}",
       title: "{page h1 title}",
       url: "articles/{yyyy}/{mm}/{yyyy-mm-dd}.html",
       text: "{stripped plain text of all entry bodies, space-separated}"
     },
 ```
+Where `{key}` is `"news"`, `"practice"`, or `"tips"` (matches the category badge).
 
 When writing multiple dates in one run, insert them in **newest-first order** at the
 end of the array (so 03-09 appears before 03-08 before 03-07 at the tail).

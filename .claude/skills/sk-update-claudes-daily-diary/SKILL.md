@@ -89,7 +89,21 @@ automatically). Copy the structure of the most recent existing file, updating:
 - `<title>` to `{yyyy-mm-dd} – {Title} | Claude's Daily Diary`
 - `<meta name="description">` accordingly
 - `<span class="date-badge">` to the missing date
+- category badge (see below) immediately after the date-badge
 - `<h1>` in `.article-header` to a title summarising the day's topics
+
+**Category badge** — choose the one that best fits the day's primary content:
+
+| Category | Key | Icon | Use when… |
+|----------|-----|------|-----------|
+| Daily News | `news` | 🧭 | Launches, partnerships, funding, platform announcements |
+| Best Practices | `practice` | ✅ | Guides, architecture, governance, responsible-use frameworks |
+| Tips 'n' Tricks | `tips` | 💡 | Specific techniques, shortcuts, developer productivity |
+
+```html
+<span class="cat-badge cat-{key}">{icon} {Label}</span>
+```
+e.g. `<span class="cat-badge cat-news">🧭 Daily News</span>`
 
 All root-relative links inside the new file must use `../../../`:
 - `href="../../../favicon.svg"`, `href="../../../styles.css"`, `href="../../../index.html"`
@@ -196,12 +210,13 @@ object to the `const SEARCH_INDEX = [...]` array in the `<script>` block near th
 
 ```js
     {
-      date: "{yyyy-mm-dd}",
+      date: "{yyyy-mm-dd}", cat: "{key}",
       title: "{page h1 title}",
       url: "articles/{yyyy}/{mm}/{yyyy-mm-dd}.html",
       text: "{stripped plain text of all entry bodies, space-separated}"
     },
 ```
+Where `{key}` is `"news"`, `"practice"`, or `"tips"` (matches the category badge chosen in Step 3b).
 
 ### 3f — Add to index.html article list
 
@@ -214,6 +229,7 @@ more recent (i.e. maintain newest-first order):
   <a href="articles/{yyyy}/{mm}/{yyyy-mm-dd}.html">
     <img class="entry-thumb" src="articles/{yyyy}/{mm}/{yyyy-mm-dd}-thumb.png" alt="{yyyy-mm-dd} thumbnail">
     <span class="article-date">{yyyy-mm-dd}</span>
+    <span class="cat-icon" title="{Label}">{icon}</span>
     <span class="article-title">{Short title}</span>
     <span class="article-arrow" aria-hidden="true">→</span>
   </a>

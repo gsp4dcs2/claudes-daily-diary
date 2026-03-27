@@ -55,16 +55,46 @@ No build step, no dependencies — pure HTML/CSS/JS, open directly in a browser 
 </article>
 ```
 
-### Index list item structure (includes thumbnail)
+### Categories
+
+Every day has a primary category. Use the one that best describes the day's dominant content.
+
+| Category | Key | Icon | Use when… |
+|----------|-----|------|-----------|
+| Daily News | `news` | 🧭 | Event-driven: launches, partnerships, funding, product announcements |
+| Best Practices | `practice` | ✅ | Guides, architecture patterns, governance, responsible-use frameworks |
+| Tips 'n' Tricks | `tips` | 💡 | Specific techniques, shortcuts, prompting tips, developer productivity |
+
+When adding a new day, choose the category that matches the day's primary entry. Most days with
+real-world news are `news`. Reserve `practice` for conceptual/architectural depth and `tips` for
+immediately actionable techniques.
+
+### Article header structure (includes category badge)
+```html
+<header class="article-header">
+  <span class="date-badge">{yyyy-mm-dd}</span>
+  <span class="cat-badge cat-{key}">{icon} {Label}</span>
+  <h1>{Title}</h1>
+</header>
+```
+Where `{key}` / `{icon}` / `{Label}` come from the table above.
+
+### Index list item structure (includes thumbnail + category icon)
 ```html
 <li>
   <a href="articles/{yyyy}/{mm}/{yyyy-mm-dd}.html">
     <img class="entry-thumb" src="articles/{yyyy}/{mm}/{yyyy-mm-dd}-thumb.png" alt="{date} thumbnail">
     <span class="article-date">{yyyy-mm-dd}</span>
+    <span class="cat-icon" title="{Label}">{icon}</span>
     <span class="article-title">{Title}</span>
     <span class="article-arrow" aria-hidden="true">→</span>
   </a>
 </li>
+```
+
+### SEARCH_INDEX entry (includes `cat` field)
+```js
+{ date: "{yyyy-mm-dd}", cat: "{key}", title: "…", url: "…", text: "…" }
 ```
 
 ### CSS classes to use
@@ -75,6 +105,8 @@ No build step, no dependencies — pure HTML/CSS/JS, open directly in a browser 
 - `.tag` / `.tag-list` — topic chips
 - `pre > code` — code blocks (dark theme)
 - `.date-badge` — date pill on article pages
+- `.cat-badge .cat-news` / `.cat-practice` / `.cat-tips` — category badge on article pages
+- `.cat-icon` — emoji icon in index list (use `title` attr for accessibility)
 - `.article-date` — date in index list
 - `.search-box` — wrapper for the search input on index
 - `.search-snippet` — body-text excerpt shown below matched list items

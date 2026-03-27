@@ -222,6 +222,13 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
   color: var(--primary);
 }
 
+/* Category icon in index list */
+.cat-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
 /* ── Article page ────────────────────────────────────────── */
 .article-header {
   margin-bottom: 40px;
@@ -248,6 +255,22 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
   line-height: 1.2;
   color: var(--text);
 }
+
+/* Category badge on article pages */
+.cat-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 11px;
+  border-radius: 20px;
+  margin-left: 8px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+.cat-news     { background: #EAF2FF; color: #2563EB; }
+.cat-practice { background: #EDFAF1; color: #16A34A; }
+.cat-tips     { background: #FFFBEB; color: #D97706; }
 
 /* ── Article entry cards ────────────────────────────────── */
 .entry {

@@ -1443,74 +1443,27 @@
     }
   ];
 
-  /* ── List controls: show-more + search ──────────────────── */
+  /* ── Search ──────────────────────────────────────────────── */
   (function () {
-    const RECENT  = 7;
-    const input   = document.getElementById('diary-search');
-    const list    = document.querySelector('.article-list');
-    const noRes   = document.getElementById('search-no-results');
-    const echo    = document.getElementById('search-query-echo');
+    const input = document.getElementById('diary-search');
+    const list  = document.querySelector('.article-list');
+    const noRes = document.getElementById('search-no-results');
+    const echo  = document.getElementById('search-query-echo');
 
-    // All real entry <li>s (excludes month-dividers added later)
-    const allItems = Array.from(list.querySelectorAll('li'));
-    const hideable = allItems.slice(RECENT);
-    let   expanded = false;
-    let   footer   = null;
-
-    // ── Show-more setup ──────────────────────────────────────
-    if (hideable.length > 0) {
-      hideable.forEach(li => li.classList.add('list-hidden'));
-
-      footer = document.createElement('div');
-      footer.className = 'article-list-footer';
-      footer.innerHTML =
-        `<button class="btn-show-more" id="btn-show-more">` +
-        `Show all entries <span class="more-count">(${hideable.length} older)</span>` +
-        `</button>`;
-      list.after(footer);
-
-      document.getElementById('btn-show-more').addEventListener('click', function () {
-        expanded = !expanded;
-        if (expanded) {
-          insertMonthDividers();
-          hideable.forEach(li => li.classList.remove('list-hidden'));
-          this.textContent = 'Show recent only';
-        } else {
-          removeMonthDividers();
-          hideable.forEach(li => li.classList.add('list-hidden'));
-          this.innerHTML =
-            `Show all entries <span class="more-count">(${hideable.length} older)</span>`;
-        }
-      });
-    }
-
-    // ── Search ───────────────────────────────────────────────
     input.addEventListener('input', function () {
       const q = this.value.trim().toLowerCase();
 
-      // Clear previous snippets and reset hidden state
-      list.querySelectorAll('.article-list li').forEach(li => {
+      // Clear previous snippets and reset visibility
+      list.querySelectorAll('li').forEach(li => {
         const s = li.querySelector('.search-snippet');
         if (s) s.remove();
         li.hidden = false;
       });
 
-      if (!q) {
-        // Restore show-more state
-        if (!expanded) hideable.forEach(li => li.classList.add('list-hidden'));
-        if (footer) footer.style.display = '';
-        noRes.hidden = true;
-        return;
-      }
-
-      // Search active — expose all items (override show-more) and hide footer
-      hideable.forEach(li => li.classList.remove('list-hidden'));
-      if (footer) footer.style.display = 'none';
+      if (!q) { noRes.hidden = true; return; }
 
       let matched = 0;
-      list.querySelectorAll('.article-list li').forEach(li => {
-        // Skip month-dividers
-        if (li.classList.contains('month-divider')) { li.hidden = true; return; }
+      list.querySelectorAll('li').forEach(li => {
         const href  = li.querySelector('a')?.getAttribute('href');
         const entry = SEARCH_INDEX.find(e => e.url === href);
         const hay   = entry ? (entry.title + ' ' + entry.text).toLowerCase() : '';
@@ -1536,31 +1489,6 @@
       echo.textContent = this.value.trim();
       noRes.hidden = matched > 0;
     });
-
-    // ── Month dividers ────────────────────────────────────────
-    function insertMonthDividers() {
-      let lastKey = null;
-      allItems.forEach(li => {
-        const dateEl = li.querySelector('.article-date');
-        if (!dateEl) return;
-        const parts = dateEl.textContent.trim().split('-');
-        const key   = parts[0] + '-' + parts[1];
-        if (key !== lastKey) {
-          lastKey = key;
-          const label = new Date(parts[0] + '-' + parts[1] + '-01T12:00:00')
-            .toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
-          const div = document.createElement('li');
-          div.className = 'month-divider';
-          div.setAttribute('aria-hidden', 'true');
-          div.textContent = label;
-          list.insertBefore(div, li);
-        }
-      });
-    }
-
-    function removeMonthDividers() {
-      list.querySelectorAll('.month-divider').forEach(d => d.remove());
-    }
   })();
   </script>
 

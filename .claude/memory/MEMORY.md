@@ -11,3 +11,4 @@
 | [feedback_commit_push.md](feedback_commit_push.md) | feedback | Always commit + push together — never stop at commit alone |
 | [backfill_jan2026.md](backfill_jan2026.md) | project | January 2026 backfill quality map — which articles have verified real events vs. invented content |
 | [feedback_nav_behaviour.md](feedback_nav_behaviour.md) | feedback | Golden rule for nav-bar state, search persistence rules, month label source priority, and confirmed acceptable UX trade-offs |
+| [feedback_svg_inkscape_cleanup.md](feedback_svg_inkscape_cleanup.md) | feedback | Always strip Inkscape metadata bloat from any SVG the user sends before using or committing |

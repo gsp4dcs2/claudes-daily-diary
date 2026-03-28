@@ -2905,6 +2905,63 @@ def img_calder_20260129():
     return base
 
 
+def img_kandinsky_20260328():
+    """Wassily Kandinsky — subscriber growth / partner network theme."""
+    base = Image.new("RGB", (W, H), (18, 34, 72))
+    # 1. Diagonal grid (Kandinsky signature)
+    grid28b = layer(); gd28b = ImageDraw.Draw(grid28b)
+    for off in range(-H, W + H, 58):
+        gd28b.line([(off, 0), (off + H, H)], fill=(255, 255, 255, 18), width=1)
+        gd28b.line([(off, 0), (off - H, H)], fill=(255, 255, 255, 18), width=1)
+    base = comp(base, grid28b)
+    # 2. Concentric growth rings (subscriber expansion)
+    rings28 = layer(); rd28 = ImageDraw.Draw(rings28)
+    cx28, cy28 = 820, 210
+    for i, (r28, alpha28) in enumerate([(260, 180), (200, 140), (148, 110), (98, 80), (52, 60)]):
+        col28 = [(255, 210, 0), (255, 160, 30), (255, 100, 40), (220, 60, 20), (180, 30, 10)][i]
+        rd28.arc([(cx28 - r28, cy28 - r28), (cx28 + r28, cy28 + r28)],
+                 0, 360, fill=(*col28, alpha28), width=4)
+    base = comp(base, rings28)
+    # 3. Large bold circle (main growth symbol)
+    c28 = layer(); ImageDraw.Draw(c28).ellipse([(580, 30), (1080, 420)],
+        fill=(255, 205, 0, 48), outline=(255, 205, 0, 210), width=7)
+    base = comp(base, c28)
+    # 4. Red upward triangle (growth arrow / momentum)
+    t28 = layer(); ImageDraw.Draw(t28).polygon(
+        [(160, 520), (420, 520), (290, 175)],
+        fill=(215, 28, 48, 215), outline=(0, 0, 0, 255))
+    base = comp(base, t28)
+    # 5. Network nodes + connector lines (partner network)
+    net28 = layer(); nd28 = ImageDraw.Draw(net28)
+    nodes28 = [(110, 155), (310, 80), (510, 190), (680, 95), (460, 360), (250, 430)]
+    for i28, (nx28, ny28) in enumerate(nodes28):
+        for j28 in range(i28 + 1, len(nodes28)):
+            if abs(i28 - j28) <= 2:
+                nd28.line([(nx28, ny28), nodes28[j28]], fill=(0, 220, 255, 80), width=2)
+    for nx28, ny28 in nodes28:
+        nd28.ellipse([(nx28 - 10, ny28 - 10), (nx28 + 10, ny28 + 10)],
+                     fill=(0, 220, 255, 200), outline=(255, 255, 255, 180), width=2)
+    base = comp(base, net28)
+    # 6. Blue pie slice (Kandinsky structural element)
+    p28 = layer(); ImageDraw.Draw(p28).pieslice(
+        [(820, 310), (1160, 595)], start=195, end=345,
+        fill=(30, 90, 215, 185), outline=(0, 0, 0, 220), width=4)
+    base = comp(base, p28)
+    # 7. Scatter primaries (Kandinsky scatter dots)
+    sc28 = layer(); scd28 = ImageDraw.Draw(sc28)
+    positions28 = [(155, 330), (325, 415), (495, 150), (705, 65), (860, 510),
+                   (960, 195), (1055, 85), (1110, 460), (65, 490), (430, 310)]
+    colors28 = [(255, 215, 0), (220, 30, 50), (255, 255, 255), (0, 240, 255),
+                (255, 120, 20), (150, 50, 200), (50, 220, 50), (255, 215, 0),
+                (0, 240, 255), (220, 30, 50)]
+    for (px28, py28), pc28 in zip(positions28, colors28):
+        r28s = rng.randint(8, 18)
+        scd28.ellipse([(px28 - r28s, py28 - r28s), (px28 + r28s, py28 + r28s)],
+                      fill=(*pc28, 210), outline=(0, 0, 0, 180), width=2)
+    base = comp(base, sc28)
+    return base
+
+
 def img_seurat_20260130():
     """Georges Seurat — January performance report / caching analytics."""
     base = Image.new("RGB", (W, H), (14, 20, 50))
@@ -3027,6 +3084,7 @@ DAYS = [
     ("2026-03-25", img_franz_marc_20260325, "Voices",        "Franz Marc"),
     ("2026-03-26", img_klee_20260326,       "Global Network", "Paul Klee"),
     ("2026-03-27", img_rothko_20260327,     "Mythos",         "Mark Rothko"),
+    ("2026-03-28", img_kandinsky_20260328, "Growth Network",  "Wassily Kandinsky"),
 ]
 
 for date, fn, kw, artist in DAYS:

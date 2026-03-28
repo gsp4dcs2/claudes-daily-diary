@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Writing effective CLAUDE.md files and project-level memory patterns — how to make Claude context-aware for your specific codebase — December 20, 2025.">
+  <title>2025-12-20 – Writing Effective CLAUDE.md Files | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input" placeholder="search..." autocomplete="off" aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2025-12-20</span>
+      <span class="cat-badge cat-practice">✅ Best Practices</span>
+      <h1>Writing Effective CLAUDE.md Files — Project Memory That Works</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2025-12-20.png" alt="Writing Effective CLAUDE.md Files — Project Memory That Works — visual for 2025-12-20">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — What Goes in a CLAUDE.md
+     Source: https://docs.anthropic.com/en/docs/claude-code/memory
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✅</span> CLAUDE.md — The Single Most Valuable File in Your Repository</h2>
+
+  <p>A <strong>CLAUDE.md</strong> file, placed in the root of a repository, is automatically loaded by Claude Code at the start of every session in that project. Think of it as the system prompt you write once for your entire codebase — it tells Claude who you are, what your tech stack is, what conventions matter, and how to behave in this specific project context. Teams that invest 30 minutes in writing a thoughtful CLAUDE.md get dramatically more consistent, on-target assistance from Claude Code than those relying on per-session prompting. The return on investment compounds with every developer who works in the repo.</p>
+
+  <h3>What to include</h3>
+  <ul>
+    <li><strong>Architecture overview:</strong> A concise description of the system — what each major directory contains, what the primary entry points are, and how the components relate. Claude doesn't read your entire codebase on every turn; this overview is what bridges that gap.</li>
+    <li><strong>Tech stack and versions:</strong> Framework, language, test runner, ORM, CI system. Prevents Claude from suggesting idioms from incompatible libraries or older API versions.</li>
+    <li><strong>Conventions that matter:</strong> Naming patterns, where config lives, how errors are structured, what "done" means for a PR. Be specific — "use conventional commits" is more useful than "write good commit messages."</li>
+    <li><strong>What to avoid:</strong> Explicitly list anti-patterns, deprecated patterns still in the codebase, or patterns that look reasonable but conflict with your team's decisions.</li>
+    <li><strong>Commands to know:</strong> The test command, lint command, build command, and any project-specific scripts Claude should use rather than inventing from scratch.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Keep it concise</strong>
+    <p>CLAUDE.md is loaded on every session, so token cost matters. Aim for under 500 words. If your project is complex, use sub-directories: place a CLAUDE.md in <code>/frontend</code> and another in <code>/backend</code> — Claude loads the nearest one(s) relevant to the files it's working with.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">CLAUDE.md</span>
+    <span class="tag">project memory</span>
+    <span class="tag">Claude Code</span>
+    <span class="tag">best practices</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Memory Patterns for Multi-Session Projects
+     Source: https://docs.anthropic.com/en/docs/claude-code/memory
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✅</span> Project Memory Patterns — Keeping Claude Context-Aware Across Sessions</h2>
+
+  <p>CLAUDE.md handles static project context, but real projects have <em>evolving</em> context — decisions made last week, a refactor currently in progress, a bug that's been reproduced but not fixed yet. The challenge is surfacing that dynamic context to Claude without manually re-explaining it at the start of every session. Here are the patterns that work.</p>
+
+  <h3>Three effective patterns</h3>
+  <ul>
+    <li><strong>A running decisions log:</strong> Keep a <code>DECISIONS.md</code> in the project root documenting architectural choices and the reasons behind them. Reference it in CLAUDE.md (<em>"Read DECISIONS.md before suggesting architectural changes"</em>). Claude will load it when relevant, and the decisions stay discoverable for human reviewers too.</li>
+    <li><strong>In-progress context file:</strong> When starting a multi-session task, create a <code>.claude/current-task.md</code> describing what's being built, what's done, what's next, and any gotchas discovered so far. Open Claude Code and say "read .claude/current-task.md before we continue." At end of session, update the file.</li>
+    <li><strong>Annotated TODO comments:</strong> Rather than a separate file, annotate complex in-progress code with structured TODO comments: <code>// TODO(claude): This function currently ignores error case X — see issue #142</code>. Claude reads the code and picks up the annotation naturally when working in that area.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>What not to put in CLAUDE.md</strong>
+    <p>Don't put secrets, API keys, or personal information in CLAUDE.md — it's checked into version control. Don't include large blocks of code; reference the files instead. And don't update it too frequently — it's a stable contract, not a sprint task list.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">project memory</span>
+    <span class="tag">CLAUDE.md</span>
+    <span class="tag">multi-session</span>
+    <span class="tag">best practices</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude.</p>
+  </footer>
+  <script>
+  (function () {
+    var OLDEST = '2025-12';
+    var badge = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM = badge.textContent.trim().slice(0, 7);
+    var today = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) { var p = ym.split('-').map(Number); var dt = new Date(p[0], p[1]-1+d, 1); return dt.getFullYear() + '-' + String(dt.getMonth()+1).padStart(2,'0'); }
+    function fmt(ym) { var p = ym.split('-'); return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2); }
+    var root = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl = document.getElementById('month-label');
+    var home = document.getElementById('btn-home');
+    var search = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click', function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click', function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click', function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus', function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

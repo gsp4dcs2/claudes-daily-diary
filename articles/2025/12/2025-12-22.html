@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Building evaluation pipelines for Claude in production: how to write evals, measure output quality, and catch regressions before they reach users — December 22, 2025.">
+  <title>2025-12-22 – Building Evaluation Pipelines for Claude | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input" placeholder="search..." autocomplete="off" aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2025-12-22</span>
+      <span class="cat-badge cat-practice">✅ Best Practices</span>
+      <h1>Building Evaluation Pipelines for Claude in Production</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2025-12-22.png" alt="Building Evaluation Pipelines for Claude in Production — visual for 2025-12-22">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Why Evals Matter
+     Source: https://www.anthropic.com/research/evaluations
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✅</span> Why Every Claude Application Needs an Evaluation Suite</h2>
+
+  <p>Deploying a Claude application without an evaluation suite is the equivalent of shipping software without tests — it works until it doesn't, and when it breaks you have no systematic way to know why or how to verify the fix. The good news: evals for LLM applications are simpler to build than most developers expect, and even a modest suite of 50–100 test cases will catch the majority of prompt regressions before they reach users. The investment pays back immediately the first time you change a model or update a system prompt and need to verify nothing broke.</p>
+
+  <h3>The evaluation pyramid</h3>
+  <ul>
+    <li><strong>Deterministic checks (base layer):</strong> Tests where the expected output is exact or pattern-matchable — JSON structure validation, required field presence, output format compliance. These run in milliseconds and catch the most obvious failures. Start here.</li>
+    <li><strong>Heuristic checks (middle layer):</strong> Tests with approximate correctness criteria — "the summary must be under 150 words," "the response must mention at least three of these five key facts," "the response must not contain the word 'cannot' in the first paragraph." Use regex, length checks, and keyword presence.</li>
+    <li><strong>LLM-as-judge (top layer):</strong> For tasks where correctness is subjective, use a second Claude call as the evaluator. Pass the original prompt, the response, and an evaluation rubric. This is expensive but handles nuanced quality dimensions that deterministic checks miss.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Build your eval set from production</strong>
+    <p>The most valuable eval cases come from real production interactions — specifically, the edge cases that surprised you and the failures that reached users. Keep a running log of these and convert each one into an eval case. A production-sourced eval set is far more predictive than a synthetically generated one.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">evaluations</span>
+    <span class="tag">testing</span>
+    <span class="tag">production reliability</span>
+    <span class="tag">best practices</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Running Evals in CI
+     Source: https://www.anthropic.com/research/evaluations
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✅</span> Running Claude Evals in CI — A Practical Setup</h2>
+
+  <p>Once you have an evaluation suite, the next step is running it automatically on every pull request that touches a prompt, tool definition, or system configuration. This makes prompt changes as safe as code changes — reviewers can see eval results in the PR before merging. Here's a practical CI setup that works without custom tooling.</p>
+
+  <h3>A minimal CI eval workflow</h3>
+  <ul>
+    <li><strong>Store test cases in JSON:</strong> Each case is <code>{"input": "...", "expected": "...", "check": "contains|json|llm"}</code>. Version-control the test cases alongside the prompts they test.</li>
+    <li><strong>Run evals against the Batch API:</strong> Submit all test cases as a single batch job (at 50% cost) in the CI step. Poll for completion, then download and score results.</li>
+    <li><strong>Gate on pass rate, not perfection:</strong> Set a threshold (e.g. 95%) below which the CI check fails. Some test cases may be legitimately ambiguous — requiring 100% pass rate creates false negatives on valid improvements.</li>
+    <li><strong>Compare model versions:</strong> When upgrading from one model to another (e.g. Haiku to Sonnet), run the eval suite against both. The comparison table — rather than just the absolute score — tells you whether the upgrade is safe.</li>
+  </ul>
+
+  <div class="tag-list">
+    <span class="tag">CI/CD</span>
+    <span class="tag">evaluations</span>
+    <span class="tag">batch API</span>
+    <span class="tag">quality gates</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude.</p>
+  </footer>
+  <script>
+  (function () {
+    var OLDEST = '2025-12';
+    var badge = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM = badge.textContent.trim().slice(0, 7);
+    var today = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) { var p = ym.split('-').map(Number); var dt = new Date(p[0], p[1]-1+d, 1); return dt.getFullYear() + '-' + String(dt.getMonth()+1).padStart(2,'0'); }
+    function fmt(ym) { var p = ym.split('-'); return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2); }
+    var root = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl = document.getElementById('month-label');
+    var home = document.getElementById('btn-home');
+    var search = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click', function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click', function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click', function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus', function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

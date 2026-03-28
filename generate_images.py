@@ -3235,9 +3235,245 @@ def img_kandinsky_20251231():
     return base
 
 
+def img_miro_20251218():
+    """Joan Miró — Agent Skills enterprise / open standard / marketplace."""
+    base = Image.new("RGB", (W, H), (28, 24, 68))
+    # 1. Deep-indigo background wash
+    wash = layer(); ImageDraw.Draw(wash).rectangle([(0,0),(W,H)], fill=(28,24,68,255)); base = comp(base, wash)
+    # 2. Bold biomorphic blobs (agent skill shapes)
+    blobs = [
+        ([(180,120),(380,120),(440,220),(380,340),(180,340),(120,220)], (212,38,38,210)),
+        ([(680,80),(820,80),(880,180),(820,300),(680,300),(620,180)], (38,130,212,200)),
+        ([(900,280),(1060,280),(1120,390),(1060,510),(900,510),(840,390)], (212,192,0,200)),
+        ([(300,380),(460,380),(520,470),(460,570),(300,570),(240,470)], (38,192,88,190)),
+        ([(100,400),(220,400),(260,490),(220,570),(100,570),(60,490)], (192,38,192,180)),
+    ]
+    for pts18, col18 in blobs:
+        bl = layer(); ImageDraw.Draw(bl).polygon(pts18, fill=col18, outline=(0,0,0,200)); base = comp(base, bl)
+    # 3. Black outlines / connecting lines (network of skills)
+    nl = layer(); nd = ImageDraw.Draw(nl)
+    nd.line([(280,230),(680,180)], fill=(0,0,0,200), width=3)
+    nd.line([(820,190),(900,390)], fill=(0,0,0,180), width=3)
+    nd.line([(380,460),(460,470)], fill=(0,0,0,160), width=2)
+    base = comp(base, nl)
+    # 4. Stars (Miró signature stars)
+    sl18 = layer(); sd18 = ImageDraw.Draw(sl18)
+    for sx18, sy18, sr18 in [(550,150,12),(750,500,10),(200,300,8),(1050,180,10),(440,80,8)]:
+        for a18 in range(0,360,72):
+            r18 = math.radians(a18)
+            x18 = sx18+int(sr18*math.cos(r18)); y18 = sy18+int(sr18*math.sin(r18))
+            sd18.line([(sx18,sy18),(x18,y18)], fill=(255,240,80,220), width=2)
+        sd18.ellipse([(sx18-4,sy18-4),(sx18+4,sy18+4)], fill=(255,240,80,230))
+    base = comp(base, sl18)
+    # 5. White dot nodes
+    dn18 = layer(); dnd18 = ImageDraw.Draw(dn18)
+    for dx18, dy18 in [(280,230),(680,180),(820,190),(900,390),(380,460),(460,470),(160,490)]:
+        dnd18.ellipse([(dx18-9,dy18-9),(dx18+9,dy18+9)], fill=(255,255,255,210), outline=(0,0,0,180), width=2)
+    base = comp(base, dn18)
+    return base
+
+
+def img_delaunay_20251219():
+    """Robert Delaunay — Claude in Chrome / cross-device / signals."""
+    base = Image.new("RGB", (W, H), (16, 14, 28))
+    # 1. Large overlapping spectral disc rings
+    discs19 = [
+        (380, 290, 260, [(255,0,0),(255,120,0),(255,220,0),(0,200,80),(0,150,255),(120,0,255)]),
+        (780, 200, 210, [(255,80,0),(255,200,0),(80,220,0),(0,180,200),(60,0,240),(200,0,180)]),
+        (1000, 420, 190, [(220,0,0),(255,160,0),(200,240,0),(0,240,120),(0,100,255),(140,0,220)]),
+    ]
+    for dcx19, dcy19, dr19, colors19 in discs19:
+        for i19, col19 in enumerate(colors19):
+            r19 = dr19 - i19 * (dr19 // len(colors19))
+            if r19 > 0:
+                dl = layer(); ImageDraw.Draw(dl).ellipse([(dcx19-r19,dcy19-r19),(dcx19+r19,dcy19+r19)],
+                    fill=(*col19, 90), outline=(*col19,140), width=2)
+                base = comp(base, dl)
+    # 2. Bright centre dots
+    for dcx19, dcy19, _ in [(380,290,0),(780,200,0),(1000,420,0)]:
+        cl = layer(); ImageDraw.Draw(cl).ellipse([(dcx19-18,dcy19-18),(dcx19+18,dcy19+18)], fill=(255,255,255,220))
+        base = comp(base, cl)
+    # 3. Radiating signal arcs
+    rl = layer(); rd19 = ImageDraw.Draw(rl)
+    for rad19 in [60, 110, 170, 230]:
+        rd19.arc([(180-rad19,290-rad19),(180+rad19,290+rad19)], 270, 450, fill=(255,255,255,30), width=2)
+    base = comp(base, rl)
+    # 4. Dark separator bands
+    bl19 = layer(); bd19 = ImageDraw.Draw(bl19)
+    for y19 in [H//3, 2*H//3]:
+        bd19.line([(0,y19),(W,y19)], fill=(0,0,0,60), width=1)
+    base = comp(base, bl19)
+    return base
+
+
+def img_calder_20251220():
+    """Alexander Calder mobile — CLAUDE.md / adaptive context / flexible memory."""
+    base = Image.new("RGB", (W, H), (242, 238, 230))
+    # 1. Mobile arm structure
+    arms20 = layer(); ad20 = ImageDraw.Draw(arms20)
+    ad20.line([(120,60),(1080,60)], fill=(16,16,16,255), width=5)
+    ad20.line([(600,60),(600,210)], fill=(16,16,16,255), width=4)
+    ad20.line([(120,60),(120,190)], fill=(16,16,16,255), width=4)
+    ad20.line([(1080,60),(1080,190)], fill=(16,16,16,255), width=4)
+    ad20.line([(260,310),(840,310)], fill=(16,16,16,255), width=3)
+    ad20.line([(260,310),(260,450)], fill=(16,16,16,255), width=3)
+    ad20.line([(840,310),(840,450)], fill=(16,16,16,255), width=3)
+    ad20.line([(160,190),(460,190)], fill=(16,16,16,255), width=3)
+    ad20.line([(310,190),(310,370)], fill=(16,16,16,255), width=2)
+    ad20.line([(460,190),(680,190)], fill=(16,16,16,255), width=2)
+    ad20.line([(570,190),(570,440)], fill=(16,16,16,255), width=2)
+    base = comp(base, arms20)
+    # 2. Primary coloured shapes
+    shapes20 = [
+        ((60,148,200,268),(212,38,38)),((540,45,700,205),(16,72,196)),
+        ((1018,148,1140,278),(212,192,0)),((228,385,368,525),(212,92,16)),
+        ((760,395,900,535),(36,152,72)),((270,320,390,430),(152,16,172)),
+        ((148,190,268,298),(0,156,198)),((380,185,498,305),(212,38,38)),
+        ((510,182,628,302),(212,192,0)),((736,370,856,490),(16,72,196)),
+    ]
+    for bounds20, col20 in shapes20:
+        el = layer(); ImageDraw.Draw(el).ellipse(bounds20, fill=(*col20,222)); base = comp(base, el)
+    return base
+
+
+def img_mondrian_20251221():
+    """Piet Mondrian — multimodal document grids / structured analysis."""
+    base = Image.new("RGB", (W, H), (245, 242, 230))
+    # 1. Yellow band
+    yb = layer(); ImageDraw.Draw(yb).rectangle([(0,0),(W,110)], fill=(255,210,0,240)); base = comp(base, yb)
+    # 2. Bold black grid lines
+    gl = layer(); gd21 = ImageDraw.Draw(gl)
+    for x21 in [0, 200, 440, 700, 920, W]:
+        gd21.line([(x21,0),(x21,H)], fill=(10,10,10,255), width=8)
+    for y21 in [0, 110, 260, 420, H]:
+        gd21.line([(0,y21),(W,y21)], fill=(10,10,10,255), width=8)
+    base = comp(base, gl)
+    # 3. Red and blue rectangles
+    rects21 = [
+        ((0,110,200,260),(195,30,30,230)),((440,260,700,420),(30,60,195,220)),
+        ((920,0,W,260),(195,30,30,210)),((0,420,440,H),(30,60,195,200)),
+        ((700,0,920,110),(30,60,195,190)),((200,420,440,H),(195,160,0,180)),
+    ]
+    for r21, c21 in rects21:
+        rl = layer(); ImageDraw.Draw(rl).rectangle(r21, fill=c21); base = comp(base, rl)
+    # 4. Re-draw grid lines on top to keep clean
+    gl2 = layer(); gd21b = ImageDraw.Draw(gl2)
+    for x21 in [0, 200, 440, 700, 920, W]:
+        gd21b.line([(x21,0),(x21,H)], fill=(10,10,10,255), width=8)
+    for y21 in [0, 110, 260, 420, H]:
+        gd21b.line([(0,y21),(W,y21)], fill=(10,10,10,255), width=8)
+    base = comp(base, gl2)
+    return base
+
+
+def img_seurat_20251222():
+    """Georges Seurat pointillist — evaluation pipelines / data density / analytics."""
+    base = Image.new("RGB", (W, H), (14, 20, 44))
+    # 1. Dense pointillist dots building a quality-metric graph shape
+    dl22 = layer(); dd22 = ImageDraw.Draw(dl22)
+    for _ in range(6000):
+        dx22 = rng.randint(0, W); dy22 = rng.randint(0, H)
+        # Curve shape: quality line from lower-left to upper-right
+        cx22 = dx22 / W; cy22 = dy22 / H
+        on_curve = abs(cy22 - (1 - cx22 * 0.7)) < 0.25
+        bright22 = 0.8 if on_curve else max(0, 0.3 - abs(cy22 - 0.6) * 0.4)
+        r22 = int(20 + bright22 * 235); g22 = int(40 + bright22 * 180); b22 = int(100 + bright22 * 155)
+        hs22 = rng.randint(-20, 20); dr22 = rng.randint(2, 5)
+        dd22.ellipse([(dx22-dr22,dy22-dr22),(dx22+dr22,dy22+dr22)],
+                     fill=(min(255,r22+hs22),min(255,g22),min(255,b22),rng.randint(140,230)))
+    base = comp(base, dl22)
+    # 2. Bright data-point clusters (eval scores)
+    for cx22, cy22, cr22 in [(960,120,35),(760,200,28),(540,310,22),(320,440,18)]:
+        cl = layer(); ImageDraw.Draw(cl).ellipse([(cx22-cr22,cy22-cr22),(cx22+cr22,cy22+cr22)],
+                                                  fill=(255,220,60,200))
+        base = comp(base, cl)
+    # 3. Faint grid (eval axis)
+    gl22 = layer(); gd22b = ImageDraw.Draw(gl22)
+    for x22 in range(0, W, W//6):
+        gd22b.line([(x22,0),(x22,H)], fill=(255,255,255,18), width=1)
+    for y22 in range(0, H, H//5):
+        gd22b.line([(0,y22),(W,y22)], fill=(255,255,255,18), width=1)
+    base = comp(base, gl22)
+    return base
+
+
+def img_klimt_20251223():
+    """Gustav Klimt — copyright / ethics / AI craftsmanship and IP."""
+    base = Image.new("RGB", (W, H), (12, 8, 18))
+    # 1. Gold spiral background
+    gs23 = layer(); gsd23 = ImageDraw.Draw(gs23)
+    for _ in range(220):
+        gx23 = rng.randint(0, W); gy23 = rng.randint(0, H)
+        gr23 = rng.randint(6, 28)
+        gsd23.arc([(gx23-gr23,gy23-gr23),(gx23+gr23,gy23+gr23)],
+                  rng.randint(0,360), rng.randint(180,540),
+                  fill=(205,168,48,rng.randint(60,180)), width=rng.randint(1,3))
+    base = comp(base, gs23)
+    # 2. Mosaic tile scatter
+    ms23 = layer(); msd23 = ImageDraw.Draw(ms23)
+    for _ in range(360):
+        mx23 = rng.randint(0, W-16); my23 = rng.randint(0, H-16); sz23 = rng.randint(3, 14)
+        mc23 = [(205,168,48),(0,108,108),(142,48,20),(185,162,62),(68,28,105)][rng.randint(0,4)]
+        msd23.rectangle([(mx23,my23),(mx23+sz23,my23+sz23)], fill=(*mc23,rng.randint(100,200)))
+    base = comp(base, ms23)
+    # 3. Large teal/rust accent panels
+    pl23 = layer(); pd23 = ImageDraw.Draw(pl23)
+    pd23.rectangle([(0,0),(320,H)], fill=(0,88,100,88))
+    pd23.rectangle([(880,0),(W,H)], fill=(148,44,18,78))
+    base = comp(base, pl23)
+    # 4. Gold face oval / medallion
+    face23 = layer(); fd23 = ImageDraw.Draw(face23)
+    fd23.ellipse([(440,60),(760,420)], fill=(205,168,48,35), outline=(205,168,48,160), width=6)
+    for rc23 in [50,90,130,175]:
+        fd23.arc([(600-rc23,240-rc23),(600+rc23,240+rc23)], 0, 360, fill=(205,168,48,40), width=2)
+    base = comp(base, face23)
+    return base
+
+
+def img_malevich_20251224():
+    """Kazimir Malevich — Christmas Eve / prompt library / structure and safety."""
+    base = Image.new("RGB", (W, H), (242, 238, 224))
+    # 1. Large bold black tilted square (Suprematist anchor)
+    bs24 = layer()
+    angle24 = 18
+    cx24, cy24, s24 = W//2-50, H//2-30, 220
+    pts24 = []
+    for ax24, ay24 in [(-s24//2,-s24//2),(s24//2,-s24//2),(s24//2,s24//2),(-s24//2,s24//2)]:
+        r24 = math.radians(angle24)
+        pts24.append((cx24 + int(ax24*math.cos(r24)-ay24*math.sin(r24)),
+                      cy24 + int(ax24*math.sin(r24)+ay24*math.cos(r24))))
+    ImageDraw.Draw(bs24).polygon(pts24, fill=(18,18,18,235))
+    base = comp(base, bs24)
+    # 2. Red rectangle (diagonal)
+    rr24 = layer(); rrd24 = ImageDraw.Draw(rr24)
+    rr24_pts = [(80,80),(340,80),(440,260),(180,260)]
+    rrd24.polygon(rr24_pts, fill=(188,28,28,220))
+    base = comp(base, rr24)
+    # 3. Navy bar
+    nb24 = layer(); nbd24 = ImageDraw.Draw(nb24)
+    nb24_pts = [(820,60),(1100,60),(1140,220),(860,220)]
+    nbd24.polygon(nb24_pts, fill=(28,28,142,210))
+    base = comp(base, nb24)
+    # 4. Yellow accent
+    ya24 = layer(); yad24 = ImageDraw.Draw(ya24)
+    yad24.polygon([(140,500),(360,500),(400,580),(180,580)], fill=(220,188,0,200))
+    base = comp(base, ya24)
+    # 5. Small circle (Christmas star / prompt origin)
+    sc24 = layer(); ImageDraw.Draw(sc24).ellipse([(320,80),(400,160)], fill=(18,18,18,220))
+    base = comp(base, sc24)
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
+    ("2025-12-18", img_miro_20251218,       "Agent Skills",    "Joan Miró"),
+    ("2025-12-19", img_delaunay_20251219,   "Chrome Tips",     "Robert Delaunay"),
+    ("2025-12-20", img_calder_20251220,     "CLAUDE.md",       "Alexander Calder"),
+    ("2025-12-21", img_mondrian_20251221,   "Doc Analysis",    "Piet Mondrian"),
+    ("2025-12-22", img_seurat_20251222,     "Eval Pipelines",  "Georges Seurat"),
+    ("2025-12-23", img_klimt_20251223,      "Copyright",       "Gustav Klimt"),
+    ("2025-12-24", img_malevich_20251224,   "Prompt Library",  "Kazimir Malevich"),
     ("2025-12-25", img_franz_marc_20251225, "Science & Safety", "Franz Marc"),
     ("2025-12-26", img_klee_20251226,       "Model Migration",  "Paul Klee"),
     ("2025-12-27", img_moholy_20251227,     "Year-End Tips",    "László Moholy-Nagy"),

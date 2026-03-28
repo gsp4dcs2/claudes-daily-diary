@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 72 72"
+   version="1.1"
+   id="svg9"
+   sodipodi:docname="favicon_v2.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs9" />
+  <sodipodi:namedview
+     id="namedview9"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="5.6568543"
+     inkscape:cx="-16.086679"
+     inkscape:cy="34.383067"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg9" />
+  <!-- Background -->
+  <circle
+     cx="36"
+     cy="36"
+     r="36"
+     fill="#2D1B0E"
+     id="circle1" />
+  <!-- Logo mark -->
+  <g
+     transform="translate(36,36)"
+     id="g9">
+    <!-- Central dot -->
+    <circle
+       r="4"
+       fill="#F4A07D"
+       id="circle2" />
+    <!-- Cardinal rays -->
+    <rect
+       x="-1.685467"
+       y="-29.217123"
+       width="3.625"
+       height="18.625"
+       rx="1.8125"
+       fill="#e8734a"
+       opacity="0.9"
+       id="rect2" />
+    <rect
+       x="-2.125"
+       y="14.125"
+       width="4"
+       height="14"
+       rx="2"
+       fill="#e8734a"
+       opacity="0.9"
+       id="rect3" />
+    <rect
+       x="12"
+       y="-2"
+       width="14"
+       height="4"
+       rx="2"
+       fill="#E8734A"
+       opacity="0.9"
+       id="rect4" />
+    <rect
+       x="-27.625"
+       y="-1.875"
+       width="14"
+       height="4"
+       rx="2"
+       fill="#e8734a"
+       opacity="0.9"
+       id="rect5"
+       inkscape:transform-center-x="-1.75"
+       inkscape:transform-center-y="0.25" />
+    <!-- Diagonal rays -->
+    <rect
+       x="5.515625"
+       y="-21.515625"
+       width="4"
+       height="14"
+       rx="2"
+       fill="#f4a07d"
+       opacity="0.7"
+       transform="rotate(45,7.5,-20)"
+       id="rect6" />
+    <rect
+       x="-1.8561553"
+       y="13.700194"
+       width="4"
+       height="14"
+       rx="2"
+       fill="#f4a07d"
+       opacity="0.7"
+       transform="rotate(-45)"
+       id="rect7" />
+    <rect
+       x="6.9187951"
+       y="-20.815893"
+       width="4"
+       height="14"
+       rx="2"
+       fill="#f4a07d"
+       opacity="0.7"
+       transform="rotate(-45)"
+       id="rect8" />
+    <rect
+       x="-9.732233"
+       y="6.5303302"
+       width="4"
+       height="14"
+       rx="2"
+       fill="#f4a07d"
+       opacity="0.7"
+       transform="rotate(45,-11.5,6)"
+       id="rect9" />
+  </g>
+</svg>

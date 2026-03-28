@@ -3464,9 +3464,287 @@ def img_malevich_20251224():
     return base
 
 
+def img_leger_20251211():
+    """Fernand Léger industrial style — MCP infrastructure & Accenture partnership theme."""
+    rng2 = Random(42)
+    base = Image.new("RGB", (W, H), (14, 16, 22))
+    draw = ImageDraw.Draw(base)
+    # 1. Industrial pipe horizontals
+    for y in [120, 220, 360, 470, 560]:
+        col = rng2.choice([(220,60,40),(40,120,220),(30,190,80),(220,180,30)])
+        draw.rectangle([(0, y-16), (W, y+16)], fill=col)
+        draw.rectangle([(0, y-18), (W, y-14)], fill=(0,0,0))
+        draw.rectangle([(0, y+14), (W, y+18)], fill=(0,0,0))
+    # 2. Bold vertical columns
+    for x in [180, 480, 780, 1040]:
+        col = rng2.choice([(200,50,30),(30,100,200),(180,160,20)])
+        lv = layer(); ImageDraw.Draw(lv).rectangle([(x-28,0),(x+28,H)], fill=col+(200,))
+        base = comp(base, lv)
+    # 3. Bold mechanical circle joints
+    for cx, cy, r in [(180,120,44),(480,360,52),(780,220,38),(1040,470,46),(600,560,34)]:
+        lc = layer(); d = ImageDraw.Draw(lc)
+        d.ellipse([(cx-r,cy-r),(cx+r,cy+r)], fill=(240,240,240,230))
+        d.ellipse([(cx-r//2,cy-r//2),(cx+r//2,cy+r//2)], fill=(14,16,22,230))
+        base = comp(base, lc)
+    # 4. Gear-like notched rectangle (flat mechanical)
+    gx, gy = 860, 80
+    lg = layer(); dg = ImageDraw.Draw(lg)
+    dg.rectangle([(gx, gy),(gx+280, gy+180)], fill=(220,60,40,210))
+    for nx in range(gx, gx+280, 40):
+        dg.rectangle([(nx, gy-18),(nx+20, gy+8)], fill=(220,60,40,200))
+        dg.rectangle([(nx, gy+172),(nx+20, gy+198)], fill=(220,60,40,200))
+    base = comp(base, lg)
+    # 5. Black outline grid overlay (Léger's bold outlines)
+    for x in range(0, W, 80):
+        draw.line([(x,0),(x,H)], fill=(0,0,0), width=2)
+    for y in range(0, H, 80):
+        draw.line([(0,y),(W,y)], fill=(0,0,0), width=2)
+    return base
+
+
+def img_lissitzky_20251212():
+    """El Lissitzky Constructivist style — MCP developer guide / tooling theme."""
+    rng2 = Random(42)
+    base = Image.new("RGB", (W, H), (245, 240, 228))
+    draw = ImageDraw.Draw(base)
+    # 1. Bold diagonal red bars
+    for i in range(5):
+        x0 = rng2.randint(-100, 800)
+        y0 = rng2.randint(-80, 400)
+        lr = layer(); dr = ImageDraw.Draw(lr)
+        pts = [(x0,y0),(x0+260,y0),(x0+340,y0+90),(x0+80,y0+90)]
+        dr.polygon(pts, fill=(200,28,28,220))
+        base = comp(base, lr)
+    # 2. Black geometric bars (vertical + horizontal)
+    for x in [120, 420, 740, 1050]:
+        draw.rectangle([(x-12, 0),(x+12, H)], fill=(20,20,20))
+    for y in [80, 240, 440]:
+        draw.rectangle([(0, y-10),(W, y+10)], fill=(20,20,20))
+    # 3. Large red circle (Lissitzky's proun circle)
+    lcirc = layer(); ImageDraw.Draw(lcirc).ellipse([(820,80),(1100,360)], fill=(200,28,28,180))
+    base = comp(base, lcirc)
+    # 4. White rectangle cutting through red
+    lw = layer(); ImageDraw.Draw(lw).rectangle([(870,160),(1050,280)], fill=(245,240,228,240))
+    base = comp(base, lw)
+    # 5. Small black squares (constructivist nodes)
+    for sx, sy in [(160,300),(460,480),(780,520),(1080,420),(340,160)]:
+        draw.rectangle([(sx-18,sy-18),(sx+18,sy+18)], fill=(20,20,20))
+    return base
+
+
+def img_klee_20251213():
+    """Paul Klee grid style — Claude Code in Slack / agent network theme."""
+    rng2 = Random(42)
+    base = Image.new("RGB", (W, H), (28, 24, 34))
+    draw = ImageDraw.Draw(base)
+    CELL_W, CELL_H = 80, 70
+    cols_grid = W // CELL_W + 1
+    rows_grid = H // CELL_H + 1
+    warm_cool = [
+        (220,80,40),(200,130,30),(80,180,60),(40,160,200),(120,60,180),
+        (200,60,120),(240,200,40),(30,140,160),(180,80,160),(60,200,140),
+        (220,160,60),(40,80,200),(200,100,80),(80,220,180),(160,40,120),
+    ]
+    # 1. Colour grid cells
+    for row in range(rows_grid):
+        for col in range(cols_grid):
+            colour = warm_cool[rng2.randint(0, len(warm_cool)-1)]
+            alpha = rng2.randint(140, 220)
+            lc = layer()
+            x0, y0 = col*CELL_W, row*CELL_H
+            ImageDraw.Draw(lc).rectangle([(x0+2,y0+2),(x0+CELL_W-2,y0+CELL_H-2)], fill=colour+(alpha,))
+            base = comp(base, lc)
+    # 2. Dark grid lines
+    for x in range(0, W, CELL_W):
+        draw.line([(x,0),(x,H)], fill=(28,24,34), width=3)
+    for y in range(0, H, CELL_H):
+        draw.line([(0,y),(W,y)], fill=(28,24,34), width=3)
+    # 3. White node circles at grid intersections (selected)
+    node_positions = [(rng2.randint(1,cols_grid-1)*CELL_W, rng2.randint(1,rows_grid-1)*CELL_H) for _ in range(18)]
+    for nx, ny in node_positions:
+        ln = layer(); ImageDraw.Draw(ln).ellipse([(nx-10,ny-10),(nx+10,ny+10)], fill=(255,255,255,220))
+        base = comp(base, ln)
+    # 4. Connecting lines between nodes (agent links)
+    for i in range(len(node_positions)-1):
+        x0,y0 = node_positions[i]; x1,y1 = node_positions[i+1]
+        ll = layer(); ImageDraw.Draw(ll).line([(x0,y0),(x1,y1)], fill=(255,255,255,80), width=2)
+        base = comp(base, ll)
+    return base
+
+
+def img_kandinsky_20251214():
+    """Wassily Kandinsky 'Composition' style — extended thinking / reasoning theme."""
+    rng2 = Random(42)
+    base = Image.new("RGB", (W, H), (18, 34, 72))
+    draw = ImageDraw.Draw(base)
+    # 1. Diagonal grid lines
+    for i in range(-10, 20):
+        x = i * 80
+        draw.line([(x, 0),(x+H, H)], fill=(255,255,255,30), width=1)
+        draw.line([(x, 0),(x-H, H)], fill=(255,255,255,30), width=1)
+    # 2. Large primary circles
+    for cx, cy, r, col in [
+        (200, 200, 120, (220,60,40,180)),
+        (700, 150, 90, (40,140,220,160)),
+        (1000, 380, 110, (220,180,30,170)),
+        (400, 480, 75, (40,180,100,160)),
+    ]:
+        lc = layer(); ImageDraw.Draw(lc).ellipse([(cx-r,cy-r),(cx+r,cy+r)], fill=col)
+        base = comp(base, lc)
+    # 3. Bold triangles (reasoning angles)
+    for pts, col in [
+        ([(580,80),(720,80),(650,200)], (220,60,40,200)),
+        ([(900,440),(1100,440),(1000,280)], (40,140,220,200)),
+        ([(60,400),(180,400),(120,550)], (220,180,30,200)),
+    ]:
+        lt = layer(); ImageDraw.Draw(lt).polygon(pts, fill=col)
+        base = comp(base, lt)
+    # 4. Black arcs (compositional rhythm)
+    for cx, cy, r in [(400,300,160),(800,480,120),(150,120,80)]:
+        la = layer(); ImageDraw.Draw(la).arc([(cx-r,cy-r),(cx+r,cy+r)], 30, 270, fill=(0,0,0,180), width=8)
+        base = comp(base, la)
+    # 5. Small accent circles (thought nodes)
+    for _ in range(22):
+        ax = rng2.randint(40, W-40); ay = rng2.randint(40, H-40)
+        ar = rng2.randint(6, 18)
+        col = rng2.choice([(220,60,40),(40,140,220),(220,180,30),(255,255,255)])
+        ls = layer(); ImageDraw.Draw(ls).ellipse([(ax-ar,ay-ar),(ax+ar,ay+ar)], fill=col+(200,))
+        base = comp(base, ls)
+    return base
+
+
+def img_balla_20251215():
+    """Giacomo Balla Futurist style — enterprise partnerships / momentum theme."""
+    rng2 = Random(42)
+    base = Image.new("RGB", (W, H), (10, 10, 14))
+    VPX, VPY = W // 2, H // 2
+    # 1. Radiating coloured planes from VP
+    colours = [
+        (220,60,40),(240,180,30),(40,200,80),(40,120,220),(180,40,200),
+        (220,120,30),(30,200,180),(200,40,100),(240,220,40),(60,160,240),
+    ]
+    for i, col in enumerate(colours):
+        angle = i * (360 / len(colours))
+        rad = math.radians(angle)
+        spread = math.radians(18)
+        r1 = math.radians(angle - 9)
+        r2 = math.radians(angle + 9)
+        ex1 = int(VPX + math.cos(r1) * 900)
+        ey1 = int(VPY + math.sin(r1) * 900)
+        ex2 = int(VPX + math.cos(r2) * 900)
+        ey2 = int(VPY + math.sin(r2) * 900)
+        lp = layer()
+        ImageDraw.Draw(lp).polygon([(VPX,VPY),(ex1,ey1),(ex2,ey2)], fill=col+(160,))
+        base = comp(base, lp)
+    # 2. Motion lines (speed streaks)
+    for _ in range(30):
+        sx = rng2.randint(0, W); sy = rng2.randint(0, H)
+        angle_m = math.atan2(sy - VPY, sx - VPX)
+        length = rng2.randint(60, 180)
+        ex = sx + int(math.cos(angle_m) * length)
+        ey = sy + int(math.sin(angle_m) * length)
+        col_m = rng2.choice(colours)
+        lm = layer(); ImageDraw.Draw(lm).line([(sx,sy),(ex,ey)], fill=col_m+(120,), width=rng2.randint(2,5))
+        base = comp(base, lm)
+    # 3. Bright central burst
+    for r in [80, 55, 32, 14]:
+        alpha = 100 + (80 - r) * 2
+        lb = layer()
+        ImageDraw.Draw(lb).ellipse([(VPX-r,VPY-r),(VPX+r,VPY+r)], fill=(255,255,255,min(255,alpha)))
+        base = comp(base, lb)
+    # 4. Secondary velocity nodes
+    for nx, ny in [(300,180),(900,200),(250,460),(960,430),(500,540)]:
+        ln = layer(); ImageDraw.Draw(ln).ellipse([(nx-22,ny-22),(nx+22,ny+22)], fill=(240,200,30,180))
+        base = comp(base, ln)
+    return base
+
+
+def img_rothko_20251216():
+    """Mark Rothko Colour Field style — Dario Amodei / DealBook / AI investment depth theme."""
+    base = Image.new("RGB", (W, H), (20, 12, 8))
+    draw = ImageDraw.Draw(base, "RGBA")
+    # 1. Three hazy colour bands (classic Rothko)
+    bands = [
+        (0,        0,        H//3+30,  (140, 30,  20)),    # deep burgundy top
+        (H//3-30,  H//3-30,  2*H//3+30,(70,  50,  120)),   # indigo middle
+        (2*H//3-30,2*H//3-30,H,        (180, 100, 20)),    # amber base
+    ]
+    for y0, fy0, y1, col in bands:
+        lb = layer()
+        ImageDraw.Draw(lb).rectangle([(0, fy0),(W, y1)], fill=col+(200,))
+        base = comp(base, lb)
+    # 2. Luminous soft edges (Rothko's glow)
+    for cx, cy, rw, rh, col in [
+        (W//2, H//3,    500, 60, (220, 60, 40, 80)),
+        (W//2, 2*H//3,  480, 55, (220, 150, 30, 80)),
+        (W//2, H//2,    420, 50, (150, 80, 200, 60)),
+    ]:
+        for spread in [1.8, 1.4, 1.0]:
+            le = layer()
+            rw_s = int(rw * spread); rh_s = int(rh * spread)
+            alpha = int(40 / spread)
+            ImageDraw.Draw(le).ellipse([(cx-rw_s, cy-rh_s),(cx+rw_s, cy+rh_s)], fill=col[:3]+(alpha,))
+            base = comp(base, le)
+    # 3. Fine horizontal texture lines (Rothko's brushstroke texture)
+    for y in range(0, H, 6):
+        alpha = 20 + (y % 40)
+        draw.line([(0,y),(W,y)], fill=(255,255,255,alpha), width=1)
+    # 4. Dark separating lines between bands
+    for y in [H//3, 2*H//3]:
+        ld = layer(); ImageDraw.Draw(ld).rectangle([(0, y-3),(W, y+3)], fill=(10,8,6,200))
+        base = comp(base, ld)
+    return base
+
+
+def img_moholy_20251217():
+    """László Moholy-Nagy Bauhaus style — structured outputs / transparency theme."""
+    rng2 = Random(42)
+    base = Image.new("RGB", (W, H), (248, 246, 240))
+    # 1. Large overlapping translucent circles (primary colours)
+    circle_specs = [
+        (280, 220, 200, (220, 40,  40,  80)),
+        (600, 180, 180, (30,  80,  200, 80)),
+        (900, 300, 220, (220, 180, 30,  80)),
+        (400, 420, 160, (30,  180, 80,  80)),
+        (750, 460, 190, (180, 40,  180, 70)),
+    ]
+    for cx, cy, r, col in circle_specs:
+        lc = layer(); ImageDraw.Draw(lc).ellipse([(cx-r,cy-r),(cx+r,cy+r)], fill=col)
+        base = comp(base, lc)
+    # 2. Overlapping translucent rectangles
+    rect_specs = [
+        (100, 80,  550, 380, (30,  80,  200, 50)),
+        (650, 150, 1150, 480,(220, 40,  40,  50)),
+        (200, 350, 800,  580,(220, 180, 30,  50)),
+    ]
+    for x0,y0,x1,y1,col in rect_specs:
+        lr = layer(); ImageDraw.Draw(lr).rectangle([(x0,y0),(x1,y1)], fill=col)
+        base = comp(base, lr)
+    # 3. Black structural lines (Bauhaus grid)
+    draw = ImageDraw.Draw(base)
+    for x in [200, 550, 900]:
+        draw.line([(x,0),(x,H)], fill=(20,20,20), width=3)
+    for y in [160, 340, 500]:
+        draw.line([(0,y),(W,y)], fill=(20,20,20), width=3)
+    # 4. Small primary accent dots
+    for _ in range(20):
+        ax = rng2.randint(50, W-50); ay = rng2.randint(50, H-50)
+        col = rng2.choice([(220,40,40),(30,80,200),(220,180,30),(30,180,80)])
+        la = layer(); ImageDraw.Draw(la).ellipse([(ax-8,ay-8),(ax+8,ay+8)], fill=col+(220,))
+        base = comp(base, la)
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
+    ("2025-12-11", img_leger_20251211,      "MCP Standard",    "Fernand Léger"),
+    ("2025-12-12", img_lissitzky_20251212,  "MCP Dev Guide",   "El Lissitzky"),
+    ("2025-12-13", img_klee_20251213,       "Claude in Slack", "Paul Klee"),
+    ("2025-12-14", img_kandinsky_20251214,  "Deep Reasoning",  "Wassily Kandinsky"),
+    ("2025-12-15", img_balla_20251215,      "Partnerships",    "Giacomo Balla"),
+    ("2025-12-16", img_rothko_20251216,     "AI Investment",   "Mark Rothko"),
+    ("2025-12-17", img_moholy_20251217,     "Struct Outputs",  "László Moholy-Nagy"),
     ("2025-12-18", img_miro_20251218,       "Agent Skills",    "Joan Miró"),
     ("2025-12-19", img_delaunay_20251219,   "Chrome Tips",     "Robert Delaunay"),
     ("2025-12-20", img_calder_20251220,     "CLAUDE.md",       "Alexander Calder"),

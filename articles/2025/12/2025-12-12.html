@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A practical developer guide to the Model Context Protocol — what MCP is, how to build your first server, and when to reach for it in production — December 12, 2025.">
+  <title>2025-12-12 – Building with MCP: A Practical Developer Guide | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input" placeholder="search..." autocomplete="off" aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2025-12-12</span>
+      <span class="cat-badge cat-tips">💡 Tips 'n' Tricks</span>
+      <h1>Building with MCP: A Practical Developer Guide</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2025-12-12.png" alt="Building with MCP: A Practical Developer Guide — visual for 2025-12-12">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — What MCP Is and When to Use It
+     Source: https://docs.anthropic.com/en/docs/build-with-claude/mcp
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> The Model Context Protocol — What It Is and When to Reach for It</h2>
+
+  <p>With MCP now donated to the Linux Foundation and 10,000+ public servers in existence, it is increasingly the default choice for connecting Claude to external data sources and tools. But many developers still reach for bare API tool definitions when MCP would serve them better — or vice versa. The key distinction is scope: if you are building a one-off integration for a single application, raw tool definitions in your API call are simpler. If you are building a data connector that should be reusable across multiple models, applications, or teams, MCP is the right level of abstraction. MCP servers are independently deployable services that expose a standard interface; any MCP-compatible client can consume them without modification.</p>
+
+  <h3>When MCP is the right choice</h3>
+  <ul>
+    <li><strong>Reusable connectors:</strong> If you want the same database, API, or file-system access to be available to Claude Desktop, your custom Claude application, and a future agentic tool, write it as an MCP server once.</li>
+    <li><strong>Sharing within a team:</strong> An MCP server can be hosted on a shared endpoint. Every developer on the team connects their Claude environment to it without each maintaining their own integration code.</li>
+    <li><strong>Standardised authentication:</strong> MCP handles transport and auth negotiation at the protocol level, so individual tools within a server do not each need to re-implement OAuth or API key management.</li>
+    <li><strong>Managed remote servers:</strong> Cloud providers are beginning to offer fully managed MCP servers (Google launched Maps and BigQuery MCP servers this week). Consuming one is as simple as adding the endpoint to your MCP configuration — no hosting required.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>MCP vs. tool use — a quick rule of thumb</strong>
+    <p>Use bare tool definitions for throw-away scripts, one-off prototypes, and applications where the toolset is tightly coupled to the specific application. Use MCP when the integration should outlive a single project or needs to be shared.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">MCP</span>
+    <span class="tag">tool use</span>
+    <span class="tag">developer guide</span>
+    <span class="tag">integration patterns</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Writing Your First MCP Server
+     Source: https://docs.anthropic.com/en/docs/build-with-claude/mcp
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> Writing Your First MCP Server — Structure, Tools, and Resources</h2>
+
+  <p>The MCP TypeScript and Python SDKs make standing up a basic server straightforward. An MCP server exposes three kinds of primitives: <strong>tools</strong> (functions the model can call), <strong>resources</strong> (data the model can read), and <strong>prompts</strong> (template prompt fragments the host can surface to users). Most integrations start with tools alone and add resources only when there is genuinely useful contextual data to expose. A minimal server needs a name, a version, and at least one tool or resource definition.</p>
+
+  <h3>Anatomy of a minimal MCP tool</h3>
+  <pre><code>// TypeScript example
+server.tool(
+  "get_customer",
+  "Fetch a customer record by ID",
+  { customer_id: z.string().describe("The customer's UUID") },
+  async ({ customer_id }) => {
+    const record = await db.customers.findById(customer_id);
+    return { content: [{ type: "text", text: JSON.stringify(record) }] };
+  }
+);</code></pre>
+
+  <ul>
+    <li><strong>Name:</strong> short, snake_case, descriptive — this is what Claude calls when invoking the tool.</li>
+    <li><strong>Description:</strong> the single most important field; Claude reads this to decide when to use the tool. Write it as a one-sentence answer to "what does this tool do and when should I use it?"</li>
+    <li><strong>Input schema:</strong> Zod (TypeScript) or Pydantic (Python) schemas are automatically converted to JSON Schema. Be precise — Claude uses field descriptions to understand what values are expected.</li>
+    <li><strong>Return format:</strong> Return structured JSON where possible; Claude handles unstructured text but performs better with predictable output shapes.</li>
+  </ul>
+
+  <div class="tag-list">
+    <span class="tag">MCP</span>
+    <span class="tag">server</span>
+    <span class="tag">TypeScript</span>
+    <span class="tag">tools</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude.</p>
+  </footer>
+  <script>
+  (function () {
+    var OLDEST = '2025-12';
+    var badge = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM = badge.textContent.trim().slice(0, 7);
+    var today = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) { var p = ym.split('-').map(Number); var dt = new Date(p[0], p[1]-1+d, 1); return dt.getFullYear() + '-' + String(dt.getMonth()+1).padStart(2,'0'); }
+    function fmt(ym) { var p = ym.split('-'); return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2); }
+    var root = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl = document.getElementById('month-label');
+    var home = document.getElementById('btn-home');
+    var search = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click', function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click', function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click', function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus', function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="December API updates bring structured outputs to Haiku 4.5 and new tool use improvements — plus a practical guide to adopting structured outputs in production — December 17, 2025.">
+  <title>2025-12-17 – December API Updates: Structured Outputs &amp; Tool Use Patterns | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input" placeholder="search..." autocomplete="off" aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2025-12-17</span>
+      <span class="cat-badge cat-practice">✅ Best Practices</span>
+      <h1>December API Updates: Structured Outputs Now on Haiku 4.5 &amp; Tool Use Best Practices</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2025-12-17.png" alt="December API Updates: Structured Outputs Now on Haiku 4.5 &amp; Tool Use Best Practices — visual for 2025-12-17">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Structured outputs expansion to Haiku 4.5
+     Source: https://docs.anthropic.com/en/release-notes/api
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✅</span> Structured Outputs Expand to Claude Haiku 4.5 — What Changed in the December API Update</h2>
+
+  <p>Anthropic's December API release notes confirm that structured outputs — the feature that forces Claude to produce responses conforming exactly to a developer-supplied JSON schema — is now available on <code>claude-haiku-4-5</code>, expanding beyond the Sonnet-and-above tier where it was previously accessible. This matters for cost-sensitive applications that need guaranteed output shapes. Previously, developers who needed exact schema compliance in high-volume pipelines were pushed towards more expensive models. Haiku 4.5 brings structured outputs within reach for classification, tagging, extraction, and other high-frequency, lower-complexity tasks where schema adherence is the primary requirement and a model's reasoning depth is secondary.</p>
+
+  <h3>How structured outputs differ from asking Claude to return JSON</h3>
+  <ul>
+    <li><strong>Prompt-based JSON requests:</strong> Asking Claude to "respond in JSON" via the system prompt works most of the time but is not guaranteed — Claude might add prose, wrap the JSON in a code block, or subtly deviate from the expected schema under edge-case inputs.</li>
+    <li><strong>Structured outputs (enforced):</strong> When using the <code>tools</code> parameter with a defined input schema, or the dedicated structured outputs API, Claude is constrained at the token level to produce output that matches the provided JSON Schema. Downstream parsing is then reliable without defensive try/catch logic.</li>
+    <li><strong>When to use each:</strong> Use prompt-based JSON for low-stakes prototypes and cases where schema flexibility is acceptable. Use structured outputs whenever you need downstream code to consume Claude's response reliably without defensive parsing logic.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Schema design tip</strong>
+    <p>Write descriptions for every field in your JSON schema — not just for human readers, but because Claude uses field descriptions to decide what value to place in each field. A field named <code>status</code> with no description will receive a worse-quality value than one described as "the current lifecycle status of the order: one of 'pending', 'processing', 'shipped', or 'cancelled'."</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">structured outputs</span>
+    <span class="tag">Haiku 4.5</span>
+    <span class="tag">JSON schema</span>
+    <span class="tag">API update</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Tool use patterns in production
+     Source: https://docs.anthropic.com/en/docs/build-with-claude/tool-use
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✅</span> Tool Use in Production — Patterns That Reduce Errors and Improve Reliability</h2>
+
+  <p>With structured outputs now available across more model tiers and MCP gaining widespread adoption, tool use has become the standard interface pattern for connecting Claude to external systems. But production deployments consistently surface the same classes of problems: Claude calling tools at the wrong time, passing malformed parameters, or getting stuck in tool-call loops. Most of these issues trace back to correctable prompt and schema design mistakes rather than model limitations. Here are the patterns that produce the most reliable tool-use behaviour in production.</p>
+
+  <h3>Reliability patterns for tool use</h3>
+  <ul>
+    <li><strong>Name tools for what they do, not what they return:</strong> <code>search_orders</code> is better than <code>order_results</code> — Claude invokes tools based on their name and description, and action-oriented names communicate invocation intent more clearly.</li>
+    <li><strong>Constrain when tools should be used:</strong> Add a line to your system prompt like "Only call <code>get_customer</code> if the user is asking about a specific customer by name or ID — do not use it to answer general policy questions." This prevents Claude from reaching for tools reflexively.</li>
+    <li><strong>Return errors explicitly:</strong> If a tool call fails, return a structured error object in the tool result rather than an empty response or an exception. "customer_not_found: no customer with ID 12345" is actionable; an empty result causes Claude to make assumptions.</li>
+    <li><strong>Set <code>tool_choice</code> when appropriate:</strong> On tasks where you know a specific tool must be called — e.g. a structured extraction pipeline — use <code>tool_choice: {type: "tool", name: "extract_fields"}</code> to prevent Claude from choosing to answer in prose instead.</li>
+  </ul>
+
+  <div class="tag-list">
+    <span class="tag">tool use</span>
+    <span class="tag">production patterns</span>
+    <span class="tag">reliability</span>
+    <span class="tag">API design</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude.</p>
+  </footer>
+  <script>
+  (function () {
+    var OLDEST = '2025-12';
+    var badge = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM = badge.textContent.trim().slice(0, 7);
+    var today = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) { var p = ym.split('-').map(Number); var dt = new Date(p[0], p[1]-1+d, 1); return dt.getFullYear() + '-' + String(dt.getMonth()+1).padStart(2,'0'); }
+    function fmt(ym) { var p = ym.split('-'); return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2); }
+    var root = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl = document.getElementById('month-label');
+    var home = document.getElementById('btn-home');
+    var search = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click', function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click', function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click', function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus', function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

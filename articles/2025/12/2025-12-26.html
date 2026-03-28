@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Claude Haiku 3.5 is scheduled for deprecation in February 2026, and Anthropic publishes user wellbeing safeguards research — December 26, 2025.">
+  <title>2025-12-26 – Haiku 3.5 Sunset &amp; Wellbeing Safeguards | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div>
+
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2025-12-26</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Haiku 3.5 Sunset &amp; User Wellbeing Safeguards</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2025-12-26.png" alt="Haiku 3.5 Sunset &amp; User Wellbeing Safeguards — visual for 2025-12-26">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Haiku 3.5 Deprecation Notice
+     Source: https://platform.claude.com/docs/en/release-notes/overview
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Haiku 3.5 Scheduled for Deprecation — Migrate to Haiku 4.5 by February 2026</h2>
+
+  <p>Anthropic's API release notes published this week confirm that <strong>Claude Haiku 3.5</strong> (<code>claude-3-5-haiku-20241022</code>) will be retired on <strong>19 February 2026</strong>. Developers currently using Haiku 3.5 in production need to migrate to <strong>Claude Haiku 4.5</strong>, which offers meaningfully better performance across speed, instruction-following, and reasoning tasks while maintaining competitive pricing. Anthropic's standard migration timeline gives API users approximately two months of advance notice — consistent with the policy introduced earlier in 2025.</p>
+
+  <h3>Migration checklist</h3>
+  <ul>
+    <li><strong>Update your model string:</strong> Replace <code>claude-3-5-haiku-20241022</code> with the Haiku 4.5 model ID in all API calls, environment variables, and config files.</li>
+    <li><strong>Re-test your prompts:</strong> Haiku 4.5 is a different model with different tokenisation and instruction-following characteristics. Run your evaluation suite before switching in production.</li>
+    <li><strong>Review context window usage:</strong> Haiku 4.5 offers an expanded context window; if you were working around Haiku 3.5 limits, you may be able to simplify prompt construction.</li>
+    <li><strong>Check your cost projections:</strong> Input and output token pricing may differ — re-run your cost model with the new rates from the Anthropic pricing page.</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>Deadline: 19 February 2026</strong>
+    <p>Any calls to <code>claude-3-5-haiku-20241022</code> after that date will return an error. Set a calendar reminder now and prioritise migration in your January sprint planning.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Haiku 3.5</span>
+    <span class="tag">deprecation</span>
+    <span class="tag">model migration</span>
+    <span class="tag">API</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Protecting User Wellbeing Research
+     Source: https://www.anthropic.com/news/protecting-well-being-of-users
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Anthropic Publishes Research on Claude's User Wellbeing Safeguards</h2>
+
+  <p>A research note published by Anthropic this week reveals internal testing results showing Claude models respond appropriately in <strong>86–99% of cases</strong> involving crisis conversations — topics such as suicide, self-harm, and acute mental health distress. The document also details Anthropic's ongoing work to reduce <em>sycophancy</em>: the tendency for AI assistants to tell users what they want to hear rather than what is accurate or genuinely helpful. Both strands of research are live features in the currently-deployed Claude models, not future roadmap items.</p>
+
+  <h3>Key findings from the research</h3>
+  <ul>
+    <li><strong>Crisis response accuracy:</strong> Across a battery of red-team test cases, Claude correctly identified and responded to crisis scenarios 86–99% of the time, depending on scenario type and model tier. Haiku scored at the lower end; Sonnet and Opus consistently above 95%.</li>
+    <li><strong>Safe messaging guidelines:</strong> Claude follows evidence-based safe-messaging protocols (as established by mental health organisations) when detecting potential self-harm discussions — directing users to resources rather than engaging in ways that could cause harm.</li>
+    <li><strong>Anti-sycophancy training:</strong> Anthropic describes a training methodology that penalises responses that simply agree with users, particularly when the user's stated premise contains a factual error. The goal is a model that is honest even when honesty is uncomfortable.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>For operators building user-facing products</strong>
+    <p>These safeguards are active in the default Claude system prompt. If your product serves vulnerable populations, review Anthropic's operator guidance on mental health use cases in the usage policy documentation — there are additional system-prompt patterns that can further reinforce appropriate responses.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">wellbeing</span>
+    <span class="tag">safety</span>
+    <span class="tag">sycophancy</span>
+    <span class="tag">mental health</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude.</p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2025-12';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

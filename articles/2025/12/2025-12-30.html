@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Speed up your Claude workflows before the new year: streaming, batch processing, and latency optimisation tips — December 30, 2025.">
+  <title>2025-12-30 – Speed Up Your Claude Workflows Before the New Year | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div>
+
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2025-12-30</span>
+      <span class="cat-badge cat-tips">💡 Tips 'n' Tricks</span>
+      <h1>Speed Up Your Claude Workflows Before the New Year</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2025-12-30.png" alt="Speed Up Your Claude Workflows Before the New Year — visual for 2025-12-30">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Streaming and TTFT Optimisation
+     Source: https://docs.anthropic.com/en/docs/build-with-claude/streaming
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> Streaming &amp; Time-to-First-Token — Making Claude Feel Instant</h2>
+
+  <p>One of the most impactful UX improvements you can make to a Claude-powered product costs nothing in tokens and requires only a few lines of code: <strong>enable streaming</strong>. Without streaming, your UI shows a spinner until Claude finishes generating the entire response, then displays it all at once — a wait that can stretch to 30+ seconds for long outputs. With streaming enabled, the first token appears within a second or two, and the response flows progressively. Users perceive streaming interfaces as dramatically faster even when the total generation time is identical.</p>
+
+  <h3>Streaming best practices</h3>
+  <ul>
+    <li><strong>Use the <code>stream=True</code> parameter</strong> (Python) or the streaming variant of <code>messages.create</code> in the SDK. Both fire a server-sent events stream you iterate over.</li>
+    <li><strong>Display chunks as they arrive:</strong> Don't buffer the entire stream before rendering. Flush each chunk to the UI immediately — this is the entire point of streaming.</li>
+    <li><strong>Handle <code>message_delta</code> events:</strong> The SDK's streaming iterator surfaces typed events. Listen for <code>content_block_delta</code> for text chunks and <code>message_stop</code> for completion.</li>
+    <li><strong>Reduce prompt verbosity to lower TTFT:</strong> Time-to-first-token correlates with input token count — a leaner prompt starts outputting faster. Prune any context that isn't essential to the specific query.</li>
+  </ul>
+
+  <pre><code>with client.messages.stream(
+    model="claude-haiku-4-5",   # Haiku has lowest TTFT
+    max_tokens=1024,
+    messages=[{"role": "user", "content": prompt}]
+) as stream:
+    for text in stream.text_stream:
+        print(text, end="", flush=True)</code></pre>
+
+  <div class="callout tip">
+    <strong>Model selection for latency-critical paths</strong>
+    <p>Claude Haiku has the lowest time-to-first-token of the production models. For real-time chat, autocomplete, or any user-facing feature where latency is visible, default to Haiku and escalate to Sonnet or Opus only when capability requires it.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">streaming</span>
+    <span class="tag">latency</span>
+    <span class="tag">TTFT</span>
+    <span class="tag">UX</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Batch Processing for Cost and Scale
+     Source: https://docs.anthropic.com/en/docs/build-with-claude/message-batches
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> Batch Processing — Run High-Volume Claude Workloads at 50% Off</h2>
+
+  <p>If you have a workload that doesn't need to complete in real time — document summarisation queues, nightly classification runs, bulk data extraction, evaluation pipelines — the <strong>Message Batches API</strong> is the obvious tool to reach for. Batch requests are processed asynchronously and priced at approximately 50% of the standard API rate. You submit a batch of up to 10,000 requests in a single call, poll for completion, then retrieve all results. For high-volume workflows, this halves your Claude infrastructure costs with essentially no code complexity added.</p>
+
+  <h3>When to use batch vs. real-time</h3>
+  <ul>
+    <li><strong>Use batch for:</strong> nightly report generation, bulk classification or tagging, data extraction pipelines, evaluation suites, content moderation queues, SEO or metadata generation for large content libraries.</li>
+    <li><strong>Use real-time for:</strong> anything user-facing, interactive chat, tools requiring immediate results, or pipelines where downstream steps depend on the Claude response before they can start.</li>
+    <li><strong>Parallelism within a batch:</strong> Items in a batch are processed concurrently — a batch of 1,000 items doesn't take 1,000× longer than one item. Actual throughput depends on capacity, but batches complete far faster than sequential real-time calls for the same volume.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Idempotency tip</strong>
+    <p>Each request in a batch takes a <code>custom_id</code>. Set these to meaningful, stable identifiers (e.g. a document hash) so that if your batch partially fails and you need to retry, you can submit only the failed items — avoiding double-processing and double billing.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">batch API</span>
+    <span class="tag">cost optimisation</span>
+    <span class="tag">throughput</span>
+    <span class="tag">async</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude.</p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2025-12';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

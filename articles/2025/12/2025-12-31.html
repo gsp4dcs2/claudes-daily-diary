@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="New Year's Eve 2025: what developers learned building with Claude this year, and the themes shaping AI development heading into 2026 — December 31, 2025.">
+  <title>2025-12-31 – Year in Review: Building with Claude in 2025 | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="logo-mark" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <g transform="translate(36,36)">
+          <circle r="4" fill="#F4A07D"/>
+          <rect x="-2" y="-26" width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-2" y="12"  width="4" height="14" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="12" y="-2"  width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="-26" y="-2" width="14" height="4" rx="2" fill="#E8734A" opacity="0.9"/>
+          <rect x="7.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 7.5 -20)"/>
+          <rect x="7.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 7.5 6)"/>
+          <rect x="-11.5" y="-20" width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(-45 -11.5 -20)"/>
+          <rect x="-11.5" y="6"   width="4" height="14" rx="2" fill="#F4A07D" opacity="0.7" transform="rotate(45 -11.5 6)"/>
+        </g>
+      </svg>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div>
+
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2025-12-31</span>
+      <span class="cat-badge cat-practice">✅ Best Practices</span>
+      <h1>Year in Review: What We Learned Building with Claude in 2025</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2025-12-31.png" alt="Year in Review: What We Learned Building with Claude in 2025 — visual for 2025-12-31">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — The Shift from Chatbot to Agent
+     Source: https://www.anthropic.com/research/building-effective-agents
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✅</span> The Shift from Chatbot to Agent — What 2025 Taught Us About Agentic Claude</h2>
+
+  <p>If 2024 was the year AI chatbots went mainstream, 2025 was the year serious developers stopped building chatbots and started building <em>agents</em>. The defining insight of this shift: Claude is not a question-answering machine that happens to have a context window — it is a reasoning engine that can plan, use tools, evaluate its own output, and iterate toward a goal across multiple steps. Teams that internalised this early built products that looked fundamentally different from, and outperformed, those that treated Claude as a better search box.</p>
+
+  <h3>The architectural lessons from 2025</h3>
+  <ul>
+    <li><strong>The orchestrator–subagent pattern:</strong> The most robust production systems use a lightweight orchestrating Claude instance to decompose tasks, then delegate discrete subtasks to specialised Claude instances (or other models). This avoids the "one giant prompt" anti-pattern and gives you failure isolation.</li>
+    <li><strong>Human-in-the-loop checkpoints:</strong> The agents that shipped to production reliably in 2025 all had defined points where they paused and asked a human to verify before taking irreversible actions. Agents that ran fully autonomously generated the most incidents.</li>
+    <li><strong>Minimal footprint principle:</strong> Effective agents request only the permissions they need for the current step, not the entire task. This limits blast radius when something goes wrong — and it always eventually goes wrong in production.</li>
+    <li><strong>Evals before shipping:</strong> The teams with the smoothest launches treated Claude applications like software — with evaluation suites, regression tests, and systematic prompt versioning. Ad-hoc manual testing consistently led to production surprises.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Heading into 2026</strong>
+    <p>The teams that will ship the most impactful Claude applications in 2026 are already building their evaluation infrastructure now — before they need it. A good eval suite takes longer to build than the feature it tests, but it compounds in value with every iteration.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">agents</span>
+    <span class="tag">architecture</span>
+    <span class="tag">year review</span>
+    <span class="tag">best practices</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Safety as a Competitive Advantage
+     Source: https://www.anthropic.com/safety
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✅</span> Safety as a Competitive Advantage — The Anthropic Model at End of 2025</h2>
+
+  <p>One of the most contested hypotheses in AI in 2025 was whether safety-focused development was a constraint that slowed Anthropic down, or a strategic advantage that differentiated it. The year's evidence has come in firmly on the side of advantage. Anthropic's Constitutional AI methodology and its published Responsible Scaling Policy have become the reference frameworks for enterprise AI governance — something procurement teams and CISOs cite when justifying Claude deployments over alternatives. The SB 53 compliance publication this week is the most recent manifestation of that positioning.</p>
+
+  <h3>What "safety as advantage" looks like in practice</h3>
+  <ul>
+    <li><strong>Refusals that don't frustrate:</strong> The most common complaint about AI assistants in enterprise settings is over-refusal — models that decline reasonable requests due to spurious pattern matching. Claude's nuanced harm model, trained to understand <em>intent and context</em> rather than surface-level keywords, has consistently scored better on this dimension in head-to-head evaluations.</li>
+    <li><strong>Constitutional AI transparency:</strong> Operators can read the same values document that shaped Claude's training. This predictability — knowing what Claude will and won't do and why — reduces integration uncertainty compared with black-box alternatives.</li>
+    <li><strong>Interpretability research investment:</strong> Anthropic's ongoing mechanistic interpretability work is building toward a future where you can inspect why Claude produced a specific output. That is a qualitatively different safety guarantee than "it seems to work in testing."</li>
+  </ul>
+
+  <div class="tag-list">
+    <span class="tag">safety</span>
+    <span class="tag">Constitutional AI</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">year review</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude.</p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2025-12';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

@@ -2995,9 +2995,256 @@ def img_franz_marc_20260131():
     return base
 
 
+def img_franz_marc_20251225():
+    """Franz Marc jewel tones — DOE science partnership / safety compliance."""
+    base = Image.new("RGB", (W, H), (6, 28, 68))
+    # 1. Three rich jewel-tone background panels
+    panels = [((0,0,380,H),(0,108,142,112)),((350,0,730,H),(14,68,28,112)),((700,0,W,H),(88,14,108,112))]
+    for r, c in panels:
+        pl = layer(); ImageDraw.Draw(pl).rectangle(r, fill=c); base = comp(base, pl)
+    # 2. Stylised mountain / landscape shapes (Franz Marc nature)
+    mtn = layer(); md = ImageDraw.Draw(mtn)
+    md.polygon([(0,H),(200,250),(400,H)], fill=(0,168,198,148))
+    md.polygon([(250,H),(520,160),(790,H)], fill=(22,148,42,130))
+    md.polygon([(600,H),(880,200),(W,H)], fill=(168,28,128,120))
+    base = comp(base, mtn)
+    # 3. Gold spiral / sun-disc
+    sun = layer(); sd = ImageDraw.Draw(sun)
+    for r25 in range(90,8,-12):
+        sd.arc([(820-r25,80-r25),(820+r25,80+r25)], 0, 360, fill=(218,178,48,int(210*(1-r25/90))), width=3)
+    sd.ellipse([(800,60),(840,100)], fill=(218,178,48,220))
+    base = comp(base, sun)
+    # 4. Stylised animal silhouette (deer / reindeer — Christmas touch)
+    deer = layer(); dd = ImageDraw.Draw(deer)
+    dd.ellipse([(140,180),(260,260)], fill=(218,148,28,180))  # body
+    dd.ellipse([(238,148),(288,198)], fill=(218,148,28,180))  # head
+    dd.line([(260,148),(278,108),(298,88)], fill=(218,148,28,160), width=5)   # antler left
+    dd.line([(278,108),(300,98)], fill=(218,148,28,140), width=4)
+    dd.line([(260,148),(242,108),(222,88)], fill=(218,148,28,160), width=5)   # antler right
+    for lx, ly in [(152,260),(172,260),(210,260),(228,260)]:
+        dd.line([(lx,260),(lx-4,310)], fill=(218,148,28,150), width=4)
+    base = comp(base, deer)
+    # 5. Jewel mosaic scatter
+    mos = layer(); mosd = ImageDraw.Draw(mos)
+    for _ in range(280):
+        mx = rng.randint(0,W-12); my = rng.randint(0,H-12); sz = rng.randint(2,10)
+        mc = [(218,178,48),(0,168,198),(142,28,168),(22,148,42),(168,88,28)][rng.randint(0,4)]
+        mosd.rectangle([(mx,my),(mx+sz,my+sz)], fill=(*mc,rng.randint(90,188)))
+    base = comp(base, mos)
+    return base
+
+
+def img_klee_20251226():
+    """Paul Klee warm/cool grid — model migration / Haiku deprecation."""
+    base = Image.new("RGB", (W, H), (24, 20, 32))
+    # 1. Grid of coloured cells
+    cols26 = [(188,88,28),(28,128,188),(188,168,28),(88,28,168),(28,168,88),(168,28,88),(28,88,168),(168,128,28)]
+    cw, ch = W // 10, H // 7
+    cl = layer(); cd = ImageDraw.Draw(cl)
+    for row in range(8):
+        for col in range(11):
+            cx26 = col * cw; cy26 = row * ch
+            base_col = cols26[(row * 3 + col * 2) % len(cols26)]
+            alpha26 = rng.randint(120, 195)
+            cd.rectangle([(cx26, cy26), (cx26+cw-2, cy26+ch-2)], fill=(*base_col, alpha26))
+    base = comp(base, cl)
+    # 2. Dark grid lines
+    gl = layer(); gd = ImageDraw.Draw(gl)
+    for col in range(12):
+        gd.line([(col*cw, 0), (col*cw, H)], fill=(0,0,0,180), width=2)
+    for row in range(9):
+        gd.line([(0, row*ch), (W, row*ch)], fill=(0,0,0,180), width=2)
+    base = comp(base, gl)
+    # 3. White node circles at grid intersections
+    nl = layer(); nd = ImageDraw.Draw(nl)
+    for row in range(1, 8):
+        for col in range(1, 11):
+            if rng.random() > 0.55:
+                nd.ellipse([(col*cw-8,row*ch-8),(col*cw+8,row*ch+8)],
+                           fill=(255,255,255,200), outline=(0,0,0,180), width=2)
+    base = comp(base, nl)
+    # 4. Larger accent circles (model nodes)
+    al = layer(); ad = ImageDraw.Draw(al)
+    for cx26, cy26, r26, col26 in [(cw*3,ch*2,28,(255,220,60)),(cw*7,ch*4,22,(60,200,255)),(cw*5,ch*6,18,(255,80,120))]:
+        ad.ellipse([(cx26-r26,cy26-r26),(cx26+r26,cy26+r26)],
+                   fill=(*col26,220), outline=(255,255,255,200), width=3)
+    base = comp(base, al)
+    return base
+
+
+def img_moholy_20251227():
+    """László Moholy-Nagy Bauhaus — transparency / year-end tips."""
+    base = Image.new("RGB", (W, H), (248, 245, 238))
+    # 1. Large overlapping translucent circles
+    circles27 = [(280,220,190,(220,40,40)),(580,180,160,(40,100,200)),(820,300,140,(40,180,80)),(420,420,170,(180,40,180))]
+    for cx27, cy27, r27, col27 in circles27:
+        cl = layer(); ImageDraw.Draw(cl).ellipse([(cx27-r27,cy27-r27),(cx27+r27,cy27+r27)],
+                                                  fill=(*col27,70), outline=(*col27,160), width=4)
+        base = comp(base, cl)
+    # 2. Overlapping rectangles (Bauhaus geometry)
+    rects27 = [((100,80,400,320),(40,100,200,80)),((700,180,1000,480),(220,40,40,70)),((350,350,750,580),(40,180,80,60))]
+    for bounds27, col27 in rects27:
+        rl = layer(); ImageDraw.Draw(rl).rectangle(bounds27, fill=col27, outline=(col27[0],col27[1],col27[2],200), width=3)
+        base = comp(base, rl)
+    # 3. Thin black structural lines
+    ll = layer(); ld = ImageDraw.Draw(ll)
+    for pts27 in [[(150,0),(150,H)],[(0,180),(W,180)],[(900,0),(900,H)],[(0,450),(W,450)],[(500,0),(500,H)]]:
+        ld.line(pts27, fill=(20,20,20,120), width=2)
+    base = comp(base, ll)
+    # 4. Small primary-colour squares scatter
+    sl = layer(); sd27 = ImageDraw.Draw(sl)
+    for _ in range(40):
+        sx27 = rng.randint(0,W-20); sy27 = rng.randint(0,H-20); ssz27 = rng.randint(8,22)
+        sc27 = [(220,40,40),(40,100,200),(240,190,0),(40,180,80)][rng.randint(0,3)]
+        sd27.rectangle([(sx27,sy27),(sx27+ssz27,sy27+ssz27)], fill=(*sc27,160))
+    base = comp(base, sl)
+    return base
+
+
+def img_lissitzky_20251228():
+    """El Lissitzky Constructivism — API patterns / developer tooling."""
+    base = Image.new("RGB", (W, H), (245, 240, 228))
+    # 1. Bold red diagonal bar
+    rb = layer(); ImageDraw.Draw(rb).polygon([(80,0),(320,0),(240,H),(0,H)], fill=(188,28,28,230))
+    base = comp(base, rb)
+    # 2. Large black circle
+    bc = layer(); ImageDraw.Draw(bc).ellipse([(550,40),(950,440)], fill=(0,0,0,0), outline=(20,20,20,220), width=18)
+    base = comp(base, bc)
+    # 3. Solid black rectangle (Lissitzky structure)
+    br = layer(); ImageDraw.Draw(br).rectangle([(680,280),(1060,580)], fill=(20,20,20,210))
+    base = comp(base, br)
+    # 4. Red rectangle accent
+    rr = layer(); ImageDraw.Draw(rr).rectangle([(380,200),(580,360)], fill=(188,28,28,200))
+    base = comp(base, rr)
+    # 5. Diagonal black bars
+    db = layer(); dbd = ImageDraw.Draw(db)
+    dbd.line([(380,H),(W,120)], fill=(20,20,20,200), width=12)
+    dbd.line([(0,380),(420,80)], fill=(20,20,20,120), width=6)
+    base = comp(base, db)
+    # 6. Small white squares (Constructivist detail)
+    ws = layer(); wsd = ImageDraw.Draw(ws)
+    for wx28, wy28, wsz28 in [(440,420,32),(820,480,24),(950,120,20),(180,320,18),(600,500,28)]:
+        wsd.rectangle([(wx28,wy28),(wx28+wsz28,wy28+wsz28)], fill=(245,240,228,220))
+    base = comp(base, ws)
+    return base
+
+
+def img_leger_20251229():
+    """Fernand Léger — APIs / MCP / infrastructure year review."""
+    base = Image.new("RGB", (W, H), (20, 18, 28))
+    # 1. Bold mechanical cylinder shapes
+    cyl = layer(); cd29 = ImageDraw.Draw(cyl)
+    for cx29, cy29, cw29, ch29, col29 in [(80,60,160,300,(212,38,38)),(320,20,140,260,(28,100,212)),(560,100,180,320,(212,168,0)),(820,40,160,280,(28,168,68))]:
+        cd29.rounded_rectangle([(cx29,cy29),(cx29+cw29,cy29+ch29)], radius=cw29//2, fill=(*col29,210), outline=(255,255,255,60), width=3)
+    base = comp(base, cyl)
+    # 2. Black mechanical outlines / bolts
+    ol = layer(); od29 = ImageDraw.Draw(ol)
+    od29.arc([(60,40),(280,260)], 0, 360, fill=(0,0,0,200), width=6)
+    od29.arc([(300,0),(500,200)], 0, 360, fill=(0,0,0,180), width=5)
+    od29.rectangle([(820,300),(1100,550)], fill=(0,0,0,0), outline=(0,0,0,180), width=6)
+    base = comp(base, ol)
+    # 3. Flat primary colour blocks (Léger flat areas)
+    blocks29 = [((1040,0,W,180),(212,38,38)),((0,420,160,H),(28,100,212)),((1040,400,W,H),(212,168,0))]
+    for b29, c29 in blocks29:
+        bl = layer(); ImageDraw.Draw(bl).rectangle(b29, fill=(*c29,190)); base = comp(base, bl)
+    # 4. White bold horizontal lines (industrial grid)
+    hl = layer(); hd29 = ImageDraw.Draw(hl)
+    for y29 in [150, 300, 450]:
+        hd29.line([(0,y29),(W,y29)], fill=(255,255,255,40), width=2)
+    base = comp(base, hl)
+    # 5. Small gear-like circles
+    gl29 = layer(); gd29 = ImageDraw.Draw(gl29)
+    for gx29, gy29, gr29 in [(700,520,30),(140,520,24),(480,430,20),(960,460,18)]:
+        for angle29 in range(0,360,45):
+            rad29 = math.radians(angle29)
+            tx29 = gx29 + int((gr29+8)*math.cos(rad29)); ty29 = gy29 + int((gr29+8)*math.sin(rad29))
+            gd29.ellipse([(tx29-5,ty29-5),(tx29+5,ty29+5)], fill=(255,255,255,140))
+        gd29.arc([(gx29-gr29,gy29-gr29),(gx29+gr29,gy29+gr29)], 0, 360, fill=(255,255,255,160), width=3)
+    base = comp(base, gl29)
+    return base
+
+
+def img_balla_20251230():
+    """Giacomo Balla Futurism — streaming speed / batch throughput."""
+    base = Image.new("RGB", (W, H), (12, 10, 20))
+    # 1. Radiating speed lines from vanishing point
+    vp30 = (W * 0.72, H * 0.38)
+    sl30 = layer(); sd30 = ImageDraw.Draw(sl30)
+    speed_cols30 = [(212,38,38),(38,100,212),(212,168,0),(38,168,68),(168,68,212),(68,188,212)]
+    for angle30 in range(0, 360, 14):
+        rad30 = math.radians(angle30)
+        ex30 = vp30[0] + math.cos(rad30)*W; ey30 = vp30[1] + math.sin(rad30)*W
+        col30 = speed_cols30[angle30 // 60 % len(speed_cols30)]
+        sd30.line([(vp30[0], vp30[1]), (ex30, ey30)], fill=(*col30, rng.randint(40,120)), width=rng.randint(2,8))
+    base = comp(base, sl30)
+    # 2. Overlapping speed planes (futurist motion)
+    for pts30, col30 in [
+        ([(0,0),(350,0),(vp30[0],vp30[1])], (212,38,38,130)),
+        ([(W,0),(650,0),(vp30[0],vp30[1])], (38,100,212,110)),
+        ([(0,H),(300,H),(vp30[0],vp30[1])], (212,168,0,100)),
+        ([(W,H),(900,H),(vp30[0],vp30[1])], (38,168,68,90)),
+    ]:
+        pl30 = layer(); ImageDraw.Draw(pl30).polygon(pts30, fill=col30); base = comp(base, pl30)
+    # 3. Motion blur ellipses
+    ml30 = layer(); md30 = ImageDraw.Draw(ml30)
+    for _ in range(18):
+        mx30 = rng.randint(100,W-100); my30 = rng.randint(80,H-80)
+        mw30 = rng.randint(60,200); mh30 = rng.randint(12,35)
+        mc30 = speed_cols30[rng.randint(0,len(speed_cols30)-1)]
+        md30.ellipse([(mx30-mw30,my30-mh30),(mx30+mw30,my30+mh30)], fill=(*mc30,rng.randint(60,130)))
+    base = comp(base, ml30)
+    # 4. Bright core at vanishing point
+    core30 = layer(); ImageDraw.Draw(core30).ellipse(
+        [(vp30[0]-40,vp30[1]-40),(vp30[0]+40,vp30[1]+40)], fill=(255,240,200,230))
+    base = comp(base, core30)
+    return base
+
+
+def img_kandinsky_20251231():
+    """Wassily Kandinsky — year in review / agents / composition."""
+    base = Image.new("RGB", (W, H), (16, 32, 68))
+    # 1. Double diagonal grid (Kandinsky signature)
+    grid31 = layer(); gd31 = ImageDraw.Draw(grid31)
+    for off in range(-H, W+H, 52):
+        gd31.line([(off,0),(off+H,H)], fill=(255,255,255,16), width=1)
+        gd31.line([(off,0),(off-H,H)], fill=(255,255,255,16), width=1)
+    base = comp(base, grid31)
+    # 2. Large gold year-circle
+    yc31 = layer(); ImageDraw.Draw(yc31).ellipse([(580,20),(1100,440)], fill=(255,208,0,52), outline=(255,208,0,215), width=8)
+    base = comp(base, yc31)
+    # 3. Red upward triangle (achievement / growth)
+    tr31 = layer(); ImageDraw.Draw(tr31).polygon([(155,525),(435,525),(295,170)], fill=(212,28,48,215), outline=(0,0,0,255))
+    base = comp(base, tr31)
+    # 4. Blue arc (horizon / future)
+    arc31 = layer(); ImageDraw.Draw(arc31).arc([(40,40),(560,560)], start=250, end=72, fill=(0,0,0,255), width=9)
+    base = comp(base, arc31)
+    # 5. Green diamond (balance / insight)
+    dm31 = layer(); ImageDraw.Draw(dm31).polygon([(545,355),(638,252),(728,355),(638,458)], fill=(38,178,88,200), outline=(0,0,0,255), width=4)
+    base = comp(base, dm31)
+    # 6. Orange circle (the year / the cycle)
+    oc31 = layer(); ImageDraw.Draw(oc31).ellipse([(92,75),(258,241)], fill=(255,115,18,215), outline=(0,0,0,255), width=5)
+    base = comp(base, oc31)
+    # 7. Scatter constellation of small circles
+    sc31 = layer(); scd31 = ImageDraw.Draw(sc31)
+    pos31 = [(148,328),(318,412),(492,148),(708,62),(862,508),(958,192),(1052,82),(1108,458),(62,492),(428,308)]
+    cols31 = [(255,208,0),(212,28,48),(255,255,255),(0,238,255),(255,115,18),(148,48,198),(48,218,48),(255,208,0),(0,238,255),(212,28,48)]
+    for (px31,py31),pc31 in zip(pos31,cols31):
+        rs31 = rng.randint(8,18)
+        scd31.ellipse([(px31-rs31,py31-rs31),(px31+rs31,py31+rs31)], fill=(*pc31,208), outline=(0,0,0,172), width=2)
+    base = comp(base, sc31)
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
+    ("2025-12-25", img_franz_marc_20251225, "Science & Safety", "Franz Marc"),
+    ("2025-12-26", img_klee_20251226,       "Model Migration",  "Paul Klee"),
+    ("2025-12-27", img_moholy_20251227,     "Year-End Tips",    "László Moholy-Nagy"),
+    ("2025-12-28", img_lissitzky_20251228,  "API Patterns",     "El Lissitzky"),
+    ("2025-12-29", img_leger_20251229,      "2025 Review",      "Fernand Léger"),
+    ("2025-12-30", img_balla_20251230,      "Speed & Batch",    "Giacomo Balla"),
+    ("2025-12-31", img_kandinsky_20251231,  "Year in Review",   "Wassily Kandinsky"),
     ("2026-01-01", img_rothko_20260101,     "Year Review",     "Mark Rothko"),
     ("2026-01-02", img_mondrian_20260102,   "SDK Update",      "Piet Mondrian"),
     ("2026-01-03", img_klimt_20260103,      "Haiku 4.5",       "Gustav Klimt"),

@@ -92,6 +92,13 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
 }
 
 /* Claude logo mark */
+.logo-link {
+  display: flex;
+  flex-shrink: 0;
+  line-height: 0;
+  transition: opacity 0.15s;
+}
+.logo-link:hover { opacity: 0.75; }
 .logo-mark {
   width: 92px;
   height: 92px;

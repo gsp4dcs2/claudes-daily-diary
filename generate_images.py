@@ -2962,6 +2962,67 @@ def img_kandinsky_20260328():
     return base
 
 
+def img_mondrian_20260329():
+    """Piet Mondrian Broadway Boogie Woogie style — Economic Index / learning curves theme."""
+    base = Image.new("RGB", (W, H), (245, 241, 228))
+    draw = ImageDraw.Draw(base)
+
+    YELLOW = (255, 210, 0)
+    RED    = (214, 36, 36)
+    BLUE   = (26, 72, 192)
+    BLACK  = (18, 18, 18)
+    BW     = 14
+
+    # 1. Vertical grid lines (representing data columns / time axis)
+    vx = [0, 150, 310, 470, 620, 790, 950, 1100, W]
+    for x in vx[1:-1]:
+        draw.rectangle([(x - BW // 2, 0), (x + BW // 2, H)], fill=YELLOW)
+
+    # 2. Horizontal grid lines (representing metric bands)
+    hy = [0, 105, 220, 335, 445, 550, H]
+    for y in hy[1:-1]:
+        draw.rectangle([(0, y - BW // 2), (W, y + BW // 2)], fill=YELLOW)
+
+    # 3. Coloured rectangles in selected cells (ascending pattern = learning curve)
+    inset = BW // 2 + 2
+    coloured = [
+        (0, 4, RED),    (0, 3, BLUE),
+        (1, 4, BLUE),   (1, 2, RED),
+        (2, 3, RED),    (3, 1, BLUE),
+        (3, 3, RED),    (4, 0, YELLOW),
+        (4, 2, BLUE),   (5, 0, RED),
+        (5, 1, BLUE),   (6, 0, BLUE),
+        (6, 2, RED),    (7, 0, RED),
+        (7, 1, YELLOW),
+    ]
+    for ci, ri, col in coloured:
+        if ci < len(vx) - 1 and ri < len(hy) - 1:
+            x0 = vx[ci] + inset
+            y0 = hy[ri] + inset
+            x1 = vx[ci + 1] - inset
+            y1 = hy[ri + 1] - inset
+            draw.rectangle([(x0, y0), (x1, y1)], fill=col)
+
+    # 4. Intersection dots — small coloured squares at grid crossings (Broadway Boogie detail)
+    dot_cycle = [RED, BLUE, YELLOW, RED, BLUE, YELLOW, RED]
+    dot_size = 6
+    for i, x in enumerate(vx[1:-1]):
+        for j, y in enumerate(hy[1:-1]):
+            col = dot_cycle[(i + j) % len(dot_cycle)]
+            draw.rectangle(
+                [(x - dot_size, y - dot_size), (x + dot_size, y + dot_size)],
+                fill=col
+            )
+
+    # 5. Bold black grid overlay lines (Mondrian structural frame)
+    for x in vx[1:-1]:
+        draw.line([(x, 0), (x, H)], fill=BLACK, width=2)
+    for y in hy[1:-1]:
+        draw.line([(0, y), (W, y)], fill=BLACK, width=2)
+
+    return base
+
+
 def img_seurat_20260130():
     """Georges Seurat — January performance report / caching analytics."""
     base = Image.new("RGB", (W, H), (14, 20, 50))
@@ -3846,6 +3907,7 @@ DAYS = [
     ("2026-03-26", img_klee_20260326,       "Global Network", "Paul Klee"),
     ("2026-03-27", img_rothko_20260327,     "Mythos",         "Mark Rothko"),
     ("2026-03-28", img_kandinsky_20260328, "Growth Network",  "Wassily Kandinsky"),
+    ("2026-03-29", img_mondrian_20260329,  "Learning Curves", "Piet Mondrian"),
 ]
 
 for date, fn, kw, artist in DAYS:

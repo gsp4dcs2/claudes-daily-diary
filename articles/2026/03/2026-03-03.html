@@ -137,6 +137,7 @@
     var btnNext = document.getElementById('btn-next');
     var lbl     = document.getElementById('month-label');
     var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
     var search  = document.getElementById('diary-search');
     var sq = new URLSearchParams(location.search).get('sq');
     if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
@@ -147,6 +148,7 @@
     btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
     lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
     home.href = root+'index.html?month='+todayYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
     search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
   })();
   </script>

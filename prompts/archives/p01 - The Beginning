@@ -1,0 +1,17 @@
+Hi Claude.
+
+This project involves creating a static local HTML W3C compliant website focused upon the best practices of "How to use Claude, and his best practices".
+
+The static index page will be titled "Claude's Daily Diary".
+
+The index page will show a nice header background image of the Claude logo while offering an 'up-to-date' index list of the daily accumulated 'articles', sorted from most recent down.
+
+The CSS for this whole website should be responsive and be made 'current and cool' in look and feel.
+
+For each day, any relevant 'new entries' should be added to the Index, named in the format "{yyyy-mm-dd} – {title}", and saved as "./yyyy-mm-dd.html"
+
+Subsequent entries should be added to the "./yyyy-mm-dd.html" document as to not overwrite existing entries.
+
+I would like you to create a skill named "sk-update-claude-skills" that invokes the behaviour of searching the internet and documenting the most recent 'best practices' and including new features, available from "claude.ai" (and other trusted resources) and adding them to our current "./yyyy-mm-dd.html".
+
+Is this explicit enough or do we need a chat?

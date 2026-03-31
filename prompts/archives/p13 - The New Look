@@ -1,0 +1,75 @@
+
+❯ Given that our content is growing fast, we need to 'tame' the Home Page (GUI).
+
+● Pushed. Here's what changed:
+
+  Default view — only the 7 most recent entries are shown. Clean and fast.
+
+  "Show all entries (17 older)" button appears below them. Click it and:
+  - All entries appear
+  - Month group headings are injected dynamically (March 2026, etc.) as the site grows into future months
+  - Button becomes "Show recent only"
+
+  Search — when you type in the search box, show-more is bypassed entirely. All 24 entries become searchable, the
+  button disappears, and search results show as normal. When the query is cleared, show-more state is restored.
+
+  Scaling — as the diary grows, the number in the button updates automatically (47 older, 180 older...), and month
+  headings appear naturally as new months are added.
+
+  Do sudo git pull on the VM to go live.
+
+
+❯ Thanks Claude.
+All live for now thanks, but I really think there is a lot of room for some really interesting gui design here.
+Let me sleep on it, and I will get back to you soon.
+Please update your memory and any other house-keeping as required!
+Thanks again Dude :-D
+
+● All done. Here's what I saved:
+
+  - project_overview.md — added features 6–8 (backfill skill, show-more pagination, source whitelist), current
+  content coverage (03-01 to 03-24), the rng side-effect note, and the pending GUI ideas flag
+  - user_profile.md — updated current focus to reflect the live state and flagged the GUI design conversation to
+  come
+
+  Everything is committed and pushed so it syncs to your other machines via Tresorit.
+
+  Sleep well — I'll be ready when you come back with the GUI ideas. Should be a fun one.
+
+
+
+
+
+
+
+
+
+Just in a way of a slight tidy up:
+    1: Could you 'refine' the header logo, make it slightly larger and move it to the side - this will allow the header to occupy less vertiacal space
+    2: Besides the [Home] button, 
+
+============TODO
+
+Here I am just 'brain dumping' some ideas (don't take them too literally).
+
+
+
+If we were to take some ideas from the publishing world, each month would be represented by the cover of an A4 portrait oriented artwork, photo-relistically rendered cover to look like a magazine with pages (maybe with a little drop-shadow?).
+
+The cover artwork should;
+    1: be based upon the overall theme of the articles covered within that month may include small thumbnails rendered as affine transforms or simailar.
+    2: have a variety of the top headlines for that month, most important as larger and more eye-catching.
+
+
+
+
+
+
+
+
+
+the cover 'artwork', which represents should 
+
+
+it would be cool to have each year as a nicely styled set of horizontal tabs.
+

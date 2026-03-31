@@ -88,9 +88,23 @@ Create `articles/{yyyy}/{mm}/{yyyy-mm-dd}.html` (the Write tool creates the dire
 automatically). Copy the structure of the most recent existing file, updating:
 - `<title>` to `{yyyy-mm-dd} – {Title} | Claude's Daily Diary`
 - `<meta name="description">` accordingly
+- Open Graph + Twitter Card tags (see block below) — update all URLs and image paths
 - `<span class="date-badge">` to the missing date
 - category badge (see below) immediately after the date-badge
 - `<h1>` in `.article-header` to a title summarising the day's topics
+
+**Open Graph / Twitter Card block** — insert immediately after `<meta name="description">`:
+
+```html
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="{yyyy-mm-dd} – {Title}">
+  <meta property="og:description" content="{same as meta description}">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/{yyyy}/{mm}/{yyyy-mm-dd}.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/{yyyy}/{mm}/{yyyy-mm-dd}.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/{yyyy}/{mm}/{yyyy-mm-dd}.png">
+```
 
 **Category badge** — choose the one that best fits the day's primary content:
 

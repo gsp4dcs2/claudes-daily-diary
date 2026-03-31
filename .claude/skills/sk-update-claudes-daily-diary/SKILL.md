@@ -339,6 +339,17 @@ Rules:
 
 ---
 
+## Step 6 — Regenerate sitemap.xml
+
+After all new days are written and index.html is updated, regenerate `sitemap.xml`
+so it includes the new pages:
+
+```
+python generate_sitemap.py
+```
+
+---
+
 ## Done
 
 Summarise what was added in a short plain-text response:

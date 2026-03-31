@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The full Claude Code TypeScript source leaked via an npm source map, Microsoft revamped Copilot with Claude at its core, and a practical lesson in npm security — March 31, 2026.">
+  <title>2026-03-31 – Source Map Leak, Microsoft's Claude Bet, and npm Security Lessons | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-03-31</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Source Map Leak, Microsoft's Claude Bet, and npm Security Lessons</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-03-31.png" alt="Source Map Leak, Microsoft's Claude Bet, and npm Security Lessons — visual for 2026-03-31">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code TypeScript Source Leaked via npm Source Map
+     Source: https://github.com/Kuberwastaken/claude-code (mirror)
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Code&#8217;s Full Source Code Leaked via npm Source Map</h2>
+
+  <p>On March 31, security researcher Chaofan Shou publicly disclosed that the complete unobfuscated TypeScript source code of the Claude Code CLI had been inadvertently shipped inside the published npm package. The culprit: a standard JavaScript source map file (<code>cli.js.map</code>) included in the <code>@anthropic-ai/claude-code</code> package whose <code>sourcesContent</code> field contained every original <code>.ts</code> and <code>.tsx</code> file verbatim. Anyone who had installed the package had, without knowing it, downloaded Anthropic's entire private codebase for Claude Code.</p>
+
+  <h3>The "Undercover Mode" irony</h3>
+  <p>What made the disclosure particularly striking was that the leaked source revealed Anthropic had built a feature called <strong>"Undercover Mode"</strong> — a mechanism specifically designed to prevent the accidental exposure of internal system prompts and sensitive configuration when Claude Code is running in certain environments. The code intended to protect Anthropic's internal information was itself publicly exposed through a different, overlooked channel.</p>
+
+  <h3>What the leaked source revealed</h3>
+  <ul>
+    <li>The full TypeScript implementation of the Claude Code CLI, including agent loop logic, tool invocation handlers, and permission relay code.</li>
+    <li>Internal feature flags and experimental code paths not yet exposed in the public CLI.</li>
+    <li>The Undercover Mode implementation and the list of triggers that activate it.</li>
+    <li>Comments and internal documentation that had never been intended for public view.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Anthropic&#8217;s response</strong>
+    <p>Anthropic acknowledged the disclosure and moved quickly to publish a patched version of the npm package with source maps excluded. The company noted that no API keys, user data, or production secrets were exposed — the leak was source code only. GitHub mirrors created for research purposes remained accessible.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">claude code</span>
+    <span class="tag">security</span>
+    <span class="tag">npm</span>
+    <span class="tag">source maps</span>
+    <span class="tag">disclosure</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Microsoft Revamps Copilot with Claude at its Core
+     Source: https://fortune.com/2026/03/31/microsoft-revamps-copilot-with-anthropic/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Microsoft Revamps Copilot with Claude — A Multi-Model Future Takes Shape</h2>
+
+  <p>On the same day as the source map story, Fortune reported that Microsoft has significantly upgraded Copilot to use Claude alongside GPT in a tandem architecture. Under the new design, GPT generates draft responses while Claude acts as a <strong>critique and verification layer</strong> — reviewing each draft for completeness, factual accuracy, and citation quality before the response is delivered to the user. The arrangement positions Anthropic as essential reliability infrastructure inside Microsoft's enterprise AI stack.</p>
+
+  <h3>Why this matters architecturally</h3>
+  <p>The Microsoft design is a concrete, large-scale deployment of a pattern the AI community has been discussing in theory: using different models' distinct strengths in a pipeline rather than betting everything on a single model. GPT's breadth and speed handles first-pass generation; Claude's reasoning and citation discipline handles quality control. Neither model does everything; each does what it does best.</p>
+
+  <h3>Implications for Anthropic</h3>
+  <ul>
+    <li><strong>Revenue diversification:</strong> The Copilot integration gives Anthropic a high-volume inference channel through Microsoft's enterprise customer base — separate from its direct Claude.ai subscription revenue.</li>
+    <li><strong>Trust signal:</strong> Microsoft choosing Claude for the verification role (rather than another GPT variant) is a public endorsement of Claude's reliability and accuracy characteristics.</li>
+    <li><strong>Multi-model becomes mainstream:</strong> When a product used by hundreds of millions of people ships with a multi-model architecture, it normalises the pattern. Expect other major platforms to follow with their own model-mixing strategies in 2026.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Lesson for your own builds</strong>
+    <p>If you are building agentic pipelines, the Microsoft pattern is worth studying: use a fast/cheap model for drafting, and route the output through a more careful model for a structured critique pass. The cost of the second pass is offset by the quality improvement and reduced hallucination risk in the final output.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Microsoft</span>
+    <span class="tag">Copilot</span>
+    <span class="tag">multi-model</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">partnerships</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Practical Lesson: Stripping Source Maps from npm Packages
+     Source: https://docs.npmjs.com/cli/v10/configuring-npm/package-json#files
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Don&#8217;t Ship What You Don&#8217;t Mean To — Source Map Security for npm Publishers</h2>
+
+  <p>The Claude Code source map incident is, at its core, a well-known npm publishing footgun that trips up teams across the industry. Source maps are invaluable during development — they let you debug minified code against the original TypeScript. But they have no business being inside a published npm package unless you <em>explicitly intend</em> to ship your source. Here is how to prevent the same mistake in your own packages.</p>
+
+  <h3>Option 1 — Exclude in <code>.npmignore</code></h3>
+  <pre><code># .npmignore
+**/*.map
+**/*.js.map
+**/*.css.map
+</code></pre>
+
+  <h3>Option 2 — Use the <code>files</code> field in <code>package.json</code> (preferred)</h3>
+  <p>The <code>files</code> allowlist is safer than <code>.npmignore</code> because it opts-in only what you want to ship, rather than trying to remember every file type to exclude.</p>
+  <pre><code>{
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "README.md",
+    "LICENSE"
+  ]
+}
+</code></pre>
+
+  <h3>Option 3 — Build-step flag</h3>
+  <p>If you use esbuild, webpack, or Rollup, disable source map generation in your production build config and keep it only in your development/watch build:</p>
+  <pre><code># esbuild production
+esbuild src/index.ts --bundle --outfile=dist/cli.js --sourcemap=false
+
+# webpack
+devtool: process.env.NODE_ENV === 'production' ? false : 'source-map'
+</code></pre>
+
+  <h3>Verify before publishing</h3>
+  <p>Run <code>npm pack --dry-run</code> before every release. It lists every file that will be included in the tarball — if you see a <code>.map</code> file, fix it before publishing. This one command would have caught the Claude Code issue before it shipped.</p>
+
+  <div class="callout warning">
+    <strong>Source maps are not the only risk</strong>
+    <p>While you are auditing your <code>npm pack</code> output, also look for <code>.env</code> files, credential configs, internal test fixtures, and any file that contains paths or comments that reveal internal infrastructure. The <code>files</code> allowlist approach eliminates all of these in one step.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">npm</span>
+    <span class="tag">security</span>
+    <span class="tag">source maps</span>
+    <span class="tag">publishing</span>
+    <span class="tag">developer tips</span>
+  </div>
+</article>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude.</p>
+  </footer>
+
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+todayYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

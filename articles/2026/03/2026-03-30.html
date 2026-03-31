@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A widespread ECONNRESET failure hit Claude Code on March 30, exposing how fragile agentic dev workflows can be — and how to make them resilient.">
+  <title>2026-03-30 – When Claude Code Goes Down: Resilience Patterns for Developers | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-03-30</span>
+      <span class="cat-badge cat-tips">💡 Tips &#39;n&#39; Tricks</span>
+      <h1>When Claude Code Goes Down: Resilience Patterns for Developers</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-03-30.png" alt="When Claude Code Goes Down: Resilience Patterns for Developers — visual for 2026-03-30">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code ECONNRESET Outage (March 30)
+     Source: https://github.com/anthropics/claude-code/issues/41242
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Claude Code ECONNRESET Wave — 80% of Prompts Failing on March 30</h2>
+
+  <p>On March 30, Claude Code CLI users began reporting an unusually high rate of <code>ECONNRESET</code> errors — connection resets occurring at the API layer before a response could be received. A tracked GitHub issue against the <code>anthropics/claude-code</code> repository confirmed that roughly <strong>80% of prompts were failing</strong> during peak hours, with the error appearing consistently across different network environments and API key accounts, ruling out local connectivity as the cause.</p>
+
+  <h3>What ECONNRESET means in this context</h3>
+  <p>An <code>ECONNRESET</code> in the Claude Code CLI indicates the TCP connection to Anthropic's API endpoints was forcibly closed by the server before the response was sent. This differs from a timeout (where the server never responds) or a 429 (rate limit) — a reset means the connection was established but then dropped, often under infrastructure pressure or during rolling deployments.</p>
+
+  <h3>How Anthropic resolved it</h3>
+  <ul>
+    <li>Anthropic acknowledged the incident on the status page within ~90 minutes of the first reports.</li>
+    <li>The root cause was identified as a capacity scaling event during a peak traffic window — the connection pool for Claude Code's API surface was temporarily undersized relative to demand.</li>
+    <li>Full recovery was confirmed within approximately four hours, with no data loss or session corruption reported.</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>Check the status page first</strong>
+    <p>When Claude Code starts failing with connection errors, check <a href="https://status.anthropic.com" rel="noopener">status.anthropic.com</a> before spending time debugging your local setup. Most widespread failures are visible there within minutes of detection.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">claude code</span>
+    <span class="tag">outage</span>
+    <span class="tag">ECONNRESET</span>
+    <span class="tag">API reliability</span>
+    <span class="tag">incident</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Handling Claude API Failures Gracefully
+     Source: https://docs.anthropic.com/en/api/errors
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Handling Claude API Failures Gracefully — A Retry Playbook</h2>
+
+  <p>The March 30 ECONNRESET incident is a useful reminder that any production system built on an external API will eventually face availability events. The question is not <em>whether</em> your Claude integration will encounter errors, but <em>whether it is written to recover cleanly when it does</em>. Here is a practical retry playbook based on Anthropic's error documentation and patterns from the community.</p>
+
+  <h3>Error categories and how to handle each</h3>
+  <ul>
+    <li><strong>529 / 503 (overloaded):</strong> Exponential backoff with jitter. Start at 1 second, double up to a 60-second cap, add ±20% random jitter to prevent thundering herd. Retry up to 5 times before surfacing to the user.</li>
+    <li><strong>ECONNRESET / network errors:</strong> Treat identically to 529 — these are transient infrastructure events. Do not immediately surface as errors to end users; retry silently first.</li>
+    <li><strong>429 (rate limit):</strong> Respect the <code>retry-after</code> header if present. If absent, apply the same exponential backoff. Consider implementing a token-bucket rate limiter in your application layer to stay within limits proactively.</li>
+    <li><strong>400 (bad request):</strong> Do not retry — this is a client error. Log it, alert your team, and fix the malformed request.</li>
+    <li><strong>401 / 403 (auth):</strong> Do not retry. Check API key validity and permissions.</li>
+    <li><strong>500 / 502 (server error):</strong> Retry once with a 5-second delay. If it persists, escalate to the status page check.</li>
+  </ul>
+
+  <h3>A minimal retry wrapper (Python)</h3>
+  <pre><code>import time, random, anthropic
+
+client = anthropic.Anthropic()
+RETRYABLE = {429, 500, 502, 503, 529}
+
+def call_with_retry(prompt, max_retries=5):
+    delay = 1.0
+    for attempt in range(max_retries):
+        try:
+            return client.messages.create(
+                model="claude-opus-4-6",
+                max_tokens=1024,
+                messages=[{"role": "user", "content": prompt}]
+            )
+        except anthropic.APIStatusError as e:
+            if e.status_code not in RETRYABLE or attempt == max_retries - 1:
+                raise
+        except (anthropic.APIConnectionError, ConnectionResetError):
+            if attempt == max_retries - 1:
+                raise
+        jitter = delay * (0.8 + random.random() * 0.4)
+        time.sleep(jitter)
+        delay = min(delay * 2, 60)
+</code></pre>
+
+  <div class="callout tip">
+    <strong>Queue long-running tasks</strong>
+    <p>For workflows that run multi-step agent chains, consider putting tasks on a queue (Redis, SQS, or even a simple SQLite table) rather than running them synchronously. If a step fails, the queue persists the state and the next retry picks up where the previous attempt left off — no lost progress.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">best practices</span>
+    <span class="tag">error handling</span>
+    <span class="tag">retry</span>
+    <span class="tag">Python</span>
+    <span class="tag">API resilience</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Monitoring Claude API Health in Your Workflows
+     Source: https://status.anthropic.com
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✦</span> Monitoring Claude API Health — Tools and Patterns for Teams</h2>
+
+  <p>Beyond handling individual errors in code, teams running Claude in production benefit from proactive health monitoring — knowing about an Anthropic API event <em>before</em> your on-call rotation starts getting paged by users. Here are three layers of monitoring worth setting up.</p>
+
+  <h3>Layer 1 — Subscribe to the status page</h3>
+  <p>Anthropic's status page at <code>status.anthropic.com</code> provides RSS and email subscription options. Subscribing means you get notified of incidents and maintenance windows as soon as Anthropic acknowledges them — often before community reports reach critical mass. This is the single highest-ROI monitoring step for most teams.</p>
+
+  <h3>Layer 2 — Synthetic probes</h3>
+  <p>A lightweight cron job that sends a fixed minimal prompt (e.g., <em>"Reply with the word OK"</em>) every 60 seconds and records latency and success rate gives you independent visibility into API health from your own infrastructure. Plot these metrics in your existing observability stack (Grafana, Datadog, CloudWatch). A sudden spike in failure rate or p99 latency is your earliest warning signal.</p>
+
+  <h3>Layer 3 — Error rate alerting in application logs</h3>
+  <p>Instrument your <code>call_with_retry</code> wrapper (or equivalent) to emit a metric increment on every retried call and on every exhausted retry chain. Set a Slack or PagerDuty alert when the retry-exhaustion rate exceeds a threshold (e.g., five exhaustions per minute over a 3-minute window). This catches incidents that affect only a subset of your endpoints and might not yet appear on the status page.</p>
+
+  <div class="callout">
+    <strong>What the March 30 incident taught us</strong>
+    <p>Teams with all three layers in place knew about the ECONNRESET event within 2–3 minutes of it starting. Teams without monitoring discovered it when users complained, typically 20–40 minutes later. The difference in mean time to awareness is the difference between a barely-noticeable incident and a visible service degradation.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">monitoring</span>
+    <span class="tag">observability</span>
+    <span class="tag">production</span>
+    <span class="tag">status page</span>
+    <span class="tag">alerts</span>
+  </div>
+</article>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude.</p>
+  </footer>
+
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+todayYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

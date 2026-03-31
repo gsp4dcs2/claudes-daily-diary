@@ -2962,6 +2962,115 @@ def img_kandinsky_20260328():
     return base
 
 
+def img_calder_20260330():
+    """Alexander Calder mobile style — API resilience / developer balance theme."""
+    base = Image.new("RGB", (W, H), (248, 246, 240))
+
+    # 1. Thin black structural lines radiating from two pivot points (Calder mobile armatures)
+    arm = layer(); adraw = ImageDraw.Draw(arm)
+    # Primary horizontal spine
+    adraw.line([(60, 220), (1140, 220)], fill=(18, 18, 18, 230), width=4)
+    # Secondary arm hanging from centre
+    adraw.line([(600, 220), (600, 420)], fill=(18, 18, 18, 230), width=3)
+    # Tertiary arms
+    adraw.line([(200, 220), (200, 380)], fill=(18, 18, 18, 230), width=3)
+    adraw.line([(940, 220), (940, 100)], fill=(18, 18, 18, 230), width=3)
+    adraw.line([(350, 380), (750, 380)], fill=(18, 18, 18, 230), width=3)
+    adraw.line([(350, 380), (350, 530)], fill=(18, 18, 18, 230), width=2)
+    adraw.line([(750, 380), (750, 510)], fill=(18, 18, 18, 230), width=2)
+    adraw.line([(100, 100), (450, 100)], fill=(18, 18, 18, 230), width=3)
+    adraw.line([(270, 100), (270, 220)], fill=(18, 18, 18, 230), width=2)
+    base = comp(base, arm)
+
+    # 2. Bold primary-coloured flat shapes (Calder signature discs and teardrops)
+    shapes = [
+        # (shape, bbox, fill_rgba, outline_rgba)
+        ("ellipse",  [(50, 50), (200, 155)],    (214, 30, 40, 240),   (18, 18, 18, 255)),   # red disc top-left
+        ("ellipse",  [(360, 50), (530, 155)],   (255, 210, 0, 240),   (18, 18, 18, 255)),   # yellow disc
+        ("ellipse",  [(820, 30), (1010, 185)],  (26, 80, 200, 235),   (18, 18, 18, 255)),   # blue disc top-right
+        ("ellipse",  [(130, 330), (290, 440)],  (214, 30, 40, 235),   (18, 18, 18, 255)),   # red oval left
+        ("ellipse",  [(500, 390), (720, 490)],  (26, 80, 200, 235),   (18, 18, 18, 255)),   # blue oval centre
+        ("ellipse",  [(280, 475), (440, 590)],  (255, 210, 0, 230),   (18, 18, 18, 255)),   # yellow low-left
+        ("ellipse",  [(670, 455), (850, 575)],  (214, 30, 40, 230),   (18, 18, 18, 255)),   # red low-right
+        ("ellipse",  [(880, 130), (1050, 225)], (255, 210, 0, 225),   (18, 18, 18, 255)),   # yellow right
+        ("ellipse",  [(1020, 320), (1160, 430)],(26, 80, 200, 220),   (18, 18, 18, 255)),   # blue far-right
+    ]
+    for kind, bbox, fill, outline in shapes:
+        sl = layer(); sd = ImageDraw.Draw(sl)
+        if kind == "ellipse":
+            sd.ellipse(bbox, fill=fill, outline=outline, width=4)
+        base = comp(base, sl)
+
+    # 3. Small accent dots at pivot/balance points
+    dots = layer(); ddraw = ImageDraw.Draw(dots)
+    pivots = [(60, 220), (600, 220), (940, 220), (200, 220), (350, 380),
+              (750, 380), (270, 100), (350, 530), (750, 510), (1140, 220)]
+    for px, py in pivots:
+        ddraw.ellipse([(px - 8, py - 8), (px + 8, py + 8)],
+                      fill=(18, 18, 18, 230), outline=(18, 18, 18, 255), width=2)
+    base = comp(base, dots)
+
+    # 4. Subtle warm cream texture wash (Calder canvas feel)
+    tex = layer(); tdraw = ImageDraw.Draw(tex)
+    for _ in range(900):
+        tx = rng.randint(0, W); ty = rng.randint(0, H)
+        tdraw.ellipse([(tx - 1, ty - 1), (tx + 1, ty + 1)], fill=(180, 160, 120, 18))
+    base = comp(base, tex)
+
+    return base
+
+
+def img_malevich_20260331():
+    """Kazimir Malevich Suprematist style — source map leak / security theme."""
+    base = Image.new("RGB", (W, H), (238, 234, 222))   # cream/off-white Suprematist ground
+
+    # 1. Large dominant black rectangle (bold Suprematist anchor — the leaked "black box")
+    r1 = layer(); ImageDraw.Draw(r1).rectangle(
+        [(80, 80), (560, 420)], fill=(18, 18, 18, 245))
+    base = comp(base, r1)
+
+    # 2. Bold red tilted rectangle (danger / alert — the disclosure event)
+    r2 = layer(); r2d = ImageDraw.Draw(r2)
+    pts2 = [(620, 40), (1140, 110), (1100, 310), (580, 240)]
+    r2d.polygon(pts2, fill=(210, 28, 38, 230), outline=(18, 18, 18, 255))
+    base = comp(base, r2)
+
+    # 3. Navy blue square (the secure / patched state)
+    r3 = layer(); ImageDraw.Draw(r3).rectangle(
+        [(700, 370), (1050, 590)], fill=(22, 48, 140, 220))
+    base = comp(base, r3)
+
+    # 4. Yellow tilted bar (the Microsoft/partnership signal cutting across)
+    r4 = layer(); r4d = ImageDraw.Draw(r4)
+    pts4 = [(0, 460), (480, 420), (500, 500), (0, 545)]
+    r4d.polygon(pts4, fill=(240, 195, 0, 210), outline=(18, 18, 18, 180))
+    base = comp(base, r4)
+
+    # 5. Small white rectangle (the fix / patch — floating free in Suprematist space)
+    r5 = layer(); ImageDraw.Draw(r5).rectangle(
+        [(880, 440), (1140, 520)], fill=(255, 255, 255, 230), outline=(18, 18, 18, 200))
+    base = comp(base, r5)
+
+    # 6. Thin black diagonal line (tension / leakage vector)
+    r6 = layer(); ImageDraw.Draw(r6).line(
+        [(560, 80), (700, 370)], fill=(18, 18, 18, 200), width=6)
+    base = comp(base, r6)
+
+    # 7. Small floating red square (residual vulnerability)
+    r7 = layer(); ImageDraw.Draw(r7).rectangle(
+        [(1060, 140), (1160, 240)], fill=(210, 28, 38, 200))
+    base = comp(base, r7)
+
+    # 8. Faint pencil-sketch texture (Suprematist canvas grain)
+    tex = layer(); tdraw = ImageDraw.Draw(tex)
+    for _ in range(600):
+        tx = rng.randint(0, W); ty = rng.randint(0, H)
+        tdraw.ellipse([(tx, ty), (tx + 1, ty + 1)], fill=(100, 90, 70, 14))
+    base = comp(base, tex)
+
+    return base
+
+
 def img_mondrian_20260329():
     """Piet Mondrian Broadway Boogie Woogie style — Economic Index / learning curves theme."""
     base = Image.new("RGB", (W, H), (245, 241, 228))
@@ -3908,6 +4017,8 @@ DAYS = [
     ("2026-03-27", img_rothko_20260327,     "Mythos",         "Mark Rothko"),
     ("2026-03-28", img_kandinsky_20260328, "Growth Network",  "Wassily Kandinsky"),
     ("2026-03-29", img_mondrian_20260329,  "Learning Curves", "Piet Mondrian"),
+    ("2026-03-30", img_calder_20260330,   "API Resilience",  "Alexander Calder"),
+    ("2026-03-31", img_malevich_20260331, "Source Leak",     "Kazimir Malevich"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -106,6 +106,26 @@ automatically). Copy the structure of the most recent existing file, updating:
   <meta name="twitter:image"      content="https://claudebeat.ai/articles/{yyyy}/{mm}/{yyyy-mm-dd}.png">
 ```
 
+**JSON-LD structured data block** — insert just before `</head>`:
+
+```html
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "{Title (no date prefix)}",
+    "description": "{same as meta description}",
+    "datePublished": "{yyyy-mm-dd}",
+    "dateModified": "{yyyy-mm-dd}",
+    "url": "https://claudebeat.ai/articles/{yyyy}/{mm}/{yyyy-mm-dd}.html",
+    "image": "https://claudebeat.ai/articles/{yyyy}/{mm}/{yyyy-mm-dd}.png",
+    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/{yyyy}/{mm}/{yyyy-mm-dd}.html"},
+    "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+    "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+  }
+  </script>
+```
+
 **Category badge** — choose the one that best fits the day's primary content:
 
 | Category | Key | Icon | Use when… |

@@ -12,3 +12,5 @@
 | [backfill_jan2026.md](backfill_jan2026.md) | project | January 2026 backfill quality map — which articles have verified real events vs. invented content |
 | [feedback_nav_behaviour.md](feedback_nav_behaviour.md) | feedback | Golden rule for nav-bar state, search persistence rules, month label source priority, and confirmed acceptable UX trade-offs |
 | [feedback_svg_inkscape_cleanup.md](feedback_svg_inkscape_cleanup.md) | feedback | Always strip Inkscape metadata bloat from any SVG the user sends before using or committing |
+| [feedback_confirm_before_starting.md](feedback_confirm_before_starting.md) | feedback | Always confirm before starting work — a short reply is not an instruction to proceed |
+| [project_telegram_approval.md](project_telegram_approval.md) | project | Telegram bot editorial approval workflow — full build plan ready to implement next session |

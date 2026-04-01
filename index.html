@@ -2006,6 +2006,10 @@
     if (paramSq) { searchInput.value = paramSq; sessionStorage.setItem('search_query', paramSq); }
     if (params.get('search') === '1' || paramSq) setMode('search');
 
+    // Logo — true Home: always jump to latest month
+    const logoLink = document.querySelector('.logo-link');
+    if (logoLink) logoLink.addEventListener('click', e => { e.preventDefault(); goMonth(todayYM); });
+
     btnPrev.addEventListener('click', () => { if (!btnPrev.disabled) goMonth(shiftMonth(currentMonth, -1)); });
     btnNext.addEventListener('click', () => { if (!btnNext.disabled) goMonth(shiftMonth(currentMonth, +1)); });
     // N3 — month label: switch to home view and restore scroll for current month

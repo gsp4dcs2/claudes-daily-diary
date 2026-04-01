@@ -50,7 +50,10 @@
       "WebFetch(domain:resources.anthropic.com)",
       "Bash(grep -v \"^--$\")",
       "WebFetch(domain:github.com)",
-      "Bash(python add_og_tags.py)"
+      "Bash(python add_og_tags.py)",
+      "Bash(python generate_sitemap.py)",
+      "Bash(python add_json_ld.py)",
+      "Bash(python:*)"
     ]
   }
 }

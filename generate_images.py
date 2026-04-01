@@ -3071,6 +3071,78 @@ def img_malevich_20260331():
     return base
 
 
+def img_delaunay_20260401():
+    """Robert Delaunay Orphist style — Proactive Mode & Australia global reach theme."""
+    base = Image.new("RGB", (W, H), (8, 12, 38))   # deep indigo-black bg
+
+    # 1. Large overlapping spectral-ring discs — Delaunay's signature simultanism
+    discs = [
+        # (cx, cy, r_outer, r_inner, colour_outer, colour_inner)
+        (300,  310, 280, 180, (220, 50,  20, 180), (255, 140,  0, 140)),
+        (750,  200, 240, 150, (20,  90, 210, 170), (80, 180, 255, 120)),
+        (980,  440, 200, 120, (30, 165,  60, 180), (120, 240, 100, 120)),
+        (520,  500, 170, 100, (200, 20, 160, 160), (255, 100, 220, 110)),
+        (1100, 140, 150,  80, (240, 200,   0, 160), (255, 240, 120, 110)),
+        (100,   80, 130,  70, (0,  200, 200, 150), (80, 255, 240, 100)),
+    ]
+    for cx, cy, ro, ri, co, ci in discs:
+        # Outer ring
+        ol = layer(); od = ImageDraw.Draw(ol)
+        od.ellipse([(cx-ro, cy-ro), (cx+ro, cy+ro)], fill=co)
+        base = comp(base, ol)
+        # Inner ring (lighter)
+        il = layer(); id2 = ImageDraw.Draw(il)
+        id2.ellipse([(cx-ri, cy-ri), (cx+ri, cy+ri)], fill=ci)
+        base = comp(base, il)
+        # Core highlight
+        cl2 = layer(); cd2 = ImageDraw.Draw(cl2)
+        cr = ri // 3
+        cd2.ellipse([(cx-cr, cy-cr), (cx+cr, cy+cr)], fill=(255, 255, 255, 80))
+        base = comp(base, cl2)
+
+    # 2. Rainbow arc bands — Delaunay's colour-wheel rhythm
+    arc_layer = layer()
+    ad = ImageDraw.Draw(arc_layer)
+    rainbow = [
+        (220, 20,  20,  200),   # red
+        (255, 100,  0,  180),   # orange
+        (240, 210,  0,  170),   # yellow
+        (40,  180, 50,  180),   # green
+        (20,  90, 220,  180),   # blue
+        (140, 30, 200,  170),   # violet
+    ]
+    for i, col in enumerate(rainbow):
+        r = 380 + i * 28
+        ad.arc([(W//2 - r, H//2 - r), (W//2 + r, H//2 + r)],
+               start=210 + i*10, end=330 + i*10, fill=col, width=14)
+    base = comp(base, arc_layer)
+
+    # 3. Scatter of small luminous dots — the "signal" texture
+    dot_layer = layer()
+    dd = ImageDraw.Draw(dot_layer)
+    spectral_cols = [(255,60,60,180),(255,160,0,160),(240,240,0,160),
+                     (60,220,60,160),(60,120,255,160),(200,60,255,160)]
+    for _ in range(320):
+        dx = rng.randint(0, W); dy = rng.randint(0, H)
+        dr = rng.randint(2, 6)
+        col = rng.choice(spectral_cols)
+        dd.ellipse([(dx-dr, dy-dr), (dx+dr, dy+dr)], fill=col)
+    base = comp(base, dot_layer)
+
+    # 4. Thin radial lines from canvas centre — Delaunay's light-ray emanations
+    ray_layer = layer()
+    rd = ImageDraw.Draw(ray_layer)
+    cx0, cy0 = W // 2, H // 2
+    for angle_deg in range(0, 360, 18):
+        angle = math.radians(angle_deg)
+        x1 = int(cx0 + math.cos(angle) * 480)
+        y1 = int(cy0 + math.sin(angle) * 480)
+        rd.line([(cx0, cy0), (x1, y1)], fill=(255, 255, 255, 18), width=1)
+    base = comp(base, ray_layer)
+
+    return base
+
+
 def img_mondrian_20260329():
     """Piet Mondrian Broadway Boogie Woogie style — Economic Index / learning curves theme."""
     base = Image.new("RGB", (W, H), (245, 241, 228))
@@ -4019,6 +4091,7 @@ DAYS = [
     ("2026-03-29", img_mondrian_20260329,  "Learning Curves", "Piet Mondrian"),
     ("2026-03-30", img_calder_20260330,   "API Resilience",  "Alexander Calder"),
     ("2026-03-31", img_malevich_20260331, "Source Leak",     "Kazimir Malevich"),
+    ("2026-04-01", img_delaunay_20260401, "Proactive Mode",  "Robert Delaunay"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -1989,9 +1989,19 @@
     const catIcons  = { news: '🧭', practice: '✅', tips: '💡' };
     const catLabels = { news: 'Daily News', practice: 'Best Practices', tips: "Tips 'n' Tricks" };
 
+    // Save scroll position when the user clicks through to an article
+    artList.addEventListener('click', e => {
+      if (e.target.closest('a')) {
+        sessionStorage.setItem('scroll_' + currentMonth, String(Math.round(window.scrollY)));
+      }
+    });
+
     // Init
     renderMonth(currentMonth);
     if (paramMonth) history.replaceState({ month: currentMonth }, '', '?month=' + currentMonth);
+    // Restore scroll when returning from an article page
+    const initScroll = sessionStorage.getItem('scroll_' + currentMonth);
+    if (initScroll !== null) window.scrollTo({ top: +initScroll, behavior: 'instant' });
     const paramSq = params.get('sq');
     if (paramSq) { searchInput.value = paramSq; sessionStorage.setItem('search_query', paramSq); }
     if (params.get('search') === '1' || paramSq) setMode('search');

@@ -193,8 +193,8 @@
     btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
     btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
     lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
-    home.href = root+'index.html?month='+todayYM;
-    if (logo) logo.href = root+'index.html?month='+todayYM;
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+ctxYM;
     search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
   })();
   </script>

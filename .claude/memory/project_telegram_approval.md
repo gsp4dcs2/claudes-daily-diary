@@ -1,80 +1,83 @@
 ---
 name: project_telegram_approval
-description: Plan to implement Telegram bot editorial approval workflow for autonomous daily diary updates
+description: Telegram bot editorial approval workflow — current build state, credentials, and exact next step
 type: project
 ---
 
 The user has chosen Option C — Telegram bot — as the editorial approval mechanism for the fully autonomous diary cron job.
 
-**Why:** When the cron job runs at 07:00 daily, Claude writes the day's content and sends a summary to a private Telegram bot. The user taps Approve or Reject from their phone. On Approve, the content is committed and pulled live on the VM. On Reject, the draft is discarded and flagged for manual review.
-
-**How to apply:** When the user is ready, implement this end-to-end in a single session. Full plan below.
+**Why:** When the cron job runs at 07:00 daily, Claude writes the day's content and sends a summary to a private Telegram bot. The user taps Approve or Reject from their phone. On Approve, the content is committed and pushed live on the VM. On Reject, the draft is discarded.
 
 ---
 
-## What needs to be built
+## Current state (end of session 2026-04-02)
 
-### 1. Create a Telegram bot (user does this — 2 minutes)
-- Open Telegram, search for **@BotFather**
-- Send `/newbot`, follow prompts, choose a name (e.g. "ClaudeBeat Editor")
-- BotFather returns a **bot token** (looks like `123456789:ABCdef...`) — save it
-- Start a chat with the new bot (so it can message you)
-- Get your **chat ID**: message `@userinfobot` in Telegram — it returns your numeric chat ID
+### ✅ Done
+- Telegram installed on phone, account created as "TeleClaude"
+- Bot created via @BotFather: **claudebeat_editor_bot**
+- Bot token: `8633455378:AAENHCKKt4nT9z8K6L9tKOyf5iY3s6a8Ups`
+- Chat ID: `8613239362`
+- python-telegram-bot v22.7 installed at `~/claudebeat-venv/`
+- Credentials file created at `~/claudebeat-approve.env` (chmod 600)
 
-### 2. Install python-telegram-bot on the VM
+### ❌ Stuck at
+A simple "hello world" Telegram message test failed — no message arrived on phone and no error was shown. Root cause unknown — most likely one of:
+1. The bot hasn't been properly started by the user (need to open `t.me/claudebeat_editor_bot` and tap Start)
+2. A network/firewall issue on the VM blocking outbound HTTPS to Telegram's API
+3. The test script silently failed
+
+### 🔜 Next session — start here
+Run this diagnostic to get a clear error message:
 ```bash
-pip install python-telegram-bot
-```
-
-### 3. Approval workflow logic (to add to cron/skill runner)
-
-The daily cron script should:
-1. Run the diary skill (research + write HTML)
-2. `git diff --stat` to confirm new files
-3. Send a Telegram message to the user's chat ID with:
-   - Date
-   - Article title + category
-   - Entry headlines (bullet list)
-   - Sources used
-   - Two inline keyboard buttons: ✅ Approve / ❌ Reject
-4. Wait for a button press (polling or webhook)
-5. On **Approve**: `git commit`, `git push`, `cd /var/www/claudebeat && git pull`
-6. On **Reject**: `git checkout -- .` (discard), send confirmation message
-
-### 4. Sending a message with approve/reject buttons (Python sketch)
-```python
+~/claudebeat-venv/bin/python3 -c "
 import asyncio
-from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Application, CallbackQueryHandler
+from telegram import Bot
 
-TOKEN   = "YOUR_BOT_TOKEN"
-CHAT_ID = YOUR_CHAT_ID   # integer
+async def test():
+    async with Bot('8633455378:AAENHCKKt4nT9z8K6L9tKOyf5iY3s6a8Ups') as bot:
+        info = await bot.get_me()
+        print('Bot name:', info.first_name)
+        await bot.send_message(chat_id=8613239362, text='ClaudeBeat bot alive!')
+        print('Message sent!')
 
-async def send_approval_request(summary: str, date: str):
-    bot = Bot(token=TOKEN)
-    keyboard = [[
-        InlineKeyboardButton("✅ Approve", callback_data=f"approve:{date}"),
-        InlineKeyboardButton("❌ Reject",  callback_data=f"reject:{date}"),
-    ]]
-    await bot.send_message(
-        chat_id=CHAT_ID,
-        text=summary,
-        reply_markup=InlineKeyboardMarkup(keyboard),
-        parse_mode="Markdown"
-    )
+asyncio.run(test())
+"
 ```
 
-### 5. Timeout / fallback
-If no response within 4 hours, send a reminder. If no response within 8 hours, auto-approve (so the diary doesn't fall silent on days the user is unavailable). This threshold is configurable.
+If `get_me()` fails → token or network issue.
+If `get_me()` succeeds but send fails → chat_id issue (user hasn't started the bot).
+
+Also verify the user has opened `t.me/claudebeat_editor_bot` on their phone and tapped **Start**.
 
 ---
 
-## What the user needs to have ready for the session
-- Telegram installed on phone
-- 5 minutes to create the bot via @BotFather and get the token + chat ID
-- SSH access to the VM
+## What still needs to be built (next session onwards)
 
-## Notes
-- Bot token and chat ID should be stored in a `.env` file on the VM (not in git)
-- The `.env` file should be added to `.gitignore`
-- This replaces the manual `/sk-update-claudes-daily-diary` invocation entirely
+### 1. Credentials file (already done)
+`~/claudebeat-approve.env` contains TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID.
+
+### 2. Approval script to write: `~/claudebeat-approve.py`
+Logic:
+1. Read today's new article from `/var/www/claudebeat/articles/yyyy/mm/yyyy-mm-dd.html`
+2. Extract title + entry headlines
+3. Send Telegram message with ✅ Approve / ❌ Reject inline buttons
+4. Poll for response (timeout 8 hours → auto-approve)
+5. On approve: `cd /var/www/claudebeat && git add -A && git commit && git push && git pull`
+6. On reject: discard changes, notify user
+
+### 3. Cron job
+```
+0 7 * * * cd /var/www/claudebeat && claude --non-interactive -p "$(cat .claude/skills/sk-update-claudes-daily-diary/SKILL.md)" && ~/claudebeat-venv/bin/python3 ~/claudebeat-approve.py
+```
+
+### 4. .gitignore
+Ensure `.env` and `claudebeat-approve.env` are in `.gitignore`.
+
+---
+
+## VM environment
+- OS: Ubuntu 24.04 LTS
+- Repo: `/var/www/claudebeat`
+- Python venv: `~/claudebeat-venv/`
+- python-telegram-bot: v22.7
+- Credentials: `~/claudebeat-approve.env`

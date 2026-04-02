@@ -82,6 +82,15 @@ Use targeted queries such as:
 Collect **2–4 distinct topics** not already on the covered-topics list.
 Only use sources that are ✅ Approved or 🔍 Provisional in `notes/sources.md`.
 
+**Source quality checks — apply before using any URL:**
+- Reject any aggregator, news-brief service, or outlet that summarises other outlets rather
+  than doing its own reporting (e.g. Inshorts, NewsBytesApp, Flipboard, SmartNews).
+  These make ClaudeBeat's content third-hand. Go directly to the primary source they cite.
+- If a story appears on VentureBeat, use it only as a tip-off: find and cite the underlying
+  primary source (anthropic.com, official GitHub, Tier 1–2 press) instead.
+- When in doubt about a source's tier, skip it and flag the gap rather than publish
+  questionable content.
+
 ### 3b — Create the missing day's file
 
 Create `articles/{yyyy}/{mm}/{yyyy-mm-dd}.html` (the Write tool creates the directory
@@ -331,7 +340,7 @@ Use this structure for every entry (backfill and today):
      Source: {URL used}
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> {Topic Title}</h2>
+  <h2><span class="entry-icon">{category-icon}</span> {Topic Title}</h2>
 
   <p>{One-paragraph summary of the new feature or best practice.}</p>
 
@@ -350,9 +359,23 @@ Use this structure for every entry (backfill and today):
 </article>
 ```
 
+**CRITICAL — `{category-icon}` must be the day's category emoji, never ✦:**
+| Day category | Icon to use in every `entry-icon` span |
+|---|---|
+| Daily News (`cat-news`) | 🧭 |
+| Best Practices (`cat-practice`) | ✅ |
+| Tips 'n' Tricks (`cat-tips`) | 💡 |
+
+The ✦ character must never appear as an entry icon. After writing any day's HTML,
+grep the output for `entry-icon">✦` and fix any occurrences before moving on.
+
 Rules:
 - Keep each entry focused (200–400 words of readable prose + lists).
 - Link to the source in an HTML comment above the `<article>` tag.
+- Every entry must include at least one of: a code example, an actionable recommendation,
+  a callout explaining implementation implications, or a nuance a casual reader would miss.
+- Apply the **"so what?" test** before finalising: could a developer act on this
+  information within 10 minutes of reading it? If not, add more depth or cut the entry.
 - Use existing CSS classes: `.callout`, `.callout.tip`, `.callout.warning`,
   `<pre><code>`, `.tag-list`, `.tag`.
 - Do **not** overwrite existing content — only append.

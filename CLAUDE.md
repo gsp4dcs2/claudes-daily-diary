@@ -49,11 +49,16 @@ No build step, no dependencies — pure HTML/CSS/JS, open directly in a browser 
 ### Entry structure
 ```html
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> {Title}</h2>
+  <h2><span class="entry-icon">{icon}</span> {Title}</h2>
   <p>…</p>
   <div class="tag-list"><span class="tag">{tag}</span></div>
 </article>
 ```
+
+Where `{icon}` is the **day's category emoji** — never ✦:
+- Daily News → 🧭
+- Best Practices → ✅
+- Tips 'n' Tricks → 💡
 
 ### Categories
 

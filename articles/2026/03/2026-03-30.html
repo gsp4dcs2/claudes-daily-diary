@@ -100,7 +100,7 @@
      Source: https://github.com/anthropics/claude-code/issues/41242
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Claude Code ECONNRESET Wave — 80% of Prompts Failing on March 30</h2>
+  <h2><span class="entry-icon">💡</span> Claude Code ECONNRESET Wave — 80% of Prompts Failing on March 30</h2>
 
   <p>On March 30, Claude Code CLI users began reporting an unusually high rate of <code>ECONNRESET</code> errors — connection resets occurring at the API layer before a response could be received. A tracked GitHub issue against the <code>anthropics/claude-code</code> repository confirmed that roughly <strong>80% of prompts were failing</strong> during peak hours, with the error appearing consistently across different network environments and API key accounts, ruling out local connectivity as the cause.</p>
 
@@ -133,7 +133,7 @@
      Source: https://docs.anthropic.com/en/api/errors
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Handling Claude API Failures Gracefully — A Retry Playbook</h2>
+  <h2><span class="entry-icon">💡</span> Handling Claude API Failures Gracefully — A Retry Playbook</h2>
 
   <p>The March 30 ECONNRESET incident is a useful reminder that any production system built on an external API will eventually face availability events. The question is not <em>whether</em> your Claude integration will encounter errors, but <em>whether it is written to recover cleanly when it does</em>. Here is a practical retry playbook based on Anthropic's error documentation and patterns from the community.</p>
 
@@ -192,7 +192,7 @@ def call_with_retry(prompt, max_retries=5):
      Source: https://status.anthropic.com
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Monitoring Claude API Health — Tools and Patterns for Teams</h2>
+  <h2><span class="entry-icon">💡</span> Monitoring Claude API Health — Tools and Patterns for Teams</h2>
 
   <p>Beyond handling individual errors in code, teams running Claude in production benefit from proactive health monitoring — knowing about an Anthropic API event <em>before</em> your on-call rotation starts getting paged by users. Here are three layers of monitoring worth setting up.</p>
 

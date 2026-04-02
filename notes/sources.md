@@ -91,6 +91,7 @@ Excluded (❌) sources must never be used.
 | Dataconomy | dataconomy.com | 🔍 | AI/data coverage; verify claims |
 | Releasebot.io | releasebot.io | 🔍 | Automated changelogs — useful but always cross-check |
 | EBC Financial | ebc.com | ❌ | Financial broker site — **do not use** for editorial content; too promotional |
+| VentureBeat | venturebeat.com | 🔍 | **Tip-off only** — covers similar AI territory to ClaudeBeat; never cite as primary source. If a story appears there, find and use the underlying Tier 1–2 source instead. |
 
 ---
 
@@ -98,7 +99,8 @@ Excluded (❌) sources must never be used.
 
 | Source | URL | Status | Reason |
 |--------|-----|--------|--------|
-| *(none yet)* | | ❌ | |
+| Inshorts | inshorts.com | ❌ | Aggregator — summarises other outlets in <60 words; content is third-hand by design. Always go to the primary source Inshorts credits. |
+| NewsBytesApp | newsbytesapp.com | ❌ | Aggregator — same issue as Inshorts; not original reporting. |
 
 ---
 
@@ -112,4 +114,4 @@ Excluded (❌) sources must never be used.
 
 ---
 
-*Last updated: 2026-03-24*
+*Last updated: 2026-04-02*

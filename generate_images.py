@@ -3977,6 +3977,79 @@ def img_moholy_20251217():
     return base
 
 
+def img_seurat_20260402():
+    """Georges Seurat pointillist style — user sentiment data / observability theme."""
+    base = Image.new("RGB", (W, H), (10, 14, 40))   # deep midnight navy
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Background dot field — low-saturation cool scatter across the full canvas
+    for _ in range(4000):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        r = rng.randint(1, 3)
+        b = rng.randint(25, 70)
+        draw.ellipse([(x-r, y-r), (x+r, y+r)], fill=(b-10, b, b+30))
+
+    # 2. Sentiment heat zones — warm-to-cool gradient blobs representing data clusters
+    heat_zones = [
+        # (cx, cy, radius, inner_colour, outer_colour) — warm = frustration, cool = satisfaction
+        (220,  160, 160, (255,  60,  30, 220), (255, 120,  50, 100)),   # hot frustration zone
+        (580,  420, 140, (255, 180,  20, 200), (255, 220,  80,  80)),   # medium tension zone
+        (950,  200, 170, (30,  160, 255, 200), ( 80, 220, 255, 100)),   # cool satisfied zone
+        (800,  490, 130, (40,  200,  80, 190), (100, 240, 140,  80)),   # positive zone
+        (350,  500, 110, (200,  30, 200, 180), (240, 100, 240,  90)),   # anomaly / edge case
+        (1080, 410, 100, (255, 100,  20, 170), (255, 160,  80,  70)),   # secondary frustration
+    ]
+    for cx, cy, radius, ic, oc in heat_zones:
+        # Outer halo — thousands of tiny dots densifying toward centre
+        for _ in range(800):
+            angle = rng.uniform(0, 2 * math.pi)
+            dist = rng.uniform(0, radius)
+            dx = int(cx + dist * math.cos(angle))
+            dy = int(cy + dist * math.sin(angle))
+            dr = rng.randint(1, 4)
+            # Interpolate colour from outer to inner based on proximity
+            t = dist / radius
+            r_c = int(oc[0] * t + ic[0] * (1 - t))
+            g_c = int(oc[1] * t + ic[1] * (1 - t))
+            b_c = int(oc[2] * t + ic[2] * (1 - t))
+            alpha = int((oc[3] * t + ic[3] * (1 - t)) * (1 - dist / radius * 0.6))
+            hl = layer(); ImageDraw.Draw(hl).ellipse([(dx-dr, dy-dr), (dx+dr, dy+dr)],
+                                                      fill=(r_c, g_c, b_c, alpha))
+            base = comp(base, hl)
+
+    # 3. Signal lines — fine dotted trails connecting the heat zones (data flow)
+    connections = [(0, 2), (1, 3), (0, 1), (2, 4), (3, 5)]
+    for i, j in connections:
+        ax, ay = heat_zones[i][0], heat_zones[i][1]
+        bx, by = heat_zones[j][0], heat_zones[j][1]
+        sl = layer(); sd = ImageDraw.Draw(sl)
+        for step in range(120):
+            t = step / 119
+            mx = int(ax + (bx - ax) * t)
+            my = int(ay + (by - ay) * t)
+            dr = rng.randint(1, 3)
+            alpha = int(120 * math.sin(math.pi * t))
+            sd.ellipse([(mx-dr, my-dr), (mx+dr, my+dr)], fill=(200, 220, 255, alpha))
+        base = comp(base, sl)
+
+    # 4. Foreground spectral accent dots — vivid pinpoints across the whole image
+    spectral = [
+        (255, 50,  50), (255, 140,  0), (240, 230,  0),
+        (50,  220, 80), (50,  140, 255), (200, 60,  255),
+    ]
+    fl = layer(); fd = ImageDraw.Draw(fl)
+    for _ in range(500):
+        fx = rng.randint(0, W); fy = rng.randint(0, H)
+        fr = rng.randint(2, 5)
+        col = rng.choice(spectral)
+        fd.ellipse([(fx-fr, fy-fr), (fx+fr, fy+fr)], fill=(col[0], col[1], col[2], 160))
+    base = comp(base, fl)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -4092,6 +4165,7 @@ DAYS = [
     ("2026-03-30", img_calder_20260330,   "API Resilience",  "Alexander Calder"),
     ("2026-03-31", img_malevich_20260331, "Source Leak",     "Kazimir Malevich"),
     ("2026-04-01", img_delaunay_20260401, "Proactive Mode",  "Robert Delaunay"),
+    ("2026-04-02", img_seurat_20260402,   "Data Signals",    "Georges Seurat"),
 ]
 
 for date, fn, kw, artist in DAYS:

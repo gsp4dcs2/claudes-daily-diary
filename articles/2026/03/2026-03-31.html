@@ -100,7 +100,7 @@
      Source: https://github.com/Kuberwastaken/claude-code (mirror)
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Claude Code&#8217;s Full Source Code Leaked via npm Source Map</h2>
+  <h2><span class="entry-icon">🧭</span> Claude Code&#8217;s Full Source Code Leaked via npm Source Map</h2>
 
   <p>On March 31, security researcher Chaofan Shou publicly disclosed that the complete unobfuscated TypeScript source code of the Claude Code CLI had been inadvertently shipped inside the published npm package. The culprit: a standard JavaScript source map file (<code>cli.js.map</code>) included in the <code>@anthropic-ai/claude-code</code> package whose <code>sourcesContent</code> field contained every original <code>.ts</code> and <code>.tsx</code> file verbatim. Anyone who had installed the package had, without knowing it, downloaded Anthropic's entire private codebase for Claude Code.</p>
 
@@ -134,7 +134,7 @@
      Source: https://fortune.com/2026/03/31/microsoft-revamps-copilot-with-anthropic/
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Microsoft Revamps Copilot with Claude — A Multi-Model Future Takes Shape</h2>
+  <h2><span class="entry-icon">🧭</span> Microsoft Revamps Copilot with Claude — A Multi-Model Future Takes Shape</h2>
 
   <p>On the same day as the source map story, Fortune reported that Microsoft has significantly upgraded Copilot to use Claude alongside GPT in a tandem architecture. Under the new design, GPT generates draft responses while Claude acts as a <strong>critique and verification layer</strong> — reviewing each draft for completeness, factual accuracy, and citation quality before the response is delivered to the user. The arrangement positions Anthropic as essential reliability infrastructure inside Microsoft's enterprise AI stack.</p>
 
@@ -167,7 +167,7 @@
      Source: https://docs.npmjs.com/cli/v10/configuring-npm/package-json#files
      ═══════════════════════════════════════════════════════ -->
 <article class="entry">
-  <h2><span class="entry-icon">✦</span> Don&#8217;t Ship What You Don&#8217;t Mean To — Source Map Security for npm Publishers</h2>
+  <h2><span class="entry-icon">🧭</span> Don&#8217;t Ship What You Don&#8217;t Mean To — Source Map Security for npm Publishers</h2>
 
   <p>The Claude Code source map incident is, at its core, a well-known npm publishing footgun that trips up teams across the industry. Source maps are invaluable during development — they let you debug minified code against the original TypeScript. But they have no business being inside a published npm package unless you <em>explicitly intend</em> to ship your source. Here is how to prevent the same mistake in your own packages.</p>
 

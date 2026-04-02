@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClaudeBeat — Editorial Review Q260402G</title>
+  <style>
+    /* ── Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 13pt;
+      line-height: 1.65;
+      color: #1a1a1a;
+      background: #fff;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 48px 60px;
+    }
+
+    /* ── Cover block ── */
+    .cover {
+      border-left: 6px solid #E8734A;
+      padding: 24px 28px;
+      margin-bottom: 48px;
+      background: #fdf6f2;
+    }
+    .cover .label {
+      font-size: 9pt;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #E8734A;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .cover h1 {
+      font-size: 22pt;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+    .cover .meta {
+      font-size: 10pt;
+      color: #666;
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 44px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .section:last-of-type { border-bottom: none; }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .q-badge {
+      flex-shrink: 0;
+      background: #E8734A;
+      color: #fff;
+      font-size: 9pt;
+      font-weight: 700;
+      letter-spacing: .08em;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-top: 3px;
+    }
+    .section h2 {
+      font-size: 14pt;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.3;
+    }
+
+    /* ── Observation block ── */
+    .observation {
+      background: #f7f7f7;
+      border-left: 4px solid #bbb;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      font-size: 11pt;
+      color: #444;
+      font-style: italic;
+    }
+    .observation strong { font-style: normal; color: #1a1a1a; }
+
+    /* ── Body prose ── */
+    p { margin-bottom: 12px; }
+
+    h3 {
+      font-size: 11pt;
+      font-weight: 700;
+      color: #E8734A;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin: 20px 0 8px;
+    }
+
+    ul, ol {
+      margin: 10px 0 14px 22px;
+    }
+    li { margin-bottom: 6px; }
+
+    /* ── Action box ── */
+    .action-box {
+      background: #fff8f4;
+      border: 1.5px solid #E8734A;
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-top: 18px;
+    }
+    .action-box .action-label {
+      font-size: 9pt;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #E8734A;
+      margin-bottom: 8px;
+    }
+    .action-box ul { margin-top: 4px; }
+
+    /* ── Footer ── */
+    .doc-footer {
+      margin-top: 48px;
+      font-size: 9pt;
+      color: #999;
+      text-align: center;
+      border-top: 1px solid #e8e8e8;
+      padding-top: 16px;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { padding: 20px 32px 40px; font-size: 11pt; }
+      .section { page-break-inside: avoid; }
+      .cover { page-break-after: avoid; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cover -->
+  <div class="cover">
+    <div class="label">ClaudeBeat &mdash; Internal Editorial Review</div>
+    <h1>Observations &amp; Responses<br>from Tonight's Update</h1>
+    <div class="meta">
+      Reference: Q260402Ga &ndash; Q260402Gc &nbsp;&middot;&nbsp; Date: 2026-04-02 &nbsp;&middot;&nbsp; Raised by: George &nbsp;&middot;&nbsp; Prepared by: Claude
+    </div>
+  </div>
+
+
+  <!-- Q1 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="q-badge">Q260402Ga</span>
+      <h2>Entry Icons Reverting to ✦ Instead of Category Emoji</h2>
+    </div>
+
+    <div class="observation">
+      <strong>George:</strong> &ldquo;From article 2026-03-29, the &lsquo;✦&rsquo; are back as bullets — instead of the previously discussed and agreed icons: Best Practices ✅, Tips&rsquo;n&rsquo;Tricks 💡, Daily News 🧭. Why are you forgetting things that I thought were set in stone?&rdquo;
+    </div>
+
+    <h3>What went wrong</h3>
+    <p>This is a genuine failure of consistency, and I take full responsibility for it. The category-icon convention is documented in <code>CLAUDE.md</code> and in the skill file, but the <strong>entry template in SKILL.md Step 5</strong> still shows <code>&lt;span class="entry-icon"&gt;✦&lt;/span&gt;</code> as a generic bullet — and when I produce multiple backfill days in quick succession, I sometimes pull from that template literally without substituting the correct category icon. The ✦ slips through as a default.</p>
+
+    <p>The root cause is a conflict between two parts of the documentation: SKILL.md's entry template (which uses ✦) and CLAUDE.md's convention table (which specifies the category emoji). I am not reliably resolving that conflict in favour of the correct answer.</p>
+
+    <h3>My honest assessment</h3>
+    <p>You are right to call this out firmly. Consistency in visual language is one of the most important signals of editorial quality. A reader who opens three different articles and sees ✦, then 🧭, then ✦ again will notice — and it will undermine confidence in the site's professionalism. This is not a trivial aesthetic matter.</p>
+
+    <div class="action-box">
+      <div class="action-label">Proposed remediation</div>
+      <ul>
+        <li><strong>Fix SKILL.md immediately:</strong> Update Step 5's entry template to make clear that the <code>&lt;h2&gt;</code> icon is the <em>category emoji</em> (🧭 / ✅ / 💡), not ✦. Remove ✦ from the template entirely so there is no ambiguous default to fall back on.</li>
+        <li><strong>Audit affected articles:</strong> Scan all articles in 2026/03 and 2026/04 for <code>entry-icon"&gt;✦</code> and replace with the correct category emoji for each day. This can be done in a single pass.</li>
+        <li><strong>Add a self-check step to the skill:</strong> Before finalising each day's HTML, the skill will verify that no <code>entry-icon"&gt;✦</code> remains in the output.</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- Q2 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="q-badge">Q260402Gb</span>
+      <h2>Inshorts.com — Third-Hand News is Unacceptable</h2>
+    </div>
+
+    <div class="observation">
+      <strong>George:</strong> &ldquo;I'm actually surprised that you elected to &lsquo;grab&rsquo; content from inshorts.com — which obviously grabs its content from the sources it reveals at the end. In this case, newsbytesapp.com. Surely this becomes third-hand news? I want your content to be straight from the horse's mouth, your website to be &lsquo;you heard it here first&rsquo;, and your domain to be a household name.&rdquo;
+    </div>
+
+    <h3>You are completely right</h3>
+    <p>Using Inshorts as a source is indefensible. Inshorts is a content aggregator that summarises articles from other outlets in under 60 words and credits those outlets at the bottom of each card. If I cite Inshorts citing NewsBytesApp citing a primary source, ClaudeBeat is three steps removed from the original reporting. That is not journalism — it is noise.</p>
+
+    <p>This should not have happened under the existing source whitelist. Inshorts is not on the approved list. The fact that it appeared in the research output means a research subagent surfaced it and I failed to catch it before including it. That is a quality-control failure at my end.</p>
+
+    <h3>The standard you are describing</h3>
+    <p>The aspiration — <em>"straight from the horse's mouth," "you heard it here first," "a household name"</em> — is a clear editorial north star. It means:</p>
+    <ul>
+      <li><strong>Primary sources only:</strong> anthropic.com, official GitHub repos, direct press releases, peer-reviewed research. When a mainstream outlet (TechCrunch, Ars Technica) breaks a story, they are the source — not an aggregator that summarised them.</li>
+      <li><strong>Original synthesis, not paraphrase:</strong> ClaudeBeat's value is not in repeating what TechCrunch said word for word. It is in reading the primary source, the official docs, and the code — and then synthesising something a developer can actually use.</li>
+      <li><strong>Speed when it matters:</strong> For truly breaking news (a model launch, a leak), being fast matters. For everything else, being <em>right</em> and <em>useful</em> matters more than being first.</li>
+    </ul>
+
+    <div class="action-box">
+      <div class="action-label">Proposed remediation</div>
+      <ul>
+        <li><strong>Add Inshorts.com to the Excluded list</strong> in <code>notes/sources.md</code> immediately, with note: "aggregator — content is third-hand by design."</li>
+        <li><strong>Add NewsBytesApp to Excluded</strong> for the same reason.</li>
+        <li><strong>Tighten the research prompt</strong> in SKILL.md: explicitly instruct the research subagent to reject any result from an aggregator, news brief service, or any outlet that itself cites a primary source rather than doing its own reporting.</li>
+        <li><strong>Add a verification step:</strong> before any URL is used, confirm it is a Tier 1–2 source or an approved Tier 6 community source. If uncertain, skip it and note the gap rather than publishing questionable content.</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- Q3 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="q-badge">Q260402Gc</span>
+      <h2>VentureBeat Covers the Same Ground — How Do We Shine Above It?</h2>
+    </div>
+
+    <div class="observation">
+      <strong>George:</strong> &ldquo;VentureBeat is very close to your own home — isn't it doing exactly what you are doing? Your content must not simply replicate theirs, but shine out bright and a level well above it. If we want this site to be successful with an ongoing hope to fund itself, you really need to dig a bit deeper, and a load more succinctly.&rdquo;
+    </div>
+
+    <h3>A fair and important challenge</h3>
+    <p>VentureBeat is a legitimate concern. It covers AI news — including Anthropic, Claude, and the broader LLM space — with professional journalists, editorial staff, and a large audience. On the surface, it occupies similar territory to ClaudeBeat.</p>
+
+    <p>But the overlap is shallower than it looks, and the differentiation opportunity is real. Here is how I see the landscape:</p>
+
+    <h3>What VentureBeat is</h3>
+    <ul>
+      <li>A <strong>broad AI trade publication</strong> covering the entire industry: OpenAI, Google DeepMind, Meta, Mistral, startups, enterprise deals, policy, and culture.</li>
+      <li>Written for a <strong>general technology executive audience</strong> — not specifically for developers or Claude practitioners.</li>
+      <li>Primarily <strong>news-driven</strong>: announcements, funding rounds, partnerships, executive quotes. Thin on implementation depth.</li>
+      <li>Monetised through display advertising, sponsored content, and events — meaning content decisions are partly driven by traffic volume, not depth.</li>
+    </ul>
+
+    <h3>What ClaudeBeat should be (and isn't yet)</h3>
+    <p>ClaudeBeat's unfair advantage is <strong>specificity</strong>. Every article is exclusively about Claude and Anthropic. That means:</p>
+    <ul>
+      <li><strong>Depth that VentureBeat cannot justify:</strong> A VentureBeat journalist covering ten AI companies cannot spend two hours understanding Claude's extended thinking token budget. I can — and should — produce a 400-word entry that gives a developer genuine insight they cannot get from a four-paragraph VentureBeat news brief.</li>
+      <li><strong>Practitioner voice, not reporter voice:</strong> ClaudeBeat entries should read as if written by a senior developer who has actually used the feature, not a journalist who read the press release. The code examples, the edge-case callouts, the "what this actually means for your pipeline" framing — that is the difference.</li>
+      <li><strong>Curation over completeness:</strong> VentureBeat must cover everything. ClaudeBeat must cover only what matters — with the editorial judgement to say "this announcement is noise; here is what is actually worth your attention and why."</li>
+    </ul>
+
+    <h3>The differentiation in practice</h3>
+    <p>Consider how the same story would look in each outlet:</p>
+    <ul>
+      <li><strong>VentureBeat:</strong> "Anthropic raises Batch API output cap to 300k tokens for Opus and Sonnet." Three paragraphs. Executive quote. Link to docs.</li>
+      <li><strong>ClaudeBeat (target standard):</strong> A 350-word entry that explains <em>why</em> 300k matters for specific use cases (long-form code generation, structured data extraction at scale), shows the exact beta header to add, flags the model restriction, and includes a one-paragraph callout on what to watch for in cost implications. A developer who reads it can act on it immediately.</li>
+    </ul>
+
+    <h3>On funding itself</h3>
+    <p>A site that is genuinely useful to Claude developers — that saves them an hour of reading docs, that they bookmark and return to — builds the kind of loyal, repeat audience that sustains AdSense revenue and, eventually, sponsorship. A site that repackages VentureBeat does not. The funding goal and the editorial quality goal are the same goal.</p>
+
+    <div class="action-box">
+      <div class="action-label">Proposed editorial commitments</div>
+      <ul>
+        <li><strong>Remove VentureBeat as a research source</strong> (or treat it as a tip-off only — never cite it as the source of a story; always go to the primary).</li>
+        <li><strong>Every entry must include at least one of:</strong> a code example, an actionable recommendation, a callout explaining implementation implications, or a nuance that a casual reader of the press release would miss.</li>
+        <li><strong>The "so what?" test:</strong> Before finalising any entry, apply this filter — "could a developer act on this information within 10 minutes of reading it?" If the answer is no, the entry needs more depth or should be cut.</li>
+        <li><strong>Consider a monthly "Depth Piece"</strong> — one longer-form (600–800 word) entry per month that goes well beyond news, with architecture diagrams, detailed code, and original synthesis. These are the entries that get shared.</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    ClaudeBeat &mdash; Internal Editorial Review &nbsp;&middot;&nbsp; Q260402Ga–Gc &nbsp;&middot;&nbsp; 2026-04-02 &nbsp;&middot;&nbsp; Confidential
+  </div>
+
+</body>
+</html>

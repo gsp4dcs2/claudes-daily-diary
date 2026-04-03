@@ -18,6 +18,6 @@ claude --dangerously-skip-permissions -p "$SKILL"
 
 echo "--- Skill complete. Running Telegram approval ---"
 
-~/claudebeat-venv/bin/python3 ~/claudebeat-approve.py
+~/claudebeat-venv/bin/python3 scripts/claudebeat-approve.py
 
 echo "=== Done: $(date) ==="

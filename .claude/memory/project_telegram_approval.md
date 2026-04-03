@@ -66,9 +66,21 @@ Logic:
 6. On reject: discard changes, notify user
 
 ### 3. Cron job
+Use the wrapper script (avoids quoting issues, logs output):
 ```
-0 7 * * * cd /var/www/claudebeat && claude --non-interactive -p "$(cat .claude/skills/sk-update-claudes-daily-diary/SKILL.md)" && ~/claudebeat-venv/bin/python3 ~/claudebeat-approve.py
+0 7 * * * /var/www/claudebeat/scripts/run-diary.sh >> /var/log/claudebeat.log 2>&1
 ```
+
+`scripts/run-diary.sh` (committed to repo) does:
+```bash
+cd /var/www/claudebeat
+SKILL=$(cat .claude/skills/sk-update-claudes-daily-diary/SKILL.md)
+claude --dangerously-skip-permissions -p "$SKILL"
+~/claudebeat-venv/bin/python3 ~/claudebeat-approve.py
+```
+
+Note: `--dangerously-skip-permissions` is required (not `--non-interactive`) —
+the latter does NOT skip permission prompts and the cron would silently stall.
 
 ### 4. .gitignore
 Ensure `.env` and `claudebeat-approve.env` are in `.gitignore`.

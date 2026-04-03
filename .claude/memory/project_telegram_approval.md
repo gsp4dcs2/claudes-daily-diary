@@ -6,11 +6,11 @@ type: project
 
 The user has chosen Option C — Telegram bot — as the editorial approval mechanism for the fully autonomous diary cron job.
 
-**Why:** When the cron job runs at 07:00 daily, Claude writes the day's content and sends a summary to a private Telegram bot. The user taps Approve or Reject from their phone. On Approve, the content is committed and pushed live on the VM. On Reject, the draft is discarded.
+**Why:** When the cron job runs at 07:00 daily, Claude writes the day's content and sends a Telegram message per entry with [✅ Include] [❌ Skip] buttons. The user taps from their phone. On final Publish, content is committed and pushed live. On Discard, draft is discarded.
 
 ---
 
-## Current state (end of session 2026-04-02)
+## Current state (end of session 2026-04-03)
 
 ### ✅ Done
 - Telegram installed on phone, account created as "TeleClaude"
@@ -18,72 +18,49 @@ The user has chosen Option C — Telegram bot — as the editorial approval mech
 - Bot token: `8633455378:AAENHCKKt4nT9z8K6L9tKOyf5iY3s6a8Ups`
 - Chat ID: `8613239362`
 - python-telegram-bot v22.7 installed at `~/claudebeat-venv/`
-- Credentials file created at `~/claudebeat-approve.env` (chmod 600)
+- Credentials file at `~/claudebeat-approve.env` (chmod 600)
+- `scripts/claudebeat-approve.py` — per-entry approval script (in repo)
+- `scripts/run-diary.sh` — cron wrapper (in repo), working correctly
+- Claude Code CLI v2.1.91 installed and authenticated on VM
+- Full end-to-end test run completed successfully (2026-04-03 diary written and published)
+- SKILL.md updated with CRITICAL block: **never run git add/commit/push** — approval script handles all git ops
+- Telegram per-entry buttons confirmed working (screenshot received in previous session)
 
-### ❌ Stuck at
-A simple "hello world" Telegram message test failed — no message arrived on phone and no error was shown. Root cause unknown — most likely one of:
-1. The bot hasn't been properly started by the user (need to open `t.me/claudebeat_editor_bot` and tap Start)
-2. A network/firewall issue on the VM blocking outbound HTTPS to Telegram's API
-3. The test script silently failed
+### ❌ Still to do
+1. **Cron job** — not yet set up on VM. Command to add:
+   ```
+   crontab -e
+   ```
+   Add line:
+   ```
+   0 7 * * * /var/www/claudebeat/scripts/run-diary.sh >> /var/log/claudebeat.log 2>&1
+   ```
+2. **Telegram approval test** — not completed this session. Planned test:
+   append a dummy entry to today's article, run `~/claudebeat-venv/bin/python3 scripts/claudebeat-approve.py` directly, verify Telegram buttons appear and Include/Skip/Publish flow works end-to-end, then `git restore` to clean up.
 
 ### 🔜 Next session — start here
-Run this diagnostic to get a clear error message:
-```bash
-~/claudebeat-venv/bin/python3 -c "
-import asyncio
-from telegram import Bot
-
-async def test():
-    async with Bot('8633455378:AAENHCKKt4nT9z8K6L9tKOyf5iY3s6a8Ups') as bot:
-        info = await bot.get_me()
-        print('Bot name:', info.first_name)
-        await bot.send_message(chat_id=8613239362, text='ClaudeBeat bot alive!')
-        print('Message sent!')
-
-asyncio.run(test())
-"
-```
-
-If `get_me()` fails → token or network issue.
-If `get_me()` succeeds but send fails → chat_id issue (user hasn't started the bot).
-
-Also verify the user has opened `t.me/claudebeat_editor_bot` on their phone and tapped **Start**.
+1. Run the Telegram approval test (see above)
+2. Set up the cron job
+3. Watch 07:00 UTC run the following morning
 
 ---
 
-## What still needs to be built (next session onwards)
+## Key fixes made this session
 
-### 1. Credentials file (already done)
-`~/claudebeat-approve.env` contains TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID.
+- `run-diary.sh` SKILL variable: changed `cat` to `awk` to strip YAML frontmatter before passing to `claude -p`
+- `run-diary.sh` approve script path: changed `~/claudebeat-approve.py` → `scripts/claudebeat-approve.py`
+- SKILL.md: added CRITICAL block forbidding git commit/push during skill execution
 
-### 2. Approval script to write: `~/claudebeat-approve.py`
-Logic:
-1. Read today's new article from `/var/www/claudebeat/articles/yyyy/mm/yyyy-mm-dd.html`
-2. Extract title + entry headlines
-3. Send Telegram message with ✅ Approve / ❌ Reject inline buttons
-4. Poll for response (timeout 8 hours → auto-approve)
-5. On approve: `cd /var/www/claudebeat && git add -A && git commit && git push && git pull`
-6. On reject: discard changes, notify user
+## Known git sync issue (Windows ↔ VM)
 
-### 3. Cron job
-Use the wrapper script (avoids quoting issues, logs output):
+The VM commits when it runs the skill. Windows then can't push without pulling first.
+Standard workflow when push is rejected on Windows:
 ```
-0 7 * * * /var/www/claudebeat/scripts/run-diary.sh >> /var/log/claudebeat.log 2>&1
+git stash
+git pull --rebase
+git stash pop
+git push
 ```
-
-`scripts/run-diary.sh` (committed to repo) does:
-```bash
-cd /var/www/claudebeat
-SKILL=$(cat .claude/skills/sk-update-claudes-daily-diary/SKILL.md)
-claude --dangerously-skip-permissions -p "$SKILL"
-~/claudebeat-venv/bin/python3 ~/claudebeat-approve.py
-```
-
-Note: `--dangerously-skip-permissions` is required (not `--non-interactive`) —
-the latter does NOT skip permission prompts and the cron would silently stall.
-
-### 4. .gitignore
-Ensure `.env` and `claudebeat-approve.env` are in `.gitignore`.
 
 ---
 
@@ -93,3 +70,20 @@ Ensure `.env` and `claudebeat-approve.env` are in `.gitignore`.
 - Python venv: `~/claudebeat-venv/`
 - python-telegram-bot: v22.7
 - Credentials: `~/claudebeat-approve.env`
+- Claude Code CLI: v2.1.91, authenticated
+- Git author: configured (`git config --global user.email/user.name`)
+- Git safe directory: configured (`git config --global --add safe.directory /var/www/claudebeat`)
+- Repo ownership: `claude:claude` on `/var/www/claudebeat`
+
+## Cron wrapper: scripts/run-diary.sh
+```bash
+#!/bin/bash
+set -e
+cd /var/www/claudebeat
+echo "=== ClaudeBeat diary run: $(date) ==="
+SKILL=$(awk '/^---$/{n++; if(n==2){found=1; next}} found{print}' .claude/skills/sk-update-claudes-daily-diary/SKILL.md)
+claude --dangerously-skip-permissions -p "$SKILL"
+echo "--- Skill complete. Running Telegram approval ---"
+~/claudebeat-venv/bin/python3 scripts/claudebeat-approve.py
+echo "=== Done: $(date) ==="
+```

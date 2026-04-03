@@ -15,3 +15,4 @@
 | [feedback_confirm_before_starting.md](feedback_confirm_before_starting.md) | feedback | Always confirm before starting work — a short reply is not an instruction to proceed |
 | [project_telegram_approval.md](project_telegram_approval.md) | project | Telegram bot editorial approval workflow — pipeline working; cron job + approval test still to do next session |
 | [backfill_trust_badges.md](backfill_trust_badges.md) | project | **REMINDER** — ⭐ trust badges missing from all articles before 2026-04-01; needs scripted backfill |
+| [feedback_retro_ordering.md](feedback_retro_ordering.md) | feedback | Retro block in index.html must be strict newest-first; older backfill entries go BELOW newer ones, not above |

@@ -129,7 +129,7 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
 
 /* ── Navigation bar ─────────────────────────────────────── */
 .site-nav {
-  background: rgba(255, 255, 255, 0.80);
+  background: rgba(255, 255, 255, 0.60);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(228, 226, 222, 0.55);

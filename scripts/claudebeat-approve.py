@@ -105,32 +105,29 @@ def clean(html):
 
 
 def extract_entries(html_path):
-    """Return list of dicts: {headline, source_url, snippet, raw_block}"""
+    """Return list of dicts: {headline, source_url, snippet, raw}"""
     content = html_path.read_text(encoding='utf-8')
 
-    # Split on ENTRY comment blocks
-    blocks = re.split(r'(?=<!-- ═+\s*\nENTRY)', content)
+    # Find ALL article blocks (re.finditer, not re.search)
     entries = []
+    for match in re.finditer(
+        r'<article class="entry">(.*?)</article>', content, re.DOTALL
+    ):
+        raw  = match.group(0)
+        pos  = match.start()
 
-    for block in blocks:
-        article_match = re.search(
-            r'(<article class="entry">.*?</article>)', block, re.DOTALL
-        )
-        if not article_match:
-            continue
-        raw = article_match.group(1)
+        # Look back up to 600 chars for the nearest Source: URL
+        preceding = content[max(0, pos - 600):pos]
+        src = re.search(r'Source:\s*(https?://\S+)', preceding)
+        source_url = src.group(1) if src else ''
 
-        # Headline from h2
+        # Headline from h2 (strip icon span + entities)
         h2 = re.search(r'<h2[^>]*>(.*?)</h2>', raw, re.DOTALL)
         headline = re.sub(r'^[^\w(]+', '', clean(h2.group(1))) if h2 else '(no title)'
 
-        # First <p> as snippet (up to 180 chars)
+        # First <p> as snippet, up to 180 chars
         p = re.search(r'<p>(.*?)</p>', raw, re.DOTALL)
         snippet = clean(p.group(1))[:180].rsplit(' ', 1)[0] + '…' if p else ''
-
-        # Source URL from comment above article
-        src_match = re.search(r'Source:\s*(https?://\S+)', block)
-        source_url = src_match.group(1) if src_match else ''
 
         entries.append({
             'headline':   headline,

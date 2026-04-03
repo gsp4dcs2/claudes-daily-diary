@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Practical techniques for using Claude in financial and legal analysis workflows, and the prompting patterns that consistently produce production-quality code. December 3, 2025.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2025-12-03 – Claude for Financial &amp; Legal Analysis, Plus Production Code Prompting">
+  <meta property="og:description" content="Structured prompts for investment research and contract analysis, and the techniques that get production-quality code from Claude.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2025/12/2025-12-03.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2025/12/2025-12-03.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2025/12/2025-12-03.png">
+
+  <title>2025-12-03 – Claude for Financial &amp; Legal Analysis, Plus Production Code Prompting | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude for Financial & Legal Analysis, Plus Production Code Prompting",
+  "description": "Structured prompts for investment research and contract analysis, and the techniques that get production-quality code from Claude.",
+  "datePublished": "2025-12-03",
+  "dateModified": "2025-12-03",
+  "url": "https://claudebeat.ai/articles/2025/12/2025-12-03.html",
+  "image": "https://claudebeat.ai/articles/2025/12/2025-12-03.png",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://claudebeat.ai/articles/2025/12/2025-12-03.html"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Claude's Daily Diary",
+    "url": "https://claudebeat.ai"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude's Daily Diary",
+    "url": "https://claudebeat.ai",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://claudebeat.ai/logo.svg"
+    }
+  }
+}
+  </script>
+</head>
+<body>
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input" placeholder="search..." autocomplete="off" aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2025-12-03</span>
+      <span class="cat-badge cat-tips">💡 Tips 'n' Tricks</span>
+      <h1>Claude for Financial &amp; Legal Analysis, Plus Production Code Prompting</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2025-12-03.png" alt="Claude for Financial &amp; Legal Analysis, Plus Production Code Prompting — visual for 2025-12-03">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude for financial and legal analysis
+     Source: https://www.anthropic.com/events/aws-re-invent-2025
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> Claude for Financial and Legal Analysis — Prompting Patterns That Actually Work</h2>
+
+  <p>Financial services and legal are two of the highest-value domains for Claude deployments — and two of the most demanding in terms of precision, citation, and consistency. Organisations including Norges Bank Investment Management (NBIM) and Thomson Reuters are actively deploying Claude via Amazon Bedrock in these sectors, and their experiences are beginning to surface best practices that go beyond generic prompting advice. Here is what works for rigorous analytical tasks in these domains.</p>
+
+  <h3>Financial analysis prompts</h3>
+  <ul>
+    <li><strong>SEC filing analysis:</strong> Structure your prompt as a three-part request — summarise the key risks in the Risk Factors section, identify any disclosures not present in the previous filing, and flag any language changes in forward-looking statements. Claude handles long 10-K documents well within its context window and tracks changes across versions when both documents are included.</li>
+    <li><strong>Investment research synthesis:</strong> Provide the earnings call transcript and three analyst reports simultaneously. Ask Claude to identify where the analyst consensus diverges from management guidance, and to attribute every claim to its source document. The attribution requirement dramatically reduces fabrication risk.</li>
+    <li><strong>Portfolio document Q&amp;A:</strong> For persistent document sets (fund prospectuses, mandate documents), use prompt caching to keep the base documents in context at low cost, then run targeted questions against them without reloading the full context on every request.</li>
+    <li><strong>Numbers require verification:</strong> Claude is reliable for reasoning about financial data but should never be the sole source of figures in a deliverable. Always instruct Claude to cite the exact passage it is drawing from, then verify the number against the source document before including it in any report.</li>
+  </ul>
+
+  <h3>Legal analysis prompts</h3>
+  <ul>
+    <li><strong>Contract comparison:</strong> Provide both versions of a contract and ask Claude to produce a structured diff: clauses added, clauses removed, and clauses materially changed. Ask it to flag any changes to indemnification, limitation of liability, governing law, or termination provisions specifically — these are the high-risk sections that most frequently introduce unintended changes.</li>
+    <li><strong>Issue spotting:</strong> For due diligence, give Claude a checklist of issues to look for (change of control provisions, IP assignment clauses, non-compete carve-outs) alongside the agreement. Structured checklists outperform open-ended "review this contract" prompts for thoroughness and consistency.</li>
+    <li><strong>Always label as analysis, not advice:</strong> Build into your system prompt an explicit instruction: "Conclude every response with a disclaimer that this is document analysis only and does not constitute legal advice." This is an operator responsibility — Claude's defaults include appropriate caveats but should be reinforced explicitly in regulated contexts.</li>
+  </ul>
+
+  <div class="tag-list">
+    <span class="tag">financial analysis</span>
+    <span class="tag">legal analysis</span>
+    <span class="tag">SEC filings</span>
+    <span class="tag">contract review</span>
+    <span class="tag">prompting</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Prompting for production-quality code
+     Source: https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> Getting Production-Quality Code from Claude — The Prompting Patterns That Make the Difference</h2>
+
+  <p>Anthropic's just-published internal research makes clear that engineers are using Claude for roughly 60% of their work — but they report delegating primarily debugging, code comprehension, and repetitive tasks rather than net-new feature design. That pattern reflects a tacit understanding of where Claude's code output is immediately production-ready versus where it needs careful review. Understanding that distinction — and prompting accordingly — is the skill that separates productive Claude-augmented development from frustrating trial and error.</p>
+
+  <h3>What to always include in code prompts</h3>
+  <ul>
+    <li><strong>Language, version, and framework:</strong> "Write a Python 3.12 FastAPI route handler" produces better output than "write an API endpoint." The more specific the tech stack, the less Claude has to guess about conventions, type hints, dependency injection patterns, and idioms.</li>
+    <li><strong>The surrounding context:</strong> Paste the relevant function signature, data model, or existing code that the new code must integrate with. Claude writes code that fits an existing codebase dramatically better when it can see what it is fitting into.</li>
+    <li><strong>Error handling requirements:</strong> Explicitly ask for specific error handling: "Handle the case where the database connection fails, the user ID does not exist, and the response payload exceeds 1MB." Without this, Claude will often write the happy path and leave error handling as an exercise for the reviewer.</li>
+    <li><strong>Output format:</strong> Specify whether you want a complete file, a function, a class, or a diff. "Return only the function — no surrounding boilerplate" prevents Claude from generating imports and scaffolding you need to strip out.</li>
+  </ul>
+
+  <h3>Review patterns for generated code</h3>
+  <ul>
+    <li><strong>Test before trust:</strong> Claude's research team recommends treating generated code as a pull request from a competent but unfamiliar contributor. Read it carefully, run it, and write at least one test that exercises the edge cases — especially around error handling.</li>
+    <li><strong>Ask Claude to review its own output:</strong> After receiving generated code, prompt: "Review the code you just wrote. Identify any edge cases not handled, any security concerns, and any deviations from idiomatic Python." This self-review step catches a meaningful fraction of issues before you have to find them yourself.</li>
+    <li><strong>Deskilling mitigation:</strong> Based on Anthropic's internal research, consider periodically implementing features without Claude assistance to maintain proficiency. This is not about distrusting Claude — it is about maintaining the judgment needed to review its output effectively.</li>
+  </ul>
+
+  <div class="tag-list">
+    <span class="tag">code generation</span>
+    <span class="tag">Claude Code</span>
+    <span class="tag">developer productivity</span>
+    <span class="tag">prompting</span>
+    <span class="tag">code review</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+  <script>
+  (function () {
+    var OLDEST = '2025-12';
+    var badge = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM = badge.textContent.trim().slice(0, 7);
+    var today = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) { var p = ym.split('-').map(Number); var dt = new Date(p[0], p[1]-1+d, 1); return dt.getFullYear() + '-' + String(dt.getMonth()+1).padStart(2,'0'); }
+    function fmt(ym) { var p = ym.split('-'); return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2); }
+    var root = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl = document.getElementById('month-label');
+    var home = document.getElementById('btn-home');
+    var search = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click', function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click', function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click', function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus', function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

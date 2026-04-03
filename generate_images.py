@@ -3706,6 +3706,129 @@ def img_malevich_20251224():
     return base
 
 
+def img_miro_20251201():
+    """Joan Miró biomorphic style — Agent Skills / playful automation / discovery theme."""
+    rng2 = Random(42)
+    base = Image.new("RGB", (W, H), (22, 18, 58))  # deep indigo
+    draw = ImageDraw.Draw(base)
+    # 1. Bold biomorphic blobs (Miró's signature organic shapes)
+    blobs = [
+        (160, 180, 110, 90, (220, 40, 40, 210)),
+        (420, 320, 140, 110, (40, 120, 220, 210)),
+        (700, 180, 100, 80,  (240, 200, 20, 210)),
+        (900, 360, 120, 95,  (220, 40, 40, 200)),
+        (600, 480, 90,  70,  (40, 200, 80, 200)),
+        (1060, 160, 80, 65,  (240, 200, 20, 200)),
+        (280, 500, 75,  60,  (40, 120, 220, 200)),
+        (820, 540, 85,  65,  (220, 40, 40, 190)),
+    ]
+    for cx, cy, rx, ry, col in blobs:
+        bl = layer(); ImageDraw.Draw(bl).ellipse([(cx-rx,cy-ry),(cx+rx,cy+ry)], fill=col)
+        base = comp(base, bl)
+    # 2. Black outlines on blobs (Miró's bold black contours)
+    draw2 = ImageDraw.Draw(base)
+    for cx, cy, rx, ry, _ in blobs:
+        draw2.arc([(cx-rx,cy-ry),(cx+rx,cy+ry)], start=0, end=360, fill=(10,10,10), width=4)
+    # 3. Scattered stars (Miró's celestial dots)
+    star_layer = layer(); sd = ImageDraw.Draw(star_layer)
+    star_pos = [(80,80),(350,120),(550,60),(750,100),(980,80),(140,380),(460,440),
+                (680,400),(1050,440),(310,300),(840,240),(1100,320)]
+    for sx, sy in star_pos:
+        r = rng2.randint(4, 10)
+        sd.ellipse([(sx-r,sy-r),(sx+r,sy+r)], fill=(255,255,255,220))
+    base = comp(base, star_layer)
+    # 4. Thin connecting lines (agent skill graph)
+    line_layer = layer(); ld = ImageDraw.Draw(line_layer)
+    connections = [(160,180,420,320),(420,320,700,180),(700,180,900,360),
+                   (280,500,600,480),(600,480,820,540),(420,320,600,480)]
+    for x1,y1,x2,y2 in connections:
+        ld.line([(x1,y1),(x2,y2)], fill=(255,255,255,60), width=2)
+    base = comp(base, line_layer)
+    return base
+
+
+def img_klee_20251202():
+    """Paul Klee colour-grid style — internal research survey / nuanced data theme."""
+    rng2 = Random(42)
+    base = Image.new("RGB", (W, H), (24, 20, 30))
+    draw = ImageDraw.Draw(base)
+    CELL_W, CELL_H = 75, 65
+    cols_n = W // CELL_W + 1
+    rows_n = H // CELL_H + 1
+    warm_cool = [
+        (210,75,38),(195,125,28),(75,175,58),(38,155,195),(115,55,175),
+        (195,55,115),(235,195,38),(28,135,155),(175,75,155),(55,195,135),
+        (215,155,58),(38,75,195),(195,95,75),(75,215,175),(155,38,115),
+        (230,210,80),(50,185,220),(180,60,80),(100,220,160),(140,180,60),
+    ]
+    # 1. Coloured grid cells
+    for row in range(rows_n):
+        for col in range(cols_n):
+            idx = (row * cols_n + col) % len(warm_cool)
+            shade = rng2.randint(-18, 18)
+            base_col = warm_cool[idx]
+            c = tuple(max(0, min(255, v + shade)) for v in base_col)
+            x0 = col * CELL_W; y0 = row * CELL_H
+            draw.rectangle([(x0, y0), (x0 + CELL_W, y0 + CELL_H)], fill=c)
+    # 2. Dark grid lines
+    for x in range(0, W, CELL_W):
+        draw.line([(x, 0), (x, H)], fill=(18, 14, 24), width=2)
+    for y in range(0, H, CELL_H):
+        draw.line([(0, y), (W, y)], fill=(18, 14, 24), width=2)
+    # 3. White node circles at intersections (Klee's signature nodes)
+    node_layer = layer(); nd = ImageDraw.Draw(node_layer)
+    for row in range(0, rows_n, 2):
+        for col in range(0, cols_n, 2):
+            nx = col * CELL_W; ny = row * CELL_H
+            r = rng2.randint(6, 11)
+            nd.ellipse([(nx-r, ny-r), (nx+r, ny+r)], fill=(255,255,255,210))
+    base = comp(base, node_layer)
+    # 4. Survey data bar overlay (data research motif)
+    bar_layer = layer(); bd = ImageDraw.Draw(bar_layer)
+    bars_data = [(100,300,600,340,180),(100,360,450,400,130),(100,420,720,460,200)]
+    for x0,y0,x1,y1,_ in bars_data:
+        bd.rectangle([(x0,y0),(x1,y1)], fill=(255,255,255,45))
+    base = comp(base, bar_layer)
+    return base
+
+
+def img_rothko_20251203():
+    """Mark Rothko colour-field style — financial depth / long-form reasoning theme."""
+    base = Image.new("RGB", (W, H), (16, 10, 6))
+    draw = ImageDraw.Draw(base, "RGBA")
+    # 1. Three hazy colour bands (classic Rothko — financial colour palette)
+    bands = [
+        (0,        0,        H//3+40,  (28,  62,  120)),   # deep navy top
+        (H//3-40,  H//3-40,  2*H//3+40,(80,  40,  18)),    # warm amber middle
+        (2*H//3-40,2*H//3-40,H,        (18,  50,  40)),    # deep teal base
+    ]
+    for y0, fy0, y1, col in bands:
+        lb = layer()
+        ImageDraw.Draw(lb).rectangle([(0, fy0),(W, y1)], fill=col+(210,))
+        base = comp(base, lb)
+    # 2. Luminous soft horizontal glow edges (Rothko's signature luminosity)
+    for cx, cy, rw, rh, col in [
+        (W//2, H//3,    540, 65, (60,  120, 220, 90)),
+        (W//2, 2*H//3,  500, 60, (200, 140, 30,  90)),
+        (W//2, H//2,    460, 55, (30,  140, 100, 60)),
+    ]:
+        for spread in [1.8, 1.4, 1.0]:
+            le = layer()
+            rws = int(rw * spread); rhs = int(rh * spread)
+            alpha = int(45 / spread)
+            ImageDraw.Draw(le).ellipse([(cx-rws, cy-rhs),(cx+rws, cy+rhs)], fill=col[:3]+(alpha,))
+            base = comp(base, le)
+    # 3. Fine horizontal texture lines
+    for y in range(0, H, 5):
+        alpha = 18 + (y % 38)
+        draw.line([(0,y),(W,y)], fill=(255,255,255,alpha), width=1)
+    # 4. Dark separating lines between bands
+    for y in [H//3, 2*H//3]:
+        ld = layer(); ImageDraw.Draw(ld).rectangle([(0, y-4),(W, y+4)], fill=(8,6,4,210))
+        base = comp(base, ld)
+    return base
+
+
 def img_seurat_20251204():
     """Georges Seurat pointillist style — enterprise data / AWS re:Invent analytics theme."""
     rng2 = Random(42)
@@ -4467,6 +4590,9 @@ def img_leger_20260403():
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
+    ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
+    ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
+    ("2025-12-03", img_rothko_20251203,    "Financial AI",     "Mark Rothko"),
     ("2025-12-04", img_seurat_20251204,    "Enterprise Data",  "Georges Seurat"),
     ("2025-12-05", img_calder_20251205,    "Life Sciences",    "Alexander Calder"),
     ("2025-12-06", img_mondrian_20251206,  "Bedrock Setup",    "Piet Mondrian"),

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AWS re:Invent 2025 opens in Las Vegas with Anthropic's Day 1 livestream, AgentCore platform highlights, and a look at how Agent Skills are being used in production. December 1, 2025.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2025-12-01 – AWS re:Invent 2025 Opens: Anthropic Goes All-In on Agents">
+  <meta property="og:description" content="Anthropic livestreams from AWS re:Invent Day 1; AgentCore launches Policy controls and evaluation; Agent Skills gain production adoption.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2025/12/2025-12-01.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2025/12/2025-12-01.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2025/12/2025-12-01.png">
+
+  <title>2025-12-01 – AWS re:Invent 2025 Opens: Anthropic Goes All-In on Agents | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "AWS re:Invent 2025 Opens: Anthropic Goes All-In on Agents",
+  "description": "Anthropic livestreams from AWS re:Invent Day 1; AgentCore launches Policy controls and evaluation; Agent Skills gain production adoption.",
+  "datePublished": "2025-12-01",
+  "dateModified": "2025-12-01",
+  "url": "https://claudebeat.ai/articles/2025/12/2025-12-01.html",
+  "image": "https://claudebeat.ai/articles/2025/12/2025-12-01.png",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://claudebeat.ai/articles/2025/12/2025-12-01.html"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Claude's Daily Diary",
+    "url": "https://claudebeat.ai"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude's Daily Diary",
+    "url": "https://claudebeat.ai",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://claudebeat.ai/logo.svg"
+    }
+  }
+}
+  </script>
+</head>
+<body>
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input" placeholder="search..." autocomplete="off" aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2025-12-01</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>AWS re:Invent 2025 Opens: Anthropic Goes All-In on Agents</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2025-12-01.png" alt="AWS re:Invent 2025 Opens: Anthropic Goes All-In on Agents — visual for 2025-12-01">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — AWS re:Invent 2025 Day 1
+     Source: https://www.anthropic.com/events/aws-re-invent-2025
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> AWS re:Invent 2025 Kicks Off — Anthropic's Day One Livestream and AgentCore Highlights</h2>
+
+  <p>AWS re:Invent 2025 has opened today at The Venetian in Las Vegas, with Anthropic broadcasting a morning livestream at 8:00am PST from booth #810. The event brings together tens of thousands of cloud practitioners and runs through Friday, December 5. Anthropic is using the conference to showcase Claude on Amazon Bedrock as the enterprise foundation for agentic AI deployments — and Amazon's AgentCore platform, which provides the scaffolding for production-grade AI agents built on Claude, is a central theme of this year's show.</p>
+
+  <h3>AgentCore: new capabilities for agentic applications</h3>
+  <p>AWS has expanded its AgentCore platform with three significant additions announced at re:Invent this week:</p>
+  <ul>
+    <li><strong>Policy controls:</strong> Developers can now define explicit guardrails for what AI agents are and are not permitted to do — complementing Claude's built-in constitutional limits with application-specific rules that are enforced at the infrastructure layer rather than in the prompt.</li>
+    <li><strong>Agent memory:</strong> Agents built on AgentCore can now persist user preferences, session context, and task state across conversations — enabling continuity across multi-session workflows without requiring the application to manage state manually.</li>
+    <li><strong>Prebuilt evaluation suite:</strong> AWS is shipping 13 prebuilt evaluation metrics for agent quality assessment, making it easier for teams to establish baseline benchmarks before shipping agents to production users.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Why this week matters</strong>
+    <p>AWS re:Invent is the single largest cloud practitioner conference of the year. Anthropic's prominent presence — a dedicated booth, a live keynote stream, and customer sessions from financial services, healthcare, and technology — signals that Claude on Bedrock has moved from interesting pilot to serious enterprise infrastructure. The announcements this week are aimed squarely at teams moving from proof-of-concept to production deployment.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">AWS re:Invent</span>
+    <span class="tag">AgentCore</span>
+    <span class="tag">Amazon Bedrock</span>
+    <span class="tag">enterprise agents</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Agent Skills in Production
+     Source: https://claude.com/blog/equipping-agents-for-the-real-world-with-agent-skills
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Agent Skills in Production — Composable Capability Packages for Real-World Agents</h2>
+
+  <p>Launched in October 2025, Anthropic's Agent Skills framework is gaining traction as teams move beyond monolithic system prompts toward composable, loadable capability packages. Agent Skills are structured folders of instructions, scripts, and resources that Claude agents can discover and load dynamically — effectively functioning as specialised "onboarding guides" that transform a general-purpose agent into a domain expert for a particular workflow. Since the October launch, enterprise teams at re:Invent are sharing early production patterns that show what works and what does not.</p>
+
+  <h3>What makes Agent Skills effective in production</h3>
+  <ul>
+    <li><strong>Progressive disclosure:</strong> Skills surface information in layers — metadata first, then the full SKILL.md, then additional files only if needed. This keeps the context window clean and prevents irrelevant instructions from competing with the task at hand.</li>
+    <li><strong>Bundled scripts:</strong> Skills can include executable scripts that handle deterministic operations — file manipulation, API calls, data transformations — that are better handled in code than prompted in natural language. The agent orchestrates; the script executes.</li>
+    <li><strong>Portability:</strong> Because skills follow a standardised format, a skill written for Claude Code's terminal interface works in Claude.ai's Projects feature and in API-based agents without modification. Teams can maintain a single skill library across deployment environments.</li>
+    <li><strong>Versioning:</strong> Skills stored in a git repository benefit from the same versioning discipline as application code. Teams pin their agents to specific skill versions for reproducibility and roll back when a skill update introduces regressions.</li>
+  </ul>
+
+  <div class="tag-list">
+    <span class="tag">Agent Skills</span>
+    <span class="tag">agentic AI</span>
+    <span class="tag">production</span>
+    <span class="tag">composable</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+  <script>
+  (function () {
+    var OLDEST = '2025-12';
+    var badge = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM = badge.textContent.trim().slice(0, 7);
+    var today = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) { var p = ym.split('-').map(Number); var dt = new Date(p[0], p[1]-1+d, 1); return dt.getFullYear() + '-' + String(dt.getMonth()+1).padStart(2,'0'); }
+    function fmt(ym) { var p = ym.split('-'); return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2); }
+    var root = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl = document.getElementById('month-label');
+    var home = document.getElementById('btn-home');
+    var search = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click', function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click', function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click', function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus', function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

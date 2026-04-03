@@ -352,11 +352,38 @@ Use this structure for every entry (backfill and today):
 
   <!-- Optional: callout, code block, etc. using existing CSS classes -->
 
+  <div class="source-line">
+    <span class="trust-badge" title="{tier-tooltip}">{stars}</span>
+    <a href="{source-url}" class="source-link" target="_blank" rel="noopener">{source-domain}</a>
+  </div>
+
   <div class="tag-list">
     <span class="tag">{tag1}</span>
     <span class="tag">{tag2}</span>
   </div>
 </article>
+```
+
+**Trust badge — choose stars based on the source tier from `notes/sources.md`:**
+
+| Stars | `title` tooltip | Use when… |
+|-------|----------------|-----------|
+| `⭐⭐⭐` | `Official Anthropic source` | Tier 1 — anthropic.com, support.claude.com, official GitHub |
+| `⭐⭐` | `Established press — verified journalism` | Tiers 2–4 — TechCrunch, Bloomberg, Ars Technica, Reuters etc. |
+| `⭐` | `Community content or research — independently cross-checked` | Tiers 5–7 — Sacra, dev.to, Hacker News, provisional sources |
+
+`{source-domain}` = bare domain only, e.g. `bloomberg.com` (no `https://www.`).
+`{source-url}` = the full URL used as the primary source for this entry.
+
+Also add the **trust legend** once per page, just before `</main>`:
+
+```html
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
 ```
 
 **CRITICAL — `{category-icon}` must be the day's category emoji, never ✦:**

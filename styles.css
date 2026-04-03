@@ -405,6 +405,50 @@ a:hover { color: var(--primary-dark); text-decoration: underline; }
   border-radius: 20px;
 }
 
+/* Source attribution + trust badge */
+.source-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 4px;
+  font-size: 0.8rem;
+  color: var(--text-muted, #888);
+}
+
+.trust-badge {
+  font-size: 0.85rem;
+  letter-spacing: -0.05em;
+  flex-shrink: 0;
+}
+
+.source-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.source-link:hover { text-decoration: underline; }
+
+/* Trust legend — appears once per article page, below the last entry */
+.trust-legend {
+  font-size: 0.78rem;
+  color: var(--text-muted, #999);
+  margin: 32px 0 8px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  line-height: 1.8;
+}
+
+.trust-legend strong {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--text-muted, #888);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
 /* Callout boxes */
 .callout {
   border-left: 4px solid var(--primary);

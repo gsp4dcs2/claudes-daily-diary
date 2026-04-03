@@ -13,7 +13,7 @@ cd /var/www/claudebeat
 
 echo "=== ClaudeBeat diary run: $(date) ==="
 
-SKILL=$(cat .claude/skills/sk-update-claudes-daily-diary/SKILL.md)
+SKILL=$(awk '/^---$/{n++; if(n==2){found=1; next}} found{print}' .claude/skills/sk-update-claudes-daily-diary/SKILL.md)
 claude --dangerously-skip-permissions -p "$SKILL"
 
 echo "--- Skill complete. Running Telegram approval ---"

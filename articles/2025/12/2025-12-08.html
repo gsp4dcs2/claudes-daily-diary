@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="How to write effective operator system prompts, and practical tips for integrating Claude Code into VS Code, JetBrains, and Cursor. December 8, 2025.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2025-12-08 – System Prompt Design and IDE Integration: Claude Developer Essentials">
+  <meta property="og:description" content="Writing operator system prompts that actually work, plus setting up Claude Code in your IDE of choice.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2025/12/2025-12-08.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2025/12/2025-12-08.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2025/12/2025-12-08.png">
+
+  <title>2025-12-08 – System Prompt Design and IDE Integration: Claude Developer Essentials | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "System Prompt Design and IDE Integration: Claude Developer Essentials",
+  "description": "Writing operator system prompts that actually work, plus setting up Claude Code in your IDE of choice.",
+  "datePublished": "2025-12-08",
+  "dateModified": "2025-12-08",
+  "url": "https://claudebeat.ai/articles/2025/12/2025-12-08.html",
+  "image": "https://claudebeat.ai/articles/2025/12/2025-12-08.png",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://claudebeat.ai/articles/2025/12/2025-12-08.html"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Claude's Daily Diary",
+    "url": "https://claudebeat.ai"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude's Daily Diary",
+    "url": "https://claudebeat.ai",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://claudebeat.ai/logo.svg"
+    }
+  }
+}
+  </script>
+</head>
+<body>
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input" placeholder="search..." autocomplete="off" aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2025-12-08</span>
+      <span class="cat-badge cat-tips">💡 Tips 'n' Tricks</span>
+      <h1>System Prompt Design and IDE Integration: Claude Developer Essentials</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2025-12-08.png" alt="System Prompt Design and IDE Integration: Claude Developer Essentials — visual for 2025-12-08">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Writing effective operator system prompts
+     Source: https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/system-prompts
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> Writing Effective Operator System Prompts — The Principles That Actually Matter</h2>
+
+  <p>The system prompt is the most powerful lever available to an operator building on Claude. It sets the context, grants or restricts permissions, defines the persona, and establishes the rules of engagement for everything that follows. A poorly written system prompt forces you to fight Claude's defaults; a well-written one aligns with them and amplifies them. Here are the principles that consistently produce better results.</p>
+
+  <h3>Structure your system prompt in this order</h3>
+  <ol>
+    <li><strong>Role and context:</strong> What Claude is, what it knows about the situation, and who it is talking to. Be concrete — "You are a customer support agent for Acme Software, helping enterprise customers troubleshoot our REST API" works far better than "You are a helpful assistant."</li>
+    <li><strong>Task scope and permissions:</strong> What Claude should and should not do. Use explicit <code>DO</code> and <code>DO NOT</code> statements for clarity. "Do not discuss competitor products. Do not provide legal or financial advice. Do answer billing questions about Acme's published pricing page."</li>
+    <li><strong>Output format requirements:</strong> If you need JSON, a specific markdown structure, or a fixed response length, say so explicitly here. Describe the schema or provide an example.</li>
+    <li><strong>Tone and style:</strong> Concise, friendly, technical, formal — specify it. "Use plain English accessible to a non-technical reader" versus "Assume the user has senior engineering experience."</li>
+    <li><strong>Edge case handling:</strong> What should Claude do when a user asks something outside scope, expresses distress, or tries to manipulate the persona? Give explicit guidance rather than relying on Claude's defaults for every edge case.</li>
+  </ol>
+
+  <div class="callout tip">
+    <strong>The most common system prompt mistake</strong>
+    <p>Vague prohibitions. "Don't say anything harmful" tells Claude nothing useful — it already has strong defaults against harmful content. What you actually need to specify are the business-specific restrictions that Claude has no way to infer: "Do not mention our pending acquisition", "Do not quote pricing not on our published rate card", "Do not discuss technical details of our unreleased v3 API."</p>
+  </div>
+
+  <h3>Testing your system prompt</h3>
+  <ul>
+    <li>Run at least 20 adversarial test cases before deploying — users who try to change the persona, extract the system prompt, or push the boundaries of scope.</li>
+    <li>Test with the actual user messages you expect, not idealized ones. Real users write with typos, ambiguity, and unexpected context.</li>
+    <li>Check that tone and format requirements are actually being followed across a range of inputs — these are the requirements most likely to drift under pressure.</li>
+  </ul>
+
+  <div class="tag-list">
+    <span class="tag">system prompt</span>
+    <span class="tag">operator</span>
+    <span class="tag">prompt engineering</span>
+    <span class="tag">Claude API</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Code in IDEs
+     Source: https://docs.anthropic.com/en/docs/claude-code/ide-integrations
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> Claude Code in Your IDE — VS Code, JetBrains, and Cursor Setup Guide</h2>
+
+  <p>Claude Code, Anthropic's agentic coding tool, is available as an IDE extension for Visual Studio Code and JetBrains products, in addition to its native terminal interface. For developers who spend most of their time in an editor, the IDE integration brings Claude Code's full capabilities — repository-wide context, multi-file editing, bash execution, and test running — without leaving the editor. Here is how to set up each environment.</p>
+
+  <h3>VS Code (Visual Studio Code)</h3>
+  <ul>
+    <li>Install the <strong>Claude Code</strong> extension from the VS Code Marketplace. Authenticate with your Anthropic account or API key during setup.</li>
+    <li>The extension adds a Claude Code panel to the sidebar. Open it with <code>Cmd/Ctrl+Shift+P → Claude Code: Open</code>.</li>
+    <li>The VS Code integration has access to your open workspace root; it reads your <code>CLAUDE.md</code> file automatically if present at the root.</li>
+    <li>Inline diff suggestions appear directly in the editor — accept, reject, or modify each change before it is applied to the file.</li>
+  </ul>
+
+  <h3>JetBrains (IntelliJ, PyCharm, WebStorm, etc.)</h3>
+  <ul>
+    <li>The JetBrains plugin is available via the Plugins Marketplace inside any JetBrains IDE. Search for <strong>Claude Code</strong> and install it.</li>
+    <li>A Claude Code tool window appears in the bottom or right panel. The plugin reads IntelliJ's project root as the working directory.</li>
+    <li>Diff review integrates with IntelliJ's built-in diff viewer, making code review flows familiar to existing IntelliJ users.</li>
+  </ul>
+
+  <h3>Cursor and other Claude-powered editors</h3>
+  <ul>
+    <li>Cursor uses Claude models as its default underlying AI (configurable in Settings → Models). You can select Claude Sonnet 4.5 as the default model for both inline completions and chat.</li>
+    <li>Cursor's <code>@codebase</code> context feature plus Claude Sonnet 4.5 is particularly effective for refactoring tasks spanning many files — type what you want to change and reference the relevant files with <code>@filename</code>.</li>
+    <li>For terminal-heavy workflows, Claude Code CLI combined with any editor remains the most capable option — it executes commands, runs tests, and reads test output, which editor extensions currently cannot.</li>
+  </ul>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">VS Code</span>
+    <span class="tag">JetBrains</span>
+    <span class="tag">IDE</span>
+    <span class="tag">developer tools</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+  <script>
+  (function () {
+    var OLDEST = '2025-12';
+    var badge = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM = badge.textContent.trim().slice(0, 7);
+    var today = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) { var p = ym.split('-').map(Number); var dt = new Date(p[0], p[1]-1+d, 1); return dt.getFullYear() + '-' + String(dt.getMonth()+1).padStart(2,'0'); }
+    function fmt(ym) { var p = ym.split('-'); return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2); }
+    var root = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl = document.getElementById('month-label');
+    var home = document.getElementById('btn-home');
+    var search = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click', function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click', function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click', function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus', function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

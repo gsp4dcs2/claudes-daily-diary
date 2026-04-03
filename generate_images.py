@@ -3706,6 +3706,350 @@ def img_malevich_20251224():
     return base
 
 
+def img_seurat_20251204():
+    """Georges Seurat pointillist style — enterprise data / AWS re:Invent analytics theme."""
+    rng2 = Random(42)
+    base = Image.new("RGB", (W, H), (12, 16, 42))  # deep navy
+    # 1. Dense pointillist dot field (thousands of tiny dots)
+    dot_layer = layer()
+    dd = ImageDraw.Draw(dot_layer)
+    palette = [
+        (255, 215, 80), (80, 180, 255), (255, 100, 60),
+        (100, 230, 140), (220, 80, 200), (255, 255, 180),
+        (60, 210, 210), (255, 160, 60),
+    ]
+    for _ in range(3200):
+        x = rng2.randint(0, W)
+        y = rng2.randint(0, H)
+        r = rng2.randint(2, 5)
+        col = rng2.choice(palette)
+        alpha = rng2.randint(90, 200)
+        dd.ellipse([(x-r, y-r), (x+r, y+r)], fill=col+(alpha,))
+    base = comp(base, dot_layer)
+    # 2. Luminous central band (enterprise spotlight)
+    band = layer()
+    for spread in [260, 200, 140, 80]:
+        alpha = int(30 + (260 - spread) * 0.15)
+        ImageDraw.Draw(band).ellipse([(W//2 - spread*2, H//2 - spread//2),
+                                      (W//2 + spread*2, H//2 + spread//2)],
+                                     fill=(220, 200, 120, alpha))
+    base = comp(base, band)
+    # 3. Bar chart silhouette (analytics motif)
+    chart = layer()
+    cd = ImageDraw.Draw(chart)
+    bars = [(80, 480, 180, 580), (220, 400, 320, 580), (360, 320, 460, 580),
+            (500, 260, 600, 580), (640, 340, 740, 580), (780, 200, 880, 580),
+            (920, 280, 1020, 580), (1060, 360, 1140, 580)]
+    bar_colors = [(255,215,80,120),(80,180,255,120),(255,100,60,120),(100,230,140,120),
+                  (220,80,200,120),(255,215,80,120),(80,180,255,120),(255,100,60,120)]
+    for (x0,y0,x1,y1), col in zip(bars, bar_colors):
+        cd.rectangle([(x0,y0),(x1,y1)], fill=col)
+    base = comp(base, chart)
+    # 4. Pointillist border clusters
+    border = layer()
+    bd = ImageDraw.Draw(border)
+    for _ in range(600):
+        side = rng2.choice(['top', 'bottom', 'left', 'right'])
+        if side == 'top':
+            x, y = rng2.randint(0, W), rng2.randint(0, 60)
+        elif side == 'bottom':
+            x, y = rng2.randint(0, W), rng2.randint(H-60, H)
+        elif side == 'left':
+            x, y = rng2.randint(0, 60), rng2.randint(0, H)
+        else:
+            x, y = rng2.randint(W-60, W), rng2.randint(0, H)
+        r = rng2.randint(2, 4)
+        col = rng2.choice(palette)
+        bd.ellipse([(x-r, y-r), (x+r, y+r)], fill=col+(180,))
+    base = comp(base, border)
+    return base
+
+
+def img_calder_20251205():
+    """Alexander Calder mobile style — life sciences / balance / adaptive AI theme."""
+    rng2 = Random(42)
+    base = Image.new("RGB", (W, H), (248, 246, 238))  # warm white
+    draw = ImageDraw.Draw(base)
+    RED    = (210, 40, 40)
+    BLUE   = (30, 80, 200)
+    YELLOW = (240, 200, 20)
+    BLACK  = (20, 20, 20)
+    # 1. Thin black structural arms (mobile armature)
+    arms = [
+        [(100, 80), (1100, 80)],
+        [(200, 80), (200, 220)],
+        [(600, 80), (600, 300)],
+        [(1000, 80), (1000, 180)],
+        [(200, 220), (500, 220)],
+        [(300, 220), (300, 380)],
+        [(470, 220), (470, 360)],
+        [(600, 300), (850, 300)],
+        [(700, 300), (700, 460)],
+        [(820, 300), (820, 430)],
+    ]
+    for arm in arms:
+        draw.line(arm, fill=BLACK, width=3)
+    # 2. Primary-coloured flat shapes (Calder's signature)
+    shapes = [
+        ('ellipse', (130, 90), (210, 170), RED),
+        ('ellipse', (940, 90), (1060, 170), BLUE),
+        ('polygon', [(180, 230), (240, 230), (210, 290)], YELLOW),
+        ('ellipse', (430, 220), (520, 290), RED),
+        ('polygon', [(270, 390), (340, 390), (305, 455)], BLUE),
+        ('ellipse', (430, 360), (510, 430), YELLOW),
+        ('ellipse', (660, 460), (750, 540), RED),
+        ('polygon', [(790, 430), (860, 430), (825, 500)], BLUE),
+        ('ellipse', (560, 460), (640, 520), YELLOW),
+    ]
+    for shape in shapes:
+        sl = layer()
+        sd = ImageDraw.Draw(sl)
+        if shape[0] == 'ellipse':
+            sd.ellipse([shape[1], shape[2]], fill=shape[3]+(230,))
+        elif shape[0] == 'polygon':
+            sd.polygon(shape[1], fill=shape[2]+(230,))
+        base = comp(base, sl)
+    # 3. Faint grid lines (balance / grid reference)
+    for x in range(0, W, 120):
+        draw.line([(x, 0), (x, H)], fill=(200, 195, 185), width=1)
+    for y in range(0, H, 100):
+        draw.line([(0, y), (W, y)], fill=(200, 195, 185), width=1)
+    # 4. Small accent circles (scientific data points)
+    for cx, cy, r, col in [(380, 480, 18, RED), (900, 540, 14, YELLOW), (120, 520, 16, BLUE)]:
+        sl = layer(); ImageDraw.Draw(sl).ellipse([(cx-r,cy-r),(cx+r,cy+r)], fill=col+(200,))
+        base = comp(base, sl)
+    return base
+
+
+def img_mondrian_20251206():
+    """Piet Mondrian grid style — Amazon Bedrock setup / structured cloud architecture theme."""
+    rng2 = Random(42)
+    base = Image.new("RGB", (W, H), (242, 238, 220))
+    draw = ImageDraw.Draw(base)
+    YELLOW = (255, 210, 0)
+    RED    = (215, 38, 38)
+    BLUE   = (28, 76, 196)
+    BLACK  = (18, 18, 18)
+    GREY   = (180, 175, 162)
+    # 1. Yellow horizontal and vertical grid bands
+    grid_x = [0, 90, 200, 320, 460, 580, 700, 830, 960, 1080, W]
+    grid_y = [0, 70, 160, 260, 360, 450, 540, H]
+    bw = 18
+    for gx in grid_x[1:-1]:
+        draw.rectangle([(gx-bw//2, 0), (gx+bw//2, H)], fill=YELLOW)
+    for gy in grid_y[1:-1]:
+        draw.rectangle([(0, gy-bw//2), (W, gy+bw//2)], fill=YELLOW)
+    # 2. Coloured grid cells — architectural layout
+    colored = [
+        (0, 0, RED), (3, 0, BLUE), (7, 0, RED),
+        (1, 2, BLUE), (5, 1, RED), (8, 2, BLUE),
+        (2, 4, RED), (6, 3, GREY), (9, 1, RED),
+        (4, 5, BLUE), (7, 4, RED),
+    ]
+    inset = bw // 2 + 2
+    for ci, cj, col in colored:
+        if ci < len(grid_x)-1 and cj < len(grid_y)-1:
+            x0 = grid_x[ci] + inset; y0 = grid_y[cj] + inset
+            x1 = grid_x[ci+1] - inset; y1 = grid_y[cj+1] - inset
+            if x1 > x0 and y1 > y0:
+                draw.rectangle([(x0,y0),(x1,y1)], fill=col)
+    # 3. Black grid lines on top
+    for gx in grid_x:
+        draw.line([(gx, 0), (gx, H)], fill=BLACK, width=3)
+    for gy in grid_y:
+        draw.line([(0, gy), (W, gy)], fill=BLACK, width=3)
+    # 4. Bold black border
+    draw.rectangle([(0, 0), (W-1, H-1)], outline=BLACK, width=6)
+    return base
+
+
+def img_klimt_20251207():
+    """Gustav Klimt gold mosaic style — regulated industries / compliance / craftsmanship theme."""
+    rng2 = Random(42)
+    base = Image.new("RGB", (W, H), (8, 8, 26))
+    draw = ImageDraw.Draw(base)
+    GOLD  = (212, 175, 55)
+    GOLD2 = (255, 210, 70)
+    TEAL  = (28, 145, 135)
+    RUST  = (145, 48, 28)
+    CREAM = (238, 218, 165)
+    # 1. Background mosaic patches
+    patch = 22
+    for py in range(0, H, patch):
+        for px in range(0, W, patch):
+            v = rng2.random()
+            if v < 0.22:
+                c = (rng2.randint(4, 18), rng2.randint(4, 22), rng2.randint(28, 58))
+            elif v < 0.38:
+                c = (rng2.randint(18, 38), rng2.randint(95, 135), rng2.randint(105, 145))
+            else:
+                c = (rng2.randint(4, 12), rng2.randint(4, 12), rng2.randint(18, 38))
+            draw.rectangle([(px, py), (px+patch, py+patch)], fill=c)
+    # 2. Golden spiral
+    sl = layer(); sd = ImageDraw.Draw(sl)
+    cx, cy = 580, 380
+    for deg in range(0, 720, 3):
+        ang = math.radians(deg); r = deg * 0.42
+        rx = cx + r * math.cos(ang); ry = cy + r * 0.52 * math.sin(ang)
+        sd.ellipse([(rx-2, ry-2), (rx+2, ry+2)], fill=GOLD+(195,))
+    base = comp(base, sl)
+    # 3. Gold mosaic fragment tiles
+    for _ in range(80):
+        mx = rng2.randint(0, W-30); my = rng2.randint(0, H-20)
+        mw = rng2.randint(12, 28); mh = rng2.randint(8, 18)
+        col = rng2.choice([GOLD, GOLD2, CREAM, TEAL, RUST])
+        ml = layer(); ImageDraw.Draw(ml).rectangle([(mx,my),(mx+mw,my+mh)], fill=col+(160,))
+        base = comp(base, ml)
+    # 4. Teal compliance-shield polygon
+    shield = layer(); shd = ImageDraw.Draw(shield)
+    shd.polygon([(900,80),(1100,80),(1140,240),(1000,360),(860,240)], fill=TEAL+(130,))
+    base = comp(base, shield)
+    # 5. Fine gold dot border
+    for _ in range(300):
+        bx = rng2.randint(0, W); by = rng2.choice([rng2.randint(0,30), rng2.randint(H-30,H)])
+        draw.ellipse([(bx-2,by-2),(bx+2,by+2)], fill=GOLD)
+    return base
+
+
+def img_delaunay_20251208():
+    """Robert Delaunay spectral disc style — developer tools / IDE / signal theme."""
+    rng2 = Random(42)
+    base = Image.new("RGB", (W, H), (10, 12, 32))  # deep dark bg
+    # 1. Large overlapping spectral-ring discs
+    discs = [
+        (280, 280, 240, (220, 40,  40,  80)),
+        (560, 200, 200, (255, 160, 20,  80)),
+        (820, 300, 220, (220, 220, 20,  80)),
+        (440, 440, 180, (40,  200, 80,  80)),
+        (720, 460, 190, (30,  160, 220, 80)),
+        (960, 180, 160, (180, 40,  220, 75)),
+        (160, 500, 140, (255, 80,  120, 70)),
+        (1060, 420, 150,(60,  220, 220, 70)),
+    ]
+    for cx, cy, r, col in discs:
+        for spread in [1.0, 0.75, 0.5, 0.3]:
+            rs = int(r * spread)
+            alpha = int(col[3] * (1.4 - spread))
+            dc = layer()
+            ImageDraw.Draw(dc).ellipse([(cx-rs,cy-rs),(cx+rs,cy+rs)], fill=col[:3]+(min(255,alpha),))
+            base = comp(base, dc)
+    # 2. Rainbow arc (Delaunay's circular colour sequences)
+    arc_layer = layer()
+    ad = ImageDraw.Draw(arc_layer)
+    rainbow = [(220,40,40,160),(255,140,20,160),(220,220,20,160),
+               (40,200,80,160),(30,160,220,160),(180,40,220,160)]
+    for i, col in enumerate(rainbow):
+        rr = 320 + i*28
+        ad.arc([(W//2-rr, H//2-rr), (W//2+rr, H//2+rr)],
+               start=220+i*10, end=340+i*10, fill=col, width=14)
+    base = comp(base, arc_layer)
+    # 3. Fine radial lines from centre (signal burst)
+    rl = layer(); rd = ImageDraw.Draw(rl)
+    for angle_deg in range(0, 360, 20):
+        ang = math.radians(angle_deg)
+        x2 = W//2 + 500 * math.cos(ang)
+        y2 = H//2 + 500 * math.sin(ang)
+        rd.line([(W//2, H//2), (x2, y2)], fill=(255,255,255,18), width=1)
+    base = comp(base, rl)
+    # 4. Small white node dots (IDE connection points)
+    nl = layer(); nd = ImageDraw.Draw(nl)
+    nodes = [(240,200),(580,340),(820,200),(420,480),(760,460),(1000,300),(160,380),(1060,500)]
+    for nx, ny in nodes:
+        nd.ellipse([(nx-8,ny-8),(nx+8,ny+8)], fill=(255,255,255,200))
+    base = comp(base, nl)
+    return base
+
+
+def img_franz_marc_20251209():
+    """Franz Marc jewel-tone style — production safety / resilience / careful engineering theme."""
+    rng2 = Random(42)
+    base = Image.new("RGB", (W, H), (12, 36, 72))  # deep cobalt bg
+    draw = ImageDraw.Draw(base)
+    COBALT  = (30, 80, 180)
+    EMERALD = (28, 140, 90)
+    AMBER   = (220, 150, 20)
+    CRIMSON = (180, 30, 45)
+    VIOLET  = (100, 40, 160)
+    CREAM   = (240, 225, 180)
+    # 1. Jewel-toned background layer patches
+    patches = [
+        (0, 0, 400, 320, COBALT),
+        (380, 0, 800, 260, EMERALD),
+        (780, 0, W, 300, VIOLET),
+        (0, 300, 350, H, EMERALD),
+        (330, 250, 750, H, COBALT),
+        (720, 280, W, H, AMBER),
+    ]
+    for x0,y0,x1,y1,col in patches:
+        pl = layer()
+        ImageDraw.Draw(pl).rectangle([(x0,y0),(x1,y1)], fill=col+(140,))
+        base = comp(base, pl)
+    # 2. Stylised animal silhouette — a leaping deer (safety / care motif)
+    body = layer(); bd = ImageDraw.Draw(body)
+    bd.ellipse([(500, 200), (780, 380)], fill=AMBER+(200,))  # body
+    bd.ellipse([(740, 150), (820, 240)], fill=AMBER+(200,))  # head
+    bd.line([(756, 152), (780, 100)], fill=AMBER+(220,), width=8)   # ear
+    bd.line([(800, 152), (824, 100)], fill=AMBER+(220,), width=8)   # ear
+    # legs
+    for lx in [(520, 380, 490, 490), (600, 375, 575, 490),
+                (680, 375, 700, 490), (760, 370, 790, 480)]:
+        bd.line([(lx[0],lx[1]),(lx[2],lx[3])], fill=AMBER+(200,), width=10)
+    base = comp(base, body)
+    # 3. Circuit-board lines (production engineering motif)
+    cl = layer(); cd = ImageDraw.Draw(cl)
+    circuit_pts = [
+        [(50,50),(200,50),(200,120),(380,120)],
+        [(50,200),(100,200),(100,320),(260,320)],
+        [(1000,80),(1100,80),(1100,200),(950,200)],
+        [(900,400),(1050,400),(1050,520),(920,520)],
+    ]
+    for pts in circuit_pts:
+        for i in range(len(pts)-1):
+            cd.line([pts[i], pts[i+1]], fill=CREAM+(120,), width=2)
+        for pt in pts:
+            cd.ellipse([(pt[0]-5,pt[1]-5),(pt[0]+5,pt[1]+5)], fill=CREAM+(180,))
+    base = comp(base, cl)
+    # 4. Bold black outlines (Franz Marc's strong contour lines)
+    draw.arc([(490, 190), (790, 390)], start=0, end=360, fill=(20,20,20), width=4)
+    draw.arc([(730, 140), (830, 250)], start=0, end=360, fill=(20,20,20), width=4)
+    return base
+
+
+def img_malevich_20251210():
+    """Kazimir Malevich Suprematist style — API permission model / operators / structure theme."""
+    rng2 = Random(42)
+    base = Image.new("RGB", (W, H), (236, 232, 218))  # cream bg
+    draw = ImageDraw.Draw(base)
+    BLACK = (18, 18, 18)
+    RED   = (205, 32, 32)
+    NAVY  = (22, 48, 130)
+    GOLD  = (220, 170, 20)
+    GREY  = (110, 110, 110)
+    # 1. Large bold black rectangle (dominant structure)
+    bl = layer(); ImageDraw.Draw(bl).rectangle([(80, 100), (480, 420)], fill=BLACK+(230,))
+    base = comp(base, bl)
+    # 2. Bold red tilted rectangle (operator layer)
+    rl = layer(); rd = ImageDraw.Draw(rl)
+    pts_r = [(420, 60), (820, 120), (780, 340), (380, 280)]
+    rd.polygon(pts_r, fill=RED+(210,))
+    base = comp(base, rl)
+    # 3. Navy tilted rectangle (user layer)
+    nl = layer(); nd = ImageDraw.Draw(nl)
+    pts_n = [(700, 200), (1100, 260), (1060, 500), (660, 440)]
+    nd.polygon(pts_n, fill=NAVY+(200,))
+    base = comp(base, nl)
+    # 4. Gold horizontal bar (Anthropic base / foundation)
+    gl = layer(); ImageDraw.Draw(gl).rectangle([(0, 520), (W, 590)], fill=GOLD+(210,))
+    base = comp(base, gl)
+    # 5. Small grey rectangle (permission intersect zone)
+    grl = layer(); ImageDraw.Draw(grl).rectangle([(550, 280), (740, 400)], fill=GREY+(180,))
+    base = comp(base, grl)
+    # 6. White circle (user trust token)
+    wc = layer(); ImageDraw.Draw(wc).ellipse([(940, 80), (1060, 200)], fill=(255,255,255,230))
+    base = comp(base, wc)
+    return base
+
+
 def img_leger_20251211():
     """Fernand Léger industrial style — MCP infrastructure & Accenture partnership theme."""
     rng2 = Random(42)
@@ -4123,6 +4467,13 @@ def img_leger_20260403():
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
+    ("2025-12-04", img_seurat_20251204,    "Enterprise Data",  "Georges Seurat"),
+    ("2025-12-05", img_calder_20251205,    "Life Sciences",    "Alexander Calder"),
+    ("2025-12-06", img_mondrian_20251206,  "Bedrock Setup",    "Piet Mondrian"),
+    ("2025-12-07", img_klimt_20251207,     "Compliance",       "Gustav Klimt"),
+    ("2025-12-08", img_delaunay_20251208,  "Dev Tools",        "Robert Delaunay"),
+    ("2025-12-09", img_franz_marc_20251209,"Resilience",       "Franz Marc"),
+    ("2025-12-10", img_malevich_20251210,  "API Operators",    "Kazimir Malevich"),
     ("2025-12-11", img_leger_20251211,      "MCP Standard",    "Fernand Léger"),
     ("2025-12-12", img_lissitzky_20251212,  "MCP Dev Guide",   "El Lissitzky"),
     ("2025-12-13", img_klee_20251213,       "Claude in Slack", "Paul Klee"),

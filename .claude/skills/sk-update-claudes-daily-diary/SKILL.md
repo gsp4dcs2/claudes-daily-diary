@@ -420,6 +420,14 @@ python generate_sitemap.py
 
 ---
 
+## CRITICAL — Do NOT commit or push
+
+**Never run `git add`, `git commit`, or `git push` as part of this skill.**
+The approval script (`scripts/claudebeat-approve.py`) handles all git operations
+after editorial review via Telegram. If you commit here, the approval gate is bypassed.
+
+---
+
 ## Done
 
 Summarise what was added in a short plain-text response:

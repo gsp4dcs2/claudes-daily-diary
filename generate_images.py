@@ -4050,6 +4050,76 @@ def img_seurat_20260402():
     return base
 
 
+def img_leger_20260403():
+    """Fernand Leger mechanical/industrial style — economic data & market growth theme."""
+    base = Image.new("RGB", (W, H), (22, 22, 28))   # near-black charcoal
+
+    # 1. Layered background bands suggesting industrial structure
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bd.rectangle([(0, 0), (W, 180)], fill=(44, 44, 54, 255))
+    bd.rectangle([(0, 450), (W, H)], fill=(38, 38, 48, 255))
+    base = comp(base, bl)
+
+    # 2. Large mechanical circles in Leger's flat primary palette
+    circles = [
+        (200,  300, 210, (220,  40,  40, 225)),   # large red
+        (600,  160, 150, (235, 200,   0, 210)),   # gold/yellow
+        (980,  350, 190, (30,  100, 220, 220)),   # deep blue
+        (780,  100,  80, (220,  40,  40, 190)),   # small red
+        (360,  490, 100, (235, 200,   0, 170)),   # small yellow
+        (1100, 220, 115, (30,  100, 220, 185)),   # small blue
+        (500,  360,  60, (220, 220, 220, 160)),   # white accent
+    ]
+    for cx, cy, r, col in circles:
+        cl = layer()
+        cd = ImageDraw.Draw(cl)
+        cd.ellipse([(cx-r, cy-r), (cx+r, cy+r)], fill=col, outline=(0,0,0,255), width=9)
+        cd.ellipse([(cx-r//3, cy-r//2), (cx+r//5, cy-r//4)],
+                   fill=(255, 255, 255, 90))
+        base = comp(base, cl)
+
+    # 3. Structural pipe bars — horizontal + vertical in primary colours
+    pipes = [
+        (430,  80,  480, 570, (22,  22,  28, 255), 10),   # dark vertical spine
+        (0,   290, 1200, 345, (220,  40,  40, 210),  9),   # red horizontal beam
+        (650,  50,  700, 630, (235, 200,   0, 190),  9),   # yellow vertical
+        (0,   480, 1100, 525, (30,  100, 220, 195),  8),   # blue lower beam
+        (860,  10,  910, 420, (22,  22,  28, 255),  10),   # dark right spine
+    ]
+    for x0, y0, x1, y1, col, w in pipes:
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        pd.rectangle([(x0, y0), (x1, y1)], fill=col, outline=(0,0,0,255), width=w)
+        base = comp(base, pl)
+
+    # 4. Chart-like rising bar columns — nod to economic data theme
+    col_data = [
+        (80,  400, 140, 560, (220,  40,  40, 170)),
+        (160, 340, 220, 560, (235, 200,   0, 160)),
+        (240, 290, 300, 560, (30,  100, 220, 165)),
+        (320, 240, 380, 560, (220,  40,  40, 150)),
+        (400, 200, 460, 560, (235, 200,   0, 155)),
+    ]
+    for x0, y0, x1, y1, col in col_data:
+        bl2 = layer()
+        bd2 = ImageDraw.Draw(bl2)
+        bd2.rectangle([(x0, y0), (x1, y1)], fill=col, outline=(0,0,0,200), width=4)
+        base = comp(base, bl2)
+
+    # 5. Machine-bolt grid dots — Leger's industrial texture
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    for gx in range(70, W, 130):
+        for gy in range(70, H, 130):
+            r = 9
+            dd.ellipse([(gx-r, gy-r), (gx+r, gy+r)],
+                       fill=(195, 190, 178, 130), outline=(0,0,0,190), width=3)
+    base = comp(base, dl)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -4166,6 +4236,7 @@ DAYS = [
     ("2026-03-31", img_malevich_20260331, "Source Leak",     "Kazimir Malevich"),
     ("2026-04-01", img_delaunay_20260401, "Proactive Mode",  "Robert Delaunay"),
     ("2026-04-02", img_seurat_20260402,   "Data Signals",    "Georges Seurat"),
+    ("2026-04-03", img_leger_20260403,    "Economic Data",   "Fernand Léger"),
 ]
 
 for date, fn, kw, artist in DAYS:

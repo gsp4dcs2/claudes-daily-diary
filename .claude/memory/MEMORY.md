@@ -14,3 +14,4 @@
 | [feedback_svg_inkscape_cleanup.md](feedback_svg_inkscape_cleanup.md) | feedback | Always strip Inkscape metadata bloat from any SVG the user sends before using or committing |
 | [feedback_confirm_before_starting.md](feedback_confirm_before_starting.md) | feedback | Always confirm before starting work — a short reply is not an instruction to proceed |
 | [project_telegram_approval.md](project_telegram_approval.md) | project | Telegram bot editorial approval workflow — full build plan ready to implement next session |
+| [backfill_trust_badges.md](backfill_trust_badges.md) | project | **REMINDER** — ⭐ trust badges missing from all articles before 2026-04-01; needs scripted backfill |

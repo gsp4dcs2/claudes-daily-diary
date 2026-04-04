@@ -121,6 +121,13 @@ def git_discard():
 
 # ── HTML helpers ──────────────────────────────────────────────────────────────
 
+def escape_md(text):
+    """Escape Telegram MarkdownV1 special characters in dynamic content."""
+    for ch in ['*', '_', '`', '[', ']']:
+        text = text.replace(ch, '\\' + ch)
+    return text
+
+
 def clean(html):
     text = re.sub(r'<[^>]+>', ' ', html)
     text = re.sub(r'&amp;', '&', text)
@@ -239,8 +246,8 @@ async def run():
             n_of_n = f'Entry {i+1} of {len(all_entries)}'
             text = (
                 f'*{n_of_n}* — {stars} {domain}\n'
-                f'*{entry["headline"]}*\n\n'
-                f'_{entry["snippet"]}_'
+                f'*{escape_md(entry["headline"])}*\n\n'
+                f'_{escape_md(entry["snippet"])}_'
             )
             keyboard = InlineKeyboardMarkup([[
                 InlineKeyboardButton('✅ Include', callback_data=f'include_{i}'),
@@ -301,7 +308,7 @@ async def run():
                             chat_id=CHAT_ID,
                             message_id=cq.message.message_id,
                             text=cq.message.text + f'\n\n{label}',
-                            parse_mode='Markdown'
+                            parse_mode=None
                         )
                         await cq.answer()
                         print(f'  Entry {idx+1}: {action}')

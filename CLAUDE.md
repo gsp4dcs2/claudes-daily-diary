@@ -89,10 +89,10 @@ Where `{key}` / `{icon}` / `{Label}` come from the table above.
 <li>
   <a href="articles/{yyyy}/{mm}/{yyyy-mm-dd}.html">
     <img class="entry-thumb" src="articles/{yyyy}/{mm}/{yyyy-mm-dd}-thumb.png" alt="{date} thumbnail">
-    <span class="article-date">{yyyy-mm-dd}</span>
-    <span class="cat-icon" title="{Label}">{icon}</span>
-    <span class="article-title">{Title}</span>
-    <span class="article-arrow" aria-hidden="true">→</span>
+    <div class="entry-meta">
+      <span class="article-date">{yyyy-mm-dd}</span>
+      <div class="entry-bottom"><span class="cat-icon" title="{Label}">{icon}</span> <span class="article-title">{Title}</span></div>
+    </div>
   </a>
 </li>
 ```

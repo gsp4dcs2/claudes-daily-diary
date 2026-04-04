@@ -22,7 +22,9 @@ git worktree add --detach "$DRAFT_DIR" HEAD
 trap "git worktree remove '$DRAFT_DIR' --force 2>/dev/null || true" EXIT
 
 # Run skill inside the draft worktree
+# Unset API key so Claude Code uses the OAuth account, never the depleted key
 cd "$DRAFT_DIR"
+unset ANTHROPIC_API_KEY
 SKILL=$(awk '/^---$/{n++; if(n==2){found=1; next}} found{print}' /var/www/claudebeat/.claude/skills/sk-update-claudes-daily-diary/SKILL.md)
 claude --dangerously-skip-permissions -p "$SKILL"
 

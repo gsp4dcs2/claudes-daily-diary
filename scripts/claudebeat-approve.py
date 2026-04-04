@@ -121,11 +121,9 @@ def git_discard():
 
 # ── HTML helpers ──────────────────────────────────────────────────────────────
 
-def escape_md(text):
-    """Escape Telegram MarkdownV1 special characters in dynamic content."""
-    for ch in ['*', '_', '`', '[', ']']:
-        text = text.replace(ch, '\\' + ch)
-    return text
+def escape_html(text):
+    """Escape HTML special characters for Telegram HTML parse mode."""
+    return text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
 
 
 def clean(html):
@@ -245,9 +243,9 @@ async def run():
 
             n_of_n = f'Entry {i+1} of {len(all_entries)}'
             text = (
-                f'*{n_of_n}* — {stars} {domain}\n'
-                f'*{escape_md(entry["headline"])}*\n\n'
-                f'_{escape_md(entry["snippet"])}_'
+                f'<b>{n_of_n}</b> — {stars} {escape_html(domain)}\n'
+                f'<b>{escape_html(entry["headline"])}</b>\n\n'
+                f'<i>{escape_html(entry["snippet"])}</i>'
             )
             keyboard = InlineKeyboardMarkup([[
                 InlineKeyboardButton('✅ Include', callback_data=f'include_{i}'),
@@ -255,7 +253,7 @@ async def run():
             ]])
             msg = await bot.send_message(
                 chat_id=CHAT_ID, text=text,
-                parse_mode='Markdown', reply_markup=keyboard
+                parse_mode='HTML', reply_markup=keyboard
             )
             msg_to_idx[msg.message_id] = i
             print(f'  Sent entry {i+1}: {entry["headline"][:60]}')
@@ -317,10 +315,10 @@ async def run():
         included = [i for i, d in decisions.items() if d == 'include']
         skipped  = [i for i, d in decisions.items() if d == 'skip']
 
-        summary_lines = [f'📋 *Review complete — {today}*\n']
+        summary_lines = [f'📋 <b>Review complete — {today}</b>\n']
         for i, entry in enumerate(all_entries):
             mark = '✅' if decisions.get(i) == 'include' else '❌'
-            summary_lines.append(f'{mark} {entry["headline"][:60]}')
+            summary_lines.append(f'{mark} {escape_html(entry["headline"][:60])}')
 
         if included:
             summary_lines.append(f'\n{len(included)} entr{"y" if len(included)==1 else "ies"} selected for publication.')
@@ -337,7 +335,7 @@ async def run():
         summary_msg = await bot.send_message(
             chat_id=CHAT_ID,
             text='\n'.join(summary_lines),
-            parse_mode='Markdown',
+            parse_mode='HTML',
             reply_markup=keyboard
         )
 
@@ -371,8 +369,8 @@ async def run():
             git_publish(today)
             await bot.send_message(
                 chat_id=CHAT_ID,
-                text=f'✅ *{today}* — {len(included)} entr{"y" if len(included)==1 else "ies"} committed and pushed live.',
-                parse_mode='Markdown'
+                text=f'✅ <b>{today}</b> — {len(included)} entr{"y" if len(included)==1 else "ies"} committed and pushed live.',
+                parse_mode='HTML'
             )
             print(f'Published {len(included)} entries.')
 
@@ -380,8 +378,8 @@ async def run():
             git_discard()
             await bot.send_message(
                 chat_id=CHAT_ID,
-                text=f'🗑 *{today}* draft discarded. No changes committed.',
-                parse_mode='Markdown'
+                text=f'🗑 <b>{today}</b> draft discarded. No changes committed.',
+                parse_mode='HTML'
             )
             print('Discarded — no changes committed.')
 

@@ -10,9 +10,9 @@ The user has chosen Option C — Telegram bot — as the editorial approval mech
 
 ---
 
-## Current state (end of session 2026-04-03)
+## Current state (end of session 2026-04-04)
 
-### ✅ Done
+### ✅ Done — fully operational
 - Telegram installed on phone, account created as "TeleClaude"
 - Bot created via @BotFather: **claudebeat_editor_bot**
 - Bot token: `8633455378:AAENHCKKt4nT9z8K6L9tKOyf5iY3s6a8Ups`
@@ -20,36 +20,29 @@ The user has chosen Option C — Telegram bot — as the editorial approval mech
 - python-telegram-bot v22.7 installed at `~/claudebeat-venv/`
 - Credentials file at `~/claudebeat-approve.env` (chmod 600)
 - `scripts/claudebeat-approve.py` — per-entry approval script (in repo)
-- `scripts/run-diary.sh` — cron wrapper (in repo), working correctly
-- Claude Code CLI v2.1.91 installed and authenticated on VM
-- Full end-to-end test run completed successfully (2026-04-03 diary written and published)
-- SKILL.md updated with CRITICAL block: **never run git add/commit/push** — approval script handles all git ops
-- Telegram per-entry buttons confirmed working (screenshot received in previous session)
+- `scripts/run-diary.sh` — cron wrapper using git worktree draft (never touches live site until Publish)
+- Claude Code CLI authenticated via OAuth (claude.ai account, not API key)
+- `unset ANTHROPIC_API_KEY` added to run-diary.sh to prevent interactive prompt blocking cron
+- Telegram HTML parse mode (was MarkdownV1, caused crashes on special chars)
+- Full end-to-end test confirmed working: entries drafted, approved via Telegram, committed and pushed
+- **Cron job set: `0 10 * * *` (10:00 UTC daily)** — user's preferred time
+- CLAUDE.md and SKILL.md index list item template corrected (entry-meta/entry-bottom, no → arrow)
 
-### ❌ Still to do
-1. **Cron job** — not yet set up on VM. Command to add:
-   ```
-   crontab -e
-   ```
-   Add line:
-   ```
-   0 7 * * * /var/www/claudebeat/scripts/run-diary.sh >> /var/log/claudebeat.log 2>&1
-   ```
-2. **Telegram approval test** — not completed this session. Planned test:
-   append a dummy entry to today's article, run `~/claudebeat-venv/bin/python3 scripts/claudebeat-approve.py` directly, verify Telegram buttons appear and Include/Skip/Publish flow works end-to-end, then `git restore` to clean up.
-
-### 🔜 Next session — start here
-1. Run the Telegram approval test (see above)
-2. Set up the cron job
-3. Watch 07:00 UTC run the following morning
+### 🔜 Next session — watch the 10:00 UTC run
+- Check `/var/log/claudebeat.log` for any errors
+- Approve entries via Telegram
+- Verify site looks correct after publish
 
 ---
 
-## Key fixes made this session
+## Key fixes made (sessions 2026-04-03 and 2026-04-04)
 
-- `run-diary.sh` SKILL variable: changed `cat` to `awk` to strip YAML frontmatter before passing to `claude -p`
-- `run-diary.sh` approve script path: changed `~/claudebeat-approve.py` → `scripts/claudebeat-approve.py`
-- SKILL.md: added CRITICAL block forbidding git commit/push during skill execution
+- `run-diary.sh`: skill now runs in a git worktree (`--detach HEAD`) so live site is never touched until Publish
+- `run-diary.sh`: `unset ANTHROPIC_API_KEY` prevents interactive prompt blocking unattended cron
+- `claudebeat-approve.py`: switched to HTML parse mode (MarkdownV1 broke on backticks, asterisks etc.)
+- `claudebeat-approve.py`: `git add -A` → targeted `git add -- [copied files]` (avoids stray directories)
+- `claudebeat-approve.py`: `shutil.copy2` guard: `src.is_file()` not `src.exists()` (skips __pycache__ dirs)
+- CLAUDE.md + SKILL.md: index list item template corrected to use entry-meta/entry-bottom, no → arrow
 
 ## Known git sync issue (Windows ↔ VM)
 

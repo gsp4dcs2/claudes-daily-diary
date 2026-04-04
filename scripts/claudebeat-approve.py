@@ -83,11 +83,12 @@ def get_new_html_files():
 
 def git_publish(today):
     if IS_DRAFT:
-        # Copy all new/modified files from the draft worktree to the live dir
+        # Copy only changed files from draft worktree to live dir, track them
         result = subprocess.run(
             ['git', 'status', '--porcelain'],
             cwd=REPO, capture_output=True, text=True, check=True
         )
+        copied = []
         for line in result.stdout.splitlines():
             rel = line[3:].strip().strip('"')
             src = REPO / rel
@@ -95,8 +96,12 @@ def git_publish(today):
             if src.exists():
                 dst.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(src, dst)
-
-    subprocess.run(['git', 'add', '-A'], cwd=LIVE, check=True)
+                copied.append(rel)
+        # Add only the files we copied — never git add -A on the live dir
+        if copied:
+            subprocess.run(['git', 'add', '--'] + copied, cwd=LIVE, check=True)
+    else:
+        subprocess.run(['git', 'add', '-A'], cwd=LIVE, check=True)
     subprocess.run(
         ['git', 'commit', '-m',
          f'Add {today} diary entry [approved via Telegram]'],

@@ -14,6 +14,7 @@
 import asyncio
 import os
 import re
+import shutil
 import subprocess
 from datetime import datetime
 from pathlib import Path
@@ -33,10 +34,12 @@ def load_env(path):
 
 load_env(Path.home() / 'claudebeat-approve.env')
 
-TOKEN   = os.environ['TELEGRAM_BOT_TOKEN']
-CHAT_ID = int(os.environ['TELEGRAM_CHAT_ID'])
-REPO    = Path('/var/www/claudebeat')
-TIMEOUT = 8 * 3600  # seconds
+TOKEN    = os.environ['TELEGRAM_BOT_TOKEN']
+CHAT_ID  = int(os.environ['TELEGRAM_CHAT_ID'])
+LIVE     = Path('/var/www/claudebeat')
+REPO     = Path(os.environ.get('DRAFT_DIR', str(LIVE)))  # draft worktree, or live if standalone
+IS_DRAFT = REPO != LIVE
+TIMEOUT  = 8 * 3600  # seconds
 
 
 # ── Source tier → stars ───────────────────────────────────────────────────────
@@ -79,19 +82,36 @@ def get_new_html_files():
 
 
 def git_publish(today):
-    subprocess.run(['git', 'add', '-A'], cwd=REPO, check=True)
+    if IS_DRAFT:
+        # Copy all new/modified files from the draft worktree to the live dir
+        result = subprocess.run(
+            ['git', 'status', '--porcelain'],
+            cwd=REPO, capture_output=True, text=True, check=True
+        )
+        for line in result.stdout.splitlines():
+            rel = line[3:].strip().strip('"')
+            src = REPO / rel
+            dst = LIVE / rel
+            if src.exists():
+                dst.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(src, dst)
+
+    subprocess.run(['git', 'add', '-A'], cwd=LIVE, check=True)
     subprocess.run(
         ['git', 'commit', '-m',
          f'Add {today} diary entry [approved via Telegram]'],
-        cwd=REPO, check=True
+        cwd=LIVE, check=True
     )
-    subprocess.run(['git', 'push'], cwd=REPO, check=True)
+    subprocess.run(['git', 'push'], cwd=LIVE, check=True)
 
 
 def git_discard():
-    subprocess.run(['git', 'restore', '--staged', '.'], cwd=REPO)
-    subprocess.run(['git', 'restore', '.'], cwd=REPO)
-    subprocess.run(['git', 'clean', '-fd', 'articles/'], cwd=REPO)
+    if not IS_DRAFT:
+        # Standalone mode: clean up the live dir directly
+        subprocess.run(['git', 'restore', '--staged', '.'], cwd=LIVE)
+        subprocess.run(['git', 'restore', '.'], cwd=LIVE)
+        subprocess.run(['git', 'clean', '-fd', 'articles/'], cwd=LIVE)
+    # Draft mode: run-diary.sh's trap removes the worktree automatically
 
 
 # ── HTML helpers ──────────────────────────────────────────────────────────────

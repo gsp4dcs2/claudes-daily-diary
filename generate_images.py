@@ -3,7 +3,7 @@ import os
 from random import Random
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-BASE = r"D:\Tresorit\z_Keepass\GSP\AI\Claude\ws02_Claudes_Daily_Diary"
+BASE = os.path.dirname(os.path.abspath(__file__))
 OUT  = os.path.join(BASE, "articles", "2026", "03")
 W, H = 1200, 630
 TH   = 96
@@ -4587,6 +4587,53 @@ def img_leger_20260403():
     return base
 
 
+def img_lissitzky_20260404():
+    """El Lissitzky Constructivist style — developer toolkit / API features theme."""
+    rng2 = Random(42)
+    base = Image.new("RGB", (W, H), (242, 238, 224))   # warm cream bg
+
+    # 1. Bold diagonal red parallelogram bars (Constructivist energy)
+    for i in range(6):
+        x0 = rng2.randint(-80, 900)
+        y0 = rng2.randint(-60, 500)
+        lr = layer(); dr = ImageDraw.Draw(lr)
+        pts = [(x0, y0), (x0 + 220, y0), (x0 + 290, y0 + 80), (x0 + 70, y0 + 80)]
+        dr.polygon(pts, fill=(195, 24, 24, 210))
+        base = comp(base, lr)
+
+    # 2. Black structural bars (vertical + horizontal grid spine)
+    draw = ImageDraw.Draw(base)
+    for x in [100, 380, 700, 1020]:
+        draw.rectangle([(x - 10, 0), (x + 10, H)], fill=(18, 18, 18))
+    for y in [60, 200, 390, 560]:
+        draw.rectangle([(0, y - 8), (W, y + 8)], fill=(18, 18, 18))
+
+    # 3. Large Proun circle — red semi-transparent
+    lcirc = layer()
+    ImageDraw.Draw(lcirc).ellipse([(780, 60), (1120, 400)], fill=(195, 24, 24, 175))
+    base = comp(base, lcirc)
+
+    # 4. White rectangle punched through the red circle (negative-space effect)
+    lw = layer()
+    ImageDraw.Draw(lw).rectangle([(840, 140), (1060, 320)], fill=(242, 238, 224, 245))
+    base = comp(base, lw)
+
+    # 5. Small constructivist node squares at grid intersections
+    draw = ImageDraw.Draw(base)
+    nodes = [(110, 210), (390, 65), (710, 400), (390, 395), (110, 565), (710, 205)]
+    for nx, ny in nodes:
+        draw.rectangle([(nx - 16, ny - 16), (nx + 16, ny + 16)], fill=(18, 18, 18))
+
+    # 6. Accent yellow rectangles (Constructivist third colour)
+    ly = layer()
+    yd = ImageDraw.Draw(ly)
+    yd.rectangle([(160, 410), (340, 450)], fill=(230, 190, 0, 200))
+    yd.rectangle([(450, 90), (660, 125)], fill=(230, 190, 0, 190))
+    base = comp(base, ly)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -4714,6 +4761,7 @@ DAYS = [
     ("2026-04-01", img_delaunay_20260401, "Proactive Mode",  "Robert Delaunay"),
     ("2026-04-02", img_seurat_20260402,   "Data Signals",    "Georges Seurat"),
     ("2026-04-03", img_leger_20260403,    "Economic Data",   "Fernand Léger"),
+    ("2026-04-04", img_lissitzky_20260404, "Developer Toolkit", "El Lissitzky"),
 ]
 
 for date, fn, kw, artist in DAYS:

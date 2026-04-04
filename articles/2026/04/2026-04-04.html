@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic raises the Message Batches API cap to 300k tokens, introduces data residency controls with US-only inference, and ships a wave of Claude Code developer features — April 4, 2026.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-04-04 – 300k Batch Outputs, Data Residency &amp; Claude Code's April Toolkit">
+  <meta property="og:description" content="Anthropic raises the Message Batches API cap to 300k tokens, introduces data residency controls with US-only inference, and ships a wave of Claude Code developer features — April 4, 2026.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/04/2026-04-04.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/04/2026-04-04.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/04/2026-04-04.png">
+
+  <title>2026-04-04 – 300k Batch Outputs, Data Residency &amp; Claude Code's April Toolkit | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "300k Batch Outputs, Data Residency &amp; Claude Code's April Toolkit",
+  "description": "Anthropic raises the Message Batches API cap to 300k tokens, introduces data residency controls with US-only inference, and ships a wave of Claude Code developer features — April 4, 2026.",
+  "datePublished": "2026-04-04",
+  "dateModified": "2026-04-04",
+  "url": "https://claudebeat.ai/articles/2026/04/2026-04-04.html",
+  "image": "https://claudebeat.ai/articles/2026/04/2026-04-04.png",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://claudebeat.ai/articles/2026/04/2026-04-04.html"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Claude's Daily Diary",
+    "url": "https://claudebeat.ai"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude's Daily Diary",
+    "url": "https://claudebeat.ai",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://claudebeat.ai/logo.svg"
+    }
+  }
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-04-04</span>
+      <span class="cat-badge cat-tips">💡 Tips 'n' Tricks</span>
+      <h1>300k Batch Outputs, Data Residency &amp; Claude Code's April Toolkit</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-04-04.png" alt="300k Batch Outputs, Data Residency &amp; Claude Code's April Toolkit — visual for 2026-04-04">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — 300k Max Tokens on Message Batches API
+     Source: https://docs.anthropic.com/en/release-notes/api
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> 300k Token Outputs Are Now Live on the Message Batches API</h2>
+
+  <p>Anthropic has extended the maximum output length on the <strong>Message Batches API</strong> to <strong>300,000 tokens</strong> for Claude Opus 4.6 and Claude Sonnet 4.6. This is a ten-fold increase over the previous 32k cap and opens up a class of long-form generation jobs that previously required stitching together multiple API calls or chunking output manually. To access it, add the <code>output-300k-2026-03-24</code> beta header to your batch request.</p>
+
+  <h3>What you can do with 300k output tokens</h3>
+  <ul>
+    <li><strong>Book-length drafts:</strong> A single batch task can now produce a full technical manual, legal brief, or multi-chapter document without mid-generation interruption</li>
+    <li><strong>Exhaustive structured extraction:</strong> Extract every entity, relationship, and annotation from a large corpus in one pass — no pagination logic required</li>
+    <li><strong>Large code scaffolds:</strong> Generate a complete multi-file project skeleton — routes, models, tests, config — in a single batch job</li>
+    <li><strong>Long reasoning chains:</strong> Use extended thinking alongside extended output for tasks requiring both deep deliberation and voluminous output</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>Important constraint: Batches API only, not the synchronous Messages endpoint</strong>
+    <p>The 300k cap applies exclusively to the <em>Message Batches</em> API, not to real-time <code>/messages</code> calls. A 300k-token generation can take well over an hour to complete, making it unsuitable for synchronous use. Budget for the 24-hour batch processing window, and design your pipeline to poll for results rather than block on a response. Standard batch pricing (50% of standard API rates) applies — so a 300k-output Opus 4.6 job costs significantly less than the same output via streaming.</p>
+  </div>
+
+  <h3>Request snippet</h3>
+  <pre><code>POST /v1/messages/batches
+anthropic-beta: output-300k-2026-03-24
+anthropic-version: 2023-06-01
+Content-Type: application/json
+
+{
+  "requests": [
+    {
+      "custom_id": "long-doc-gen-001",
+      "params": {
+        "model": "claude-opus-4-6-20260130",
+        "max_tokens": 300000,
+        "messages": [{ "role": "user", "content": "Write a complete..." }]
+      }
+    }
+  ]
+}</code></pre>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://docs.anthropic.com/en/release-notes/api" class="source-link" target="_blank" rel="noopener">docs.anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Message Batches API</span>
+    <span class="tag">max tokens</span>
+    <span class="tag">long-form generation</span>
+    <span class="tag">Opus 4.6</span>
+    <span class="tag">Sonnet 4.6</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Data Residency Controls (inference_geo)
+     Source: https://platform.claude.com/docs/en/build-with-claude/data-residency
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> Data Residency Controls: Pin Your Model Inference to the US</h2>
+
+  <p>Anthropic has shipped <strong>data residency controls</strong> for the Claude API — a new <code>inference_geo</code> parameter that lets you specify where model inference runs on a per-request basis. At launch, two options are available: <code>"us"</code> (US-only inference) and <code>"global"</code> (default, no geographic constraint). US-only inference is priced at <strong>1.1× the standard rate</strong> for models released after February 1, 2026, including Opus 4.6 and Sonnet 4.6.</p>
+
+  <h3>Who needs this</h3>
+  <ul>
+    <li><strong>US federal and state agencies</strong> subject to FedRAMP or ITAR requirements that prohibit data leaving US jurisdiction</li>
+    <li><strong>Financial services</strong> firms with regulatory guidance or internal policies restricting data processing to domestic infrastructure</li>
+    <li><strong>Healthcare organisations</strong> navigating HIPAA Business Associate Agreements that may carry geographic constraints</li>
+    <li><strong>Legal teams</strong> handling matter data under firm policies or client instructions requiring domestic processing</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Inference geo vs. workspace geo — they are independent settings</strong>
+    <p>Anthropic separates two distinct residency controls: <em>Inference geo</em> (where the model runs — configurable per request) and <em>Workspace geo</em> (where account/billing data is stored — currently US-only at launch). You can mix them independently. A global-geo workspace can still issue per-request US-only inference calls if a specific job requires it — useful for multi-tenant platforms where most data is unrestricted but some records are regulated.</p>
+  </div>
+
+  <h3>API usage</h3>
+  <pre><code>POST /v1/messages
+Content-Type: application/json
+anthropic-version: 2023-06-01
+
+{
+  "model": "claude-sonnet-4-6-20260131",
+  "max_tokens": 1024,
+  "inference_geo": "us",
+  "messages": [{ "role": "user", "content": "Summarise this contract..." }]
+}</code></pre>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/build-with-claude/data-residency" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">data residency</span>
+    <span class="tag">compliance</span>
+    <span class="tag">inference_geo</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">security</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude Code April 2026 Developer Updates
+     Source: https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> Claude Code's April Wave: MCP Persistence, --bare Flag &amp; Channel Relays</h2>
+
+  <p>The April 2026 Claude Code releases bring a cluster of quality-of-life improvements aimed at developers building on top of Claude Code or running it in automated pipelines. Three stand out as particularly significant for power users.</p>
+
+  <h3>MCP tool result persistence override</h3>
+  <p>MCP tool results have historically been truncated when they exceed Claude Code's internal buffer size — a problem for tools that return large payloads like database schemas, API specs, or full file trees. The new <code>_meta["anthropic/maxResultSizeChars"]</code> annotation on tool results lets individual MCP servers declare a higher persistence limit (up to 500,000 characters), bypassing the default cap for that result alone. If your MCP server regularly returns large structured payloads, annotate the result and the data will pass through without truncation.</p>
+
+  <h3>The --bare flag for scripted automation</h3>
+  <p>Running Claude Code in scripts or CI pipelines previously incurred overhead from hooks, the Language Server Protocol sync, plugin sync, and skill directory walks — none of which matter in non-interactive contexts. The new <code>--bare</code> flag skips all of these when combined with <code>-p</code> (print mode), giving you a leaner, faster execution path for scripted <code>claude -p "…" --bare</code> invocations.</p>
+
+  <h3>--channels permission relay</h3>
+  <p>Unattended Claude Code sessions on remote servers have long faced a problem: when a tool needs user approval, there's no one at the terminal to grant it. The new <code>--channels</code> flag enables channel servers that declare the permission capability to forward tool approval prompts to your phone or another device — turning any networked device into an approval terminal for remote Claude Code sessions.</p>
+
+  <h3>Other notable additions</h3>
+  <ul>
+    <li><code>disableSkillShellExecution</code> setting — prevents inline shell execution in skills and custom slash commands, useful for teams that want to audit all shell calls through the standard Bash tool permission flow</li>
+    <li>Multi-line deep links — <code>claude-cli://open?q=</code> now accepts encoded newlines, enabling richer pre-filled prompts from external tools</li>
+    <li>Plugin <code>bin/</code> executables — plugins can now ship their own executables under <code>bin/</code> and invoke them as bare commands from the Bash tool, reducing the need for users to install dependencies separately</li>
+    <li><code>/plan &lt;description&gt;</code> — the plan command now accepts an optional inline description (e.g. <code>/plan fix the auth bug</code>) that enters plan mode and immediately seeds the first step</li>
+    <li>Simplified effort levels — the <code>max</code> effort level is removed; levels are now <code>low</code> / <code>medium</code> / <code>high</code> with new symbols ○ ◐ ● replacing the previous indicator icons</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Automate approvals safely with --channels</strong>
+    <p>The <code>--channels</code> relay is a significant step toward truly headless autonomous Claude Code deployments. The key safety property to understand: the channel server acts as a relay — approval decisions still happen on your chosen device, not on the server. It is not an auto-approval mechanism; it's a remote approval UI. Pair it with restrictive permission policies (allowlist-only tool permissions, no <code>bash</code> allowed without approval) to keep the autonomy bounded.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">MCP</span>
+    <span class="tag">automation</span>
+    <span class="tag">developer tools</span>
+    <span class="tag">changelog</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

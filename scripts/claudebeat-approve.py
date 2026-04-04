@@ -93,7 +93,7 @@ def git_publish(today):
             rel = line[3:].strip().strip('"')
             src = REPO / rel
             dst = LIVE / rel
-            if src.exists():
+            if src.is_file():
                 dst.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(src, dst)
                 copied.append(rel)

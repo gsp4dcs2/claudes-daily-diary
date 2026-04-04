@@ -18,7 +18,7 @@ echo "=== ClaudeBeat diary run: $(date) ==="
 
 # Create a draft worktree — Nginx never serves this location
 DRAFT_DIR="/tmp/claudebeat-draft-$(date +%Y%m%d-%H%M%S)"
-git worktree add "$DRAFT_DIR" master
+git worktree add --detach "$DRAFT_DIR" HEAD
 trap "git worktree remove '$DRAFT_DIR' --force 2>/dev/null || true" EXIT
 
 # Run skill inside the draft worktree

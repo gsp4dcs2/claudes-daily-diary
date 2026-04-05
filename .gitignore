@@ -1,2 +1,14 @@
 claudebeat-approve.env
 messages/
+
+# Private — not for public GitHub
+notes/
+prompts/
+.claude/memory/
+.claude/settings.local.json
+Claude - how to.odt
+favicon.svg.orig
+
+# Python
+__pycache__/
+*.pyc

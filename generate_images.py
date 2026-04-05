@@ -4634,6 +4634,84 @@ def img_lissitzky_20260404():
     return base
 
 
+def img_klimt_20260405():
+    """Gustav Klimt — biotech acquisition + billing policy + intricate molecular life-sciences theme."""
+    base = Image.new("RGB", (W, H), (10, 6, 18))   # near-black deep violet bg
+
+    # 1. Dense gold spiral field — Klimt's signature tessellated mosaic
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    for _ in range(400):
+        sx = rng.randint(0, W)
+        sy = rng.randint(0, H)
+        sr = rng.randint(2, 8)
+        alpha = rng.randint(60, 190)
+        sd.ellipse([(sx - sr, sy - sr), (sx + sr, sy + sr)], fill=(212, 160, 28, alpha))
+    base = comp(base, sl)
+
+    # 2. Large central oval form — double-helix inspired, Klimt portrait silhouette
+    ol = layer()
+    od = ImageDraw.Draw(ol)
+    od.ellipse([(300, 40), (900, 500)], fill=(26, 14, 8, 220), outline=(212, 160, 28, 255), width=8)
+    base = comp(base, ol)
+
+    # 3. Teal molecular ring structures — biotech theme
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    ring_centers = [(600, 260), (420, 140), (780, 380), (480, 380), (720, 140)]
+    for rx, ry in ring_centers:
+        r_outer = rng.randint(48, 72)
+        r_inner = r_outer - 18
+        rd.ellipse([(rx - r_outer, ry - r_outer), (rx + r_outer, ry + r_outer)],
+                   fill=(22, 118, 108, 140), outline=(38, 200, 180, 200), width=4)
+        rd.ellipse([(rx - r_inner, ry - r_inner), (rx + r_inner, ry + r_inner)],
+                   fill=(10, 6, 18, 180))
+    base = comp(base, rl)
+
+    # 4. Gold mosaic fragment rectangles — Klimt's decorative surface
+    ml = layer()
+    md = ImageDraw.Draw(ml)
+    fragments = [
+        (40,  60, 180, 150,  (212, 160, 28, 170)),
+        (1020, 80, 1160, 200, (38, 200, 180, 150)),
+        (60,  460, 220, 570,  (190, 70, 18, 155)),
+        (1000, 410, 1180, 520, (212, 160, 28, 140)),
+        (180, 560, 380, 620,  (38, 200, 180, 130)),
+        (900, 530, 1100, 610,  (190, 70, 18, 130)),
+        (50,  260, 160, 360,  (212, 160, 28, 130)),
+        (1050, 260, 1180, 380, (38, 200, 180, 120)),
+    ]
+    for px0, py0, px1, py1, col in fragments:
+        md.rectangle([(px0, py0), (px1, py1)], fill=col)
+    base = comp(base, ml)
+
+    # 5. Rust/copper accent spiral arcs — molecular bond lines
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(12):
+        cx, cy = 600, 270
+        r_arc = 80 + i * 22
+        a_start = i * 30
+        ad.arc([(cx - r_arc, cy - r_arc), (cx + r_arc, cy + r_arc)],
+               start=a_start, end=a_start + 90,
+               fill=(212, 160, 28, max(30, 180 - i * 12)), width=3)
+    base = comp(base, al)
+
+    # 6. Small tesserae dots — teal, rust, gold scatter
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    tesserae = [(212, 160, 28, 210), (38, 200, 180, 200), (190, 70, 18, 200)]
+    for _ in range(120):
+        dx = rng.randint(0, W)
+        dy = rng.randint(0, H)
+        dr = rng.randint(3, 9)
+        col = tesserae[rng.randint(0, 2)]
+        dd.ellipse([(dx - dr, dy - dr), (dx + dr, dy + dr)], fill=col)
+    base = comp(base, dl)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -4762,6 +4840,7 @@ DAYS = [
     ("2026-04-02", img_seurat_20260402,   "Data Signals",    "Georges Seurat"),
     ("2026-04-03", img_leger_20260403,    "Economic Data",   "Fernand Léger"),
     ("2026-04-04", img_lissitzky_20260404, "Developer Toolkit", "El Lissitzky"),
+    ("2026-04-05", img_klimt_20260405,    "Biotech & Billing",  "Gustav Klimt"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -2139,9 +2139,14 @@
 
     const params     = new URLSearchParams(window.location.search);
     const paramMonth = params.get('month');
+    // Fall back to the latest month that has real content, not today's month
+    // (avoids "No entries this month" on the 1st of a new month before the cron runs)
+    const latestEntryMonth = allItems.length > 0
+      ? allItems[0].querySelector('.article-date').textContent.trim().slice(0, 7)
+      : todayYM;
     let currentMonth = (paramMonth && /^\d{4}-\d{2}$/.test(paramMonth))
                        ? paramMonth
-                       : (sessionStorage.getItem('last_browse_month') || todayYM);
+                       : (sessionStorage.getItem('last_browse_month') || latestEntryMonth);
     let currentMode  = 'home';
 
     function renderMonth(ym) {

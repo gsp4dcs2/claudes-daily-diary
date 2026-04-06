@@ -4712,6 +4712,84 @@ def img_klimt_20260405():
     return base
 
 
+def img_franz_marc_20260406():
+    """Franz Marc — rich jewel tones, organic neural forms — AI emotion concepts / interpretability theme."""
+    # Deep cobalt background — Franz Marc's signature jewel-tone darkness
+    base = Image.new("RGB", (W, H), (14, 26, 88))
+
+    # 1. Large emerald form — lower left, organic blob (the "grounding" emotion mass)
+    g1 = layer()
+    g1d = ImageDraw.Draw(g1)
+    g1d.ellipse([(-80, 300), (480, 680)], fill=(18, 148, 72, 200))
+    base = comp(base, g1)
+
+    # 2. Deep crimson arc — upper right (passion / distress vector)
+    r1 = layer()
+    r1d = ImageDraw.Draw(r1)
+    r1d.ellipse([(760, -80), (1280, 400)], fill=(190, 24, 44, 185))
+    base = comp(base, r1)
+
+    # 3. Violet sweeping wedge — upper left (mystery / internal state depth)
+    v1 = layer()
+    v1d = ImageDraw.Draw(v1)
+    v1d.polygon([(0, 0), (460, 0), (320, 440), (0, 360)], fill=(88, 16, 168, 155))
+    base = comp(base, v1)
+
+    # 4. Amber/gold central diagonal — the causal connection / steering beam
+    a1 = layer()
+    a1d = ImageDraw.Draw(a1)
+    a1d.polygon([(260, 590), (680, 60), (880, 110), (460, 640)], fill=(210, 162, 18, 165))
+    base = comp(base, a1)
+
+    # 5. Teal overlapping ellipse — mid-right (balance / measured response)
+    t1 = layer()
+    t1d = ImageDraw.Draw(t1)
+    t1d.ellipse([(650, 260), (1100, 620)], fill=(0, 152, 172, 145))
+    base = comp(base, t1)
+
+    # 6. Neural network node scatter — 171 emotion concepts as jewel circles
+    jewel_cols = [
+        (220, 55, 55, 215), (28, 195, 95, 210), (235, 182, 10, 215),
+        (55, 75, 215, 205), (195, 75, 178, 205), (0, 195, 195, 190),
+        (235, 125, 25, 215), (75, 35, 195, 205), (255, 200, 80, 200),
+    ]
+    node_positions = [
+        (148, 130), (328, 215), (505, 335), (625, 475), (808, 175),
+        (972, 395), (1092, 135), (195, 515), (448, 152), (748, 535),
+        (1032, 512), (568, 78), (868, 342), (292, 385), (688, 258),
+        (1142, 295), (98, 392), (428, 545), (948, 78), (180, 258),
+        (375, 475), (820, 58), (540, 525), (1010, 228), (720, 408),
+    ]
+    radii_nodes = [20, 14, 26, 16, 22, 12, 18, 24, 10, 16, 20, 14, 18, 12, 22, 16, 10, 14, 18, 20, 14, 18, 12, 16, 22]
+    for i, (px, py) in enumerate(node_positions):
+        col = jewel_cols[i % len(jewel_cols)]
+        r = radii_nodes[i % len(radii_nodes)]
+        nl = layer()
+        nd = ImageDraw.Draw(nl)
+        nd.ellipse([(px - r, py - r), (px + r, py + r)], fill=col, outline=(8, 8, 20, 200), width=2)
+        base = comp(base, nl)
+
+    # 7. Bold black contour outlines — Franz Marc's defining linear language
+    ol = layer()
+    od = ImageDraw.Draw(ol)
+    od.ellipse([(-80, 300), (480, 680)], outline=(6, 6, 18, 255), width=7)
+    od.ellipse([(760, -80), (1280, 400)], outline=(6, 6, 18, 255), width=7)
+    od.ellipse([(650, 260), (1100, 620)], outline=(6, 6, 18, 255), width=5)
+    base = comp(base, ol)
+
+    # 8. Luminous white highlight edges — Franz Marc's glow at form intersections
+    hl = layer()
+    hd = ImageDraw.Draw(hl)
+    hd.line([(310, 75), (510, 230)], fill=(255, 255, 255, 95), width=3)
+    hd.line([(690, 95), (810, 275)], fill=(255, 255, 255, 80), width=2)
+    hd.line([(195, 295), (365, 435)], fill=(255, 255, 255, 70), width=2)
+    hd.line([(890, 195), (1040, 355)], fill=(255, 255, 255, 90), width=3)
+    hd.line([(480, 440), (680, 300)], fill=(255, 255, 255, 60), width=2)
+    base = comp(base, hl)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -4841,6 +4919,7 @@ DAYS = [
     ("2026-04-03", img_leger_20260403,    "Economic Data",   "Fernand Léger"),
     ("2026-04-04", img_lissitzky_20260404, "Developer Toolkit", "El Lissitzky"),
     ("2026-04-05", img_klimt_20260405,    "Biotech & Billing",  "Gustav Klimt"),
+    ("2026-04-06", img_franz_marc_20260406, "Emotion Concepts", "Franz Marc"),
 ]
 
 for date, fn, kw, artist in DAYS:

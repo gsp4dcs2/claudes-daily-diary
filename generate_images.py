@@ -1717,6 +1717,86 @@ def img_klee_20260326():
 
 # ── February 2026 retrospective motif functions ───────────────────────────────
 
+def img_klee_20260407():
+    """Paul Klee colour-cell grid — TPU compute arrays, revenue milestones, enterprise infrastructure."""
+    base = Image.new("RGB", (W, H), (14, 18, 36))
+    draw = ImageDraw.Draw(base)
+
+    # 1. Klee-style grid — two colour zones: compute-gold (left) and silicon-blue (right)
+    cell_w, cell_h = 75, 60
+    cols_n = math.ceil(W / cell_w) + 1
+    rows_n = math.ceil(H / cell_h) + 1
+
+    gold_palette  = [(180, 130, 30),  (210, 160, 50),  (230, 180, 70),  (195, 145, 40),
+                     (220, 155, 55),  (200, 120, 35),  (215, 170, 65),  (190, 140, 45)]
+    blue_palette  = [(30,  80, 160),  (45,  110, 195), (60,  135, 215), (35,  70,  145),
+                     (50,  120, 180), (70,  150, 210), (40,  95,  165), (55,  130, 200)]
+    green_palette = [(50,  130, 80),  (65,  150, 100), (80,  170, 120), (45,  115, 70),
+                     (70,  145, 95),  (55,  160, 110), (85,  175, 130), (60,  135, 88)]
+
+    for row in range(rows_n):
+        y0 = row * cell_h
+        for col in range(cols_n):
+            x0 = col * cell_w
+            x_frac = (x0 + cell_w / 2) / W
+            if x_frac < 0.33:
+                palette = gold_palette
+            elif x_frac < 0.66:
+                palette = green_palette
+            else:
+                palette = blue_palette
+            idx = (row * 3 + col * 5) % len(palette)
+            bc = palette[idx]
+            r = max(0, min(255, bc[0] + rng.randint(-20, 20)))
+            g = max(0, min(255, bc[1] + rng.randint(-20, 20)))
+            b = max(0, min(255, bc[2] + rng.randint(-20, 20)))
+            draw.rectangle([(x0, y0), (x0 + cell_w - 1, y0 + cell_h - 1)], fill=(r, g, b))
+
+    # 2. Dark grid lines (Klee's characteristic structure)
+    for col in range(cols_n + 1):
+        draw.line([(col * cell_w, 0), (col * cell_w, H)], fill=(6, 8, 18), width=2)
+    for row in range(rows_n + 1):
+        draw.line([(0, row * cell_h), (W, row * cell_h)], fill=(6, 8, 18), width=2)
+
+    # 3. TPU pod node circles — bright white at key grid intersections
+    node_positions = [
+        (75,  60),   (225, 60),   (375, 60),   (525, 60),   (675, 60),   (900, 60),  (1125, 60),
+        (150, 180),  (300, 180),  (450, 180),  (600, 180),  (750, 180),  (975, 180), (1050, 180),
+        (75,  300),  (225, 300),  (525, 300),  (750, 300),  (900, 300),  (1125, 300),
+        (150, 420),  (375, 420),  (600, 420),  (825, 420),  (1050, 420),
+        (300, 540),  (600, 540),  (900, 540),
+    ]
+    for nx, ny in node_positions:
+        r_n = rng.randint(10, 18)
+        nl = layer()
+        nd = ImageDraw.Draw(nl)
+        nd.ellipse([(nx - r_n, ny - r_n), (nx + r_n, ny + r_n)],
+                   fill=(255, 255, 255, 210), outline=(230, 230, 230, 160), width=2)
+        base = comp(base, nl)
+
+    # 4. Connection lines between nodes (representing TPU pod interconnects)
+    connections = [
+        (0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6),
+        (7, 8), (8, 9), (9, 10), (10, 11), (11, 12), (12, 13),
+        (0, 7), (1, 8), (2, 9), (3, 10), (4, 11), (5, 12),
+        (14, 15), (15, 16), (16, 17), (17, 18), (18, 19),
+        (7, 14), (8, 15), (10, 16), (11, 17), (12, 18),
+        (20, 21), (21, 22), (22, 23), (23, 24),
+        (14, 20), (16, 21), (17, 22), (18, 23), (19, 24),
+        (25, 26), (26, 27),
+        (20, 25), (22, 26), (24, 27),
+    ]
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    for a, b_i in connections:
+        if a < len(node_positions) and b_i < len(node_positions):
+            cd.line([node_positions[a], node_positions[b_i]],
+                    fill=(255, 255, 255, 55), width=1)
+    base = comp(base, cl)
+
+    return base
+
+
 def img_klee_20260201():
     """Paul Klee colour-cell grid — Cowork Launch / agent networks."""
     base = Image.new("RGB", (W, H), (28, 22, 18))
@@ -4920,6 +5000,7 @@ DAYS = [
     ("2026-04-04", img_lissitzky_20260404, "Developer Toolkit", "El Lissitzky"),
     ("2026-04-05", img_klimt_20260405,    "Biotech & Billing",  "Gustav Klimt"),
     ("2026-04-06", img_franz_marc_20260406, "Emotion Concepts", "Franz Marc"),
+    ("2026-04-07", img_klee_20260407,       "Compute Scale",    "Paul Klee"),
 ]
 
 for date, fn, kw, artist in DAYS:

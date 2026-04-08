@@ -1797,6 +1797,81 @@ def img_klee_20260407():
     return base
 
 
+def img_moholy_20260408():
+    """László Moholy-Nagy Bauhaus — transparency, trust, memory theme (Project Glasswing / Compaction / Partner Network)."""
+    # White background — Moholy-Nagy's signature light-drenched canvas
+    base = Image.new("RGB", (W, H), (250, 250, 248))
+
+    # 1. Large transparent overlapping circles — Moholy's core photogram motif
+    circles = [
+        (280, 200, 210, (220, 35, 35, 85)),     # red — security / Glasswing
+        (500, 270, 190, (25, 75, 205, 78)),      # blue — trust / partner network
+        (390, 160, 165, (230, 195, 0, 68)),      # yellow — memory / compaction
+        (660, 240, 175, (25, 75, 205, 65)),      # blue smaller
+        (240, 370, 130, (220, 35, 35, 55)),      # red smaller
+        (580, 380, 145, (230, 195, 0, 58)),      # yellow lower
+        (750, 160, 120, (220, 35, 35, 50)),      # red top-right
+    ]
+    for cx, cy, r, col in circles:
+        cl = layer()
+        cd = ImageDraw.Draw(cl)
+        cd.ellipse([(cx - r, cy - r), (cx + r, cy + r)],
+                   fill=col, outline=(0, 0, 0, 110), width=3)
+        base = comp(base, cl)
+
+    # 2. Semi-transparent rectangles on right half — Bauhaus geometry
+    rects = [
+        (680,  60, 1100, 360, (25, 75, 205, 48)),    # large blue
+        (820, 160, 1180, 490, (220, 35, 35, 42)),     # large red
+        (740, 310, 1060, 570, (230, 195, 0, 52)),     # yellow lower-right
+        (900,  50, 1160, 220, (0, 0, 0, 22)),         # dark accent top-right
+    ]
+    for x0, y0, x1, y1, col in rects:
+        rl = layer()
+        rd = ImageDraw.Draw(rl)
+        rd.rectangle([(x0, y0), (x1, y1)], fill=col, outline=(0, 0, 0, 90), width=2)
+        base = comp(base, rl)
+
+    # 3. Thin black structural grid — Bauhaus engineering lines
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for y in [155, 310, 465]:
+        gd.line([(0, y), (1200, y)], fill=(20, 20, 20, 165), width=2)
+    for x in [390, 660, 930]:
+        gd.line([(x, 0), (x, 630)], fill=(20, 20, 20, 165), width=2)
+    base = comp(base, gl)
+
+    # 4. Solid primary anchors — small bold shapes that ground the composition
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    # Black filled circle — top-right anchor
+    ad.ellipse([(1030, 28), (1140, 138)], fill=(12, 12, 12, 255))
+    # Red square — bottom-left anchor
+    ad.rectangle([(38, 488), (148, 598)], fill=(205, 20, 20, 255))
+    # Yellow triangle — lower-centre
+    ad.polygon([(550, 598), (630, 435), (710, 598)], fill=(215, 180, 0, 215))
+    # Blue thin bar — horizontal accent across mid-left
+    ad.rectangle([(0, 308), (375, 316)], fill=(25, 75, 205, 220))
+    base = comp(base, al)
+
+    # 5. Photogram scatter — tiny primary dots suggesting data transmission / trust signals
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    dot_cols = [
+        (205, 20, 20, 150), (25, 75, 205, 150),
+        (215, 180, 0, 150), (12, 12, 12, 130),
+    ]
+    for _ in range(130):
+        dx = rng.randint(0, W)
+        dy = rng.randint(0, H)
+        dr = rng.randint(2, 6)
+        dc = dot_cols[rng.randint(0, len(dot_cols) - 1)]
+        dd.ellipse([(dx - dr, dy - dr), (dx + dr, dy + dr)], fill=dc)
+    base = comp(base, dl)
+
+    return base
+
+
 def img_klee_20260201():
     """Paul Klee colour-cell grid — Cowork Launch / agent networks."""
     base = Image.new("RGB", (W, H), (28, 22, 18))
@@ -5001,6 +5076,7 @@ DAYS = [
     ("2026-04-05", img_klimt_20260405,    "Biotech & Billing",  "Gustav Klimt"),
     ("2026-04-06", img_franz_marc_20260406, "Emotion Concepts", "Franz Marc"),
     ("2026-04-07", img_klee_20260407,       "Compute Scale",    "Paul Klee"),
+    ("2026-04-08", img_moholy_20260408,     "Trust & Memory",   "László Moholy-Nagy"),
 ]
 
 for date, fn, kw, artist in DAYS:

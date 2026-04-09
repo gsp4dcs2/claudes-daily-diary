@@ -1872,6 +1872,80 @@ def img_moholy_20260408():
     return base
 
 
+def img_calder_20260409():
+    """Alexander Calder mobile style — Claude Managed Agents / brain-hands-session decoupling theme."""
+    base = Image.new("RGB", (W, H), (248, 246, 240))  # warm off-white Calder canvas
+
+    # 1. Three-tier mobile armature representing brain / session / hands decoupling
+    arm = layer(); adraw = ImageDraw.Draw(arm)
+    # Top horizontal spine (the session event log — the connective tissue)
+    adraw.line([(80, 160), (1120, 160)], fill=(18, 18, 18, 235), width=5)
+    # Central vertical drop from session to brain node
+    adraw.line([(600, 160), (600, 310)], fill=(18, 18, 18, 220), width=4)
+    # Brain sub-arm (inference layer — balanced at centre)
+    adraw.line([(340, 310), (860, 310)], fill=(18, 18, 18, 215), width=4)
+    # Left drop: hand A
+    adraw.line([(340, 310), (340, 480)], fill=(18, 18, 18, 200), width=3)
+    # Right drop: hand B
+    adraw.line([(860, 310), (860, 480)], fill=(18, 18, 18, 200), width=3)
+    # Far-left arm: environment container sub-branch
+    adraw.line([(80, 160), (80, 280)], fill=(18, 18, 18, 190), width=3)
+    adraw.line([(30, 280), (190, 280)], fill=(18, 18, 18, 190), width=3)
+    adraw.line([(30, 280), (30, 430)], fill=(18, 18, 18, 180), width=2)
+    adraw.line([(190, 280), (190, 410)], fill=(18, 18, 18, 180), width=2)
+    # Far-right arm: SSE event stream branch
+    adraw.line([(1120, 160), (1120, 270)], fill=(18, 18, 18, 190), width=3)
+    adraw.line([(1010, 270), (1120, 270)], fill=(18, 18, 18, 185), width=3)
+    adraw.line([(1010, 270), (1010, 420)], fill=(18, 18, 18, 175), width=2)
+    base = comp(base, arm)
+
+    # 2. Bold primary-coloured shapes — each representing a Managed Agents concept
+    shapes_data = [
+        # Brain disc — large red circle, centre-top (the inference core)
+        ("ellipse", [(490, 60), (710, 170)],   (210, 28, 38, 245),  (18, 18, 18, 255), 4),
+        # Session disc — blue elongated oval at top-left (the event log)
+        ("ellipse", [(155, 100), (380, 225)],  (26, 80, 200, 235),  (18, 18, 18, 255), 4),
+        # Session right — yellow disc top-right
+        ("ellipse", [(840, 90), (1080, 215)],  (245, 195, 0, 235),  (18, 18, 18, 255), 4),
+        # Hand A — large blue teardrop shape (left execution sandbox)
+        ("ellipse", [(230, 370), (470, 560)],  (26, 80, 200, 230),  (18, 18, 18, 255), 4),
+        # Hand B — red large disc (right execution sandbox)
+        ("ellipse", [(740, 375), (990, 575)],  (210, 28, 38, 228),  (18, 18, 18, 255), 4),
+        # Container A — small yellow disc far-left
+        ("ellipse", [(10, 345), (115, 450)],   (245, 195, 0, 220),  (18, 18, 18, 255), 3),
+        # Container B — small red disc far-left lower
+        ("ellipse", [(140, 325), (245, 425)],  (210, 28, 38, 210),  (18, 18, 18, 255), 3),
+        # SSE stream — blue small disc far-right
+        ("ellipse", [(960, 330), (1090, 435)], (26, 80, 200, 215),  (18, 18, 18, 255), 3),
+    ]
+    for kind, bbox, fill, outline, lw in shapes_data:
+        sl = layer(); sd = ImageDraw.Draw(sl)
+        sd.ellipse(bbox, fill=fill, outline=outline, width=lw)
+        base = comp(base, sl)
+
+    # 3. Black pivot dots at every balance/junction point
+    dots = layer(); ddraw = ImageDraw.Draw(dots)
+    pivots = [
+        (80, 160), (600, 160), (1120, 160),
+        (340, 310), (600, 310), (860, 310),
+        (80, 280), (30, 280), (190, 280),
+        (1120, 270), (1010, 270),
+    ]
+    for px, py in pivots:
+        ddraw.ellipse([(px - 9, py - 9), (px + 9, py + 9)],
+                      fill=(18, 18, 18, 240), outline=(18, 18, 18, 255), width=2)
+    base = comp(base, dots)
+
+    # 4. Warm canvas texture (Calder studio feel)
+    tex = layer(); tdraw = ImageDraw.Draw(tex)
+    for _ in range(800):
+        tx = rng.randint(0, W); ty = rng.randint(0, H)
+        tdraw.ellipse([(tx - 1, ty - 1), (tx + 1, ty + 1)], fill=(170, 148, 108, 16))
+    base = comp(base, tex)
+
+    return base
+
+
 def img_klee_20260201():
     """Paul Klee colour-cell grid — Cowork Launch / agent networks."""
     base = Image.new("RGB", (W, H), (28, 22, 18))
@@ -5077,6 +5151,7 @@ DAYS = [
     ("2026-04-06", img_franz_marc_20260406, "Emotion Concepts", "Franz Marc"),
     ("2026-04-07", img_klee_20260407,       "Compute Scale",    "Paul Klee"),
     ("2026-04-08", img_moholy_20260408,     "Trust & Memory",   "László Moholy-Nagy"),
+    ("2026-04-09", img_calder_20260409,     "Managed Agents",   "Alexander Calder"),
 ]
 
 for date, fn, kw, artist in DAYS:

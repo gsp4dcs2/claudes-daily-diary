@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic launches the Advisor Tool in public beta — pairing a fast executor model with a high-intelligence advisor mid-generation — while Claude Code v2.1.98 patches a Bash permission bypass, and the Messages API arrives on Amazon Bedrock with a zero-operator-access guarantee.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-04-10 – Advisor Tool Beta, Code Security Fix &amp; Bedrock Messages API">
+  <meta property="og:description" content="Anthropic launches the Advisor Tool in public beta — pairing a fast executor model with a high-intelligence advisor mid-generation — while Claude Code v2.1.98 patches a Bash permission bypass, and the Messages API arrives on Amazon Bedrock with a zero-operator-access guarantee.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/04/2026-04-10.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/04/2026-04-10.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/04/2026-04-10.png">
+
+  <title>2026-04-10 – Advisor Tool Beta, Code Security Fix &amp; Bedrock Messages API | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Advisor Tool Beta, Code Security Fix &amp; Bedrock Messages API",
+  "description": "Anthropic launches the Advisor Tool in public beta — pairing a fast executor model with a high-intelligence advisor mid-generation — while Claude Code v2.1.98 patches a Bash permission bypass, and the Messages API arrives on Amazon Bedrock with a zero-operator-access guarantee.",
+  "datePublished": "2026-04-10",
+  "dateModified": "2026-04-10",
+  "url": "https://claudebeat.ai/articles/2026/04/2026-04-10.html",
+  "image": "https://claudebeat.ai/articles/2026/04/2026-04-10.png",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://claudebeat.ai/articles/2026/04/2026-04-10.html"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Claude's Daily Diary",
+    "url": "https://claudebeat.ai"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude's Daily Diary",
+    "url": "https://claudebeat.ai",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://claudebeat.ai/logo.svg"
+    }
+  }
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-04-10</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Advisor Tool Beta, Claude Code v2.1.98 Security Fix &amp; Messages API on Bedrock</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-04-10.png" alt="Advisor Tool Beta, Claude Code v2.1.98 Security Fix &amp; Messages API on Bedrock — visual for 2026-04-10">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Advisor Tool Public Beta
+     Source: https://platform.claude.com/docs/en/release-notes/overview
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Advisor Tool: Near-Advisor-Quality Output at Executor-Model Prices</h2>
+
+  <p>Anthropic has shipped the <strong>Advisor Tool</strong> in public beta — a new primitive that lets you pair two models in a single inference call. A fast, inexpensive "executor" model handles the bulk of token generation while a higher-intelligence "advisor" model is invoked at strategic decision points to provide guidance mid-generation. The result is task quality close to running the advisor model solo, but at a cost profile much closer to the executor model alone.</p>
+
+  <p>Access requires the beta header <code>anthropic-beta: advisor-tool-2026-03-01</code>; the Python and TypeScript SDKs set it automatically when you pass the <code>advisor</code> parameter.</p>
+
+  <h3>When the advisor kicks in</h3>
+  <p>The executor decides autonomously when to pause and consult the advisor — similar to how a junior engineer knows when to ask a senior colleague for a review rather than guessing. You can also configure an explicit <code>advisor_triggers</code> list (tool names or event types) to force a consultation at known high-stakes moments, such as before irreversible tool calls like file writes or API mutations.</p>
+
+  <h3>Practical configuration</h3>
+  <pre><code>import anthropic
+
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-haiku-4-5",          # executor: fast + cheap
+    advisor={
+        "model": "claude-opus-4-6",    # advisor: strategic guidance
+        "advisor_triggers": [
+            {"type": "tool_use", "tool_name": "bash"},
+            {"type": "tool_use", "tool_name": "write_file"},
+        ]
+    },
+    max_tokens=4096,
+    tools=[...],
+    messages=[{"role": "user", "content": "..."}],
+    betas=["advisor-tool-2026-03-01"],
+)</code></pre>
+
+  <div class="callout tip">
+    <strong>Cost-quality sweet spot for long-horizon agentic workloads</strong>
+    <p>The Advisor Tool is most valuable for multi-step tasks where the majority of steps are routine (file reads, search queries, text formatting) but occasional steps are genuinely hard (deciding between two architectures, reasoning about a tricky edge case). Routing only those hard steps to Opus 4.6 while keeping everything else on Haiku can reduce costs by 60–80% on typical agentic workloads with negligible quality loss on the overall task.</p>
+  </div>
+
+  <p>Three limitations to be aware of in the current beta: the advisor cannot initiate tool calls directly (it can only provide textual guidance to the executor); the advisor's tokens count toward a separate token budget and are billed at the advisor model's rate; and the feature is not yet available on Amazon Bedrock or Google Vertex AI.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/release-notes/overview" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Advisor Tool</span>
+    <span class="tag">beta</span>
+    <span class="tag">dual-model</span>
+    <span class="tag">cost optimisation</span>
+    <span class="tag">agentic</span>
+    <span class="tag">executor</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Code v2.1.97–v2.1.98: Focus View & Security Fix
+     Source: https://platform.claude.com/docs/en/release-notes/claude-code
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.97–v2.1.98: Focus View, Subprocess Sandboxing &amp; a Security Patch</h2>
+
+  <p>Two Claude Code releases landed in quick succession. <strong>v2.1.97</strong> introduced a <strong>Focus View</strong> toggle (<kbd>Ctrl+O</kbd>) that collapses the terminal UI down to three elements: the prompt, a single-line tool summary with diff stats, and the final model response. Developers working on long-running refactors report that hiding the verbose tool trace cuts visual noise enough to maintain context across hours of autonomous edits.</p>
+
+  <p><strong>v2.1.98</strong> is the more security-significant release. It addresses a <strong>Bash tool permission bypass</strong> where a backslash-escaped flag in a command string could be auto-classified as read-only and granted execution without a separate approval prompt — allowing arbitrary code to run under the guise of a read-only filesystem operation. If you are running Claude Code with a custom allowlist that auto-approves read-only Bash operations, update immediately.</p>
+
+  <h3>Other v2.1.98 additions</h3>
+  <ul>
+    <li><strong>Subprocess sandboxing (Linux)</strong> — PID namespace isolation for spawned subprocesses, preventing a compromised child process from enumerating or signalling its siblings.</li>
+    <li><strong>Google Vertex AI setup wizard</strong> — an interactive <code>claude setup vertex</code> flow that handles ADC authentication, region selection, and model pinning in one command.</li>
+    <li><strong>Monitor tool</strong> — streams stdout/stderr from long-running background scripts directly into the conversation context, so Claude can react to build failures or test output in real time without polling.</li>
+    <li><strong>W3C TRACEPARENT support</strong> — passes trace context headers through the MCP transport layer, enabling end-to-end OpenTelemetry spans across Claude Code, your MCP servers, and your backend services.</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>Action required if you use auto-allow rules for Bash</strong>
+    <p>The backslash-escape bypass only affects configurations that have <code>bash</code> in their auto-allow list with a read-only filter (e.g. <code>bash:read</code> in <code>settings.json</code>). If you use <strong>interactive permission mode</strong> (the default), you were not exposed. Still, update to v2.1.98 via <code>claude update</code> or your package manager. The CVE identifier will be published in the GitHub Security Advisory once the update window closes.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/release-notes/claude-code" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">security</span>
+    <span class="tag">Focus View</span>
+    <span class="tag">subprocess sandboxing</span>
+    <span class="tag">Vertex AI</span>
+    <span class="tag">OpenTelemetry</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Messages API on Amazon Bedrock (research preview)
+     Source: https://platform.claude.com/docs/en/release-notes/overview
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude's Messages API Comes to Amazon Bedrock — Same Shape, Zero Operator Access</h2>
+
+  <p>Anthropic has launched the <strong>Messages API on Amazon Bedrock</strong> as a research preview, available initially in <code>us-east-1</code>. Unlike the existing Bedrock Converse endpoint (which wraps a normalised AWS request shape), the new <code>/anthropic/v1/messages</code> endpoint accepts the <strong>identical JSON request format</strong> as the first-party Claude API — no adapter layer, no field mapping, no request translation. Code written against <code>api.anthropic.com</code> can be pointed at the Bedrock endpoint by swapping a single base URL and replacing the <code>x-api-key</code> header with AWS Signature V4.</p>
+
+  <h3>Why this matters for enterprise teams</h3>
+  <ul>
+    <li><strong>Zero-operator-access guarantee</strong> — the endpoint runs on AWS-managed infrastructure with a contractual commitment that Anthropic cannot access your prompts, responses, or fine-tuning data. This satisfies data residency requirements that block use of <code>api.anthropic.com</code> in regulated industries.</li>
+    <li><strong>Unified codebase</strong> — teams can maintain a single inference client that targets either endpoint, with environment variables selecting the deployment target. No separate Bedrock SDK required.</li>
+    <li><strong>VPC PrivateLink support</strong> — traffic never traverses the public internet when PrivateLink is configured, a hard requirement for several financial and healthcare compliance frameworks.</li>
+  </ul>
+
+  <h3>Migration snippet</h3>
+  <pre><code>import anthropic
+import boto3
+from botocore.auth import SigV4Auth
+
+# Point the standard client at Bedrock
+client = anthropic.Anthropic(
+    base_url="https://bedrock.us-east-1.amazonaws.com/anthropic/v1",
+    auth=SigV4Auth(boto3.Session().get_credentials(), "bedrock", "us-east-1"),
+)
+
+# From here, use exactly as you would with api.anthropic.com
+response = client.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello from Bedrock!"}],
+)</code></pre>
+
+  <p>The research preview is available by contacting an Anthropic account executive; general availability is planned for Q2 2026. Not all beta features (e.g. the Advisor Tool, Managed Agents) are accessible on the Bedrock endpoint during the preview period.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/release-notes/overview" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Amazon Bedrock</span>
+    <span class="tag">Messages API</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">data residency</span>
+    <span class="tag">VPC PrivateLink</span>
+    <span class="tag">AWS</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

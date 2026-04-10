@@ -5019,6 +5019,61 @@ def img_franz_marc_20260406():
     return base
 
 
+def img_malevich_20260410():
+    """Kazimir Malevich — Advisor Tool beta + Claude Code security fix + Bedrock API — structure, safety, absolutes."""
+    base = Image.new("RGB", (W, H), (240, 236, 220))  # cream bg
+
+    # 1. Large tilted black square — Suprematist anchor (dual-model intelligence)
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    cx, cy, s = 560, 260, 210
+    sq_pts = [
+        (cx - s, cy - 25), (cx + 25, cy - s),
+        (cx + s, cy + 25), (cx - 25, cy + s),
+    ]
+    bd.polygon(sq_pts, fill=(16, 16, 16, 255))
+    base = comp(base, bl)
+
+    # 2. Bold red rectangle — primary accent (security patch urgency)
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.rectangle([(830, 60), (1160, 200)], fill=(208, 24, 24, 245))
+    base = comp(base, rl)
+
+    # 3. Navy elongated diagonal shape — Bedrock infrastructure
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    nd.polygon([(60, 490), (310, 420), (400, 590), (150, 625)], fill=(22, 36, 115, 235))
+    base = comp(base, nl)
+
+    # 4. Yellow diagonal bar — executor speed / cost optimisation
+    yl = layer()
+    yd = ImageDraw.Draw(yl)
+    yd.polygon([(680, 470), (1180, 390), (1182, 435), (682, 515)], fill=(232, 190, 0, 225))
+    base = comp(base, yl)
+
+    # 5. Small white circle — floating Suprematist element (advisor guidance node)
+    wl = layer()
+    wd = ImageDraw.Draw(wl)
+    wd.ellipse([(140, 72), (276, 208)], fill=(240, 236, 220, 245),
+               outline=(16, 16, 16, 200), width=4)
+    base = comp(base, wl)
+
+    # 6. Thin red vertical bar — right structural rule
+    vl = layer()
+    vd = ImageDraw.Draw(vl)
+    vd.rectangle([(1050, 240), (1076, 580)], fill=(208, 24, 24, 180))
+    base = comp(base, vl)
+
+    # 7. Small black rectangle — grounding element bottom-right
+    gr = layer()
+    gd = ImageDraw.Draw(gr)
+    gd.rectangle([(900, 510), (1140, 560)], fill=(16, 16, 16, 200))
+    base = comp(base, gr)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -5152,6 +5207,7 @@ DAYS = [
     ("2026-04-07", img_klee_20260407,       "Compute Scale",    "Paul Klee"),
     ("2026-04-08", img_moholy_20260408,     "Trust & Memory",   "László Moholy-Nagy"),
     ("2026-04-09", img_calder_20260409,     "Managed Agents",   "Alexander Calder"),
+    ("2026-04-10", img_malevich_20260410,   "Advisor Tool",     "Kazimir Malevich"),
 ]
 
 for date, fn, kw, artist in DAYS:

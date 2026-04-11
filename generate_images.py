@@ -5074,6 +5074,67 @@ def img_malevich_20260410():
     return base
 
 
+def img_mondrian_20260411():
+    """Piet Mondrian Broadway Boogie Woogie style — Claude for Word + enterprise compute theme."""
+    base = Image.new("RGB", (W, H), (245, 241, 228))
+    draw = ImageDraw.Draw(base)
+
+    YELLOW = (255, 210, 0)
+    RED    = (214, 36, 36)
+    BLUE   = (26, 72, 192)
+    BLACK  = (18, 18, 18)
+    BW     = 12   # grid line half-width
+
+    # 1. Vertical dividers — evoke document columns and a sidebar
+    vx = [0, 260, 520, 680, 860, 1060, W]
+    for x in vx[1:-1]:
+        draw.rectangle([(x - BW // 2, 0), (x + BW // 2, H)], fill=BLACK)
+
+    # 2. Horizontal dividers — evoke document rows / section breaks
+    hy = [0, 120, 260, 390, 510, H]
+    for y in hy[1:-1]:
+        draw.rectangle([(0, y - BW // 2), (W, y + BW // 2)], fill=BLACK)
+
+    # 3. Coloured cell fills — primary Mondrian palette
+    inset = BW // 2 + 3
+    coloured = [
+        # (col_idx, row_idx, colour)  — large blocks suggesting document/sidebar regions
+        (0, 0, BLUE),    # tall left blue column — the AI sidebar
+        (0, 1, BLUE),
+        (0, 2, BLUE),
+        (1, 0, YELLOW),  # yellow header band
+        (2, 0, YELLOW),
+        (3, 0, RED),     # red accent top-right
+        (4, 0, YELLOW),
+        (5, 0, BLUE),    # far-right accent
+        (1, 3, RED),     # red block — compute / infrastructure signal
+        (3, 2, YELLOW),
+        (4, 1, BLUE),
+        (5, 3, RED),
+        (2, 2, RED),
+        (4, 3, YELLOW),
+    ]
+    for ci, ri, col in coloured:
+        if ci < len(vx) - 1 and ri < len(hy) - 1:
+            x0 = vx[ci] + inset
+            y0 = hy[ri] + inset
+            x1 = vx[ci + 1] - inset
+            y1 = hy[ri + 1] - inset
+            draw.rectangle([(x0, y0), (x1, y1)], fill=col)
+
+    # 4. Yellow accent dashes along key grid intersections (Broadway Boogie energy)
+    dot_size = 7
+    for i, x in enumerate(vx[1:-1]):
+        for j, y in enumerate(hy[1:-1]):
+            colour = [YELLOW, RED, BLUE][(i * 3 + j * 2) % 3]
+            draw.rectangle(
+                [(x - dot_size, y - dot_size), (x + dot_size, y + dot_size)],
+                fill=colour
+            )
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -5208,6 +5269,7 @@ DAYS = [
     ("2026-04-08", img_moholy_20260408,     "Trust & Memory",   "László Moholy-Nagy"),
     ("2026-04-09", img_calder_20260409,     "Managed Agents",   "Alexander Calder"),
     ("2026-04-10", img_malevich_20260410,   "Advisor Tool",     "Kazimir Malevich"),
+    ("2026-04-11", img_mondrian_20260411,   "Word & Compute",  "Piet Mondrian"),
 ]
 
 for date, fn, kw, artist in DAYS:

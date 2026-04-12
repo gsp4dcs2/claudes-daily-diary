@@ -5135,6 +5135,93 @@ def img_mondrian_20260411():
     return base
 
 
+def img_kandinsky_20260412():
+    """Wassily Kandinsky style — safety debate, moral formation, and copyright themes."""
+    base = Image.new("RGB", (W, H), (14, 28, 68))  # deep prussian blue bg
+
+    # 1. Diagonal grid — fine white lines suggesting complex interconnection
+    grid = layer()
+    gd = ImageDraw.Draw(grid)
+    step = 55
+    for off in range(-H, W + H, step):
+        gd.line([(off, 0), (off + H, H)], fill=(255, 255, 255, 18), width=1)
+    for off in range(0, W + H + step, step):
+        gd.line([(off, 0), (off - H, H)], fill=(255, 255, 255, 18), width=1)
+    base = comp(base, grid)
+
+    # 2. Large warning-red triangle — safety boundary / containment breach
+    tri = layer()
+    td = ImageDraw.Draw(tri)
+    td.polygon([(80, 560), (420, 560), (250, 140)], fill=(210, 35, 45, 215), outline=(0, 0, 0, 255), width=6)
+    base = comp(base, tri)
+
+    # 3. Gold circle — moral/philosophical illumination
+    gc = layer()
+    gcd = ImageDraw.Draw(gc)
+    gcd.ellipse([(620, -80), (1120, 420)], fill=(245, 200, 30, 210), outline=(0, 0, 0, 255), width=7)
+    base = comp(base, gc)
+
+    # 4. Deep blue arc — copyright arc / legal arc
+    arc_l = layer()
+    ald = ImageDraw.Draw(arc_l)
+    ald.arc([(30, 40), (600, 610)], start=250, end=65, fill=(40, 200, 255, 230), width=10)
+    base = comp(base, arc_l)
+
+    # 5. Black semi-circle — gated / withheld half
+    blk = layer()
+    bd = ImageDraw.Draw(blk)
+    bd.pieslice([(800, 300), (1150, 610)], start=180, end=360, fill=(15, 15, 15, 240), outline=(0, 0, 0, 255), width=5)
+    base = comp(base, blk)
+
+    # 6. Purple diamond — faith / spiritual geometry
+    dmnd = layer()
+    dd = ImageDraw.Draw(dmnd)
+    dd.polygon([(530, 310), (640, 190), (750, 310), (640, 430)], fill=(145, 55, 210, 210), outline=(0, 0, 0, 255), width=4)
+    base = comp(base, dmnd)
+
+    # 7. Coral small circle — Anthropic brand / editorial voice
+    cc = layer()
+    ccd = ImageDraw.Draw(cc)
+    ccd.ellipse([(440, 60), (570, 190)], fill=(232, 115, 74, 230), outline=(0, 0, 0, 255), width=5)
+    base = comp(base, cc)
+
+    # 8. Green small triangle — licensing/settlement forward motion
+    gt = layer()
+    gtd = ImageDraw.Draw(gt)
+    gtd.polygon([(930, 130), (1080, 130), (1005, 20)], fill=(55, 195, 100, 205), outline=(0, 0, 0, 255), width=3)
+    base = comp(base, gt)
+
+    # 9. Scatter of small circles in full spectrum
+    scatter = layer()
+    sd = ImageDraw.Draw(scatter)
+    positions = [
+        (160, 310), (340, 430), (500, 100), (710, 50), (870, 520),
+        (960, 190), (1060, 70), (1110, 440), (55, 470), (430, 250),
+        (310, 180), (750, 490), (1010, 340),
+    ]
+    colors = [
+        (255, 215, 0, 220), (210, 35, 45, 220), (255, 255, 255, 200),
+        (40, 200, 255, 200), (232, 115, 74, 220), (145, 55, 210, 200),
+        (55, 195, 100, 220), (255, 215, 0, 200), (40, 200, 255, 200),
+        (210, 35, 45, 220), (145, 55, 210, 190), (255, 215, 0, 210),
+        (232, 115, 74, 200),
+    ]
+    radii = [17, 13, 11, 19, 9, 15, 12, 14, 11, 16, 10, 13, 8]
+    for (px, py), col, r in zip(positions, colors, radii):
+        sd.ellipse([(px - r, py - r), (px + r, py + r)], fill=col, outline=(0, 0, 0, 255), width=2)
+    base = comp(base, scatter)
+
+    # 10. Bold crossing lines — tension, debate, boundary
+    lines = layer()
+    ld = ImageDraw.Draw(lines)
+    ld.line([(0, 380), (420, 80)],  fill=(0, 0, 0, 255), width=5)
+    ld.line([(480, 600), (920, 180)], fill=(0, 0, 0, 255), width=4)
+    ld.line([(820, 600), (1150, 280)], fill=(255, 255, 255, 200), width=2)
+    base = comp(base, lines)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -5270,6 +5357,7 @@ DAYS = [
     ("2026-04-09", img_calder_20260409,     "Managed Agents",   "Alexander Calder"),
     ("2026-04-10", img_malevich_20260410,   "Advisor Tool",     "Kazimir Malevich"),
     ("2026-04-11", img_mondrian_20260411,   "Word & Compute",  "Piet Mondrian"),
+    ("2026-04-12", img_kandinsky_20260412, "Safety Debate",   "Wassily Kandinsky"),
 ]
 
 for date, fn, kw, artist in DAYS:

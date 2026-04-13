@@ -5222,6 +5222,98 @@ def img_kandinsky_20260412():
     return base
 
 
+def img_balla_20260413():
+    """Giacomo Balla Futurism — enterprise surge, labs united, upward momentum."""
+    base = Image.new("RGB", (W, H), (8, 8, 16))  # near-black bg
+
+    # Vanishing point at bottom-centre — surge radiates upward and outward
+    vp = (600, 720)
+
+    # 1. Wide radiating colour planes from VP — Balla's speed vectors surging upward
+    colours = [
+        (220,  45,  45, 210),   # hot red
+        (240, 160,   0, 200),   # amber
+        (240, 230,   0, 195),   # yellow
+        ( 60, 210,  80, 200),   # green
+        ( 30, 150, 240, 205),   # blue
+        (160,  50, 230, 195),   # violet
+        (230,  50, 130, 200),   # magenta
+        (240, 100,   0, 190),   # orange
+        ( 20, 200, 200, 185),   # cyan
+        (220,  45,  45, 170),   # red repeat (wide fan)
+    ]
+    n = len(colours)
+    span = 200  # total spread in degrees (fan opens upward)
+    start_ang = 90 + span / 2  # angles measured from positive-x axis
+    for i, col in enumerate(colours):
+        ang = start_ang - i * (span / (n - 1))
+        ang2 = start_ang - (i + 1) * (span / (n - 1))
+        rad1 = math.radians(ang)
+        rad2 = math.radians(ang2)
+        ex1 = int(vp[0] + 1400 * math.cos(rad1))
+        ey1 = int(vp[1] + 1400 * math.sin(rad1))
+        ex2 = int(vp[0] + 1400 * math.cos(rad2))
+        ey2 = int(vp[1] + 1400 * math.sin(rad2))
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        pd.polygon([vp, (ex1, ey1), (ex2, ey2)], fill=col)
+        base = comp(base, pl)
+
+    # 2. Motion lines — fine white streaks radiating upward from VP
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    for i in range(30):
+        ang = 270 - 90 + (i - 15) * 6  # -90° to +90° spread (upward fan)
+        rad = math.radians(ang)
+        lx = int(vp[0] + 1000 * math.cos(rad))
+        ly = int(vp[1] + 1000 * math.sin(rad))
+        ld.line([vp, (lx, ly)], fill=(255, 255, 255, 40), width=1)
+    base = comp(base, ll)
+
+    # 3. Bright white burst at VP
+    fl = layer()
+    fd = ImageDraw.Draw(fl)
+    fd.ellipse([(vp[0]-60, vp[1]-60), (vp[0]+60, vp[1]+60)], fill=(255, 255, 255, 230))
+    fd.ellipse([(vp[0]-25, vp[1]-25), (vp[0]+25, vp[1]+25)], fill=(255, 240, 200, 255))
+    base = comp(base, fl)
+
+    # 4. Speed arcs — concentric semi-circles emanating from VP (upward)
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for r in [140, 240, 360, 500, 660]:
+        ad.arc([(vp[0]-r, vp[1]-r), (vp[0]+r, vp[1]+r)],
+               start=200, end=340, fill=(255, 255, 255, 90), width=2)
+    base = comp(base, al)
+
+    # 5. Dark overlay on the lower triangle — ground / origin mass
+    ov = layer()
+    od = ImageDraw.Draw(ov)
+    od.polygon([(0, H), (W, H), (W, 560), (600, 630), (0, 560)],
+               fill=(5, 5, 12, 200))
+    base = comp(base, ov)
+
+    # 6. Small bright corporate nodes — dots representing labs / enterprise adopters
+    nodes = [
+        (200, 120, 18, (255, 255, 255, 240)),
+        (450,  80, 14, (240, 200,  30, 230)),
+        (750,  60, 16, (60,  210, 255, 230)),
+        (980, 140, 12, (220,  50,  50, 220)),
+        (320, 260, 10, (50,  220,  80, 210)),
+        (680, 200, 11, (180,  60, 240, 210)),
+        (880, 300, 13, (255, 160,   0, 220)),
+        (130, 350,  9, (60,  210, 255, 200)),
+        (530, 380, 10, (255, 255, 255, 190)),
+        (1050, 420,  8, (220,  50, 130, 200)),
+    ]
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    for nx, ny, nr, nc in nodes:
+        nd.ellipse([(nx-nr, ny-nr), (nx+nr, ny+nr)], fill=nc, outline=(0, 0, 0, 180), width=2)
+    base = comp(base, nl)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -5358,6 +5450,7 @@ DAYS = [
     ("2026-04-10", img_malevich_20260410,   "Advisor Tool",     "Kazimir Malevich"),
     ("2026-04-11", img_mondrian_20260411,   "Word & Compute",  "Piet Mondrian"),
     ("2026-04-12", img_kandinsky_20260412, "Safety Debate",   "Wassily Kandinsky"),
+    ("2026-04-13", img_balla_20260413,    "Enterprise Surge", "Giacomo Balla"),
 ]
 
 for date, fn, kw, artist in DAYS:

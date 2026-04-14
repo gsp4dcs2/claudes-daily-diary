@@ -5314,6 +5314,87 @@ def img_balla_20260413():
     return base
 
 
+def img_leger_20260414():
+    """Fernand Léger mechanical/industrial style — office integration & custom silicon theme."""
+    base = Image.new("RGB", (W, H), (18, 18, 22))   # near-black bg
+
+    # 1. Background structural bands — top and bottom industrial shelves
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bd.rectangle([(0, 0),   (W, 160)], fill=(34, 34, 42, 255))
+    bd.rectangle([(0, 470), (W, H)],   fill=(28, 28, 36, 255))
+    base = comp(base, bl)
+
+    # 2. Large overlapping primary circles — Léger's signature mechanical roundels
+    circles = [
+        (180,  280, 220, (220,  40,  40, 215)),   # big red left
+        (680,  200, 170, (235, 195,   0, 210)),   # gold centre
+        (1020, 350, 195, (28,  95,  220, 220)),   # deep blue right
+        (440,  480, 100, (235, 195,   0, 175)),   # small gold lower
+        (820,   80,  85, (220,  40,  40, 185)),   # small red upper-right
+        (110,  540,  70, (28,  95,  220, 165)),   # small blue lower-left
+        (590,  360,  55, (240, 240, 240, 150)),   # white accent
+    ]
+    for cx, cy, r, col in circles:
+        cl = layer()
+        cd = ImageDraw.Draw(cl)
+        cd.ellipse([(cx-r, cy-r), (cx+r, cy+r)],
+                   fill=col, outline=(0, 0, 0, 255), width=10)
+        # inner highlight
+        cd.ellipse([(cx-r//3, cy-r//2), (cx+r//5, cy-r//5)],
+                   fill=(255, 255, 255, 80))
+        base = comp(base, cl)
+
+    # 3. Bold pipe/bar structural elements — horizontal and vertical
+    pipes = [
+        (0,   300, 1200, 352, (220,  40,  40, 205),  10),   # red wide horizontal
+        (540,   0,  596, 630, (235, 195,   0, 195),  10),   # gold tall vertical
+        (0,   490, 940,  530, (28,   95, 220, 190),   8),   # blue lower beam
+        (760,  40,  810, 440, (18,   18,  22, 255),  12),   # dark right spine
+        (290,  40,  340, 300, (18,   18,  22, 255),  12),   # dark left spine
+    ]
+    for x0, y0, x1, y1, col, w in pipes:
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        pd.rectangle([(x0, y0), (x1, y1)], fill=col, outline=(0, 0, 0, 220), width=w)
+        base = comp(base, pl)
+
+    # 4. Circuit-board trace lines — thin horizontal runs suggesting chip design
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    trace_y = [90, 130, 400, 440, 570, 600]
+    trace_cols = [
+        (220,  40,  40, 120),
+        (235, 195,   0, 100),
+        (28,   95, 220, 110),
+        (220,  40,  40, 100),
+        (235, 195,   0, 90),
+        (28,   95, 220, 95),
+    ]
+    for ty, tc in zip(trace_y, trace_cols):
+        td.line([(0, ty), (W, ty)], fill=tc, width=2)
+    # Via dots on traces
+    via_positions = [(120, 90), (380, 130), (650, 90), (900, 130), (1100, 90),
+                     (200, 400), (460, 440), (720, 400), (960, 440), (1150, 400)]
+    for vx, vy in via_positions:
+        r = 6
+        td.ellipse([(vx-r, vy-r), (vx+r, vy+r)],
+                   fill=(240, 240, 200, 180), outline=(0, 0, 0, 200), width=2)
+    base = comp(base, tl)
+
+    # 5. Machine-bolt grid dots — Léger's industrial riveted-plate texture
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    for gx in range(65, W, 125):
+        for gy in range(65, H, 125):
+            r = 8
+            dd.ellipse([(gx-r, gy-r), (gx+r, gy+r)],
+                       fill=(185, 180, 165, 110), outline=(0, 0, 0, 180), width=3)
+    base = comp(base, dl)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -5451,6 +5532,7 @@ DAYS = [
     ("2026-04-11", img_mondrian_20260411,   "Word & Compute",  "Piet Mondrian"),
     ("2026-04-12", img_kandinsky_20260412, "Safety Debate",   "Wassily Kandinsky"),
     ("2026-04-13", img_balla_20260413,    "Enterprise Surge", "Giacomo Balla"),
+    ("2026-04-14", img_leger_20260414,    "Office & Silicon",  "Fernand Léger"),
 ]
 
 for date, fn, kw, artist in DAYS:

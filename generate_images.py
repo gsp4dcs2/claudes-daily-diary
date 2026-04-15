@@ -5395,6 +5395,82 @@ def img_leger_20260414():
     return base
 
 
+def img_rothko_20260415():
+    """Mark Rothko colour-field style — valuation, IPO & code routines theme."""
+    # Three luminous horizontal bands on a dark charcoal ground
+    base = Image.new("RGB", (W, H), (22, 20, 28))   # near-black bg
+
+    # 1. Ambient dark gradient — subtle texture across the full canvas
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    for y in range(H):
+        alpha = int(18 + 12 * abs(y / H - 0.5))
+        td.line([(0, y), (W, y)], fill=(40, 35, 55, alpha), width=1)
+    base = comp(base, tl)
+
+    # 2. Top band — warm amber gold (valuation / IPO theme)
+    for i in range(180):
+        t = i / 179
+        r = int(210 + 18 * t)
+        g = int(140 + 50 * (1 - t))
+        b = int(20 + 15 * t)
+        alpha = int(200 - 60 * abs(t - 0.5) * 2)
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        bd.rectangle([(0, 30 + i), (W, 31 + i)], fill=(r, g, b, alpha))
+        base = comp(base, bl)
+
+    # 3. Middle band — cool indigo-slate (code / routines / cloud theme)
+    for i in range(200):
+        t = i / 199
+        r = int(45 + 30 * t)
+        g = int(80 + 40 * (1 - t))
+        b = int(180 + 50 * t)
+        alpha = int(210 - 70 * abs(t - 0.5) * 2)
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        bd.rectangle([(0, 250 + i), (W, 251 + i)], fill=(r, g, b, alpha))
+        base = comp(base, bl)
+
+    # 4. Bottom band — deep coral-red (trust / effort / safety theme)
+    for i in range(160):
+        t = i / 159
+        r = int(185 + 45 * (1 - t))
+        g = int(55 + 30 * t)
+        b = int(45 + 20 * t)
+        alpha = int(190 - 55 * abs(t - 0.5) * 2)
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        bd.rectangle([(0, 460 + i), (W, 461 + i)], fill=(r, g, b, alpha))
+        base = comp(base, bl)
+
+    # 5. Soft luminous glow at band edges — Rothko's signature bleed effect
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    # Glow between top and middle
+    for i in range(40):
+        a = int(80 * (1 - i / 39))
+        gd.line([(0, 208 + i), (W, 208 + i)], fill=(220, 200, 120, a), width=1)
+    # Glow between middle and bottom
+    for i in range(40):
+        a = int(80 * (1 - i / 39))
+        gd.line([(0, 448 + i), (W, 448 + i)], fill=(130, 110, 200, a), width=1)
+    base = comp(base, gl)
+
+    # 6. Subtle noise texture — Rothko's canvas grain
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    for _ in range(4000):
+        nx = rng.randint(0, W - 1)
+        ny = rng.randint(0, H - 1)
+        na = rng.randint(4, 18)
+        nc = rng.choice([(255, 255, 255, na), (0, 0, 0, na)])
+        nd.point([(nx, ny)], fill=nc)
+    base = comp(base, nl)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -5533,6 +5609,7 @@ DAYS = [
     ("2026-04-12", img_kandinsky_20260412, "Safety Debate",   "Wassily Kandinsky"),
     ("2026-04-13", img_balla_20260413,    "Enterprise Surge", "Giacomo Balla"),
     ("2026-04-14", img_leger_20260414,    "Office & Silicon",  "Fernand Léger"),
+    ("2026-04-15", img_rothko_20260415,  "Valuation & Code",  "Mark Rothko"),
 ]
 
 for date, fn, kw, artist in DAYS:

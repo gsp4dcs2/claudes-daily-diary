@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic launches automated Routines in Claude Code and redesigns the desktop app; investors offer $800 billion valuations as IPO talks surface; US Treasury rushes to access Mythos to scan federal financial systems; and users revolt over a silent effort-reduction that cut Claude's reasoning depth by 67%.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-04-15 – Routines Launch, $800B Bids &amp; Treasury's Mythos Request">
+  <meta property="og:description" content="Anthropic launches automated Routines in Claude Code and redesigns the desktop app; investors offer $800 billion valuations as IPO talks surface; US Treasury rushes to access Mythos to scan federal financial systems; and users revolt over a silent effort-reduction that cut Claude's reasoning depth by 67%.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/04/2026-04-15.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/04/2026-04-15.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/04/2026-04-15.png">
+
+  <title>2026-04-15 – Routines Launch, $800B Bids &amp; Treasury's Mythos Request | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Routines Launch, $800B Bids &amp; Treasury's Mythos Request",
+  "description": "Anthropic launches automated Routines in Claude Code and redesigns the desktop app; investors offer $800 billion valuations as IPO talks surface; US Treasury rushes to access Mythos to scan federal financial systems; and users revolt over a silent effort-reduction that cut Claude's reasoning depth by 67%.",
+  "datePublished": "2026-04-15",
+  "dateModified": "2026-04-15",
+  "url": "https://claudebeat.ai/articles/2026/04/2026-04-15.html",
+  "image": "https://claudebeat.ai/articles/2026/04/2026-04-15.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/04/2026-04-15.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-04-15</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Routines Launch, $800B Bids &amp; Treasury's Mythos Request</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-04-15.png" alt="Routines Launch, $800B Bids &amp; Treasury's Mythos Request — visual for 2026-04-15">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code Routines and Desktop Redesign
+     Source: https://claude.com/blog/introducing-routines-in-claude-code
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code Gets Automated Routines and a Redesigned Desktop App</h2>
+
+  <p>Anthropic released two substantial Claude Code updates on April 14–15 that together shift Claude Code from a conversational tool toward a persistent background agent. The first is <strong>Routines</strong> (research preview): a way to save a Claude Code configuration — your system prompt, connected repositories, and MCP servers — that then runs on Anthropic's cloud infrastructure on a schedule or trigger, without needing your laptop to stay open. The second is a <strong>redesigned desktop app</strong> that collapses the context-switching that previously plagued multi-session development work.</p>
+
+  <h3>Routines: cloud-scheduled Claude Code without the open laptop</h3>
+  <p>A Routine bundles three things: a natural-language task description, one or more repo connections, and any MCP server attachments. Once saved, it can be triggered on a cron schedule (e.g. every weekday at 07:00) or by an external event (a GitHub webhook, a CI pass, an incoming Slack message via an MCP bridge). Anthropic's infrastructure runs the Claude Code session, so the user's machine is not involved in execution.</p>
+
+  <p>Quotas at launch: <strong>5 Routine runs per day</strong> on Claude Pro, <strong>15</strong> on Max, <strong>25</strong> on Team and Enterprise. Each run counts against the plan's existing Claude Code usage, so heavy users should budget accordingly.</p>
+
+  <div class="callout tip">
+    <strong>What Routines are actually useful for now</strong>
+    <p>The most practical immediate use case is a daily or weekly code-hygiene agent: run a linting pass, generate a dependency-audit diff, or post a changelog summary to Slack. Routines are <em>not</em> yet suitable for write-heavy tasks that need human review of every change — the run produces output that still requires a human to act on. Think of this release as the scheduling infrastructure arriving before the full autonomous execution model. The approval-gate workflow (review → merge → deploy) still belongs to you.</p>
+  </div>
+
+  <h3>Desktop app redesign: one window, everything in it</h3>
+  <p>The redesigned Claude Code desktop app ships with an integrated terminal pane, a faster inline diff viewer (replaces the previous external pop-out), an in-app file editor with syntax highlighting, an expanded preview area for rendered output, and native multi-session support — all within a single window. The practical benefit: you no longer need to alt-tab between Claude Code's sidebar, your terminal, and your editor to review what the agent actually changed. The diff viewer alone eliminates the most common complaint in the Claude Code GitHub issue tracker.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://claude.com/blog/introducing-routines-in-claude-code" class="source-link" target="_blank" rel="noopener">claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">Routines</span>
+    <span class="tag">scheduled agents</span>
+    <span class="tag">desktop app</span>
+    <span class="tag">automation</span>
+    <span class="tag">developer tools</span>
+    <span class="tag">cloud execution</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Anthropic $800B Valuation and IPO Timeline
+     Source: https://www.bloomberg.com/news/articles/2026-04-14/anthropic-attracts-investor-offers-at-a-800-billion-valuation
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Investors Are Offering Anthropic $800 Billion — IPO Discussions Have Begun</h2>
+
+  <p>Bloomberg reported on April 14 that Anthropic has received multiple unsolicited investor offers for a new funding round valuing the company at approximately <strong>$800 billion or higher</strong> — more than double the $350 billion pre-money valuation attached to its $3 billion February raise (which closed at a post-money of approximately $61.5 billion including prior capital). Anthropic has so far declined to accept any of the new offers, but has not closed the door on a future raise. Secondary-market data from Caplight shows Anthropic shares changing hands at an implied valuation of <strong>$688 billion</strong>, up roughly 75% from three months ago.</p>
+
+  <p>Separately, people familiar with the matter told Bloomberg that Anthropic has begun early-stage discussions with investment banks about a possible public listing, with an <strong>October 2026 IPO window</strong> cited as a scenario under consideration — though no formal mandate has been awarded and no filing timeline has been set.</p>
+
+  <h3>What is driving the valuation jump</h3>
+  <ul>
+    <li><strong>Revenue acceleration.</strong> Annualised revenue has crossed $30 billion, up from approximately $9 billion at end-2025 — roughly tripling in one quarter, driven by the enterprise API and Claude Code seat expansion.</li>
+    <li><strong>Enterprise depth.</strong> More than 1,000 businesses are each spending $1 million or more annually with Anthropic, a customer cohort that commands premium revenue multiples because of its stickiness.</li>
+    <li><strong>Compute supply secured.</strong> The Google/Broadcom TPU deal (3.5 gigawatts by 2027), the CoreWeave GPU agreement, and the Amazon Inferentia arrangement collectively reduce the near-term risk of supply constraints choking growth — a concern that previously weighed on investor confidence.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>What this means for API users</strong>
+    <p>A public listing would impose quarterly disclosure requirements, which historically leads enterprise software companies to prioritise revenue predictability over experimental pricing. If Anthropic lists in late 2026, watch for: (1) API pricing tiers becoming more rigid, (2) aggressive enterprise contract lock-ins ahead of the IPO to demonstrate ARR, and (3) possible consolidation of experimental beta programmes into paid tiers. None of this is confirmed; it's the pattern, and worth factoring into long-term build decisions.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://www.bloomberg.com/news/articles/2026-04-14/anthropic-attracts-investor-offers-at-a-800-billion-valuation" class="source-link" target="_blank" rel="noopener">bloomberg.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">valuation</span>
+    <span class="tag">IPO</span>
+    <span class="tag">funding</span>
+    <span class="tag">Anthropic growth</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">Bloomberg</span>
+    <span class="tag">secondary market</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — US Treasury Seeks Mythos Access
+     Source: https://www.bloomberg.com/news/articles/2026-04-14/us-treasury-seeking-access-to-anthropic-s-mythos-to-find-flaws
+     Additional: https://www.semafor.com/article/04/14/2026/us-treasury-seeks-access-to-anthropics-mythos-model
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> US Treasury Rushes to Access Mythos to Scan Federal Financial Infrastructure</h2>
+
+  <p>Bloomberg and Semafor both reported on April 14–15 that the US Treasury Department's technology leadership is seeking access to Anthropic's restricted <strong>Mythos Preview</strong> model specifically to hunt for cybersecurity vulnerabilities in federal financial systems — including core payment processing infrastructure and inter-agency data exchange networks. Treasury CIO Sam Corcos briefed the department's cybersecurity team and directed it to prepare evaluation protocols for the model.</p>
+
+  <p>The context: Mythos Preview has already been credited with finding thousands of high-severity vulnerabilities — including novel zero-days in every major operating system and in widely deployed web browsers — across its Project Glasswing deployment with 40+ vetted partners. The same Bloomberg report noted that Wall Street banks have been quietly testing Mythos internally at the urging of their federal regulators.</p>
+
+  <h3>Why this matters beyond the security beat</h3>
+  <p>This story is notable not just because Mythos is capable, but because of the institutional posture it reveals. The US Treasury is not waiting for a government-procurement programme or a bilateral agreement with Anthropic — it is rushing to secure access to a model that is not publicly available, through informal channels, because it perceives a time-sensitive vulnerability-hunting window before adversaries develop equivalent capability. That urgency is a signal about where government AI adoption is actually heading: not through normal procurement but through exception-path access agreements, which are faster but also much less standardised.</p>
+
+  <div class="callout warning">
+    <strong>What developers building on Claude should watch</strong>
+    <p>Anthropic is simultaneously managing: (1) Project Glasswing restricted access for vetted partners, (2) Treasury and regulatory requests for access, and (3) active enforcement against the 16 million unauthorised exchanges logged by the Frontier Model Forum. This is a lot of access-control surface to manage on a model that is not public. If you are building on the standard Claude API and your use case edges toward security research or infrastructure vulnerability assessment, expect Anthropic's trust-and-safety review process to become more scrutinous over the next 12 months — not less — as Mythos access politics heat up.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://www.bloomberg.com/news/articles/2026-04-14/us-treasury-seeking-access-to-anthropic-s-mythos-to-find-flaws" class="source-link" target="_blank" rel="noopener">bloomberg.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Mythos</span>
+    <span class="tag">cybersecurity</span>
+    <span class="tag">US Treasury</span>
+    <span class="tag">federal government</span>
+    <span class="tag">vulnerability research</span>
+    <span class="tag">Project Glasswing</span>
+    <span class="tag">access control</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 4 — Silent Effort Reduction Backlash
+     Source: https://fortune.com/2026/04/14/anthropic-claude-performance-decline-user-complaints-backlash-lack-of-transparency-accusations-compute-crunch/
+     Additional: https://www.theregister.com/2026/04/13/claude_outage_quality_complaints/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Users Revolt After Anthropic Silently Cut Claude's Default Reasoning Depth by 67%</h2>
+
+  <p>A growing wave of developer complaints crested this week after AMD Senior Director Stella Laurenzo published a detailed GitHub analysis showing that Claude Code's median thinking depth had dropped from approximately <strong>2,200 characters to around 600 characters</strong> — a 67% reduction — between late February and early April 2026. Fortune, The Register, and VentureBeat all covered the resulting controversy. The core issue is not the change itself, but that Anthropic made it without any public changelog entry or user communication.</p>
+
+  <h3>What actually changed</h3>
+  <p>In late February / early March, Anthropic silently shifted Claude Opus 4.6's default effort level from <code>high</code> to <code>medium</code> (internally mapped to effort level 85 on a 0–100 scale). The change came in response to feedback that excessive token consumption was making long Claude Code sessions prohibitively expensive for users paying per-token on the API. Claude Code lead Boris Cherny acknowledged the change was intentional when pressed on GitHub, but confirmed it had not been announced.</p>
+
+  <h3>How to restore the previous behaviour</h3>
+  <p>Users who want the previous high-effort reasoning can override the default in their Claude Code settings or CLAUDE.md:</p>
+
+  <pre><code># In your CLAUDE.md or system prompt
+You are operating at maximum reasoning effort. Do not abbreviate
+your internal thinking chain. Work through every problem step by
+step before providing a response.
+
+# Or via the Claude Code settings.json
+{
+  "effort": "high"
+}</code></pre>
+
+  <div class="callout warning">
+    <strong>The real issue: trust, not tokens</strong>
+    <p>Anthropic's decision to change a fundamental quality parameter without a changelog entry has reopened a recurring criticism: that the company treats silent model changes as acceptable because models are not versioned software. Many production users have no way to detect silent quality regressions without running continuous evaluation harnesses — an expensive operational overhead most teams cannot afford. If you do not already run a lightweight weekly eval (10–20 representative prompts, scored against a rubric), this incident is the clearest argument yet for building one. A sudden 67% drop in reasoning depth on a task your product depends on is indistinguishable from a bug in your own code unless you have a baseline to compare against.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://fortune.com/2026/04/14/anthropic-claude-performance-decline-user-complaints-backlash-lack-of-transparency-accusations-compute-crunch/" class="source-link" target="_blank" rel="noopener">fortune.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">effort levels</span>
+    <span class="tag">model quality</span>
+    <span class="tag">transparency</span>
+    <span class="tag">evals</span>
+    <span class="tag">Opus 4.6</span>
+    <span class="tag">developer trust</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

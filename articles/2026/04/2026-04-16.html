@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic introduces government ID verification via Persona for select Claude users; a platform-wide 3-hour outage hit claude.ai and the API on April 15; and the Anthropic Fellows Program 2026 opens applications with a $50K stipend and a hard April 26 deadline.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-04-16 – ID Checks, April Outage &amp; Anthropic's Safety Fellowship">
+  <meta property="og:description" content="Anthropic introduces government ID verification via Persona for select Claude users; a platform-wide 3-hour outage hit claude.ai and the API on April 15; and the Anthropic Fellows Program 2026 opens applications with a $50K stipend and a hard April 26 deadline.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/04/2026-04-16.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/04/2026-04-16.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/04/2026-04-16.png">
+
+  <title>2026-04-16 – ID Checks, April Outage &amp; Anthropic's Safety Fellowship | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ID Checks, April Outage &amp; Anthropic's Safety Fellowship",
+  "description": "Anthropic introduces government ID verification via Persona for select Claude users; a platform-wide 3-hour outage hit claude.ai and the API on April 15; and the Anthropic Fellows Program 2026 opens applications with a $50K stipend and a hard April 26 deadline.",
+  "datePublished": "2026-04-16",
+  "dateModified": "2026-04-16",
+  "url": "https://claudebeat.ai/articles/2026/04/2026-04-16.html",
+  "image": "https://claudebeat.ai/articles/2026/04/2026-04-16.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/04/2026-04-16.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-04-16</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>ID Checks, April Outage &amp; Anthropic's Safety Fellowship</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-04-16.png" alt="ID Checks, April Outage &amp; Anthropic's Safety Fellowship — visual for 2026-04-16">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Anthropic Introduces Government ID Verification via Persona
+     Source: https://support.claude.com/en/articles/14328960-identity-verification-on-claude
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Anthropic Now Asks Some Users for a Government ID — Here Is What Triggers It and Why</h2>
+
+  <p>Anthropic has begun prompting select Claude users to verify their identity using a government-issued photo ID and a real-time selfie before accessing certain capabilities. The verification is handled by <strong>Persona Identities</strong>, a third-party KYC (Know Your Customer) platform. As of this week, users on the Max subscription tier are among those receiving verification prompts, with the rollout framed around platform integrity and responsible-use compliance. The official rationale, quoted directly from Anthropic's help page: <em>"Being responsible with powerful technology starts with knowing who is using it."</em></p>
+
+  <h3>What triggers a verification request</h3>
+  <ul>
+    <li>Accessing advanced capabilities that Anthropic has designated as requiring identity assurance</li>
+    <li>Routine platform integrity checks triggered by usage patterns</li>
+    <li>Safety and compliance requirements that Anthropic has not fully specified publicly</li>
+  </ul>
+
+  <h3>What Persona does — and does not — do with your data</h3>
+  <ul>
+    <li><strong>Accepted documents:</strong> passports, driver's licences, national ID cards (physical originals only; no photocopies or digital IDs)</li>
+    <li><strong>Data custody:</strong> Persona holds the ID images and selfies, not Anthropic directly; all data is encrypted in transit and at rest</li>
+    <li><strong>No training use:</strong> verified ID data will not be used for model training or shared for marketing purposes, per the help page</li>
+    <li><strong>Retention:</strong> Persona's standard retention policy applies; users can request deletion via Anthropic support</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>The privacy tension Anthropic has to navigate</strong>
+    <p>A meaningful share of Claude's privacy-conscious user base switched from ChatGPT specifically because Anthropic had not required identity verification. The irony was captured bluntly by Decrypt's headline: "You Switched to Claude Over Surveillance Fears. Now It Wants Your Passport." Anthropic is walking a genuine tightrope here. On one side: the platform integrity argument is real — restricted models like Mythos and advanced agentic capabilities carry legitimate misuse risk that anonymous accounts make harder to manage. On the other: government ID requirements create a data-collection surface area and a chilling effect on legitimate privacy-preserving use cases. Developers building Claude-powered applications should factor this into user communications if your product requires a Claude subscription or API access — users who hit a verification gate mid-workflow are not going to enjoy the experience.</p>
+  </div>
+
+  <p>For context: OpenAI implemented similar ID verification measures for API developers earlier, and the broader pattern across frontier AI providers is moving in this direction as governments in the EU, UK, and US signal that identity-linked access controls may become regulatory requirements for high-capability models. Anthropic is ahead of that curve but not alone in heading toward it.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://support.claude.com/en/articles/14328960-identity-verification-on-claude" class="source-link" target="_blank" rel="noopener">support.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">identity verification</span>
+    <span class="tag">KYC</span>
+    <span class="tag">Persona</span>
+    <span class="tag">privacy</span>
+    <span class="tag">platform integrity</span>
+    <span class="tag">responsible AI</span>
+    <span class="tag">Max plan</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — April 15 Platform-Wide Outage
+     Source: https://www.cnbc.com/2026/04/15/anthropic-outage-elevated-errors-claude-chatbot-code-api.html
+     Additional: https://status.claude.com/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> 3-Hour Platform Outage on April 15 Took Down Claude.ai, Claude Code, and the API Simultaneously</h2>
+
+  <p>On April 15, 2026, Claude experienced its largest publicly documented outage to date — roughly three hours of disruption affecting claude.ai, the mobile apps, Claude Code, and the API simultaneously. CNBC and TechRadar covered the event in real time. At peak, approximately 6,000 users were actively reporting issues on Downdetector. The outage was not tier-selective: both free and Pro/Max subscribers were affected, and the API showed the same errors as the consumer product.</p>
+
+  <h3>Timeline</h3>
+  <ul>
+    <li><strong>10:53 AM ET:</strong> Anthropic posts "Elevated errors on Claude.ai, API, Claude Code" on the status page</li>
+    <li><strong>11:03 AM ET:</strong> First fix deployed — partial improvement reported</li>
+    <li><strong>11:40 AM ET:</strong> Status worsens — "Claude.ai and Platform are down" (broader degradation than initial report)</li>
+    <li><strong>~12:30 PM ET:</strong> Login rates begin stabilising; error rates begin to decline</li>
+    <li><strong>1:42 PM ET:</strong> Fully resolved, all systems operational</li>
+  </ul>
+
+  <p>User-reported symptoms included: login failures, "temporarily busy" errors on claude.ai, incorrect usage-limit warnings (users seeing "limit reached" despite having quota remaining), and model unavailability errors on the API returning HTTP 529. Root cause was not disclosed by Anthropic.</p>
+
+  <div class="callout tip">
+    <strong>Build for outage resilience — don't treat the API as always-on</strong>
+    <p>Three-hour outages at this scale are rare but not unprecedented for frontier AI providers. If your production workflow depends on Claude API availability, these defensive patterns will save you during the next incident:</p>
+    <ul>
+      <li><strong>Retry with exponential backoff:</strong> HTTP 529 (overloaded) is retryable; implement 1s → 2s → 4s → 8s backoff with jitter. The Anthropic Python and JS SDKs do this automatically when you set <code>max_retries</code>.</li>
+      <li><strong>Async request queuing:</strong> for non-real-time workflows (batch classification, document processing), push tasks to a queue and process asynchronously so a 15-minute API gap doesn't become a customer-visible failure.</li>
+      <li><strong>Graceful degradation:</strong> identify which parts of your product require Claude in the critical path vs. which can fail silently or show a "try again" message. Not everything needs Claude in real time.</li>
+      <li><strong>Status page subscription:</strong> subscribe to <code>status.claude.com</code> for email/webhook incident notifications so your on-call team gets ahead of user complaints.</li>
+    </ul>
+  </div>
+
+  <p>The outage is notable in context: it occurred the same week Anthropic launched Claude Code Routines (the cloud-scheduled automation feature), expanded Cowork, and published the IPO valuation story. Platform reliability at the scale Anthropic is now operating — $30B+ annualised revenue, enterprise customers with SLA expectations — is a qualitatively different operational challenge than it was 18 months ago. The CoreWeave and Google TPU capacity additions are partly a hedge against exactly this kind of load-related degradation, but the pace of demand growth is keeping the pressure on.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://www.cnbc.com/2026/04/15/anthropic-outage-elevated-errors-claude-chatbot-code-api.html" class="source-link" target="_blank" rel="noopener">cnbc.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">outage</span>
+    <span class="tag">reliability</span>
+    <span class="tag">API resilience</span>
+    <span class="tag">platform status</span>
+    <span class="tag">Claude Code</span>
+    <span class="tag">production engineering</span>
+    <span class="tag">HTTP 529</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Anthropic Fellows Program 2026
+     Source: https://alignment.anthropic.com/2025/anthropic-fellows-program-2026/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Anthropic Fellows Program 2026 Is Open — $50K Stipend, 10 Days to Apply for the July Cohort</h2>
+
+  <p>Anthropic has opened applications for two rounds of its <strong>Anthropic Fellows Program</strong> — a four-month paid AI safety research fellowship targeting people who want to do serious safety research but are not currently at a frontier AI lab. The May 2026 cohort is already underway; the <strong>July 2026 cohort deadline is April 26, 2026 — ten days away</strong>. Applications are via Greenhouse (linked from the alignment blog).</p>
+
+  <h3>What you get</h3>
+  <ul>
+    <li><strong>Stipend:</strong> $3,850 USD/week (~$50,000 for the four-month term)</li>
+    <li><strong>Compute:</strong> approximately $15,000/month in compute funding — enough to run serious experiments against current-generation models</li>
+    <li><strong>Mentorship:</strong> Anthropic researchers pitch project ideas; fellows choose and co-design their project, then work with a dedicated researcher mentor throughout the term</li>
+    <li><strong>Location:</strong> San Francisco; relocation support available</li>
+  </ul>
+
+  <h3>Research areas open for July 2026</h3>
+  <p>Anthropic has explicitly expanded the scope from the inaugural cohort. Current target areas include:</p>
+  <ul>
+    <li>Scalable oversight and weak-to-strong generalisation</li>
+    <li>Adversarial robustness and jailbreak dynamics</li>
+    <li>AI control and corrigibility under distribution shift</li>
+    <li>Model organisms of misalignment</li>
+    <li>Mechanistic interpretability (circuit-level analysis of frontier models)</li>
+    <li>AI security — novel attack vectors on deployed model systems</li>
+    <li>Model welfare and consciousness research</li>
+  </ul>
+
+  <h3>Who should apply</h3>
+  <p>No PhD or prior ML publications are required. Past fellows came from physics, mathematics, CS, and cybersecurity. The filter is demonstrated research ability — a strong coding background, prior experience running experiments, and evidence of independent thinking on hard problems. The cohort is small (typically 10–15 fellows) and competitive.</p>
+
+  <div class="callout">
+    <strong>Why Anthropic runs this programme — and what it signals</strong>
+    <p>The Fellows Program is an explicit acknowledgement that AI safety talent cannot be built fast enough through traditional hiring. Anthropic is trying to compress the gap by funding a cohort of externally-trained researchers, giving them access to frontier models, and converting the best into full-time hires: 40%+ of first-cohort fellows subsequently joined Anthropic, and 80%+ produced published papers during their term. The research output directly feeds back into Claude's development — papers from earlier cohorts have been cited in Anthropic's responsible scaling policy updates and in the team studying functional emotion concepts in Claude's activations. If you are in a position to apply, or know someone who is, the April 26 deadline is real.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://alignment.anthropic.com/2025/anthropic-fellows-program-2026/" class="source-link" target="_blank" rel="noopener">alignment.anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Fellows Program</span>
+    <span class="tag">AI safety</span>
+    <span class="tag">research fellowship</span>
+    <span class="tag">alignment</span>
+    <span class="tag">mechanistic interpretability</span>
+    <span class="tag">model welfare</span>
+    <span class="tag">career</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

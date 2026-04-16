@@ -5471,6 +5471,60 @@ def img_rothko_20260415():
     return base
 
 
+def img_lissitzky_20260416():
+    """El Lissitzky Constructivist style — identity verification & platform integrity theme."""
+    rng2 = Random(42)
+    base = Image.new("RGB", (W, H), (248, 244, 232))   # pale cream bg
+
+    # 1. Large bold black vertical bar left-of-centre — structural spine
+    draw = ImageDraw.Draw(base)
+    draw.rectangle([(310, 0), (340, H)], fill=(14, 14, 14))
+
+    # 2. Bold horizontal black bars — ID card / registry grid feel
+    for y in [90, 280, 470]:
+        draw.rectangle([(0, y), (W, y + 14)], fill=(14, 14, 14))
+
+    # 3. Large red diagonal parallelograms — Constructivist kinetic energy
+    for x0, y0 in [(60, 20), (420, 160), (700, 320), (900, 30)]:
+        lr = layer()
+        dr = ImageDraw.Draw(lr)
+        pts = [(x0, y0), (x0 + 260, y0), (x0 + 310, y0 + 90), (x0 + 50, y0 + 90)]
+        dr.polygon(pts, fill=(196, 22, 22, 200))
+        base = comp(base, lr)
+
+    # 4. Proun sphere — large red circle upper-right (identity verification emblem)
+    lc = layer()
+    ImageDraw.Draw(lc).ellipse([(820, 40), (1160, 380)], fill=(196, 22, 22, 160))
+    base = comp(base, lc)
+
+    # 5. White rectangle punched inside the Proun circle — negative space / ID window
+    lw = layer()
+    ImageDraw.Draw(lw).rectangle([(870, 100), (1110, 320)], fill=(248, 244, 232, 240))
+    base = comp(base, lw)
+
+    # 6. Black node squares at structural grid intersections — Lissitzky rivet motif
+    draw = ImageDraw.Draw(base)
+    nodes = [(310, 90), (310, 280), (310, 470), (0, 280), (700, 90), (700, 470)]
+    for nx, ny in nodes:
+        draw.rectangle([(nx - 18, ny - 18), (nx + 18, ny + 18)], fill=(14, 14, 14))
+
+    # 7. Yellow accent rectangles — third Constructivist colour; badge/label feel
+    ly = layer()
+    yd = ImageDraw.Draw(ly)
+    yd.rectangle([(50, 310), (275, 355)], fill=(225, 185, 0, 210))
+    yd.rectangle([(370, 480), (620, 520)], fill=(225, 185, 0, 200))
+    base = comp(base, ly)
+
+    # 8. Fine diagonal hatching in lower-left — texture and depth
+    hl = layer()
+    hd = ImageDraw.Draw(hl)
+    for i in range(0, 300, 12):
+        hd.line([(0, 350 + i), (i * 1.2, H)], fill=(14, 14, 14, 55), width=2)
+    base = comp(base, hl)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -5610,6 +5664,7 @@ DAYS = [
     ("2026-04-13", img_balla_20260413,    "Enterprise Surge", "Giacomo Balla"),
     ("2026-04-14", img_leger_20260414,    "Office & Silicon",  "Fernand Léger"),
     ("2026-04-15", img_rothko_20260415,  "Valuation & Code",  "Mark Rothko"),
+    ("2026-04-16", img_lissitzky_20260416, "Identity & Safety", "El Lissitzky"),
 ]
 
 for date, fn, kw, artist in DAYS:

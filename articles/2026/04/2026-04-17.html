@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic launches Claude Opus 4.7 with task budgets, xhigh effort, high-res images and a new tokenizer; appoints Novartis CEO Vas Narasimhan to its Long-Term Benefit Trust board; and officially deprecates Claude Sonnet 4 and Opus 4, retiring June 15.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-04-17 – Opus 4.7 Launches, Narasimhan Joins the Board &amp; Two Models Enter Retirement">
+  <meta property="og:description" content="Anthropic launches Claude Opus 4.7 with task budgets, xhigh effort, high-res images and a new tokenizer; appoints Novartis CEO Vas Narasimhan to its Long-Term Benefit Trust board; and officially deprecates Claude Sonnet 4 and Opus 4, retiring June 15.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/04/2026-04-17.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/04/2026-04-17.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/04/2026-04-17.png">
+
+  <title>2026-04-17 – Opus 4.7 Launches, Narasimhan Joins the Board &amp; Two Models Enter Retirement | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Opus 4.7 Launches, Narasimhan Joins the Board &amp; Two Models Enter Retirement",
+  "description": "Anthropic launches Claude Opus 4.7 with task budgets, xhigh effort, high-res images and a new tokenizer; appoints Novartis CEO Vas Narasimhan to its Long-Term Benefit Trust board; and officially deprecates Claude Sonnet 4 and Opus 4, retiring June 15.",
+  "datePublished": "2026-04-17",
+  "dateModified": "2026-04-17",
+  "url": "https://claudebeat.ai/articles/2026/04/2026-04-17.html",
+  "image": "https://claudebeat.ai/articles/2026/04/2026-04-17.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/04/2026-04-17.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-04-17</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Opus 4.7 Launches, Narasimhan Joins the Board &amp; Two Models Enter Retirement</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-04-17.png" alt="Opus 4.7 Launches, Narasimhan Joins the Board &amp; Two Models Enter Retirement — visual for 2026-04-17">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Opus 4.7 Launch
+     Source: https://www.anthropic.com/news/claude-opus-4-7
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Opus 4.7 Is Here — Task Budgets, xhigh Effort, High-Res Images and a New Tokenizer</h2>
+
+  <p>Anthropic released <strong>Claude Opus 4.7</strong> (model ID: <code>claude-opus-4-7</code>) on April 16, 2026, making it the new flagship generally available model. The release comes with four major capability upgrades and several breaking changes significant enough to require a migration audit before you update your API calls. Here is what changed and what it means in practice.</p>
+
+  <h3>New capability 1 — Task budgets (beta)</h3>
+  <p>Task budgets let you tell Opus 4.7 how much token capacity it should reserve for a full agentic loop, not just a single response. Instead of the model deciding ad-hoc when to wrap up a subtask, you set an advisory limit via the new <code>task-budgets-2026-03-13</code> beta header. The model self-moderates to stay under budget while still completing the work — similar in spirit to a hard-cap prompt, but implemented at inference level rather than as a system-prompt constraint.</p>
+
+  <pre><code>import anthropic
+
+client = anthropic.Anthropic()
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=8096,
+    betas=["task-budgets-2026-03-13"],
+    messages=[{"role": "user", "content": "Refactor the auth module."}]
+)</code></pre>
+
+  <div class="callout tip">
+    <strong>When to use task budgets</strong>
+    <p>Task budgets are most useful for multi-step agentic workflows — code generation, document analysis, or tool-calling loops — where you want predictable cost and latency. Set your budget to 2–3× the typical completion token count for your use case; the model will prioritise completing the task within budget rather than over-elaborating. This is particularly valuable for batch processing pipelines where token cost predictability matters more than absolute completeness.</p>
+  </div>
+
+  <h3>New capability 2 — xhigh effort level</h3>
+  <p>Opus 4.7 adds a new <code>xhigh</code> effort level above the existing <code>high</code> setting, targeted at coding and complex agentic tasks. Where <code>high</code> effort enabled extended chain-of-thought, <code>xhigh</code> engages a deeper planning loop before generating the first response token. Expect significantly higher token consumption — roughly 2–3× the output of <code>high</code> effort — but noticeably stronger performance on problems involving multiple interdependent steps.</p>
+
+  <h3>New capability 3 — High-resolution image support</h3>
+  <p>The maximum image resolution has been raised from 1568px / 1.15MP to <strong>2576px / 3.75MP</strong>, with true 1:1 pixel coordinate mapping for computer-use workflows. In practice this means Opus 4.7 can accurately locate and interact with fine UI elements (small buttons, dense tables, code editors) that were previously outside its coordinate precision. The change primarily benefits computer-use agents operating on high-DPI displays.</p>
+
+  <h3>Breaking changes — migration required</h3>
+  <p>Three parameters have been <strong>removed entirely</strong>: <code>temperature</code>, <code>top_p</code>, and <code>top_k</code>. Any API call that sets these will now receive a <code>400</code> error. Additionally:</p>
+  <ul>
+    <li><strong>Adaptive thinking only:</strong> Opus 4.7 uses adaptive thinking by default; extended thinking budgets set via the old API shape now return a <code>400</code>. Remove explicit <code>thinking</code> budget blocks from your prompts.</li>
+    <li><strong>Thinking content omitted by default:</strong> The model's internal thinking chain is no longer streamed or returned unless explicitly requested. This improves latency but will break any code that parsed thinking tokens.</li>
+    <li><strong>New tokenizer:</strong> Opus 4.7 uses an updated tokenizer that encodes tokens differently, resulting in approximately 35% more tokens for the same input text. Audit any <code>max_tokens</code> or cost-cap logic that assumed Opus 4.6 tokenization rates.</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>The 35% tokenizer change will surprise you if you don't audit first</strong>
+    <p>If you have production code that sets <code>max_tokens</code> close to a hard limit (e.g. to cap API spend), the new tokenizer means your existing limits will be hit ~35% sooner per equivalent task. Run a token-count comparison on a representative sample of your prompts before migrating. The Anthropic Python SDK's <code>client.messages.count_tokens()</code> method supports Opus 4.7 and is the right tool for this audit.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/claude-opus-4-7" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Opus 4.7</span>
+    <span class="tag">model launch</span>
+    <span class="tag">task budgets</span>
+    <span class="tag">xhigh effort</span>
+    <span class="tag">high-res images</span>
+    <span class="tag">tokenizer</span>
+    <span class="tag">adaptive thinking</span>
+    <span class="tag">breaking changes</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Vas Narasimhan joins Anthropic LTBT Board
+     Source: https://www.anthropic.com/news/narasimhan-board
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Novartis CEO Vas Narasimhan Joins Anthropic's Board via the Long-Term Benefit Trust</h2>
+
+  <p>Anthropic announced on April 14 that <strong>Vas Narasimhan</strong>, CEO of Novartis and one of the most prominent executives in global pharma, has been appointed to Anthropic's Board of Directors — a seat filled by the <strong>Long-Term Benefit Trust (LTBT)</strong>, the independent oversight body that holds a minority equity stake with majority board-appointment rights. With this addition, LTBT-appointed directors now constitute a <strong>majority of Anthropic's full board</strong> — a structural milestone for a company at this valuation that is relatively rare in venture-backed AI.</p>
+
+  <h3>Who is Vas Narasimhan</h3>
+  <ul>
+    <li>CEO of Novartis since 2018; oversaw the approval of more than 35 novel medicines during his tenure</li>
+    <li>Previously chaired PhRMA (the US pharmaceutical industry trade group); sits on the National Academy of Medicine and Harvard Medical School boards</li>
+    <li>A physician-scientist who led Novartis's internal AI transformation programme — one of the first large pharma companies to operationalise AI-assisted drug discovery at scale</li>
+    <li>The first pharmaceutical executive to join Anthropic's board</li>
+  </ul>
+
+  <h3>Why this appointment matters beyond the headline</h3>
+  <p>The LTBT's mandate is to ensure Anthropic's long-term-benefit mission takes precedence over short-term financial returns — particularly relevant as Anthropic approaches a potential IPO and the associated pressure to maximise near-term revenue. Adding a board member whose entire career has involved deploying breakthrough technology responsibly within one of the most heavily regulated industries in the world signals that Anthropic is preparing the board for exactly that kind of pressure. Narasimhan brings direct, hard-won experience navigating the gap between what is technically possible and what is safe enough to ship — a domain that maps directly onto Anthropic's daily decisions about which Claude capabilities to release and under what constraints.</p>
+
+  <div class="callout">
+    <strong>What LTBT majority control actually means in practice</strong>
+    <p>The Long-Term Benefit Trust structure gives Anthropic's board a built-in institutional counterweight to investor pressure. When a frontier AI company IPOs, the typical dynamic is that financial shareholders dominate board seats and push for growth over caution. Anthropic's LTBT majority means that even after a public listing, a group with no financial stake in the company retains decisive board influence. Narasimhan, with no Anthropic equity, is structurally incentivised to prioritise mission alignment rather than share price — which is precisely what the structure is designed to ensure.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/narasimhan-board" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">LTBT</span>
+    <span class="tag">governance</span>
+    <span class="tag">board of directors</span>
+    <span class="tag">Vas Narasimhan</span>
+    <span class="tag">Novartis</span>
+    <span class="tag">life sciences</span>
+    <span class="tag">responsible AI</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Model Deprecations: Sonnet 4, Opus 4 → June 15; Haiku 3 → April 20
+     Source: https://platform.claude.com/docs/en/about-claude/model-deprecations
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Three Deprecations to Act On Now: Sonnet 4 &amp; Opus 4 Retire June 15, Haiku 3 Retires April 20</h2>
+
+  <p>Anthropic published updated deprecation entries on April 14 alongside the Opus 4.7 launch. Three models now have firm retirement dates — meaning API calls to them will fail after those dates, with no graceful fallback:</p>
+
+  <h3>Immediate action: Haiku 3 retires April 20 (three days away)</h3>
+  <p><strong><code>claude-3-haiku-20240307</code></strong> has a retirement date of <strong>April 20, 2026</strong>. If you have any production code, scripts, or CI pipelines still calling this model, they will begin returning errors on Monday. The recommended replacement is <code>claude-haiku-4-5-20251001</code>. Run a grep now:</p>
+
+  <pre><code># Find any remaining Haiku 3 calls in your codebase
+grep -r "claude-3-haiku-20240307" . --include="*.py" --include="*.ts" --include="*.js"</code></pre>
+
+  <h3>Plan ahead: Sonnet 4 and Opus 4 retire June 15</h3>
+  <ul>
+    <li><strong><code>claude-sonnet-4-20250514</code></strong> → retirement date June 15, 2026. Recommended replacement: <code>claude-sonnet-4-6</code></li>
+    <li><strong><code>claude-opus-4-20250514</code></strong> → retirement date June 15, 2026. Recommended replacement: <code>claude-opus-4-7</code></li>
+  </ul>
+  <p>You have roughly eight weeks. Use this window to run your eval suite against the replacement models — both Sonnet 4-6 and Opus 4.7 have meaningful behaviour differences from their predecessors (particularly Opus 4.7's new tokenizer), so a direct swap without testing is inadvisable.</p>
+
+  <div class="callout warning">
+    <strong>The Opus 4.7 tokenizer means your Opus 4 tests won't transfer cleanly</strong>
+    <p>Because Opus 4.7 uses a new tokenizer that consumes approximately 35% more tokens for equivalent input, any eval that compares output length, cost, or token-per-task ratios between Opus 4 and Opus 4.7 will show apparent regressions that are tokenizer artefacts rather than quality regressions. Normalise your evals by task outcome rather than token count when comparing across the deprecation boundary. For cost modelling, update your baseline: Opus 4.7 at the same task will cost more tokens, and you should verify whether the new pricing tiers offset this increase.</p>
+  </div>
+
+  <h3>Model lifecycle pattern to adopt going forward</h3>
+  <p>Anthropic's deprecation policy requires at least 60 days notice before retirement. The pattern is now consistent: a new model launches → older same-family models are deprecated the same week → 60-day countdown begins. Pinning to versioned model IDs (e.g. <code>claude-opus-4-20250514</code>) rather than alias endpoints (e.g. <code>claude-opus-4</code>) is the right practice — aliases track the latest model silently, which can introduce unexpected behaviour changes; versioned IDs give you explicit control at the cost of requiring manual migration on deprecation.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/about-claude/model-deprecations" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">model deprecation</span>
+    <span class="tag">Haiku 3</span>
+    <span class="tag">Sonnet 4</span>
+    <span class="tag">Opus 4</span>
+    <span class="tag">model lifecycle</span>
+    <span class="tag">migration</span>
+    <span class="tag">API versioning</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

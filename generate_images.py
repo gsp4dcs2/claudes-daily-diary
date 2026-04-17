@@ -5525,6 +5525,94 @@ def img_lissitzky_20260416():
     return base
 
 
+def img_klee_20260417():
+    """Paul Klee colour-cell grid — Opus 4.7 model launch, new capabilities, generational leap."""
+    base = Image.new("RGB", (W, H), (10, 14, 28))
+    draw = ImageDraw.Draw(base)
+
+    # 1. Klee-style warm→cool colour grid: amber (left, retiring models) → green (centre)
+    #    → vivid teal (right, new Opus 4.7 capabilities)
+    cell_w, cell_h = 80, 63
+    cols_n = math.ceil(W / cell_w) + 1
+    rows_n = math.ceil(H / cell_h) + 1
+
+    amber_palette = [(195, 130, 35), (215, 155, 50), (230, 170, 60), (200, 140, 40),
+                     (210, 150, 45), (220, 165, 55), (190, 125, 30), (205, 145, 42)]
+    green_palette = [(45,  150, 90),  (60,  170, 110), (75,  185, 125), (50,  140, 80),
+                     (65,  160, 100), (55,  175, 115), (80,  190, 130), (48,  155, 95)]
+    teal_palette  = [(30,  160, 185), (45,  180, 205), (60,  195, 215), (35,  165, 190),
+                     (50,  185, 210), (40,  175, 200), (55,  190, 212), (28,  155, 180)]
+
+    for row in range(rows_n):
+        y0 = row * cell_h
+        for col in range(cols_n):
+            x0 = col * cell_w
+            x_frac = (x0 + cell_w / 2) / W
+            if x_frac < 0.32:
+                palette = amber_palette
+            elif x_frac < 0.62:
+                palette = green_palette
+            else:
+                palette = teal_palette
+            idx = (row * 3 + col * 7) % len(palette)
+            bc = palette[idx]
+            r = max(0, min(255, bc[0] + rng.randint(-18, 18)))
+            g = max(0, min(255, bc[1] + rng.randint(-18, 18)))
+            b = max(0, min(255, bc[2] + rng.randint(-18, 18)))
+            draw.rectangle([(x0, y0), (x0 + cell_w - 1, y0 + cell_h - 1)], fill=(r, g, b))
+
+    # 2. Dark grid lines — Klee's characteristic structure
+    for col in range(cols_n + 1):
+        draw.line([(col * cell_w, 0), (col * cell_w, H)], fill=(6, 8, 18), width=2)
+    for row in range(rows_n + 1):
+        draw.line([(0, row * cell_h), (W, row * cell_h)], fill=(6, 8, 18), width=2)
+
+    # 3. Feature node circles — key Opus 4.7 capabilities at prominent intersections
+    #    (task budgets, xhigh effort, high-res images, new tokenizer)
+    feature_nodes = [
+        (160, 126,  22, (255, 220, 100, 230)),   # amber zone — "retiring" marker
+        (400, 189,  26, (100, 240, 155, 220)),   # green zone — task budgets
+        (640, 252,  30, (80,  220, 240, 225)),   # teal zone  — xhigh effort
+        (880, 189,  28, (60,  195, 230, 220)),   # teal zone  — high-res images
+        (1040, 315, 24, (50,  180, 215, 210)),   # teal zone  — new tokenizer
+        (240, 378,  20, (200, 230, 100, 190)),   # mid-left   — adaptive thinking
+        (560, 441,  18, (70,  210, 180, 200)),   # centre     — board governance
+        (800, 378,  22, (45,  200, 220, 210)),   # right      — deprecation marker
+    ]
+    for nx, ny, radius, colour in feature_nodes:
+        nl = layer()
+        nd = ImageDraw.Draw(nl)
+        nd.ellipse([(nx - radius, ny - radius), (nx + radius, ny + radius)],
+                   fill=colour, outline=(255, 255, 255, 120), width=2)
+        base = comp(base, nl)
+
+    # 4. Connection lines between feature nodes (capability graph / model architecture)
+    connections_idx = [(0, 1), (1, 2), (2, 3), (3, 4), (1, 5), (5, 6), (2, 6),
+                       (6, 7), (3, 7), (4, 7)]
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    for a, b_i in connections_idx:
+        ax, ay = feature_nodes[a][0], feature_nodes[a][1]
+        bx2, by2 = feature_nodes[b_i][0], feature_nodes[b_i][1]
+        cd.line([(ax, ay), (bx2, by2)], fill=(255, 255, 255, 50), width=1)
+    base = comp(base, cl)
+
+    # 5. Large glowing highlight in teal zone — "new model" burst
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    gd.ellipse([(750, 80), (1100, 380)], fill=(30, 180, 210, 35))
+    gd.ellipse([(820, 130), (1050, 330)], fill=(40, 200, 225, 30))
+    base = comp(base, gl)
+
+    # 6. Amber glow in the left zone — outgoing generation warmth
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    ad.ellipse([(0, 60), (320, 390)], fill=(200, 140, 40, 30))
+    base = comp(base, al)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -5665,6 +5753,7 @@ DAYS = [
     ("2026-04-14", img_leger_20260414,    "Office & Silicon",  "Fernand Léger"),
     ("2026-04-15", img_rothko_20260415,  "Valuation & Code",  "Mark Rothko"),
     ("2026-04-16", img_lissitzky_20260416, "Identity & Safety", "El Lissitzky"),
+    ("2026-04-17", img_klee_20260417,      "Opus 4.7",          "Paul Klee"),
 ]
 
 for date, fn, kw, artist in DAYS:

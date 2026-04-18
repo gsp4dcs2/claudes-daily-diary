@@ -5613,6 +5613,92 @@ def img_klee_20260417():
     return base
 
 
+def img_delaunay_20260418():
+    """Robert Delaunay Simultanism style — Claude Design launch, visual output, colour spectrum theme."""
+    base = Image.new("RGB", (W, H), (6, 10, 32))   # deep indigo-black bg
+
+    # 1. Large overlapping spectral-ring disc system — Delaunay's signature "Windows" series
+    #    Arranged to suggest a design canvas with overlapping colour zones
+    discs = [
+        # (cx, cy, r_outer, r_inner, colour_outer, colour_inner)
+        (260,  280, 250, 160, (210, 40,  18, 185), (255, 130,  0, 145)),   # red-orange disc — design warmth
+        (680,  180, 210, 130, (15,  80, 200, 175), (70, 170, 255, 125)),   # blue disc — data/tech
+        (1020, 390, 220, 135, (28, 155,  55, 182), (110, 230, 95, 128)),   # green disc — finance/growth
+        (490,  490, 160,  95, (190, 18, 150, 165), (250, 90, 210, 115)),   # magenta — creative output
+        (880,  110, 140,  80, (235, 195,   0, 162), (255, 240, 120, 112)), # yellow — brand/identity
+        (80,   80,  120,  65, (0,  190, 195, 155),  (70, 250, 235, 102)),  # cyan — verify/security
+        (1120, 530, 130,  72, (150, 50,  220, 158), (200, 120, 255, 108)), # violet — cyber layer
+    ]
+    for cx, cy, ro, ri, co, ci in discs:
+        # Outer ring
+        ol = layer(); od = ImageDraw.Draw(ol)
+        od.ellipse([(cx-ro, cy-ro), (cx+ro, cy+ro)], fill=co)
+        base = comp(base, ol)
+        # Inner ring (lighter, contrasting hue)
+        il = layer(); id2 = ImageDraw.Draw(il)
+        id2.ellipse([(cx-ri, cy-ri), (cx+ri, cy+ri)], fill=ci)
+        base = comp(base, il)
+        # Core highlight — luminous centre
+        cl2 = layer(); cd2 = ImageDraw.Draw(cl2)
+        cr = ri // 3
+        cd2.ellipse([(cx-cr, cy-cr), (cx+cr, cy+cr)], fill=(255, 255, 255, 90))
+        base = comp(base, cl2)
+
+    # 2. Colour-wheel arc bands sweeping from lower-left — Delaunay's "Formes Simultanées"
+    arc_layer = layer()
+    ad = ImageDraw.Draw(arc_layer)
+    rainbow = [
+        (215, 18,  18,  195),   # red
+        (255, 95,   0,  178),   # orange
+        (235, 205,  0,  168),   # yellow
+        (35,  175, 48,  178),   # green
+        (18,  85, 215,  178),   # blue
+        (135, 28, 195,  168),   # violet
+        (200, 18, 140,  155),   # magenta
+    ]
+    cx_arc, cy_arc = 180, H + 60
+    for i, col in enumerate(rainbow):
+        r = 440 + i * 32
+        ad.arc([(cx_arc - r, cy_arc - r), (cx_arc + r, cy_arc + r)],
+               start=280 + i * 7, end=345 + i * 7, fill=col, width=16)
+    base = comp(base, arc_layer)
+
+    # 3. Canvas-grid overlay — light orthogonal lines suggesting a design canvas
+    grid_layer = layer()
+    gd = ImageDraw.Draw(grid_layer)
+    for x in range(0, W, 80):
+        gd.line([(x, 0), (x, H)], fill=(255, 255, 255, 10), width=1)
+    for y in range(0, H, 80):
+        gd.line([(0, y), (W, y)], fill=(255, 255, 255, 10), width=1)
+    base = comp(base, grid_layer)
+
+    # 4. Luminous scatter — small spectral dots simulating colour-field vibrancy
+    dot_layer = layer()
+    dd = ImageDraw.Draw(dot_layer)
+    spectral = [(255, 60, 60, 185), (255, 155, 0, 165), (240, 235, 0, 165),
+                (55, 215, 60, 165), (55, 115, 255, 165), (195, 55, 250, 165),
+                (250, 55, 180, 155), (55, 240, 225, 155)]
+    for _ in range(350):
+        dx = rng.randint(0, W); dy = rng.randint(0, H)
+        dr = rng.randint(2, 7)
+        col = rng.choice(spectral)
+        dd.ellipse([(dx-dr, dy-dr), (dx+dr, dy+dr)], fill=col)
+    base = comp(base, dot_layer)
+
+    # 5. Thin radial spokes from canvas centre — Delaunay's light-ray signature
+    ray_layer = layer()
+    rd = ImageDraw.Draw(ray_layer)
+    cx0, cy0 = W // 2, H // 2
+    for angle_deg in range(0, 360, 15):
+        angle = math.radians(angle_deg)
+        x1 = int(cx0 + math.cos(angle) * 520)
+        y1 = int(cy0 + math.sin(angle) * 520)
+        rd.line([(cx0, cy0), (x1, y1)], fill=(255, 255, 255, 14), width=1)
+    base = comp(base, ray_layer)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -5754,6 +5840,7 @@ DAYS = [
     ("2026-04-15", img_rothko_20260415,  "Valuation & Code",  "Mark Rothko"),
     ("2026-04-16", img_lissitzky_20260416, "Identity & Safety", "El Lissitzky"),
     ("2026-04-17", img_klee_20260417,      "Opus 4.7",          "Paul Klee"),
+    ("2026-04-18", img_delaunay_20260418, "Claude Design",     "Robert Delaunay"),
 ]
 
 for date, fn, kw, artist in DAYS:

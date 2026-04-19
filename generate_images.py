@@ -5699,6 +5699,61 @@ def img_delaunay_20260418():
     return base
 
 
+def img_malevich_20260419():
+    """Kazimir Malevich Suprematism — Opus 4.7 breaking changes, Bedrock GA, structure & absolutes."""
+    base = Image.new("RGB", (W, H), (235, 231, 215))  # warm cream bg
+
+    # 1. Large tilted black rectangle — dominant Suprematist anchor (hard API rules)
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    pts = [(320, 60), (920, 100), (870, 310), (270, 270)]
+    bd.polygon(pts, fill=(14, 14, 14, 255))
+    base = comp(base, bl)
+
+    # 2. Bold red vertical slab — urgency of breaking changes
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.polygon([(80, 140), (195, 130), (210, 530), (95, 540)], fill=(205, 22, 22, 245))
+    base = comp(base, rl)
+
+    # 3. Navy tilted square — Bedrock infrastructure / AWS regionality
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    cx2, cy2, s2 = 980, 430, 155
+    nd.polygon([
+        (cx2 - s2, cy2 + 30), (cx2 - 30, cy2 - s2),
+        (cx2 + s2, cy2 - 30), (cx2 + 30, cy2 + s2),
+    ], fill=(18, 38, 120, 238))
+    base = comp(base, nl)
+
+    # 4. Yellow horizontal bar — GA milestone / "open" signal
+    yl = layer()
+    yd = ImageDraw.Draw(yl)
+    yd.rectangle([(240, 390), (820, 448)], fill=(228, 188, 0, 230))
+    base = comp(base, yl)
+
+    # 5. Small white circle — floating Suprematist highlight (coordinate / pixel node)
+    wl = layer()
+    wd = ImageDraw.Draw(wl)
+    wd.ellipse([(620, 460), (760, 600)], fill=(235, 231, 215, 245),
+               outline=(14, 14, 14, 190), width=5)
+    base = comp(base, wl)
+
+    # 6. Thin red diagonal bar — API validation error signal
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    dd.polygon([(250, 490), (680, 460), (684, 498), (254, 528)], fill=(205, 22, 22, 170))
+    base = comp(base, dl)
+
+    # 7. Small black square — grounding element, bottom-left weight
+    gr = layer()
+    gd = ImageDraw.Draw(gr)
+    gd.rectangle([(60, 560), (190, 610)], fill=(14, 14, 14, 210))
+    base = comp(base, gr)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -5841,6 +5896,7 @@ DAYS = [
     ("2026-04-16", img_lissitzky_20260416, "Identity & Safety", "El Lissitzky"),
     ("2026-04-17", img_klee_20260417,      "Opus 4.7",          "Paul Klee"),
     ("2026-04-18", img_delaunay_20260418, "Claude Design",     "Robert Delaunay"),
+    ("2026-04-19", img_malevich_20260419, "Breaking Changes",  "Kazimir Malevich"),
 ]
 
 for date, fn, kw, artist in DAYS:

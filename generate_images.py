@@ -5754,6 +5754,82 @@ def img_malevich_20260419():
     return base
 
 
+def img_seurat_20260420():
+    """Georges Seurat pointillist style — $800B valuation, federal deployment & FSB oversight theme."""
+    base = Image.new("RGB", (W, H), (8, 12, 35))   # deep midnight navy
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Background field — thousands of cool blue-grey dots across the full canvas
+    for _ in range(4500):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        r = rng.randint(1, 3)
+        b = rng.randint(20, 60)
+        draw.ellipse([(x - r, y - r), (x + r, y + r)], fill=(b - 5, b + 5, b + 25))
+
+    # 2. Institutional power zones — valuation (gold), government (steel blue), regulatory (teal), risk (orange-red), geopolitical (purple)
+    power_zones = [
+        # (cx, cy, radius, inner_colour, outer_colour)
+        (380, 260, 200, (220, 170, 20, 240), (180, 130, 10, 100)),   # valuation / gold capital zone
+        (870, 190, 165, (70, 120, 200, 220), (30,  80, 160,  90)),   # government / steel blue
+        (700, 450, 145, (20, 160, 150, 200), (10, 110, 100,  80)),   # regulatory / teal FSB zone
+        (120, 450, 110, (200,  70,  30, 180), (160, 50,  20,  70)),  # risk / pressure orange-red
+        (1060, 420, 100, (140, 60, 200, 170), (100, 40, 160,  70)),  # geopolitical / purple
+    ]
+    for cx, cy, radius, ic, oc in power_zones:
+        for _ in range(900):
+            angle = rng.uniform(0, 2 * math.pi)
+            dist  = rng.uniform(0, radius)
+            dx = int(cx + dist * math.cos(angle))
+            dy = int(cy + dist * math.sin(angle))
+            dr = rng.randint(1, 5)
+            t  = dist / radius
+            r_c = int(oc[0] * t + ic[0] * (1 - t))
+            g_c = int(oc[1] * t + ic[1] * (1 - t))
+            b_c = int(oc[2] * t + ic[2] * (1 - t))
+            alpha = int((oc[3] * t + ic[3] * (1 - t)) * (1 - dist / radius * 0.5))
+            hl = layer()
+            ImageDraw.Draw(hl).ellipse([(dx - dr, dy - dr), (dx + dr, dy + dr)],
+                                       fill=(r_c, g_c, b_c, alpha))
+            base = comp(base, hl)
+
+    # 3. Institutional connection threads — faint pointillist dotted trails between zones
+    connections = [(0, 1), (1, 2), (0, 2), (2, 3), (1, 4)]
+    for i, j in connections:
+        ax, ay = power_zones[i][0], power_zones[i][1]
+        bx, by = power_zones[j][0], power_zones[j][1]
+        sl = layer()
+        sd = ImageDraw.Draw(sl)
+        for step in range(100):
+            t  = step / 99
+            mx = int(ax + (bx - ax) * t)
+            my = int(ay + (by - ay) * t)
+            dr = rng.randint(1, 3)
+            alpha = int(90 * math.sin(math.pi * t))
+            sd.ellipse([(mx - dr, my - dr), (mx + dr, my + dr)], fill=(220, 240, 255, alpha))
+        base = comp(base, sl)
+
+    # 4. Gold and cool accent dots — vivid foreground scatter (capital energy + regulatory cool)
+    accent_tones = [
+        (255, 215,   0), (255, 200,  20), (240, 180,   0),
+        (255, 230,  80), (200, 150,   0), (255, 100,  20),
+        (100, 200, 255), (140, 220, 255), (180, 200, 255),
+    ]
+    fl = layer()
+    fd = ImageDraw.Draw(fl)
+    for _ in range(650):
+        fx  = rng.randint(0, W)
+        fy  = rng.randint(0, H)
+        fr  = rng.randint(2, 5)
+        col = rng.choice(accent_tones)
+        fd.ellipse([(fx - fr, fy - fr), (fx + fr, fy + fr)],
+                   fill=(col[0], col[1], col[2], 150))
+    base = comp(base, fl)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -5897,6 +5973,7 @@ DAYS = [
     ("2026-04-17", img_klee_20260417,      "Opus 4.7",          "Paul Klee"),
     ("2026-04-18", img_delaunay_20260418, "Claude Design",     "Robert Delaunay"),
     ("2026-04-19", img_malevich_20260419, "Breaking Changes",  "Kazimir Malevich"),
+    ("2026-04-20", img_seurat_20260420,  "Scale & Power",     "Georges Seurat"),
 ]
 
 for date, fn, kw, artist in DAYS:

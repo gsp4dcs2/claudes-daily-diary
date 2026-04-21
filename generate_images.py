@@ -5830,6 +5830,107 @@ def img_seurat_20260420():
     return base
 
 
+def img_klimt_20260421():
+    """Gustav Klimt — dark bg, gold spirals + mosaic fragments — Amazon $100B AWS compute deal + multi-cloud + legal teams theme."""
+    base = Image.new("RGB", (W, H), (8, 4, 14))   # near-black deep violet bg
+
+    # 1. Dense gold spiral field — Klimt's signature scattered tesserae across the whole canvas
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    for _ in range(500):
+        sx = rng.randint(0, W)
+        sy = rng.randint(0, H)
+        sr = rng.randint(2, 9)
+        alpha = rng.randint(50, 200)
+        sd.ellipse([(sx - sr, sy - sr), (sx + sr, sy + sr)], fill=(218, 165, 32, alpha))
+    base = comp(base, sl)
+
+    # 2. Three large cloud-zone ellipses — AWS (amber), Google Cloud (blue), Azure (teal) — multi-cloud
+    cloud_zones = [
+        (310, 230, 260, 190, (200, 140, 20, 180)),   # AWS — amber gold
+        (750, 180, 210, 160, (30, 100, 210, 165)),   # Google Cloud — deep blue
+        (970, 390, 170, 140, (20, 170, 160, 155)),   # Azure — teal
+    ]
+    for cx, cy, rw, rh, col in cloud_zones:
+        zl = layer()
+        zd = ImageDraw.Draw(zl)
+        zd.ellipse([(cx - rw, cy - rh), (cx + rw, cy + rh)], fill=col)
+        base = comp(base, zl)
+
+    # 3. Gold arc spirals — concentric expanding arcs around the AWS zone (compute scale)
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(14):
+        r_arc = 60 + i * 26
+        a_start = i * 25
+        ad.arc([(310 - r_arc, 230 - r_arc), (310 + r_arc, 230 + r_arc)],
+               start=a_start, end=a_start + 110,
+               fill=(218, 165, 32, max(25, 190 - i * 12)), width=4)
+    base = comp(base, al)
+
+    # 4. Mosaic fragment rectangles — Klimt decorative surface, gold + teal + rust corners
+    ml = layer()
+    md = ImageDraw.Draw(ml)
+    fragments = [
+        (30,  40, 180, 140,  (218, 165, 32, 160)),   # gold top-left
+        (1040, 30, 1185, 160, (20, 170, 160, 145)),  # teal top-right
+        (40,  490, 210, 610,  (185, 60, 15, 150)),   # rust bottom-left
+        (1000, 480, 1185, 610, (218, 165, 32, 140)), # gold bottom-right
+        (500, 20, 700, 90,    (30, 100, 210, 130)),   # blue top-centre
+        (480, 550, 720, 620,  (20, 170, 160, 125)),  # teal bottom-centre
+        (40,  290, 130, 390,  (218, 165, 32, 130)),  # gold left-mid
+        (1080, 260, 1185, 370, (185, 60, 15, 120)),  # rust right-mid
+    ]
+    for px0, py0, px1, py1, col in fragments:
+        md.rectangle([(px0, py0), (px1, py1)], fill=col)
+    base = comp(base, ml)
+
+    # 5. Connection threads — faint gold dotted lines linking the three cloud zones
+    pairs = [(310, 230, 750, 180), (750, 180, 970, 390), (310, 230, 970, 390)]
+    for ax, ay, bx, by in pairs:
+        tl = layer()
+        td = ImageDraw.Draw(tl)
+        for step in range(80):
+            t = step / 79
+            mx = int(ax + (bx - ax) * t)
+            my = int(ay + (by - ay) * t)
+            dr = rng.randint(1, 3)
+            alpha = int(100 * math.sin(math.pi * t))
+            td.ellipse([(mx - dr, my - dr), (mx + dr, my + dr)], fill=(218, 165, 32, alpha))
+        base = comp(base, tl)
+
+    # 6. Fine rust/copper detail arcs — legal-document layering texture in lower half
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    for i in range(9):
+        rx = rng.randint(200, 1000)
+        ry = rng.randint(360, 590)
+        rr = rng.randint(30, 75)
+        a0 = rng.randint(0, 270)
+        rd.arc([(rx - rr, ry - rr), (rx + rr, ry + rr)],
+               start=a0, end=a0 + 90,
+               fill=(185, 60, 15, rng.randint(90, 170)), width=3)
+    base = comp(base, rl)
+
+    # 7. Bright tesserae scatter — vivid gold, teal, blue foreground energy
+    fl = layer()
+    fd = ImageDraw.Draw(fl)
+    accent_tones = [
+        (255, 215, 0),  (240, 190, 30), (200, 140, 20),
+        (30, 200, 190), (20, 140, 210), (185, 60, 15),
+    ]
+    for _ in range(200):
+        fx  = rng.randint(0, W)
+        fy  = rng.randint(0, H)
+        fr  = rng.randint(3, 8)
+        col = rng.choice(accent_tones)
+        fd.ellipse([(fx - fr, fy - fr), (fx + fr, fy + fr)],
+                   fill=(col[0], col[1], col[2], 180))
+    base = comp(base, fl)
+
+    return base
+
+
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
 DAYS = [
@@ -5974,6 +6075,7 @@ DAYS = [
     ("2026-04-18", img_delaunay_20260418, "Claude Design",     "Robert Delaunay"),
     ("2026-04-19", img_malevich_20260419, "Breaking Changes",  "Kazimir Malevich"),
     ("2026-04-20", img_seurat_20260420,  "Scale & Power",     "Georges Seurat"),
+    ("2026-04-21", img_klimt_20260421,  "AWS Compute",       "Gustav Klimt"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Google Cloud Next 2026 opens with Anthropic live-demoing Claude's enterprise agent architecture on Vertex AI; Anthropic briefly removes Claude Code from the $20/month Pro plan then reverses within hours; and a practical guide to choosing between Bedrock and Vertex AI for Claude deployments.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-04-22 – Cloud Next Live, Claude Code Pro Pricing Reversal &amp; Multi-Cloud Patterns">
+  <meta property="og:description" content="Google Cloud Next 2026 opens with Anthropic live-demoing Claude's enterprise agent architecture on Vertex AI; Anthropic briefly removes Claude Code from the $20/month Pro plan then reverses within hours; and a practical guide to choosing between Bedrock and Vertex AI for Claude deployments.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/04/2026-04-22.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/04/2026-04-22.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/04/2026-04-22.png">
+
+  <title>2026-04-22 – Cloud Next Live, Claude Code Pro Pricing Reversal &amp; Multi-Cloud Patterns | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Cloud Next Live, Claude Code Pro Pricing Reversal &amp; Multi-Cloud Patterns",
+  "description": "Google Cloud Next 2026 opens with Anthropic live-demoing Claude's enterprise agent architecture on Vertex AI; Anthropic briefly removes Claude Code from the $20/month Pro plan then reverses within hours; and a practical guide to choosing between Bedrock and Vertex AI for Claude deployments.",
+  "datePublished": "2026-04-22",
+  "dateModified": "2026-04-22",
+  "url": "https://claudebeat.ai/articles/2026/04/2026-04-22.html",
+  "image": "https://claudebeat.ai/articles/2026/04/2026-04-22.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/04/2026-04-22.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-04-22</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Cloud Next Live, Claude Code Pro Pricing Reversal &amp; Multi-Cloud Patterns</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-04-22.png" alt="Cloud Next Live, Claude Code Pro Pricing Reversal &amp; Multi-Cloud Patterns — visual for 2026-04-22">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Google Cloud Next 2026 Opens: Claude's Enterprise Agent Architecture Live
+     Source: https://www.anthropic.com/events/anthropic-at-google-cloud-next-2026
+     Additional: https://www.itpro.com/cloud/cloud-computing/google-cloud-next-2026-googles-unique-advantages
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Google Cloud Next 2026 Opens: Anthropic's Enterprise Agent Architecture Goes Live in Las Vegas</h2>
+
+  <p>Google Cloud Next 2026 opened today at Mandalay Bay, Las Vegas — and Anthropic's presence on the show floor is the clearest live demonstration yet of what the multi-cloud Claude strategy looks like when it is actually running. Booth #2021 in the AI/ML pavilion is running a continuous demo of Claude Managed Agents operating natively inside Vertex AI's orchestration layer, handling multi-step enterprise tasks end-to-end without leaving Google Cloud's compliance boundary. The five sessions Anthropic is delivering across the April 22–24 programme collectively make one argument: the "after software" era is not a roadmap item — it is deployable today.</p>
+
+  <h3>What Anthropic is actually showing on the floor</h3>
+  <p>The core live demo at Booth #2021 strings together four Claude capabilities that were announced separately over the past six weeks but are now running as a single integrated workflow:</p>
+  <ul>
+    <li><strong>Vertex AI Managed Agents integration.</strong> Claude Managed Agents running natively inside Vertex AI's agent orchestration layer, with Google Cloud's Vertex-native checkpointing handling session state — no Anthropic-side agent infrastructure required. This is the version that uses Google's checkpoint storage rather than Anthropic's, which matters for GCP-committed enterprises with data residency requirements.</li>
+    <li><strong>Claude Code for GCP infrastructure.</strong> Live Terraform generation, BigQuery schema inference, and Pub/Sub event processing written and deployed by Claude Code within the demo — targeting the segment of developers who live in gcloud and want Claude as a native GCP collaborator rather than a generic coding tool.</li>
+    <li><strong>Shopify Sidekick on Vertex.</strong> Shopify's Claude-powered commerce assistant is running on Vertex AI and is shown handling merchant queries, generating product descriptions, and analysing store performance metrics — one of the clearest enterprise-scale production deployments of Claude on Google Cloud.</li>
+    <li><strong>Joint safety and governance session with Google.</strong> A co-presented session on combining Anthropic's Constitutional AI principles with Google's Responsible AI framework for regulated enterprise deployments — targeting compliance teams who need a documented governance framework before any AI goes to production.</li>
+  </ul>
+
+  <h3>The multi-cloud story at full resolution</h3>
+  <p>Yesterday's Amazon announcement ($5B investment, $100B AWS commitment) and today's Google Cloud Next presence sit in apparent tension. In practice, they represent a deliberate two-platform strategy: AWS is Anthropic's primary inference and training infrastructure, receiving the deepest compute commitments. Google Cloud is Anthropic's primary enterprise distribution channel for the GCP ecosystem — the partnership (up to one million TPUs, announced October 2025) supplements rather than competes with the AWS relationship. The Cloud Next presence is a reminder that this is not a forced choice for enterprise architects: Claude's availability on all three major clouds (AWS, Google Cloud, Azure) means you can adopt Claude inside whichever procurement and compliance track your organisation is already on.</p>
+
+  <div class="callout tip">
+    <strong>If your team is GCP-first</strong>
+    <p>The Vertex AI Managed Agents integration is the most significant practical output of today's Cloud Next sessions. The Vertex-native checkpoint mechanism means that Claude agent sessions can be paused and resumed across GCP's infrastructure without exposing session state to Anthropic's systems — a meaningful data residency boundary for heavily regulated environments. This capability was not available in Claude's earlier Vertex AI integration; it landed with the Managed Agents public beta in April.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/events/anthropic-at-google-cloud-next-2026" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Google Cloud Next</span>
+    <span class="tag">Vertex AI</span>
+    <span class="tag">Managed Agents</span>
+    <span class="tag">Claude Code</span>
+    <span class="tag">multi-cloud</span>
+    <span class="tag">Terraform</span>
+    <span class="tag">Shopify</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">GCP</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Code Pro Plan Pricing Test: Reversed Within Hours
+     Source: https://simonwillison.net/2026/Apr/22/claude-code-confusion/
+     Additional: https://www.wheresyoured.at/news-anthropic-removes-pro-cc/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code Briefly Vanished from the $20 Pro Plan — and Was Back Within Six Hours</h2>
+
+  <p>A pricing experiment gone public: on the afternoon of April 21, Anthropic silently updated its pricing pages and documentation to show Claude Code as a Max-plan-only feature, effectively requiring a jump from $20/month to $100–$200/month for existing Claude Code users on the Pro plan. By the morning of April 22, both the landing page and the docs had been reverted. Anthropic's Head of Growth, Amol Avasare, confirmed on Twitter that the change was "a small test on approximately 2% of new prosumer signups" and was never intended to roll out broadly — but the speed and scale of the developer backlash made the reversal happen faster than the timeline might otherwise have suggested.</p>
+
+  <h3>What the test showed — and what Avasare hinted at next</h3>
+  <p>The incident surfaced several things simultaneously:</p>
+  <ul>
+    <li><strong>The scale gap between Pro and Max is felt immediately.</strong> Claude Code users on the $20 Pro plan represent a significant portion of Anthropic's developer ecosystem, including many users outside the United States and Europe for whom $100/month is a genuinely prohibitive price point. The backlash was cross-geography and cross-developer-seniority — not just the US tech Twitter crowd.</li>
+    <li><strong>Competitive context matters.</strong> OpenAI's Codex remains available at lower price points. Any pricing change that moves Claude Code out of Pro effectively cedes the low-end developer segment — a segment Anthropic has publicly stated it wants to retain for long-term ecosystem reasons.</li>
+    <li><strong>A restructure is coming, just not this way.</strong> Avasare's most notable comment was that "usage has changed a lot and our current plans weren't built for this." This is a strong signal that Anthropic intends to restructure its tier boundaries in the near term — probably introducing a new intermediate tier between Pro ($20) and Max ($100–$200) that captures Claude Code's heavy users without stranding the broader developer base on either extreme.</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>What this means if you are on the Pro plan</strong>
+    <p>Claude Code access on Pro is restored as of April 22. However, Avasare's comment makes it likely that plan restructuring is coming within weeks or months — not years. If you are building a product or workflow that depends on Claude Code at Pro pricing, it is worth monitoring Anthropic's pricing announcements carefully in Q2 2026. The safest hedge for teams is to abstract your Claude Code invocations behind an internal service layer so that a pricing-tier migration does not require touching application code.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Community content or research — independently cross-checked">⭐</span>
+    <a href="https://simonwillison.net/2026/Apr/22/claude-code-confusion/" class="source-link" target="_blank" rel="noopener">simonwillison.net</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">Pro plan</span>
+    <span class="tag">Max plan</span>
+    <span class="tag">pricing</span>
+    <span class="tag">developer community</span>
+    <span class="tag">plan restructuring</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Bedrock vs Vertex AI: Choosing the Right Claude Cloud for Your Stack
+     Source: https://www.anthropic.com/api
+     Additional: https://docs.anthropic.com/en/docs/claude-on-vertex-ai
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Bedrock vs Vertex AI: A Decision Framework for Claude Multi-Cloud Deployments</h2>
+
+  <p>With Claude now live on all three major clouds and both the AWS and Google Cloud partnerships deepened this week, teams are increasingly asking the same question: if you can run Claude on Amazon Bedrock <em>and</em> on Vertex AI, which should you actually use for a new project? The answer is almost never "both simultaneously" — it is a genuine architectural decision with meaningful cost, compliance, and capability differences. Today's Cloud Next sessions made the Vertex-specific capabilities more concrete, so this is a good moment to lay out the decision framework.</p>
+
+  <h3>Start with your cloud commitment, not the AI features</h3>
+  <p>The single biggest determinant of which Claude cloud is right for a project is not Claude's feature set — both Bedrock and Vertex support the same model APIs — it is your organisation's existing cloud commitment and the compliance controls that come with it:</p>
+  <ul>
+    <li><strong>AWS-first organisations → Bedrock.</strong> Bedrock now has GA status in 27 regions with full IAM integration, VPC PrivateLink support, HIPAA BAA coverage, and FedRAMP compliance. If your data is already in S3, your IAM policies are already written, and your teams know Boto3, Bedrock is zero-friction Claude access. The Reserved Throughput model on Bedrock is also well-suited to predictable high-volume enterprise workloads.</li>
+    <li><strong>GCP-first organisations → Vertex AI.</strong> Claude on Vertex AI uses Google's standard Vertex SDK, Google's IAM and VPC-SC controls, and now supports Vertex-native checkpointing for Managed Agents — which means session state stays inside your Google Cloud project boundary. If your data is in BigQuery, your teams use gcloud, and your compliance posture is built around Google Cloud's controls, Vertex AI is the right Claude surface.</li>
+    <li><strong>Multi-cloud by design → abstract at the service layer.</strong> If your architecture genuinely spans clouds, do not call Bedrock or Vertex AI directly from application code. Build a thin internal Claude gateway service (a single HTTP endpoint your apps hit) that routes to whichever cloud surface is appropriate for a given request. This lets you migrate between surfaces without touching application code — and is the right hedge given that pricing and feature parity between the two platforms will continue to shift.</li>
+  </ul>
+
+  <h3>Feature differences that actually matter today</h3>
+  <ul>
+    <li><strong>Managed Agents.</strong> Available on both, but the Vertex AI version now supports Vertex-native checkpointing (announced at Cloud Next today). The Bedrock version uses Anthropic's checkpoint infrastructure. For GCP-committed enterprises with strict data residency, this is a meaningful difference in favour of Vertex.</li>
+    <li><strong>Prompt caching.</strong> Available on Bedrock; Vertex AI support is rolling out in Q2 2026. If prompt caching is critical to your cost model today, Bedrock has an edge.</li>
+    <li><strong>Model availability.</strong> Both surfaces support Claude Opus 4.7, Sonnet 4.6, and Haiku 4.5. Bedrock typically receives new models within 1–2 weeks of the API GA; Vertex AI has been within 2–3 weeks. Neither is a practical bottleneck at the current release cadence.</li>
+    <li><strong>Pricing.</strong> Both charge the same per-token rates as the direct Anthropic API. Bedrock's Reserved Throughput adds a predictable-commitment pricing model not available on Vertex. Vertex's billing is purely on-demand.</li>
+  </ul>
+
+  <pre><code># Minimal multi-cloud Claude gateway pattern (Python)
+# Route to Bedrock or Vertex based on environment config
+
+import os
+import anthropic
+
+def get_claude_client():
+    cloud = os.environ.get("CLAUDE_CLOUD", "anthropic")
+    if cloud == "bedrock":
+        return anthropic.AnthropicBedrock(
+            aws_region=os.environ["AWS_REGION"]
+        )
+    elif cloud == "vertex":
+        return anthropic.AnthropicVertex(
+            project_id=os.environ["GCP_PROJECT_ID"],
+            region=os.environ["GCP_REGION"]
+        )
+    else:
+        return anthropic.Anthropic()   # direct API
+
+client = get_claude_client()
+
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello from the gateway"}]
+)
+print(response.content[0].text)</code></pre>
+
+  <p>The pattern above lets you switch between all three Claude surfaces by changing a single environment variable — no application code changes required. Extend it with a retry/fallback layer to gain resilience if one surface has an outage.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://docs.anthropic.com/en/docs/claude-on-vertex-ai" class="source-link" target="_blank" rel="noopener">docs.anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Bedrock</span>
+    <span class="tag">Vertex AI</span>
+    <span class="tag">multi-cloud</span>
+    <span class="tag">architecture</span>
+    <span class="tag">AnthropicBedrock</span>
+    <span class="tag">AnthropicVertex</span>
+    <span class="tag">data residency</span>
+    <span class="tag">gateway pattern</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

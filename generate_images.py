@@ -5933,6 +5933,87 @@ def img_klimt_20260421():
 
 # ── Saving logic ─────────────────────────────────────────────────────────────
 
+def img_miro_20260422():
+    """Joan Miró — multi-cloud platform, marketplace, playful automation theme."""
+    # Deep indigo background — Miró's signature cosmic night sky
+    base = Image.new("RGB", (W, H), (22, 18, 72))
+
+    # 1. Large red biomorphic blob — AWS / Bedrock platform (left anchor)
+    b1 = layer()
+    b1d = ImageDraw.Draw(b1)
+    b1d.polygon([(60, 100), (380, 80), (440, 280), (340, 460), (100, 420), (30, 240)],
+                fill=(218, 32, 32, 215))
+    b1d.polygon([(60, 100), (380, 80), (440, 280), (340, 460), (100, 420), (30, 240)],
+                outline=(10, 8, 18, 255), width=8)
+    base = comp(base, b1)
+
+    # 2. Yellow irregular blob — Azure / third cloud (upper-centre)
+    b2 = layer()
+    b2d = ImageDraw.Draw(b2)
+    b2d.polygon([(510, 40), (720, 30), (790, 180), (700, 310), (510, 290), (440, 130)],
+                fill=(238, 200, 0, 205))
+    b2d.polygon([(510, 40), (720, 30), (790, 180), (700, 310), (510, 290), (440, 130)],
+                outline=(10, 8, 18, 255), width=7)
+    base = comp(base, b2)
+
+    # 3. Blue large rounded blob — Google Cloud / Vertex (right)
+    b3 = layer()
+    b3d = ImageDraw.Draw(b3)
+    b3d.ellipse([(820, 180), (1160, 530)], fill=(30, 90, 210, 200))
+    b3d.ellipse([(820, 180), (1160, 530)], outline=(10, 8, 18, 255), width=9)
+    base = comp(base, b3)
+
+    # 4. Small green accent blob — lower centre (Claude connecting the platforms)
+    b4 = layer()
+    b4d = ImageDraw.Draw(b4)
+    b4d.ellipse([(480, 430), (680, 600)], fill=(30, 170, 80, 190))
+    b4d.ellipse([(480, 430), (680, 600)], outline=(10, 8, 18, 255), width=6)
+    base = comp(base, b4)
+
+    # 5. Thin black connector lines linking the blobs — Miró's characteristic thread
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    ld.line([(240, 280), (510, 160), (820, 355)], fill=(10, 8, 18, 215), width=6)
+    ld.line([(580, 300), (580, 430)], fill=(10, 8, 18, 190), width=4)
+    ld.line([(240, 430), (480, 510)], fill=(10, 8, 18, 180), width=4)
+    base = comp(base, ll)
+
+    # 6. Miró stars — 7 white asterisk stars scattered across the canvas
+    stl = layer()
+    std = ImageDraw.Draw(stl)
+    stars = [(320, 60), (700, 500), (1020, 100), (1110, 440), (450, 540),
+             (140, 520), (830, 70)]
+    for sx, sy in stars:
+        for ang in range(0, 360, 60):
+            rad = math.radians(ang)
+            ex = int(sx + 26 * math.cos(rad))
+            ey = int(sy + 26 * math.sin(rad))
+            std.line([(sx, sy), (ex, ey)], fill=(255, 255, 255, 230), width=4)
+        std.ellipse([(sx - 7, sy - 7), (sx + 7, sy + 7)], fill=(255, 255, 255, 255))
+    base = comp(base, stl)
+
+    # 7. Small black filled dot — Miró's signature punctuation mark
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    dd.ellipse([(570, 175), (610, 215)], fill=(10, 8, 18, 255))
+    dd.ellipse([(890, 390), (920, 420)], fill=(10, 8, 18, 255))
+    base = comp(base, dl)
+
+    # 8. Fine dot scatter — cosmic texture
+    scl = layer()
+    scd = ImageDraw.Draw(scl)
+    for _ in range(180):
+        sx = rng.randint(0, W)
+        sy = rng.randint(0, H)
+        sr = rng.randint(1, 3)
+        alpha = rng.randint(40, 120)
+        scd.ellipse([(sx - sr, sy - sr), (sx + sr, sy + sr)],
+                    fill=(255, 255, 255, alpha))
+    base = comp(base, scl)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -6076,6 +6157,7 @@ DAYS = [
     ("2026-04-19", img_malevich_20260419, "Breaking Changes",  "Kazimir Malevich"),
     ("2026-04-20", img_seurat_20260420,  "Scale & Power",     "Georges Seurat"),
     ("2026-04-21", img_klimt_20260421,  "AWS Compute",       "Gustav Klimt"),
+    ("2026-04-22", img_miro_20260422,   "Multi-Cloud",       "Joan Miró"),
 ]
 
 for date, fn, kw, artist in DAYS:

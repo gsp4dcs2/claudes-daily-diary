@@ -6014,6 +6014,88 @@ def img_miro_20260422():
     return base
 
 
+def img_leger_20260423():
+    """Fernand Léger mechanical/industrial style — developer tooling & code release theme."""
+    base = Image.new("RGB", (W, H), (14, 14, 18))   # near-black bg
+
+    # 1. Dark structural shelves — top and bottom industrial bands
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bd.rectangle([(0, 0),   (W, 145)], fill=(30, 30, 40, 255))
+    bd.rectangle([(0, 485), (W, H)],   fill=(24, 24, 34, 255))
+    base = comp(base, bl)
+
+    # 2. Large overlapping mechanical roundels in Léger primaries
+    circles = [
+        (200,  310, 235, (210,  35,  35, 210)),   # big red left
+        (640,  185, 175, (230, 185,   0, 205)),   # gold centre-top
+        (1050, 370, 200, (22,  88,  215, 220)),   # deep blue right
+        (420,  490, 105, (230, 185,   0, 180)),   # small gold lower
+        (850,   85,  90, (210,  35,  35, 185)),   # small red upper-right
+        (95,   555,  65, (22,   88, 215, 160)),   # small blue lower-left
+        (560,  380,  48, (245, 245, 245, 145)),   # white accent
+        (960,  530,  55, (230, 185,   0, 155)),   # gold lower-right
+    ]
+    for cx, cy, r, col in circles:
+        cl = layer()
+        cd = ImageDraw.Draw(cl)
+        cd.ellipse([(cx-r, cy-r), (cx+r, cy+r)],
+                   fill=col, outline=(0, 0, 0, 255), width=9)
+        cd.ellipse([(cx-r//3, cy-r//2), (cx+r//5, cy-r//5)],
+                   fill=(255, 255, 255, 75))
+        base = comp(base, cl)
+
+    # 3. Bold pipe/bar structural members — Léger's industrial scaffolding
+    pipes = [
+        (0,   295, 1200, 345, (210,  35,  35, 200),  9),   # red wide horizontal
+        (510,   0,  565, 630, (230, 185,   0, 190),  9),   # gold tall vertical
+        (0,   500,  980, 540, (22,   88, 215, 185),  8),   # blue lower beam
+        (740,  40,  790, 460, (14,   14,  18, 255), 11),   # dark right spine
+        (260,  40,  310, 295, (14,   14,  18, 255), 11),   # dark left spine
+        (790,  40, 1200,  80, (22,   88, 215, 140),  7),   # thin blue top-right
+    ]
+    for x0, y0, x1, y1, col, w in pipes:
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        pd.rectangle([(x0, y0), (x1, y1)], fill=col, outline=(0, 0, 0, 215), width=w)
+        base = comp(base, pl)
+
+    # 4. Circuit-trace lines — horizontal runs suggesting release pipeline
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    trace_y  = [80, 118, 395, 435, 560, 595]
+    trace_col = [
+        (210,  35,  35, 115),
+        (230, 185,   0,  95),
+        (22,   88, 215, 105),
+        (210,  35,  35,  95),
+        (230, 185,   0,  85),
+        (22,   88, 215,  90),
+    ]
+    for ty, tc in zip(trace_y, trace_col):
+        td.line([(0, ty), (W, ty)], fill=tc, width=2)
+    # Via / solder-dot nodes
+    via_pts = [(110, 80), (370, 118), (630, 80), (890, 118), (1100, 80),
+               (190, 395), (450, 435), (710, 395), (970, 435), (1160, 395)]
+    for vx, vy in via_pts:
+        r = 5
+        td.ellipse([(vx-r, vy-r), (vx+r, vy+r)],
+                   fill=(240, 238, 195, 175), outline=(0, 0, 0, 195), width=2)
+    base = comp(base, tl)
+
+    # 5. Rivet-grid dots — Léger's riveted-plate industrial texture
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    for gx in range(60, W, 130):
+        for gy in range(60, H, 130):
+            r = 7
+            dd.ellipse([(gx-r, gy-r), (gx+r, gy+r)],
+                       fill=(180, 175, 160, 105), outline=(0, 0, 0, 175), width=3)
+    base = comp(base, dl)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -6158,6 +6240,7 @@ DAYS = [
     ("2026-04-20", img_seurat_20260420,  "Scale & Power",     "Georges Seurat"),
     ("2026-04-21", img_klimt_20260421,  "AWS Compute",       "Gustav Klimt"),
     ("2026-04-22", img_miro_20260422,   "Multi-Cloud",       "Joan Miró"),
+    ("2026-04-23", img_leger_20260423, "Code Release",      "Fernand Léger"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -6096,6 +6096,75 @@ def img_leger_20260423():
     return base
 
 
+def img_mondrian_20260424():
+    """Piet Mondrian neoplasticism style — Japan enterprise AI, structured workforce theme."""
+    # Off-white / cream background — classic Mondrian canvas
+    base = Image.new("RGB", (W, H), (242, 238, 228))
+
+    # 1. Bold black grid lines — Mondrian's structural skeleton
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    # Vertical lines
+    verticals = [310, 560, 850, 1010]
+    for vx in verticals:
+        gd.rectangle([(vx - 8, 0), (vx + 8, H)], fill=(12, 10, 8, 255))
+    # Horizontal lines
+    horizontals = [160, 340, 500]
+    for hy in horizontals:
+        gd.rectangle([(0, hy - 8), (W, hy + 8)], fill=(12, 10, 8, 255))
+    base = comp(base, gl)
+
+    # 2. Primary colour rectangles filling the grid cells
+    cells = [
+        # (x0, y0, x1, y1, fill_rgba)
+        # Top-left large red — bold anchor, NEC red
+        (0,    0,  318, 168, (210, 30, 30, 255)),
+        # Top-right narrow blue — Anthropic / Claude
+        (858,  0, 1200, 168, (22, 78, 200, 255)),
+        # Middle-centre yellow — collaboration energy
+        (318, 168,  568, 348, (230, 190, 0, 255)),
+        # Lower-right blue — enterprise services (large)
+        (858, 168, 1200, 508, (22, 78, 200, 245)),
+        # Lower-left red — Japan market anchor
+        (0,   340,  318, 630, (210, 30, 30, 240)),
+        # Centre-right small yellow — local government sector
+        (568, 348,  858, 508, (230, 190, 0, 220)),
+        # Bottom-centre narrow red strip
+        (318, 508,  568, 630, (210, 30, 30, 200)),
+        # Top-centre narrow red
+        (318,   0,  568, 168, (210, 30, 30, 180)),
+    ]
+    for x0, y0, x1, y1, col in cells:
+        cl = layer()
+        cd = ImageDraw.Draw(cl)
+        cd.rectangle([(x0 + 8, y0 + 8), (x1 - 8, y1 - 8)], fill=col)
+        base = comp(base, cl)
+
+    # 3. Re-draw grid lines on top so they dominate over colour fill bleed
+    gl2 = layer()
+    g2d = ImageDraw.Draw(gl2)
+    for vx in verticals:
+        g2d.rectangle([(vx - 8, 0), (vx + 8, H)], fill=(12, 10, 8, 255))
+    for hy in horizontals:
+        g2d.rectangle([(0, hy - 8), (W, hy + 8)], fill=(12, 10, 8, 255))
+    # Outer border
+    g2d.rectangle([(0, 0), (W - 1, H - 1)], outline=(12, 10, 8, 255), width=16)
+    base = comp(base, gl2)
+
+    # 4. Subtle warm noise texture on cream cells — gives the canvas a painted feel
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    for _ in range(2200):
+        nx = rng.randint(0, W - 1)
+        ny = rng.randint(0, H - 1)
+        alpha = rng.randint(6, 28)
+        nd.ellipse([(nx, ny), (nx + 2, ny + 2)],
+                   fill=(180, 165, 140, alpha))
+    base = comp(base, nl)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -6240,7 +6309,8 @@ DAYS = [
     ("2026-04-20", img_seurat_20260420,  "Scale & Power",     "Georges Seurat"),
     ("2026-04-21", img_klimt_20260421,  "AWS Compute",       "Gustav Klimt"),
     ("2026-04-22", img_miro_20260422,   "Multi-Cloud",       "Joan Miró"),
-    ("2026-04-23", img_leger_20260423, "Code Release",      "Fernand Léger"),
+    ("2026-04-23", img_leger_20260423,    "Code Release",      "Fernand Léger"),
+    ("2026-04-24", img_mondrian_20260424, "Japan AI Team",     "Piet Mondrian"),
 ]
 
 for date, fn, kw, artist in DAYS:

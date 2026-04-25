@@ -6165,6 +6165,90 @@ def img_mondrian_20260424():
     return base
 
 
+def img_balla_20260425():
+    """Giacomo Balla Futurism style — massive capital investment, radiating energy theme."""
+    # Near-black background
+    base = Image.new("RGB", (W, H), (8, 6, 18))
+
+    # 1. Radiating coloured planes from a single vanishing point (upper-right)
+    vp_x, vp_y = 1080, 80
+    ray_layer = layer()
+    rd = ImageDraw.Draw(ray_layer)
+    colours = [
+        (230, 80,  30, 200),   # burnt orange
+        (255, 200,  0, 190),   # gold
+        (30,  120, 220, 190),  # cobalt blue
+        (220, 40,  80, 180),   # crimson
+        (60,  200,  80, 175),  # green
+        (200, 60,  220, 165),  # violet
+        (255, 140,  0, 185),   # amber
+        (20,  200, 200, 170),  # teal
+        (255, 255,  80, 180),  # yellow
+        (180, 40,  40, 175),   # deep red
+        (80,  80,  240, 180),  # indigo
+        (255, 100, 160, 165),  # pink
+    ]
+    import math as _math
+    for i, col in enumerate(colours):
+        angle = _math.radians(-170 + i * 28)
+        length = 1800
+        ex = int(vp_x + length * _math.cos(angle))
+        ey = int(vp_y + length * _math.sin(angle))
+        # Wide plane polygon: two edges slightly spread from the ray
+        spread = 0.06
+        a1 = angle - spread
+        a2 = angle + spread
+        ex1 = int(vp_x + length * _math.cos(a1))
+        ey1 = int(vp_y + length * _math.sin(a1))
+        ex2 = int(vp_x + length * _math.cos(a2))
+        ey2 = int(vp_y + length * _math.sin(a2))
+        rd.polygon([(vp_x, vp_y), (ex1, ey1), (ex2, ey2)], fill=col)
+    base = comp(base, ray_layer)
+
+    # 2. Motion lines — horizontal streaks across left half reinforcing kinetic energy
+    ml = layer()
+    md = ImageDraw.Draw(ml)
+    for _ in range(60):
+        y = rng.randint(10, H - 10)
+        x0 = rng.randint(0, 200)
+        x1 = rng.randint(400, 800)
+        alpha = rng.randint(60, 140)
+        r = rng.randint(180, 255)
+        g = rng.randint(160, 240)
+        b = rng.randint(80, 180)
+        w = rng.randint(1, 3)
+        md.line([(x0, y), (x1, y)], fill=(r, g, b, alpha), width=w)
+    base = comp(base, ml)
+
+    # 3. Concentric arc halos around the vanishing point — energy burst
+    halo = layer()
+    hd = ImageDraw.Draw(halo)
+    for r_val in [60, 120, 200, 300, 440]:
+        alpha = max(20, 120 - r_val // 4)
+        hd.arc(
+            [(vp_x - r_val, vp_y - r_val), (vp_x + r_val, vp_y + r_val)],
+            start=120, end=300,
+            fill=(255, 220, 120, alpha), width=3
+        )
+    base = comp(base, halo)
+
+    # 4. Scatter of small bright dots — Futurist pointillist energy particles
+    sc = layer()
+    scd = ImageDraw.Draw(sc)
+    for _ in range(320):
+        sx = rng.randint(0, W)
+        sy = rng.randint(0, H)
+        sr = rng.randint(2, 6)
+        sa = rng.randint(80, 200)
+        sc_r = rng.randint(180, 255)
+        sc_g = rng.randint(150, 255)
+        sc_b = rng.randint(50, 220)
+        scd.ellipse([(sx - sr, sy - sr), (sx + sr, sy + sr)], fill=(sc_r, sc_g, sc_b, sa))
+    base = comp(base, sc)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -6311,6 +6395,7 @@ DAYS = [
     ("2026-04-22", img_miro_20260422,   "Multi-Cloud",       "Joan Miró"),
     ("2026-04-23", img_leger_20260423,    "Code Release",      "Fernand Léger"),
     ("2026-04-24", img_mondrian_20260424, "Japan AI Team",     "Piet Mondrian"),
+    ("2026-04-25", img_balla_20260425,   "Google Invest",     "Giacomo Balla"),
 ]
 
 for date, fn, kw, artist in DAYS:

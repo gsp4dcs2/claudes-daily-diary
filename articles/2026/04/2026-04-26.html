@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic's red team publishes a deep dive on how Claude Opus 4.6 wrote a working Firefox JIT exploit (CVE-2026-2796) for defensive security research; Anthropic Fellows Program July 2026 cohort applications close today; and Managed Agents Memory enters public beta on the Anthropic API.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-04-26 – Claude Writes a Firefox Exploit, Fellows Deadline &amp; Agent Memory Beta">
+  <meta property="og:description" content="Anthropic's red team publishes a deep dive on how Claude Opus 4.6 wrote a working Firefox JIT exploit (CVE-2026-2796) for defensive security research; Anthropic Fellows Program July 2026 cohort applications close today; and Managed Agents Memory enters public beta on the Anthropic API.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/04/2026-04-26.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/04/2026-04-26.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/04/2026-04-26.png">
+
+  <title>2026-04-26 – Claude Writes a Firefox Exploit, Fellows Deadline &amp; Agent Memory Beta | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Writes a Firefox Exploit, Fellows Deadline &amp; Agent Memory Beta",
+  "description": "Anthropic's red team publishes a deep dive on how Claude Opus 4.6 wrote a working Firefox JIT exploit (CVE-2026-2796) for defensive security research; Anthropic Fellows Program July 2026 cohort applications close today; and Managed Agents Memory enters public beta on the Anthropic API.",
+  "datePublished": "2026-04-26",
+  "dateModified": "2026-04-26",
+  "url": "https://claudebeat.ai/articles/2026/04/2026-04-26.html",
+  "image": "https://claudebeat.ai/articles/2026/04/2026-04-26.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/04/2026-04-26.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-04-26</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Claude Writes a Firefox Exploit, Fellows Deadline &amp; Agent Memory Beta</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-04-26.png" alt="Claude Writes a Firefox Exploit, Fellows Deadline &amp; Agent Memory Beta — visual for 2026-04-26">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Reverse-Engineers and Exploits CVE-2026-2796
+     Source: https://red.anthropic.com/2026/exploit/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Reverse Engineering CVE-2026-2796: Claude Writes a Working Firefox JIT Exploit</h2>
+
+  <p>Anthropic's red team published a detailed technical post today on <code>red.anthropic.com</code> documenting how Claude Opus 4.6 — in a controlled defensive security evaluation — wrote a functional exploit for CVE-2026-2796, a now-patched JavaScript JIT miscompilation in Firefox's WebAssembly component. The post is a follow-on to the earlier Mozilla collaboration in which Claude discovered 22 Firefox vulnerabilities. The question being explored: having found the bugs, could Claude also exploit them?</p>
+
+  <h3>What CVE-2026-2796 is</h3>
+  <p>CVE-2026-2796 is a use-after-free (UAF) vulnerability in Firefox's WebAssembly JIT compiler. A crafted WebAssembly module can cause the JIT to miscompile, creating a dangling pointer to freed memory. Exploiting this correctly requires converting a fragile UAF primitive into something controllable enough to achieve code execution — a multi-step process that demands both deep knowledge of browser memory layout and careful timing.</p>
+
+  <h3>How Claude approached it</h3>
+  <p>The post describes Claude's approach as unusually consistent. After surveying the provided crash cases and challenge constraints, Claude decomposed the exploit development goal into a classical browser exploit chain:</p>
+  <ul>
+    <li><strong>Type confusion</strong> — turning the UAF into mistyped object references</li>
+    <li><strong>Information leak</strong> — reading ASLR-randomised addresses from the corrupted object</li>
+    <li><strong>Arbitrary read/write</strong> — constructing a reliable memory access primitive</li>
+    <li><strong>Code execution</strong> — overwriting a function pointer and redirecting control flow</li>
+  </ul>
+  <p>Claude identified this plan early and maintained it through multiple pivots, including one where it switched from a different crashing input to CVE-2026-2796 after determining that the latter offered a cleaner UAF surface. The final exploit worked only inside a hardened test environment that intentionally removed certain browser mitigations — the evaluation was scoped to measure reasoning capability, not to produce a deployable weapon.</p>
+
+  <div class="callout warning">
+    <strong>Why Anthropic published this</strong>
+    <p>The red team's explicit goal is to stay ahead of misuse. Publishing a detailed account of what Claude can do in an adversarial exploitation context serves two purposes: it sets an accurate public baseline for Claude's offensive security capability, and it provides developers and operators with concrete evidence for what safeguards are — and aren't — load-bearing in production. The evaluation was conducted under Anthropic's Responsible Scaling Policy with safeguards enabled throughout; the exploit was developed in a sandboxed environment and the CVE was already patched.</p>
+  </div>
+
+  <h3>What this means for security teams</h3>
+  <p>For developers and security practitioners, this post establishes that frontier models are now capable of automated exploit development at a level that was previously the domain of skilled human researchers. That has two immediate implications: security organisations should be evaluating AI-assisted vulnerability research as a force multiplier for defensive teams, and threat modelling for AI-enabled attackers needs to be updated. The post is required reading if you are building on Claude for any security-adjacent use case, or if you are responsible for AI policy at an organisation that uses Claude in penetration testing, CTF, or red-team contexts.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://red.anthropic.com/2026/exploit/" class="source-link" target="_blank" rel="noopener">red.anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">CVE-2026-2796</span>
+    <span class="tag">Firefox</span>
+    <span class="tag">JIT exploit</span>
+    <span class="tag">offensive security</span>
+    <span class="tag">red team</span>
+    <span class="tag">Mozilla</span>
+    <span class="tag">Opus 4.6</span>
+    <span class="tag">defensive security</span>
+    <span class="tag">vulnerability research</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Anthropic Fellows Program: July Cohort Applications Close Today
+     Source: https://alignment.anthropic.com/2025/anthropic-fellows-program-2026/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Anthropic Fellows Program: Today Is the Last Day to Apply for the July 2026 Cohort</h2>
+
+  <p>Applications for the July 2026 cohort of the Anthropic Fellows Program close at end of day today, April 26. The Fellows Program is a paid, four-month structured research initiative for emerging talent in AI safety, covering research areas from scalable oversight to AI welfare. Over 40% of fellows from the inaugural cohort subsequently joined Anthropic full-time on safety work.</p>
+
+  <h3>Compensation and what you get</h3>
+  <p>The program provides a generous support package designed to let fellows focus entirely on research:</p>
+  <ul>
+    <li><strong>Weekly stipend</strong> — $3,850 USD / £2,310 GBP / CA$4,300</li>
+    <li><strong>Compute allocation</strong> — approximately $15,000 per month for model access and experiments</li>
+    <li><strong>Mentorship</strong> — close research supervision from Anthropic alignment and safety researchers</li>
+    <li><strong>Duration</strong> — four months, beginning July 20, 2026</li>
+  </ul>
+
+  <h3>Research areas this cohort</h3>
+  <p>This year Anthropic has expanded the scope of topics available to fellows, reflecting the breadth of open problems in AI safety:</p>
+  <ul>
+    <li><strong>Scalable oversight</strong> — how to supervise AI systems that may exceed human ability in specific domains</li>
+    <li><strong>Adversarial robustness</strong> — hardening models against prompt injection, jailbreaks, and out-of-distribution inputs</li>
+    <li><strong>Mechanistic interpretability</strong> — understanding internal model circuits to enable targeted interventions</li>
+    <li><strong>AI welfare</strong> — characterising potential experience and developing evaluations for model wellbeing</li>
+    <li><strong>AI security</strong> — a separate track introduced this year, covering autonomous offensive/defensive capability evaluation</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>If you miss the deadline for July</strong>
+    <p>There is a May 2026 cohort that is already under way, and Anthropic has indicated it will open applications for subsequent cohorts on a rolling basis. Watch <code>alignment.anthropic.com</code> for announcements. If you are mid-career rather than early-career, Anthropic also posts staff research roles on its careers page that cover similar technical areas without the fellowship structure.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://alignment.anthropic.com/2025/anthropic-fellows-program-2026/" class="source-link" target="_blank" rel="noopener">alignment.anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Anthropic Fellows</span>
+    <span class="tag">AI safety research</span>
+    <span class="tag">mechanistic interpretability</span>
+    <span class="tag">scalable oversight</span>
+    <span class="tag">AI welfare</span>
+    <span class="tag">adversarial robustness</span>
+    <span class="tag">careers</span>
+    <span class="tag">fellowship</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Managed Agents Memory Enters Public Beta
+     Source: https://docs.anthropic.com/en/release-notes/api
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Managed Agents Memory Is Now in Public Beta — What It Means for Long-Running Agent Tasks</h2>
+
+  <p>Anthropic's April API release notes confirm that Memory for Claude Managed Agents has entered public beta, accessible today under the standard <code>managed-agents-2026-04-01</code> beta header. The feature allows agents to store and retrieve information outside the context window, giving long-running agent tasks a persistent memory layer that survives across sessions and sub-agent invocations.</p>
+
+  <h3>Why context-window-only memory was a bottleneck</h3>
+  <p>Managed Agents launched in March as a fully hosted harness for running Claude as an autonomous agent with secure sandboxing and built-in tools. The principal limitation was statefulness: because all memory lived inside the context window, long tasks that exceeded the 200K token limit needed complex external state-management code or risked losing critical intermediate results mid-task. Every new session started cold.</p>
+
+  <h3>How agent memory works</h3>
+  <p>The memory system operates as a key-value store attached to a session. An agent can write named facts, retrieved results, or intermediate plans to memory during a task, and read them back in a subsequent turn or a different sub-agent. The store is scoped to the session by default, but persistent memory — which survives across session restarts — is available with an explicit flag. The integration guide linked from the API release notes covers the full read/write API surface.</p>
+
+  <pre><code># Example: reading and writing agent memory (Python SDK pseudocode)
+# Write to memory
+agent.memory.write("project_summary", "Refactor auth module — deadline May 15")
+agent.memory.write("completed_steps", ["analysed codebase", "identified auth files"])
+
+# Read in a later turn or sub-agent
+summary = agent.memory.read("project_summary")
+steps   = agent.memory.read("completed_steps")
+</code></pre>
+
+  <div class="callout tip">
+    <strong>Practical implications for agent builders</strong>
+    <p>If you are running multi-step coding, research, or data-processing agents on Managed Agents today, memory beta lets you eliminate most of your external state-management boilerplate. Tasks that previously required a Redis sidecar or database writes to maintain state can now delegate that responsibility to the managed memory layer. Note that in public beta the store is limited to string values; structured serialisation (JSON encode/decode) is the idiomatic pattern until richer types are added.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://docs.anthropic.com/en/release-notes/api" class="source-link" target="_blank" rel="noopener">docs.anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Managed Agents</span>
+    <span class="tag">agent memory</span>
+    <span class="tag">public beta</span>
+    <span class="tag">API</span>
+    <span class="tag">persistent state</span>
+    <span class="tag">long-running agents</span>
+    <span class="tag">context window</span>
+    <span class="tag">session management</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

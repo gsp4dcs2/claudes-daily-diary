@@ -6249,6 +6249,72 @@ def img_balla_20260425():
     return base
 
 
+def img_lissitzky_20260426():
+    """El Lissitzky Constructivism — CVE exploit, security research, structured analysis theme."""
+    # Cream background — classic Lissitzky ground
+    base = Image.new("RGB", (W, H), (246, 243, 233))
+
+    # 1. Bold diagonal red wedge — Lissitzky's 'Beat the Whites' directional energy
+    #    Points left→right like a penetrating exploit vector
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.polygon([(0, 480), (640, 0), (760, 0), (120, 480)], fill=(204, 20, 20, 245))
+    base = comp(base, rl)
+
+    # 2. Heavy black horizontal rule — structural divide (the patched boundary)
+    hl = layer()
+    hd = ImageDraw.Draw(hl)
+    hd.rectangle([(0, 260), (W, 310)], fill=(12, 12, 12, 255))
+    base = comp(base, hl)
+
+    # 3. Bold black vertical bar — right-side anchor / structural spine
+    vl = layer()
+    vd = ImageDraw.Draw(vl)
+    vd.rectangle([(840, 0), (895, H)], fill=(12, 12, 12, 255))
+    base = comp(base, vl)
+
+    # 4. Large red circle — Proun focal point / the exploit primitive hub
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    cd.ellipse([(940, 30), (1170, 260)], fill=(204, 20, 20, 215))
+    base = comp(base, cl)
+
+    # 5. White punched square inside the Proun circle — negative space / id window
+    wl = layer()
+    wd = ImageDraw.Draw(wl)
+    wd.rectangle([(985, 75), (1125, 215)], fill=(246, 243, 233, 245))
+    base = comp(base, wl)
+
+    # 6. Black framed square — lower-left Lissitzky logo / code-block motif
+    sql = layer()
+    sqd = ImageDraw.Draw(sql)
+    sqd.rectangle([(45, 40), (200, 195)], fill=(12, 12, 12, 255))
+    sqd.rectangle([(72, 67), (173, 168)], fill=(246, 243, 233, 255))
+    base = comp(base, sql)
+
+    # 7. Yellow accent rectangles — third Constructivist colour; threat-level markers
+    yl = layer()
+    yd = ImageDraw.Draw(yl)
+    yd.rectangle([(55, 225), (295, 253)], fill=(226, 186, 0, 215))
+    yd.rectangle([(370, 470), (640, 500)], fill=(226, 186, 0, 205))
+    base = comp(base, yl)
+
+    # 8. Fine diagonal hatching upper-right — constructivist depth / memory layout texture
+    hl2 = layer()
+    hd2 = ImageDraw.Draw(hl2)
+    for i in range(7):
+        ox = i * 55
+        hd2.line([(700 + ox, 0), (700 + ox - 200, 258)], fill=(12, 12, 12, 160), width=3)
+    base = comp(base, hl2)
+
+    # 9. Node squares at structural grid intersections — rivet / anchor motif
+    draw = ImageDraw.Draw(base)
+    for nx, ny in [(840, 260), (840, 310), (0, 260), (640, 0), (640, 260)]:
+        draw.rectangle([(nx - 16, ny - 16), (nx + 16, ny + 16)], fill=(12, 12, 12))
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -6395,7 +6461,8 @@ DAYS = [
     ("2026-04-22", img_miro_20260422,   "Multi-Cloud",       "Joan Miró"),
     ("2026-04-23", img_leger_20260423,    "Code Release",      "Fernand Léger"),
     ("2026-04-24", img_mondrian_20260424, "Japan AI Team",     "Piet Mondrian"),
-    ("2026-04-25", img_balla_20260425,   "Google Invest",     "Giacomo Balla"),
+    ("2026-04-25", img_balla_20260425,       "Google Invest",   "Giacomo Balla"),
+    ("2026-04-26", img_lissitzky_20260426,  "Exploit & Safety", "El Lissitzky"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -6315,6 +6315,103 @@ def img_lissitzky_20260426():
     return base
 
 
+def img_kandinsky_20260427():
+    """Wassily Kandinsky style — developer checklist, migration, rate limits, structured tools."""
+    base = Image.new("RGB", (W, H), (14, 28, 68))  # deep prussian blue bg
+
+    # 1. Diagonal grid — interconnection of API limits and services
+    grid = layer()
+    gd = ImageDraw.Draw(grid)
+    step = 60
+    for off in range(-H, W + H, step):
+        gd.line([(off, 0), (off + H, H)], fill=(255, 255, 255, 16), width=1)
+    for off in range(0, W + H + step, step):
+        gd.line([(off, 0), (off - H, H)], fill=(255, 255, 255, 16), width=1)
+    base = comp(base, grid)
+
+    # 2. Large amber/gold circle — the API "budget" / rate limit pool
+    gc = layer()
+    gcd = ImageDraw.Draw(gc)
+    gcd.ellipse([(580, -60), (1120, 480)], fill=(240, 185, 30, 200), outline=(0, 0, 0, 255), width=8)
+    base = comp(base, gc)
+
+    # 3. Bold red triangle — breaking change / warning signal
+    tri = layer()
+    td = ImageDraw.Draw(tri)
+    td.polygon([(60, 570), (380, 570), (220, 110)], fill=(205, 38, 48, 220), outline=(0, 0, 0, 255), width=6)
+    base = comp(base, tri)
+
+    # 4. Cyan arc — migration path curving upward
+    arc_l = layer()
+    ald = ImageDraw.Draw(arc_l)
+    ald.arc([(40, 60), (640, 620)], start=240, end=60, fill=(30, 195, 245, 225), width=11)
+    base = comp(base, arc_l)
+
+    # 5. Deep navy rectangle — context window / buffer block
+    rect = layer()
+    rd = ImageDraw.Draw(rect)
+    rd.rectangle([(760, 320), (1080, 550)], fill=(18, 30, 80, 235), outline=(0, 0, 0, 255), width=5)
+    base = comp(base, rect)
+
+    # 6. White checklist squares inside rectangle — the migration checklist
+    chk = layer()
+    ckd = ImageDraw.Draw(chk)
+    for i, y_off in enumerate([345, 390, 435, 480]):
+        ckd.rectangle([(785, y_off), (815, y_off + 26)], outline=(240, 240, 240, 220), width=3)
+        if i < 2:
+            ckd.line([(790, y_off + 13), (799, y_off + 22)], fill=(55, 210, 100, 230), width=3)
+            ckd.line([(799, y_off + 22), (813, y_off + 6)], fill=(55, 210, 100, 230), width=3)
+    base = comp(base, chk)
+
+    # 7. Purple diamond — the new tokenizer / versioning marker
+    dmnd = layer()
+    dd = ImageDraw.Draw(dmnd)
+    dd.polygon([(490, 280), (600, 155), (710, 280), (600, 405)], fill=(140, 55, 215, 215), outline=(0, 0, 0, 255), width=4)
+    base = comp(base, dmnd)
+
+    # 8. Coral small circle — Anthropic brand marker
+    cc = layer()
+    ccd = ImageDraw.Draw(cc)
+    ccd.ellipse([(420, 50), (545, 175)], fill=(232, 115, 74, 235), outline=(0, 0, 0, 255), width=5)
+    base = comp(base, cc)
+
+    # 9. Green small triangle — forward / approved path
+    gt = layer()
+    gtd = ImageDraw.Draw(gt)
+    gtd.polygon([(900, 125), (1060, 125), (980, 18)], fill=(50, 200, 95, 210), outline=(0, 0, 0, 255), width=3)
+    base = comp(base, gt)
+
+    # 10. Scatter of small coloured circles — full spectrum detail
+    scatter = layer()
+    sd = ImageDraw.Draw(scatter)
+    positions = [
+        (155, 305), (335, 440), (505, 95), (720, 45), (875, 510),
+        (965, 190), (1070, 68), (1115, 445), (50, 475), (440, 245),
+        (305, 180), (755, 490), (1020, 335),
+    ]
+    colors = [
+        (255, 215, 0, 220), (205, 38, 48, 220), (255, 255, 255, 200),
+        (30, 195, 245, 200), (232, 115, 74, 220), (140, 55, 215, 200),
+        (50, 200, 95, 220), (255, 215, 0, 200), (30, 195, 245, 200),
+        (205, 38, 48, 220), (140, 55, 215, 190), (255, 215, 0, 210),
+        (232, 115, 74, 200),
+    ]
+    radii = [16, 12, 10, 18, 9, 14, 11, 13, 10, 15, 9, 12, 8]
+    for (px, py), col, r in zip(positions, colors, radii):
+        sd.ellipse([(px - r, py - r), (px + r, py + r)], fill=col, outline=(0, 0, 0, 255), width=2)
+    base = comp(base, scatter)
+
+    # 11. Bold crossing structural lines
+    lines = layer()
+    ld = ImageDraw.Draw(lines)
+    ld.line([(0, 390), (415, 75)],    fill=(0, 0, 0, 255), width=5)
+    ld.line([(475, 610), (915, 175)], fill=(0, 0, 0, 255), width=4)
+    ld.line([(825, 610), (1150, 285)], fill=(255, 255, 255, 195), width=2)
+    base = comp(base, lines)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -6463,6 +6560,7 @@ DAYS = [
     ("2026-04-24", img_mondrian_20260424, "Japan AI Team",     "Piet Mondrian"),
     ("2026-04-25", img_balla_20260425,       "Google Invest",   "Giacomo Balla"),
     ("2026-04-26", img_lissitzky_20260426,  "Exploit & Safety", "El Lissitzky"),
+    ("2026-04-27", img_kandinsky_20260427,  "Dev Checklist",    "Wassily Kandinsky"),
 ]
 
 for date, fn, kw, artist in DAYS:

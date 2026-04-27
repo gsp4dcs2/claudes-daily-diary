@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Three developer actions for April 27: the new Rate Limits API lets admins query org and workspace limits programmatically; Opus 4.7 has breaking changes (sampling params now return 400 errors, thinking content omitted by default) that must be fixed before June 15; and the 1M context window beta for Sonnet 4.5 and Sonnet 4 retires April 30 — three days away.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-04-27 – Rate Limits API, Opus 4.7 Migration Checklist &amp; the April 30 Context Window Warning">
+  <meta property="og:description" content="Three developer actions for April 27: the new Rate Limits API lets admins query org and workspace limits programmatically; Opus 4.7 has breaking changes (sampling params now return 400 errors, thinking content omitted by default) that must be fixed before June 15; and the 1M context window beta for Sonnet 4.5 and Sonnet 4 retires April 30 — three days away.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/04/2026-04-27.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/04/2026-04-27.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/04/2026-04-27.png">
+
+  <title>2026-04-27 – Rate Limits API, Opus 4.7 Migration Checklist &amp; the April 30 Context Window Warning | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Rate Limits API, Opus 4.7 Migration Checklist &amp; the April 30 Context Window Warning",
+  "description": "Three developer actions for April 27: the new Rate Limits API lets admins query org and workspace limits programmatically; Opus 4.7 has breaking changes (sampling params now return 400 errors, thinking content omitted by default) that must be fixed before June 15; and the 1M context window beta for Sonnet 4.5 and Sonnet 4 retires April 30 — three days away.",
+  "datePublished": "2026-04-27",
+  "dateModified": "2026-04-27",
+  "url": "https://claudebeat.ai/articles/2026/04/2026-04-27.html",
+  "image": "https://claudebeat.ai/articles/2026/04/2026-04-27.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/04/2026-04-27.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-04-27</span>
+      <span class="cat-badge cat-tips">💡 Tips 'n' Tricks</span>
+      <h1>Rate Limits API, Opus 4.7 Migration Checklist &amp; the April 30 Context Window Warning</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-04-27.png" alt="Rate Limits API, Opus 4.7 Migration Checklist &amp; the April 30 Context Window Warning — visual for 2026-04-27">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Rate Limits API: Programmatic Access to Your Org's Limits
+     Source: https://platform.claude.com/docs/en/build-with-claude/rate-limits-api
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> The Rate Limits API: Stop Hardcoding Limits in Your Gateways</h2>
+
+  <p>Anthropic quietly shipped the <strong>Rate Limits API</strong> on April 24 — a new Admin API endpoint that gives organisation administrators programmatic, read-only access to every rate limit configured for their org and individual workspaces. If you maintain a Claude gateway, proxy, or internal cost-management tool that currently hardcodes RPM/TPM values, this is the endpoint you've been waiting for.</p>
+
+  <h3>What it returns</h3>
+  <p>A <code>GET /v1/organizations/rate_limits</code> call returns a list of rate limit groups. Each group represents a set of models (or a resource like Message Batches or the Files API) that share a single limit pool, along with the configured limits:</p>
+
+  <pre><code># Requires an Admin API key (sk-ant-admin...)
+curl "https://api.anthropic.com/v1/organizations/rate_limits" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+
+# Example response fragment
+{
+  "data": [
+    {
+      "type": "rate_limit",
+      "group_type": "model_group",
+      "models": ["claude-opus-4-5", "claude-opus-4-6", "claude-opus-4-7"],
+      "limits": [
+        { "type": "requests_per_minute",      "value": 4000 },
+        { "type": "input_tokens_per_minute",  "value": 2000000 },
+        { "type": "output_tokens_per_minute", "value": 400000 }
+      ]
+    }
+  ]
+}</code></pre>
+
+  <p>The workspace endpoint — <code>/v1/organizations/workspaces/{workspace_id}/rate_limits</code> — returns only override values, so a group absent from the response inherits the org-level limit. The <code>org_limit</code> field is included alongside each override value for quick comparison.</p>
+
+  <h3>Three use cases to implement now</h3>
+  <ul>
+    <li><strong>Gateway sync at startup</strong> — read limits once on boot and on a schedule so your proxy's throttle values never drift from Anthropic's actual configured limits.</li>
+    <li><strong>Internal alerting</strong> — pair this with the <a href="https://platform.claude.com/docs/en/build-with-claude/usage-cost-api">Usage and Cost API</a> to trigger a Slack alert when usage crosses, say, 80% of the configured RPM in the last minute.</li>
+    <li><strong>Workspace audit</strong> — verify that your provisioning automation set workspace overrides correctly; diff the API response against your Terraform state.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Admin API key required</strong>
+    <p>This endpoint requires a key starting with <code>sk-ant-admin...</code> — a separate credential from your standard <code>sk-ant-api...</code> keys. Only organisation members with the <strong>Admin role</strong> can provision these through Console → Settings → Admin Keys. The Rate Limits API is read-only; to change workspace limits you still use the Console UI.</p>
+  </div>
+
+  <p>Filter by resource type using the optional <code>group_type</code> query parameter. Valid values: <code>model_group</code>, <code>batch</code>, <code>token_count</code>, <code>files</code>, <code>skills</code>, <code>web_search</code>. Look up any model string — dated IDs like <code>claude-opus-4-7</code> or aliases — and it will appear in exactly one <code>model_group</code> entry.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/build-with-claude/rate-limits-api" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Rate Limits API</span>
+    <span class="tag">Admin API</span>
+    <span class="tag">DevOps</span>
+    <span class="tag">gateway</span>
+    <span class="tag">monitoring</span>
+    <span class="tag">workspace</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Opus 4.7 Migration: Breaking Changes Checklist
+     Source: https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> Opus 4.7 Migration Checklist: Three Breaking Changes That Will Silently Break Your App</h2>
+
+  <p>Claude Opus 4.7 launched April 16 with a longer-than-usual list of <strong>breaking API changes</strong>. If you haven't migrated yet, you have until June 15 before Opus 4.6 (and Sonnet 4) retire. Here are the three changes most likely to surface as bugs rather than obvious errors — and what to do about each.</p>
+
+  <h3>1. Sampling parameters removed — now a hard 400 error</h3>
+  <p>Setting <code>temperature</code>, <code>top_p</code>, or <code>top_k</code> to any non-default value on Opus 4.7 returns a <code>400 invalid_request_error</code>. The safest migration path is to remove these parameters entirely from all requests targeting Opus 4.7. If your codepath used <code>temperature=0</code> hoping for determinism, note that it never actually guaranteed identical outputs — and determinism is better pursued via prompting with a fixed seed or explicit instructions to format output consistently.</p>
+
+  <pre><code># Before (Opus 4.6) — will 400 on Opus 4.7
+response = client.messages.create(
+    model="claude-opus-4-7",
+    temperature=0.2,
+    max_tokens=4096,
+    messages=[...]
+)
+
+# After — omit sampling params entirely
+response = client.messages.create(
+    model="claude-opus-4-7",
+    max_tokens=4096,
+    messages=[...]
+)</code></pre>
+
+  <h3>2. Thinking content omitted by default — a silent behaviour change</h3>
+  <p>In Opus 4.6, extended thinking blocks were included in the response stream by default. In Opus 4.7 they are omitted — no error is raised, but <strong>your product will show a long pause before output begins</strong> if you stream thinking to users and haven't opted in. To restore visible progress during thinking, set <code>"display": "summarized"</code>:</p>
+
+  <pre><code># Opus 4.7 — enable thinking with visible progress updates
+response = client.messages.create(
+    model="claude-opus-4-7",
+    thinking={"type": "adaptive", "display": "summarized"},
+    output_config={"effort": "high"},
+    max_tokens=16000,
+    messages=[...]
+)</code></pre>
+
+  <p>Note that <code>thinking: {"type": "enabled", "budget_tokens": N}</code> now returns a 400 error. Adaptive thinking is the only supported mode on Opus 4.7.</p>
+
+  <h3>3. New tokenizer — up to 35% more tokens per request</h3>
+  <p>Opus 4.7 uses a new tokenizer that may use 1× to 1.35× as many tokens as Opus 4.6 on the same input. <code>/v1/messages/count_tokens</code> will return a different value for 4.7 than 4.6. Practical actions:</p>
+  <ul>
+    <li>Raise <code>max_tokens</code> limits with headroom (especially compaction triggers and context window calculations).</li>
+    <li>Re-baseline any cost estimates — token efficiency varies by workload shape.</li>
+    <li>Use the <code>effort</code> parameter (<code>"low"</code>–<code>"xhigh"</code>) to trade intelligence vs. token spend. Start with <code>"high"</code> for most tasks; use <code>"xhigh"</code> for demanding coding and agentic loops.</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>Timeline: June 15, 2026</strong>
+    <p>Claude Sonnet 4 (<code>claude-sonnet-4-20250514</code>) and Claude Opus 4 (<code>claude-opus-4-20250514</code>) retire June 15. Claude Opus 4.6 is not explicitly deprecated yet, but Opus 4.7 is generally available at the same $5/$25 per MTok pricing. The recommendation is to migrate to Opus 4.7 for new work and Sonnet 4.6 as a drop-in for Sonnet 4 workloads.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Opus 4.7</span>
+    <span class="tag">migration</span>
+    <span class="tag">breaking changes</span>
+    <span class="tag">temperature</span>
+    <span class="tag">adaptive thinking</span>
+    <span class="tag">tokenizer</span>
+    <span class="tag">effort</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — April 30 Warning: 1M Context Window Beta Retires for Sonnet 4.5 & Sonnet 4
+     Source: https://platform.claude.com/docs/en/release-notes/api
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> 3 Days Left: The 1M Context Window Beta for Sonnet 4.5 and Sonnet 4 Retires April 30</h2>
+
+  <p>Anthropic announced on March 30 that the 1M token context window beta — activated via the <code>context-1m-2025-08-07</code> header on <strong>Claude Sonnet 4.5</strong> and <strong>Claude Sonnet 4</strong> — will be retired on <strong>April 30, 2026</strong>. That's three days from today. After April 30, requests that include that header on those models and exceed the standard 200k-token context window will return an error.</p>
+
+  <h3>Who is affected</h3>
+  <p>You are affected if your code passes <code>"anthropic-beta": "context-1m-2025-08-07"</code> in any request to <code>claude-sonnet-4-5-20250929</code> or <code>claude-sonnet-4-20250514</code> (or their aliases) with prompts longer than 200k tokens. Production pipelines that ingest large documents — legal review, codebase analysis, long-form research — are the most likely candidates.</p>
+
+  <h3>Migration path</h3>
+  <p>Migrate to <strong>Claude Sonnet 4.6</strong> (<code>claude-sonnet-4-6</code>) or <strong>Claude Opus 4.6/4.7</strong> — all of which support the full 1M token context window at standard pricing with no beta header required. The 1M window is now generally available on those models (since March 13). Steps:</p>
+  <ul>
+    <li>Replace <code>claude-sonnet-4-5</code> → <code>claude-sonnet-4-6</code> or <code>claude-opus-4-6</code> in your model string.</li>
+    <li>Remove the <code>context-1m-2025-08-07</code> beta header — no header needed on 4.6+ models.</li>
+    <li>Re-run your token counting step if you are on Opus 4.7, as the new tokenizer changes token counts by up to 35%.</li>
+    <li>Update cost estimates: the 1M window on Sonnet 4.6 is billed at standard pricing with no long-context premium, unlike the beta.</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>Don't wait until April 30</strong>
+    <p>Deprecations on Anthropic's API go live at exactly the announced time. If your application serves production traffic involving long contexts and you haven't tested the migration yet, make time today — not tomorrow. A broken API call in a long-running agent loop is harder to debug under pressure than a controlled swap done in advance.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/release-notes/api" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">context window</span>
+    <span class="tag">1M tokens</span>
+    <span class="tag">Sonnet 4.5</span>
+    <span class="tag">Sonnet 4</span>
+    <span class="tag">deprecation</span>
+    <span class="tag">April 30</span>
+    <span class="tag">migration</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

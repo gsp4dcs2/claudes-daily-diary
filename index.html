@@ -61,6 +61,16 @@
       <!-- Newest entries at the top. Format: {yyyy-mm-dd} – {title} -->
 
       <li>
+        <a href="articles/2026/04/2026-04-27.html">
+          <img class="entry-thumb" src="articles/2026/04/2026-04-27-thumb.png" alt="2026-04-27 thumbnail">
+          <div class="entry-meta">
+            <span class="article-date">2026-04-27</span>
+            <div class="entry-bottom"><span class="cat-icon" title="Tips 'n' Tricks">💡</span> <span class="article-title">Rate Limits API, Opus 4.7 Migration Checklist &amp; the April 30 Context Window Warning</span></div>
+          </div>
+        </a>
+      </li>
+
+      <li>
         <a href="articles/2026/04/2026-04-26.html">
           <img class="entry-thumb" src="articles/2026/04/2026-04-26-thumb.png" alt="2026-04-26 thumbnail">
           <div class="entry-meta">
@@ -1563,6 +1573,12 @@
      collapsed). Rebuild this array when new days are added.
      ──────────────────────────────────────────────────────── */
   const SEARCH_INDEX = [
+    {
+      date: "2026-04-27", cat: "tips",
+      title: "Rate Limits API, Opus 4.7 Migration Checklist & the April 30 Context Window Warning",
+      url: "articles/2026/04/2026-04-27.html",
+      text: "The Rate Limits API Stop Hardcoding Limits in Your Gateways Anthropic shipped the Rate Limits API on April 24 a new Admin API endpoint that gives organisation administrators programmatic read-only access to every rate limit configured for their org and individual workspaces. Requires Admin API key sk-ant-admin Three use cases Gateway sync at startup Gateway proxy throttle values never drift. Internal alerting pair with Usage and Cost API trigger alerts at 80% of configured RPM. Workspace audit verify provisioning automation set workspace overrides. Opus 4.7 Migration Checklist Three Breaking Changes Claude Opus 4.7 launched April 16 breaking API changes migration deadline June 15. Sampling parameters removed 400 error temperature top_p top_k returns 400 invalid_request_error omit entirely. Thinking content omitted by default no error raised but long pause before output begins set display summarized to restore visible progress. thinking type enabled budget_tokens N now returns 400 error adaptive thinking only supported mode. New tokenizer up to 35% more tokens raise max_tokens re-baseline cost estimates use effort parameter low through xhigh. Timeline June 15 2026 Claude Sonnet 4 and Claude Opus 4 retire. 3 Days Left 1M Context Window Beta for Sonnet 4.5 and Sonnet 4 Retires April 30 context-1m-2025-08-07 header retired April 30 2026 requests exceeding 200k-token context window will return error. Migrate to Claude Sonnet 4.6 or Claude Opus 4.6 4.7 full 1M token context window standard pricing no beta header required. Replace model string remove beta header re-run token counting update cost estimates."
+    },
     {
       date: "2026-04-26", cat: "news",
       title: "Claude Writes a Firefox Exploit, Fellows Deadline & Agent Memory Beta",

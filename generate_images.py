@@ -6412,6 +6412,84 @@ def img_kandinsky_20260427():
     return base
 
 
+def img_calder_20260428():
+    """Alexander Calder mobile style — global partnerships, Sydney/Harvard/AWS expansion theme."""
+    base = Image.new("RGB", (W, H), (246, 244, 238))  # warm off-white Calder canvas
+
+    # 1. Three-tier mobile armature — three expansion vectors (APAC / Education / AWS)
+    arm = layer(); adraw = ImageDraw.Draw(arm)
+    # Top horizontal spine
+    adraw.line([(100, 130), (1100, 130)], fill=(18, 18, 18, 240), width=5)
+    # Central vertical drop
+    adraw.line([(600, 130), (600, 290)], fill=(18, 18, 18, 225), width=4)
+    # Mid horizontal cross-arm
+    adraw.line([(280, 290), (920, 290)], fill=(18, 18, 18, 215), width=4)
+    # Left drop (APAC / Sydney)
+    adraw.line([(280, 290), (280, 470)], fill=(18, 18, 18, 205), width=3)
+    # Centre drop (Education / Harvard)
+    adraw.line([(600, 290), (600, 510)], fill=(18, 18, 18, 205), width=3)
+    # Right drop (AWS / Bedrock)
+    adraw.line([(920, 290), (920, 460)], fill=(18, 18, 18, 205), width=3)
+    # Far-left anchor
+    adraw.line([(100, 130), (100, 250)], fill=(18, 18, 18, 195), width=3)
+    adraw.line([(50, 250), (200, 250)],  fill=(18, 18, 18, 195), width=3)
+    adraw.line([(50, 250), (50, 400)],   fill=(18, 18, 18, 180), width=2)
+    adraw.line([(200, 250), (200, 385)], fill=(18, 18, 18, 180), width=2)
+    # Far-right anchor
+    adraw.line([(1100, 130), (1100, 240)], fill=(18, 18, 18, 195), width=3)
+    adraw.line([(1010, 240), (1100, 240)], fill=(18, 18, 18, 190), width=3)
+    adraw.line([(1010, 240), (1010, 390)], fill=(18, 18, 18, 175), width=2)
+    base = comp(base, arm)
+
+    # 2. Primary-coloured bold shapes — each representing an expansion node
+    shapes = [
+        # Sydney disc — large red circle on left arm (Pacific expansion)
+        ("ellipse", [(155, 370), (415, 565)],  (210, 28, 38, 245),  (18, 18, 18, 255), 5),
+        # Harvard disc — large yellow circle, centre (education)
+        ("ellipse", [(460, 420), (740, 600)],  (245, 195, 0, 240),  (18, 18, 18, 255), 5),
+        # AWS disc — large blue circle on right arm (cloud infrastructure)
+        ("ellipse", [(780, 360), (1060, 555)], (26, 80, 200, 240),  (18, 18, 18, 255), 5),
+        # Spine left anchor — small yellow disc far-left upper
+        ("ellipse", [(25, 145), (135, 255)],   (245, 195, 0, 230),  (18, 18, 18, 255), 3),
+        # Spine right anchor — small red disc far-right upper
+        ("ellipse", [(1040, 50), (1165, 175)], (210, 28, 38, 225),  (18, 18, 18, 255), 3),
+        # Sub-left container A — small blue (CBA / Canva partnership)
+        ("ellipse", [(22, 310), (125, 415)],   (26, 80, 200, 215),  (18, 18, 18, 255), 2),
+        # Sub-left container B — small green (MOU / government)
+        ("ellipse", [(170, 300), (270, 400)],  (50, 200, 95, 215),  (18, 18, 18, 255), 2),
+        # Sub-right container — small green (CDK / IaC)
+        ("ellipse", [(975, 300), (1080, 400)], (50, 200, 95, 210),  (18, 18, 18, 255), 2),
+        # Top central circle — Anthropic coral (the hub everything hangs from)
+        ("ellipse", [(500, 30), (700, 130)],   (232, 115, 74, 245), (18, 18, 18, 255), 4),
+    ]
+    for kind, bbox, fill, outline, lw in shapes:
+        sl = layer(); sd = ImageDraw.Draw(sl)
+        sd.ellipse(bbox, fill=fill, outline=outline, width=lw)
+        base = comp(base, sl)
+
+    # 3. Black pivot dots at every junction point
+    dots = layer(); ddraw = ImageDraw.Draw(dots)
+    pivots = [
+        (100, 130), (600, 130), (1100, 130),
+        (280, 290), (600, 290), (920, 290),
+        (100, 250), (50, 250), (200, 250),
+        (1100, 240), (1010, 240),
+    ]
+    for px, py in pivots:
+        ddraw.ellipse([(px - 9, py - 9), (px + 9, py + 9)],
+                      fill=(18, 18, 18, 245), outline=(18, 18, 18, 255), width=2)
+    base = comp(base, dots)
+
+    # 4. Canvas warmth texture
+    tex = layer(); tdraw = ImageDraw.Draw(tex)
+    for _ in range(900):
+        tx = rng.randint(0, W); ty = rng.randint(0, H)
+        tdraw.ellipse([(tx - 1, ty - 1), (tx + 1, ty + 1)], fill=(165, 142, 100, 15))
+    base = comp(base, tex)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -6561,6 +6639,7 @@ DAYS = [
     ("2026-04-25", img_balla_20260425,       "Google Invest",   "Giacomo Balla"),
     ("2026-04-26", img_lissitzky_20260426,  "Exploit & Safety", "El Lissitzky"),
     ("2026-04-27", img_kandinsky_20260427,  "Dev Checklist",    "Wassily Kandinsky"),
+    ("2026-04-28", img_calder_20260428,     "Global Reach",     "Alexander Calder"),
 ]
 
 for date, fn, kw, artist in DAYS:

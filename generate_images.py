@@ -6490,6 +6490,70 @@ def img_calder_20260428():
     return base
 
 
+def img_rothko_20260429():
+    """Mark Rothko colour field — enterprise lockout & revenue milestone; weight of financial scale."""
+    # Deep blue-grey background — the gravity of global finance
+    base = Image.new("RGB", (W, H), (16, 20, 32))
+
+    def soft_band(img, y0, y1, colour, feather=65):
+        """Soft-edged Rothko colour band with luminous edges."""
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        r, g, b = colour
+        # Core solid band (inset from canvas edges)
+        bd.rectangle([(70, y0 + feather), (W - 70, y1 - feather)], fill=(r, g, b, 215))
+        # Feathered top edge
+        for i in range(feather):
+            alpha = int(190 * (i / feather))
+            bd.rectangle([(70 + i, y0 + i), (W - 70 - i, y0 + i + 1)], fill=(r, g, b, alpha))
+        # Feathered bottom edge
+        for i in range(feather):
+            alpha = int(190 * ((feather - i) / feather))
+            bd.rectangle([(70 + i, y1 - i - 1), (W - 70 - i, y1 - i)], fill=(r, g, b, alpha))
+        return comp(img, bl)
+
+    # Top band — cool slate-blue: the restriction, the locked door in Hong Kong
+    base = soft_band(base, 25, 225, (38, 68, 118), feather=60)
+
+    # Middle band — warm amber-gold (widest): the $30B revenue milestone, luminous achievement
+    base = soft_band(base, 205, 430, (188, 128, 28), feather=72)
+
+    # Bottom band — deep steel-teal: enterprise depth, Microsoft compute, the infrastructure layer
+    base = soft_band(base, 408, 605, (24, 80, 100), feather=58)
+
+    # Luminous inner glow on the gold band — the milestone moment
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for i in range(55):
+        alpha = int(65 * (1 - i / 55))
+        gd.rectangle([(190 + i, 262 + i), (W - 190 - i, 372 - i)], fill=(248, 210, 90, alpha))
+    base = comp(base, gl)
+
+    # Subtle cool bloom along the top band — the restriction's cold presence
+    bl2 = layer()
+    bd2 = ImageDraw.Draw(bl2)
+    for i in range(70):
+        alpha = int(35 * (1 - i / 70))
+        bd2.ellipse([(W//2 - 240 - i*2, 15 - i), (W//2 + 240 + i*2, 190 + i)],
+                    fill=(80, 130, 200, alpha))
+    base = comp(base, bl2)
+
+    # Fine luminous edge lines between bands — Rothko's characteristic band borders
+    el = layer()
+    ed = ImageDraw.Draw(el)
+    # Border between top (blue) and gold bands
+    for i in range(12):
+        alpha = max(0, 50 - i * 4)
+        ed.rectangle([(70, 215 + i), (W - 70, 217 + i)], fill=(220, 180, 80, alpha))
+    # Border between gold and teal bands
+    for i in range(12):
+        alpha = max(0, 50 - i * 4)
+        ed.rectangle([(70, 420 + i), (W - 70, 422 + i)], fill=(120, 200, 200, alpha))
+    base = comp(base, el)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -6640,6 +6704,7 @@ DAYS = [
     ("2026-04-26", img_lissitzky_20260426,  "Exploit & Safety", "El Lissitzky"),
     ("2026-04-27", img_kandinsky_20260427,  "Dev Checklist",    "Wassily Kandinsky"),
     ("2026-04-28", img_calder_20260428,     "Global Reach",     "Alexander Calder"),
+    ("2026-04-29", img_rothko_20260429,     "HK & Revenue",     "Mark Rothko"),
 ]
 
 for date, fn, kw, artist in DAYS:

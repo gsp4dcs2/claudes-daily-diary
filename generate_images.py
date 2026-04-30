@@ -6554,6 +6554,100 @@ def img_rothko_20260429():
     return base
 
 
+def img_klimt_20260430():
+    """Gustav Klimt — dark bg, gold spirals + mosaic fragments — creative tools connector launch theme."""
+    base = Image.new("RGB", (W, H), (6, 3, 12))   # near-black deep indigo bg
+
+    # 1. Dense gold tesserae field — Klimt's scattered gold leaf across the whole canvas
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    for _ in range(600):
+        sx = rng.randint(0, W)
+        sy = rng.randint(0, H)
+        sr = rng.randint(1, 7)
+        alpha = rng.randint(40, 180)
+        sd.ellipse([(sx - sr, sy - sr), (sx + sr, sy + sr)], fill=(218, 165, 32, alpha))
+    base = comp(base, sl)
+
+    # 2. Five creative-app orbs: Adobe (crimson), Blender (tangerine), Ableton (lime), Autodesk (sky blue), Splice (violet)
+    app_zones = [
+        (220,  160, 180, 140, (195,  30,  40, 175)),   # Adobe — crimson
+        (590,  240, 150, 120, (225,  90,  15, 170)),   # Blender — tangerine
+        (920,  155, 140, 110, (100, 195,  40, 165)),   # Ableton — lime-green
+        (340,  430, 130, 105, ( 30, 110, 210, 160)),   # Autodesk — sky blue
+        (830,  410, 120, 100, (140,  40, 200, 160)),   # Splice — violet
+    ]
+    for cx, cy, rw, rh, col in app_zones:
+        zl = layer()
+        zd = ImageDraw.Draw(zl)
+        zd.ellipse([(cx - rw, cy - rh), (cx + rw, cy + rh)], fill=col)
+        base = comp(base, zl)
+
+    # 3. Gold arc spirals — concentric expanding arcs around the central Blender orb (craft/creation)
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(16):
+        r_arc = 55 + i * 22
+        a_start = i * 22
+        ad.arc([(590 - r_arc, 240 - r_arc), (590 + r_arc, 240 + r_arc)],
+               start=a_start, end=a_start + 100,
+               fill=(218, 165, 32, max(20, 175 - i * 10)), width=4)
+    base = comp(base, al)
+
+    # 4. Gold mosaic fragment rectangles — Klimt decorative surface at canvas corners
+    ml = layer()
+    md = ImageDraw.Draw(ml)
+    fragments = [
+        ( 25,   25, 190, 125, (218, 165,  32, 155)),  # gold top-left
+        (1020,  20, 1185, 135, (195,  30,  40, 140)),  # crimson top-right
+        ( 30,  505, 195, 610, (100, 195,  40, 140)),   # lime bottom-left
+        (1010, 500, 1185, 610, (218, 165,  32, 140)),  # gold bottom-right
+        (460,   18, 730,  80, (140,  40, 200, 120)),   # violet top-centre
+        (470,  555, 740, 618, ( 30, 110, 210, 118)),   # blue bottom-centre
+        ( 30,  280, 115, 370, (218, 165,  32, 125)),   # gold left-mid
+        (1090, 265, 1185, 360, (225,  90,  15, 120)),  # tangerine right-mid
+    ]
+    for px0, py0, px1, py1, col in fragments:
+        md.rectangle([(px0, py0), (px1, py1)], fill=col)
+    base = comp(base, ml)
+
+    # 5. Gold dotted threads connecting app orbs — the connector network
+    connections = [
+        (220, 160, 590, 240),
+        (590, 240, 920, 155),
+        (590, 240, 340, 430),
+        (590, 240, 830, 410),
+        (220, 160, 340, 430),
+        (920, 155, 830, 410),
+    ]
+    for ax, ay, bx, by in connections:
+        tl = layer()
+        td = ImageDraw.Draw(tl)
+        for step in range(70):
+            t = step / 69
+            mx = int(ax + (bx - ax) * t)
+            my = int(ay + (by - ay) * t)
+            dr = rng.randint(1, 3)
+            alpha = int(110 * math.sin(math.pi * t))
+            td.ellipse([(mx - dr, my - dr), (mx + dr, my + dr)], fill=(218, 165, 32, alpha))
+        base = comp(base, tl)
+
+    # 6. Fine rust/copper arc details — Klimt's decorative ornamental layering
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    for i in range(10):
+        rx = rng.randint(150, 1050)
+        ry = rng.randint(320, 590)
+        rr = rng.randint(25, 65)
+        a0 = rng.randint(0, 270)
+        rd.arc([(rx - rr, ry - rr), (rx + rr, ry + rr)],
+               start=a0, end=a0 + 85,
+               fill=(185, 60, 15, rng.randint(80, 160)), width=3)
+    base = comp(base, rl)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -6705,6 +6799,7 @@ DAYS = [
     ("2026-04-27", img_kandinsky_20260427,  "Dev Checklist",    "Wassily Kandinsky"),
     ("2026-04-28", img_calder_20260428,     "Global Reach",     "Alexander Calder"),
     ("2026-04-29", img_rothko_20260429,     "HK & Revenue",     "Mark Rothko"),
+    ("2026-04-30", img_klimt_20260430,      "Creative Tools",   "Gustav Klimt"),
 ]
 
 for date, fn, kw, artist in DAYS:

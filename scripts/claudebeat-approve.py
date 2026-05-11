@@ -70,7 +70,7 @@ def stars_for_url(url):
 
 def get_new_html_files():
     result = subprocess.run(
-        ['git', 'status', '--porcelain'],
+        ['git', 'status', '--porcelain', '-u'],
         cwd=REPO, capture_output=True, text=True, check=True
     )
     files = []
@@ -85,7 +85,7 @@ def git_publish(today):
     if IS_DRAFT:
         # Copy only changed files from draft worktree to live dir, track them
         result = subprocess.run(
-            ['git', 'status', '--porcelain'],
+            ['git', 'status', '--porcelain', '-u'],
             cwd=REPO, capture_output=True, text=True, check=True
         )
         copied = []

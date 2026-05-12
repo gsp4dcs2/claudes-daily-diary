@@ -6554,6 +6554,727 @@ def img_rothko_20260429():
     return base
 
 
+def img_seurat_20260501():
+    """Georges Seurat pointillist — DoD/AI sector rivalry, dense data-field of competing signals."""
+    base = Image.new("RGB", (W, H), (14, 22, 48))   # deep navy bg
+
+    # 1. Dense dot field — thousands of coloured points building the AI landscape
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    spectral = [
+        (220, 40, 40), (220, 100, 30), (210, 180, 30),
+        (40, 180, 80), (30, 120, 220), (130, 40, 210),
+        (220, 60, 140), (255, 255, 255),
+    ]
+    for _ in range(4200):
+        sx = rng.randint(0, W)
+        sy = rng.randint(0, H)
+        r = rng.randint(2, 6)
+        col = spectral[rng.randint(0, len(spectral) - 1)]
+        alpha = rng.randint(50, 200)
+        dd.ellipse([(sx - r, sy - r), (sx + r, sy + r)], fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, dl)
+
+    # 2. Seven bright company orbs — the competitors in the DoD deal
+    orbs = [
+        (180, 160, 70, (220, 40, 40, 200)),   # red
+        (380, 110, 55, (30, 120, 220, 190)),   # blue
+        (600, 200, 65, (210, 180, 30, 200)),   # yellow
+        (820, 130, 60, (40, 180, 80, 190)),    # green
+        (1000, 220, 70, (220, 100, 30, 200)),  # orange
+        (490, 420, 80, (255, 255, 255, 170)),  # white — Anthropic excluded
+        (750, 390, 55, (130, 40, 210, 190)),   # violet
+    ]
+    for cx, cy, r, col in orbs:
+        ol = layer()
+        od = ImageDraw.Draw(ol)
+        od.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=col)
+        # Halo of dots around each orb
+        for _ in range(200):
+            angle = rng.uniform(0, 2 * math.pi)
+            dist = rng.uniform(r + 3, r + 30)
+            dx = int(cx + math.cos(angle) * dist)
+            dy = int(cy + math.sin(angle) * dist)
+            dr = rng.randint(1, 4)
+            dd2 = ImageDraw.Draw(ol)
+            dd2.ellipse([(dx - dr, dy - dr), (dx + dr, dy + dr)], fill=(col[0], col[1], col[2], rng.randint(60, 160)))
+        base = comp(base, ol)
+
+    # 3. Large exclusion ring around the white orb (Anthropic)
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    for i in range(8):
+        r_ring = 90 + i * 12
+        rd.arc([(490 - r_ring, 420 - r_ring), (490 + r_ring, 420 + r_ring)],
+               start=0, end=360, fill=(255, 80, 80, max(10, 80 - i * 9)), width=2)
+    base = comp(base, rl)
+
+    # 4. Dark "exclusion" cross over white orb
+    xl = layer()
+    xd = ImageDraw.Draw(xl)
+    xd.line([(455, 385), (525, 455)], fill=(200, 30, 30, 180), width=5)
+    xd.line([(525, 385), (455, 455)], fill=(200, 30, 30, 180), width=5)
+    base = comp(base, xl)
+
+    return base
+
+
+def img_miro_20260502():
+    """Joan Miró — biomorphic blobs and stars for Claude Code release cycles."""
+    base = Image.new("RGB", (W, H), (18, 14, 55))   # deep indigo
+
+    # 1. Star scatter — release versions
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    for _ in range(35):
+        sx = rng.randint(30, W - 30)
+        sy = rng.randint(30, H - 30)
+        r = rng.randint(4, 14)
+        col_choices = [(255, 220, 0, 220), (255, 80, 80, 200), (255, 255, 255, 200)]
+        col = col_choices[rng.randint(0, 2)]
+        # 5-point star
+        pts = []
+        for i in range(10):
+            angle = math.pi / 5 * i - math.pi / 2
+            rr = r if i % 2 == 0 else r // 2
+            pts.append((int(sx + rr * math.cos(angle)), int(sy + rr * math.sin(angle))))
+        sd.polygon(pts, fill=col)
+    base = comp(base, sl)
+
+    # 2. Large bold biomorphic blobs (Miró primaries)
+    blobs = [
+        (160, 300, 130, 95, (220, 40, 40, 210)),    # red blob left
+        (600, 200, 160, 120, (255, 210, 0, 200)),   # yellow blob centre-top
+        (950, 380, 140, 100, (30, 80, 220, 200)),   # blue blob right
+        (400, 450, 110, 80, (255, 255, 255, 180)),  # white small blob
+        (780, 180, 100, 70, (220, 40, 40, 180)),    # red top-right
+    ]
+    for cx, cy, rw, rh, col in blobs:
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        bd.ellipse([(cx - rw, cy - rh), (cx + rw, cy + rh)], fill=col, outline=(0, 0, 0, 255), width=4)
+        base = comp(base, bl)
+
+    # 3. Black connecting lines
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    lines = [(160, 300, 400, 450), (400, 450, 600, 200), (600, 200, 950, 380), (950, 380, 780, 180)]
+    for ax, ay, bx, by in lines:
+        ld.line([(ax, ay), (bx, by)], fill=(0, 0, 0, 255), width=5)
+    base = comp(base, ll)
+
+    # 4. Small circle accents (Miró dots)
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    accent_pos = [(250, 150), (500, 350), (700, 480), (1050, 200), (100, 500), (1100, 530)]
+    for ax, ay in accent_pos:
+        r = rng.randint(8, 22)
+        col = [(255, 210, 0, 230), (255, 80, 80, 220), (255, 255, 255, 200)][rng.randint(0, 2)]
+        ad.ellipse([(ax - r, ay - r), (ax + r, ay + r)], fill=col, outline=(0, 0, 0, 200), width=3)
+    base = comp(base, al)
+
+    return base
+
+
+def img_franz_marc_20260503():
+    """Franz Marc — jewel-toned stylised animal/nature shapes — team practices, collaborative safety."""
+    base = Image.new("RGB", (W, H), (12, 28, 68))   # deep cobalt bg
+
+    # 1. Cobalt and emerald interlocking geometric nature shapes
+    shapes = [
+        # Large cobalt-blue arch (stylised animal body)
+        [(100, 580), (100, 300), (300, 150), (500, 300), (500, 580)],
+        # Emerald green flowing form (second 'animal')
+        [(500, 550), (500, 250), (700, 100), (900, 250), (900, 550)],
+        # Deep amber form (third body)
+        [(850, 580), (850, 320), (1050, 180), (1200, 320), (1200, 580)],
+    ]
+    colors = [
+        (35, 95, 200, 200),   # cobalt blue
+        (20, 160, 80, 190),   # emerald green
+        (190, 130, 20, 185),  # amber
+    ]
+    for pts, col in zip(shapes, colors):
+        fl = layer()
+        fd = ImageDraw.Draw(fl)
+        fd.polygon(pts, fill=col, outline=(0, 0, 0, 200), width=3)
+        base = comp(base, fl)
+
+    # 2. Jewel-toned leaf/petal accents across the canvas
+    petals = [
+        (250, 200, 80, 50, 30, (200, 30, 120, 170)),    # magenta
+        (700, 350, 90, 55, -20, (240, 180, 20, 180)),   # gold
+        (1050, 240, 70, 40, 45, (80, 200, 200, 170)),   # teal
+        (400, 480, 75, 45, 15, (160, 40, 200, 160)),    # violet
+        (900, 150, 60, 35, -30, (220, 80, 30, 170)),    # rust
+    ]
+    for cx, cy, rw, rh, rot, col in petals:
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        # Approximate ellipse at angle using polygon
+        pts = []
+        for i in range(36):
+            angle = math.pi * 2 * i / 36
+            rot_r = math.radians(rot)
+            px = cx + rw * math.cos(angle) * math.cos(rot_r) - rh * math.sin(angle) * math.sin(rot_r)
+            py = cy + rw * math.cos(angle) * math.sin(rot_r) + rh * math.sin(angle) * math.cos(rot_r)
+            pts.append((int(px), int(py)))
+        pd.polygon(pts, fill=col)
+        base = comp(base, pl)
+
+    # 3. Fine dark contour lines connecting forms (Franz Marc's bold outlines)
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    contours = [(300, 150, 500, 100), (500, 100, 700, 100), (700, 100, 900, 250),
+                (150, 400, 300, 300), (900, 400, 1050, 300)]
+    for ax, ay, bx, by in contours:
+        cd.line([(ax, ay), (bx, by)], fill=(0, 0, 0, 200), width=4)
+    base = comp(base, cl)
+
+    # 4. White star/moon highlights
+    hl = layer()
+    hd = ImageDraw.Draw(hl)
+    for hx, hy in [(200, 100), (800, 80), (1100, 450), (450, 250)]:
+        hd.ellipse([(hx - 15, hy - 15), (hx + 15, hy + 15)], fill=(255, 255, 255, 180))
+    base = comp(base, hl)
+
+    return base
+
+
+def img_klee_20260504():
+    """Paul Klee colour-cell grid — enterprise network, cells, Blackstone/Goldman grid."""
+    base = Image.new("RGB", (W, H), (22, 18, 14))   # very dark warm bg
+
+    # 1. Klee-style coloured grid cells
+    cols_palette = [
+        (180, 60, 30), (210, 140, 20), (30, 100, 180),
+        (60, 160, 80), (180, 40, 120), (220, 200, 30),
+        (80, 40, 160), (180, 100, 40), (30, 140, 140),
+        (200, 60, 60), (40, 180, 140), (160, 160, 60),
+    ]
+    cell_w, cell_h = 75, 63
+    for row in range(10):
+        for col in range(16):
+            cx = col * cell_w + rng.randint(-5, 5)
+            cy = row * cell_h + rng.randint(-5, 5)
+            cw = cell_w + rng.randint(-8, 8)
+            ch = cell_h + rng.randint(-8, 8)
+            col_idx = (row * 3 + col * 2) % len(cols_palette)
+            alpha = rng.randint(90, 200)
+            cl = layer()
+            cd = ImageDraw.Draw(cl)
+            cd.rectangle([(cx, cy), (cx + cw, cy + ch)], fill=(cols_palette[col_idx][0], cols_palette[col_idx][1], cols_palette[col_idx][2], alpha))
+            base = comp(base, cl)
+
+    # 2. Dark grid lines on top
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for col in range(17):
+        gd.line([(col * cell_w, 0), (col * cell_w, H)], fill=(20, 16, 12, 200), width=3)
+    for row in range(11):
+        gd.line([(0, row * cell_h), (W, row * cell_h)], fill=(20, 16, 12, 200), width=3)
+    base = comp(base, gl)
+
+    # 3. White node circles at grid intersections (Klee's compositional nodes)
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    for row in range(1, 10):
+        for col in range(1, 16):
+            if rng.random() < 0.3:
+                nx = col * cell_w
+                ny = row * cell_h
+                nr = rng.randint(4, 10)
+                nd.ellipse([(nx - nr, ny - nr), (nx + nr, ny + nr)], fill=(255, 255, 255, 200), outline=(20, 16, 12, 255), width=2)
+    base = comp(base, nl)
+
+    return base
+
+
+def img_moholy_20260505():
+    """László Moholy-Nagy Bauhaus — transparent overlapping circles + rectangles — finance agent precision."""
+    base = Image.new("RGB", (W, H), (245, 242, 238))   # warm white bg
+
+    # 1. Large overlapping transparent circles (Moholy's core motif)
+    circle_data = [
+        (300, 280, 220, (220, 40, 40, 100)),    # red large
+        (600, 200, 190, (30, 80, 200, 100)),    # blue
+        (900, 300, 200, (220, 180, 20, 100)),   # yellow
+        (450, 430, 160, (30, 150, 80, 90)),     # green
+        (800, 430, 170, (180, 30, 180, 85)),    # violet
+        (150, 180, 130, (220, 40, 40, 80)),     # red small left
+        (1050, 200, 140, (30, 80, 200, 75)),    # blue right
+    ]
+    for cx, cy, r, col in circle_data:
+        cl = layer()
+        cd = ImageDraw.Draw(cl)
+        cd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=col, outline=(col[0]//2, col[1]//2, col[2]//2, 200), width=3)
+        base = comp(base, cl)
+
+    # 2. Bold horizontal and vertical bars (Bauhaus structure)
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    bars = [
+        (0, 280, W, 295, (30, 30, 30, 180)),     # thick horizontal
+        (580, 0, 595, H, (30, 30, 30, 160)),     # thick vertical
+        (0, 500, W, 508, (180, 30, 30, 120)),    # thin red horizontal
+        (300, 0, 308, H, (30, 80, 200, 100)),    # thin blue vertical
+    ]
+    for bx0, by0, bx1, by1, col in bars:
+        rd.rectangle([(bx0, by0), (bx1, by1)], fill=col)
+    base = comp(base, rl)
+
+    # 3. Small primary-colour squares at intersections
+    sq_l = layer()
+    sq_d = ImageDraw.Draw(sq_l)
+    squares = [
+        (294, 274, (220, 40, 40, 220)), (294, 494, (30, 80, 200, 220)),
+        (574, 274, (220, 180, 20, 220)), (574, 494, (30, 150, 80, 200)),
+    ]
+    for sx, sy, col in squares:
+        sq_d.rectangle([(sx, sy), (sx + 22, sy + 22)], fill=col)
+    base = comp(base, sq_l)
+
+    # 4. Fine radiating lines from centre (transparency/trust visual)
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    cx, cy = W // 2, H // 2
+    for i in range(24):
+        angle = math.pi * 2 * i / 24
+        ex = int(cx + 500 * math.cos(angle))
+        ey = int(cy + 500 * math.sin(angle))
+        td.line([(cx, cy), (ex, ey)], fill=(100, 100, 100, 30), width=1)
+    base = comp(base, tl)
+
+    return base
+
+
+def img_delaunay_20260506():
+    """Robert Delaunay spectral rings — Code with Claude + SpaceX space-signal theme."""
+    base = Image.new("RGB", (W, H), (8, 6, 24))   # near-black bg
+
+    # 1. Large overlapping spectral disc pair (left = earth/code, right = space/satellite)
+    disc_data = [
+        (350, 310, 260),   # left disc centre — code/SF conference
+        (870, 300, 240),   # right disc centre — space/Colossus
+    ]
+    spectral_rings = [
+        (180, 0, 0), (180, 80, 0), (180, 160, 0),
+        (0, 160, 0), (0, 80, 180), (80, 0, 180),
+        (160, 0, 140), (200, 200, 200),
+    ]
+    for cx, cy, max_r in disc_data:
+        for i, col in enumerate(spectral_rings):
+            r = max_r - i * 28
+            if r < 5:
+                break
+            rl = layer()
+            rd = ImageDraw.Draw(rl)
+            alpha = 160 if i < 3 else 120
+            rd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=(col[0], col[1], col[2], alpha))
+            base = comp(base, rl)
+
+    # 2. Connecting ring arcs between the two discs (signal transmission)
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(6):
+        r_arc = 120 + i * 35
+        mid_x = (350 + 870) // 2
+        ad.arc([(mid_x - r_arc, 310 - r_arc // 2), (mid_x + r_arc, 310 + r_arc // 2)],
+               start=200, end=340, fill=(200, 200, 200, max(20, 90 - i * 12)), width=3)
+    base = comp(base, al)
+
+    # 3. Small satellite rings in upper corners
+    for scx, scy, sr in [(120, 90, 60), (1080, 100, 55), (600, 60, 50)]:
+        for i, col in enumerate(spectral_rings[:5]):
+            r = sr - i * 10
+            if r < 4:
+                break
+            sl = layer()
+            sd = ImageDraw.Draw(sl)
+            sd.ellipse([(scx - r, scy - r), (scx + r, scy + r)], fill=(col[0], col[1], col[2], 140))
+            base = comp(base, sl)
+
+    # 4. White star dots — the NVIDIA GPU count
+    stl = layer()
+    std = ImageDraw.Draw(stl)
+    for _ in range(120):
+        sx = rng.randint(0, W)
+        sy = rng.randint(0, H)
+        sr = rng.randint(1, 3)
+        std.ellipse([(sx - sr, sy - sr), (sx + sr, sy + sr)], fill=(255, 255, 255, rng.randint(80, 200)))
+    base = comp(base, stl)
+
+    return base
+
+
+def img_malevich_20260507():
+    """Kazimir Malevich Suprematism — bold geometric shapes — multi-agent orchestration pure structure."""
+    base = Image.new("RGB", (W, H), (245, 238, 225))   # cream bg
+
+    # 1. Large black central square — the lead/orchestrator agent
+    ml = layer()
+    md = ImageDraw.Draw(ml)
+    md.rectangle([(430, 170), (770, 460)], fill=(18, 16, 14, 255))
+    base = comp(base, ml)
+
+    # 2. Red tilted rectangle — primary specialist
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    pts = []
+    cx, cy, w, h, angle = 200, 350, 180, 70, -25
+    rot = math.radians(angle)
+    corners = [(-w//2, -h//2), (w//2, -h//2), (w//2, h//2), (-w//2, h//2)]
+    for px, py in corners:
+        rx = int(cx + px * math.cos(rot) - py * math.sin(rot))
+        ry = int(cy + px * math.sin(rot) + py * math.cos(rot))
+        pts.append((rx, ry))
+    rd.polygon(pts, fill=(200, 30, 30, 240))
+    base = comp(base, rl)
+
+    # 3. Navy blue tilted rectangle — second specialist
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    pts = []
+    cx, cy, w, h, angle = 1000, 250, 165, 65, 20
+    rot = math.radians(angle)
+    for px, py in [(-w//2, -h//2), (w//2, -h//2), (w//2, h//2), (-w//2, h//2)]:
+        rx = int(cx + px * math.cos(rot) - py * math.sin(rot))
+        ry = int(cy + px * math.sin(rot) + py * math.cos(rot))
+        pts.append((rx, ry))
+    bd.polygon(pts, fill=(20, 40, 140, 230))
+    base = comp(base, bl)
+
+    # 4. Yellow bold bar — third specialist (horizontal)
+    yl = layer()
+    yd = ImageDraw.Draw(yl)
+    pts = []
+    cx, cy, w, h, angle = 600, 520, 350, 55, -8
+    rot = math.radians(angle)
+    for px, py in [(-w//2, -h//2), (w//2, -h//2), (w//2, h//2), (-w//2, h//2)]:
+        rx = int(cx + px * math.cos(rot) - py * math.sin(rot))
+        ry = int(cy + px * math.sin(rot) + py * math.cos(rot))
+        pts.append((rx, ry))
+    yd.polygon(pts, fill=(220, 185, 15, 230))
+    base = comp(base, yl)
+
+    # 5. Small black connecting circles — the shared filesystem/coordination points
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    for px, py in [(430, 320), (770, 320), (600, 460), (200, 290), (1000, 215)]:
+        cd.ellipse([(px - 12, py - 12), (px + 12, py + 12)], fill=(18, 16, 14, 220))
+    base = comp(base, cl)
+
+    # 6. Thin black lines connecting orchestrator to specialists
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    ld.line([(430, 320), (200, 350)], fill=(18, 16, 14, 200), width=3)
+    ld.line([(770, 320), (1000, 250)], fill=(18, 16, 14, 200), width=3)
+    ld.line([(600, 460), (600, 520)], fill=(18, 16, 14, 200), width=3)
+    base = comp(base, ll)
+
+    return base
+
+
+def img_leger_20260508():
+    """Fernand Léger — bold mechanical industrial shapes — Akamai cloud infrastructure surge."""
+    base = Image.new("RGB", (W, H), (12, 14, 28))   # near-black bg
+
+    # 1. Bold mechanical cylinders/pipes (cloud infra)
+    pipes = [
+        (0, 180, 400, 240, (180, 180, 180, 200)),    # horizontal left
+        (500, 0, 560, 630, (120, 120, 140, 190)),    # vertical centre
+        (650, 300, 1200, 360, (200, 160, 30, 190)),  # horizontal right gold
+        (880, 0, 940, 400, (180, 60, 30, 180)),      # vertical red-orange right
+    ]
+    for x0, y0, x1, y1, col in pipes:
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        pd.rectangle([(x0, y0), (x1, y1)], fill=col)
+        # Highlight edge
+        if y1 - y0 > x1 - x0:  # vertical
+            pd.rectangle([(x0, y0), (x0 + 8, y1)], fill=(min(col[0]+50, 255), min(col[1]+50, 255), min(col[2]+50, 255), 150))
+        else:
+            pd.rectangle([(x0, y0), (x1, y0 + 8)], fill=(min(col[0]+50, 255), min(col[1]+50, 255), min(col[2]+50, 255), 150))
+        base = comp(base, pl)
+
+    # 2. Bold primary geometric shapes — Léger's flat forms
+    shapes = [
+        [(100, 380), (380, 380), (380, 580), (100, 580)],   # large grey square
+        [(640, 80), (840, 80), (840, 280), (640, 280)],     # red square
+        [(960, 380), (1180, 380), (1180, 580), (960, 580)], # yellow square
+    ]
+    shape_colors = [(70, 80, 100, 200), (200, 50, 30, 210), (210, 180, 20, 200)]
+    for pts, col in zip(shapes, shape_colors):
+        fl = layer()
+        fd = ImageDraw.Draw(fl)
+        fd.polygon(pts, fill=col, outline=(220, 220, 220, 180), width=4)
+        base = comp(base, fl)
+
+    # 3. Bold circular gears/wheels
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for gcx, gcy, gr, gcol in [(240, 480, 85, (80, 90, 110, 210)), (740, 180, 75, (200, 50, 30, 200)), (1070, 480, 80, (200, 170, 20, 200))]:
+        gd.ellipse([(gcx - gr, gcy - gr), (gcx + gr, gcy + gr)], fill=gcol, outline=(220, 220, 220, 200), width=6)
+        gd.ellipse([(gcx - gr // 3, gcy - gr // 3), (gcx + gr // 3, gcy + gr // 3)], fill=(12, 14, 28, 255))
+    base = comp(base, gl)
+
+    # 4. White bold outlines (Léger's black outlines in white for dark bg)
+    ol = layer()
+    od = ImageDraw.Draw(ol)
+    od.line([(0, 180), (1200, 180)], fill=(220, 220, 220, 120), width=4)
+    od.line([(500, 0), (500, 630)], fill=(220, 220, 220, 100), width=4)
+    base = comp(base, ol)
+
+    return base
+
+
+def img_mondrian_20260509():
+    """Piet Mondrian grid — structured Claude Code releases, cache and plugin system."""
+    base = Image.new("RGB", (W, H), (245, 240, 225))
+
+    YELLOW = (255, 215, 0)
+    RED    = (220, 40, 40)
+    BLUE   = (30, 80, 200)
+    BLACK  = (20, 20, 20)
+
+    # Grid lines at cache-themed spacings
+    grid_x = [0, 90, 200, 330, 460, 590, 720, 840, 960, 1080, 1200, W]
+    grid_y = [0, 70, 155, 240, 340, 440, 530, H]
+    band_w = 14
+
+    for gx in grid_x[1:-1]:
+        base_d = ImageDraw.Draw(base)
+        base_d.rectangle([(gx - band_w // 2, 0), (gx + band_w // 2, H)], fill=YELLOW)
+    for gy in grid_y[1:-1]:
+        base_d = ImageDraw.Draw(base)
+        base_d.rectangle([(0, gy - band_w // 2), (W, gy + band_w // 2)], fill=YELLOW)
+
+    # Intersection accents
+    cycle_colors = [RED, BLUE, YELLOW, (245, 240, 225), RED, BLUE, RED, (245, 240, 225)]
+    idx = 0
+    draw = ImageDraw.Draw(base)
+    for gx in grid_x[1:-1]:
+        for gy in grid_y[1:-1]:
+            col = cycle_colors[idx % len(cycle_colors)]
+            idx += 1
+            cx = gx - band_w // 2
+            cy = gy - band_w // 2
+            draw.rectangle([(cx - 4, cy - 4), (cx + 14, cy + 14)], fill=col)
+
+    # Coloured cells
+    inset = band_w // 2 + 2
+    colored_cells = [
+        (0, 0, RED), (2, 1, BLUE), (4, 0, RED),
+        (1, 2, BLUE), (5, 1, RED), (7, 2, BLUE),
+        (3, 4, RED), (6, 3, BLUE), (9, 1, RED),
+        (8, 5, BLUE), (10, 3, RED),
+    ]
+    for ci, cj, col in colored_cells:
+        if ci < len(grid_x) - 1 and cj < len(grid_y) - 1:
+            x0 = grid_x[ci] + inset
+            y0 = grid_y[cj] + inset
+            x1 = grid_x[ci + 1] - inset
+            y1 = grid_y[cj + 1] - inset
+            if x1 > x0 and y1 > y0:
+                draw.rectangle([(x0, y0), (x1, y1)], fill=col)
+
+    for gx in grid_x:
+        draw.line([(gx, 0), (gx, H)], fill=BLACK, width=2)
+    for gy in grid_y:
+        draw.line([(0, gy), (W, gy)], fill=BLACK, width=2)
+
+    return base
+
+
+def img_balla_20260510():
+    """Giacomo Balla Futurism — radiating motion lines from VP — fiction-based character training, dynamic values."""
+    base = Image.new("RGB", (W, H), (8, 6, 18))   # near-black bg
+
+    # 1. Multiple vanishing points radiating planes — different training 'stories' converging
+    vps = [(200, 315), (600, 150), (1000, 400)]
+    plane_colors = [
+        [(220, 30, 30), (220, 100, 30), (200, 180, 20)],    # warm — conflict narratives
+        [(30, 100, 220), (30, 180, 180), (100, 30, 200)],   # cool — cooperative narratives
+        [(200, 200, 200), (160, 160, 160), (120, 120, 120)], # neutral — factual text
+    ]
+    for (vpx, vpy), pc in zip(vps, plane_colors):
+        for i, col in enumerate(pc):
+            angle_start = i * 60 + 10
+            for j in range(8):
+                angle = math.radians(angle_start + j * 7)
+                length = rng.randint(200, 500)
+                ex = int(vpx + length * math.cos(angle))
+                ey = int(vpy + length * math.sin(angle))
+                pl = layer()
+                pd = ImageDraw.Draw(pl)
+                width = max(1, 6 - j)
+                alpha = max(20, 140 - j * 15)
+                pd.line([(vpx, vpy), (ex, ey)], fill=(col[0], col[1], col[2], alpha), width=width)
+                base = comp(base, pl)
+
+    # 2. Bold central burst — the training moment where fiction reshapes character
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    cx, cy = 600, 315
+    for i in range(36):
+        angle = math.pi * 2 * i / 36
+        for r in [40, 70, 100]:
+            ex = int(cx + r * math.cos(angle))
+            ey = int(cy + r * math.sin(angle))
+            dr = max(1, 5 - r // 30)
+            col_r = int(200 + 55 * math.sin(angle))
+            col_g = int(100 + 100 * math.cos(angle))
+            bd.ellipse([(ex - dr, ey - dr), (ex + dr, ey + dr)], fill=(col_r, col_g, 50, 200))
+    base = comp(base, bl)
+
+    # 3. Motion arc lines (Balla's speed lines)
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(12):
+        r_arc = 120 + i * 25
+        for vpx, vpy in vps:
+            ad.arc([(vpx - r_arc, vpy - r_arc // 2), (vpx + r_arc, vpy + r_arc // 2)],
+                   start=rng.randint(180, 240), end=rng.randint(300, 360),
+                   fill=(220, 220, 220, max(10, 60 - i * 4)), width=2)
+    base = comp(base, al)
+
+    # 4. Scattered bright specks — the data points that form the training signal
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    for _ in range(500):
+        sx = rng.randint(0, W)
+        sy = rng.randint(0, H)
+        sr = rng.randint(1, 3)
+        alpha = rng.randint(60, 200)
+        col = [(220, 30, 30), (30, 120, 220), (220, 180, 20), (255, 255, 255)][rng.randint(0, 3)]
+        sd.ellipse([(sx - sr, sy - sr), (sx + sr, sy + sr)], fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, sl)
+
+    return base
+
+
+def img_lissitzky_20260511():
+    """El Lissitzky Constructivism — white/cream bg, bold red+black bars — stock market structure, regulatory."""
+    base = Image.new("RGB", (W, H), (248, 244, 236))   # cream bg
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Bold diagonal red bar (the dominant Lissitzky element — regulatory sweep)
+    pts_red = [(0, 180), (700, 180), (1200, 0), (1200, 80), (700, 260), (0, 260)]
+    draw.polygon(pts_red, fill=(200, 30, 30))
+
+    # 2. Bold black horizontal bar (market authority)
+    draw.rectangle([(0, 380), (W, 440)], fill=(18, 16, 14))
+
+    # 3. Bold vertical black bar (the IPO preparation axis)
+    draw.rectangle([(540, 0), (600, H)], fill=(18, 16, 14))
+
+    # 4. Red circles at structural junctions (Lissitzky's node points)
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    for cx, cy in [(540, 180), (600, 180), (540, 440), (600, 440)]:
+        cd.ellipse([(cx - 22, cy - 22), (cx + 22, cy + 22)], fill=(200, 30, 30, 255))
+    base = comp(base, cl)
+
+    # 5. Thin red diagonal lines (secondary Lissitzky bars)
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    for i in range(5):
+        y_off = i * 40
+        td.line([(0, 300 + y_off), (540, 180 + y_off // 2)], fill=(200, 30, 30, 100), width=2)
+        td.line([(600, 200 + y_off // 2), (W, 350 + y_off)], fill=(200, 30, 30, 80), width=2)
+    base = comp(base, tl)
+
+    # 6. White rectangle cutout over red bar (pure Lissitzky geometric tension)
+    wl = layer()
+    wd = ImageDraw.Draw(wl)
+    wd.rectangle([(200, 190), (400, 250)], fill=(248, 244, 236, 230))
+    wd.rectangle([(800, 195), (1000, 248)], fill=(248, 244, 236, 210))
+    base = comp(base, wl)
+
+    return base
+
+
+def img_kandinsky_20260512():
+    """Wassily Kandinsky — bold primaries, diagonals, circles + triangles — valuation complexity, IPO momentum."""
+    base = Image.new("RGB", (W, H), (18, 34, 72))
+
+    # 1. Diagonal grid
+    grid_layer = layer()
+    gd = ImageDraw.Draw(grid_layer)
+    step = 58
+    line_color = (255, 255, 255, 22)
+    for offset in range(-H, W + H, step):
+        gd.line([(offset, 0), (offset + H, H)], fill=line_color, width=1)
+    for offset in range(0, W + H + step, step):
+        gd.line([(offset, 0), (offset - H, H)], fill=line_color, width=1)
+    base = comp(base, grid_layer)
+
+    # 2. Large gold circle (the valuation balloon)
+    c_layer = layer()
+    cd = ImageDraw.Draw(c_layer)
+    cd.ellipse([(580, -80), (1100, 440)], fill=(255, 215, 0, 220), outline=(0, 0, 0, 255), width=6)
+    base = comp(base, c_layer)
+
+    # 3. Red upward triangle (market momentum)
+    t_layer = layer()
+    td = ImageDraw.Draw(t_layer)
+    td.polygon([(150, 560), (450, 560), (300, 160)], fill=(220, 30, 50, 220), outline=(0, 0, 0, 255))
+    base = comp(base, t_layer)
+
+    # 4. Blue pie-slice (investor share)
+    p_layer = layer()
+    pd = ImageDraw.Draw(p_layer)
+    pd.pieslice([(780, 350), (1150, 620)], start=170, end=340, fill=(30, 90, 220, 200), outline=(0, 0, 0, 255), width=5)
+    base = comp(base, p_layer)
+
+    # 5. Large arc (market curve)
+    a_layer = layer()
+    ad = ImageDraw.Draw(a_layer)
+    ad.arc([(30, 40), (560, 560)], start=250, end=60, fill=(0, 0, 0, 255), width=8)
+    base = comp(base, a_layer)
+
+    # 6. Orange accent circle
+    oc_layer = layer()
+    ocd = ImageDraw.Draw(oc_layer)
+    ocd.ellipse([(80, 60), (260, 240)], fill=(255, 120, 20, 220), outline=(0, 0, 0, 255), width=5)
+    base = comp(base, oc_layer)
+
+    # 7. Purple circle (EU/regulatory overlay)
+    pc_layer = layer()
+    pcd = ImageDraw.Draw(pc_layer)
+    pcd.ellipse([(350, 20), (510, 180)], fill=(150, 50, 200, 200), outline=(0, 0, 0, 255), width=4)
+    base = comp(base, pc_layer)
+
+    # 8. Green diamond (data point)
+    gm_layer = layer()
+    gmd = ImageDraw.Draw(gm_layer)
+    gmd.polygon([(520, 400), (610, 300), (700, 400), (610, 500)], fill=(40, 180, 90, 200), outline=(0, 0, 0, 255), width=4)
+    base = comp(base, gm_layer)
+
+    # 9. Scatter circles (market signals)
+    scatter = layer()
+    sd = ImageDraw.Draw(scatter)
+    positions = [(130, 350), (310, 420), (480, 120), (720, 40), (860, 520), (950, 210), (1060, 70), (1110, 480), (50, 510), (420, 310)]
+    colors = [(255, 215, 0, 220), (220, 30, 50, 220), (255, 255, 255, 200), (0, 240, 255, 200),
+              (255, 120, 20, 220), (150, 50, 200, 200), (50, 220, 50, 220), (255, 215, 0, 200),
+              (0, 240, 255, 200), (220, 30, 50, 220)]
+    radii = [18, 14, 11, 20, 9, 16, 13, 15, 12, 17]
+    for (px, py), col, r in zip(positions, colors, radii):
+        sd.ellipse([(px - r, py - r), (px + r, py + r)], fill=col, outline=(0, 0, 0, 255), width=2)
+    base = comp(base, scatter)
+
+    # 10. Bold lines
+    lines_layer = layer()
+    ld = ImageDraw.Draw(lines_layer)
+    ld.line([(0, 440), (420, 110)], fill=(0, 0, 0, 255), width=4)
+    ld.line([(480, 610), (880, 210)], fill=(0, 0, 0, 255), width=3)
+    ld.line([(780, 610), (1100, 280)], fill=(255, 255, 255, 255), width=2)
+    base = comp(base, lines_layer)
+
+    return base
+
+
 def img_klimt_20260430():
     """Gustav Klimt — dark bg, gold spirals + mosaic fragments — creative tools connector launch theme."""
     base = Image.new("RGB", (W, H), (6, 3, 12))   # near-black deep indigo bg
@@ -6800,6 +7521,18 @@ DAYS = [
     ("2026-04-28", img_calder_20260428,     "Global Reach",     "Alexander Calder"),
     ("2026-04-29", img_rothko_20260429,     "HK & Revenue",     "Mark Rothko"),
     ("2026-04-30", img_klimt_20260430,      "Creative Tools",   "Gustav Klimt"),
+    ("2026-05-01", img_seurat_20260501,     "DoD Rivalry",      "Georges Seurat"),
+    ("2026-05-02", img_miro_20260502,       "Code Releases",    "Joan Miró"),
+    ("2026-05-03", img_franz_marc_20260503, "Team Practices",   "Franz Marc"),
+    ("2026-05-04", img_klee_20260504,       "Enterprise Grid",  "Paul Klee"),
+    ("2026-05-05", img_moholy_20260505,     "Finance Agents",   "László Moholy-Nagy"),
+    ("2026-05-06", img_delaunay_20260506,   "Space & Code",     "Robert Delaunay"),
+    ("2026-05-07", img_malevich_20260507,   "Agent Structure",  "Kazimir Malevich"),
+    ("2026-05-08", img_leger_20260508,      "Cloud Surge",      "Fernand Léger"),
+    ("2026-05-09", img_mondrian_20260509,   "Cache & Plugins",  "Piet Mondrian"),
+    ("2026-05-10", img_balla_20260510,      "Fiction Training", "Giacomo Balla"),
+    ("2026-05-11", img_lissitzky_20260511,  "Market Structure", "El Lissitzky"),
+    ("2026-05-12", img_kandinsky_20260512,  "Valuation Rise",   "Wassily Kandinsky"),
 ]
 
 for date, fn, kw, artist in DAYS:

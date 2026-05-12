@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="May 6: Code with Claude 2026 opens in San Francisco with Claude Code checkpoints and auto mode as keynote features. Simultaneously, Anthropic signs a deal to use all 220,000 GPUs at SpaceX's Colossus 1 data center in Memphis, immediately doubling Pro and Max rate limits.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-05-06 – Code with Claude 2026 Opens in San Francisco + SpaceX Colossus Compute Deal">
+  <meta property="og:description" content="May 6: Code with Claude 2026 opens in San Francisco with Claude Code checkpoints and auto mode as keynote features. Anthropic signs a deal to use all 220,000 GPUs at SpaceX's Colossus 1 data center, immediately doubling Pro and Max rate limits.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/05/2026-05-06.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/05/2026-05-06.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/05/2026-05-06.png">
+
+  <title>2026-05-06 – Code with Claude 2026 Opens in San Francisco + SpaceX Colossus Compute Deal | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Code with Claude 2026 Opens in San Francisco + SpaceX Colossus Compute Deal",
+  "description": "May 6: Code with Claude 2026 opens in San Francisco with Claude Code checkpoints and auto mode as keynote features. Anthropic signs a deal to use all 220,000 GPUs at SpaceX's Colossus 1 data center, immediately doubling Pro and Max rate limits.",
+  "datePublished": "2026-05-06",
+  "dateModified": "2026-05-06",
+  "url": "https://claudebeat.ai/articles/2026/05/2026-05-06.html",
+  "image": "https://claudebeat.ai/articles/2026/05/2026-05-06.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/05/2026-05-06.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-05-06</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Code with Claude 2026 Opens in San Francisco + SpaceX Colossus Compute Deal</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-05-06.png" alt="Code with Claude 2026 Opens in San Francisco + SpaceX Colossus Compute Deal — visual for 2026-05-06">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Code with Claude 2026 keynote
+     Source: https://simonwillison.net/2026/May/6/code-w-claude-2026/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Code with Claude 2026: Checkpoints, Auto Mode, and a Deliberate No-New-Model Keynote</h2>
+
+  <p>Anthropic's second annual developer conference, <em>Code with Claude 2026</em>, opened in San Francisco on May 6. Unlike many developer conferences, the keynote did not launch a new model — a deliberate choice the company framed as a signal that the focus is now on getting existing models reliably into production rather than chasing benchmark headlines. The two centerpiece announcements were <strong>Claude Code Checkpoints</strong> and <strong>Claude Code Auto Mode</strong>, both shipping same-day.</p>
+
+  <h3>Checkpoints: save state, rewind with confidence</h3>
+  <p>Checkpoints automatically save your code state before every change Claude makes. If a multi-step session takes a wrong turn, you can rewind to any prior state using <code>Esc Esc</code> (double-tap Escape) or the <code>/rewind</code> command, then choose to restore the code, the conversation, or both. The feature was one of the most-requested by Claude Code users, who had previously relied on git commits as manual checkpoints — a workflow that required constant context-switching. Checkpoints operate below the git layer, so you can rewind to mid-session states that were never committed.</p>
+
+  <pre><code># During a Claude Code session:
+/rewind               # opens checkpoint browser
+                      # choose: restore code only, conversation only, or both
+# Or press Esc twice to jump to the most recent checkpoint</code></pre>
+
+  <h3>Auto Mode: safer autonomous execution</h3>
+  <p>Auto Mode is a new permission model for Claude Code that sits between fully interactive (every action requires approval) and <code>--dangerously-skip-permissions</code> (no approvals at all). In Auto Mode, a secondary model-based classifier evaluates each proposed action and decides whether it requires human confirmation. The classifier uses session context — accumulated denials, action type, file sensitivity — to calibrate its decisions. A backstop rule kicks in if the session accumulates 3 consecutive denials or 20 total, halting the agent and escalating to the human. This makes it safe to leave Claude Code running on long tasks without babysitting every decision.</p>
+
+  <div class="callout tip">
+    <strong>When to use Auto Mode vs. --dangerously-skip-permissions</strong>
+    <p>Use Auto Mode for any session where you want to step away but maintain a safety net. The classifier backstop prevents runaway agents from repeatedly pushing past denials. Reserve <code>--dangerously-skip-permissions</code> only for fully sandboxed CI environments where no production systems are accessible and you have reviewed the task scope completely before starting.</p>
+  </div>
+
+  <h3>Conference structure: three cities, extended days</h3>
+  <p>The 2026 edition spans three stops: San Francisco (May 6), London (May 19), and Tokyo (June 10). Each main conference day is followed by an "Extended" day aimed at independent developers and early-stage founders, with a focus on hands-on workshops rather than keynotes.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Community content or research — independently cross-checked">⭐</span>
+    <a href="https://simonwillison.net/2026/May/6/code-w-claude-2026/" class="source-link" target="_blank" rel="noopener">simonwillison.net</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Code with Claude 2026</span>
+    <span class="tag">checkpoints</span>
+    <span class="tag">auto mode</span>
+    <span class="tag">Claude Code</span>
+    <span class="tag">developer conference</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — SpaceX Colossus compute deal + higher limits
+     Source: https://www.anthropic.com/news/higher-limits-spacex
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Anthropic Signs SpaceX Colossus 1 Deal — 220,000 GPUs and Doubled Pro/Max Rate Limits</h2>
+
+  <p>On the same day as the conference keynote, Anthropic published a brief announcement: the company has signed a deal to use the entire compute capacity of SpaceX's Colossus 1 data center in Memphis, Tennessee. The deal gives Anthropic access to more than <strong>300 megawatts of capacity and over 220,000 NVIDIA GPUs</strong> within the month. SpaceX and xAI merged earlier in 2026; xAI retains its larger Colossus 2 cluster while Anthropic takes Colossus 1. The compute is being added to meet demand that Anthropic's CEO Dario Amodei described as "80x growth" in a single quarter.</p>
+
+  <h3>Immediate effect: rate limits doubled</h3>
+  <ul>
+    <li><strong>Pro and Max plans</strong> — rate limits doubled; peak-hour reductions removed. Pro and Max subscribers should see noticeably improved throughput during US daytime hours starting this week.</li>
+    <li><strong>Team and Enterprise plans</strong> — seat-based rate limits doubled.</li>
+    <li><strong>API (Opus tier)</strong> — Opus token limits raised.</li>
+  </ul>
+
+  <h3>Space compute interest</h3>
+  <p>As part of the agreement, Anthropic "expressed interest" in working with SpaceX to develop multiple gigawatts of compute capacity in orbit — satellite-based inference infrastructure that would reduce terrestrial data center land and power constraints. This remains exploratory and has no committed timeline, but it is the most concrete public statement either company has made about space-based AI compute.</p>
+
+  <div class="callout">
+    <strong>Enterprise capacity planning update</strong>
+    <p>If your team has been throttled during peak hours, the rate limit increase is effective immediately — no configuration change required. For teams managing spend budgets, the higher throughput ceiling means you can run more concurrent Claude Code sessions or API calls before hitting limits, but the per-token pricing has not changed. Update your load-testing benchmarks and capacity models to reflect the new ceilings.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/higher-limits-spacex" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">SpaceX</span>
+    <span class="tag">Colossus 1</span>
+    <span class="tag">compute</span>
+    <span class="tag">rate limits</span>
+    <span class="tag">infrastructure</span>
+    <span class="tag">Pro plan</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

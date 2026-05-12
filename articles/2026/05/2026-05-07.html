@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="May 7: Anthropic updates Claude Managed Agents with three new features — Dreaming (agents review past sessions to self-improve), Outcomes (a grading agent scores and re-runs tasks), and Multi-agent Orchestration (a lead agent delegates specialist workstreams in parallel).">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-05-07 – Claude Managed Agents: Dreaming, Outcomes, and Multi-Agent Orchestration">
+  <meta property="og:description" content="May 7: Anthropic updates Claude Managed Agents with three new features — Dreaming (self-improving memory), Outcomes (grading agent), and Multi-agent Orchestration (parallel specialist delegation).">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/05/2026-05-07.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/05/2026-05-07.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/05/2026-05-07.png">
+
+  <title>2026-05-07 – Claude Managed Agents: Dreaming, Outcomes, and Multi-Agent Orchestration | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Managed Agents: Dreaming, Outcomes, and Multi-Agent Orchestration",
+  "description": "May 7: Anthropic updates Claude Managed Agents with three new features — Dreaming, Outcomes, and Multi-agent Orchestration.",
+  "datePublished": "2026-05-07",
+  "dateModified": "2026-05-07",
+  "url": "https://claudebeat.ai/articles/2026/05/2026-05-07.html",
+  "image": "https://claudebeat.ai/articles/2026/05/2026-05-07.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/05/2026-05-07.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-05-07</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Claude Managed Agents: Dreaming, Outcomes, and Multi-Agent Orchestration</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-05-07.png" alt="Claude Managed Agents: Dreaming, Outcomes, and Multi-Agent Orchestration — visual for 2026-05-07">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Managed Agents three new features
+     Source: https://9to5mac.com/2026/05/07/anthropic-updates-claude-managed-agents-with-three-new-features/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Three New Claude Managed Agents Features: Dreaming, Outcomes, and Multi-Agent Orchestration</h2>
+
+  <p>Anthropic announced three major new features for Claude Managed Agents on May 7, the day after the Code with Claude 2026 keynote in San Francisco. The features were flagged during the keynote but shipped with technical documentation the following day. Together, they address three persistent gaps in production agent deployments: agents that don't learn from experience, agents that can't self-evaluate quality, and agents that can't scale work across parallel specialised processes.</p>
+
+  <h3>Dreaming — agents that improve over time</h3>
+  <p><strong>Dreaming</strong> is a scheduled background process that runs on an agent's session history and memory store. On a configurable schedule (daily by default), a "dreaming session" reviews past agent sessions, extracts patterns, curates memories, and updates the agent's long-term knowledge base — surfacing what worked, what failed, and what context is worth retaining for future sessions. The term echoes sleep-based memory consolidation in neuroscience, where experiences are processed and integrated into long-term memory during low-activity periods. Dreaming is in research preview and must be explicitly enabled per agent; it is not on by default for existing Managed Agents deployments.</p>
+
+  <div class="callout tip">
+    <strong>Practical implication: agents get better at your specific tasks</strong>
+    <p>Dreaming means a Managed Agent that handles your monthly KYC review process will gradually develop a richer internal model of your specific data patterns, common exception types, and preferred output formats — without requiring you to manually update its system prompt. The quality improvement is incremental but compounding. Enable it on lower-stakes agents first to observe what it retains before activating on critical workflows.</p>
+  </div>
+
+  <h3>Outcomes — graded self-improvement</h3>
+  <p><strong>Outcomes</strong> allows you to define success criteria for a Managed Agent task, then uses a separate grading agent to evaluate completed outputs against those criteria. When the grader identifies that an output falls short, it re-runs the task with additional context from the failure analysis. Anthropic's internal benchmarks show a 10.1% improvement in PowerPoint generation quality (on an internal OfficeQA benchmark) after three Outcomes cycles — a meaningful gain for document-heavy workflows where output format and data accuracy both matter.</p>
+
+  <h3>Multi-Agent Orchestration — parallel specialist delegation</h3>
+  <p><strong>Multi-Agent Orchestration</strong> lets a lead Managed Agent decompose a complex task and delegate each component to a specialist agent with its own model, system prompt, tool set, and memory store. Specialists run in parallel on a shared filesystem, with the lead agent coordinating outputs and resolving conflicts. This mirrors the sub-agent patterns used by Anthropic's own engineering teams (see May 3 entry), but as a managed cloud service rather than a local CLI workflow.</p>
+
+  <p>Example workflow: a lead agent receives a request to "prepare a competitive analysis of three companies in our sector." It delegates company research to three parallel specialist agents (one per company), waits for completion, then synthesises the outputs into a unified report — all without human intervention.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://9to5mac.com/2026/05/07/anthropic-updates-claude-managed-agents-with-three-new-features/" class="source-link" target="_blank" rel="noopener">9to5mac.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Managed Agents</span>
+    <span class="tag">Dreaming</span>
+    <span class="tag">Outcomes</span>
+    <span class="tag">multi-agent</span>
+    <span class="tag">orchestration</span>
+    <span class="tag">autonomous agents</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

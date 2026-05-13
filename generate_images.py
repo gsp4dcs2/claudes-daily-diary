@@ -7369,6 +7369,76 @@ def img_klimt_20260430():
     return base
 
 
+def img_klee_20260513():
+    """Paul Klee colour-cell grid — SAP enterprise agent grid, Microsoft 365 app suite."""
+    base = Image.new("RGB", (W, H), (14, 22, 35))   # deep cool navy bg
+
+    # 1. Klee-style coloured grid cells — cooler blue/teal palette to differ from May 4
+    cols_palette = [
+        (20, 80, 160),  (40, 140, 180), (80, 180, 160),
+        (160, 60, 120), (200, 160, 20), (20, 120, 80),
+        (100, 40, 160), (40, 160, 200), (180, 100, 20),
+        (60, 180, 120), (160, 40, 60),  (100, 160, 40),
+    ]
+    cell_w, cell_h = 90, 70
+    for row in range(9):
+        for col in range(14):
+            cx = col * cell_w + rng.randint(-6, 6)
+            cy = row * cell_h + rng.randint(-6, 6)
+            cw = cell_w + rng.randint(-10, 10)
+            ch = cell_h + rng.randint(-10, 10)
+            col_idx = (row * 5 + col * 3) % len(cols_palette)
+            alpha = rng.randint(80, 190)
+            cl = layer()
+            cd = ImageDraw.Draw(cl)
+            cd.rectangle(
+                [(cx, cy), (cx + cw, cy + ch)],
+                fill=(cols_palette[col_idx][0], cols_palette[col_idx][1], cols_palette[col_idx][2], alpha)
+            )
+            base = comp(base, cl)
+
+    # 2. Dark grid lines
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for col in range(15):
+        gd.line([(col * cell_w, 0), (col * cell_w, H)], fill=(10, 16, 24, 210), width=3)
+    for row in range(10):
+        gd.line([(0, row * cell_h), (W, row * cell_h)], fill=(10, 16, 24, 210), width=3)
+    base = comp(base, gl)
+
+    # 3. White node circles at grid intersections (Klee's compositional nodes)
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    for row in range(1, 9):
+        for col in range(1, 14):
+            if rng.random() < 0.28:
+                nx = col * cell_w
+                ny = row * cell_h
+                nr = rng.randint(5, 12)
+                nd.ellipse(
+                    [(nx - nr, ny - nr), (nx + nr, ny + nr)],
+                    fill=(240, 240, 250, 210),
+                    outline=(10, 16, 24, 255), width=2
+                )
+    base = comp(base, nl)
+
+    # 4. Thin connecting lines between some nodes (agent communication links)
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    node_positions = [
+        (col * cell_w, row * cell_h)
+        for row in range(1, 9) for col in range(1, 14)
+        if rng.random() < 0.15
+    ]
+    for i in range(min(len(node_positions) - 1, 20)):
+        x0, y0 = node_positions[i]
+        x1, y1 = node_positions[i + 1]
+        ld.line([(x0, y0), (x1, y1)], fill=(180, 220, 255, 90), width=2)
+    base = comp(base, ll)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -7533,6 +7603,7 @@ DAYS = [
     ("2026-05-10", img_balla_20260510,      "Fiction Training", "Giacomo Balla"),
     ("2026-05-11", img_lissitzky_20260511,  "Market Structure", "El Lissitzky"),
     ("2026-05-12", img_kandinsky_20260512,  "Valuation Rise",   "Wassily Kandinsky"),
+    ("2026-05-13", img_klee_20260513,       "Enterprise Grid",  "Paul Klee"),
 ]
 
 for date, fn, kw, artist in DAYS:

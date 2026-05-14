@@ -7439,6 +7439,85 @@ def img_klee_20260513():
     return base
 
 
+def img_calder_20260514():
+    """Alexander Calder mobile style — small business integrations; connectors as hanging shapes."""
+    base = Image.new("RGB", (W, H), (248, 246, 240))  # warm off-white canvas
+
+    # 1. Mobile armature — a central spine with seven connector drops
+    arm = layer(); adraw = ImageDraw.Draw(arm)
+    # Top horizontal spine
+    adraw.line([(80, 100), (1120, 100)], fill=(18, 18, 18, 245), width=5)
+    # Central vertical drop to mid-bar
+    adraw.line([(600, 100), (600, 240)], fill=(18, 18, 18, 225), width=4)
+    # Mid horizontal bar
+    adraw.line([(200, 240), (1000, 240)], fill=(18, 18, 18, 215), width=4)
+    # Left cluster drops (finance: QuickBooks + PayPal)
+    adraw.line([(200, 240), (200, 400)], fill=(18, 18, 18, 205), width=3)
+    adraw.line([(120, 400), (320, 400)], fill=(18, 18, 18, 200), width=3)
+    adraw.line([(120, 400), (120, 540)], fill=(18, 18, 18, 190), width=2)
+    adraw.line([(320, 400), (320, 530)], fill=(18, 18, 18, 190), width=2)
+    # Centre drop (Claude hub)
+    adraw.line([(600, 240), (600, 520)], fill=(18, 18, 18, 210), width=4)
+    # Right cluster drops (sales/marketing: HubSpot + Canva)
+    adraw.line([(1000, 240), (1000, 390)], fill=(18, 18, 18, 205), width=3)
+    adraw.line([(860, 390), (1000, 390)], fill=(18, 18, 18, 200), width=3)
+    adraw.line([(860, 390), (860, 540)], fill=(18, 18, 18, 185), width=2)
+    adraw.line([(1000, 390), (1000, 530)], fill=(18, 18, 18, 185), width=2)
+    # Far-left anchor (DocuSign)
+    adraw.line([(80, 100), (80, 320)], fill=(18, 18, 18, 195), width=3)
+    # Far-right anchor (Google Workspace)
+    adraw.line([(1120, 100), (1120, 300)], fill=(18, 18, 18, 195), width=3)
+    base = comp(base, arm)
+
+    # 2. Hanging shapes — each represents an integration node
+    shapes = [
+        # QuickBooks — green disc, far-left finance arm
+        ("ellipse", [(70, 515), (190, 600)],   (46, 160, 80, 245),   (18, 18, 18, 255), 4),
+        # PayPal — blue disc, inner finance arm
+        ("ellipse", [(260, 505), (400, 590)],  (0, 78, 168, 245),    (18, 18, 18, 255), 4),
+        # Claude hub — large coral circle, centre
+        ("ellipse", [(490, 440), (710, 600)],  (232, 115, 74, 250),  (18, 18, 18, 255), 5),
+        # HubSpot — orange disc, inner right arm
+        ("ellipse", [(800, 510), (935, 590)],  (255, 91, 0, 245),    (18, 18, 18, 255), 4),
+        # Canva — purple disc, outer right arm
+        ("ellipse", [(940, 495), (1070, 575)], (120, 50, 200, 240),  (18, 18, 18, 255), 4),
+        # DocuSign — red disc, far-left anchor
+        ("ellipse", [(20, 290), (155, 395)],   (210, 30, 38, 240),   (18, 18, 18, 255), 4),
+        # Google Workspace — yellow disc, far-right anchor
+        ("ellipse", [(1065, 260), (1185, 365)], (245, 195, 0, 245),  (18, 18, 18, 255), 4),
+        # Slack — small teal square (rotated) mid-spine accent
+        ("poly",    [(540, 150), (600, 105), (660, 150), (600, 195)], (74, 21, 75, 235), (18, 18, 18, 255), 3),
+    ]
+    for kind, pts, fill, outline, lw in shapes:
+        sl = layer(); sd = ImageDraw.Draw(sl)
+        if kind == "ellipse":
+            sd.ellipse(pts, fill=fill, outline=outline, width=lw)
+        else:
+            sd.polygon(pts, fill=fill, outline=outline)
+        base = comp(base, sl)
+
+    # 3. Black pivot dots at every armature junction
+    dots = layer(); ddraw = ImageDraw.Draw(dots)
+    pivots = [
+        (80, 100), (600, 100), (1120, 100),
+        (200, 240), (600, 240), (1000, 240),
+        (120, 400), (320, 400), (860, 390), (1000, 390),
+    ]
+    for px, py in pivots:
+        ddraw.ellipse([(px - 8, py - 8), (px + 8, py + 8)],
+                      fill=(18, 18, 18, 250), outline=(18, 18, 18, 255), width=2)
+    base = comp(base, dots)
+
+    # 4. Canvas warmth texture
+    tex = layer(); tdraw = ImageDraw.Draw(tex)
+    for _ in range(800):
+        tx = rng.randint(0, W); ty = rng.randint(0, H)
+        tdraw.ellipse([(tx - 1, ty - 1), (tx + 1, ty + 1)], fill=(160, 138, 95, 14))
+    base = comp(base, tex)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -7604,6 +7683,7 @@ DAYS = [
     ("2026-05-11", img_lissitzky_20260511,  "Market Structure", "El Lissitzky"),
     ("2026-05-12", img_kandinsky_20260512,  "Valuation Rise",   "Wassily Kandinsky"),
     ("2026-05-13", img_klee_20260513,       "Enterprise Grid",  "Paul Klee"),
+    ("2026-05-14", img_calder_20260514,    "Small Business",   "Alexander Calder"),
 ]
 
 for date, fn, kw, artist in DAYS:

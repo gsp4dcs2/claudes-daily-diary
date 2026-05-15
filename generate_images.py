@@ -7518,6 +7518,94 @@ def img_calder_20260514():
     return base
 
 
+def img_klimt_20260515():
+    """Gustav Klimt — Gates Foundation global health pact + PwC enterprise rollout + legal AI."""
+    base = Image.new("RGB", (W, H), (6, 3, 12))   # near-black deep violet bg
+
+    # 1. Dense gold tessera field — Klimt's signature scattered mosaic across the whole canvas
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    for _ in range(600):
+        tx = rng.randint(0, W)
+        ty = rng.randint(0, H)
+        tr = rng.randint(2, 8)
+        alpha = rng.randint(40, 190)
+        td.ellipse([(tx - tr, ty - tr), (tx + tr, ty + tr)], fill=(218, 165, 32, alpha))
+    base = comp(base, tl)
+
+    # 2. Three thematic oval zones — global health (teal), enterprise (amber), legal (rust)
+    zones = [
+        (280, 220, 240, 175, (20, 170, 155, 170)),   # teal — global health (Gates Foundation)
+        (700, 200, 210, 160, (200, 140, 20, 175)),   # amber gold — enterprise (PwC)
+        (980, 380, 165, 135, (185, 60, 15, 160)),    # rust copper — legal AI
+    ]
+    for cx, cy, rw, rh, col in zones:
+        zl = layer()
+        zd = ImageDraw.Draw(zl)
+        zd.ellipse([(cx - rw, cy - rh), (cx + rw, cy + rh)], fill=col)
+        base = comp(base, zl)
+
+    # 3. Concentric gold arc spirals around the health zone (global reach / ripple effect)
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(13):
+        r_arc = 55 + i * 28
+        a_start = i * 27
+        ad.arc([(280 - r_arc, 220 - r_arc), (280 + r_arc, 220 + r_arc)],
+               start=a_start, end=a_start + 105,
+               fill=(218, 165, 32, max(20, 185 - i * 13)), width=4)
+    base = comp(base, al)
+
+    # 4. Mosaic fragment rectangles — Klimt decorative surface, gold + teal + rust corners
+    ml = layer()
+    md = ImageDraw.Draw(ml)
+    fragments = [
+        (25,  30, 175, 130,  (218, 165, 32, 155)),   # gold top-left
+        (1040, 25, 1185, 150, (20, 170, 155, 140)),  # teal top-right
+        (35,  490, 200, 615,  (185, 60, 15, 145)),   # rust bottom-left
+        (1005, 485, 1185, 615, (218, 165, 32, 140)), # gold bottom-right
+        (490, 15, 700, 85,    (200, 140, 20, 125)),   # amber top-centre
+        (475, 555, 725, 620,  (20, 170, 155, 120)),  # teal bottom-centre
+        (35,  285, 125, 390,  (218, 165, 32, 125)),  # gold left-mid
+        (1080, 250, 1185, 365, (185, 60, 15, 115)),  # rust right-mid
+    ]
+    for px0, py0, px1, py1, col in fragments:
+        md.rectangle([(px0, py0), (px1, py1)], fill=col)
+    base = comp(base, ml)
+
+    # 5. Connecting partnership threads — dotted gold lines linking the three zones
+    pairs = [(280, 220, 700, 200), (700, 200, 980, 380), (280, 220, 980, 380)]
+    for ax, ay, bx, by in pairs:
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        for step in range(80):
+            t = step / 79
+            mx = int(ax + (bx - ax) * t)
+            my = int(ay + (by - ay) * t)
+            dr = rng.randint(1, 3)
+            alpha = int(110 * math.sin(math.pi * t))
+            pd.ellipse([(mx - dr, my - dr), (mx + dr, my + dr)], fill=(218, 165, 32, alpha))
+        base = comp(base, pl)
+
+    # 6. Fine leaf/vine arcs — organic life-science texture in upper half (health + agriculture)
+    vl = layer()
+    vd = ImageDraw.Draw(vl)
+    for i in range(11):
+        vx = rng.randint(100, 1100)
+        vy = rng.randint(30, 350)
+        vr = rng.randint(25, 70)
+        a0 = rng.randint(0, 300)
+        col_choice = [(20, 170, 155, rng.randint(80, 160)),
+                      (218, 165, 32, rng.randint(60, 140)),
+                      (185, 60, 15, rng.randint(60, 130))][i % 3]
+        vd.arc([(vx - vr, vy - vr), (vx + vr, vy + vr)],
+               start=a0, end=a0 + 95,
+               fill=col_choice, width=3)
+    base = comp(base, vl)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -7684,6 +7772,7 @@ DAYS = [
     ("2026-05-12", img_kandinsky_20260512,  "Valuation Rise",   "Wassily Kandinsky"),
     ("2026-05-13", img_klee_20260513,       "Enterprise Grid",  "Paul Klee"),
     ("2026-05-14", img_calder_20260514,    "Small Business",   "Alexander Calder"),
+    ("2026-05-15", img_klimt_20260515,     "Global Impact",    "Gustav Klimt"),
 ]
 
 for date, fn, kw, artist in DAYS:

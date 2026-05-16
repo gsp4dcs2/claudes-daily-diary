@@ -7606,6 +7606,79 @@ def img_klimt_20260515():
     return base
 
 
+def img_rothko_20260516():
+    """Mark Rothko colour field — Claude Platform on AWS, Stainless SDK acquisition, enterprise spend."""
+    # Deep charcoal-blue background — the weight of cloud infrastructure
+    base = Image.new("RGB", (W, H), (14, 18, 28))
+
+    def soft_band(img, y0, y1, colour, feather=65):
+        """Soft-edged Rothko colour band with luminous edges."""
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        r, g, b = colour
+        # Core solid band (inset from canvas edges)
+        bd.rectangle([(65, y0 + feather), (W - 65, y1 - feather)], fill=(r, g, b, 210))
+        # Feathered top edge
+        for i in range(feather):
+            alpha = int(185 * (i / feather))
+            bd.rectangle([(65 + i, y0 + i), (W - 65 - i, y0 + i + 1)], fill=(r, g, b, alpha))
+        # Feathered bottom edge
+        for i in range(feather):
+            alpha = int(185 * ((feather - i) / feather))
+            bd.rectangle([(65 + i, y1 - i - 1), (W - 65 - i, y1 - i)], fill=(r, g, b, alpha))
+        return comp(img, bl)
+
+    # Top band — AWS orange-amber: the cloud platform layer, scale and reach
+    base = soft_band(base, 20, 215, (210, 105, 30), feather=62)
+
+    # Middle band — steel blue (widest): the API and integration layer, cool precision
+    base = soft_band(base, 196, 428, (38, 96, 168), feather=75)
+
+    # Bottom band — warm slate-violet: enterprise foundation, capital commitment, strategic depth
+    base = soft_band(base, 408, 608, (88, 52, 110), feather=60)
+
+    # Luminous inner glow on the blue band — the platform integration light
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for i in range(44):
+        alpha = int(70 * (1 - i / 44))
+        gd.rectangle([(200 + i, 268 + i), (W - 200 - i, 360 - i)], fill=(100, 168, 240, alpha))
+    base = comp(base, gl)
+
+    # Warm bloom at the top of the amber band — AWS orange glow
+    bl2 = layer()
+    bd2 = ImageDraw.Draw(bl2)
+    for i in range(75):
+        alpha = int(40 * (1 - i / 75))
+        bd2.ellipse([(W//2 - 280 - i*2, 10 - i), (W//2 + 280 + i*2, 185 + i)],
+                    fill=(230, 140, 40, alpha))
+    base = comp(base, bl2)
+
+    # Fine luminous edge lines between bands — Rothko's characteristic borders
+    el = layer()
+    ed = ImageDraw.Draw(el)
+    # Amber/blue boundary — warm shimmer
+    for i in range(18):
+        alpha = int(90 * (1 - i / 18))
+        ed.rectangle([(65 + i, 208 - i), (W - 65 - i, 210 + i)], fill=(240, 185, 80, alpha))
+    # Blue/violet boundary — cool-to-warm transition
+    for i in range(18):
+        alpha = int(85 * (1 - i / 18))
+        ed.rectangle([(65 + i, 418 - i), (W - 65 - i, 420 + i)], fill=(140, 110, 200, alpha))
+    base = comp(base, el)
+
+    # Subtle cool vertical shimmer — reinforces the "layered stack" reading
+    sv = layer()
+    svd = ImageDraw.Draw(sv)
+    for i in range(45):
+        alpha = int(22 * (1 - i / 45))
+        svd.rectangle([(W//2 - 5 - i*4, 40), (W//2 + 5 + i*4, H - 40)],
+                      fill=(180, 210, 255, alpha))
+    base = comp(base, sv)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -7773,6 +7846,7 @@ DAYS = [
     ("2026-05-13", img_klee_20260513,       "Enterprise Grid",  "Paul Klee"),
     ("2026-05-14", img_calder_20260514,    "Small Business",   "Alexander Calder"),
     ("2026-05-15", img_klimt_20260515,     "Global Impact",    "Gustav Klimt"),
+    ("2026-05-16", img_rothko_20260516,   "Platform Layers",  "Mark Rothko"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="May 17: Claude Code v2.1.142 makes Opus 4.7 the Fast Mode default and auto-surfaces SKILL.md plugins. v2.1.143 adds plugin dependency enforcement and per-turn context cost estimates. Plus: Ramp financial data shows Anthropic has overtaken OpenAI in business customer penetration — 34.4% vs 32.3%.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-05-17 – Opus 4.7 Default in Fast Mode, Plugin Upgrades &amp; Anthropic Tops OpenAI in Business Adoption">
+  <meta property="og:description" content="Claude Code v2.1.142 switches Fast Mode to Opus 4.7 by default; v2.1.143 adds plugin dependency enforcement and cost estimates. Ramp data: Anthropic now serves more businesses than OpenAI — 34.4% vs 32.3%.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/05/2026-05-17.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/05/2026-05-17.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/05/2026-05-17.png">
+
+  <title>2026-05-17 – Opus 4.7 Default in Fast Mode, Plugin Upgrades &amp; Anthropic Tops OpenAI in Business Adoption | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Opus 4.7 Default in Fast Mode, Plugin Upgrades & Anthropic Tops OpenAI in Business Adoption",
+  "description": "Claude Code v2.1.142 switches Fast Mode to Opus 4.7 by default; v2.1.143 adds plugin dependency enforcement and cost estimates. Ramp data: Anthropic now serves more businesses than OpenAI — 34.4% vs 32.3%.",
+  "datePublished": "2026-05-17",
+  "dateModified": "2026-05-17",
+  "url": "https://claudebeat.ai/articles/2026/05/2026-05-17.html",
+  "image": "https://claudebeat.ai/articles/2026/05/2026-05-17.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/05/2026-05-17.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-05-17</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Opus 4.7 Default in Fast Mode, Plugin Upgrades &amp; Anthropic Tops OpenAI in Business Adoption</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-05-17.png" alt="Opus 4.7 Default in Fast Mode, Plugin Upgrades &amp; Anthropic Tops OpenAI in Business Adoption — visual for 2026-05-17">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code v2.1.142: Opus 4.7 Becomes Fast Mode Default
+     Source: https://github.com/anthropics/claude-code/releases/tag/v2.1.142
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.142: Opus 4.7 Is Now the Fast Mode Default</h2>
+
+  <p>Claude Code v2.1.142, released May 14, quietly lands one of the more significant model-default changes since Fast Mode launched: <strong>Opus 4.7 is now the default model for Fast Mode</strong> sessions, replacing Opus 4.6. Opus 4.7 — released on April 16, 2026 — brings native 1 million token context (no preview flag), a new <code>xhigh</code> effort level, 13% improvement in coding-benchmark task resolution, and 3.75 MP image support. Since pricing is unchanged ($5/M input · $25/M output), the switch to a more capable model costs nothing extra.</p>
+
+  <h3>What else shipped in v2.1.142</h3>
+  <ul>
+    <li><strong>SKILL.md plugins auto-surfaced</strong> — Any plugin that includes a root-level <code>SKILL.md</code> file is now automatically listed in the <code>/skills</code> pane, removing the need for a separate skill registration step. This brings the plugin and skill systems one step closer to a unified extension model.</li>
+    <li><strong>LSP servers shown in <code>/plugin</code> details</strong> — The plugin details panel now lists which Language Server Protocol servers a plugin provides, helping you evaluate language-tooling plugins before installing.</li>
+    <li><strong>MCP_TOOL_TIMEOUT fix for remote HTTP/SSE</strong> — The <code>MCP_TOOL_TIMEOUT</code> environment variable now correctly raises the per-request fetch timeout for remote HTTP and SSE MCP servers. Previously, the setting was parsed but not applied to the actual request layer, causing unexpected timeouts on slow external tools.</li>
+    <li><strong>Background session fixes</strong> — Sessions woken from idle now correctly recognise pre-existing git worktrees, and a daemon exit bug triggered by binary upgrades has been resolved.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Opting back to Opus 4.6 in Fast Mode</strong>
+    <p>If your workflows were calibrated to Opus 4.6's specific output style in Fast Mode — for instance, you have eval harnesses with expected output patterns — you can pin to 4.6 with one environment variable:</p>
+    <pre><code>export CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE=1</code></pre>
+    <p>That said, Opus 4.7 is a strict improvement on coding tasks with identical pricing. Most teams should leave the default alone and benefit from the upgrade automatically. Review your eval baseline against 4.7 output before pinning to 4.6 long-term.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.142" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">v2.1.142</span>
+    <span class="tag">Opus 4.7</span>
+    <span class="tag">Fast Mode</span>
+    <span class="tag">plugins</span>
+    <span class="tag">MCP</span>
+    <span class="tag">SKILL.md</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Code v2.1.143: Plugin Cost Estimates + Dependency Enforcement
+     Source: https://github.com/anthropics/claude-code/releases/tag/v2.1.143
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.143: Plugin Marketplace Gets Cost Estimates, Dependency Guards &amp; PowerShell Improvements</h2>
+
+  <p>Released May 15, v2.1.143 continues the plugin ecosystem buildout started in v2.1.142, adding two features that make the marketplace practical for production use: <strong>projected context cost estimates</strong> in the browse pane, and <strong>plugin dependency enforcement</strong> that prevents you from accidentally breaking a plugin's dependencies.</p>
+
+  <h3>Plugin marketplace: cost estimates and dependency safety</h3>
+  <ul>
+    <li><strong>Projected context cost in browse pane</strong> — The <code>/plugin</code> marketplace now shows estimated per-turn and per-invocation token costs alongside each plugin listing. This lets you assess the context overhead a plugin adds before installing it — critical for high-frequency agentic sessions where context budget matters.</li>
+    <li><strong>Dependency enforcement on disable</strong> — <code>claude plugin disable &lt;name&gt;</code> now refuses to proceed if another currently-enabled plugin declares a dependency on the target. You'll see a clear error message naming the dependent plugin. This prevents the silent, hard-to-diagnose breakage that occurs when shared tooling plugins are accidentally removed.</li>
+  </ul>
+
+  <h3>Other notable changes</h3>
+  <ul>
+    <li><strong><code>worktree.bgIsolation: "none"</code></strong> — A new setting lets background sessions edit the working copy directly, without needing to call <code>EnterWorktree</code>. Useful for background tasks that should remain on the current branch rather than an isolated worktree.</li>
+    <li><strong>PowerShell execution policy bypass</strong> — On Windows, the PowerShell tool now automatically passes <code>-ExecutionPolicy Bypass</code>, fixing the common scenario where restrictive system policies blocked Claude Code from running scripts. Opt out with <code>CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY=1</code> if your org requires policy enforcement.</li>
+    <li><strong>PowerShell enabled by default on Windows</strong> for Bedrock, Vertex, and Foundry users — bringing Windows deployments on managed infrastructure to parity with local CLI usage.</li>
+    <li><strong>Auto mode in Shift+Tab cycle</strong> — In attached agent sessions, Shift+Tab now cycles through model/effort options and includes auto mode, making it quicker to downshift to a lighter configuration mid-session.</li>
+    <li><strong>Background session model persistence</strong> — Sessions now preserve the model and effort level after waking from idle, preventing unintended resets to defaults.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>How to read the new cost estimates</strong>
+    <p>The per-turn token estimate in <code>/plugin</code> browse represents the overhead the plugin adds to each conversation turn — typically from system-prompt injections, tool definitions, and background context. The per-invocation number is the expected cost when the plugin's main tool or skill is actually called. A plugin showing "~800 tokens/turn · ~2,400 tokens/call" on a 200k-context session is modest; one showing "~15,000 tokens/turn" deserves scrutiny before use in high-frequency agentic loops.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.143" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">v2.1.143</span>
+    <span class="tag">plugin marketplace</span>
+    <span class="tag">context cost</span>
+    <span class="tag">PowerShell</span>
+    <span class="tag">worktree</span>
+    <span class="tag">Windows</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Anthropic Overtakes OpenAI in Business Customer Count
+     Source: https://techcrunch.com/2026/05/13/anthropic-now-has-more-business-customers-than-openai-according-to-ramp-data/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Ramp Data: Anthropic Now Has More Business Customers Than OpenAI — 34.4% vs 32.3%</h2>
+
+  <p>According to spend data compiled by corporate fintech platform Ramp, <strong>Anthropic has overtaken OpenAI in business customer penetration for the first time</strong>. As of May 2026, 34.4% of Ramp's business clients are paying Anthropic customers, compared to 32.3% for OpenAI. Because Ramp measures actual corporate card and invoice spend — not self-reported surveys — the data represents real purchasing decisions made by real finance and engineering teams.</p>
+
+  <h3>Why this milestone matters</h3>
+  <ul>
+    <li><strong>It's spend-verified, not survey-reported</strong> — Ramp's methodology tracks expense data from participating companies, which means it captures businesses that have gone through procurement and are actively paying — a higher bar than "we tried it" usage metrics.</li>
+    <li><strong>The gap is narrow but the direction is clear</strong> — OpenAI still holds the mindshare advantage from GPT's consumer breakthrough, but Anthropic's enterprise product focus (longer context, stronger instruction-following, stronger safety posture for legal/compliance teams) appears to be translating into wallet share.</li>
+    <li><strong>Claude Code is the wedge</strong> — Multiple data points from the past two weeks — Salesforce's $300M token commitment, PwC's 30,000-strong Claude certification rollout — identify developer and engineering tooling as the primary adoption driver. Teams adopt Claude Code individually, get results, and the company-wide Claude API spend follows.</li>
+    <li><strong>Both are growing</strong> — The shift in relative share doesn't mean OpenAI is shrinking. Enterprise AI spending overall is rising sharply; Anthropic is simply growing faster in this cohort.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>What to watch next</strong>
+    <p>Ramp data lags real-world adoption by 30–60 days (billing cycles) and reflects only Ramp's client base — skewed toward growth-stage tech companies. Broader market surveys from Gartner and IDC (typically Q3 reports) will show whether this pattern holds across the Fortune 500. For now, Ramp is one of the most reliable leading indicators of where engineering teams are actually spending, and the signal is clear: Anthropic's developer-first strategy is converting into measurable business adoption at scale.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://techcrunch.com/2026/05/13/anthropic-now-has-more-business-customers-than-openai-according-to-ramp-data/" class="source-link" target="_blank" rel="noopener">techcrunch.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Ramp</span>
+    <span class="tag">market share</span>
+    <span class="tag">business adoption</span>
+    <span class="tag">OpenAI</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">developer-first</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

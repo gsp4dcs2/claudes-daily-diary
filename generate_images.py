@@ -7679,6 +7679,87 @@ def img_rothko_20260516():
     return base
 
 
+def img_leger_20260517():
+    """Fernand Léger — bold mechanical industrial shapes — plugin ecosystem, developer tooling, business adoption."""
+    base = Image.new("RGB", (W, H), (10, 12, 22))   # near-black bg
+
+    # 1. Bold horizontal and vertical structural bars — plugin module grid
+    bars = [
+        (0,   120, 1200, 165,  (48,  48,  80,  210)),   # wide horizontal band
+        (0,   380, 1200, 425,  (30,  80,  160, 190)),   # blue horizontal band
+        (180, 0,   230,  630,  (180, 60,  30,  180)),   # vertical red-orange
+        (700, 0,   750,  630,  (200, 170, 20,  170)),   # vertical gold
+        (980, 0,   1020, 630,  (60,  160, 80,  160)),   # vertical green
+    ]
+    for x0, y0, x1, y1, col in bars:
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        bd.rectangle([(x0, y0), (x1, y1)], fill=col)
+        # Bright highlight edge
+        if (y1 - y0) > (x1 - x0):  # vertical
+            bd.rectangle([(x0, y0), (x0 + 6, y1)], fill=(min(col[0]+70, 255), min(col[1]+70, 255), min(col[2]+70, 255), 130))
+        else:
+            bd.rectangle([(x0, y0), (x1, y0 + 6)], fill=(min(col[0]+70, 255), min(col[1]+70, 255), min(col[2]+70, 255), 130))
+        base = comp(base, bl)
+
+    # 2. Primary bold rectangles — plugin "blocks" in Léger's flat geometric style
+    blocks = [
+        [(40,  200), (170, 360)],   # large left block — dark slate
+        [(270, 470), (470, 590)],   # bottom left — red
+        [(520, 60),  (680, 310)],   # centre-top — yellow
+        [(770, 440), (960, 590)],   # bottom right — blue
+        [(1050,180), (1190, 370)],  # right — orange
+    ]
+    block_cols = [
+        (55, 65, 90, 210),
+        (200, 45, 30, 215),
+        (210, 185, 25, 205),
+        (30, 80, 200, 210),
+        (210, 105, 30, 205),
+    ]
+    for pts, col in zip(blocks, block_cols):
+        fl = layer()
+        fd = ImageDraw.Draw(fl)
+        fd.rectangle(pts, fill=col, outline=(220, 220, 220, 140), width=5)
+        base = comp(base, fl)
+
+    # 3. Bold circular "node" elements — connection points in the plugin graph
+    nodes = [
+        (205, 143, 55, (200, 60, 30, 200)),    # red-orange node on vertical bar
+        (725, 402, 50, (210, 185, 25, 200)),   # gold node on gold bar
+        (1000, 402, 48, (60, 175, 90, 200)),   # green node on green bar
+        (105, 290, 40, (100, 120, 200, 190)),  # small blue node, left area
+    ]
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    for cx, cy, r, col in nodes:
+        nd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=col, outline=(220, 220, 220, 180), width=5)
+        nd.ellipse([(cx - r//3, cy - r//3), (cx + r//3, cy + r//3)], fill=(10, 12, 22, 255))
+    base = comp(base, nl)
+
+    # 4. Fine white bold outlines — Léger's characteristic black outlines, inverted for dark bg
+    ol = layer()
+    od = ImageDraw.Draw(ol)
+    # Diagonal accent lines (Léger often added slight diagonals for dynamism)
+    od.line([(0, 380), (180, 120)], fill=(220, 220, 220, 80), width=3)
+    od.line([(750, 0), (980, 380)], fill=(220, 220, 220, 70), width=3)
+    od.line([(470, 310), (700, 440)], fill=(220, 220, 220, 60), width=2)
+    base = comp(base, ol)
+
+    # 5. Subtle background texture — scattered small squares (circuit-board feel)
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    for _ in range(60):
+        tx = rng.randint(0, W)
+        ty = rng.randint(0, H)
+        ts = rng.randint(3, 9)
+        tc = rng.choice([(180, 60, 30), (210, 185, 25), (30, 80, 200), (60, 160, 80)])
+        td.rectangle([(tx, ty), (tx + ts, ty + ts)], fill=(*tc, 55))
+    base = comp(base, tl)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -7847,6 +7928,7 @@ DAYS = [
     ("2026-05-14", img_calder_20260514,    "Small Business",   "Alexander Calder"),
     ("2026-05-15", img_klimt_20260515,     "Global Impact",    "Gustav Klimt"),
     ("2026-05-16", img_rothko_20260516,   "Platform Layers",  "Mark Rothko"),
+    ("2026-05-17", img_leger_20260517,    "Plugin & Code",    "Fernand Léger"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -7760,6 +7760,91 @@ def img_leger_20260517():
     return base
 
 
+def img_moholy_20260518():
+    """László Moholy-Nagy Bauhaus — transparency + regulatory disclosure + legal infrastructure + multi-agent coordination."""
+    # White/near-white background — Moholy's signature light-saturated canvas
+    base = Image.new("RGB", (W, H), (248, 248, 246))
+
+    # 1. Large overlapping transparent circles — photogram motif, data-flow / transparency
+    circles = [
+        (300, 210, 200, (25,  75, 205,  80)),   # deep blue — regulatory trust
+        (520, 290, 175, (210, 30,  30,  72)),    # red — Mythos risk signal
+        (420, 155, 155, (225, 190,  0,  65)),    # yellow — legal platform
+        (700, 250, 160, (25,  75, 205,  60)),    # blue — agent network
+        (250, 390, 125, (210, 30,  30,  50)),    # red lower-left
+        (600, 400, 140, (225, 190,  0,  55)),    # yellow lower
+        (800, 140, 110, (60, 180, 100,  55)),    # green accent — MCP connectors
+        (950, 340, 130, (25,  75, 205,  45)),    # blue right
+    ]
+    for cx, cy, r, col in circles:
+        cl = layer()
+        cd = ImageDraw.Draw(cl)
+        cd.ellipse([(cx - r, cy - r), (cx + r, cy + r)],
+                   fill=col, outline=(0, 0, 0, 105), width=3)
+        base = comp(base, cl)
+
+    # 2. Semi-transparent rectangles — Bauhaus structural geometry, legal document layers
+    rects = [
+        (700,  40, 1160, 360, (25,  75, 205, 44)),   # large blue — regulatory field
+        (840, 180, 1190, 510, (210, 30,  30, 38)),    # red overlay
+        (760, 330, 1080, 590, (225, 190,  0, 48)),    # yellow lower-right
+        (920,  30, 1170, 200, (0,   0,   0,  18)),    # dark accent top-right
+        (50,  480,  400, 610, (60, 180, 100, 40)),    # green bottom-left — MCP
+    ]
+    for x0, y0, x1, y1, col in rects:
+        rl = layer()
+        rd = ImageDraw.Draw(rl)
+        rd.rectangle([(x0, y0), (x1, y1)], fill=col, outline=(0, 0, 0, 85), width=2)
+        base = comp(base, rl)
+
+    # 3. Thin black structural grid — Bauhaus engineering precision
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for y in [158, 315, 472]:
+        gd.line([(0, y), (1200, y)], fill=(20, 20, 20, 155), width=2)
+    for x in [400, 680, 960]:
+        gd.line([(x, 0), (x, 630)], fill=(20, 20, 20, 155), width=2)
+    base = comp(base, gl)
+
+    # 4. Bold solid anchor shapes
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    # Black filled circle — top-right anchor (regulatory authority)
+    ad.ellipse([(1050, 22), (1160, 132)], fill=(12, 12, 12, 255))
+    # Red square — bottom-left (risk signal)
+    ad.rectangle([(35, 490), (145, 600)], fill=(205, 20, 20, 255))
+    # Yellow triangle — lower-centre (legal platform wedge)
+    ad.polygon([(555, 600), (640, 430), (725, 600)], fill=(210, 175, 0, 215))
+    # Blue thin horizontal bar — mid-left (agent view row)
+    ad.rectangle([(0, 312), (380, 320)], fill=(25, 75, 205, 210))
+    # Green thin vertical bar — right side (MCP connector)
+    ad.rectangle([(958, 0), (966, 320)], fill=(60, 180, 100, 200))
+    base = comp(base, al)
+
+    # 5. Photogram scatter — tiny primary dots suggesting data signals / trust nodes
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    dot_data = [
+        (120, 180, 5, (25,  75, 205, 200)),
+        (195, 260, 4, (210, 30,  30, 190)),
+        (340, 440, 6, (225, 190,  0, 200)),
+        (470, 520, 4, (25,  75, 205, 180)),
+        (610, 110, 5, (60, 180, 100, 195)),
+        (830, 490, 5, (210, 30,  30, 185)),
+        (1000, 90, 4, (225, 190,  0, 190)),
+        (1120, 400, 6, (25,  75, 205, 175)),
+        (70,  350, 4, (60, 180, 100, 185)),
+        (280, 570, 5, (210, 30,  30, 180)),
+        (750,  60, 4, (25,  75, 205, 190)),
+        (1060, 550, 5, (225, 190,  0, 180)),
+    ]
+    for dx, dy, dr, dc in dot_data:
+        dd.ellipse([(dx - dr, dy - dr), (dx + dr, dy + dr)], fill=dc)
+    base = comp(base, dl)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -7929,6 +8014,7 @@ DAYS = [
     ("2026-05-15", img_klimt_20260515,     "Global Impact",    "Gustav Klimt"),
     ("2026-05-16", img_rothko_20260516,   "Platform Layers",  "Mark Rothko"),
     ("2026-05-17", img_leger_20260517,    "Plugin & Code",    "Fernand Léger"),
+    ("2026-05-18", img_moholy_20260518,   "Legal & Mythos",   "László Moholy-Nagy"),
 ]
 
 for date, fn, kw, artist in DAYS:

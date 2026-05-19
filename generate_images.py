@@ -7845,6 +7845,71 @@ def img_moholy_20260518():
     return base
 
 
+def img_delaunay_20260519():
+    """Robert Delaunay spectral rings — Code with Claude London conference + global broadcast signal theme."""
+    base = Image.new("RGB", (W, H), (8, 6, 24))   # near-black bg
+
+    spectral_rings = [
+        (180, 0, 0), (180, 80, 0), (200, 170, 0),
+        (0, 160, 60), (0, 100, 200), (80, 0, 200),
+        (170, 0, 150), (220, 220, 220),
+    ]
+
+    # 1. Large central disc — the London conference hub
+    cx, cy, max_r = 580, 290, 280
+    for i, col in enumerate(spectral_rings):
+        r = max_r - i * 30
+        if r < 8:
+            break
+        rl = layer()
+        rd = ImageDraw.Draw(rl)
+        alpha = 170 if i < 3 else 130
+        rd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=(col[0], col[1], col[2], alpha))
+        base = comp(base, rl)
+
+    # 2. Smaller disc upper-left — Claude Security scanner pulse
+    for i, col in enumerate(spectral_rings):
+        r = 140 - i * 16
+        if r < 6:
+            break
+        rl = layer()
+        rd = ImageDraw.Draw(rl)
+        rd.ellipse([(180 - r, 140 - r), (180 + r, 140 + r)], fill=(col[0], col[1], col[2], 145))
+        base = comp(base, rl)
+
+    # 3. Smaller disc lower-right — Anthropic Institute research signal
+    for i, col in enumerate(spectral_rings):
+        r = 130 - i * 14
+        if r < 6:
+            break
+        rl = layer()
+        rd = ImageDraw.Draw(rl)
+        rd.ellipse([(1020 - r, 490 - r), (1020 + r, 490 + r)], fill=(col[0], col[1], col[2], 135))
+        base = comp(base, rl)
+
+    # 4. Broadcast arc bands radiating from centre — livestream signal rings
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(7):
+        r_arc = 300 + i * 55
+        ad.arc([(cx - r_arc, cy - r_arc), (cx + r_arc, cy + r_arc)],
+               start=0, end=360, fill=(220, 220, 220, max(10, 70 - i * 9)), width=2)
+    base = comp(base, al)
+
+    # 5. White star dots — attendees / distributed sessions
+    stl = layer()
+    std = ImageDraw.Draw(stl)
+    for _ in range(130):
+        sx = rng.randint(0, W)
+        sy = rng.randint(0, H)
+        sr = rng.randint(1, 3)
+        std.ellipse([(sx - sr, sy - sr), (sx + sr, sy + sr)],
+                    fill=(255, 255, 255, rng.randint(60, 190)))
+    base = comp(base, stl)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -8015,6 +8080,7 @@ DAYS = [
     ("2026-05-16", img_rothko_20260516,   "Platform Layers",  "Mark Rothko"),
     ("2026-05-17", img_leger_20260517,    "Plugin & Code",    "Fernand Léger"),
     ("2026-05-18", img_moholy_20260518,   "Legal & Mythos",   "László Moholy-Nagy"),
+    ("2026-05-19", img_delaunay_20260519, "London & Security", "Robert Delaunay"),
 ]
 
 for date, fn, kw, artist in DAYS:

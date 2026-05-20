@@ -7195,6 +7195,50 @@ def img_lissitzky_20260511():
     return base
 
 
+def img_lissitzky_20260520():
+    """El Lissitzky Constructivism — white/cream bg, bold red+black geometry — SDK acquisition, developer toolchain."""
+    base = Image.new("RGB", (W, H), (245, 242, 232))   # warm cream bg
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Thick black vertical spine (the SDK / API axis)
+    draw.rectangle([(480, 0), (550, H)], fill=(14, 12, 10))
+
+    # 2. Bold diagonal red bar sweeping lower-left to upper-right (acquisition momentum)
+    pts_red = [(0, 420), (480, 160), (550, 160), (550, 200), (80, 450), (0, 450)]
+    draw.polygon(pts_red, fill=(195, 28, 28))
+
+    # 3. Black horizontal bar (toolchain consolidation)
+    draw.rectangle([(0, 310), (480, 365)], fill=(14, 12, 10))
+
+    # 4. Large red circle at the intersection (Lissitzky's focal node — the deal)
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    cd.ellipse([(440, 140), (590, 290)], fill=(195, 28, 28, 240))
+    base = comp(base, cl)
+
+    # 5. White cutout rectangle over red bar (geometric tension)
+    wl = layer()
+    wd = ImageDraw.Draw(wl)
+    wd.rectangle([(120, 320), (340, 355)], fill=(245, 242, 232, 220))
+    base = comp(base, wl)
+
+    # 6. Secondary thin red bars (SDK languages — TypeScript, Python, Go, Java, Ruby)
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    lang_y = [80, 120, 160, 200, 240]
+    for i, y in enumerate(lang_y):
+        x_end = 250 + i * 45
+        sd.rectangle([(560, y), (560 + x_end, y + 14)], fill=(195, 28, 28, 180))
+    base = comp(base, sl)
+
+    # 7. Small black square accents (Lissitzky structural nodes)
+    for sx, sy in [(480, 310), (550, 310), (480, 365), (550, 365)]:
+        draw.rectangle([(sx - 10, sy - 10), (sx + 10, sy + 10)], fill=(14, 12, 10))
+
+    return base
+
+
 def img_kandinsky_20260512():
     """Wassily Kandinsky — bold primaries, diagonals, circles + triangles — valuation complexity, IPO momentum."""
     base = Image.new("RGB", (W, H), (18, 34, 72))
@@ -8081,6 +8125,7 @@ DAYS = [
     ("2026-05-17", img_leger_20260517,    "Plugin & Code",    "Fernand Léger"),
     ("2026-05-18", img_moholy_20260518,   "Legal & Mythos",   "László Moholy-Nagy"),
     ("2026-05-19", img_delaunay_20260519, "London & Security", "Robert Delaunay"),
+    ("2026-05-20", img_lissitzky_20260520, "SDK Acquisition",  "El Lissitzky"),
 ]
 
 for date, fn, kw, artist in DAYS:

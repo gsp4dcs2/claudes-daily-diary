@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="May 20: Anthropic officially acquires Stainless, the SDK factory behind OpenAI, Google, and Cloudflare, for $300M+. Code with Claude London extends into Day 2 for independent developers. Claude Code v2.1.145 adds JSON session scripting and OTEL tracing.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-05-20 – Anthropic Acquires Stainless, London Day 2 for Indie Devs &amp; Claude Code v2.1.145">
+  <meta property="og:description" content="Anthropic confirms the $300M+ acquisition of Stainless, the SDK generator behind OpenAI, Google, and Cloudflare's official libraries. Code with Claude London extends to Day 2 for independent developers. Claude Code v2.1.145 ships JSON session scripting and OTEL span improvements.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/05/2026-05-20.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/05/2026-05-20.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/05/2026-05-20.png">
+
+  <title>2026-05-20 – Anthropic Acquires Stainless, London Day 2 &amp; Claude Code v2.1.145 | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Anthropic Acquires Stainless, London Day 2 for Indie Devs & Claude Code v2.1.145",
+  "description": "Anthropic confirms the $300M+ acquisition of Stainless, the SDK generator behind OpenAI, Google, and Cloudflare's official libraries. Code with Claude London extends to Day 2 for independent developers. Claude Code v2.1.145 ships JSON session scripting and OTEL span improvements.",
+  "datePublished": "2026-05-20",
+  "dateModified": "2026-05-20",
+  "url": "https://claudebeat.ai/articles/2026/05/2026-05-20.html",
+  "image": "https://claudebeat.ai/articles/2026/05/2026-05-20.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/05/2026-05-20.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-05-20</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Anthropic Acquires Stainless, Code with Claude London Day 2 &amp; Claude Code v2.1.145</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-05-20.png" alt="Anthropic Acquires Stainless, Code with Claude London Day 2 &amp; Claude Code v2.1.145 — visual for 2026-05-20">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Anthropic Acquires Stainless: The SDK Factory Behind OpenAI, Google & Cloudflare
+     Source: https://www.anthropic.com/news/anthropic-acquires-stainless
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Anthropic Acquires Stainless — the SDK Factory Behind OpenAI, Google &amp; Cloudflare — for Over $300M</h2>
+
+  <p>Anthropic has officially confirmed the acquisition of <strong>Stainless</strong>, the San Francisco startup that automates SDK generation from OpenAPI specs. Founded in 2022 by former Stripe engineer Alex Rattray, Stainless has quietly powered the <strong>official SDKs for Anthropic since the earliest API days</strong> — and also generated the official client libraries used by OpenAI, Google, Meta, Cloudflare, and hundreds of other companies. The deal, reported at over $300 million, is the largest acquisition Anthropic has made to date.</p>
+
+  <h3>What Stainless actually does</h3>
+  <p>Stainless takes an OpenAPI spec and generates idiomatic, production-ready SDKs across TypeScript, Python, Go, Java, and Ruby — along with CLI tooling and MCP servers. The resulting libraries handle pagination, retries, streaming, auth, and type safety in ways that hand-rolled SDKs rarely do consistently. It also regenerates them automatically when the API spec changes, which is the part that makes SDK maintenance tractable at scale.</p>
+
+  <h3>What changes for existing customers</h3>
+  <ul>
+    <li><strong>Hosted Stainless tools are being wound down.</strong> The managed SDK generation service that OpenAI, Google, and Cloudflare have relied on will be discontinued. Anthropic will not provide these services to competitor AI labs going forward.</li>
+    <li><strong>Existing SDKs are yours to keep.</strong> Companies that generated SDKs through Stainless retain full ownership, plus unrestricted rights to modify and extend those libraries. The code does not disappear — but the maintenance pipeline behind it does.</li>
+    <li><strong>The Stainless team joins Anthropic</strong> to accelerate developer tooling across Claude's API, SDK surface, and MCP ecosystem.</li>
+  </ul>
+
+  <h3>Strategic read</h3>
+  <p>This is a toolchain consolidation play. Every MCP server, every SDK wrapper, every CLI that talks to Claude will now be shaped by the same team that defined how the SDKs are built. For Claude, that means faster iteration on developer-facing infrastructure and tighter integration between the API spec and the client libraries that surface it. For OpenAI and Google, it means rebuilding or migrating a maintenance-critical piece of their developer infrastructure.</p>
+
+  <div class="callout tip">
+    <strong>What developers should do now</strong>
+    <p>If your stack uses an Anthropic SDK, nothing changes in the near term — these are maintained by Anthropic already. If you're at a company that used Stainless's hosted tool to generate SDKs for your own API, audit your dependency on the service and plan migration now: the wind-down timeline will be communicated by Stainless directly, but prudent teams should not wait. Stainless's open-source tooling (the underlying generator) may survive separately — watch their GitHub for guidance.</p>
+    <pre><code># Verify you're on the latest Anthropic-maintained SDK:
+pip install --upgrade anthropic
+
+# TypeScript:
+npm update @anthropic-ai/sdk</code></pre>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/anthropic-acquires-stainless" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Stainless</span>
+    <span class="tag">acquisition</span>
+    <span class="tag">SDK</span>
+    <span class="tag">MCP</span>
+    <span class="tag">developer tooling</span>
+    <span class="tag">OpenAPI</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Code with Claude London Extended: Day 2 for Independent Developers
+     Source: https://claude.com/code-with-claude/london-extended
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Code with Claude London Extended — Day 2 Is All About Independent Developers and Early-Stage Founders</h2>
+
+  <p>The Code with Claude London conference continues today (May 20) with its <strong>Extended Day</strong> — a separate track designed for independent developers and early-stage founders who couldn't make it to the enterprise-heavy Day 1. Where yesterday's programme was structured around three simultaneous stages with keynotes from Anthropic engineering leadership and enterprise guest companies (Spotify, Lovable, Doctolib, monday.com), today's format is deliberately more accessible: smaller rooms, more hands-on time, and a focus on what builders shipping solo or in very small teams actually need.</p>
+
+  <h3>Extended Day programme highlights</h3>
+  <ul>
+    <li><strong>"Zero-to-agent in an afternoon"</strong> — a full hands-on workshop walking through the complete Agent SDK stack from scratch: project setup, tool definition, MCP server wiring, and a working production-ready agent by end of session.</li>
+    <li><strong>"Claude Code for solo founders"</strong> — a practitioner panel on using Claude Code as a force-multiplier when you have no engineering team: how to set up a CLAUDE.md that encodes your entire architecture, managing parallel sessions without losing context, and the permission configurations that matter most when you're both developer and reviewer.</li>
+    <li><strong>"Getting to your first 1,000 API customers"</strong> — startup-specific session on pricing, rate limits, and go-to-market for AI-native products built on Claude. Includes Q&amp;A with Anthropic's developer relations team.</li>
+    <li><strong>Office hours</strong> — 30-minute slots with Anthropic engineers and developer advocates throughout the afternoon.</li>
+  </ul>
+
+  <h3>Why this matters</h3>
+  <p>The dual-format approach — enterprise keynote day followed by indie developer day — is an intentional structural choice. It reflects Anthropic's recognition that the two audiences have different bottlenecks: enterprises need confidence in compliance, managed infrastructure, and partner integrations; indie developers need clarity on cost, capability ceilings, and how to ship fast without a dedicated ML team.</p>
+
+  <div class="callout tip">
+    <strong>Didn't make it to London?</strong>
+    <p>Selected sessions from both days will be posted to Anthropic's YouTube channel within 48 hours. The Tokyo leg follows on June 10, with a similar two-day structure. For the office hours format, keep an eye on the <a href="https://www.anthropic.com/events" target="_blank" rel="noopener">Anthropic events page</a> — virtual office hours have been trialled after each conference city.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://claude.com/code-with-claude/london-extended" class="source-link" target="_blank" rel="noopener">claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Code with Claude</span>
+    <span class="tag">London 2026</span>
+    <span class="tag">indie developers</span>
+    <span class="tag">founders</span>
+    <span class="tag">developer conference</span>
+    <span class="tag">Agent SDK</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude Code v2.1.145: JSON Session Scripting and OTEL Tracing
+     Source: https://code.claude.com/docs/en/changelog
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.145: Script Your Agent Sessions with JSON Output and Full OTEL Span Tracing</h2>
+
+  <p>Yesterday's Claude Code release (v2.1.145) is a small update with outsized implications for teams running multi-agent pipelines at scale. The headline feature is <code>claude agents --json</code>, which outputs a live snapshot of all Claude Code sessions as a machine-readable JSON array — making it trivial to wire Claude's session state into external tooling: status bars, session pickers, tmux-resurrect scripts, monitoring dashboards, and CI gate checks.</p>
+
+  <h3>What <code>claude agents --json</code> returns</h3>
+  <p>Each session entry in the JSON output includes the session ID, name, current status (<code>running</code> / <code>waiting</code> / <code>done</code>), last output snippet, elapsed time, and whether the session is a background (<code>bg</code>) session or interactive. Combined with the Agent View dashboard (released in v2.1.139), this gives you both a human-readable TUI and a scriptable API over the same session state.</p>
+
+  <pre><code># List all live sessions as JSON:
+claude agents --json
+
+# Example output (truncated):
+[
+  {
+    "id": "sess_01abc...",
+    "name": "feature-auth",
+    "status": "waiting",
+    "bg": true,
+    "elapsed": "00:14:22",
+    "last_output": "Waiting for permission: write src/auth/..."
+  },
+  ...
+]
+
+# Pipe into jq to find sessions waiting for input:
+claude agents --json | jq '.[] | select(.status == "waiting")'</code></pre>
+
+  <h3>OTEL span improvements</h3>
+  <p>v2.1.145 also landed two OpenTelemetry improvements that matter for teams instrumenting Claude Code inside larger observability pipelines:</p>
+  <ul>
+    <li><strong><code>agent_id</code> and <code>parent_agent_id</code></strong> attributes are now added to all <code>claude_code.tool</code> OTEL spans. This lets you filter your trace data by which agent (or subagent) produced a given tool call — critical when parallel sessions are producing tool spans in the same trace.</li>
+    <li><strong>Corrected trace parenting</strong> — background subagent spans now nest correctly under the dispatching <code>Agent</code> tool span, rather than appearing as orphaned top-level spans. Distributed traces across multi-agent chains now render as a coherent tree in Jaeger, Honeycomb, and Datadog.</li>
+  </ul>
+
+  <h3>Quality-of-life additions</h3>
+  <ul>
+    <li>Status-line JSON input now surfaces GitHub repo name and current PR number when a Git remote is detected — useful for status-bar integrations.</li>
+    <li><code>/plugin</code> Discover and Browse screens now show a plugin's full manifest — commands, agents, skills, hooks, MCP/LSP servers — before you install it. No more installing blind.</li>
+    <li>The <code>claude agents</code> terminal tab title now shows the awaiting-input count (<code>claude agents [3 waiting]</code>) so you can see at a glance from an alt-tabbed window which agents need attention.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Practical use: a one-liner CI gate</strong>
+    <p>With <code>claude agents --json</code>, you can write a simple CI check that fails the pipeline if any active Claude Code background session has been in "waiting" state for more than a configurable threshold — catching stuck agents before they hold up a release branch.</p>
+    <pre><code># Fail CI if any bg session has been waiting > 30 min:
+claude agents --json \
+  | jq -e '[.[] | select(.status=="waiting" and .bg==true
+            and (.elapsed | strptime("%H:%M:%S") | mktime) > 1800)]
+           | length == 0'</code></pre>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://code.claude.com/docs/en/changelog" class="source-link" target="_blank" rel="noopener">code.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">v2.1.145</span>
+    <span class="tag">claude agents</span>
+    <span class="tag">JSON scripting</span>
+    <span class="tag">OpenTelemetry</span>
+    <span class="tag">observability</span>
+    <span class="tag">multi-agent</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

@@ -7954,6 +7954,89 @@ def img_delaunay_20260519():
     return base
 
 
+def img_seurat_20260521():
+    """Georges Seurat pointillist — revenue milestone and enterprise scale theme."""
+    base = Image.new("RGB", (W, H), (10, 18, 42))   # deep navy bg
+
+    # 1. Dense dot field — pointillist texture across the canvas
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    spectral = [
+        (220, 40, 40), (220, 120, 30), (210, 190, 40),
+        (60, 190, 90), (40, 130, 230), (140, 50, 220),
+        (230, 70, 150), (255, 240, 200),
+    ]
+    for _ in range(5000):
+        sx = rng.randint(0, W)
+        sy = rng.randint(0, H)
+        r = rng.randint(2, 5)
+        col = spectral[rng.randint(0, len(spectral) - 1)]
+        alpha = rng.randint(25, 120)
+        dd.ellipse([(sx - r, sy - r), (sx + r, sy + r)], fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, dl)
+
+    # 2. Rising bar columns built from dense dots (revenue growth)
+    bars = [
+        (130, 560, 75, (190, 100, 50, 180)),
+        (270, 490, 75, (210, 140, 40, 190)),
+        (410, 400, 75, (232, 115, 74, 200)),
+        (550, 290, 75, (80, 200, 120, 200)),
+        (690, 160, 75, (80, 160, 240, 210)),
+        (830, 80,  75, (255, 215, 0, 220)),
+    ]
+    for bx, by, bw, col in bars:
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        for _ in range(500):
+            dx = rng.randint(bx - bw // 2, bx + bw // 2)
+            dy = rng.randint(by, 590)
+            r2 = rng.randint(2, 7)
+            bd.ellipse([(dx - r2, dy - r2), (dx + r2, dy + r2)], fill=col)
+        base = comp(base, bl)
+
+    # 3. Large golden orb — the profitable quarter milestone
+    ol = layer()
+    od = ImageDraw.Draw(ol)
+    cx, cy, orb_r = 1020, 190, 130
+    od.ellipse([(cx - orb_r, cy - orb_r), (cx + orb_r, cy + orb_r)], fill=(255, 215, 0, 210))
+    # Pointillist radiant halo
+    for _ in range(800):
+        angle = rng.uniform(0, 2 * math.pi)
+        dist = rng.uniform(orb_r + 4, orb_r + 80)
+        dx = int(cx + math.cos(angle) * dist)
+        dy = int(cy + math.sin(angle) * dist)
+        r3 = rng.randint(1, 5)
+        od.ellipse([(dx - r3, dy - r3), (dx + r3, dy + r3)],
+                   fill=(255, 215, 0, rng.randint(30, 140)))
+    base = comp(base, ol)
+
+    # 4. Arc of enterprise alliance dots orbiting the golden orb
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    ent_cols = [
+        (30, 100, 220, 210), (40, 180, 90, 210), (220, 40, 40, 210),
+        (150, 50, 200, 210), (255, 120, 20, 210), (0, 200, 210, 210),
+    ]
+    for i in range(12):
+        angle = math.radians(-60 + i * 22)
+        ax = int(cx + 200 * math.cos(angle))
+        ay = int(cy + 200 * math.sin(angle))
+        r4 = 14 + (i % 3) * 5
+        col = ent_cols[i % len(ent_cols)]
+        ad.ellipse([(ax - r4, ay - r4), (ax + r4, ay + r4)], fill=col)
+        # Small pointillist halo on each enterprise dot
+        for _ in range(40):
+            ang2 = rng.uniform(0, 2 * math.pi)
+            dist2 = rng.uniform(r4 + 2, r4 + 18)
+            ex = int(ax + math.cos(ang2) * dist2)
+            ey = int(ay + math.sin(ang2) * dist2)
+            ad.ellipse([(ex - 2, ey - 2), (ex + 2, ey + 2)],
+                       fill=(col[0], col[1], col[2], rng.randint(50, 140)))
+    base = comp(base, al)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -8126,6 +8209,7 @@ DAYS = [
     ("2026-05-18", img_moholy_20260518,   "Legal & Mythos",   "László Moholy-Nagy"),
     ("2026-05-19", img_delaunay_20260519, "London & Security", "Robert Delaunay"),
     ("2026-05-20", img_lissitzky_20260520, "SDK Acquisition",  "El Lissitzky"),
+    ("2026-05-21", img_seurat_20260521,   "First Profit",     "Georges Seurat"),
 ]
 
 for date, fn, kw, artist in DAYS:

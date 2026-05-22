@@ -8037,6 +8037,83 @@ def img_seurat_20260521():
     return base
 
 
+def img_miro_20260522():
+    """Joan Miró — biomorphic blobs on deep indigo — agent tunnels and private network access theme."""
+    base = Image.new("RGB", (W, H), (18, 14, 55))   # deep indigo bg
+
+    # 1. Background texture — subtle grid of tiny dots suggesting network nodes
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    for gx in range(0, W, 60):
+        for gy in range(0, H, 60):
+            td.ellipse([(gx - 2, gy - 2), (gx + 2, gy + 2)], fill=(80, 60, 160, 60))
+    base = comp(base, tl)
+
+    # 2. Tunnel arcs — curved lines suggesting secure connections between nodes
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    arcs = [
+        ((-50, 200), (400, 580), (200, 150)),   # left sweep
+        ((200, 150), (800, 500), (550, 80)),     # centre arc
+        ((550, 80), (1250, 400), (950, 200)),    # right arc
+    ]
+    for (x0, y0), (x1, y1), (cx, cy) in arcs:
+        # draw curved line as series of line segments approximating bezier
+        steps = 40
+        pts = []
+        for i in range(steps + 1):
+            t = i / steps
+            px = (1 - t)**2 * x0 + 2 * (1 - t) * t * cx + t**2 * x1
+            py = (1 - t)**2 * y0 + 2 * (1 - t) * t * cy + t**2 * y1
+            pts.append((int(px), int(py)))
+        for i in range(len(pts) - 1):
+            ad.line([pts[i], pts[i + 1]], fill=(0, 0, 0, 220), width=6)
+    base = comp(base, al)
+
+    # 3. Large biomorphic blobs — nodes in the network
+    blobs = [
+        (200, 160, 120, 90,  (220, 40, 40, 215)),     # red — left gateway node
+        (550, 90,  100, 75,  (255, 210, 0, 210)),     # yellow — centre hub
+        (950, 210, 130, 95,  (30, 80, 220, 210)),     # blue — right private node
+        (380, 490, 100, 70,  (255, 255, 255, 185)),   # white — internal service
+        (750, 480, 115, 80,  (60, 190, 80, 200)),     # green — self-hosted sandbox
+    ]
+    for cx, cy, rw, rh, col in blobs:
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        bd.ellipse([(cx - rw, cy - rh), (cx + rw, cy + rh)], fill=col, outline=(0, 0, 0, 255), width=5)
+        base = comp(base, bl)
+
+    # 4. Star scatter — MCP protocol signals
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    for _ in range(28):
+        sx = rng.randint(20, W - 20)
+        sy = rng.randint(20, H - 20)
+        r = rng.randint(5, 13)
+        col_choices = [(255, 220, 0, 210), (255, 80, 80, 190), (255, 255, 255, 190), (60, 200, 255, 190)]
+        col = col_choices[rng.randint(0, 3)]
+        pts = []
+        for i in range(10):
+            angle = math.pi / 5 * i - math.pi / 2
+            rr = r if i % 2 == 0 else r // 2
+            pts.append((int(sx + rr * math.cos(angle)), int(sy + rr * math.sin(angle))))
+        sd.polygon(pts, fill=col)
+    base = comp(base, sl)
+
+    # 5. Small circle accents — Miró dot signature
+    dot_l = layer()
+    dot_d = ImageDraw.Draw(dot_l)
+    accent_pos = [(290, 270), (460, 370), (680, 280), (870, 490), (1050, 340), (130, 420), (1120, 130)]
+    for ax, ay in accent_pos:
+        r = rng.randint(10, 24)
+        col = [(255, 210, 0, 230), (255, 80, 80, 220), (255, 255, 255, 200), (60, 200, 255, 220)][rng.randint(0, 3)]
+        dot_d.ellipse([(ax - r, ay - r), (ax + r, ay + r)], fill=col, outline=(0, 0, 0, 200), width=3)
+    base = comp(base, dot_l)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -8210,6 +8287,7 @@ DAYS = [
     ("2026-05-19", img_delaunay_20260519, "London & Security", "Robert Delaunay"),
     ("2026-05-20", img_lissitzky_20260520, "SDK Acquisition",  "El Lissitzky"),
     ("2026-05-21", img_seurat_20260521,   "First Profit",     "Georges Seurat"),
+    ("2026-05-22", img_miro_20260522,    "Agent Security",   "Joan Miró"),
 ]
 
 for date, fn, kw, artist in DAYS:

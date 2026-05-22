@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="May 22: Claude Managed Agents gain MCP Tunnels for private-network access and Self-Hosted Sandboxes for on-premises code execution. Claude Code renames /simplify to /code-review, pins background sessions, and patches an exit-code regression. Anthropic hosts a live webinar on modernising state and local government software.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-05-22 – Managed Agents Private Network Access, /code-review Command &amp; Claude for Government">
+  <meta property="og:description" content="Claude Managed Agents gain MCP Tunnels for private-network access and Self-Hosted Sandboxes for on-premises code execution. Claude Code renames /simplify to /code-review, pins background sessions, and patches an exit-code regression. Anthropic hosts a live webinar on modernising state and local government software.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/05/2026-05-22.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/05/2026-05-22.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/05/2026-05-22.png">
+
+  <title>2026-05-22 – Managed Agents Private Network Access, /code-review Command &amp; Claude for Government | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Managed Agents Private Network Access, /code-review Command & Claude for Government",
+  "description": "Claude Managed Agents gain MCP Tunnels for private-network access and Self-Hosted Sandboxes for on-premises code execution. Claude Code renames /simplify to /code-review, pins background sessions, and patches an exit-code regression. Anthropic hosts a live webinar on modernising state and local government software.",
+  "datePublished": "2026-05-22",
+  "dateModified": "2026-05-22",
+  "url": "https://claudebeat.ai/articles/2026/05/2026-05-22.html",
+  "image": "https://claudebeat.ai/articles/2026/05/2026-05-22.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/05/2026-05-22.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-05-22</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Managed Agents Private Network Access, /code-review Command &amp; Claude for Government</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-05-22.png" alt="Managed Agents Private Network Access, /code-review Command &amp; Claude for Government — visual for 2026-05-22">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Managed Agents: MCP Tunnels for Private Networks & Self-Hosted Sandboxes
+     Source: https://9to5mac.com/2026/05/19/anthropic-enhances-claude-managed-agents-with-two-new-privacy-and-security-features/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Managed Agents Gain Private Network Access — MCP Tunnels and Self-Hosted Sandboxes Arrive</h2>
+
+  <p>Anthropic has added two major security and privacy features to Claude Managed Agents: <strong>MCP Tunnels</strong>, which let agents reach MCP servers inside a private network without exposing them to the public internet, and <strong>Self-Hosted Sandboxes</strong>, which keep sensitive files and code execution on the customer's own infrastructure while Anthropic's orchestration layer handles scheduling and coordination. Together, these address the two most common blockers for enterprises evaluating Managed Agents for sensitive workloads: network isolation and data residency.</p>
+
+  <h3>MCP Tunnels — how they work</h3>
+  <p>MCP Tunnels establish a secure outbound connection from the customer's internal network to the Managed Agents service. No inbound firewall rules are required, and no internal server is exposed to the internet. The agent can then call internal MCP tools — databases, private APIs, knowledge bases, ticketing systems — exactly as it would call a public MCP server, with end-to-end traffic encryption throughout.</p>
+  <ul>
+    <li><strong>Lightweight gateway</strong> — a small daemon deployed inside the private network handles the single outbound tunnel connection</li>
+    <li><strong>No public exposure</strong> — the internal MCP server is never addressable from outside the network</li>
+    <li><strong>Status:</strong> limited research preview; access requests required</li>
+  </ul>
+
+  <h3>Self-Hosted Sandboxes — the split architecture</h3>
+  <p>The Managed Agents orchestration loop (scheduling, reasoning, agent lifecycle) continues to run on Anthropic's infrastructure. But <strong>tool execution</strong> — running code, reading and writing files, calling APIs — happens inside a sandbox configured in the customer's own environment. Supported sandbox providers at launch include <strong>Cloudflare, Daytona, Modal, and Vercel</strong>. This means that source code, proprietary data, and credentials processed by an agent never leave the customer's own cloud account, even when the orchestration is managed by Anthropic.</p>
+
+  <div class="callout tip">
+    <strong>Practical implication for security-sensitive teams</strong>
+    <p>These two features, in combination, unlock a deployment pattern where a Managed Agent can query internal documentation (via MCP Tunnel), run code against proprietary data (via Self-Hosted Sandbox), and coordinate the workflow (via Anthropic orchestration) — without any sensitive data leaving the customer's perimeter. This is the architecture that financial services, healthcare, and regulated industries have been asking for. If your organisation previously ruled out Managed Agents on data-residency grounds, it is worth re-evaluating.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://9to5mac.com/2026/05/19/anthropic-enhances-claude-managed-agents-with-two-new-privacy-and-security-features/" class="source-link" target="_blank" rel="noopener">9to5mac.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Managed Agents</span>
+    <span class="tag">MCP Tunnels</span>
+    <span class="tag">Self-Hosted Sandboxes</span>
+    <span class="tag">private network</span>
+    <span class="tag">data residency</span>
+    <span class="tag">enterprise security</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Code v2.1.147 + v2.1.148: /code-review, Pinned Sessions & Bash Fix
+     Source: https://github.com/anthropics/claude-code/releases
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.147 + v2.1.148: /code-review Replaces /simplify, Pinned Sessions Stay Alive</h2>
+
+  <p>Two Claude Code releases landed on May 21–22 with developer-workflow improvements and a quick regression fix. The headline change: <strong><code>/simplify</code> is now <code>/code-review</code></strong>, with an optional effort-level argument. The command does the same thing — reads changed code and identifies improvements — but the new name more accurately describes the intent and adds granularity over how thorough the review should be.</p>
+
+  <h3>What changed in v2.1.147</h3>
+  <ul>
+    <li><strong><code>/code-review [level]</code></strong> — replaces <code>/simplify</code>. Levels: <code>/code-review low</code>, <code>/code-review medium</code> (default), <code>/code-review high</code>. Higher effort means more thorough analysis at higher token cost.</li>
+    <li><strong>Pinned background sessions (<code>Ctrl+T</code>) survive idle</strong> — previously, pinned sessions in <code>claude agents</code> would die if the agent went idle; they now stay alive and are restarted in-place when Claude Code auto-updates.</li>
+    <li><strong>Auto-updater retry logic</strong> — the updater now retries on transient failures instead of failing silently.</li>
+    <li><strong>Diff rendering performance</strong> — large file edits render significantly faster in the diff view.</li>
+    <li><strong>PowerShell fixes on Windows</strong> — tool failures with winget and Microsoft Store installations are resolved.</li>
+    <li><strong>MCP pagination fix</strong> — paginating MCP servers no longer drops resources and templates.</li>
+    <li><strong>Windows Terminal strobing fix</strong> — full-screen strobing in background sessions is gone.</li>
+  </ul>
+
+  <h3>What changed in v2.1.148 (May 22)</h3>
+  <p>v2.1.148 is a hotfix: the Bash tool was returning <strong>exit code 127</strong> (command not found) on every invocation for some users — a regression introduced in v2.1.147. This is patched. If you saw hooks or scripts inexplicably failing after the v2.1.147 update, upgrading to v2.1.148 should resolve it.</p>
+
+  <div class="callout">
+    <strong>Update your muscle memory: /simplify → /code-review</strong>
+    <p>If you have <code>/simplify</code> in any CLAUDE.md hook scripts, cron tasks, or shell aliases, update them to <code>/code-review</code>. The old command name will not persist. The new <code>high</code> effort level is worth using for pre-PR reviews on complex refactors where you want Claude to dig into edge-case handling, not just surface-level style.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">v2.1.147</span>
+    <span class="tag">v2.1.148</span>
+    <span class="tag">/code-review</span>
+    <span class="tag">pinned sessions</span>
+    <span class="tag">bug fix</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude Code & Public Service: Modernising State & Local Government Software
+     Source: https://www.anthropic.com/events
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Anthropic Hosts Live Webinar on Using Claude Code to Modernise State and Local Government Software</h2>
+
+  <p>Anthropic held a live, demo-first webinar on May 22 — <strong>"Claude Code and Public Service: Modernising How State and Local Governments Build Software"</strong> — targeted at SLED (State, Local, Education) IT teams responsible for aging, hard-to-maintain government systems. The session demonstrated how Claude Code can compress delivery timelines for constituent-facing services from quarters to days, addressing the specific pain of legacy codebases where the original authors have often retired.</p>
+
+  <h3>The use-case landscape for government IT</h3>
+  <p>Government software portfolios are uniquely challenging: COBOL-backed benefits eligibility systems, aging .NET permitting platforms, DMV and tax systems written in languages few practitioners know today. Staffing these with experienced maintainers is expensive and increasingly impossible. The webinar showed how Claude Code's agentic capabilities — reading and understanding legacy code at scale, writing tests, proposing modernisation paths — map directly to this problem:</p>
+  <ul>
+    <li><strong>Legacy system comprehension</strong> — Claude Code can read COBOL, understand what a function does in context, and explain it to a modern developer who has never seen COBOL</li>
+    <li><strong>New constituent-facing services</strong> — online permit applications, status portals, and eligibility calculators can be scaffolded on top of existing back-end data without a full rewrite</li>
+    <li><strong>Accelerated delivery</strong> — demos showed services shipping in days that previously required quarter-long procurement and development cycles</li>
+  </ul>
+
+  <h3>Why this matters beyond government</h3>
+  <p>The techniques demonstrated — using Claude Code as an "interpreter" layer between legacy systems and modern development teams — apply broadly. Any organisation running inherited codebases in languages with shrinking talent pools (COBOL, Perl, legacy VB.NET, classic ASP) faces the same constraints. The government sector is simply the most visible case because procurement rules prevent quick migrations. A recording is being distributed within 48 hours of the live session.</p>
+
+  <div class="callout tip">
+    <strong>How to replicate this for your own legacy systems</strong>
+    <p>Open Claude Code in a legacy codebase directory and start with: <em>"Read all files in this directory. Summarise what this system does, identify its primary data flows, and list the three biggest risks for a developer unfamiliar with this stack."</em> This single prompt typically gives a senior developer enough orientation to begin contributing safely to a codebase they have never seen. Pair with <code>/code-review high</code> on any new code written against the legacy system before it merges.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/events" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">government</span>
+    <span class="tag">public sector</span>
+    <span class="tag">legacy modernisation</span>
+    <span class="tag">SLED</span>
+    <span class="tag">Claude Code</span>
+    <span class="tag">webinar</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

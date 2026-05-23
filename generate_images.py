@@ -8114,6 +8114,95 @@ def img_miro_20260522():
     return base
 
 
+def img_marc_20260523():
+    """Franz Marc — rich jewel-toned bg, stylised shapes — global impact, ethics, AI values theme."""
+    base = Image.new("RGB", (W, H), (14, 42, 98))   # deep cobalt bg
+
+    # 1. Background gradient-wash — layered emerald and cobalt bands
+    bg_l = layer()
+    bg_d = ImageDraw.Draw(bg_l)
+    for y in range(0, H, 4):
+        t = y / H
+        r = int(14 + t * 10)
+        g = int(42 + t * 60)
+        b = int(98 + t * 40)
+        bg_d.line([(0, y), (W, y)], fill=(r, g, b, 80))
+    base = comp(base, bg_l)
+
+    # 2. Large sun / moral compass — gold circle centre-right
+    sun_l = layer()
+    sun_d = ImageDraw.Draw(sun_l)
+    sun_d.ellipse([(700, 40), (1100, 440)], fill=(255, 200, 20, 210), outline=(180, 120, 0, 255), width=8)
+    base = comp(base, sun_l)
+
+    # 3. Emerald mountain / rising arc — global health symbolism
+    mt_l = layer()
+    mt_d = ImageDraw.Draw(mt_l)
+    mt_d.polygon([
+        (0, H), (180, 200), (360, H),
+    ], fill=(30, 160, 90, 200), outline=(0, 80, 40, 255), width=5)
+    mt_d.polygon([
+        (200, H), (420, 140), (640, H),
+    ], fill=(20, 130, 110, 195), outline=(0, 60, 50, 255), width=4)
+    base = comp(base, mt_l)
+
+    # 4. Stylised bird / rising figure — aspiration, cross-faith dialogue
+    bird_l = layer()
+    bird_d = ImageDraw.Draw(bird_l)
+    # Body ellipse
+    bird_d.ellipse([(820, 220), (1020, 360)], fill=(200, 50, 50, 210), outline=(80, 0, 0, 255), width=5)
+    # Left wing
+    bird_d.polygon([(820, 290), (580, 160), (760, 310)], fill=(200, 50, 50, 180), outline=(80, 0, 0, 200), width=3)
+    # Right wing
+    bird_d.polygon([(1020, 290), (1200, 140), (1080, 330)], fill=(200, 50, 50, 180), outline=(80, 0, 0, 200), width=3)
+    base = comp(base, bird_l)
+
+    # 5. Teal river / flowing data arc — health data for LMICs
+    river_l = layer()
+    river_d = ImageDraw.Draw(river_l)
+    steps = 60
+    pts = []
+    for i in range(steps + 1):
+        t = i / steps
+        px = int(t * W)
+        py = int(H * 0.75 + math.sin(t * math.pi * 2.5) * 60)
+        pts.append((px, py))
+    for i in range(len(pts) - 1):
+        river_d.line([pts[i], pts[i + 1]], fill=(0, 200, 190, 160), width=12)
+    base = comp(base, river_l)
+
+    # 6. Rust/amber diamond — funding, value, exchange
+    dia_l = layer()
+    dia_d = ImageDraw.Draw(dia_l)
+    dia_d.polygon([(200, 440), (320, 340), (440, 440), (320, 540)],
+                  fill=(210, 110, 30, 210), outline=(120, 60, 0, 255), width=5)
+    base = comp(base, dia_l)
+
+    # 7. Small jewel-dot scatter — communities, traditions, diversity
+    dot_l = layer()
+    dot_d = ImageDraw.Draw(dot_l)
+    gem_colours = [
+        (255, 200, 20, 220),   # gold
+        (200, 50, 50, 210),    # deep red
+        (0, 200, 190, 200),    # teal
+        (210, 110, 30, 210),   # amber
+        (255, 255, 255, 180),  # white
+        (130, 60, 200, 200),   # violet
+    ]
+    dot_positions = [
+        (90, 150), (550, 500), (680, 80), (1100, 510), (470, 350),
+        (160, 530), (780, 580), (960, 80), (320, 260), (1060, 310),
+        (580, 270), (840, 480), (140, 380), (700, 200), (1150, 200),
+    ]
+    for idx, (dx, dy) in enumerate(dot_positions):
+        r = rng.randint(8, 20)
+        col = gem_colours[idx % len(gem_colours)]
+        dot_d.ellipse([(dx - r, dy - r), (dx + r, dy + r)], fill=col, outline=(0, 0, 0, 180), width=2)
+    base = comp(base, dot_l)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -8288,6 +8377,7 @@ DAYS = [
     ("2026-05-20", img_lissitzky_20260520, "SDK Acquisition",  "El Lissitzky"),
     ("2026-05-21", img_seurat_20260521,   "First Profit",     "Georges Seurat"),
     ("2026-05-22", img_miro_20260522,    "Agent Security",   "Joan Miró"),
+    ("2026-05-23", img_marc_20260523,    "Global Reach",     "Franz Marc"),
 ]
 
 for date, fn, kw, artist in DAYS:

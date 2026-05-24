@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="May 24: Anthropic publishes Responsible Scaling Policy v2.1 with stricter ASL-3 evaluations and its first public red-team summary. Claude Code v2.1.149 adds Workspace Snapshots for saving and resuming multi-agent sessions. Claude.ai launches Shared Spaces for real-time team collaboration within Projects.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-05-24 – RSP v2.1, Claude Code Workspace Snapshots &amp; Shared Spaces for Teams">
+  <meta property="og:description" content="Anthropic publishes Responsible Scaling Policy v2.1 with stricter ASL-3 evaluations and its first public red-team summary. Claude Code v2.1.149 adds Workspace Snapshots for saving and resuming multi-agent sessions. Claude.ai launches Shared Spaces for real-time team collaboration within Projects.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/05/2026-05-24.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/05/2026-05-24.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/05/2026-05-24.png">
+
+  <title>2026-05-24 – RSP v2.1, Claude Code Workspace Snapshots &amp; Shared Spaces for Teams | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "RSP v2.1, Claude Code Workspace Snapshots & Shared Spaces for Teams",
+  "description": "Anthropic publishes Responsible Scaling Policy v2.1 with stricter ASL-3 evaluations and its first public red-team summary. Claude Code v2.1.149 adds Workspace Snapshots for saving and resuming multi-agent sessions. Claude.ai launches Shared Spaces for real-time team collaboration within Projects.",
+  "datePublished": "2026-05-24",
+  "dateModified": "2026-05-24",
+  "url": "https://claudebeat.ai/articles/2026/05/2026-05-24.html",
+  "image": "https://claudebeat.ai/articles/2026/05/2026-05-24.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/05/2026-05-24.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-05-24</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>RSP v2.1, Claude Code Workspace Snapshots &amp; Shared Spaces for Teams</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-05-24.png" alt="RSP v2.1, Claude Code Workspace Snapshots &amp; Shared Spaces for Teams — visual for 2026-05-24">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Anthropic Publishes Responsible Scaling Policy v2.1
+     Source: https://www.anthropic.com/news/responsible-scaling-policy
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Anthropic Publishes RSP v2.1 — Stricter ASL-3 Evaluations and First-Ever Public Red-Team Summary</h2>
+
+  <p>One day after announcing its <a href="2026-05-23.html">cross-faith AI ethics dialogue</a>, Anthropic has released a substantially revised Responsible Scaling Policy (RSP v2.1). The update formalises tighter capability evaluations for frontier models at ASL-3, introduces a new class of "containment commitments" that limit how broadly a model can be deployed before reaching specific safety benchmarks, and — most notably — publishes the first-ever public summary of Anthropic's internal red-team findings: the categories of misuse most reliably elicited in testing, which defences worked, and which did not.</p>
+
+  <h3>What changed from RSP v2.0</h3>
+  <ul>
+    <li><strong>Expanded ASL-3 evaluation suite</strong> — the set of capability benchmarks that trigger ASL-3 classification has been widened to include novel biosecurity uplift tests co-developed with the Johns Hopkins Center for Health Security, and a new "social engineering at scale" benchmark measuring whether a model can autonomously influence large populations through coordinated messaging</li>
+    <li><strong>Containment commitments</strong> — new clause: a model that reaches ASL-3 capability thresholds cannot be deployed beyond a controlled operator programme until it also passes a corresponding set of "safety sufficiency" evaluations. Previously, safety evaluations and capability evaluations ran in parallel; they are now explicitly gated</li>
+    <li><strong>Stop-training threshold</strong> — Anthropic commits publicly, for the first time, to halting a training run if any in-training checkpoint exceeds a new internal uplift benchmark by a margin Anthropic deems "unacceptable" — the benchmark itself remains classified, but the commitment is now a documented policy rather than an informal norm</li>
+    <li><strong>Third-party audit schedule</strong> — RSP v2.1 adds a requirement for external audits of ASL-3 and above evaluations, with METR (formerly ARC Evals) and UK AISI named as initial audit partners</li>
+  </ul>
+
+  <h3>The public red-team summary: what it says</h3>
+  <p>The most technically substantive addition is a 12-page red-team summary appended to the policy. Key disclosures include:</p>
+  <ul>
+    <li><strong>Most reliably elicited misuse category</strong>: "persuasive content at scale" (creating targeted political messaging, disinformation templates, and influence-campaign assets) — this succeeded in red-team scenarios far more often than weapons uplift or CBRN assistance</li>
+    <li><strong>Defences that worked</strong>: output classifiers tuned on adversarial red-team outputs significantly reduced success rates in follow-up testing; rule-based refusals alone did not</li>
+    <li><strong>Defences that did not work</strong>: role-play framing and indirect jailbreaks via tool calls remained difficult to block without unacceptable false-positive rates on legitimate uses</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Why this matters for operators building on the API</strong>
+    <p>The red-team summary is not just academic transparency — it directly informs what kinds of use cases Anthropic will consider high-risk, and therefore which operator applications may face tighter scrutiny or usage policy enforcement. If your product involves generating persuasive content at scale (marketing copy generation, A/B testing content, political outreach tools), review your operator agreement against this disclosure. The containment commitments also signal that future frontier model rollouts may arrive to the API more slowly while safety evaluations complete.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/responsible-scaling-policy" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">RSP</span>
+    <span class="tag">responsible scaling</span>
+    <span class="tag">ASL-3</span>
+    <span class="tag">red-team</span>
+    <span class="tag">safety policy</span>
+    <span class="tag">METR</span>
+    <span class="tag">UK AISI</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Code v2.1.149: Workspace Snapshots
+     Source: https://github.com/anthropics/claude-code/releases
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.149: Workspace Snapshots — Save and Resume Multi-Agent Sessions Across Machines</h2>
+
+  <p>Three days after the exit-code regression hotfix (v2.1.148), Anthropic has shipped Claude Code v2.1.149 with a significant new capability for long-running agentic workflows: <strong>Workspace Snapshots</strong>. A snapshot captures the full serialised state of an active session — open file edits, task queue, sub-agent identifiers, permission grants, and the in-memory conversation context — and saves it as a JSON file in <code>.claude/snapshots/</code> inside the project directory. Snapshots can be restored on any machine with access to the same project directory, enabling handoff between laptops, CI runners, and remote VMs without losing agent state.</p>
+
+  <h3>Using snapshots</h3>
+  <pre><code># Save current session to a named snapshot
+/snapshot save "before-api-refactor"
+
+# List snapshots for this project
+/snapshot list
+
+# Resume the most recent snapshot (within same session or new session)
+claude --resume latest
+
+# Resume a named snapshot
+claude --resume "before-api-refactor"
+
+# Delete snapshots older than 7 days
+/snapshot prune --older-than 7d</code></pre>
+
+  <h3>What is and isn't captured</h3>
+  <ul>
+    <li><strong>Captured</strong>: task queue, sub-agent status (running/waiting/done), all pending file edits (as diffs, not full files), explicit permission grants for the session, conversation history up to the compaction limit</li>
+    <li><strong>Not captured</strong>: external process state (shell commands that were running), network connections held by tools, secret/environment variables (must be re-supplied on resume)</li>
+    <li><strong>Portability</strong>: snapshots are project-local and assume the same repository at the same path; git worktree support is planned but not yet included</li>
+  </ul>
+
+  <h3>Other changes in v2.1.149</h3>
+  <ul>
+    <li><strong>Streaming diff performance</strong> — large diffs (&gt;2,000 lines changed) now render incrementally rather than blocking until complete</li>
+    <li><strong>Prompt-cache miss fix on re-runs</strong> — a regression where resuming a background session always triggered a cold cache fill (doubling token cost on the first turn) is resolved</li>
+    <li><strong>MCP server reconnect backoff</strong> — MCP servers that go offline during a session now retry with exponential backoff rather than failing immediately, reducing lost work on flaky network connections</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Practical pattern: safe checkpoints before risky agent steps</strong>
+    <p>The best time to call <code>/snapshot save</code> is immediately before you approve a potentially destructive step — a database migration, a bulk file rename, a deploy. If the agent's next action causes an unexpected outcome, you can restore the pre-approval state in seconds rather than untangling partial changes. Combined with the <code>/code-review high</code> command from v2.1.147, this gives you a structured review-then-checkpoint flow before each consequential agent action.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">v2.1.149</span>
+    <span class="tag">workspace snapshots</span>
+    <span class="tag">session resume</span>
+    <span class="tag">multi-agent</span>
+    <span class="tag">agentic workflows</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude.ai Shared Spaces for Real-Time Team Collaboration
+     Source: https://www.anthropic.com/news/claude-shared-spaces
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude.ai Launches Shared Spaces — Real-Time Team Collaboration Inside Projects</h2>
+
+  <p>Anthropic has released <strong>Shared Spaces</strong>, a new collaboration layer for Claude.ai that turns Projects from personal workspaces into live team environments. In a Shared Space, up to 20 team members can join the same Project conversation, see each other's messages appear in real time, and branch the conversation in different directions simultaneously — each branch visible to all participants. Custom system prompts, uploaded knowledge files, and tool access (web search, code execution) are all shared at the Project level and apply to every participant's session within the Space.</p>
+
+  <h3>How Shared Spaces differ from existing Projects</h3>
+  <ul>
+    <li><strong>Live presence</strong> — a presence bar shows which teammates are active in the Space right now, with initials and status (reading, typing, reviewing a branch)</li>
+    <li><strong>Branched responses</strong> — any participant can fork the conversation from any Claude response, creating a named branch. All branches are visible to all participants and can be merged back or closed</li>
+    <li><strong>Shared knowledge base</strong> — files uploaded to the Project are shared across all sessions; the 200,000-token context is pooled across the Space's knowledge base, not split per user</li>
+    <li><strong>Audit log</strong> — all messages (human and Claude), branch opens/closes, and file changes are logged with timestamps and participant identity for compliance review</li>
+  </ul>
+
+  <h3>Availability and pricing</h3>
+  <p>Shared Spaces launch in <strong>public beta for Claude Teams and Enterprise subscribers</strong> today. Claude Max subscribers get a limited preview (up to 5 participants per Space). There is no additional charge for the feature itself; participant slots count against the Team or Enterprise seat allocation. GA for all paid plans is expected in Q3 2026. Shared Spaces are not available on Claude Pro or the free tier.</p>
+
+  <div class="callout tip">
+    <strong>Best use: asynchronous expert review with live follow-up</strong>
+    <p>The most immediately high-value pattern for Shared Spaces is <em>asynchronous expert review</em>: one team member runs a deep Claude analysis overnight (legal review, code audit, technical specification review), then the rest of the team joins the Space in the morning to ask follow-up questions, branch into specific sub-topics, and collectively refine the output — all in the same persistent context rather than copy-pasting between separate conversations. This is the workflow that previously required expensive facilitated AI workshops; it is now a built-in platform feature.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/claude-shared-spaces" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude.ai</span>
+    <span class="tag">Shared Spaces</span>
+    <span class="tag">team collaboration</span>
+    <span class="tag">Projects</span>
+    <span class="tag">branched conversations</span>
+    <span class="tag">Claude Teams</span>
+    <span class="tag">Enterprise</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

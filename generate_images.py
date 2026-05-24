@@ -8203,6 +8203,102 @@ def img_marc_20260523():
     return base
 
 
+def img_kandinsky_20260524():
+    """Wassily Kandinsky — deep prussian-blue bg, bold geometric composition — RSP, transparency, trust theme."""
+    base = Image.new("RGB", (W, H), (15, 28, 68))   # deep prussian blue
+
+    # 1. Diagonal grid — policy framework structure
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    step = 80
+    line_color = (255, 255, 255, 18)
+    for offset in range(-H, W + H, step):
+        gd.line([(offset, 0), (offset + H, H)], fill=line_color, width=1)
+    for offset in range(0, W + H + step, step):
+        gd.line([(offset, 0), (offset - H, H)], fill=line_color, width=1)
+    base = comp(base, grid_l)
+
+    # 2. Large gold circle — accountability, public commitment
+    gc_l = layer()
+    gc_d = ImageDraw.Draw(gc_l)
+    gc_d.ellipse([(680, -80), (1180, 420)], fill=(240, 195, 30, 200), outline=(0, 0, 0, 255), width=7)
+    base = comp(base, gc_l)
+
+    # 3. White broad arc — transparency, openness (RSP disclosure arc)
+    arc_l = layer()
+    arc_d = ImageDraw.Draw(arc_l)
+    arc_d.arc([(60, 40), (620, 580)], start=240, end=80, fill=(255, 255, 255, 240), width=12)
+    base = comp(base, arc_l)
+
+    # 4. Teal triangle — workspace snapshots, forward progress
+    tri_l = layer()
+    tri_d = ImageDraw.Draw(tri_l)
+    tri_d.polygon([(140, 560), (420, 560), (280, 200)],
+                  fill=(20, 200, 195, 210), outline=(0, 80, 80, 255), width=5)
+    base = comp(base, tri_l)
+
+    # 5. Red pie-slice — policy enforcement zone
+    pie_l = layer()
+    pie_d = ImageDraw.Draw(pie_l)
+    pie_d.pieslice([(840, 300), (1180, 590)], start=200, end=360,
+                   fill=(215, 35, 55, 210), outline=(0, 0, 0, 255), width=5)
+    base = comp(base, pie_l)
+
+    # 6. Orange circle — trust badge / operator signal
+    oc_l = layer()
+    oc_d = ImageDraw.Draw(oc_l)
+    oc_d.ellipse([(90, 90), (270, 270)],
+                 fill=(255, 130, 30, 215), outline=(0, 0, 0, 255), width=5)
+    base = comp(base, oc_l)
+
+    # 7. Purple rectangle — containment commitment
+    rect_l = layer()
+    rect_d = ImageDraw.Draw(rect_l)
+    rect_d.rectangle([(500, 60), (680, 200)],
+                     fill=(140, 45, 210, 190), outline=(0, 0, 0, 255), width=4)
+    base = comp(base, rect_l)
+
+    # 8. Small scatter circles — red-team data points, diversity of signals
+    scatter = layer()
+    sd = ImageDraw.Draw(scatter)
+    positions = [
+        (160, 350), (340, 420), (500, 160), (720, 80), (860, 510),
+        (960, 180), (1060, 70), (1110, 440), (55, 490), (430, 310),
+        (590, 390), (750, 540), (300, 150), (1030, 350), (680, 300),
+    ]
+    colors = [
+        (240, 195, 30, 220),   # gold
+        (215, 35, 55, 210),    # red
+        (255, 255, 255, 200),  # white
+        (20, 200, 195, 200),   # teal
+        (255, 130, 30, 210),   # orange
+        (140, 45, 210, 200),   # purple
+        (60, 220, 80, 200),    # green
+        (240, 195, 30, 190),   # gold
+        (20, 200, 195, 200),   # teal
+        (215, 35, 55, 200),    # red
+        (255, 255, 255, 180),  # white
+        (255, 130, 30, 200),   # orange
+        (60, 220, 80, 190),    # green
+        (140, 45, 210, 190),   # purple
+        (240, 195, 30, 210),   # gold
+    ]
+    radii = [14, 11, 18, 16, 10, 15, 12, 17, 9, 13, 20, 8, 11, 14, 16]
+    for (px, py), col, r in zip(positions, colors, radii):
+        sd.ellipse([(px - r, py - r), (px + r, py + r)], fill=col, outline=(0, 0, 0, 200), width=2)
+    base = comp(base, scatter)
+
+    # 9. Bold composition lines — structured policy framework
+    lines_l = layer()
+    ld = ImageDraw.Draw(lines_l)
+    ld.line([(0, 420), (450, 110)], fill=(0, 0, 0, 255), width=5)
+    ld.line([(520, 590), (950, 220)], fill=(0, 0, 0, 255), width=3)
+    ld.line([(820, 590), (1150, 310)], fill=(255, 255, 255, 200), width=2)
+    base = comp(base, lines_l)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -8377,7 +8473,8 @@ DAYS = [
     ("2026-05-20", img_lissitzky_20260520, "SDK Acquisition",  "El Lissitzky"),
     ("2026-05-21", img_seurat_20260521,   "First Profit",     "Georges Seurat"),
     ("2026-05-22", img_miro_20260522,    "Agent Security",   "Joan Miró"),
-    ("2026-05-23", img_marc_20260523,    "Global Reach",     "Franz Marc"),
+    ("2026-05-23", img_marc_20260523,        "Global Reach",    "Franz Marc"),
+    ("2026-05-24", img_kandinsky_20260524,  "Policy & Trust",  "Wassily Kandinsky"),
 ]
 
 for date, fn, kw, artist in DAYS:

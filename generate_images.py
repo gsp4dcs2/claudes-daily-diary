@@ -8299,6 +8299,68 @@ def img_kandinsky_20260524():
     return base
 
 
+def img_malevich_20260525():
+    """Kazimir Malevich — Project Glasswing security scan, vulnerability discovery, structural absolutes."""
+    base = Image.new("RGB", (W, H), (236, 232, 216))
+
+    # 1. Large navy tilted parallelogram — infrastructure being scanned
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    nd.polygon([(380, 60), (980, 40), (900, 350), (300, 370)], fill=(22, 38, 110, 235))
+    base = comp(base, nl)
+
+    # 2. Bold red tilted rectangle — threat/vulnerability indicator
+    rl = layer()
+    rd = ImageDraw.Draw(nl)
+    rd = ImageDraw.Draw(rl)
+    rd.polygon([(60, 160), (300, 120), (360, 300), (120, 340)], fill=(205, 24, 24, 245))
+    base = comp(base, rl)
+
+    # 3. Small black tilted square — top-right anchor
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    cx, cy, s = 1040, 130, 100
+    bd.polygon([
+        (cx - s//2, cy - 15), (cx + 15, cy - s//2),
+        (cx + s//2, cy + 15), (cx - 15, cy + s//2),
+    ], fill=(14, 14, 14, 255))
+    base = comp(base, bl)
+
+    # 4. Yellow diagonal bar — scanning sweep
+    yl = layer()
+    yd = ImageDraw.Draw(yl)
+    yd.polygon([(50, 490), (720, 430), (730, 475), (60, 535)], fill=(228, 190, 0, 225))
+    base = comp(base, yl)
+
+    # 5. Small cream circle — Suprematist floating element
+    wl = layer()
+    wd = ImageDraw.Draw(wl)
+    wd.ellipse([(820, 440), (940, 560)], fill=(236, 232, 216, 230), outline=(14, 14, 14, 180), width=3)
+    base = comp(base, wl)
+
+    # 6. Tiny black rectangles — vulnerability markers scattered
+    scatter = layer()
+    sd = ImageDraw.Draw(scatter)
+    markers = [
+        (150, 240, 22, 8), (470, 150, 18, 7), (650, 90, 25, 9),
+        (840, 200, 20, 8), (200, 420, 16, 6), (960, 480, 22, 8),
+        (1100, 320, 14, 6), (580, 390, 19, 7), (350, 510, 21, 8),
+    ]
+    for (mx, my, mw, mh) in markers:
+        scatter_layer = layer()
+        sld = ImageDraw.Draw(scatter_layer)
+        sld.rectangle([(mx, my), (mx + mw, my + mh)], fill=(14, 14, 14, 200))
+        base = comp(base, scatter_layer)
+
+    # 7. Thin white horizontal rule — policy line
+    hrl = layer()
+    hrd = ImageDraw.Draw(hrl)
+    hrd.rectangle([(0, 392), (W, 398)], fill=(255, 255, 255, 160))
+    base = comp(base, hrl)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -8475,6 +8537,7 @@ DAYS = [
     ("2026-05-22", img_miro_20260522,    "Agent Security",   "Joan Miró"),
     ("2026-05-23", img_marc_20260523,        "Global Reach",    "Franz Marc"),
     ("2026-05-24", img_kandinsky_20260524,  "Policy & Trust",  "Wassily Kandinsky"),
+    ("2026-05-25", img_malevich_20260525,   "Bug Discovery",   "Kazimir Malevich"),
 ]
 
 for date, fn, kw, artist in DAYS:

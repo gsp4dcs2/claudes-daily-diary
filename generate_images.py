@@ -8361,6 +8361,106 @@ def img_malevich_20260525():
     return base
 
 
+def img_klimt_20260526():
+    """Gustav Klimt — Vatican AI encyclical + Model Spec Midtraining alignment research."""
+    base = Image.new("RGB", (W, H), (4, 2, 10))   # deep near-black violet-black bg
+
+    # 1. Dense gold tessera field across full canvas — Klimt signature mosaic
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    for _ in range(700):
+        tx = rng.randint(0, W)
+        ty = rng.randint(0, H)
+        tr = rng.randint(2, 7)
+        alpha = rng.randint(35, 175)
+        td.ellipse([(tx - tr, ty - tr), (tx + tr, ty + tr)], fill=(218, 165, 32, alpha))
+    base = comp(base, tl)
+
+    # 2. Three thematic oval zones — Vatican (gold/purple), MSM alignment (teal), moral oversight (rust)
+    zones = [
+        (310, 210, 255, 185, (180, 120, 25, 180)),   # warm gold — Vatican / encyclical
+        (820, 195, 230, 170, (15, 155, 145, 175)),   # teal — alignment / MSM research
+        (580, 420, 185, 145, (155, 45, 120, 160)),   # deep magenta-purple — values / inner states
+    ]
+    for cx, cy, rw, rh, col in zones:
+        zl = layer()
+        zd = ImageDraw.Draw(zl)
+        zd.ellipse([(cx - rw, cy - rh), (cx + rw, cy + rh)], fill=col)
+        base = comp(base, zl)
+
+    # 3. Concentric gold arc spirals around Vatican zone — spiritual radiance / encyclical reach
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(14):
+        r_arc = 60 + i * 30
+        a_start = i * 25
+        ad.arc([(310 - r_arc, 210 - r_arc), (310 + r_arc, 210 + r_arc)],
+               start=a_start, end=a_start + 110,
+               fill=(218, 165, 32, max(18, 190 - i * 12)), width=4)
+    base = comp(base, al)
+
+    # 4. Mosaic corner fragments — Klimt decorative frame with gold, teal, and purple
+    ml = layer()
+    md = ImageDraw.Draw(ml)
+    fragments = [
+        (20,  20, 185, 130,  (218, 165, 32, 150)),   # gold top-left
+        (1025, 18, 1185, 155, (15, 155, 145, 140)),  # teal top-right
+        (20,  490, 195, 615,  (155, 45, 120, 145)),  # purple bottom-left
+        (1010, 490, 1185, 615, (218, 165, 32, 145)), # gold bottom-right
+        (500, 12, 710, 80,    (180, 120, 25, 120)),   # amber top-centre
+        (480, 558, 730, 618,  (15, 155, 145, 115)),  # teal bottom-centre
+        (28,  280, 118, 390,  (218, 165, 32, 120)),  # gold left-mid
+        (1082, 255, 1185, 375, (155, 45, 120, 110)), # purple right-mid
+    ]
+    for px0, py0, px1, py1, col in fragments:
+        md.rectangle([(px0, py0), (px1, py1)], fill=col)
+    base = comp(base, ml)
+
+    # 5. Dotted gold threads linking the three zones — moral, values, oversight network
+    pairs = [(310, 210, 820, 195), (820, 195, 580, 420), (310, 210, 580, 420)]
+    for ax, ay, bx, by in pairs:
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        for step in range(90):
+            t = step / 89
+            mx = int(ax + (bx - ax) * t)
+            my = int(ay + (by - ay) * t)
+            dr = rng.randint(1, 3)
+            alpha = int(120 * math.sin(math.pi * t))
+            pd.ellipse([(mx - dr, my - dr), (mx + dr, my + dr)], fill=(218, 165, 32, alpha))
+        base = comp(base, pl)
+
+    # 6. Organic arc flourishes — vine/leaf ornament suggestive of illuminated manuscript tradition
+    vl = layer()
+    vd = ImageDraw.Draw(vl)
+    palette = [(218, 165, 32), (15, 155, 145), (155, 45, 120)]
+    for i in range(14):
+        vx = rng.randint(80, 1120)
+        vy = rng.randint(25, 380)
+        vr = rng.randint(28, 72)
+        a0 = rng.randint(0, 320)
+        r, g, b = palette[i % 3]
+        alpha = rng.randint(65, 150)
+        vd.arc([(vx - vr, vy - vr), (vx + vr, vy + vr)],
+               start=a0, end=a0 + 100,
+               fill=(r, g, b, alpha), width=3)
+    base = comp(base, vl)
+
+    # 7. Fine gold stipple ring around values/inner-states zone (purple) — consciousness halo
+    hl = layer()
+    hd = ImageDraw.Draw(hl)
+    for i in range(48):
+        angle = 2 * math.pi * i / 48
+        hx = int(580 + 200 * math.cos(angle))
+        hy = int(420 + 158 * math.sin(angle))
+        hr = rng.randint(2, 5)
+        alpha = rng.randint(80, 180)
+        hd.ellipse([(hx - hr, hy - hr), (hx + hr, hy + hr)], fill=(218, 165, 32, alpha))
+    base = comp(base, hl)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -8538,6 +8638,7 @@ DAYS = [
     ("2026-05-23", img_marc_20260523,        "Global Reach",    "Franz Marc"),
     ("2026-05-24", img_kandinsky_20260524,  "Policy & Trust",  "Wassily Kandinsky"),
     ("2026-05-25", img_malevich_20260525,   "Bug Discovery",   "Kazimir Malevich"),
+    ("2026-05-26", img_klimt_20260526,      "Moral Voices",    "Gustav Klimt"),
 ]
 
 for date, fn, kw, artist in DAYS:

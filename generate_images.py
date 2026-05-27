@@ -8461,6 +8461,82 @@ def img_klimt_20260526():
     return base
 
 
+def img_leger_20260527():
+    """Fernand Léger — bold mechanical industrial shapes — enterprise security integrations, developer tooling, global reach."""
+    base = Image.new("RGB", (W, H), (8, 10, 20))   # near-black bg
+
+    # 1. Primary structural grid bars — Léger's signature mechanical geometry
+    bars = [
+        (0,   95,  1200, 140,  (40,  60, 160, 200)),   # deep blue horizontal band
+        (0,   430, 1200, 475,  (160, 40,  30, 185)),   # red-orange horizontal band
+        (140, 0,   190,  630,  (200, 170, 20, 175)),   # vertical gold bar
+        (560, 0,   610,  630,  (50,  160, 80, 165)),   # vertical green bar
+        (950, 0,   1000, 630,  (30,  100, 200, 170)),  # vertical blue bar
+    ]
+    for x0, y0, x1, y1, col in bars:
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        bd.rectangle([(x0, y0), (x1, y1)], fill=col)
+        vert = (y1 - y0) > (x1 - x0)
+        if vert:
+            bd.rectangle([(x0, y0), (x0 + 6, y1)], fill=(min(col[0]+80, 255), min(col[1]+80, 255), min(col[2]+80, 255), 120))
+        else:
+            bd.rectangle([(x0, y0), (x1, y0 + 6)], fill=(min(col[0]+80, 255), min(col[1]+80, 255), min(col[2]+80, 255), 120))
+        base = comp(base, bl)
+
+    # 2. Bold flat primary rectangles — "integration block" modules
+    blocks = [
+        ([(210, 160), (390, 310)], (200,  40,  30, 210)),   # red left-centre
+        ([(630, 70),  (830, 250)], (210, 185,  25, 205)),   # yellow centre-top
+        ([(640, 500), (850, 610)], (30,   80, 200, 210)),   # blue centre-bottom
+        ([(1020,220), (1185, 420)], (50,  160,  80, 205)),  # green right
+        ([(30,  300), (135, 415)], (200, 120,  30, 200)),   # orange far-left
+    ]
+    for pts, col in blocks:
+        fl = layer()
+        fd = ImageDraw.Draw(fl)
+        fd.rectangle(pts, fill=col, outline=(215, 215, 215, 130), width=5)
+        base = comp(base, fl)
+
+    # 3. Bold mechanical circle "nodes" — security connection endpoints
+    nodes = [
+        (165, 117,  52, (200, 170,  20, 200)),   # gold node on gold bar
+        (585, 452,  48, ( 50, 175,  90, 200)),   # green node on green bar
+        (975, 452,  50, ( 30, 110, 220, 200)),   # blue node on blue bar
+        (300, 235,  36, (210,  40,  30, 185)),   # red detail node
+        (730, 160,  32, (230, 200,  30, 185)),   # yellow detail node
+    ]
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    for cx, cy, r, col in nodes:
+        nd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=col, outline=(215, 215, 215, 170), width=5)
+        nd.ellipse([(cx - r//3, cy - r//3), (cx + r//3, cy + r//3)], fill=(8, 10, 20, 255))
+    base = comp(base, nl)
+
+    # 4. Diagonal accent lines — Léger's dynamism, here representing data flows between nodes
+    ol = layer()
+    od = ImageDraw.Draw(ol)
+    od.line([(190, 430), (140, 160)],  fill=(215, 215, 215, 70), width=3)
+    od.line([(610, 430), (560, 160)],  fill=(215, 215, 215, 65), width=3)
+    od.line([(390, 235), (560, 160)],  fill=(215, 215, 215, 60), width=2)
+    od.line([(830, 160), (950, 430)],  fill=(215, 215, 215, 55), width=2)
+    od.line([(135, 360), (210, 310)],  fill=(215, 215, 215, 50), width=2)
+    base = comp(base, ol)
+
+    # 5. Scattered small square texture — circuit-board / integration grid feel
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    for _ in range(70):
+        tx = rng.randint(0, W)
+        ty = rng.randint(0, H)
+        ts = rng.randint(3, 8)
+        tc = rng.choice([(200, 40, 30), (210, 185, 25), (30, 80, 200), (50, 160, 80), (200, 120, 30)])
+        td.rectangle([(tx, ty), (tx + ts, ty + ts)], fill=(*tc, 50))
+    base = comp(base, tl)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -8639,6 +8715,7 @@ DAYS = [
     ("2026-05-24", img_kandinsky_20260524,  "Policy & Trust",  "Wassily Kandinsky"),
     ("2026-05-25", img_malevich_20260525,   "Bug Discovery",   "Kazimir Malevich"),
     ("2026-05-26", img_klimt_20260526,      "Moral Voices",    "Gustav Klimt"),
+    ("2026-05-27", img_leger_20260527,      "Security & Code", "Fernand Léger"),
 ]
 
 for date, fn, kw, artist in DAYS:

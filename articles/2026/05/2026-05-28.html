@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="May 28: Claude Code v2.1.153 ships Git LFS support in plugin marketplace sources, agent autocomplete for native slash commands and bundled skills, persistent macOS background-agent permissions, and a security fix for custom API gateways. Plus: five actionable patterns for writing more reliable MCP servers, drawn from the bugs this release fixes.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-05-28 – Claude Code v2.1.153: Git LFS, Agent Autocomplete &amp; MCP Server Reliability">
+  <meta property="og:description" content="Claude Code v2.1.153 ships Git LFS support in plugin marketplace sources, agent autocomplete for native slash commands and bundled skills, persistent macOS background-agent permissions, and a security fix for custom API gateways. Plus: five actionable patterns for writing more reliable MCP servers, drawn from the bugs this release fixes.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/05/2026-05-28.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/05/2026-05-28.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/05/2026-05-28.png">
+
+  <title>2026-05-28 – Claude Code v2.1.153: Git LFS, Agent Autocomplete &amp; MCP Server Reliability | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Code v2.1.153: Git LFS, Agent Autocomplete &amp; MCP Server Reliability",
+  "description": "Claude Code v2.1.153 ships Git LFS support in plugin marketplace sources, agent autocomplete for native slash commands and bundled skills, persistent macOS background-agent permissions, and a security fix for custom API gateways. Plus: five actionable patterns for writing more reliable MCP servers, drawn from the bugs this release fixes.",
+  "datePublished": "2026-05-28",
+  "dateModified": "2026-05-28",
+  "url": "https://claudebeat.ai/articles/2026/05/2026-05-28.html",
+  "image": "https://claudebeat.ai/articles/2026/05/2026-05-28.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/05/2026-05-28.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-05-28</span>
+      <span class="cat-badge cat-tips">💡 Tips &#39;n&#39; Tricks</span>
+      <h1>Claude Code v2.1.153: Git LFS, Agent Autocomplete &amp; MCP Server Reliability</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-05-28.png" alt="Claude Code v2.1.153: Git LFS, Agent Autocomplete &amp; MCP Server Reliability — visual for 2026-05-28">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code v2.1.153
+     Source: https://github.com/anthropics/claude-code/releases
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> Claude Code v2.1.153: Git LFS, Agent Autocomplete, macOS Permissions &amp; Security Fix</h2>
+
+  <p>Claude Code <strong>v2.1.153</strong> landed early this morning (00:52 UTC). The release is narrower in scope than yesterday's v2.1.152, but carries one security fix and several quality-of-life improvements that developer automation workflows will notice immediately.</p>
+
+  <h3>Git LFS support in plugin marketplace sources</h3>
+  <p>Plugin marketplace sources using the <code>github</code> or <code>git</code> provider can now set <code>skipLfs: true</code> to bypass Git LFS downloads entirely during clone and update. This matters for any plugin whose repository tracks large binary assets — documentation images, pre-built binaries, test fixtures — that your runtime environment doesn't need. Skipping LFS makes installs faster and avoids needing LFS credentials in environments that don't have them.</p>
+
+  <pre><code># In your plugin marketplace source entry:
+{
+  "type": "github",
+  "repo": "acme/my-plugin",
+  "skipLfs": true
+}
+</code></pre>
+
+  <h3>Agent autocomplete now includes native commands and bundled skills</h3>
+  <p>When you type <code>claude agents</code> or trigger autocomplete in the agent configuration interface, the suggestion list now surfaces <strong>native slash commands</strong> and <strong>bundled skills</strong> alongside custom agents. Before this change, discovering which built-in commands were available required consulting the docs. Now the shell autocomplete itself is the documentation — especially useful when writing <code>SessionStart</code> hooks that chain agent calls together.</p>
+
+  <h3>Security fix: custom API gateway credential isolation</h3>
+  <p>A regression since v2.1.129 meant that when Claude Code was configured to route API calls through a <strong>custom gateway</strong>, the user's Anthropic OAuth token was sometimes forwarded to the gateway instead of the gateway's own credential. This release fixes the isolation so that your Anthropic OAuth token stays local and the gateway receives only the token configured for it. If you operate a shared gateway (for cost tracking, rate limiting, or compliance routing), upgrading to v2.1.153 is security-relevant.</p>
+
+  <h3>Other changes</h3>
+  <ul>
+    <li><strong><code>/doctor</code> improvement</strong> — now shows the outcome of your <em>last</em> update attempt alongside the current environment check. Useful for diagnosing "it said it updated but nothing changed" situations.</li>
+    <li><strong>Status-line commands get <code>COLUMNS</code> and <code>LINES</code></strong> — scripts running as status-line providers now receive terminal dimension environment variables, enabling responsive output that doesn't wrap or truncate at arbitrary widths.</li>
+    <li><strong>macOS background agents listed as "Claude Code"</strong> — Background agent processes now appear under the "Claude Code" entry in System Settings → Privacy &amp; Security, and their permission grants persist across Claude Code upgrades. Previously, each upgrade could reset macOS permissions for background agents.</li>
+    <li><strong>MCP auth notifications consolidated</strong> — Multiple connector and MCP authentication startup messages are now batched into a single notification instead of flooding the output at session start.</li>
+  </ul>
+
+  <h3>Bug fixes</h3>
+  <ul>
+    <li>Paginated MCP <code>tools/list</code> responses now return all pages (previous builds silently dropped tools beyond the first page)</li>
+    <li>SVG images and other unsupported MIME types returned by MCP image tools no longer break conversations</li>
+    <li>Stateful MCP servers without GET SSE no longer enter a reconnect loop on startup</li>
+    <li>Bedrock and Vertex users can now select "Opus (1M context)" from <code>/model</code> (regression since v2.1.129)</li>
+    <li>Skill tool no longer throws a permission error when running in headless mode</li>
+    <li>Subagent (Agent tool) frontmatter MCP servers now correctly respect <code>--strict-mcp-config</code>, <code>--bare</code>, and managed MCP policies</li>
+    <li>Windows PowerShell installer no longer falsely reports "Installation complete!" on failure</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Should you upgrade now?</strong>
+    <p>Yes, if any of these apply: you use a custom API gateway (security fix), you have macOS background agents that lose permissions after upgrades (permissions fix), or you run MCP servers with pagination (silent data-loss fix). The credential leak fix alone makes this worth applying immediately in shared or enterprise environments. Run <code>claude update</code> or reinstall via npm.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">v2.1.153</span>
+    <span class="tag">Git LFS</span>
+    <span class="tag">MCP</span>
+    <span class="tag">agent autocomplete</span>
+    <span class="tag">security fix</span>
+    <span class="tag">macOS</span>
+    <span class="tag">API gateway</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Five Patterns for Reliable MCP Servers
+     Source: https://github.com/anthropics/claude-code/releases
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> Five Patterns for Writing Reliable MCP Servers — Lessons from v2.1.153's Bug Fixes</h2>
+
+  <p>Every Claude Code release that fixes MCP-related bugs is also a specification of what the host client actually <em>expects</em>. The v2.1.153 changelog documents several edge cases that MCP server authors frequently get wrong. Here are the five patterns those fixes reveal — things you can audit in your own server today.</p>
+
+  <h3>1. Paginate tools/list completely</h3>
+  <p>Claude Code previously returned only the first page of a paginated <code>tools/list</code> response and silently dropped the rest. That bug is fixed — but it masked a deeper problem: your server should be returning all tools on the first response, or paginating in a way the client explicitly requests. Check your implementation: if you return a <code>nextCursor</code> in a <code>tools/list</code> response, Claude Code will now follow it. If you weren't accounting for multi-page tool lists in your server, now is the time to test against a client that actually pages.</p>
+
+  <h3>2. Return only supported MIME types from image tools</h3>
+  <p>Returning <code>image/svg+xml</code> or other unsupported MIME types from an MCP image-tool response would silently break the conversation in earlier builds. v2.1.153 makes this graceful — but your server should still avoid the problem entirely. Supported types are <code>image/png</code>, <code>image/jpeg</code>, <code>image/gif</code>, and <code>image/webp</code>. If your tool might return SVGs (e.g., from a diagramming service), convert them to PNG before including them in the response, or omit the image and return a text description instead.</p>
+
+  <pre><code># In your MCP image tool response, always specify:
+{
+  "type": "image",
+  "data": "&lt;base64-encoded-png&gt;",
+  "mimeType": "image/png"   # not image/svg+xml
+}
+</code></pre>
+
+  <h3>3. Design stateful servers to reconnect cleanly</h3>
+  <p>Stateful MCP servers — those that maintain session state between calls — were triggering a reconnect loop if they didn't implement GET SSE. The fix is in the client, but the underlying advice remains: if your server is stateful, make sure your startup handshake is idempotent. Claude Code may disconnect and reconnect at any point (session resume, auto-update, background wake). Your server should return the same initialised state on each new connection rather than assuming continuity.</p>
+
+  <h3>4. Don't rely on credential passthrough from the host</h3>
+  <p>The OAuth credential regression (your Anthropic token leaking to a custom gateway) is a client-side fix, but it highlights a broader design principle: MCP servers and gateways should <strong>authenticate independently</strong> — never rely on receiving a credential that belongs to a different layer of the stack. Your gateway should validate its own API key; your MCP server should validate its own auth headers. Treat any credential you receive as intended only for you, and reject requests that don't carry your specific credential.</p>
+
+  <h3>5. Test your server in headless mode</h3>
+  <p>The Skill tool permission error in headless mode caught servers that assume interactive input is always available. If you ship MCP servers for use in CI pipelines, cron jobs, or Claude Code headless mode (<code>--print</code> / non-interactive), test them in exactly that context. Specifically: ensure your server doesn't block waiting for stdin, doesn't pop auth prompts, and has a defined behaviour when no TTY is attached.</p>
+
+  <div class="callout">
+    <strong>How to audit your server against these five patterns</strong>
+    <p>Run Claude Code against your MCP server with <code>--verbose</code> and trigger a <code>tools/list</code> call — check that all your tools appear. Add an SVG-returning test tool and verify it degrades gracefully. Stop and restart the Claude Code session mid-conversation to test reconnection behaviour. Run in headless mode (<code>claude --print "list available tools"</code>) to catch any interactive assumptions. These tests take under ten minutes and will surface the most common integration failures before your users do.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">MCP</span>
+    <span class="tag">MCP servers</span>
+    <span class="tag">best practices</span>
+    <span class="tag">developer tips</span>
+    <span class="tag">pagination</span>
+    <span class="tag">headless mode</span>
+    <span class="tag">Claude Code</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

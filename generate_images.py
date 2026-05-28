@@ -8537,6 +8537,96 @@ def img_leger_20260527():
     return base
 
 
+def img_klee_20260528():
+    """Paul Klee — warm-to-cool grid with dense hub nodes — agent mesh / MCP server reliability."""
+    base = Image.new("RGB", (W, H), (18, 14, 26))
+
+    GRID_W = 12
+    GRID_H = 8
+    cw = W // GRID_W
+    ch = H // GRID_H
+
+    # 1. Warm-to-cool colour grid cells — denser grid than usual, jewel tones
+    warm = [(210, 80, 20), (180, 140, 10), (200, 50, 60)]
+    cool = [(20, 90, 180), (30, 150, 130), (80, 30, 140)]
+    for row in range(GRID_H):
+        for col in range(GRID_W):
+            t = col / (GRID_W - 1)
+            if (row + col) % 3 == 0:
+                src = warm[row % len(warm)]
+                dst = cool[col % len(cool)]
+            elif (row + col) % 3 == 1:
+                src = cool[row % len(cool)]
+                dst = warm[col % len(warm)]
+            else:
+                src = warm[(row + 1) % len(warm)]
+                dst = cool[(col + 1) % len(cool)]
+            col_rgb = tuple(int(src[k] * (1 - t) + dst[k] * t) for k in range(3))
+            alpha = rng.randint(140, 210)
+            cl = layer()
+            cd = ImageDraw.Draw(cl)
+            cd.rectangle(
+                [(col * cw + 2, row * ch + 2), (col * cw + cw - 2, row * ch + ch - 2)],
+                fill=col_rgb + (alpha,)
+            )
+            base = comp(base, cl)
+
+    # 2. Dark grid lines
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for c in range(GRID_W + 1):
+        gd.line([(c * cw, 0), (c * cw, H)], fill=(14, 10, 22, 255), width=3)
+    for r in range(GRID_H + 1):
+        gd.line([(0, r * ch), (W, r * ch)], fill=(14, 10, 22, 255), width=3)
+    base = comp(base, gl)
+
+    # 3. Connector lines — "agent mesh" routing paths
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    connections = [
+        (0,0,4,2),(1,1,5,0),(2,2,6,3),(4,0,8,2),(6,1,10,3),
+        (3,4,7,6),(5,3,9,5),(2,5,6,7),(8,0,11,2),(7,3,11,5),
+        (1,6,4,5),(9,2,11,4),(0,4,3,7),(5,6,8,7),(10,1,12,3),
+    ]
+    for c1, r1, c2, r2 in connections:
+        alpha = rng.randint(80, 140)
+        ad.line(
+            [(min(c1, GRID_W) * cw, min(r1, GRID_H) * ch),
+             (min(c2, GRID_W) * cw, min(r2, GRID_H) * ch)],
+            fill=(255, 220, 90, alpha), width=2
+        )
+    base = comp(base, al)
+
+    # 4. Hub nodes at key intersections — larger "MCP server" nodes
+    hub_nodes = [(2,2), (4,0), (6,3), (9,2), (11,4), (3,6), (7,5), (0,4)]
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    for ci, ri in hub_nodes:
+        r = rng.randint(10, 16)
+        cx, cy = ci * cw, ri * ch
+        nd.ellipse([(cx - r, cy - r), (cx + r, cy + r)],
+                   fill=(255, 255, 255, 220), outline=(14, 10, 22, 255), width=3)
+        nd.ellipse([(cx - 4, cy - 4), (cx + 4, cy + 4)],
+                   fill=(255, 160, 60, 255))
+    base = comp(base, nl)
+
+    # 5. Smaller standard nodes at all remaining intersections
+    sn = layer()
+    sd = ImageDraw.Draw(sn)
+    hub_set = set(hub_nodes)
+    for ci in range(GRID_W + 1):
+        for ri in range(GRID_H + 1):
+            if (ci, ri) in hub_set:
+                continue
+            cx, cy = ci * cw, ri * ch
+            r = 5
+            sd.ellipse([(cx - r, cy - r), (cx + r, cy + r)],
+                       fill=(255, 255, 255, 170), outline=(14, 10, 22, 200), width=2)
+    base = comp(base, sn)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -8716,6 +8806,7 @@ DAYS = [
     ("2026-05-25", img_malevich_20260525,   "Bug Discovery",   "Kazimir Malevich"),
     ("2026-05-26", img_klimt_20260526,      "Moral Voices",    "Gustav Klimt"),
     ("2026-05-27", img_leger_20260527,      "Security & Code", "Fernand Léger"),
+    ("2026-05-28", img_klee_20260528,       "Agent Mesh",      "Paul Klee"),
 ]
 
 for date, fn, kw, artist in DAYS:

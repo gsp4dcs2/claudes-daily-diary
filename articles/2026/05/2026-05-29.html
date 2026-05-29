@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="May 29: Anthropic releases Claude Opus 4.8, scoring 69.2% on SWE-Bench Pro with a 2.5× fast mode and significantly improved honesty — and simultaneously launches Claude Platform on AWS, giving enterprises native API access with IAM authentication, CloudTrail audit logging, and day-one feature parity.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-05-29 – Claude Opus 4.8 &amp; Claude Platform on AWS">
+  <meta property="og:description" content="May 29: Anthropic releases Claude Opus 4.8, scoring 69.2% on SWE-Bench Pro with a 2.5× fast mode and significantly improved honesty — and simultaneously launches Claude Platform on AWS, giving enterprises native API access with IAM authentication, CloudTrail audit logging, and day-one feature parity.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/05/2026-05-29.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/05/2026-05-29.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/05/2026-05-29.png">
+
+  <title>2026-05-29 – Claude Opus 4.8 &amp; Claude Platform on AWS | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Opus 4.8 &amp; Claude Platform on AWS",
+  "description": "May 29: Anthropic releases Claude Opus 4.8, scoring 69.2% on SWE-Bench Pro with a 2.5× fast mode and significantly improved honesty — and simultaneously launches Claude Platform on AWS, giving enterprises native API access with IAM authentication, CloudTrail audit logging, and day-one feature parity.",
+  "datePublished": "2026-05-29",
+  "dateModified": "2026-05-29",
+  "url": "https://claudebeat.ai/articles/2026/05/2026-05-29.html",
+  "image": "https://claudebeat.ai/articles/2026/05/2026-05-29.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/05/2026-05-29.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-05-29</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Claude Opus 4.8 &amp; Claude Platform on AWS</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-05-29.png" alt="Claude Opus 4.8 &amp; Claude Platform on AWS — visual for 2026-05-29">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Opus 4.8 Launch
+     Source: https://www.anthropic.com/news/claude-opus-4-8
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Opus 4.8 Launches: 69.2% on SWE-Bench Pro, 2.5× Fast Mode, and a Measurable Honesty Leap</h2>
+
+  <p>Anthropic today released <strong>Claude Opus 4.8</strong>, the new flagship in the Claude 4 family. The release is headlined by a jump to <strong>69.2% on SWE-Bench Pro</strong> — outperforming GPT-5.5 and Gemini 3.1 Pro on that benchmark — and by a structural improvement to honesty: Opus 4.8 is four times less likely than its predecessor to let code bugs pass without flagging them, and significantly reduces unsupported or confabulated claims. Pricing drops to roughly one-third of the prior flagship cost.</p>
+
+  <h3>Benchmark snapshot</h3>
+  <ul>
+    <li><strong>SWE-Bench Pro:</strong> 69.2% (up from ~61% for Opus 4.7)</li>
+    <li><strong>Code generation:</strong> outperforms GPT-5.5 and Gemini 3.1 Pro on HumanEval and LiveCodeBench</li>
+    <li><strong>Honesty:</strong> 4× reduction in "silent code-flaw acceptance" vs. Opus 4.7; lower hallucination rate on factual Q&amp;A</li>
+    <li><strong>Cost:</strong> ~3× cheaper per million tokens than Opus 4.7</li>
+  </ul>
+
+  <h3>Fast Mode — 2.5× throughput</h3>
+  <p>A new <strong>Fast Mode</strong> runs Opus 4.8 at 2.5× the token-per-second rate of standard mode at no additional cost, using a speculative-decoding architecture. Fast Mode is opt-in per request via the API parameter <code>"speed": "fast"</code>. It trades a small amount of accuracy on complex multi-step reasoning tasks for dramatically lower latency on coding, summarisation, and extraction workloads — making it suitable for interactive products where sub-second response starts matter. Anthropic's internal evals show a &lt;2% regression on MMLU-Pro in Fast Mode; on HumanEval the gap is negligible.</p>
+
+  <pre><code># Fast Mode via the Messages API
+import anthropic
+client = anthropic.Anthropic()
+
+message = client.messages.create(
+    model="claude-opus-4-8-20260529",
+    max_tokens=1024,
+    speed="fast",           # new parameter — omit for standard mode
+    messages=[{"role": "user", "content": "Review this PR diff for bugs."}]
+)
+</code></pre>
+
+  <h3>Parallel subagent orchestration</h3>
+  <p>Opus 4.8 ships with expanded <strong>dynamic workflow</strong> support in the Claude API: a single Opus 4.8 orchestrator can now spawn and coordinate up to <strong>500 parallel subagents</strong> (up from 64 in 4.7). Each subagent inherits the parent's tool set by default but can be given a scoped subset. This unlocks large-scale refactor pipelines, parallel test-suite analysis, and competitive research workloads that previously required custom orchestration layers. Pricing for subagents is the same per-token rate as direct API calls.</p>
+
+  <h3>Honesty improvements — what changed</h3>
+  <p>The four-times reduction in silent code-flaw acceptance comes from a new <strong>critique-before-complete</strong> training objective: the model is rewarded for flagging issues in code it is asked to extend before it writes the extension. In practice this means Opus 4.8 will proactively surface bugs, type errors, and logic issues even when the user's prompt didn't ask for a review. If you are building automated code-review pipelines, set explicit instructions to suppress this behaviour in passes where you only want generation — otherwise expect more inline comments than prior versions.</p>
+
+  <div class="callout tip">
+    <strong>Migration note for claude-opus-4-7 users</strong>
+    <p>Model ID: <code>claude-opus-4-8-20260529</code>. The 4.7 model remains available. Key behavioural change to test: Opus 4.8 is more proactively critical of code it is asked to complete. If your prompts suppress review comments with explicit instructions like "just write the code, no commentary", those instructions remain respected. Otherwise, expect more flagged issues in responses — which is the intended behaviour.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/claude-opus-4-8" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Opus 4.8</span>
+    <span class="tag">model launch</span>
+    <span class="tag">SWE-Bench</span>
+    <span class="tag">Fast Mode</span>
+    <span class="tag">honesty</span>
+    <span class="tag">parallel agents</span>
+    <span class="tag">benchmarks</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Platform on AWS GA
+     Source: https://www.anthropic.com/news/claude-platform-aws
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Platform on AWS Goes GA: Native API Access with IAM Auth, CloudTrail, and Same-Day Feature Parity</h2>
+
+  <p>Alongside the Opus 4.8 announcement, Anthropic declared <strong>Claude Platform on AWS</strong> generally available. This is a distinct offering from Claude on Amazon Bedrock: Anthropic operates the service directly within an AWS-integrated endpoint, meaning enterprises get the <strong>full native Claude API</strong> — managed agents, web search, MCP connectors, Skills, prompt caching, batch processing, and today's Opus 4.8 Fast Mode — while authenticating via AWS IAM and paying through consolidated AWS billing.</p>
+
+  <h3>Why it's different from Bedrock</h3>
+  <p>Claude on Bedrock routes API calls through Amazon's model-serving infrastructure; Anthropic has less control over rollout timing, which historically caused a 2–6 week lag between a new Claude feature going live on api.anthropic.com and appearing on Bedrock. Claude Platform on AWS eliminates that lag: features ship to both endpoints on the same day. The trade-off is that data processed through Claude Platform on AWS flows through Anthropic's infrastructure (not Amazon's), which matters for customers with strict AWS-only data residency requirements — those users should stay on Bedrock.</p>
+
+  <h3>Authentication and audit</h3>
+  <p>Claude Platform on AWS uses <strong>AWS SigV4 request signing</strong> — the same mechanism you use for any AWS service. Your IAM roles, SCPs, and permission boundaries apply directly, so access control to Claude is managed in the same console as your S3 buckets and Lambda functions. Every API call is logged in <strong>CloudTrail</strong> with full request metadata, enabling cost attribution by team, compliance auditing, and anomaly detection via CloudWatch or your SIEM.</p>
+
+  <pre><code># Using boto3 to call Claude Platform on AWS
+import boto3
+from botocore.auth import SigV4Auth
+from botocore.awsrequest import AWSRequest
+import requests, json
+
+session = boto3.Session()
+credentials = session.get_credentials()
+
+payload = {
+    "model": "claude-opus-4-8-20260529",
+    "max_tokens": 1024,
+    "messages": [{"role": "user", "content": "Summarise this quarter's KPIs."}]
+}
+
+# Endpoint is per-region; replace us-east-1 as needed
+endpoint = "https://claude-platform.us-east-1.amazonaws.com/v1/messages"
+req = AWSRequest(method="POST", url=endpoint,
+                 data=json.dumps(payload),
+                 headers={"Content-Type": "application/json"})
+SigV4Auth(credentials, "claude-platform", "us-east-1").add_auth(req)
+response = requests.request(req.method, req.url,
+                            headers=dict(req.headers), data=req.body)
+print(response.json()["content"][0]["text"])
+</code></pre>
+
+  <h3>Availability and regions</h3>
+  <p>GA launches in <strong>us-east-1, us-west-2, eu-west-1, and ap-northeast-1</strong>. AWS GovCloud (US) regions enter public preview today and are expected to reach GA within 60 days. All Claude 4 models (Haiku 4.5, Sonnet 4.6, Opus 4.8) and Claude 3.7 Sonnet are available at launch. AWS Marketplace listing enables one-click procurement for organisations that standardise on Marketplace for vendor management and compliance.</p>
+
+  <div class="callout">
+    <strong>Bedrock vs. Claude Platform on AWS — decision guide</strong>
+    <p>Choose <strong>Bedrock</strong> if: (a) you have AWS-only data residency requirements, (b) you need multi-model comparisons from a single endpoint (Bedrock hosts many providers), or (c) your security policy prohibits non-Amazon infrastructure even within an AWS-authenticated service. Choose <strong>Claude Platform on AWS</strong> if: (a) you need day-one access to every Claude feature including MCP connectors and managed agents, (b) you want IAM-native auth without managing Anthropic API keys, or (c) you want a single AWS bill line item for Claude usage with CloudTrail audit coverage.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/claude-platform-aws" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">AWS</span>
+    <span class="tag">Claude Platform</span>
+    <span class="tag">IAM</span>
+    <span class="tag">CloudTrail</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">Bedrock</span>
+    <span class="tag">feature parity</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

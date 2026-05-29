@@ -8627,6 +8627,85 @@ def img_klee_20260528():
     return base
 
 
+def img_mondrian_20260529():
+    """Piet Mondrian De Stijl style — model launch / AWS platform grid theme."""
+    base = Image.new("RGB", (W, H), (245, 242, 232))   # off-white
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Define a Mondrian-style grid of thick black lines
+    # Vertical dividers (x positions)
+    vlines = [190, 420, 680, 900, 1060]
+    # Horizontal dividers (y positions)
+    hlines = [120, 290, 440, 560]
+
+    # 2. Flood colour into specific rectangular cells
+    # Build list of (x0,y0,x1,y1, colour) with off-white as default
+    all_xs = [0] + vlines + [W]
+    all_ys = [0] + hlines + [H]
+
+    red    = (214, 40, 40)
+    blue   = (23, 68, 158)
+    yellow = (240, 196, 30)
+    black  = (15, 15, 15)
+
+    colour_map = {
+        # (col_idx, row_idx): colour  — 0-indexed cells between lines
+        (0, 0): yellow,
+        (1, 2): red,
+        (3, 0): blue,
+        (4, 3): red,
+        (2, 4): yellow,
+        (5, 1): blue,
+        (0, 3): red,
+        (4, 1): yellow,
+        (3, 3): blue,
+        (1, 4): red,
+        (5, 2): yellow,
+    }
+
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    for ci in range(len(all_xs) - 1):
+        for ri in range(len(all_ys) - 1):
+            col = colour_map.get((ci, ri), None)
+            if col:
+                alpha = rng.randint(210, 245)
+                cd.rectangle(
+                    [(all_xs[ci] + 1, all_ys[ri] + 1),
+                     (all_xs[ci + 1] - 1, all_ys[ri + 1] - 1)],
+                    fill=col + (alpha,)
+                )
+    base = comp(base, cl)
+
+    # 3. Heavy black grid lines
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    lw_v = [10, 12, 8, 14, 10]
+    lw_h = [12, 8, 10, 14]
+    for i, x in enumerate(vlines):
+        gd.line([(x, 0), (x, H)], fill=black + (255,), width=lw_v[i])
+    for i, y in enumerate(hlines):
+        gd.line([(0, y), (W, y)], fill=black + (255,), width=lw_h[i])
+    # Border
+    gd.rectangle([(0, 0), (W - 1, H - 1)], outline=black + (255,), width=14)
+    base = comp(base, gl)
+
+    # 4. Small accent squares — Mondrian sometimes adds nested inner rectangles
+    accent_cells = [(0, 0), (3, 0), (1, 2), (4, 3)]
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for ci, ri in accent_cells:
+        x0, y0 = all_xs[ci] + 20, all_ys[ri] + 20
+        x1, y1 = all_xs[ci + 1] - 20, all_ys[ri + 1] - 20
+        if x1 > x0 + 10 and y1 > y0 + 10:
+            ad.rectangle([(x0, y0), (x1, y1)],
+                         outline=black + (180,), width=4)
+    base = comp(base, al)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -8807,6 +8886,7 @@ DAYS = [
     ("2026-05-26", img_klimt_20260526,      "Moral Voices",    "Gustav Klimt"),
     ("2026-05-27", img_leger_20260527,      "Security & Code", "Fernand Léger"),
     ("2026-05-28", img_klee_20260528,       "Agent Mesh",      "Paul Klee"),
+    ("2026-05-29", img_mondrian_20260529,  "Opus 4.8 Launch", "Piet Mondrian"),
 ]
 
 for date, fn, kw, artist in DAYS:

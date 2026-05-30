@@ -8706,6 +8706,76 @@ def img_mondrian_20260529():
     return base
 
 
+def img_rothko_20260530():
+    """Mark Rothko colour field — monumental $65B Series H / near-$1T valuation, European expansion."""
+    # Deep near-black with a hint of midnight blue — the gravity of near-trillion-dollar scale
+    base = Image.new("RGB", (W, H), (10, 12, 24))
+
+    def soft_band(img, y0, y1, colour, feather=68):
+        """Soft-edged Rothko band with luminous haze."""
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        r, g, b = colour
+        bd.rectangle([(60, y0 + feather), (W - 60, y1 - feather)], fill=(r, g, b, 215))
+        for i in range(feather):
+            alpha = int(190 * (i / feather))
+            bd.rectangle([(60 + i, y0 + i), (W - 60 - i, y0 + i + 1)], fill=(r, g, b, alpha))
+        for i in range(feather):
+            alpha = int(190 * ((feather - i) / feather))
+            bd.rectangle([(60 + i, y1 - i - 1), (W - 60 - i, y1 - i)], fill=(r, g, b, alpha))
+        return comp(img, bl)
+
+    # Top band — emerald-green: the Series H growth trajectory, EMEA expansion
+    base = soft_band(base, 15, 205, (28, 130, 80), feather=60)
+
+    # Middle band — deep gold (widest, most luminous): the $965B valuation, financial zenith
+    base = soft_band(base, 185, 440, (195, 148, 24), feather=78)
+
+    # Bottom band — royal purple-indigo: infrastructure depth, compute partnerships, future scale
+    base = soft_band(base, 418, 615, (72, 38, 140), feather=62)
+
+    # Luminous inner glow on gold band — the trillion-dollar luminance
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for i in range(40):
+        alpha = int(80 * (1 - i / 40))
+        gd.rectangle([(160 + i, 280 + i), (W - 160 - i, 380 - i)], fill=(255, 220, 80, alpha))
+    base = comp(base, gl)
+
+    # Warm bloom at centre of gold band — radiant financial milestone
+    bl2 = layer()
+    bd2 = ImageDraw.Draw(bl2)
+    for i in range(90):
+        alpha = int(45 * (1 - i / 90))
+        bd2.ellipse([(W//2 - 320 - i*2, 195 - i), (W//2 + 320 + i*2, 435 + i)],
+                    fill=(245, 200, 60, alpha))
+    base = comp(base, bl2)
+
+    # Edge lines between bands — Rothko's characteristic luminous boundaries
+    el = layer()
+    ed = ImageDraw.Draw(el)
+    # Green/gold boundary — hopeful shimmer
+    for i in range(20):
+        alpha = int(100 * (1 - i / 20))
+        ed.rectangle([(60 + i, 196 - i), (W - 60 - i, 198 + i)], fill=(200, 240, 120, alpha))
+    # Gold/purple boundary — transition to infrastructure depth
+    for i in range(20):
+        alpha = int(95 * (1 - i / 20))
+        ed.rectangle([(60 + i, 428 - i), (W - 60 - i, 430 + i)], fill=(210, 160, 80, alpha))
+    base = comp(base, el)
+
+    # Subtle vertical shimmer — reinforces monumental depth
+    sv = layer()
+    svd = ImageDraw.Draw(sv)
+    for i in range(50):
+        alpha = int(18 * (1 - i / 50))
+        svd.rectangle([(W//2 - 6 - i*5, 30), (W//2 + 6 + i*5, H - 30)],
+                      fill=(220, 240, 180, alpha))
+    base = comp(base, sv)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -8887,6 +8957,7 @@ DAYS = [
     ("2026-05-27", img_leger_20260527,      "Security & Code", "Fernand Léger"),
     ("2026-05-28", img_klee_20260528,       "Agent Mesh",      "Paul Klee"),
     ("2026-05-29", img_mondrian_20260529,  "Opus 4.8 Launch", "Piet Mondrian"),
+    ("2026-05-30", img_rothko_20260530,   "$965B Series H",  "Mark Rothko"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -8776,6 +8776,106 @@ def img_rothko_20260530():
     return base
 
 
+def img_seurat_20260531():
+    """Georges Seurat pointillist — enterprise deployment patterns, Opus 4.8 migration, Auto mode."""
+    base = Image.new("RGB", (W, H), (14, 22, 50))   # deep midnight-blue bg
+
+    # 1. Dense ambient dot field — the granular texture of enterprise-scale data
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    spectral = [
+        (210, 50, 50), (215, 130, 30), (200, 200, 40),
+        (50, 195, 100), (40, 140, 235), (130, 55, 215),
+        (235, 75, 155), (255, 245, 200),
+    ]
+    for _ in range(6000):
+        sx = rng.randint(0, W)
+        sy = rng.randint(0, H)
+        r = rng.randint(1, 5)
+        col = spectral[rng.randint(0, len(spectral) - 1)]
+        alpha = rng.randint(18, 95)
+        dd.ellipse([(sx - r, sy - r), (sx + r, sy + r)], fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, dl)
+
+    # 2. Large globe built from pointillist dots — BMS global enterprise deployment
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    cx, cy, gr = 880, 200, 160
+    globe_cols = [
+        (50, 140, 240), (30, 200, 110), (220, 185, 40),
+        (210, 80, 50), (160, 60, 210),
+    ]
+    # Fill globe interior with layered spectral dots
+    for _ in range(4500):
+        angle = rng.uniform(0, 2 * math.pi)
+        dist = rng.uniform(0, gr)
+        px = int(cx + math.cos(angle) * dist)
+        py = int(cy + math.sin(angle) * dist)
+        r2 = rng.randint(2, 7)
+        col = globe_cols[rng.randint(0, len(globe_cols) - 1)]
+        alpha = rng.randint(60, 195)
+        gd.ellipse([(px - r2, py - r2), (px + r2, py + r2)], fill=(col[0], col[1], col[2], alpha))
+    # Bright pointillist halo around globe
+    for _ in range(1200):
+        angle = rng.uniform(0, 2 * math.pi)
+        dist = rng.uniform(gr + 3, gr + 65)
+        px = int(cx + math.cos(angle) * dist)
+        py = int(cy + math.sin(angle) * dist)
+        r3 = rng.randint(1, 4)
+        col = globe_cols[rng.randint(0, len(globe_cols) - 1)]
+        gd.ellipse([(px - r3, py - r3), (px + r3, py + r3)],
+                   fill=(col[0], col[1], col[2], rng.randint(40, 130)))
+    base = comp(base, gl)
+
+    # 3. Migration path — left-to-right arc of dots rising from Opus 4.6 to Opus 4.8
+    ml = layer()
+    md = ImageDraw.Draw(ml)
+    # Wavy arc path: starts at bottom-left, rises to upper-right
+    path_cols = [
+        (220, 80, 50, 200),   # warm start — Opus 4.6
+        (220, 140, 40, 200),  # transition amber
+        (200, 210, 50, 200),  # mid-yellow
+        (60, 210, 110, 210),  # cool green
+        (50, 160, 240, 215),  # arrival blue — Opus 4.8
+    ]
+    for step in range(180):
+        t = step / 179.0
+        px = int(60 + t * 700)
+        # gentle upward curve with slight sine wave
+        py = int(570 - t * 380 + math.sin(t * math.pi * 3) * 28)
+        col_idx = min(int(t * len(path_cols)), len(path_cols) - 1)
+        col = path_cols[col_idx]
+        for _ in range(12):
+            dx = px + rng.randint(-14, 14)
+            dy = py + rng.randint(-14, 14)
+            r4 = rng.randint(2, 8)
+            md.ellipse([(dx - r4, dy - r4), (dx + r4, dy + r4)],
+                       fill=(col[0], col[1], col[2], rng.randint(80, col[3])))
+    base = comp(base, ml)
+
+    # 4. Auto mode tier rings — three concentric rings of dots (Haiku / Sonnet / Opus)
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    tier_rings = [
+        (230, 470, 50, (100, 200, 240, 190), 40),   # Haiku — small inner ring
+        (230, 470, 95, (90,  180, 90,  200), 70),   # Sonnet — mid ring
+        (230, 470, 145, (232, 115, 74,  210), 100), # Opus — outer ring
+    ]
+    for rx, ry, rrad, col, n_dots in tier_rings:
+        for i in range(n_dots):
+            angle = (2 * math.pi * i) / n_dots + rng.uniform(-0.06, 0.06)
+            px = int(rx + math.cos(angle) * rrad)
+            py = int(ry + math.sin(angle) * rrad)
+            r5 = rng.randint(3, 9)
+            rd.ellipse([(px - r5, py - r5), (px + r5, py + r5)],
+                       fill=(col[0], col[1], col[2], col[3]))
+    # Small bright centre dot — Auto mode orchestrator
+    rd.ellipse([(230 - 18, 470 - 18), (230 + 18, 470 + 18)], fill=(255, 230, 80, 230))
+    base = comp(base, rl)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -8958,6 +9058,7 @@ DAYS = [
     ("2026-05-28", img_klee_20260528,       "Agent Mesh",      "Paul Klee"),
     ("2026-05-29", img_mondrian_20260529,  "Opus 4.8 Launch", "Piet Mondrian"),
     ("2026-05-30", img_rothko_20260530,   "$965B Series H",  "Mark Rothko"),
+    ("2026-05-31", img_seurat_20260531,   "Enterprise Scale", "Georges Seurat"),
 ]
 
 for date, fn, kw, artist in DAYS:

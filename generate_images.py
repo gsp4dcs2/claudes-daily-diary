@@ -7954,6 +7954,86 @@ def img_delaunay_20260519():
     return base
 
 
+def img_delaunay_20260601():
+    """Robert Delaunay spectral rings — programmatic credit pools, Tokyo broadcast, model lifecycle."""
+    base = Image.new("RGB", (W, H), (6, 4, 20))   # near-black deep indigo bg
+
+    spectral_rings = [
+        (200, 30, 30), (200, 100, 20), (210, 185, 20),
+        (30, 175, 80), (20, 110, 215), (100, 20, 210),
+        (180, 20, 140), (230, 230, 230),
+    ]
+
+    # 1. Large central disc — programmatic credit pool hub
+    cx, cy, max_r = 560, 300, 260
+    for i, col in enumerate(spectral_rings):
+        r = max_r - i * 28
+        if r < 8:
+            break
+        rl = layer()
+        rd = ImageDraw.Draw(rl)
+        alpha = 180 if i < 4 else 120
+        rd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=(col[0], col[1], col[2], alpha))
+        base = comp(base, rl)
+
+    # 2. Medium disc upper-right — Tokyo conference signal
+    tx, ty = 960, 155
+    for i, col in enumerate(spectral_rings):
+        r = 145 - i * 16
+        if r < 6:
+            break
+        rl = layer()
+        rd = ImageDraw.Draw(rl)
+        rd.ellipse([(tx - r, ty - r), (tx + r, ty + r)], fill=(col[0], col[1], col[2], 150))
+        base = comp(base, rl)
+
+    # 3. Smaller disc lower-left — model lifecycle signal
+    lx, ly = 145, 480
+    for i, col in enumerate(spectral_rings):
+        r = 115 - i * 13
+        if r < 5:
+            break
+        rl = layer()
+        rd = ImageDraw.Draw(rl)
+        rd.ellipse([(lx - r, ly - r), (lx + r, ly + r)], fill=(col[0], col[1], col[2], 135))
+        base = comp(base, rl)
+
+    # 4. Radiating arc bands from centre — subscription tiers / credit flow
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(8):
+        r_arc = 280 + i * 52
+        ad.arc([(cx - r_arc, cy - r_arc), (cx + r_arc, cy + r_arc)],
+               start=0, end=360, fill=(200, 200, 255, max(8, 65 - i * 8)), width=2)
+    base = comp(base, al)
+
+    # 5. Connecting arc bands between discs — signal lines
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    # Central to Tokyo arc
+    for i in range(4):
+        rx = abs(tx - cx) // 2 + i * 18
+        ry = abs(ty - cy) // 2 + i * 18
+        mx = (cx + tx) // 2
+        my = (cy + ty) // 2
+        cd.arc([(mx - rx, my - ry), (mx + rx, my + ry)],
+               start=210, end=355, fill=(180, 220, 255, max(10, 55 - i * 12)), width=2)
+    base = comp(base, cl)
+
+    # 6. Star field — distributed developer nodes
+    stl = layer()
+    std = ImageDraw.Draw(stl)
+    for _ in range(150):
+        sx = rng.randint(0, W)
+        sy = rng.randint(0, H)
+        sr = rng.randint(1, 3)
+        std.ellipse([(sx - sr, sy - sr), (sx + sr, sy + sr)],
+                    fill=(255, 255, 255, rng.randint(50, 180)))
+    base = comp(base, stl)
+
+    return base
+
+
 def img_seurat_20260521():
     """Georges Seurat pointillist — revenue milestone and enterprise scale theme."""
     base = Image.new("RGB", (W, H), (10, 18, 42))   # deep navy bg
@@ -9059,6 +9139,7 @@ DAYS = [
     ("2026-05-29", img_mondrian_20260529,  "Opus 4.8 Launch", "Piet Mondrian"),
     ("2026-05-30", img_rothko_20260530,   "$965B Series H",  "Mark Rothko"),
     ("2026-05-31", img_seurat_20260531,   "Enterprise Scale", "Georges Seurat"),
+    ("2026-06-01", img_delaunay_20260601, "Agent Credits",    "Robert Delaunay"),
 ]
 
 for date, fn, kw, artist in DAYS:

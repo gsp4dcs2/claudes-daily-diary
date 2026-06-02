@@ -8956,6 +8956,64 @@ def img_seurat_20260531():
     return base
 
 
+def img_lissitzky_20260602():
+    """El Lissitzky Constructivism — cream bg, bold red+black geometry — IPO filing, SpaceX compute, dynamic agent orchestration."""
+    base = Image.new("RGB", (W, H), (246, 242, 232))   # warm cream bg
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Bold black vertical spine (structural axis — corporate filing)
+    draw.rectangle([(490, 0), (555, H)], fill=(10, 8, 6))
+
+    # 2. Bold black horizontal bar (financial floor — IPO structure)
+    draw.rectangle([(0, 270), (W, 335)], fill=(10, 8, 6))
+
+    # 3. Bold diagonal red polygon sweeping from upper-left area to mid-right (IPO momentum)
+    pts_red = [(0, 0), (490, 0), (490, 210), (220, 270), (0, 270)]
+    draw.polygon(pts_red, fill=(200, 24, 24))
+
+    # 4. Secondary red rectangle lower-right (SpaceX compute deal)
+    pts_red2 = [(555, 335), (W, 335), (W, H), (720, H)]
+    draw.polygon(pts_red2, fill=(200, 24, 24))
+
+    # 5. Red circles at structural junctions (Lissitzky's focal nodes)
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    for nx, ny in [(490, 270), (555, 270), (490, 335), (555, 335)]:
+        cd.ellipse([(nx - 30, ny - 30), (nx + 30, ny + 30)], fill=(200, 24, 24, 255))
+    # Inner cream rings — transparency / cutout tension
+    for nx, ny in [(490, 270), (555, 270), (490, 335), (555, 335)]:
+        cd.ellipse([(nx - 14, ny - 14), (nx + 14, ny + 14)], fill=(246, 242, 232, 240))
+    base = comp(base, cl)
+
+    # 6. Thin parallel red lines radiating right of vertical spine (agent orchestration lines)
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    for i in range(8):
+        y_pos = 60 + i * 27
+        td.line([(555, y_pos), (W - 30, y_pos + (i * 8))],
+                fill=(200, 24, 24, max(20, 90 - i * 10)), width=1)
+    base = comp(base, tl)
+
+    # 7. White cutout rectangle over red upper-left zone (geometric tension)
+    wl = layer()
+    wd = ImageDraw.Draw(wl)
+    wd.rectangle([(60, 50), (320, 130)], fill=(246, 242, 232, 190))
+    base = comp(base, wl)
+
+    # 8. Small black rectangles lower-left (dynamic subagent nodes)
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    node_positions = [(80, 380), (180, 420), (290, 395), (80, 480), (210, 500), (340, 465)]
+    for nx, ny in node_positions:
+        w_rect = rng.randint(18, 36)
+        h_rect = rng.randint(12, 22)
+        nd.rectangle([(nx, ny), (nx + w_rect, ny + h_rect)], fill=(10, 8, 6, 210))
+    base = comp(base, nl)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -9140,6 +9198,7 @@ DAYS = [
     ("2026-05-30", img_rothko_20260530,   "$965B Series H",  "Mark Rothko"),
     ("2026-05-31", img_seurat_20260531,   "Enterprise Scale", "Georges Seurat"),
     ("2026-06-01", img_delaunay_20260601, "Agent Credits",    "Robert Delaunay"),
+    ("2026-06-02", img_lissitzky_20260602, "IPO & SpaceX",   "El Lissitzky"),
 ]
 
 for date, fn, kw, artist in DAYS:

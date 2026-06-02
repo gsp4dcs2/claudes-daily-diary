@@ -61,6 +61,16 @@
       <!-- Newest entries at the top. Format: {yyyy-mm-dd} – {title} -->
 
       <li>
+        <a href="articles/2026/06/2026-06-02.html">
+          <img class="entry-thumb" src="articles/2026/06/2026-06-02-thumb.png" alt="2026-06-02 thumbnail">
+          <div class="entry-meta">
+            <span class="article-date">2026-06-02</span>
+            <div class="entry-bottom"><span class="cat-icon" title="Daily News">🧭</span> <span class="article-title">Anthropic Files for IPO, SpaceX Compute Deal &amp; Dynamic Workflows</span></div>
+          </div>
+        </a>
+      </li>
+
+      <li>
         <a href="articles/2026/06/2026-06-01.html">
           <img class="entry-thumb" src="articles/2026/06/2026-06-01-thumb.png" alt="2026-06-01 thumbnail">
           <div class="entry-meta">
@@ -1923,6 +1933,12 @@
      collapsed). Rebuild this array when new days are added.
      ──────────────────────────────────────────────────────── */
   const SEARCH_INDEX = [
+    {
+      date: "2026-06-02", cat: "news",
+      title: "Anthropic Files for IPO, SpaceX Compute Deal & Dynamic Workflows",
+      url: "articles/2026/06/2026-06-02.html",
+      text: "Anthropic Confidentially Files for IPO — What It Means for the Claude Ecosystem Anthropic submitted a confidential draft registration statement to the SEC on June 1, 2026, formally beginning the process toward an initial public offering. The filing comes less than a week after the company closed its $65 billion Series H at a valuation approaching $965 billion, and with a disclosed revenue run-rate of $47 billion — up from $9 billion at the end of 2025. Anthropic has not disclosed a share count, pricing range, or target listing date; these details will emerge when the S-1 prospectus is made public, likely 15 days before the IPO begins trading. Why the confidential filing path matters Under-the-radar preparation: A confidential filing lets Anthropic negotiate underwriter terms, finalize audit disclosures, and conduct pre-IPO roadshows without public scrutiny until it chooses to go live. Expect the public S-1 to land roughly 90–180 days from now. Ahead of OpenAI: Multiple reporters confirm Anthropic's filing pre-empts its main rival, giving it first-mover access to public institutional capital if market conditions hold. Revenue trajectory as the headline: Going from $9B to $47B annualised in roughly 18 months is the central investor story. The S-1 will reveal whether that growth is concentrated or broadly distributed across consumer, developer API, and partner tiers. An IPO doesn't change the API or product roadmap directly, but it does create new pressures and incentives. Public companies must grow revenue quarter-over-quarter under analyst scrutiny, which typically accelerates enterprise feature development while creating pricing stability pressures for the developer API. SpaceX Colossus 1 Deal Doubles Claude Code Rate Limits for All Paid Plans Anthropic announced a compute partnership with SpaceX, securing access to the full capacity of the Colossus 1 data center in Memphis, Tennessee — more than 300 megawatts of capacity housing over 220,000 NVIDIA GPUs. The new supply unlocks immediate subscriber benefits: five-hour Claude Code usage limits are doubled for Pro, Max, Team, and seat-based Enterprise plans, peak-hour usage reductions are removed for Pro and Max subscribers, and API rate limits for Claude Opus models are materially higher to support larger and more complex developer workloads. Claude Code 5-hour session limit doubled across Pro, Max, Team, and Enterprise. Peak-hour throttling removed entirely for Pro and Max subscribers. Opus API rate limits raised for developers and enterprises running high-volume agentic pipelines. Claude Managed Agents can now run in a customer-controlled sandbox and connect to private MCP servers. Colossus 1 joins a rapidly growing infrastructure portfolio including a multi-GW Amazon agreement, a 5 GW agreement with Google and Broadcom, and a $30 billion Azure partnership. Dynamic Workflows in Claude Code: Orchestrate Hundreds of Parallel Agents on a Single Task Anthropic has moved Dynamic Workflows into research preview for Claude Code users on Max, Team, and eligible Enterprise plans, as well as through the Claude API on Amazon Bedrock, Google Vertex AI, and Microsoft Foundry. The feature addresses hard limits of single-agent sessions by letting Claude write and execute its own orchestration script, spawning and managing tens to hundreds of subagents in parallel, validating intermediate results, and synthesising a final answer. You describe the high-level task and Claude decomposes it, writes a workflow script, and launches subagents — each scoped to a specific file set, function, or concern. With Opus 4.8 Fast Mode, individual subagents run at 2.5x speed. The Bun runtime team used Dynamic Workflows to port Bun from Zig to Rust: roughly 750,000 lines of Rust code were generated, 99.8% of the existing test suite passed, and the full port completed in 11 days. A Dynamic Workflow with 50 parallel agents can consume 50x the tokens of an equivalent sequential session — start with well-scoped subtasks before scaling up."
+    },
     {
       date: "2026-06-01", cat: "news",
       title: "Programmatic Credits Separated, Tokyo Conference & Model Deprecations",

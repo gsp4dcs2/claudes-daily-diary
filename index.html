@@ -61,6 +61,16 @@
       <!-- Newest entries at the top. Format: {yyyy-mm-dd} – {title} -->
 
       <li>
+        <a href="articles/2026/06/2026-06-03.html">
+          <img class="entry-thumb" src="articles/2026/06/2026-06-03-thumb.png" alt="2026-06-03 thumbnail">
+          <div class="entry-meta">
+            <span class="article-date">2026-06-03</span>
+            <div class="entry-bottom"><span class="cat-icon" title="Daily News">🧭</span> <span class="article-title">Project Glasswing Expands, Claude Security GA &amp; Managed Agents Sandboxes</span></div>
+          </div>
+        </a>
+      </li>
+
+      <li>
         <a href="articles/2026/06/2026-06-02.html">
           <img class="entry-thumb" src="articles/2026/06/2026-06-02-thumb.png" alt="2026-06-02 thumbnail">
           <div class="entry-meta">
@@ -1933,6 +1943,12 @@
      collapsed). Rebuild this array when new days are added.
      ──────────────────────────────────────────────────────── */
   const SEARCH_INDEX = [
+    {
+      date: "2026-06-03", cat: "news",
+      title: "Project Glasswing Expands, Claude Security GA & Managed Agents Sandboxes",
+      url: "articles/2026/06/2026-06-03.html",
+      text: "Project Glasswing Expands to 150 New Critical-Infrastructure Orgs and Claude Security Launches GA Anthropic announced the second cohort of Project Glasswing, extending Claude Mythos Preview access to approximately 150 new organisations operating in power, water, healthcare, communications, and hardware — sectors under-represented in the initial April cohort. Partners are now based in more than 15 countries. Claude Security is now generally available as a standalone product built on Opus 4.8 that lets any security team scan codebases and receive annotated patch-ready suggestions. The original 50 Glasswing partners found more than 10,000 high or critical-severity vulnerabilities. Claude Mythos Preview is the restricted purpose-built model for critical infrastructure; Claude Security is the GA general-use tier available to all teams on Max Team or Enterprise plans. Claude Managed Agents Gets Self-Hosted Sandboxes and Private MCP Tunnels Anthropic shipped two additions: agents can now run inside a sandbox you control rather than Anthropic's default cloud environment, and a new MCP tunnel mechanism lets agents reach MCP servers inside your private network without exposing them to the internet. Self-hosted sandboxes deploy the Managed Agents runtime into your own container environment (AWS ECS, GKE, Azure Container Instances) while keeping Anthropic's orchestration checkpointing and credential management. MCP tunnels use a lightweight gateway process that opens a single authenticated outbound connection to Anthropic's relay infrastructure with mutual TLS and sub-10 ms latency overhead. June 2 Outage Postmortem — Five Patterns for Building Resilient Claude Integrations On June 2 2026 Claude experienced a global service disruption lasting approximately 5 hours 45 minutes from 06:04 UTC to 11:49 UTC due to unexpected capacity constraints. Five resilience patterns: multi-model fallback routing with overloaded_error and 529 HTTP response handling, circuit-breaker with status.claude.com health checks, idempotent checkpointing for multi-step agent tasks, queue-backed async pipelines with exponential back-off, and decoupling quota monitoring from response health during recovery windows."
+    },
     {
       date: "2026-06-02", cat: "news",
       title: "Anthropic Files for IPO, SpaceX Compute Deal & Dynamic Workflows",

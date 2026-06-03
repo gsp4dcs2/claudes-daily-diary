@@ -8956,6 +8956,64 @@ def img_seurat_20260531():
     return base
 
 
+def img_malevich_20260603():
+    """Kazimir Malevich Suprematism — cream bg, bold tilted shapes — Project Glasswing cybersecurity expansion, 150 new orgs, critical infrastructure."""
+    base = Image.new("RGB", (W, H), (238, 234, 218))   # warm cream bg
+
+    # 1. Large navy tilted quadrilateral — critical infrastructure slab
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    nd.polygon([(120, 30), (820, 50), (760, 330), (60, 310)], fill=(18, 30, 95, 240))
+    base = comp(base, nl)
+
+    # 2. Bold red tilted rectangle — vulnerability / threat indicator
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.polygon([(870, 80), (1140, 60), (1160, 230), (890, 250)], fill=(204, 22, 22, 245))
+    base = comp(base, rl)
+
+    # 3. Black tilted bar sweeping across lower field — scanner sweep
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bd.polygon([(0, 430), (W, 390), (W, 435), (0, 480)], fill=(12, 10, 8, 255))
+    base = comp(base, bl)
+
+    # 4. Yellow diamond — patch / fix signal (Suprematist floating form)
+    yl = layer()
+    yd = ImageDraw.Draw(yl)
+    cx, cy, s = 980, 430, 85
+    yd.polygon([
+        (cx, cy - s), (cx + s, cy), (cx, cy + s), (cx - s, cy)
+    ], fill=(224, 186, 0, 235))
+    base = comp(base, yl)
+
+    # 5. White circle — Suprematist void / zero-day patched
+    wl = layer()
+    wd = ImageDraw.Draw(wl)
+    wd.ellipse([(210, 370), (360, 520)], fill=(238, 234, 218, 230), outline=(12, 10, 8, 190), width=4)
+    base = comp(base, wl)
+
+    # 6. Scatter of small black marker rectangles — 10k+ vulnerabilities found
+    for (mx, my, mw, mh) in [
+        (170, 100, 24, 9), (420, 70, 20, 8), (600, 130, 28, 10),
+        (320, 220, 18, 7), (550, 260, 22, 9), (700, 180, 16, 7),
+        (100, 190, 20, 8), (480, 150, 14, 6), (660, 85, 26, 10),
+        (250, 290, 18, 7), (390, 300, 22, 8), (760, 270, 15, 6),
+    ]:
+        ml = layer()
+        md = ImageDraw.Draw(ml)
+        md.rectangle([(mx, my), (mx + mw, my + mh)], fill=(12, 10, 8, 210))
+        base = comp(base, ml)
+
+    # 7. Thin coral horizontal accent line — 15+ countries breadth
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    ad.rectangle([(0, 355), (W, 361)], fill=(232, 115, 74, 180))
+    base = comp(base, al)
+
+    return base
+
+
 def img_lissitzky_20260602():
     """El Lissitzky Constructivism — cream bg, bold red+black geometry — IPO filing, SpaceX compute, dynamic agent orchestration."""
     base = Image.new("RGB", (W, H), (246, 242, 232))   # warm cream bg
@@ -9199,6 +9257,7 @@ DAYS = [
     ("2026-05-31", img_seurat_20260531,   "Enterprise Scale", "Georges Seurat"),
     ("2026-06-01", img_delaunay_20260601, "Agent Credits",    "Robert Delaunay"),
     ("2026-06-02", img_lissitzky_20260602, "IPO & SpaceX",   "El Lissitzky"),
+    ("2026-06-03", img_malevich_20260603,  "Glasswing Security", "Kazimir Malevich"),
 ]
 
 for date, fn, kw, artist in DAYS:

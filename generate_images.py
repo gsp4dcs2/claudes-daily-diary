@@ -8956,6 +8956,106 @@ def img_seurat_20260531():
     return base
 
 
+def img_klimt_20260604():
+    """Gustav Klimt — partner network tiers, AI cyber-threat mapping, intricate ecosystem."""
+    base = Image.new("RGB", (W, H), (3, 1, 8))   # near-black deep violet bg
+
+    # 1. Dense gold tessera field — Klimt signature mosaic across full canvas
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    for _ in range(800):
+        tx = rng.randint(0, W)
+        ty = rng.randint(0, H)
+        tr = rng.randint(2, 6)
+        alpha = rng.randint(28, 165)
+        td.ellipse([(tx - tr, ty - tr), (tx + tr, ty + tr)], fill=(212, 160, 28, alpha))
+    base = comp(base, tl)
+
+    # 2. Four partner-tier oval glows — Select (amber), Preferred (teal), Global Premier (deep gold),
+    #    Threat-mapping (rust-red)
+    zones = [
+        (220,  200, 195, 145, (180, 100, 18, 165)),    # amber — Select tier
+        (650,  160, 225, 170, (12, 148, 138, 165)),    # teal — Preferred tier
+        (1020, 235, 190, 155, (205, 155, 10, 178)),    # rich gold — Global Premier
+        (480,  430, 210, 158, (165, 28, 40, 160)),     # rust-red — threat mapping
+    ]
+    for cx, cy, rw, rh, col in zones:
+        zl = layer()
+        zd = ImageDraw.Draw(zl)
+        zd.ellipse([(cx - rw, cy - rh), (cx + rw, cy + rh)], fill=col)
+        base = comp(base, zl)
+
+    # 3. Concentric gold arcs around Global Premier zone — topmost tier radiance
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(12):
+        r_arc = 55 + i * 28
+        a_start = i * 30
+        ad.arc([(1020 - r_arc, 235 - r_arc), (1020 + r_arc, 235 + r_arc)],
+               start=a_start, end=a_start + 105,
+               fill=(212, 160, 28, max(15, 185 - i * 13)), width=4)
+    base = comp(base, al)
+
+    # 4. Dotted gold threads connecting all four zones — partner ecosystem network
+    pairs = [(220, 200, 650, 160), (650, 160, 1020, 235), (220, 200, 480, 430), (650, 160, 480, 430), (1020, 235, 480, 430)]
+    for ax, ay, bx, by in pairs:
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        for step in range(80):
+            t = step / 79
+            mx = int(ax + (bx - ax) * t)
+            my = int(ay + (by - ay) * t)
+            dr = rng.randint(1, 3)
+            alpha = int(110 * math.sin(math.pi * t))
+            pd.ellipse([(mx - dr, my - dr), (mx + dr, my + dr)], fill=(212, 160, 28, alpha))
+        base = comp(base, pl)
+
+    # 5. Klimt mosaic corner fragments
+    ml = layer()
+    md = ImageDraw.Draw(ml)
+    fragments = [
+        (18,  18, 195, 140, (212, 160, 28, 145)),    # gold top-left
+        (1015, 15, 1185, 148, (12, 148, 138, 135)),  # teal top-right
+        (18,  490, 200, 618,  (165, 28, 40, 140)),   # rust bottom-left
+        (1010, 490, 1185, 618, (205, 155, 10, 140)), # amber bottom-right
+        (495, 10, 715, 76,    (180, 100, 18, 115)),  # amber top-centre
+        (475, 558, 735, 618,  (12, 148, 138, 110)),  # teal bottom-centre
+        (25,  278, 112, 388,  (212, 160, 28, 115)),  # gold left-mid
+        (1080, 252, 1185, 370, (165, 28, 40, 105)),  # rust right-mid
+    ]
+    for px0, py0, px1, py1, col in fragments:
+        md.rectangle([(px0, py0), (px1, py1)], fill=col)
+    base = comp(base, ml)
+
+    # 6. Organic arc flourishes — certification/credential vine ornament
+    vl = layer()
+    vd = ImageDraw.Draw(vl)
+    palette = [(212, 160, 28), (12, 148, 138), (165, 28, 40), (205, 155, 10)]
+    for i in range(16):
+        vx = rng.randint(80, 1120)
+        vy = rng.randint(25, 400)
+        vr = rng.randint(22, 68)
+        a0 = rng.randint(0, 320)
+        r, g, b = palette[i % 4]
+        alpha = rng.randint(55, 145)
+        vd.arc([(vx - vr, vy - vr), (vx + vr, vy + vr)],
+               start=a0, end=a0 + rng.randint(50, 140),
+               fill=(r, g, b, alpha), width=rng.randint(2, 5))
+    base = comp(base, vl)
+
+    # 7. Small espionage threat scatter dots (deep red) — 832 banned accounts
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    for _ in range(120):
+        sx = rng.randint(30, W - 30)
+        sy = rng.randint(30, H - 30)
+        sr = rng.randint(1, 3)
+        sd.ellipse([(sx - sr, sy - sr), (sx + sr, sy + sr)], fill=(200, 40, 40, rng.randint(60, 140)))
+    base = comp(base, sl)
+
+    return base
+
+
 def img_malevich_20260603():
     """Kazimir Malevich Suprematism — cream bg, bold tilted shapes — Project Glasswing cybersecurity expansion, 150 new orgs, critical infrastructure."""
     base = Image.new("RGB", (W, H), (238, 234, 218))   # warm cream bg
@@ -9258,6 +9358,7 @@ DAYS = [
     ("2026-06-01", img_delaunay_20260601, "Agent Credits",    "Robert Delaunay"),
     ("2026-06-02", img_lissitzky_20260602, "IPO & SpaceX",   "El Lissitzky"),
     ("2026-06-03", img_malevich_20260603,  "Glasswing Security", "Kazimir Malevich"),
+    ("2026-06-04", img_klimt_20260604,     "Partner Tiers",      "Gustav Klimt"),
 ]
 
 for date, fn, kw, artist in DAYS:

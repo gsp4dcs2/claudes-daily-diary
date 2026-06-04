@@ -61,6 +61,16 @@
       <!-- Newest entries at the top. Format: {yyyy-mm-dd} – {title} -->
 
       <li>
+        <a href="articles/2026/06/2026-06-04.html">
+          <img class="entry-thumb" src="articles/2026/06/2026-06-04-thumb.png" alt="2026-06-04 thumbnail">
+          <div class="entry-meta">
+            <span class="article-date">2026-06-04</span>
+            <div class="entry-bottom"><span class="cat-icon" title="Daily News">🧭</span> <span class="article-title">Partner Network Tiers, AI Cyber-Threat Reports &amp; Claude Code Hardening</span></div>
+          </div>
+        </a>
+      </li>
+
+      <li>
         <a href="articles/2026/06/2026-06-03.html">
           <img class="entry-thumb" src="articles/2026/06/2026-06-03-thumb.png" alt="2026-06-03 thumbnail">
           <div class="entry-meta">
@@ -1943,6 +1953,12 @@
      collapsed). Rebuild this array when new days are added.
      ──────────────────────────────────────────────────────── */
   const SEARCH_INDEX = [
+    {
+      date: "2026-06-04", cat: "news",
+      title: "Partner Network Tiers, AI Cyber-Threat Reports & Claude Code Hardening",
+      url: "articles/2026/06/2026-06-04.html",
+      text: "Claude Partner Network Goes Tiered Services Track and Partner Hub Now Live Anthropic launched the Services Track and Claude Partner Hub formalising how consulting firms and SIs prove and advertise their Claude expertise to enterprise buyers. The partner network launched in March with a $100 million investment in training and shared marketing with more than 40,000 firms applying and over 10,000 consultants earning a Claude certification. Services Track three tiers earned not bought: Select 10 certified practitioners 2 production client deployments 1 public customer endorsement; Preferred 100 certified practitioners 15 active customer deployments 3 published endorsements; Global Premier 1,000 certified practitioners deployments with 100+ customers across 3+ regions 15 public endorsements and jointly developed business plan with named executive sponsors. Partner Hub serves partner firms with live dashboard showing certification counts deal registrations and gap-to-next-tier metrics and enterprise buyers with searchable directory showing which firms have real deployments. New MCP connector lets firms query Hub directly from Claude. Anthropic Publishes Dual Cyber Reports AI Threat Mapping and First AI-Orchestrated Espionage Campaign Anthropic published two security research papers: What we learned mapping a year's worth of AI-enabled cyber threats examining 832 accounts banned for malicious activity between March 2025 and March 2026 mapped onto MITRE ATT&CK; and Disrupting the first reported AI-orchestrated cyber espionage campaign about a state-sponsored operation detected in September 2025. Share of medium or high-risk actors using AI rose from 33% to 56% (1.7x increase). 67.3% of 832 banned accounts used AI primarily for malware writing. AI deployed at later more complex attack chain stages: exploit development evasion lateral movement. Chinese state-sponsored group GTG-1002 used Claude Code to autonomously query databases extract data parse results and categorise findings at physically impossible request rates achieving 80-90% autonomous execution against 30 global targets including tech companies financial institutions chemical manufacturers and government agencies. Anthropic in discussions with MITRE about updating ATT&CK framework. Claude Code Hardens Its Defaults Streaming Tools Always On MCP Session IDs Sharper Exfiltration Detection Streaming tool execution now always enabled across all deployment paths including Bedrock Vertex Foundry and when telemetry disabled. Stdio MCP server subprocesses now receive CLAUDE_CODE_SESSION_ID and CLAUDECODE=1 environment variables for log correlation session-scoped caches and tenant routing. Improved data-exfiltration detection in auto-mode now more aggressively identifies bulk repository transfers specifically tightened in response to GTG-1002 espionage patterns. MCP server approval fix: claude mcp list/get shows unapproved .mcp.json servers as Pending approval instead of auto-approving in non-interactive piped contexts such as CI pipelines."
+    },
     {
       date: "2026-06-03", cat: "news",
       title: "Project Glasswing Expands, Claude Security GA & Managed Agents Sandboxes",

@@ -120,7 +120,13 @@
     <p>Anthropic acknowledged the disclosure and moved quickly to publish a patched version of the npm package with source maps excluded. The company noted that no API keys, user data, or production secrets were exposed — the leak was source code only. GitHub mirrors created for research purposes remained accessible.</p>
   </div>
 
-  <div class="tag-list">
+  
+  <div class="source-line">
+    <span class="trust-badge" title="Community / research — cross-checked">⭐</span>
+    <a href="https://github.com/Kuberwastaken/claude-code" class="source-link" target="_blank" rel="noopener">github.com</a>
+  </div>
+
+<div class="tag-list">
     <span class="tag">claude code</span>
     <span class="tag">security</span>
     <span class="tag">npm</span>
@@ -153,7 +159,13 @@
     <p>If you are building agentic pipelines, the Microsoft pattern is worth studying: use a fast/cheap model for drafting, and route the output through a more careful model for a structured critique pass. The cost of the second pass is offset by the quality improvement and reduced hallucination risk in the final output.</p>
   </div>
 
-  <div class="tag-list">
+  
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://fortune.com/2026/03/31/microsoft-revamps-copilot-with-anthropic/" class="source-link" target="_blank" rel="noopener">fortune.com</a>
+  </div>
+
+<div class="tag-list">
     <span class="tag">Microsoft</span>
     <span class="tag">Copilot</span>
     <span class="tag">multi-model</span>
@@ -207,7 +219,13 @@ devtool: process.env.NODE_ENV === 'production' ? false : 'source-map'
     <p>While you are auditing your <code>npm pack</code> output, also look for <code>.env</code> files, credential configs, internal test fixtures, and any file that contains paths or comments that reveal internal infrastructure. The <code>files</code> allowlist approach eliminates all of these in one step.</p>
   </div>
 
-  <div class="tag-list">
+  
+  <div class="source-line">
+    <span class="trust-badge" title="Community / research — cross-checked">⭐</span>
+    <a href="https://docs.npmjs.com/cli/v10/configuring-npm/package-json#files" class="source-link" target="_blank" rel="noopener">docs.npmjs.com</a>
+  </div>
+
+<div class="tag-list">
     <span class="tag">npm</span>
     <span class="tag">security</span>
     <span class="tag">source maps</span>
@@ -215,6 +233,13 @@ devtool: process.env.NODE_ENV === 'production' ? false : 'source-map'
     <span class="tag">developer tips</span>
   </div>
 </article>
+
+    <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
 
   </main>
 

@@ -119,7 +119,13 @@
     <p>When Claude Code starts failing with connection errors, check <a href="https://status.anthropic.com" rel="noopener">status.anthropic.com</a> before spending time debugging your local setup. Most widespread failures are visible there within minutes of detection.</p>
   </div>
 
-  <div class="tag-list">
+  
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/issues/41242" class="source-link" target="_blank" rel="noopener">github.com</a>
+  </div>
+
+<div class="tag-list">
     <span class="tag">claude code</span>
     <span class="tag">outage</span>
     <span class="tag">ECONNRESET</span>
@@ -178,7 +184,13 @@ def call_with_retry(prompt, max_retries=5):
     <p>For workflows that run multi-step agent chains, consider putting tasks on a queue (Redis, SQS, or even a simple SQLite table) rather than running them synchronously. If a step fails, the queue persists the state and the next retry picks up where the previous attempt left off — no lost progress.</p>
   </div>
 
-  <div class="tag-list">
+  
+  <div class="source-line">
+    <span class="trust-badge" title="Community / research — cross-checked">⭐</span>
+    <a href="https://docs.anthropic.com/en/api/errors" class="source-link" target="_blank" rel="noopener">docs.anthropic.com</a>
+  </div>
+
+<div class="tag-list">
     <span class="tag">best practices</span>
     <span class="tag">error handling</span>
     <span class="tag">retry</span>
@@ -210,7 +222,13 @@ def call_with_retry(prompt, max_retries=5):
     <p>Teams with all three layers in place knew about the ECONNRESET event within 2–3 minutes of it starting. Teams without monitoring discovered it when users complained, typically 20–40 minutes later. The difference in mean time to awareness is the difference between a barely-noticeable incident and a visible service degradation.</p>
   </div>
 
-  <div class="tag-list">
+  
+  <div class="source-line">
+    <span class="trust-badge" title="Community / research — cross-checked">⭐</span>
+    <a href="https://status.anthropic.com" class="source-link" target="_blank" rel="noopener">status.anthropic.com</a>
+  </div>
+
+<div class="tag-list">
     <span class="tag">monitoring</span>
     <span class="tag">observability</span>
     <span class="tag">production</span>
@@ -218,6 +236,13 @@ def call_with_retry(prompt, max_retries=5):
     <span class="tag">alerts</span>
   </div>
 </article>
+
+    <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
 
   </main>
 

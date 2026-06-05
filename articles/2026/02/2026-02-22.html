@@ -102,7 +102,13 @@
     <li><strong>Audit trail</strong> — every tool call Claude makes in a security-mode session is logged to the workspace audit log with before/after diffs</li>
   </ul>
   <p>The mode is billed as an addition to the standard Enterprise seat price, with no per-scan surcharge. Anthropic notes that the security mode is not a replacement for a professional security review but is designed to catch the most common classes of AI-introduced vulnerabilities in day-to-day coding workflows.</p>
-  <div class="tag-list">
+  
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/claude-code-security-enterprise" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+<div class="tag-list">
     <span class="tag">Claude Code</span>
     <span class="tag">security</span>
     <span class="tag">enterprise</span>
@@ -119,7 +125,13 @@
   <h2><span class="entry-icon">🧭</span> Sandboxed Code Execution — Architecture Deep Dive</h2>
   <p>Anthropic has published a detailed technical post explaining the architecture behind the sandboxed code execution environment that powers both the dynamic web filtering feature (launched February 11) and Claude Code Security. The post describes a three-layer isolation model: a gVisor-based kernel sandbox at the lowest level, a time-and-memory-bounded execution budget enforced by a custom supervisor process, and an output validation layer that intercepts and normalises the sandbox's stdout/stderr before returning results to Claude.</p>
   <p>Each sandbox instance is ephemeral — provisioned per tool call and destroyed immediately after — with no persistent filesystem access and no network egress. The post notes that the design deliberately trades flexibility for auditability: a sandbox that cannot reach the network or retain state produces outputs that are structurally easier to reason about from a security perspective, even at the cost of excluding use cases that require persistent state.</p>
-  <div class="tag-list">
+  
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/research/sandboxed-code-execution-architecture" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+<div class="tag-list">
     <span class="tag">security</span>
     <span class="tag">sandboxing</span>
     <span class="tag">architecture</span>
@@ -127,6 +139,13 @@
     <span class="tag">retrospective</span>
   </div>
 </article>
+
+    <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
 
   </main>
   <footer class="site-footer">

@@ -113,7 +113,13 @@ response = client.messages.create(
 result = response.parse(AnalysisResult)
 print(result.sentiment)   # typed, validated</code></pre>
   <p>Both SDKs also add a <code>stream_to_file()</code> helper that pipelines a streaming response directly to a file object, closing a longstanding gap for developers building document-generation pipelines. The Python SDK ships with updated type stubs generated from the OpenAPI spec, reducing IDE false-positives on newer parameters.</p>
-  <div class="tag-list">
+  
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/anthropic-sdk-python" class="source-link" target="_blank" rel="noopener">github.com</a>
+  </div>
+
+<div class="tag-list">
     <span class="tag">SDK</span>
     <span class="tag">Python</span>
     <span class="tag">TypeScript</span>
@@ -136,13 +142,26 @@ print(result.sentiment)   # typed, validated</code></pre>
     <li><strong>Partial result streaming</strong> — results are now available for completed sub-requests before the entire batch finishes, reducing wall-clock latency for pipelines that process results incrementally</li>
   </ul>
   <p>Batch pricing remains at 50% of the standard per-token rate. Anthropic notes that batch jobs now account for over 20% of total API token volume, driven primarily by data labelling, document classification, and evaluation pipeline use cases.</p>
-  <div class="tag-list">
+  
+  <div class="source-line">
+    <span class="trust-badge" title="Community / research — cross-checked">⭐</span>
+    <a href="https://platform.claude.com/docs/en/api/batch-messages" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+<div class="tag-list">
     <span class="tag">API</span>
     <span class="tag">batch processing</span>
     <span class="tag">developer tools</span>
     <span class="tag">retrospective</span>
   </div>
 </article>
+
+    <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
 
   </main>
   <footer class="site-footer">

@@ -106,7 +106,13 @@
     <p>Write descriptions for every field in your JSON schema — not just for human readers, but because Claude uses field descriptions to decide what value to place in each field. A field named <code>status</code> with no description will receive a worse-quality value than one described as "the current lifecycle status of the order: one of 'pending', 'processing', 'shipped', or 'cancelled'."</p>
   </div>
 
-  <div class="tag-list">
+  
+  <div class="source-line">
+    <span class="trust-badge" title="Community / research — cross-checked">⭐</span>
+    <a href="https://docs.anthropic.com/en/release-notes/api" class="source-link" target="_blank" rel="noopener">docs.anthropic.com</a>
+  </div>
+
+<div class="tag-list">
     <span class="tag">structured outputs</span>
     <span class="tag">Haiku 4.5</span>
     <span class="tag">JSON schema</span>
@@ -132,7 +138,13 @@
     <li><strong>Set <code>tool_choice</code> when appropriate:</strong> On tasks where you know a specific tool must be called — e.g. a structured extraction pipeline — use <code>tool_choice: {type: "tool", name: "extract_fields"}</code> to prevent Claude from choosing to answer in prose instead.</li>
   </ul>
 
-  <div class="tag-list">
+  
+  <div class="source-line">
+    <span class="trust-badge" title="Community / research — cross-checked">⭐</span>
+    <a href="https://docs.anthropic.com/en/docs/build-with-claude/tool-use" class="source-link" target="_blank" rel="noopener">docs.anthropic.com</a>
+  </div>
+
+<div class="tag-list">
     <span class="tag">tool use</span>
     <span class="tag">production patterns</span>
     <span class="tag">reliability</span>
@@ -140,6 +152,13 @@
     <span class="tag">retrospective</span>
   </div>
 </article>
+
+    <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
 
   </main>
   <footer class="site-footer">

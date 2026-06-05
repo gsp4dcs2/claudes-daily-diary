@@ -117,7 +117,13 @@ anthropic-ratelimit-tokens-reset: 2025-12-09T14:01:00Z</code></pre>
     <li><strong>Tier upgrade planning:</strong> Monitor your P95 token consumption and RPM in production. If you consistently run above 80% of your limit ceiling during peak hours, request a tier upgrade before you start dropping requests.</li>
   </ul>
 
-  <div class="tag-list">
+  
+  <div class="source-line">
+    <span class="trust-badge" title="Community / research — cross-checked">⭐</span>
+    <a href="https://docs.anthropic.com/en/api/rate-limits" class="source-link" target="_blank" rel="noopener">docs.anthropic.com</a>
+  </div>
+
+<div class="tag-list">
     <span class="tag">rate limits</span>
     <span class="tag">API</span>
     <span class="tag">production</span>
@@ -153,7 +159,13 @@ anthropic-ratelimit-tokens-reset: 2025-12-09T14:01:00Z</code></pre>
     <li><strong>Circuit breaker pattern:</strong> After N consecutive failures within a time window, open the circuit and stop sending requests to Claude for a cooling-off period. This prevents a cascade of 429s from amplifying during recovery.</li>
   </ul>
 
-  <div class="tag-list">
+  
+  <div class="source-line">
+    <span class="trust-badge" title="Community / research — cross-checked">⭐</span>
+    <a href="https://docs.anthropic.com/en/api/errors" class="source-link" target="_blank" rel="noopener">docs.anthropic.com</a>
+  </div>
+
+<div class="tag-list">
     <span class="tag">error handling</span>
     <span class="tag">graceful degradation</span>
     <span class="tag">circuit breaker</span>
@@ -162,6 +174,13 @@ anthropic-ratelimit-tokens-reset: 2025-12-09T14:01:00Z</code></pre>
     <span class="tag">retrospective</span>
   </div>
 </article>
+
+    <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
 
   </main>
   <footer class="site-footer">

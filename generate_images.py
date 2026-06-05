@@ -9172,6 +9172,90 @@ def img_lissitzky_20260602():
     return base
 
 
+def img_marc_20260605():
+    """Franz Marc — jewel-toned bg, converging animal shapes — alignment, safety, values theme."""
+    base = Image.new("RGB", (W, H), (10, 28, 80))  # deep sapphire bg
+
+    # 1. Rich gradient wash — deep sapphire to emerald
+    bg_l = layer()
+    bg_d = ImageDraw.Draw(bg_l)
+    for y in range(0, H, 3):
+        t = y / H
+        r = int(10 + t * 5)
+        g = int(28 + t * 80)
+        b = int(80 - t * 30)
+        bg_d.line([(0, y), (W, y)], fill=(r, g, b, 70))
+    base = comp(base, bg_l)
+
+    # 2. Central radiant circle — gold "core values" sun
+    core_l = layer()
+    core_d = ImageDraw.Draw(core_l)
+    for radius in range(180, 0, -12):
+        alpha = int(60 + (180 - radius) * 0.8)
+        gold = (255, 195 + rng.randint(-15, 15), 20, min(alpha, 240))
+        core_d.ellipse(
+            [(W // 2 - radius, H // 2 - radius),
+             (W // 2 + radius, H // 2 + radius)],
+            fill=gold
+        )
+    base = comp(base, core_l)
+
+    # 3. Four stylised animal silhouettes converging toward the centre (alignment)
+    an_l = layer()
+    an_d = ImageDraw.Draw(an_l)
+    # Left — deep red stag body heading right
+    an_d.ellipse([(80, 230), (320, 420)], fill=(180, 40, 40, 200), outline=(80, 0, 0, 255), width=4)
+    an_d.polygon([(200, 230), (240, 130), (280, 230)], fill=(160, 30, 30, 190))  # neck/head
+    an_d.polygon([(240, 130), (200, 60), (260, 100), (290, 50), (310, 110)],     # antlers
+                 fill=(140, 20, 20, 180))
+    # Right — teal deer body heading left
+    an_d.ellipse([(880, 230), (1120, 420)], fill=(20, 150, 140, 200), outline=(0, 70, 60, 255), width=4)
+    an_d.polygon([(1000, 230), (960, 130), (920, 230)], fill=(10, 130, 120, 190))
+    # Top — cobalt bird descending
+    an_d.ellipse([(520, 30), (680, 160)], fill=(40, 60, 180, 210), outline=(10, 20, 90, 255), width=4)
+    an_d.polygon([(530, 90), (370, 30), (510, 130)], fill=(30, 50, 160, 180))   # left wing
+    an_d.polygon([(670, 90), (830, 30), (690, 130)], fill=(30, 50, 160, 180))   # right wing
+    # Bottom — amber fox rising
+    an_d.ellipse([(490, 450), (710, 570)], fill=(200, 110, 20, 210), outline=(110, 55, 0, 255), width=4)
+    an_d.polygon([(600, 450), (550, 360), (650, 360)], fill=(185, 95, 15, 190))  # head up
+    base = comp(base, an_l)
+
+    # 4. Convergence lines — thin rays from each animal toward the gold centre
+    conv_l = layer()
+    conv_d = ImageDraw.Draw(conv_l)
+    cx, cy = W // 2, H // 2
+    anchors = [(200, 325), (1000, 325), (600, 95), (600, 510)]
+    colours = [(180, 40, 40), (20, 150, 140), (40, 60, 180), (200, 110, 20)]
+    for (ax, ay), col in zip(anchors, colours):
+        for offset in range(-18, 19, 6):
+            px = ax + offset
+            conv_d.line([(px, ay), (cx, cy)], fill=(*col, 90), width=2)
+    base = comp(base, conv_l)
+
+    # 5. Jewel-dot scatter — small gems radiating from centre
+    dot_l = layer()
+    dot_d = ImageDraw.Draw(dot_l)
+    gem_cols = [
+        (255, 195, 20, 220),   # gold
+        (180, 40, 40, 200),    # deep red
+        (20, 150, 140, 200),   # teal
+        (40, 60, 180, 200),    # cobalt
+        (200, 110, 20, 200),   # amber
+        (130, 30, 160, 200),   # violet
+    ]
+    for _ in range(220):
+        angle = rng.uniform(0, 2 * math.pi)
+        dist  = rng.uniform(30, 420)
+        dx = int(cx + math.cos(angle) * dist)
+        dy = int(cy + math.sin(angle) * dist)
+        r  = rng.randint(3, 8)
+        col = rng.choice(gem_cols)
+        dot_d.ellipse([(dx - r, dy - r), (dx + r, dy + r)], fill=col)
+    base = comp(base, dot_l)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -9359,6 +9443,7 @@ DAYS = [
     ("2026-06-02", img_lissitzky_20260602, "IPO & SpaceX",   "El Lissitzky"),
     ("2026-06-03", img_malevich_20260603,  "Glasswing Security", "Kazimir Malevich"),
     ("2026-06-04", img_klimt_20260604,     "Partner Tiers",      "Gustav Klimt"),
+    ("2026-06-05", img_marc_20260605,      "Safe Alignment",     "Franz Marc"),
 ]
 
 for date, fn, kw, artist in DAYS:

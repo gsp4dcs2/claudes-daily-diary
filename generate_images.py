@@ -9256,6 +9256,117 @@ def img_marc_20260605():
     return base
 
 
+def img_kandinsky_20260606():
+    """Wassily Kandinsky — deep prussian-blue bg, recursive circular forms — AI self-authoring, recursive improvement theme."""
+    base = Image.new("RGB", (W, H), (14, 26, 62))  # deep prussian blue
+
+    # 1. Diagonal grid — the lattice of interconnected systems
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    step = 70
+    line_color = (255, 255, 255, 16)
+    for offset in range(-H, W + H, step):
+        gd.line([(offset, 0), (offset + H, H)], fill=line_color, width=1)
+    for offset in range(0, W + H + step, step):
+        gd.line([(offset, 0), (offset - H, H)], fill=line_color, width=1)
+    base = comp(base, grid_l)
+
+    # 2. Concentric gold circles — recursive loop, AI building on AI
+    rings_l = layer()
+    rings_d = ImageDraw.Draw(rings_l)
+    cx, cy = 700, 280
+    for r in range(260, 20, -40):
+        alpha = int(50 + (260 - r) * 0.7)
+        rings_d.ellipse(
+            [(cx - r, cy - r), (cx + r, cy + r)],
+            outline=(245, 200, 30, min(alpha, 230)),
+            width=3 if r > 100 else 2
+        )
+    # Filled bright centre
+    rings_d.ellipse([(cx - 22, cy - 22), (cx + 22, cy + 22)], fill=(245, 200, 30, 240))
+    base = comp(base, rings_l)
+
+    # 3. Large teal arc sweeping left — forward trajectory, self-improvement curve
+    arc_l = layer()
+    arc_d = ImageDraw.Draw(arc_l)
+    arc_d.arc([(40, 30), (680, 590)], start=250, end=70, fill=(20, 200, 190, 230), width=11)
+    base = comp(base, arc_l)
+
+    # 4. Red triangle — structural node, decision point
+    tri_l = layer()
+    tri_d = ImageDraw.Draw(tri_l)
+    tri_d.polygon([(120, 540), (380, 540), (250, 210)],
+                  fill=(215, 35, 50, 215), outline=(0, 0, 0, 255), width=5)
+    base = comp(base, tri_l)
+
+    # 5. Orange small circle — code authorship signal
+    oc_l = layer()
+    oc_d = ImageDraw.Draw(oc_l)
+    oc_d.ellipse([(80, 80), (240, 240)],
+                 fill=(255, 125, 25, 210), outline=(0, 0, 0, 255), width=5)
+    base = comp(base, oc_l)
+
+    # 6. Purple pie-slice — governance zone
+    pie_l = layer()
+    pie_d = ImageDraw.Draw(pie_l)
+    pie_d.pieslice([(870, 330), (1190, 600)], start=195, end=355,
+                   fill=(140, 42, 205, 205), outline=(0, 0, 0, 255), width=4)
+    base = comp(base, pie_l)
+
+    # 7. Green diamond — emergent capability
+    gem_l = layer()
+    gem_d = ImageDraw.Draw(gem_l)
+    gem_d.polygon([(520, 370), (610, 265), (700, 370), (610, 475)],
+                  fill=(38, 185, 85, 200), outline=(0, 0, 0, 255), width=4)
+    base = comp(base, gem_l)
+
+    # 8. Scatter dots — data points, tokens, code commits
+    scatter = layer()
+    sd = ImageDraw.Draw(scatter)
+    positions = [
+        (155, 340), (330, 430), (495, 155), (730, 75), (860, 505),
+        (965, 175), (1060, 68), (1105, 445), (52, 495), (425, 315),
+        (580, 400), (760, 545), (295, 160), (1035, 355), (670, 305),
+        (200, 480), (460, 70), (900, 90), (1150, 250), (350, 260),
+    ]
+    colors = [
+        (245, 200, 30, 220),   # gold
+        (215, 35, 50, 210),    # red
+        (255, 255, 255, 195),  # white
+        (20, 200, 190, 200),   # teal
+        (255, 125, 25, 210),   # orange
+        (140, 42, 205, 200),   # purple
+        (38, 185, 85, 200),    # green
+        (245, 200, 30, 190),   # gold
+        (20, 200, 190, 200),   # teal
+        (215, 35, 50, 200),    # red
+        (255, 255, 255, 175),  # white
+        (255, 125, 25, 195),   # orange
+        (38, 185, 85, 185),    # green
+        (140, 42, 205, 185),   # purple
+        (245, 200, 30, 210),   # gold
+        (20, 200, 190, 185),   # teal
+        (215, 35, 50, 185),    # red
+        (255, 255, 255, 165),  # white
+        (140, 42, 205, 175),   # purple
+        (38, 185, 85, 195),    # green
+    ]
+    radii = [13, 10, 17, 15, 9, 14, 11, 16, 8, 12, 19, 7, 10, 13, 15, 9, 11, 14, 8, 12]
+    for (px, py), col, r in zip(positions, colors, radii):
+        sd.ellipse([(px - r, py - r), (px + r, py + r)], fill=col, outline=(0, 0, 0, 180), width=2)
+    base = comp(base, scatter)
+
+    # 9. Bold composition lines
+    lines_l = layer()
+    ld = ImageDraw.Draw(lines_l)
+    ld.line([(0, 430), (440, 120)], fill=(0, 0, 0, 255), width=5)
+    ld.line([(510, 600), (940, 230)], fill=(0, 0, 0, 255), width=3)
+    ld.line([(830, 600), (1150, 320)], fill=(255, 255, 255, 190), width=2)
+    base = comp(base, lines_l)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -9444,6 +9555,7 @@ DAYS = [
     ("2026-06-03", img_malevich_20260603,  "Glasswing Security", "Kazimir Malevich"),
     ("2026-06-04", img_klimt_20260604,     "Partner Tiers",      "Gustav Klimt"),
     ("2026-06-05", img_marc_20260605,      "Safe Alignment",     "Franz Marc"),
+    ("2026-06-06", img_kandinsky_20260606, "AI Builds Itself",   "Wassily Kandinsky"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -9367,6 +9367,116 @@ def img_kandinsky_20260606():
     return base
 
 
+def img_klee_20260607():
+    """Paul Klee — warm-to-cool delegation grid with orchestrator hub — agentic coding trends / delegation gap theme."""
+    base = Image.new("RGB", (W, H), (16, 12, 28))   # very dark indigo bg
+
+    GRID_W = 10
+    GRID_H = 7
+    cw = W // GRID_W
+    ch = H // GRID_H
+
+    # 1. Warm-to-cool colour grid — each cell a distinct delegation "zone"
+    palettes = [
+        [(190, 70, 30), (210, 150, 20), (230, 100, 50)],   # warm: rust, amber, coral
+        [(20, 100, 170), (40, 160, 130), (70, 40, 160)],   # cool: cerulean, teal, violet
+    ]
+    for row in range(GRID_H):
+        for col in range(GRID_W):
+            t = col / max(GRID_W - 1, 1)
+            warm = palettes[0][row % 3]
+            cool = palettes[1][col % 3]
+            col_rgb = tuple(int(warm[k] * (1 - t) + cool[k] * t) for k in range(3))
+            alpha = rng.randint(130, 200)
+            cl = layer()
+            cd = ImageDraw.Draw(cl)
+            cd.rectangle(
+                [(col * cw + 3, row * ch + 3), (col * cw + cw - 3, row * ch + ch - 3)],
+                fill=col_rgb + (alpha,)
+            )
+            base = comp(base, cl)
+
+    # 2. Dark grid lines — the Klee grid structure
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for c in range(GRID_W + 1):
+        gd.line([(c * cw, 0), (c * cw, H)], fill=(12, 8, 20, 255), width=3)
+    for r in range(GRID_H + 1):
+        gd.line([(0, r * ch), (W, r * ch)], fill=(12, 8, 20, 255), width=3)
+    base = comp(base, gl)
+
+    # 3. Delegation arrows from orchestrator (col 2, row 1) down to worker nodes
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    orch_col, orch_row = 2, 1
+    worker_targets = [(0, 4), (2, 5), (4, 4), (6, 5), (8, 4)]
+    for wc, wr in worker_targets:
+        x1, y1 = orch_col * cw + cw // 2, orch_row * ch + ch
+        x2, y2 = wc * cw + cw // 2, wr * ch
+        alpha = rng.randint(100, 170)
+        ad.line([(x1, y1), (x2, y2)], fill=(255, 220, 80, alpha), width=2)
+    base = comp(base, al)
+
+    # 4. Cross-worker coordination lines — peer communication in the agent mesh
+    cl2 = layer()
+    cd2 = ImageDraw.Draw(cl2)
+    coord_pairs = [((0, 4), (2, 5)), ((2, 5), (4, 4)), ((4, 4), (6, 5)), ((6, 5), (8, 4))]
+    for (c1, r1), (c2, r2) in coord_pairs:
+        x1, y1 = c1 * cw + cw // 2, r1 * ch + ch // 2
+        x2, y2 = c2 * cw + cw // 2, r2 * ch + ch // 2
+        alpha = rng.randint(50, 100)
+        cd2.line([(x1, y1), (x2, y2)], fill=(180, 255, 220, alpha), width=1)
+    base = comp(base, cl2)
+
+    # 5. Orchestrator hub node — large, bright, central authority
+    hl = layer()
+    hd = ImageDraw.Draw(hl)
+    hx, hy = orch_col * cw + cw // 2, orch_row * ch + ch // 2
+    hd.ellipse([(hx - 22, hy - 22), (hx + 22, hy + 22)],
+               fill=(255, 255, 255, 240), outline=(12, 8, 20, 255), width=4)
+    hd.ellipse([(hx - 9, hy - 9), (hx + 9, hy + 9)],
+               fill=(255, 165, 50, 255))
+    base = comp(base, hl)
+
+    # 6. Worker nodes at target intersections
+    wl = layer()
+    wd = ImageDraw.Draw(wl)
+    for wc, wr in worker_targets:
+        wx, wy = wc * cw + cw // 2, wr * ch + ch // 2
+        r = rng.randint(10, 15)
+        wd.ellipse([(wx - r, wy - r), (wx + r, wy + r)],
+                   fill=(255, 255, 255, 200), outline=(12, 8, 20, 255), width=3)
+        wd.ellipse([(wx - 4, wy - 4), (wx + 4, wy + 4)],
+                   fill=(80, 200, 160, 255))
+    base = comp(base, wl)
+
+    # 7. Small standard intersection nodes — all remaining grid intersections
+    sn = layer()
+    sd = ImageDraw.Draw(sn)
+    special = set(worker_targets) | {(orch_col, orch_row)}
+    for ci in range(GRID_W + 1):
+        for ri in range(GRID_H + 1):
+            if (ci, ri) in special:
+                continue
+            sx, sy = ci * cw, ri * ch
+            sr = rng.randint(3, 6)
+            sd.ellipse([(sx - sr, sy - sr), (sx + sr, sy + sr)],
+                       fill=(255, 255, 255, rng.randint(100, 170)))
+    base = comp(base, sn)
+
+    # 8. Faint human-checkpoint markers — small coral diamonds at top row intersections
+    dm = layer()
+    dd = ImageDraw.Draw(dm)
+    checkpoint_cols = [1, 4, 7, 9]
+    for cc in checkpoint_cols:
+        dx, dy = cc * cw, 0
+        dd.polygon([(dx, dy - 10), (dx + 8, dy), (dx, dy + 10), (dx - 8, dy)],
+                   fill=(232, 115, 74, 180))
+    base = comp(base, dm)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -9556,6 +9666,7 @@ DAYS = [
     ("2026-06-04", img_klimt_20260604,     "Partner Tiers",      "Gustav Klimt"),
     ("2026-06-05", img_marc_20260605,      "Safe Alignment",     "Franz Marc"),
     ("2026-06-06", img_kandinsky_20260606, "AI Builds Itself",   "Wassily Kandinsky"),
+    ("2026-06-07", img_klee_20260607,      "Delegation Gap",     "Paul Klee"),
 ]
 
 for date, fn, kw, artist in DAYS:

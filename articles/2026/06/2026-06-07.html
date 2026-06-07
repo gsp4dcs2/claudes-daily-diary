@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="June 7: Anthropic's 2026 Agentic Coding Trends Report names the delegation gap — devs use AI for 60% of work but fully delegate only 0–20% — plus the Opus 4.1 sunset timeline and two API cost improvements that deserve wider attention.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-06-07 – The Delegation Gap, API Cost Wins &amp; Opus 4.1 Sunset">
+  <meta property="og:description" content="June 7: Anthropic's 2026 Agentic Coding Trends Report names the delegation gap — devs use AI for 60% of work but fully delegate only 0–20% — plus the Opus 4.1 sunset timeline and two API cost improvements that deserve wider attention.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/06/2026-06-07.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/06/2026-06-07.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/06/2026-06-07.png">
+
+  <title>2026-06-07 – The Delegation Gap, API Cost Wins &amp; Opus 4.1 Sunset | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "The Delegation Gap, API Cost Wins &amp; Opus 4.1 Sunset",
+  "description": "June 7: Anthropic's 2026 Agentic Coding Trends Report names the delegation gap — devs use AI for 60% of work but fully delegate only 0–20% — plus the Opus 4.1 sunset timeline and two API cost improvements that deserve wider attention.",
+  "datePublished": "2026-06-07",
+  "dateModified": "2026-06-07",
+  "url": "https://claudebeat.ai/articles/2026/06/2026-06-07.html",
+  "image": "https://claudebeat.ai/articles/2026/06/2026-06-07.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/06/2026-06-07.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-06-07</span>
+      <span class="cat-badge cat-practice">✅ Best Practices</span>
+      <h1>The Delegation Gap, API Cost Wins &amp; Opus 4.1 Sunset</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-06-07.png" alt="The Delegation Gap, API Cost Wins &amp; Opus 4.1 Sunset — visual for 2026-06-07">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — The Delegation Gap: Eight Takeaways from Anthropic's 2026 Agentic Coding Trends Report
+     Source: https://resources.anthropic.com/2026-agentic-coding-trends-report
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✅</span> The Delegation Gap: Eight Takeaways from Anthropic's 2026 Agentic Coding Trends Report</h2>
+
+  <p>Anthropic published its <em>2026 Agentic Coding Trends Report</em>, a cross-industry study of how engineering teams are actually integrating Claude into daily work. The headline finding has a name now: the <strong>delegation gap</strong>. Developers report using AI assistance for roughly <strong>60% of their work time</strong>, yet they say they can fully delegate — meaning "hand it off and not supervise it" — only <strong>0–20% of tasks</strong>. That 40+ point gap is not a model capability problem; it is an organisational and task-decomposition problem. The report draws on case studies from Rakuten, CRED, TELUS, and Zapier, and identifies eight trends that are reshaping how software gets built.</p>
+
+  <h3>The eight trends in brief</h3>
+  <ul>
+    <li><strong>Shifting engineer roles:</strong> The highest-productivity teams have moved engineers from implementation to architecture decisions, agent coordination, and outcome verification. Writing code is no longer the primary activity.</li>
+    <li><strong>The delegation gap:</strong> Most teams have not redesigned tasks for AI delegation — they have layered AI onto existing task structures. The jump from AI-assisted to AI-delegated requires explicit task decomposition, not just better prompts.</li>
+    <li><strong>Multi-agent coordination:</strong> Single-agent workflows are hitting practical limits on complex tasks. Hierarchical orchestrator/worker architectures — one orchestrator planning and routing, specialist sub-agents executing — are now the dominant pattern for tasks exceeding roughly four hours of wall-clock time.</li>
+    <li><strong>Expanding task horizons:</strong> Task scope is growing from minutes (code snippet completion) to days and weeks (full feature branches, migrations, test suite overhauls). Long-running agents pause only at strategic human checkpoints.</li>
+    <li><strong>Net-new work unlocked:</strong> Approximately <strong>27% of AI-assisted work consists of tasks that would not have been done without AI</strong> — fixing papercuts, building internal dashboards, running experiments previously too marginal to justify. This is additive output, not just accelerated existing output.</li>
+    <li><strong>Non-technical teams building independently:</strong> Product, data, and operations teams are using Claude Code to build their own internal tools without engineering support, reducing the queue pressure on engineering while introducing new quality-assurance responsibilities.</li>
+    <li><strong>Human judgment as the permanent layer:</strong> The report explicitly rejects the "human in the loop as a transitional phase" framing. Human judgment on intent, constraints, and quality criteria is the load-bearing layer that makes agentic systems reliable — it does not disappear with better models.</li>
+    <li><strong>Cycle-time collapse:</strong> Teams that redesigned workflows around agentic handoffs report cycle-time reductions from weeks to hours on well-defined implementation tasks. The bottleneck has shifted from implementation throughput to intent clarity and evaluation quality.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Closing the delegation gap in your team</strong>
+    <p>The report's practical guidance is specific: before trying to delegate a task to Claude, decompose it until you can describe (1) the input state, (2) the acceptance criterion, and (3) the boundary conditions where Claude should pause and ask. Teams that documented these three things per task before assigning it to Claude reduced failed-delegation events by more than half in the TELUS and Zapier case studies.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://resources.anthropic.com/2026-agentic-coding-trends-report" class="source-link" target="_blank" rel="noopener">resources.anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">delegation gap</span>
+    <span class="tag">agentic coding</span>
+    <span class="tag">multi-agent</span>
+    <span class="tag">engineering productivity</span>
+    <span class="tag">task decomposition</span>
+    <span class="tag">trends report</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Opus 4.1 Deprecation: Migrate Before August 5
+     Source: https://platform.claude.com/docs/en/about-claude/model-deprecations
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✅</span> Claude Opus 4.1 Deprecation: What Developers Need to Do Before August 5</h2>
+
+  <p>Anthropic quietly added another model to the retirement queue: <strong>Claude Opus 4.1</strong> (<code>claude-opus-4-1-20250805</code>) is deprecated as of June 5, 2026, with full retirement from the API scheduled for <strong>August 5, 2026</strong>. Requests to the model will return an error after that date. The recommended migration target is <strong>Claude Opus 4.8</strong> (<code>claude-opus-4-8-20260528</code>). This is a quieter deprecation than the June 15 Sonnet 4 / Opus 4 base sunset — many teams running Opus 4.1 may not have seen it flagged yet.</p>
+
+  <h3>What differs between Opus 4.1 and Opus 4.8</h3>
+  <ul>
+    <li><strong>Context window:</strong> Opus 4.1 has a 200k context window. Opus 4.8 defaults to <strong>1M tokens</strong> on the first-party API, Amazon Bedrock, and Vertex AI — without a beta header.</li>
+    <li><strong>Extended thinking:</strong> Opus 4.8 uses 20–35% fewer thinking tokens for equivalent reasoning quality. If you are running budgeted thinking on Opus 4.1, review your <code>budget_tokens</code> ceiling after migrating — you may be over-allocating.</li>
+    <li><strong>Tool-call reliability:</strong> Opus 4.8's revised tool-call parser handles malformed JSON arguments more gracefully. Teams with complex multi-tool chains have reported a meaningful reduction in 400-class errors.</li>
+    <li><strong>API breaking changes:</strong> Setting <code>temperature</code>, <code>top_p</code>, or <code>top_k</code> to non-default values returns a 400 error on Opus 4.8 (same restriction as Opus 4.7). Audit any integrations that set sampling parameters explicitly before migrating.</li>
+    <li><strong>Pricing:</strong> Same $15 / $75 per MTok input/output pricing as Opus 4.1.</li>
+  </ul>
+
+  <pre><code># Migrate from Opus 4.1 to Opus 4.8:
+# Before:
+response = client.messages.create(
+    model="claude-opus-4-1-20250805",   # retires 2026-08-05
+    max_tokens=4096,
+    messages=[{"role": "user", "content": "..."}]
+)
+
+# After:
+response = client.messages.create(
+    model="claude-opus-4-8-20260528",   # current flagship
+    max_tokens=4096,
+    # Note: do NOT pass temperature/top_p/top_k — 400 error on 4.8
+    messages=[{"role": "user", "content": "..."}]
+)
+</code></pre>
+
+  <div class="callout warning">
+    <strong>Watch out for aliased model references</strong>
+    <p>If you are passing <code>"model": "claude-opus-4-1"</code> (without the date suffix), the alias currently resolves to <code>claude-opus-4-1-20250805</code>. On August 5, the alias will stop resolving. Prefer the full versioned model ID in production integrations so you control migration timing explicitly rather than discovering it via a 404 in production.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/about-claude/model-deprecations" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">model deprecation</span>
+    <span class="tag">Opus 4.1</span>
+    <span class="tag">Opus 4.8</span>
+    <span class="tag">API migration</span>
+    <span class="tag">August 2026</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Two API Changes With Outsized Impact: Zero-Cost Refusals & Capped Advisor Output
+     Source: https://platform.claude.com/docs/en/release-notes/overview
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✅</span> Two API Changes Worth Knowing: Zero-Cost Refusals and Capped Advisor Output</h2>
+
+  <p>Two API changes from the June 2 release notes have flown under the radar but have real cost and reliability implications for anyone building content-sensitive or multi-model agentic workflows on the Claude API.</p>
+
+  <h3>1. No charge when Claude refuses without generating output</h3>
+
+  <p>The Claude API will no longer bill you for a request that returns <code>stop_reason: "refusal"</code> <em>without Claude having generated any output tokens</em>. Previously, a hard refusal at the input boundary — triggered by a policy check before the model began generating — was still billed as a completed request. Now it isn't. This matters most for:</p>
+
+  <ul>
+    <li><strong>High-volume screening pipelines</strong> that route heterogeneous user input through Claude as a policy filter — a proportion of which will always trigger refusals. Those refusals were previously silent cost without output value.</li>
+    <li><strong>Agentic retry logic</strong> where a malformed or policy-violating tool call caused a refusal partway through a long session. The refusal itself was billed; now only turns that produce output are charged.</li>
+  </ul>
+
+  <pre><code>import anthropic
+
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-4-8-20260528",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "..."}]
+)
+
+if response.stop_reason == "refusal":
+    # No output tokens generated — this turn is not billed.
+    # response.content will be empty or contain only a refusal block.
+    # Check response.stop_details for category ("cyber", "bio", or None)
+    # and a human-readable explanation.
+    category = getattr(response, "stop_details", {}).get("category")
+    handle_refusal(category)
+</code></pre>
+
+  <h3>2. Capping advisor tool output to reduce latency and cost</h3>
+
+  <p>The <strong>advisor tool</strong> (launched in April, now in public beta) lets you pair a fast executor model with a high-intelligence advisor model that provides strategic mid-generation guidance. The new <code>max_tokens</code> parameter on the advisor tool definition caps how many tokens the advisor can emit per call. For workloads where you need the advisor's reasoning quality but not its full verbosity — plan validation, constraint checking, error routing — setting a tight cap (e.g., 256–512 tokens) can substantially reduce the per-turn latency and cost of the advisor call without meaningfully degrading the guidance quality.</p>
+
+  <pre><code>tools = [
+    {
+        "type": "advisor",
+        "model": "claude-opus-4-8-20260528",
+        "max_tokens": 512,   # cap advisor output per call
+        "system": "You are a senior architect. Review the executor's plan and flag only critical issues."
+    },
+    # ... executor tools ...
+]
+</code></pre>
+
+  <div class="callout tip">
+    <strong>Tuning the advisor cap</strong>
+    <p>Start with <code>max_tokens: 1024</code> and log the actual advisor token usage per call in your first production run. Most constraint-checking advisor calls use fewer than 400 tokens; only multi-step plan validation regularly exceeds 800. A cap of 512 covers 80–90% of calls without truncation for most agentic workloads, and halves the per-turn cost of the advisor on the remainder where it truncates.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/release-notes/overview" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">API cost</span>
+    <span class="tag">refusal billing</span>
+    <span class="tag">advisor tool</span>
+    <span class="tag">max_tokens</span>
+    <span class="tag">agentic pipelines</span>
+    <span class="tag">release notes</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

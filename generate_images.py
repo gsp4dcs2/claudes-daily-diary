@@ -9477,6 +9477,72 @@ def img_klee_20260607():
     return base
 
 
+def img_mondrian_20260608():
+    """Piet Mondrian grid — model values, alignment structure, API architecture."""
+    base = Image.new("RGB", (W, H), (242, 237, 220))
+
+    YELLOW = (255, 213, 0)
+    RED    = (215, 35, 35)
+    BLUE   = (25, 75, 195)
+    BLACK  = (18, 18, 18)
+
+    # Asymmetric grid — wider columns for the "architecture" feel
+    grid_x = [0, 80, 210, 370, 520, 680, 820, 950, 1070, 1160, W]
+    grid_y = [0, 60, 140, 250, 370, 460, 545, H]
+    bw = 16   # band width for grid lines
+
+    draw = ImageDraw.Draw(base)
+
+    # Yellow band highlights on specific columns — gives depth before black lines
+    for gx in [grid_x[2], grid_x[5], grid_x[8]]:
+        draw.rectangle([(gx - bw // 2, 0), (gx + bw // 2, H)], fill=YELLOW)
+    for gy in [grid_y[2], grid_y[5]]:
+        draw.rectangle([(0, gy - bw // 2), (W, gy + bw // 2)], fill=YELLOW)
+
+    # Filled cells — primary colours in deliberate pattern
+    inset = bw // 2 + 3
+    colored_cells = [
+        # (col_idx, row_idx, colour)
+        (0, 0, RED),
+        (1, 3, BLUE),
+        (3, 0, RED),
+        (5, 1, BLUE),
+        (4, 4, RED),
+        (7, 0, BLUE),
+        (6, 5, RED),
+        (9, 2, RED),
+        (8, 4, BLUE),
+        (2, 5, RED),
+        (0, 6, BLUE),
+    ]
+    for ci, ri, col in colored_cells:
+        if ci < len(grid_x) - 1 and ri < len(grid_y) - 1:
+            x0 = grid_x[ci] + inset
+            y0 = grid_y[ri] + inset
+            x1 = grid_x[ci + 1] - inset
+            y1 = grid_y[ri + 1] - inset
+            if x1 > x0 and y1 > y0:
+                draw.rectangle([(x0, y0), (x1, y1)], fill=col)
+
+    # Bold black grid lines
+    for gx in grid_x:
+        draw.line([(gx, 0), (gx, H)], fill=BLACK, width=3)
+    for gy in grid_y:
+        draw.line([(0, gy), (W, gy)], fill=BLACK, width=3)
+
+    # Small yellow squares at every intersection — alignment node markers
+    node_cycle = [YELLOW, RED, BLUE, (242, 237, 220), YELLOW, BLUE, RED]
+    ni = 0
+    for gx in grid_x[1:-1]:
+        for gy in grid_y[1:-1]:
+            col = node_cycle[ni % len(node_cycle)]
+            ni += 1
+            cx, cy = gx, gy
+            draw.rectangle([(cx - 5, cy - 5), (cx + 5, cy + 5)], fill=col)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -9667,6 +9733,7 @@ DAYS = [
     ("2026-06-05", img_marc_20260605,      "Safe Alignment",     "Franz Marc"),
     ("2026-06-06", img_kandinsky_20260606, "AI Builds Itself",   "Wassily Kandinsky"),
     ("2026-06-07", img_klee_20260607,      "Delegation Gap",     "Paul Klee"),
+    ("2026-06-08", img_mondrian_20260608,  "Model Values",       "Piet Mondrian"),
 ]
 
 for date, fn, kw, artist in DAYS:

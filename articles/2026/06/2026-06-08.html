@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="June 8: Anthropic's Model Spec Midtraining (MSM) cuts agentic misalignment from 68% to 5%; mid-conversation system messages let agents update instructions without breaking the prompt cache; and the new inference_geo API parameter gives enterprises per-request data residency control.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-06-08 – Model Spec Midtraining, Mid-Session Instructions &amp; Data Residency">
+  <meta property="og:description" content="June 8: Anthropic's Model Spec Midtraining (MSM) cuts agentic misalignment from 68% to 5%; mid-conversation system messages let agents update instructions without breaking the prompt cache; and the new inference_geo API parameter gives enterprises per-request data residency control.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/06/2026-06-08.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/06/2026-06-08.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/06/2026-06-08.png">
+
+  <title>2026-06-08 – Model Spec Midtraining, Mid-Session Instructions &amp; Data Residency | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Model Spec Midtraining, Mid-Session Instructions &amp; Data Residency",
+  "description": "June 8: Anthropic's Model Spec Midtraining (MSM) cuts agentic misalignment from 68% to 5%; mid-conversation system messages let agents update instructions without breaking the prompt cache; and the new inference_geo API parameter gives enterprises per-request data residency control.",
+  "datePublished": "2026-06-08",
+  "dateModified": "2026-06-08",
+  "url": "https://claudebeat.ai/articles/2026/06/2026-06-08.html",
+  "image": "https://claudebeat.ai/articles/2026/06/2026-06-08.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/06/2026-06-08.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-06-08</span>
+      <span class="cat-badge cat-practice">✅ Best Practices</span>
+      <h1>Model Spec Midtraining, Mid-Session Instructions &amp; Data Residency</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-06-08.png" alt="Model Spec Midtraining, Mid-Session Instructions &amp; Data Residency — visual for 2026-06-08">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Model Spec Midtraining: How Anthropic Bakes Values into Models Before Fine-Tuning
+     Source: https://alignment.anthropic.com/2026/msm/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✅</span> Model Spec Midtraining: How Anthropic Bakes Values into Models Before Fine-Tuning</h2>
+
+  <p>Anthropic's alignment team published a significant research result: <strong>Model Spec Midtraining (MSM)</strong>, a technique that inserts a training phase between pre-training and alignment fine-tuning in which the model reads large volumes of synthetic documents derived from the Model Spec. The headline number is striking — in one tested model, agentic misalignment rates fell from <strong>68% to 5%</strong> after MSM. Equally important for practitioners: MSM made subsequent alignment fine-tuning <strong>40–60× more token-efficient</strong>, meaning Anthropic can achieve the same alignment quality with far fewer supervised fine-tuning examples. The research also found that specs including value <em>explanations</em> — the "why" behind each rule — consistently outperform rule-only specifications in generalization to novel situations.</p>
+
+  <h3>Why this matters for teams building on Claude</h3>
+  <ul>
+    <li><strong>The insight generalises to your own prompts.</strong> The MSM finding that explanation outperforms rule-only is directly reproducible in system prompts. Telling Claude <em>why</em> a constraint exists — not just stating it — produces more consistent adherence, especially in long agentic chains where the rule might need to be interpreted in an unanticipated context.</li>
+    <li><strong>Agentic misalignment is a training-level problem, not just a prompting one.</strong> MSM is one layer of defence. The 5% residual misalignment rate is the baseline your guardrails and human-in-the-loop checkpoints need to handle — plan accordingly.</li>
+    <li><strong>Expect model-level alignment to compound over generations.</strong> As MSM becomes standard at Anthropic, each successive model generation starts from a stronger alignment baseline, reducing the "alignment tax" that previously made highly capable models harder to deploy safely.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Actionable: write your system prompts the MSM way</strong>
+    <p>Replace bare prohibitions with explained ones. Instead of <code>"Do not access external URLs."</code>, write <code>"Do not access external URLs — this agent runs in an air-gapped compliance environment where any outbound network call would trigger a security audit and halt the workflow."</code> The explanation gives Claude the context to generalise the constraint correctly when it encounters edge cases the rule didn't anticipate.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://alignment.anthropic.com/2026/msm/" class="source-link" target="_blank" rel="noopener">alignment.anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">alignment</span>
+    <span class="tag">model spec</span>
+    <span class="tag">MSM</span>
+    <span class="tag">midtraining</span>
+    <span class="tag">agentic safety</span>
+    <span class="tag">research</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Mid-Conversation System Messages: Dynamic Instruction Updates Without Cache Busting
+     Source: https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✅</span> Mid-Conversation System Messages: Dynamic Instruction Updates Without Cache Busting</h2>
+
+  <p>Launched alongside Opus 4.8 on May 28, <strong>mid-conversation system messages</strong> solve a practical problem that anyone building long-running agentic sessions has hit: needing to change Claude's instructions mid-session without invalidating the expensive prompt cache prefix. The Messages API now accepts <code>"role": "system"</code> entries anywhere in the conversation after the first user turn. Earlier turns remain byte-identical to their cached versions — cache hits are preserved even when instructions change. No beta header is required on Opus 4.8 or later.</p>
+
+  <h3>When to use mid-conversation system messages</h3>
+  <ul>
+    <li><strong>Phase transitions in long agentic pipelines.</strong> Move from a broad "exploration" mode to a strict "write only validated output" mode mid-session by injecting a system message at the phase boundary — without restarting the session and losing all prior context.</li>
+    <li><strong>Tool availability changes.</strong> When a subtask completes and certain tools should be disabled (e.g., a file-write tool that was valid only during the scaffolding phase), inject a system message revoking tool access rather than rebuilding the full conversation.</li>
+    <li><strong>Dynamic operator policy injection.</strong> Multi-tenant platforms can inject tenant-specific compliance instructions at the point where a user switches workspace context, without a full cache bust.</li>
+  </ul>
+
+  <pre><code>import anthropic
+
+client = anthropic.Anthropic()
+
+# Turn 1 — broad exploration instructions
+messages = [
+    {"role": "user", "content": "Analyse the repository structure and summarise what you find."}
+]
+
+response1 = client.messages.create(
+    model="claude-opus-4-8-20260528",
+    max_tokens=2048,
+    system="You are a senior code reviewer. Be thorough and exploratory.",
+    messages=messages
+)
+messages.append({"role": "assistant", "content": response1.content})
+
+# Inject mid-conversation system message — tighten scope for output phase
+# Earlier turns remain cache-eligible; only the new system message is uncached
+messages.append({
+    "role": "system",
+    "content": "PHASE CHANGE: You are now in report-writing mode. "
+               "Produce only structured findings. Do not explore further. "
+               "Every claim must cite a file path and line number."
+})
+
+messages.append({"role": "user", "content": "Write the final review report."})
+
+response2 = client.messages.create(
+    model="claude-opus-4-8-20260528",
+    max_tokens=4096,
+    system="You are a senior code reviewer. Be thorough and exploratory.",
+    messages=messages
+)
+</code></pre>
+
+  <div class="callout">
+    <strong>Placement rules</strong>
+    <p>A mid-conversation system message cannot be the first entry in <code>messages[]</code> — that position is reserved for <code>"role": "user"</code>. The top-level <code>system</code> parameter still sets the baseline; mid-conversation system messages <em>augment</em> it rather than replace it. Anthropic's documentation recommends using them for additive constraints, not contradictory rewrites — conflicting instructions between the base system prompt and a mid-conversation one will cause inconsistent behaviour.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">mid-conversation system messages</span>
+    <span class="tag">prompt caching</span>
+    <span class="tag">agentic sessions</span>
+    <span class="tag">Messages API</span>
+    <span class="tag">Opus 4.8</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Data Residency: Per-Request Inference Geography with inference_geo
+     Source: https://platform.claude.com/docs/en/manage-claude/data-residency
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✅</span> Data Residency Controls: Per-Request Inference Geography with <code>inference_geo</code></h2>
+
+  <p>Anthropic's Claude API now supports an <code>inference_geo</code> request parameter that lets operators control where model inference is routed on a per-request basis. The two supported values are <code>"us"</code> (US-only routing, priced at <strong>1.1× standard</strong> for models released after February 1, 2026) and <code>"global"</code> (standard pricing, default behaviour). Workspace-level defaults are also configurable in the console, making it easy to enforce a blanket policy without modifying every API call. This is a direct response to enterprise and regulated-industry customers who need documented compute-geography guarantees for data sovereignty, GDPR, and sector-specific compliance frameworks (HIPAA, FedRAMP, financial services regulations).</p>
+
+  <h3>Routing options and recommended paths by jurisdiction</h3>
+  <ul>
+    <li><strong>US-only via first-party API:</strong> Pass <code>"inference_geo": "us"</code>. All inference runs in Anthropic's US infrastructure. The 10% premium covers the capacity reservation required for guaranteed US-only routing.</li>
+    <li><strong>EU GDPR compliance:</strong> Route through <strong>AWS Bedrock EU</strong> or <strong>Vertex AI EU regional endpoints</strong> — both enforce EU-only compute and are fully contractually supported. Microsoft Foundry EU support is listed as "Coming 2026."</li>
+    <li><strong>Workspace default:</strong> Set in the Anthropic Console under Settings → Data Residency. Once set, all API calls from that workspace default to the chosen geography without requiring code changes in every integration.</li>
+  </ul>
+
+  <pre><code>import anthropic
+
+client = anthropic.Anthropic()
+
+# Enforce US-only inference for a compliance-sensitive request
+response = client.messages.create(
+    model="claude-opus-4-8-20260528",
+    max_tokens=1024,
+    inference_geo="us",          # US-only routing — 1.1× pricing
+    messages=[
+        {"role": "user", "content": "Summarise this patient intake form: ..."}
+    ]
+)
+
+# Check the response header to confirm where inference ran
+# X-Anthropic-Inference-Region: us-east-1
+print(response.model)   # confirms model used
+</code></pre>
+
+  <div class="callout warning">
+    <strong>What <code>inference_geo</code> does and does not cover</strong>
+    <p><code>inference_geo</code> controls where the <em>model inference</em> runs. Anthropic's standard data retention and zero-retention policy options (controllable via <code>X-Anthropic-No-Training</code>) govern whether prompt/completion data is stored — these are separate controls. For full data residency compliance, you typically need both: <code>inference_geo</code> for compute geography and a data-retention agreement for storage. Consult your legal team before treating <code>inference_geo</code> alone as sufficient for regulatory compliance.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/manage-claude/data-residency" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">data residency</span>
+    <span class="tag">inference_geo</span>
+    <span class="tag">GDPR</span>
+    <span class="tag">enterprise compliance</span>
+    <span class="tag">data sovereignty</span>
+    <span class="tag">API</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

@@ -9543,6 +9543,82 @@ def img_mondrian_20260608():
     return base
 
 
+def img_balla_20260609():
+    """Giacomo Balla Futurism — Apple WWDC integration, platform launch momentum."""
+    base = Image.new("RGB", (W, H), (8, 8, 16))
+
+    # Vanishing point at center-left, slightly above center
+    vp = (160, 290)
+
+    # 1. Radiating coloured planes from VP — Apple ecosystem + Anthropic coral
+    colours = [
+        (232, 115, 74, 200),  # coral — Anthropic
+        (90, 180, 255, 190),  # electric blue — Apple sky
+        (255, 215, 0, 180),   # gold — premium
+        (180, 255, 180, 160), # mint — iOS green
+        (200, 100, 255, 160), # purple — visionOS
+        (255, 80, 80, 140),   # red — Apple brand
+        (80, 200, 255, 140),  # cyan — watchOS
+        (255, 160, 60, 130),  # amber — momentum
+        (140, 200, 100, 120), # green — growth
+    ]
+    n = len(colours)
+    for i, col in enumerate(colours):
+        ang = i * (360 / n) - 30
+        rad  = math.radians(ang)
+        rad2 = math.radians(ang + 360 / n)
+        ex  = int(vp[0] + 1500 * math.cos(rad))
+        ey  = int(vp[1] + 1500 * math.sin(rad))
+        ex2 = int(vp[0] + 1500 * math.cos(rad2))
+        ey2 = int(vp[1] + 1500 * math.sin(rad2))
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        pd.polygon([vp, (ex, ey), (ex2, ey2)], fill=col)
+        base = comp(base, pl)
+
+    # 2. Concentric motion lines from VP — speed vectors
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    for i in range(32):
+        ang = i * (360 / 32)
+        rad = math.radians(ang)
+        lx = int(vp[0] + 1000 * math.cos(rad))
+        ly = int(vp[1] + 1000 * math.sin(rad))
+        ld.line([vp, (lx, ly)], fill=(255, 255, 255, 40), width=2)
+    base = comp(base, ll)
+
+    # 3. Bright flash at VP — launch burst
+    fl = layer()
+    fd = ImageDraw.Draw(fl)
+    for r, a in [(80, 240), (50, 200), (25, 220)]:
+        fd.ellipse([(vp[0]-r, vp[1]-r), (vp[0]+r, vp[1]+r)], fill=(255, 255, 255, a))
+    base = comp(base, fl)
+
+    # 4. Speed arc sweeps — platform expansion arcs
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    arc_cols = [(232, 115, 74, 120), (90, 180, 255, 100), (255, 215, 0, 90), (200, 100, 255, 80)]
+    for j, (r, ac) in enumerate(zip([180, 310, 460, 620], arc_cols)):
+        ad.arc([(vp[0]-r, vp[1]-r), (vp[0]+r, vp[1]+r)],
+               start=320, end=180, fill=ac, width=4)
+    base = comp(base, al)
+
+    # 5. Scatter of small bright dots — device nodes across the canvas
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    dot_cols = [(255, 255, 255), (232, 115, 74), (90, 180, 255), (255, 215, 0)]
+    for _ in range(60):
+        dx = rng.randint(300, W - 50)
+        dy = rng.randint(20, H - 20)
+        r  = rng.randint(3, 10)
+        dc = dot_cols[rng.randint(0, 3)]
+        a  = rng.randint(120, 220)
+        sd.ellipse([(dx-r, dy-r), (dx+r, dy+r)], fill=(*dc, a))
+    base = comp(base, sl)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -9734,6 +9810,7 @@ DAYS = [
     ("2026-06-06", img_kandinsky_20260606, "AI Builds Itself",   "Wassily Kandinsky"),
     ("2026-06-07", img_klee_20260607,      "Delegation Gap",     "Paul Klee"),
     ("2026-06-08", img_mondrian_20260608,  "Model Values",       "Piet Mondrian"),
+    ("2026-06-09", img_balla_20260609,    "WWDC Launch",        "Giacomo Balla"),
 ]
 
 for date, fn, kw, artist in DAYS:

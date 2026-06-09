@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="June 9: Claude joins Apple's Foundation Models framework at WWDC 2026, enabling Swift-native integration across iOS/macOS 27; LG CNS signs the largest single-org Claude Enterprise deal in Asia; and Anthropic drops the full session schedule ahead of Code with Claude Tokyo (June 10–11).">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-06-09 – Claude at WWDC, LG CNS Enterprise &amp; Tokyo Conference Eve">
+  <meta property="og:description" content="June 9: Claude joins Apple's Foundation Models framework at WWDC 2026, enabling Swift-native integration across iOS/macOS 27; LG CNS signs the largest single-org Claude Enterprise deal in Asia; and Anthropic drops the full session schedule ahead of Code with Claude Tokyo (June 10–11).">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/06/2026-06-09.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/06/2026-06-09.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/06/2026-06-09.png">
+
+  <title>2026-06-09 – Claude at WWDC, LG CNS Enterprise &amp; Tokyo Conference Eve | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude at WWDC, LG CNS Enterprise &amp; Tokyo Conference Eve",
+  "description": "June 9: Claude joins Apple's Foundation Models framework at WWDC 2026, enabling Swift-native integration across iOS/macOS 27; LG CNS signs the largest single-org Claude Enterprise deal in Asia; and Anthropic drops the full session schedule ahead of Code with Claude Tokyo (June 10–11).",
+  "datePublished": "2026-06-09",
+  "dateModified": "2026-06-09",
+  "url": "https://claudebeat.ai/articles/2026/06/2026-06-09.html",
+  "image": "https://claudebeat.ai/articles/2026/06/2026-06-09.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/06/2026-06-09.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-06-09</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Claude at WWDC, LG CNS Enterprise &amp; Tokyo Conference Eve</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-06-09.png" alt="Claude at WWDC, LG CNS Enterprise &amp; Tokyo Conference Eve — visual for 2026-06-09">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Joins Apple's Foundation Models Framework at WWDC 2026
+     Source: https://www.anthropic.com/news/claude-apple-foundation-models
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Joins Apple's Foundation Models Framework at WWDC 2026</h2>
+
+  <p>At WWDC 2026 (June 9–13, Cupertino), Apple and Anthropic jointly announced that <strong>Claude is now part of Apple's Foundation Models framework</strong> — the on-device AI infrastructure introduced with Apple Intelligence. Starting with iOS 27, iPadOS 27, macOS 27, visionOS 27, and watchOS 27 (available this autumn), developers can use a new Swift package to route tasks to Claude when they exceed what the on-device model can handle — including multi-step reasoning, code generation, web search, and code execution. Streaming responses are native to SwiftUI, so real-time Claude output in iOS and macOS apps requires no custom transport layer.</p>
+
+  <h3>How the framework integration works</h3>
+  <ul>
+    <li><strong>Automatic delegation:</strong> The Foundation Models framework decides whether a prompt stays on-device or routes to Claude based on task complexity and connectivity. Developers can also set explicit routing policies via the <code>InferenceTarget</code> API.</li>
+    <li><strong>Typed Swift outputs:</strong> Claude responses are decoded directly into Swift structs conforming to <code>Codable</code>, so the app receives structured data without manual JSON parsing.</li>
+    <li><strong>Operator control:</strong> Anthropic's operator system-prompt layer is preserved — app developers can pass a <code>systemPrompt</code> to configure Claude's persona, constraints, and response style.</li>
+    <li><strong>Private relay:</strong> Traffic between device and Claude API is routed through Apple's privacy relay infrastructure, so Anthropic does not see device identifiers or Apple account information.</li>
+  </ul>
+
+  <pre><code>import FoundationModels
+import Anthropic  // new Apple-distributed Swift package
+
+// Route a complex reasoning task to Claude automatically
+let session = LanguageModelSession(
+    model: .automatic,           // Foundation Models picks on-device or Claude
+    instructions: "You are a helpful coding assistant."
+)
+
+let response = try await session.respond(to: "Refactor this Swift function to use async/await: \(code)")
+print(response.content)
+
+// Force Claude explicitly for tasks that need internet reasoning
+let claudeSession = LanguageModelSession(
+    model: .claude,
+    instructions: "You are a senior Swift engineer."
+)
+for try await chunk in claudeSession.streamResponse(to: "Explain this crash log: \(log)") {
+    textView.append(chunk)  // native SwiftUI streaming
+}
+</code></pre>
+
+  <div class="callout tip">
+    <strong>What this means for existing Claude API users</strong>
+    <p>The Foundation Models Swift package is an additional distribution channel — it uses the same underlying Anthropic API and the same operator/user permission model. If you already have an Anthropic API key, you can use it with the Swift package directly during development. For App Store distribution, Apple handles the API routing transparently. Standard usage-based pricing applies; there is no Apple surcharge on Claude calls made through the framework.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/claude-apple-foundation-models" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Apple</span>
+    <span class="tag">WWDC 2026</span>
+    <span class="tag">Foundation Models</span>
+    <span class="tag">Swift</span>
+    <span class="tag">iOS 27</span>
+    <span class="tag">on-device AI</span>
+    <span class="tag">SwiftUI</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — LG CNS Signs Group-Wide Claude Enterprise Agreement
+     Source: https://www.koreaherald.com/article/10591842
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> LG CNS Signs Group-Wide Claude Enterprise Agreement — Asia's Largest Single-Org Deployment</h2>
+
+  <p>LG CNS — the IT-services arm of South Korea's LG Group, with roughly 7,000 employees and annual revenue above $2 billion — has signed a <strong>group-wide Claude Enterprise agreement with Anthropic</strong>, covering all LG affiliates from LG Electronics and LG Energy Solution to LG Display and LG Uplus. The deal, reported in the Korea Herald and Seoul Economic Daily, makes it one of the largest single-organisation Claude deployments in Asia to date. The agreement was timed to coincide with <em>Code with Claude Tokyo</em> (June 10–11), signalling Anthropic's commitment to the Asia-Pacific enterprise market.</p>
+
+  <h3>Planned use cases across LG affiliates</h3>
+  <ul>
+    <li><strong>Agentic software development:</strong> Claude Code running in LG CNS-managed sandboxes to accelerate internal software projects across the group — aligned with LG CNS's existing DevSecOps platform.</li>
+    <li><strong>AI agent creation for non-technical teams:</strong> Business units at LG affiliates will use Claude to build department-specific agents without needing to write code, using Claude's natural-language workflow tools.</li>
+    <li><strong>Long-document processing:</strong> Legal, compliance, and procurement contracts (often 200–500 pages) processed through Claude's 1M-token context window for summarisation, risk flagging, and cross-document comparison.</li>
+    <li><strong>Korean-language optimisation:</strong> Anthropic confirmed the enterprise agreement includes an SLA commitment on Korean-language quality, including formal register (존댓말 / <em>jondaemal</em>) fidelity in business correspondence drafts.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Why this signals a shift in Anthropic's enterprise strategy</strong>
+    <p>Previous major enterprise deals (Rakuten, Softbank, Samsung) were scoped to a single division or use case. The LG CNS agreement is structured as a <em>group-wide</em> deployment — meaning Anthropic is now competing for full-enterprise displacement contracts in the same tier as Microsoft Copilot and Google Workspace AI. The Korean market in particular has been historically dominated by hyperscaler deals; a native-LLM group agreement of this size is a leading indicator of where Anthropic's enterprise sales motion is heading in H2 2026.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://www.koreaherald.com/article/10591842" class="source-link" target="_blank" rel="noopener">koreaherald.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">LG CNS</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">Asia-Pacific</span>
+    <span class="tag">Korea</span>
+    <span class="tag">Claude Enterprise</span>
+    <span class="tag">group-wide deployment</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Code with Claude Tokyo: Full Schedule Released — What to Watch June 10–11
+     Source: https://www.anthropic.com/events/claude-tokyo-2026
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Code with Claude Tokyo: Full Schedule Released — What to Watch June 10–11</h2>
+
+  <p>With <em>Code with Claude Tokyo</em> opening at 09:00 JST tomorrow at the Tokyo International Forum, Anthropic has published the full two-day session schedule. The conference is Anthropic's first major developer event in Asia, and the lineup reflects the region's distinct priorities: strong enterprise integration tracks, Japanese-language model optimisation, and hands-on workshops targeted at iOS/Swift and Android/Kotlin developers now that Claude is embedded in Apple's Foundation Models framework. Remote attendance is free; all keynotes and selected sessions will be streamed live on anthropic.com.</p>
+
+  <h3>Highlighted sessions (selected)</h3>
+  <ul>
+    <li><strong>Opening keynote — Dario Amodei:</strong> Live demos of Claude Code running agentic workflows at enterprise scale, followed by a Q&amp;A segment. June 10, 09:15 JST.</li>
+    <li><strong>"Scaling Agentic Workflows at Enterprise" panel:</strong> Practitioners from LG CNS, Rakuten, and Softbank share what's working and what isn't in large-scale Claude deployments. June 10, 11:00 JST.</li>
+    <li><strong>"Claude for Japanese Business Writing" session:</strong> Deep dive on formal register, keigo accuracy, and document-formatting norms — with benchmark comparisons between Claude Opus 4.8 and competing models on Japanese business prose. June 10, 14:00 JST.</li>
+    <li><strong>MCP Server Workshop:</strong> Build and deploy a private MCP server — accessible only to your organisation's Claude agents — in 90 minutes. Limited to 80 in-person attendees; materials open-sourced on GitHub. June 10, 15:30 JST.</li>
+    <li><strong>"Mobile AI with Claude" (iOS/Android):</strong> Hands-on session covering the Foundation Models Swift package integration and the new Android AI Core bindings. June 11, 10:00 JST.</li>
+    <li><strong>Closing keynote — research preview:</strong> Anthropic researchers will share a preview of upcoming model capabilities targeted at Asia-Pacific use cases. Details embargoed until broadcast. June 11, 16:00 JST.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>How to follow along remotely</strong>
+    <p>All keynotes and the enterprise panel stream live at <code>anthropic.com/events/claude-tokyo-2026</code>. Session recordings are posted within 48 hours. Workshop notebooks and MCP server templates will be published to <code>github.com/anthropics/cc-tokyo-2026</code> at the start of each session — you can follow along in your own environment without being in Tokyo. The Japanese-language session will have live English subtitles.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/events/claude-tokyo-2026" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Code with Claude Tokyo</span>
+    <span class="tag">developer conference</span>
+    <span class="tag">Asia-Pacific</span>
+    <span class="tag">workshops</span>
+    <span class="tag">MCP</span>
+    <span class="tag">Japanese language</span>
+    <span class="tag">mobile</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

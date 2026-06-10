@@ -9619,6 +9619,76 @@ def img_balla_20260609():
     return base
 
 
+def img_rothko_20260610():
+    """Mark Rothko colour field — Claude Fable 5 launch, Mythos-class depth, long-horizon autonomy."""
+    # Near-black base — the gravity of a new capability tier
+    base = Image.new("RGB", (W, H), (8, 6, 18))
+
+    def soft_band(img, y0, y1, colour, feather=68):
+        """Soft-edged Rothko band with luminous haze."""
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        r, g, b = colour
+        bd.rectangle([(55, y0 + feather), (W - 55, y1 - feather)], fill=(r, g, b, 215))
+        for i in range(feather):
+            alpha = int(188 * (i / feather))
+            bd.rectangle([(55 + i, y0 + i), (W - 55 - i, y0 + i + 1)], fill=(r, g, b, alpha))
+        for i in range(feather):
+            alpha = int(188 * ((feather - i) / feather))
+            bd.rectangle([(55 + i, y1 - i - 1), (W - 55 - i, y1 - i)], fill=(r, g, b, alpha))
+        return comp(img, bl)
+
+    # Top band — deep crimson: the Mythos-class frontier, Fable 5 capability ceiling
+    base = soft_band(base, 12, 200, (148, 18, 42), feather=58)
+
+    # Middle band — luminous amber-gold (widest): long-horizon autonomy, the main breakthrough
+    base = soft_band(base, 178, 440, (210, 148, 28), feather=82)
+
+    # Bottom band — cobalt-indigo: infrastructure depth, Glasswing Mythos 5, Project depth
+    base = soft_band(base, 415, 618, (28, 52, 148), feather=65)
+
+    # Luminous inner glow on gold band — the Fable 5 radiance
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for i in range(48):
+        alpha = int(72 * (1 - i / 48))
+        gd.rectangle([(170 + i, 272 + i), (W - 170 - i, 388 - i)], fill=(255, 210, 60, alpha))
+    base = comp(base, gl)
+
+    # Warm bloom centred on gold band — long-horizon luminance halo
+    bl2 = layer()
+    bd2 = ImageDraw.Draw(bl2)
+    for i in range(100):
+        alpha = int(38 * (1 - i / 100))
+        bd2.ellipse([(W//2 - 340 - i*2, 188 - i), (W//2 + 340 + i*2, 448 + i)],
+                    fill=(240, 185, 40, alpha))
+    base = comp(base, bl2)
+
+    # Edge lines between bands — Rothko's characteristic luminous boundaries
+    el = layer()
+    ed = ImageDraw.Draw(el)
+    # Crimson / gold boundary — capability threshold shimmer
+    for i in range(22):
+        alpha = int(110 * (1 - i / 22))
+        ed.rectangle([(55 + i, 190 - i), (W - 55 - i, 192 + i)], fill=(220, 120, 80, alpha))
+    # Gold / indigo boundary — depth transition
+    for i in range(22):
+        alpha = int(100 * (1 - i / 22))
+        ed.rectangle([(55 + i, 426 - i), (W - 55 - i, 428 + i)], fill=(180, 155, 90, alpha))
+    base = comp(base, el)
+
+    # Subtle vertical shimmer — the monumental quality of the new tier
+    sv = layer()
+    svd = ImageDraw.Draw(sv)
+    for i in range(55):
+        alpha = int(14 * (1 - i / 55))
+        svd.rectangle([(W//2 - 8 - i*5, 25), (W//2 + 8 + i*5, H - 25)],
+                      fill=(230, 200, 160, alpha))
+    base = comp(base, sv)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -9811,6 +9881,7 @@ DAYS = [
     ("2026-06-07", img_klee_20260607,      "Delegation Gap",     "Paul Klee"),
     ("2026-06-08", img_mondrian_20260608,  "Model Values",       "Piet Mondrian"),
     ("2026-06-09", img_balla_20260609,    "WWDC Launch",        "Giacomo Balla"),
+    ("2026-06-10", img_rothko_20260610,   "Fable Launch",       "Mark Rothko"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="June 11: Tokyo Day 2 Extended wraps with Anthropic's internal 'How We Claude Code' practices revealed live; Dario Amodei publishes a landmark two-framework AI policy paper; and Managed Agents gains cron scheduling and credential vaults in public beta.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-06-11 – Tokyo Day 2, Dario's AI Policy Paper &amp; Managed Agents Scheduling">
+  <meta property="og:description" content="June 11: Tokyo Day 2 Extended wraps with Anthropic's internal 'How We Claude Code' practices revealed live; Dario Amodei publishes a landmark two-framework AI policy paper; and Managed Agents gains cron scheduling and credential vaults in public beta.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/06/2026-06-11.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/06/2026-06-11.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/06/2026-06-11.png">
+
+  <title>2026-06-11 – Tokyo Day 2, Dario's AI Policy Paper &amp; Managed Agents Scheduling | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Tokyo Day 2, Dario's AI Policy Paper &amp; Managed Agents Scheduling",
+  "description": "June 11: Tokyo Day 2 Extended wraps with Anthropic's internal 'How We Claude Code' practices revealed live; Dario Amodei publishes a landmark two-framework AI policy paper; and Managed Agents gains cron scheduling and credential vaults in public beta.",
+  "datePublished": "2026-06-11",
+  "dateModified": "2026-06-11",
+  "url": "https://claudebeat.ai/articles/2026/06/2026-06-11.html",
+  "image": "https://claudebeat.ai/articles/2026/06/2026-06-11.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/06/2026-06-11.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-06-11</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Tokyo Day 2, Dario's AI Policy Paper &amp; Managed Agents Scheduling</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-06-11.png" alt="Tokyo Day 2, Dario's AI Policy Paper &amp; Managed Agents Scheduling — visual for 2026-06-11">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Code with Claude Tokyo Day 2: "How We Claude Code" Workshop Reveals Anthropic's Internal Practices
+     Source: https://claude.com/code-with-claude/tokyo-extended
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> "How We Claude Code" — Anthropic Engineers Share Internal Practices at Tokyo Day 2</h2>
+
+  <p>Day 2 of Code with Claude Tokyo (the "Extended" builder-focused day, capped at 200 independent developers and early-stage founders) closed with the most concretely actionable session of the entire conference: a 45-minute live workshop by Anthropic Member of Technical Staff <strong>Jason Schwartz</strong> titled <em>"How We Claude Code"</em>. Schwartz walked through the exact project-context setup, custom-command library, hook configuration, and sub-agent patterns that Anthropic's own engineers use daily. Before-and-after demos showed identical tasks run against a stock Claude Code install versus a tuned configuration — the latter consistently completed tasks with fewer clarification turns and lower token consumption.</p>
+
+  <h3>The five-layer internal setup</h3>
+  <ul>
+    <li><strong>CLAUDE.md hierarchy:</strong> Anthropic teams maintain three levels — repo-root (architecture, conventions, never-do rules), package-level (component-specific context), and session-level injected via <code>--append-system</code>. The outer two are checked in; the session level is ephemeral.</li>
+    <li><strong>Custom commands library:</strong> A shared <code>.claude/commands/</code> repo (internal, not open-sourced yet) with ~60 slash commands for common tasks: <code>/migrate-schema</code>, <code>/review-pr-readiness</code>, <code>/generate-tests</code>, <code>/update-changelog</code>. Each command embeds its own quality criteria so Claude doesn't need to be re-instructed each run.</li>
+    <li><strong>Pre-tool-use hooks:</strong> A lightweight shell hook validates that any <code>Bash</code> command touching <code>migrations/</code> or <code>infra/</code> directories requires an explicit <code>APPROVED=1</code> env var — a zero-friction safety rail that doesn't interrupt normal development flow.</li>
+    <li><strong>Sub-agent patterns for long tasks:</strong> For multi-hour coding tasks, Anthropic engineers spawn a "planning agent" first (lightweight, fast model) to decompose the task and write a <code>.plan.md</code> file, then invoke the main Claude Code session with that plan pre-loaded. This consistently reduces wasted effort from misunderstood scope.</li>
+    <li><strong>Failure retrospective logging:</strong> A post-session hook appends a brief structured log (<code>{task, duration, tokens, success: bool, failure_mode}</code>) to a local SQLite file. Engineers review these weekly to identify which task types need better CLAUDE.md guidance.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>The most transferable insight from the session</strong>
+    <p>Schwartz's clearest piece of advice: treat your <code>CLAUDE.md</code> like a senior engineer's onboarding doc, not a list of rules. It should explain <em>why</em> conventions exist (e.g. "we use explicit transaction labels in migrations because a silent rollback cost us 3 hours in January") — not just <em>what</em> they are. Claude uses the "why" to generalise the constraint correctly to novel situations; a bare rule list often gets applied too literally or too loosely.</p>
+  </div>
+
+  <p>Day 2's Boris Cherny opening keynote also formally announced that the <code>cc-tokyo-2026</code> GitHub repo (all workshop materials from both days) will be released publicly within 72 hours of the conference close, under an Apache 2.0 licence.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://claude.com/code-with-claude/tokyo-extended" class="source-link" target="_blank" rel="noopener">claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Code with Claude Tokyo</span>
+    <span class="tag">CLAUDE.md</span>
+    <span class="tag">custom commands</span>
+    <span class="tag">hooks</span>
+    <span class="tag">sub-agents</span>
+    <span class="tag">internal practices</span>
+    <span class="tag">developer conference</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Dario Amodei Publishes "Policy on the AI Exponential"
+     Source: https://www.anthropic.com/policy-on-the-ai-exponential
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Dario Amodei Publishes "Policy on the AI Exponential" — Two Governance Frameworks for the Decade Ahead</h2>
+
+  <p>Published on Anthropic's website today, <strong>"Policy on the AI Exponential"</strong> is Dario Amodei's most detailed public policy statement to date. The paper argues that AI progress is now moving faster than existing regulatory frameworks were designed to handle, and proposes two concrete governance structures: an <strong>Advanced AI Framework</strong> targeting safety and deployment oversight, and an <strong>Economic Policy Framework</strong> addressing labour-market disruption. The paper is careful to present both as inputs to a policy conversation rather than finished proposals.</p>
+
+  <h3>Advanced AI Framework — key provisions</h3>
+  <ul>
+    <li><strong>Scope:</strong> Applies to models trained with more than 10²⁵ FLOPs, from organisations earning more than $500M in AI revenue or spending more than $1B on AI R&amp;D annually.</li>
+    <li><strong>Mandatory transparency:</strong> Covered developers must file pre-deployment evaluation reports with a designated oversight body, covering four risk categories — biological weapons uplift, cyber vulnerability exploitation, loss-of-control risk, and other emerging severe risks.</li>
+    <li><strong>Government deployment authority:</strong> The framework proposes that a government body should have legal standing to delay or block a deployment if independent evaluations surface a category-one risk above a defined threshold.</li>
+    <li><strong>Civil penalties:</strong> Non-compliance with transparency obligations carries graduated civil penalties; criminal penalties are proposed only for deliberate concealment of evaluation findings.</li>
+  </ul>
+
+  <h3>Economic Policy Framework — graduated response tiers</h3>
+  <ul>
+    <li><strong>5% displacement tier:</strong> Expanded worker retraining grants, portable benefits pilots, and an AI economic monitoring index required of large employers.</li>
+    <li><strong>10% displacement tier:</strong> Extended unemployment insurance duration (to 24 months), mandatory transition counselling, and sector-specific adjustment funds modelled on trade adjustment assistance.</li>
+    <li><strong>"Unprecedented" tier:</strong> The paper describes, without fully endorsing, a basic-income or sovereign-wealth-fund approach funded by productivity gains; Amodei calls this a "contingency framework that should be designed now, before it is needed."</li>
+  </ul>
+
+  <div class="callout">
+    <strong>What this means for Anthropic's developer community</strong>
+    <p>The paper has no immediate product impact — it is a policy document, not an API announcement. But the scope thresholds (10²⁵ FLOPs, $500M revenue) are calibrated to apply to Anthropic itself, not just future hypothetical developers. Amodei is, in effect, publicly inviting regulatory scrutiny of Anthropic's own models. Developers building on Claude should watch for downstream compliance obligations if their jurisdiction adopts similar frameworks — particularly mandatory pre-deployment evaluation disclosures for enterprise deployments.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/policy-on-the-ai-exponential" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">AI policy</span>
+    <span class="tag">governance</span>
+    <span class="tag">Dario Amodei</span>
+    <span class="tag">Advanced AI Framework</span>
+    <span class="tag">economic policy</span>
+    <span class="tag">deployment oversight</span>
+    <span class="tag">safety</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Managed Agents Gains Cron Scheduling and Credential Vaults in Public Beta
+     Source: https://platform.claude.com/docs/en/release-notes/overview
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Managed Agents Gains Cron Scheduling and Credential Vaults in Public Beta</h2>
+
+  <p>Anthropic's Claude Platform release notes (updated today) confirm two long-requested features for <strong>Claude Managed Agents</strong> have reached public beta: <strong>scheduled deployments</strong> (attach a cron expression directly to an agent; it fires on schedule with no external trigger infrastructure) and <strong>environment-variable credential vaults</strong> (securely inject secrets into the agent sandbox so CLIs and SDKs that authenticate via env vars work without hard-coding keys). Both features are available on all Claude Platform paid plans at no additional charge beyond standard usage costs.</p>
+
+  <h3>Cron scheduling — how it works</h3>
+  <p>In the platform dashboard or via API, attach a cron schedule to any deployed agent:</p>
+  <pre><code>POST /v1/managed-agents/{agent_id}/schedule
+{
+  "cron": "0 7 * * *",          // 07:00 UTC daily
+  "timezone": "Asia/Tokyo",
+  "enabled": true,
+  "max_session_duration_seconds": 3600
+}</code></pre>
+  <p>At each trigger, the platform starts a fresh agent session, runs it to completion (or timeout), and emits a <code>session.completed</code> or <code>session.failed</code> webhook event. The webhook payload now includes a <code>session_thread_id</code> field for cross-referencing logs.</p>
+
+  <h3>Credential vaults — key details</h3>
+  <ul>
+    <li>Secrets are encrypted at rest with AES-256 and injected as environment variables at session start — they are never written to disk or logged.</li>
+    <li>Vault entries are scoped per-agent; an agent cannot read secrets from another agent's vault even within the same organisation.</li>
+    <li>Supports up to 50 key-value pairs per agent; values up to 8 KB each (covers most API keys, tokens, and connection strings).</li>
+    <li>Vault contents are not visible after write — read-access is write-only from the dashboard (you can overwrite or delete, not retrieve plaintext).</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>The two blockers this clears</strong>
+    <p>Enterprise pilots of autonomous agents have historically stalled on two questions: "who triggers the agent when no human is at a keyboard?" and "how does it authenticate without leaking credentials into prompts or logs?" Cron scheduling and credential vaults address both. For teams already using Managed Agents for daily reporting, data-pipeline monitoring, or overnight research tasks, migrating from an external cron + secrets-manager stack to native platform features reduces operational surface area significantly.</p>
+  </div>
+
+  <p>Also noted in today's release notes: Claude Code v2.1.172 (shipping alongside these platform changes) adds support for <strong>nested sub-agents up to 5 levels deep</strong> and introduces <strong>marketplace plugin search</strong> — a new <code>/plugins search {query}</code> command that scans the Claude plugin registry without leaving the terminal.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/release-notes/overview" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Managed Agents</span>
+    <span class="tag">cron scheduling</span>
+    <span class="tag">credential vaults</span>
+    <span class="tag">public beta</span>
+    <span class="tag">Claude Code v2.1.172</span>
+    <span class="tag">sub-agents</span>
+    <span class="tag">plugin marketplace</span>
+    <span class="tag">automation</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

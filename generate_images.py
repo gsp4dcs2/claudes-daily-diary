@@ -9689,6 +9689,66 @@ def img_rothko_20260610():
     return base
 
 
+def img_lissitzky_20260611():
+    """El Lissitzky Constructivism — Tokyo Day 2 builders, policy frameworks, cron scheduling."""
+    base = Image.new("RGB", (W, H), (243, 240, 228))  # warm cream bg
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Bold red diagonal wedge from upper-left — builders' momentum
+    draw.polygon([(0, 0), (560, 0), (400, H), (0, H)], fill=(202, 22, 22))
+
+    # 2. Thin black horizontal rule dividing upper and lower cream zones
+    draw.rectangle([(560, 210), (W, 218)], fill=(12, 10, 8))
+
+    # 3. Bold black vertical pillar — right anchor, structural platform
+    draw.rectangle([(720, 0), (778, H)], fill=(12, 10, 8))
+
+    # 4. Red circle focal point — upper right (policy / governance node)
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    cd.ellipse([(860, 55), (1110, 305)], fill=(202, 22, 22, 230))
+    cd.ellipse([(910, 105), (1060, 255)], fill=(243, 240, 228, 210))  # cream cutout
+    base = comp(base, cl)
+
+    # 5. Parallel thin red lines radiating from pillar rightward — scheduling grid
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    for i in range(6):
+        y_pos = 260 + i * 48
+        ld.line([(778, y_pos), (W - 20, y_pos + i * 10)],
+                fill=(202, 22, 22, max(25, 110 - i * 16)), width=2)
+    base = comp(base, ll)
+
+    # 6. Black framed square — lower left Constructivist logo element
+    sq = layer()
+    sqd = ImageDraw.Draw(sq)
+    sqd.rectangle([(48, 420), (230, 580)], fill=(12, 10, 8, 255))
+    sqd.rectangle([(76, 448), (202, 552)], fill=(243, 240, 228, 255))
+    base = comp(base, sq)
+
+    # 7. Scattered small black marker bars — cron schedule ticks / data points
+    tick_coords = [
+        (620, 80, 48, 8), (640, 115, 38, 7), (598, 148, 52, 8),
+        (625, 180, 42, 7), (610, 50, 36, 6),
+        (820, 340, 44, 8), (860, 370, 30, 6), (835, 400, 50, 8),
+        (870, 430, 34, 7), (815, 460, 46, 8),
+    ]
+    for tx, ty, tw, th in tick_coords:
+        tl = layer()
+        td = ImageDraw.Draw(tl)
+        td.rectangle([(tx, ty), (tx + tw, ty + th)], fill=(12, 10, 8, 200))
+        base = comp(base, tl)
+
+    # 8. Thin coral accent line — brand energy across the composition
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    ad.rectangle([(560, 0), (565, 210)], fill=(232, 115, 74, 200))
+    base = comp(base, al)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -9882,6 +9942,7 @@ DAYS = [
     ("2026-06-08", img_mondrian_20260608,  "Model Values",       "Piet Mondrian"),
     ("2026-06-09", img_balla_20260609,    "WWDC Launch",        "Giacomo Balla"),
     ("2026-06-10", img_rothko_20260610,   "Fable Launch",       "Mark Rothko"),
+    ("2026-06-11", img_lissitzky_20260611, "Builder Day 2",     "El Lissitzky"),
 ]
 
 for date, fn, kw, artist in DAYS:

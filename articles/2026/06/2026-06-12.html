@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="June 12: Anthropic launches $150M Claude Corps fellowship placing 1,000 early-career fellows at US nonprofits; cwc-workshops GitHub repo open-sourced with all Tokyo conference materials; and Claude Code's safe mode and fallback model chains make production agents more resilient.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-06-12 – Claude Corps Fellowship, Tokyo Workshop Repo &amp; Safe-Mode Debugging">
+  <meta property="og:description" content="June 12: Anthropic launches $150M Claude Corps fellowship placing 1,000 early-career fellows at US nonprofits; cwc-workshops GitHub repo open-sourced with all Tokyo conference materials; and Claude Code's safe mode and fallback model chains make production agents more resilient.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/06/2026-06-12.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/06/2026-06-12.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/06/2026-06-12.png">
+
+  <title>2026-06-12 – Claude Corps Fellowship, Tokyo Workshop Repo &amp; Safe-Mode Debugging | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Corps Fellowship, Tokyo Workshop Repo &amp; Safe-Mode Debugging",
+  "description": "June 12: Anthropic launches $150M Claude Corps fellowship placing 1,000 early-career fellows at US nonprofits; cwc-workshops GitHub repo open-sourced with all Tokyo conference materials; and Claude Code's safe mode and fallback model chains make production agents more resilient.",
+  "datePublished": "2026-06-12",
+  "dateModified": "2026-06-12",
+  "url": "https://claudebeat.ai/articles/2026/06/2026-06-12.html",
+  "image": "https://claudebeat.ai/articles/2026/06/2026-06-12.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/06/2026-06-12.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-06-12</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Claude Corps Fellowship, Tokyo Workshop Repo &amp; Safe-Mode Debugging</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-06-12.png" alt="Claude Corps Fellowship, Tokyo Workshop Repo &amp; Safe-Mode Debugging — visual for 2026-06-12">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Anthropic Launches $150M Claude Corps Fellowship
+     Source: https://www.washingtonpost.com/business/2026/06/11/anthropic-ai-claude-corps-daniela-amodei/d11fd0a0-6595-11f1-bdd4-805ebb99a693_story.html
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Anthropic Launches $150M Claude Corps Fellowship to Embed AI in US Nonprofits</h2>
+
+  <p>Anthropic has committed <strong>$150 million</strong> to launch <strong>Claude Corps</strong>, a national fellowship that will place 1,000 early-career professionals inside U.S. nonprofits for 12-month paid placements starting October 2026. Led by President <strong>Daniela Amodei</strong>, the programme is structured around three partners: Anthropic funds and designs the curriculum, <strong>CodePath</strong> recruits, trains, and employs the fellows, and <strong>Social Finance</strong> handles measurement and administers $10,000 host grants. Announced publicly on June 11 with broad press coverage today, Claude Corps represents Anthropic's most tangible acknowledgement yet that AI-driven labour displacement is real — and that it has a direct responsibility to respond.</p>
+
+  <h3>Who can apply and what fellows do</h3>
+  <ul>
+    <li><strong>Eligibility:</strong> Anyone over 18 with fewer than two years of full-time work experience, authorised to work in the US, comfortable using Claude, and willing to relocate to a host city if required. No degree requirement.</li>
+    <li><strong>Compensation:</strong> $85,000 annual salary plus benefits, paid by CodePath (not the host nonprofit).</li>
+    <li><strong>Cohort schedule:</strong> Cohort 1 — 100 fellows starting October 19, 2026; Cohort 2 — ~450 fellows in January 2027; Cohort 3 — ~450 fellows in August 2027.</li>
+    <li><strong>Applications close:</strong> July 17, 2026 for Cohort 1.</li>
+    <li><strong>Host support:</strong> Each of the ~400 participating nonprofits receives a $10,000 grant and free Claude credits for the duration of the placement.</li>
+  </ul>
+
+  <h3>What fellows actually build</h3>
+  <p>Fellows are not generic "AI helpers" — each placement has a defined scope. Published examples from early host partners include: building a multilingual case-intake Claude workflow for a legal-aid organisation; creating a grant-writing assistant for a community-health network; and automating donor-reporting pipelines for a conservation nonprofit. CodePath's training curriculum covers prompt engineering, CLAUDE.md configuration, MCP connector setup, and basic agentic workflow design — exactly the skills a non-technical nonprofit staffer needs to become a competent Claude deployer.</p>
+
+  <div class="callout">
+    <strong>The subtext in the programme design</strong>
+    <p>Dario Amodei's <em>"Policy on the AI Exponential"</em> paper (published June 11 alongside this announcement) explicitly describes a 5% labour-displacement tier that triggers "expanded worker retraining grants." Claude Corps is, in effect, Anthropic voluntarily running that programme before any government requires it — and building the operational muscle for a response that scales. For developers thinking about the long arc of where Anthropic is headed, the combination of the policy paper and Claude Corps on the same day is not a coincidence.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://www.washingtonpost.com/business/2026/06/11/anthropic-ai-claude-corps-daniela-amodei/d11fd0a0-6595-11f1-bdd4-805ebb99a693_story.html" class="source-link" target="_blank" rel="noopener">washingtonpost.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Corps</span>
+    <span class="tag">fellowship</span>
+    <span class="tag">nonprofits</span>
+    <span class="tag">Daniela Amodei</span>
+    <span class="tag">CodePath</span>
+    <span class="tag">labour displacement</span>
+    <span class="tag">AI policy</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — cwc-workshops GitHub Repo Open-Sourced
+     Source: https://github.com/anthropics/cwc-workshops
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Code with Claude Tokyo Workshop Materials Now Open-Source at anthropics/cwc-workshops</h2>
+
+  <p>As promised during the Tokyo closing keynote, Anthropic has published all Code with Claude 2026 workshop materials in the <strong><code>anthropics/cwc-workshops</code></strong> GitHub repository under an Apache 2.0 licence. The repo covers every hands-on session from the San Francisco, London, and Tokyo stops of the conference — five complete workshop packages, each with a problem statement, starter code, worked solution, and a skill or MCP server you can drop straight into your own Claude Code setup.</p>
+
+  <h3>What's in the repository</h3>
+  <ul>
+    <li><strong>rightmodel/</strong> — <em>Picking the Right Model:</em> a Claude Code SKILL that audits an existing LLM eval suite, sweeps it across models and inference parameters, and outputs a cost/quality trade-off table. Immediately useful for teams deciding when to use Fable 5 vs Opus 4.8 vs Sonnet 4.6.</li>
+    <li><strong>agent-decomposition/</strong> — <em>Compose Multi-Agent Systems with Skills and MCP:</em> deconstructs a 400-line monolithic agent prompt into modular skills + a code-execution tool + callable sub-agents on Claude Managed Agents. Demonstrates the "why" behind decomposition with before/after token and error-rate data.</li>
+    <li><strong>how-we-claude-code/</strong> — <em>How We Claude Code:</em> the written companion to Jason Schwartz's Tokyo Day 2 session. Three-phase walkthrough — CLAUDE.md setup, custom command library bootstrapping, and session-level hook configuration — with annotated examples from Anthropic's internal engineering practice.</li>
+    <li><strong>ship-your-first-managed-agent/</strong> — <em>Ship Your First Managed Agent:</em> an end-to-end Streamlit incident-dashboard with an offline SRE Agent chat panel. Good reference for teams adding agent chat to an existing web app without rebuilding the UI from scratch.</li>
+    <li><strong>agent-battle/</strong> — <em>Agent Battle:</em> the 45-minute competition format used at all three conference stops. A self-contained benchmark scenario you can use to evaluate competing agent configurations on a fixed task.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>The most copy-pasteable artefact: rightmodel/</strong>
+    <p>The <code>rightmodel</code> workshop ships a complete SKILL file that you can add to any Claude Code project in under five minutes. Running <code>/rightmodel</code> against your eval suite gives you a CSV with per-task costs, latency percentiles, and pass rates across every model you specify. Teams that have been manually checking "is Opus really worth it for this task?" now have an automatable answer.</p>
+  </div>
+
+  <p>The repository also includes the slide decks (PDF) and speaker notes for each session. All workshop code targets Claude Code v2.1.170+ and the Managed Agents API as of June 2026; both the <code>CLAUDE.md</code> in each sub-directory and the top-level <code>README</code> flag any version dependencies.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/cwc-workshops" class="source-link" target="_blank" rel="noopener">github.com/anthropics</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">cwc-workshops</span>
+    <span class="tag">Code with Claude Tokyo</span>
+    <span class="tag">open source</span>
+    <span class="tag">Apache 2.0</span>
+    <span class="tag">Claude Code skills</span>
+    <span class="tag">Managed Agents</span>
+    <span class="tag">workshop materials</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude Code Safe Mode & Fallback Model Chains
+     Source: https://www.digitalapplied.com/blog/claude-code-safe-mode-fallback-models-production-resilience-guide
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code Gets Safe Mode and Fallback Model Chains — Two Features Every Production Team Needs</h2>
+
+  <p>Claude Code versions <strong>2.1.166–2.1.169</strong> (shipped June 6–8) introduced two features that quietly solve the most common pain points teams hit when running Claude Code unattended: a <code>--safe-mode</code> flag that isolates configuration problems during debugging, and <strong>fallback model chains</strong> that keep a production pipeline alive through a transient model overload. Neither feature was headlined at the Tokyo conference, but both are worth understanding before you deploy agents into CI or background worker contexts.</p>
+
+  <h3>Safe mode — turning "is it my config?" into a one-flag answer</h3>
+  <p>Starting a Claude Code session with <code>claude --safe-mode</code> (or setting <code>CLAUDE_CODE_SAFE_MODE=1</code>) launches a completely clean session: no CLAUDE.md files are loaded, no plugins or skills activate, no hooks fire, and no MCP servers connect. The environment variable alternative is useful for injecting safe mode into background workers without changing your invocation script.</p>
+
+  <pre><code># One-off troubleshooting session
+claude --safe-mode
+
+# Or permanently in a test environment
+export CLAUDE_CODE_SAFE_MODE=1
+claude
+
+# Partial safe mode — disable only hooks and MCP, keep CLAUDE.md
+claude --safe-mode=hooks,mcp</code></pre>
+
+  <p>The last form (comma-separated component list) is new in 2.1.169. Supported tokens are <code>claude-md</code>, <code>plugins</code>, <code>hooks</code>, <code>mcp</code>, and <code>skills</code> — useful for cases where you want to rule out a specific subsystem without going fully clean-slate.</p>
+
+  <h3>Fallback model chains — surviving a transient overload</h3>
+  <p>Claude Code 2.1.167 introduced a <code>fallbackModel</code> setting (in <code>settings.json</code> or per-session via <code>--fallback-model</code>) that specifies up to three backup models. If the primary model returns an overload error, Claude Code silently retries the current turn on the first backup. The session reverts to the primary model on the next turn — the fallback is scoped to a single turn, not the entire session.</p>
+
+  <pre><code>// settings.json
+{
+  "model": "claude-fable-5-20261009",
+  "fallbackModel": [
+    "claude-opus-4-8-20260530",
+    "claude-sonnet-4-6-20251022"
+  ]
+}</code></pre>
+
+  <div class="callout tip">
+    <strong>Two separate fallback systems — don't confuse them</strong>
+    <p><code>fallbackModel</code> handles <em>availability errors</em> (503 overloads). It is distinct from the <em>safety classifier fallback</em> introduced with Fable 5, which silently reroutes requests that trigger Fable 5's safety classifiers to Claude Opus 4.8. Safety classifier fallback is automatic and not configurable; <code>fallbackModel</code> is explicit and user-controlled. Both can fire in the same session without interfering with each other.</p>
+  </div>
+
+  <h3>Also in this release window</h3>
+  <ul>
+    <li><strong><code>/cd {path}</code></strong> — moves the active session to a new working directory without breaking the prompt cache. Previously, changing directory mid-session required a full restart and re-warmup.</li>
+    <li><strong>Post-session hook</strong> (self-hosted runner only) — runs after the session ends and before the workspace is deleted; useful for snapshotting uncommitted work or exporting session logs to a central store.</li>
+    <li><strong>MCP policy enforcement tightened</strong> — Claude Code now rejects MCP tool calls that request filesystem access outside the declared workspace root, even if the MCP server's declared scope permits it.</li>
+  </ul>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Community content or research — independently cross-checked">⭐</span>
+    <a href="https://www.digitalapplied.com/blog/claude-code-safe-mode-fallback-models-production-resilience-guide" class="source-link" target="_blank" rel="noopener">digitalapplied.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">safe mode</span>
+    <span class="tag">fallback model chains</span>
+    <span class="tag">production resilience</span>
+    <span class="tag">v2.1.169</span>
+    <span class="tag">debugging</span>
+    <span class="tag">MCP</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

@@ -9749,6 +9749,119 @@ def img_lissitzky_20260611():
     return base
 
 
+def img_calder_20260612():
+    """Alexander Calder mobile — Claude Corps fellowship balance, community reach, safe-mode resilience."""
+    # Warm off-white Calder canvas
+    base = Image.new("RGB", (W, H), (248, 245, 238))
+
+    # 1. Primary horizontal spine — the connective "wire" of the mobile
+    wl = layer()
+    wd = ImageDraw.Draw(wl)
+    # Top anchor wire dropping from upper-centre
+    wd.line([(600, 0), (600, 130)], fill=(14, 12, 10, 255), width=4)
+    # Main horizontal spine
+    wd.line([(120, 130), (1080, 130)], fill=(14, 12, 10, 255), width=4)
+    # Left sub-arm cluster — representing community/nonprofit spread
+    wd.line([(120, 130), (120, 270)], fill=(14, 12, 10, 255), width=3)
+    wd.line([(50, 270), (280, 270)], fill=(14, 12, 10, 255), width=3)
+    wd.line([(50, 270), (50, 430)], fill=(14, 12, 10, 255), width=2)
+    wd.line([(280, 270), (280, 410)], fill=(14, 12, 10, 255), width=2)
+    # Centre-left arm — balance point (safe mode / fallback symmetry)
+    wd.line([(420, 130), (420, 320)], fill=(14, 12, 10, 255), width=3)
+    wd.line([(320, 320), (520, 320)], fill=(14, 12, 10, 255), width=3)
+    wd.line([(320, 320), (320, 490)], fill=(14, 12, 10, 255), width=2)
+    wd.line([(520, 320), (520, 470)], fill=(14, 12, 10, 255), width=2)
+    # Right arm — Tokyo / workshop repo branch
+    wd.line([(850, 130), (850, 280)], fill=(14, 12, 10, 255), width=3)
+    wd.line([(750, 280), (980, 280)], fill=(14, 12, 10, 255), width=3)
+    wd.line([(750, 280), (750, 450)], fill=(14, 12, 10, 255), width=2)
+    wd.line([(980, 280), (980, 420)], fill=(14, 12, 10, 255), width=2)
+    # Far-right pendant
+    wd.line([(1080, 130), (1080, 260)], fill=(14, 12, 10, 255), width=3)
+    base = comp(base, wl)
+
+    # 2. Bold Calder primary shapes — each node on the mobile
+    shapes = [
+        # Top-left large red disc — Claude Corps scale
+        ("ellipse", [(10, 340), (130, 520)],  (218, 28, 28, 245)),
+        # Top-left inner right yellow rect — CodePath/training
+        ((200, 390), (360, 480),               (230, 188, 0, 245), "rect"),
+        # Centre-left blue disc — safe mode / clean slate
+        ("ellipse", [(260, 430), (410, 545)],  (24, 78, 210, 245)),
+        # Centre-right red small disc
+        ("ellipse", [(450, 400), (570, 500)],  (218, 28, 28, 235)),
+        # Right yellow large disc — workshop repo / open source
+        ("ellipse", [(665, 355), (870, 530)],  (230, 188, 0, 240)),
+        # Far-right blue rect
+        ("ellipse", [(910, 330), (1050, 490)], (24, 78, 210, 235)),
+        # Far-right pendant green disc
+        ("ellipse", [(1020, 170), (1140, 310)], (28, 148, 68, 235)),
+        # Upper-left small pivot disc
+        ("ellipse", [(560, 55), (660, 130)],   (218, 28, 28, 230)),
+    ]
+    for item in shapes:
+        sl = layer()
+        sd = ImageDraw.Draw(sl)
+        if item[0] == "ellipse":
+            _, bounds, col = item
+            sd.ellipse(bounds, fill=col)
+        else:
+            # rect variant: (x1,y1),(x2,y2), col, "rect"
+            (x1, y1), (x2, y2), col, _ = item
+            sd.rectangle([(x1, y1), (x2, y2)], fill=col)
+        base = comp(base, sl)
+
+    # 3. Fine black outlines on each shape — Calder's characteristic heavy contour
+    ol = layer()
+    od = ImageDraw.Draw(ol)
+    od.ellipse([(10, 340), (130, 520)],   outline=(14, 12, 10, 255), width=3)
+    od.rectangle([(200, 390), (360, 480)], outline=(14, 12, 10, 255), width=3)
+    od.ellipse([(260, 430), (410, 545)],  outline=(14, 12, 10, 255), width=3)
+    od.ellipse([(450, 400), (570, 500)],  outline=(14, 12, 10, 255), width=3)
+    od.ellipse([(665, 355), (870, 530)],  outline=(14, 12, 10, 255), width=3)
+    od.ellipse([(910, 330), (1050, 490)], outline=(14, 12, 10, 255), width=3)
+    od.ellipse([(1020, 170), (1140, 310)], outline=(14, 12, 10, 255), width=3)
+    od.ellipse([(560, 55), (660, 130)],   outline=(14, 12, 10, 255), width=3)
+    base = comp(base, ol)
+
+    # 4. Small secondary shapes scattered across mid-field — the 1,000 fellows
+    secondary = [
+        (180,  80, 18, (218, 28,  28, 210)),
+        (370,  60, 14, (24,  78, 210, 210)),
+        (760,  50, 16, (230,188,   0, 210)),
+        (940,  75, 12, (218, 28,  28, 200)),
+        (160, 200, 14, (28, 148,  68, 200)),
+        (490, 185, 16, (230,188,   0, 200)),
+        (680, 190, 12, (24,  78, 210, 200)),
+        (110, 590, 14, (230,188,   0, 200)),
+        (420, 560, 16, (218, 28,  28, 200)),
+        (590, 540, 12, (28, 148,  68, 200)),
+    ]
+    for sx, sy, sr, sc in secondary:
+        el = layer()
+        ed = ImageDraw.Draw(el)
+        ed.ellipse([(sx - sr, sy - sr), (sx + sr, sy + sr)], fill=sc,
+                   outline=(14, 12, 10, 200), width=2)
+        base = comp(base, el)
+
+    # 5. Fine dot scatter — Calder's airy sense of suspended motion
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    dot_colours = [
+        (218, 28, 28, 100), (24, 78, 210, 100),
+        (230, 188, 0, 100), (28, 148, 68, 90),
+    ]
+    for _ in range(60):
+        dx = rng.randint(0, W)
+        dy = rng.randint(0, H)
+        dr = rng.randint(2, 5)
+        dc = dot_colours[rng.randint(0, len(dot_colours) - 1)]
+        dd.ellipse([(dx - dr, dy - dr), (dx + dr, dy + dr)], fill=dc)
+    base = comp(base, dl)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -9943,6 +10056,7 @@ DAYS = [
     ("2026-06-09", img_balla_20260609,    "WWDC Launch",        "Giacomo Balla"),
     ("2026-06-10", img_rothko_20260610,   "Fable Launch",       "Mark Rothko"),
     ("2026-06-11", img_lissitzky_20260611, "Builder Day 2",     "El Lissitzky"),
+    ("2026-06-12", img_calder_20260612,   "Corps & Balance",   "Alexander Calder"),
 ]
 
 for date, fn, kw, artist in DAYS:

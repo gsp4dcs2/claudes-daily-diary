@@ -9862,6 +9862,117 @@ def img_calder_20260612():
     return base
 
 
+def img_seurat_20260613():
+    """Georges Seurat pointillist — public opinion survey, 52,000 data points, trust landscape."""
+    base = Image.new("RGB", (W, H), (10, 16, 42))   # deep midnight-indigo bg
+
+    # 1. Full-canvas ambient dot field — 52,000 respondents rendered as spectral pixels
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    spectral = [
+        (215, 55,  55),   # red — fear / concern
+        (215, 135, 30),   # amber — uncertainty
+        (200, 205, 40),   # yellow-green — neutral
+        (50,  200, 110),  # green — hope
+        (40,  145, 235),  # blue — trust
+        (130, 55,  218),  # violet — regulation support
+        (235, 80,  160),  # magenta — daily users
+        (255, 248, 205),  # cream — optimism
+    ]
+    for _ in range(7500):
+        sx = rng.randint(0, W)
+        sy = rng.randint(0, H)
+        r = rng.randint(1, 4)
+        col = spectral[rng.randint(0, len(spectral) - 1)]
+        alpha = rng.randint(15, 80)
+        ad.ellipse([(sx - r, sy - r), (sx + r, sy + r)], fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, al)
+
+    # 2. Large hemisphere of opinion — upper-right, built from dense pointillist dots
+    #    Fear (red-amber) at left edge, Hope (green-blue) at right, Trust (violet) at apex
+    hl = layer()
+    hd = ImageDraw.Draw(hl)
+    hcx, hcy, hr = 870, 180, 220
+    opinion_zones = [
+        # (angle_start, angle_end, colour, n_dots)
+        (180, 270, (215, 55, 55, 190), 1400),    # left half — fear / concern (red)
+        (270, 360, (40, 145, 235, 200), 1400),   # right half — hope / optimism (blue)
+        (240, 300, (200, 205, 40, 180), 800),    # centre band — neutral / mixed (yellow)
+    ]
+    for ang_s, ang_e, col, n in opinion_zones:
+        for _ in range(n):
+            angle = rng.uniform(math.radians(ang_s), math.radians(ang_e))
+            dist = rng.uniform(0, hr)
+            px = int(hcx + math.cos(angle) * dist)
+            py = int(hcy + math.sin(angle) * dist)
+            r2 = rng.randint(2, 7)
+            hd.ellipse([(px - r2, py - r2), (px + r2, py + r2)], fill=(col[0], col[1], col[2], col[3]))
+    # Bright halo around hemisphere
+    for _ in range(900):
+        angle = rng.uniform(math.pi, 2 * math.pi)
+        dist = rng.uniform(hr + 2, hr + 60)
+        px = int(hcx + math.cos(angle) * dist)
+        py = int(hcy + math.sin(angle) * dist)
+        r3 = rng.randint(1, 3)
+        col = spectral[rng.randint(0, len(spectral) - 1)]
+        hd.ellipse([(px - r3, py - r3), (px + r3, py + r3)], fill=(col[0], col[1], col[2], 90))
+    base = comp(base, hl)
+
+    # 3. Trust bar — a horizontal pointillist band showing institutional trust gradient
+    #    Left: AI companies (low, 15%) — dim red; Right: Academia (higher) — bright green
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    bar_y, bar_h = 420, 80
+    for bx in range(0, W, 1):
+        t = bx / W
+        # gradient: red → amber → yellow → green → blue
+        if t < 0.15:
+            col = (215, 55, 55, 200)     # AI companies — lowest trust
+        elif t < 0.35:
+            col = (215, 135, 30, 200)    # tech sector generally
+        elif t < 0.55:
+            col = (200, 205, 40, 200)    # neutral mid institutions
+        elif t < 0.75:
+            col = (50, 200, 110, 200)    # academia / science
+        else:
+            col = (40, 145, 235, 200)    # government / civil society
+        for _ in range(6):
+            dy = rng.randint(bar_y, bar_y + bar_h)
+            r4 = rng.randint(1, 5)
+            td.ellipse([(bx - r4, dy - r4), (bx + r4, dy + r4)], fill=col)
+    base = comp(base, tl)
+
+    # 4. Three dense vertical columns — left 48% cancer hope, centre 64% job-loss fear, right 70% daily-user shift
+    cols_data = [
+        (160, 255, (50, 200, 110, 210),  0.48, 2200),   # green — cancer/Alzheimer hope
+        (510, 255, (215, 55,  55, 210),  0.64, 2800),   # red — job displacement fear
+        (860, 255, (40, 145, 235, 210),  0.70, 3000),   # blue — regulation support
+    ]
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    for col_x, col_base_y, col, frac, n_pts in cols_data:
+        col_height = int(frac * 340)
+        for _ in range(n_pts):
+            px = col_x + rng.randint(-55, 55)
+            py = col_base_y + rng.randint(-col_height // 2, col_height // 2)
+            r5 = rng.randint(2, 6)
+            cd.ellipse([(px - r5, py - r5), (px + r5, py + r5)], fill=col)
+    base = comp(base, cl)
+
+    # 5. Fine dot scatter overlay — depth and texture
+    fl = layer()
+    fd = ImageDraw.Draw(fl)
+    for _ in range(1800):
+        fx = rng.randint(0, W)
+        fy = rng.randint(0, H)
+        fr = rng.randint(1, 3)
+        fc = spectral[rng.randint(0, len(spectral) - 1)]
+        fd.ellipse([(fx - fr, fy - fr), (fx + fr, fy + fr)], fill=(fc[0], fc[1], fc[2], 45))
+    base = comp(base, fl)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -10057,6 +10168,7 @@ DAYS = [
     ("2026-06-10", img_rothko_20260610,   "Fable Launch",       "Mark Rothko"),
     ("2026-06-11", img_lissitzky_20260611, "Builder Day 2",     "El Lissitzky"),
     ("2026-06-12", img_calder_20260612,   "Corps & Balance",   "Alexander Calder"),
+    ("2026-06-13", img_seurat_20260613,  "Public Data",       "Georges Seurat"),
 ]
 
 for date, fn, kw, artist in DAYS:

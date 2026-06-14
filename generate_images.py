@@ -9862,6 +9862,78 @@ def img_calder_20260612():
     return base
 
 
+def img_leger_20260614():
+    """Fernand Léger mechanical industrial — enterprise IT deployment, DXC/TCS partnerships, model control."""
+    base = Image.new("RGB", (W, H), (16, 16, 24))   # near-black bg
+
+    # 1. Structural background: subtle horizontal register bands (industrial blueprint feel)
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    for by in [120, 240, 380, 510]:
+        bd.rectangle([(0, by - 3), (W, by + 3)], fill=(200, 200, 200, 30))
+    base = comp(base, bl)
+
+    # 2. Large primary rectangular panels — enterprise data-centre blocks / server modules
+    panels = [
+        # (x0, y0, x1, y1, fill_rgba)
+        (40,   50,  340, 320, (195, 30,  30,  210)),   # crimson left
+        (180,  180, 520, 480, (24,  80,  195, 200)),   # cobalt blue centre-left
+        (480,  40,  820, 310, (210, 175, 20,  200)),   # golden yellow centre
+        (700,  250, 1050, 570, (195, 30, 30,  185)),   # crimson right-centre
+        (940,  60,  1170, 370, (50, 50, 60,   220)),   # dark slate right
+    ]
+    for x0, y0, x1, y1, col in panels:
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        pd.rectangle([(x0, y0), (x1, y1)], fill=col)
+        pd.rectangle([(x0, y0), (x1, y1)], outline=(240, 240, 240, 175), width=8)
+        pd.rectangle([(x0, y0), (x1, y0 + 10)], fill=(255, 255, 255, 55))
+        base = comp(base, pl)
+
+    # 3. Bold industrial circles — three "hubs" (DXC, TCS, Anthropic)
+    hubs = [
+        (200, 530, 95,  (70, 80, 100, 220)),   # DXC — bottom left
+        (600, 420, 110, (210, 175, 20, 210)),   # TCS — centre
+        (1000, 180, 90, (195, 30, 30, 210)),    # Anthropic — upper right
+    ]
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for gcx, gcy, gr, gcol in hubs:
+        gd.ellipse([(gcx - gr, gcy - gr), (gcx + gr, gcy + gr)],
+                   fill=gcol, outline=(240, 240, 240, 200), width=9)
+        ir = gr // 2
+        gd.ellipse([(gcx - ir, gcy - ir), (gcx + ir, gcy + ir)],
+                   fill=(16, 16, 24, 255), outline=(240, 240, 240, 140), width=5)
+        cr = gr // 6
+        gd.ellipse([(gcx - cr, gcy - cr), (gcx + cr, gcy + cr)],
+                   fill=(240, 240, 240, 230))
+    base = comp(base, gl)
+
+    # 4. Bold diagonal pipelines connecting the three hubs
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    # DXC → TCS
+    dd.line([(200, 530), (600, 420)], fill=(200, 200, 200, 140), width=18)
+    dd.line([(200, 530), (600, 420)], fill=(240, 240, 240, 70), width=6)
+    # TCS → Anthropic
+    dd.line([(600, 420), (1000, 180)], fill=(200, 200, 200, 140), width=18)
+    dd.line([(600, 420), (1000, 180)], fill=(240, 240, 240, 70), width=6)
+    # Long accent diagonal (full canvas)
+    dd.line([(40, 80), (1170, 550)], fill=(200, 175, 20, 70), width=12)
+    base = comp(base, dl)
+
+    # 5. Fine white accent stripes — Léger's compositional rhythm
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    for ax in [340, 520, 820, 1050]:
+        sd.rectangle([(ax, 0), (ax + 6, H)], fill=(255, 255, 255, 45))
+    for ay in [180, 310, 480]:
+        sd.rectangle([(0, ay), (W, ay + 4)], fill=(255, 255, 255, 35))
+    base = comp(base, sl)
+
+    return base
+
+
 def img_seurat_20260613():
     """Georges Seurat pointillist — public opinion survey, 52,000 data points, trust landscape."""
     base = Image.new("RGB", (W, H), (10, 16, 42))   # deep midnight-indigo bg
@@ -10169,6 +10241,7 @@ DAYS = [
     ("2026-06-11", img_lissitzky_20260611, "Builder Day 2",     "El Lissitzky"),
     ("2026-06-12", img_calder_20260612,   "Corps & Balance",   "Alexander Calder"),
     ("2026-06-13", img_seurat_20260613,  "Public Data",       "Georges Seurat"),
+    ("2026-06-14", img_leger_20260614,   "Enterprise Wave",   "Fernand Léger"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -9934,6 +9934,65 @@ def img_leger_20260614():
     return base
 
 
+def img_moholy_20260615():
+    """László Moholy-Nagy Bauhaus — billing credit pools, policy transparency, governance frameworks."""
+    base = Image.new("RGB", (W, H), (248, 246, 240))   # warm cream bg
+
+    # 1. Three large overlapping transparent circles — the three credit pool tiers (Pro / Max 5× / Max 20×)
+    tiers = [
+        (280,  270, 230, (220, 60,  30)),    # Pro — coral-red, left
+        (640,  220, 260, (30,  80, 200)),    # Max 5× — blue, centre
+        (1000, 300, 210, (220, 170, 20)),    # Max 20× — amber, right
+    ]
+    for cx, cy, r, col in tiers:
+        for opacity in [35, 80, 165]:
+            cl = layer()
+            ImageDraw.Draw(cl).ellipse([(cx - r, cy - r), (cx + r, cy + r)],
+                                       fill=(*col, opacity),
+                                       outline=(*col, 220), width=5)
+            base = comp(base, cl)
+
+    # 2. Three policy-tier rectangles stacked — Tiers 1 / 2 / 3 of the EPF
+    policy_bands = [
+        (60, 380, 420, 480, (220, 60, 30)),    # Tier 1 coral
+        (60, 490, 420, 550, (30, 80, 200)),    # Tier 2 blue
+        (60, 560, 420, 610, (20, 20, 20)),     # Tier 3 near-black
+    ]
+    for x0, y0, x1, y1, col in policy_bands:
+        rl = layer()
+        rd = ImageDraw.Draw(rl)
+        rd.rectangle([(x0, y0), (x1, y1)], fill=(*col, 80), outline=(*col, 200), width=4)
+        base = comp(base, rl)
+
+    # 3. Bauhaus structural cross-lines — transparency grid
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    # Horizontal axis
+    ld.line([(0, 320), (W, 320)], fill=(0, 0, 0, 90), width=3)
+    # Vertical axis
+    ld.line([(600, 0), (600, H)], fill=(0, 0, 0, 90), width=3)
+    # Secondary horizontal
+    ld.line([(0, 480), (W, 480)], fill=(0, 0, 0, 50), width=2)
+    base = comp(base, ll)
+
+    # 4. Fine diagonal accent — governance oversight arrow (bottom-left to upper-right)
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    ad.line([(50, 600), (1150, 80)], fill=(20, 20, 20, 55), width=8)
+    ad.line([(50, 570), (1150, 50)], fill=(20, 20, 20, 30), width=4)
+    base = comp(base, al)
+
+    # 5. Small Bauhaus squares — four corner anchors (FAA framework pillars)
+    pillars = [(80, 60, 160, 140), (1040, 60, 1120, 140), (80, 500, 160, 580), (1040, 500, 1120, 580)]
+    pil_cols = [(220, 60, 30), (30, 80, 200), (220, 170, 20), (20, 20, 20)]
+    for (x0, y0, x1, y1), col in zip(pillars, pil_cols):
+        ql = layer()
+        ImageDraw.Draw(ql).rectangle([(x0, y0), (x1, y1)], fill=(*col, 200), outline=(0, 0, 0, 180), width=4)
+        base = comp(base, ql)
+
+    return base
+
+
 def img_seurat_20260613():
     """Georges Seurat pointillist — public opinion survey, 52,000 data points, trust landscape."""
     base = Image.new("RGB", (W, H), (10, 16, 42))   # deep midnight-indigo bg
@@ -10242,6 +10301,7 @@ DAYS = [
     ("2026-06-12", img_calder_20260612,   "Corps & Balance",   "Alexander Calder"),
     ("2026-06-13", img_seurat_20260613,  "Public Data",       "Georges Seurat"),
     ("2026-06-14", img_leger_20260614,   "Enterprise Wave",   "Fernand Léger"),
+    ("2026-06-15", img_moholy_20260615,  "Credits & Policy",  "László Moholy-Nagy"),
 ]
 
 for date, fn, kw, artist in DAYS:

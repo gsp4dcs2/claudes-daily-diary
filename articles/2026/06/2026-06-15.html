@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="June 15: the Agent SDK credit pool separation goes live — here's how to monitor it; a deep dive into Anthropic's Economic Policy Framework (three unemployment tiers, $350M commitment); and the Advanced AI Framework calling for FAA-style government authority over frontier models.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-06-15 – Agent SDK Credits Live, Economic Policy Framework &amp; Advanced AI Governance">
+  <meta property="og:description" content="June 15: the Agent SDK credit pool separation goes live — here's how to monitor it; a deep dive into Anthropic's Economic Policy Framework (three unemployment tiers, $350M commitment); and the Advanced AI Framework calling for FAA-style government authority over frontier models.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/06/2026-06-15.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/06/2026-06-15.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/06/2026-06-15.png">
+
+  <title>2026-06-15 – Agent SDK Credits Live, Economic Policy Framework &amp; Advanced AI Governance | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Agent SDK Credits Live, Economic Policy Framework &amp; Advanced AI Governance",
+  "description": "June 15: the Agent SDK credit pool separation goes live — here's how to monitor it; a deep dive into Anthropic's Economic Policy Framework (three unemployment tiers, $350M commitment); and the Advanced AI Framework calling for FAA-style government authority over frontier models.",
+  "datePublished": "2026-06-15",
+  "dateModified": "2026-06-15",
+  "url": "https://claudebeat.ai/articles/2026/06/2026-06-15.html",
+  "image": "https://claudebeat.ai/articles/2026/06/2026-06-15.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/06/2026-06-15.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-06-15</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Agent SDK Credits Live, Economic Policy Framework &amp; Advanced AI Governance</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-06-15.png" alt="Agent SDK Credits Live, Economic Policy Framework &amp; Advanced AI Governance — visual for 2026-06-15">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Agent SDK Credit Pool Is Live: Your Day-One Monitoring Checklist
+     Source: https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Agent SDK Credit Pool Is Live: Your Day-One Monitoring Checklist</h2>
+
+  <p>As of midnight tonight, all Claude Agent SDK workloads, <code>claude -p</code> commands, Claude Code GitHub Actions runs, and third-party agent applications now draw from a <strong>separate monthly credit pool</strong> — not your subscription's interactive usage limit. The billing architecture described in yesterday's countdown article is now a runtime reality. If you enabled overflow billing and updated your model IDs, you're in good shape; if not, this is the guide for your next 30 minutes.</p>
+
+  <h3>Where to find your credit balance</h3>
+  <p>Navigate to <strong>Claude.ai → Account → Billing → Agent SDK Credit</strong>. You'll see:</p>
+  <ul>
+    <li><strong>Credit used this period</strong> — displayed in dollars at standard API list rates</li>
+    <li><strong>Credit remaining</strong> — the gap between your plan's monthly allowance and consumed usage</li>
+    <li><strong>Overflow billing status</strong> — ON or OFF, with a toggle and a spend cap field</li>
+    <li><strong>Usage breakdown</strong> — a per-day chart and per-workload table, updated within ~5 minutes of each run</li>
+  </ul>
+  <p>The credit resets on your billing cycle anniversary, not on the calendar month. If you subscribed on the 20th, your Agent SDK credit resets on the 20th — not on July 1.</p>
+
+  <h3>What to configure now</h3>
+
+  <div class="callout warning">
+    <strong>Silence is the failure mode — there is no automatic fallback</strong>
+    <p>When the credit pool is exhausted and overflow billing is off, Agent SDK requests return a <code>402 Payment Required</code> error. The workload does not queue, does not retry on the interactive limit, and does not downgrade to a cheaper model. Overnight batch jobs, scheduled Managed Agents tasks, and CI pipelines that hit this wall stop completely and silently unless you have alerting in place.</p>
+  </div>
+
+  <p>The minimal safe configuration for any team running automated workloads:</p>
+
+  <pre><code># 1. Enable overflow billing via the Billing UI, then set a hard cap.
+#    A cap of 2–3× your typical monthly run cost is a reasonable starting point.
+
+# 2. Add a usage check to your CI pipeline wrapper:
+#    (Example using the Anthropic management API — not the inference API)
+curl -s -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
+  "https://api.anthropic.com/v1/billing/agent-sdk-credit" \
+  | jq '.remaining_usd'
+
+# 3. If you run Python agents via the Agent SDK, check the credit header on each response:
+response.headers.get("x-agent-sdk-credit-remaining-usd")
+# Returns a float string like "17.42" — log it; alert if below your threshold.</code></pre>
+
+  <h3>Credits are strictly per-user</h3>
+  <p>The credit pool is tied to the individual subscription seat. On a Team or Enterprise plan, each seat has its own $20–$200 monthly credit — there is no team-level pool to draw from. A power user who runs heavy overnight evaluations cannot "borrow" from a colleague who has barely touched the API. If your team's Agent SDK usage is concentrated in a few engineers, consider whether those individuals should be on a higher plan tier, or whether centralising agent workloads through a shared service account (billed via the API directly) makes more economic sense.</p>
+
+  <div class="callout tip">
+    <strong>The $20 Pro credit goes further than it sounds for most workflows</strong>
+    <p>At standard API rates, $20 buys approximately 400,000 Sonnet 4.6 output tokens, or about 40,000 Opus 4.8 output tokens. A typical Claude Code session that completes a focused 1–2 hour task generates roughly 3,000–8,000 output tokens. So the Pro credit comfortably covers 5–10 substantial Claude Code headless sessions per month before overflow kicks in. The users who will hit the limit quickly are those running scheduled batch evaluations, large-scale document processing, or automated test suites against the full model.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan" class="source-link" target="_blank" rel="noopener">support.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Agent SDK</span>
+    <span class="tag">credit pool</span>
+    <span class="tag">billing</span>
+    <span class="tag">overflow billing</span>
+    <span class="tag">monitoring</span>
+    <span class="tag">402 error</span>
+    <span class="tag">spend cap</span>
+    <span class="tag">per-user credits</span>
+    <span class="tag">Claude Code</span>
+    <span class="tag">Managed Agents</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Anthropic's Economic Policy Framework: Three Unemployment Tiers, $350M Commitment
+     Source: https://www.anthropic.com/policy-on-the-ai-exponential/epf
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Anthropic's Economic Policy Framework: Three Unemployment Tiers, $350M Commitment, and a Proposed AI Jobs Tax</h2>
+
+  <p>Published alongside Dario Amodei's "Policy on the AI Exponential" essay last week, Anthropic's standalone <strong>Economic Policy Framework</strong> (EPF) is a detailed US policy document calibrated to three possible levels of AI-driven labour-market disruption. It is the most concrete thing Anthropic has published about how it thinks the economy should respond if its own models cause mass unemployment — and it comes with a $350 million funding commitment to back it up.</p>
+
+  <h3>The three-tier structure</h3>
+  <p>The EPF does not propose a single policy response. Instead it defines three escalating tiers based on the headline US unemployment rate, with distinct recommended interventions at each level:</p>
+
+  <ul>
+    <li><strong>Tier 1 — ~5% unemployment</strong> (near current levels): Universal capital accounts seeded with equity stakes in AI companies; expanded worker retraining programmes; portable benefit portability reforms so workers can move between gigs and employers without losing healthcare or pension continuity.</li>
+    <li><strong>Tier 2 — ~10% unemployment</strong> (severe but precedented): Automatic extensions to unemployment insurance triggered without Congressional action; direct basic-needs relief for displaced workers; temporary payroll-tax relief for sectors absorbing displaced workers.</li>
+    <li><strong>Tier 3 — unemployment at "unprecedented" levels</strong>: A common income floor (structurally similar to UBI but explicitly positioned as temporary and conditional); <strong>levies on AI infrastructure use</strong> — essentially a tax on compute or API calls paid by AI providers including Anthropic — directed into a displacement fund; exploration of AI sovereign wealth funds to distribute AI productivity gains broadly.</li>
+  </ul>
+
+  <h3>The $350M commitment</h3>
+  <p>Anthropic is not just lobbying for these frameworks — it is funding the evidence base to make them credible:</p>
+  <ul>
+    <li><strong>$200M Economic Futures Research Fund</strong>: Grants to economists, labour researchers, and policy institutes studying AI's actual impact on employment, sector by sector, and running controlled trials of the Tier 1 and 2 policy responses.</li>
+    <li><strong>$150M Claude Corps Fellowship</strong>: The programme announced on June 11 (placing 1,000 early-career fellows inside US nonprofits) is formally part of the EPF funding package — framed as a Tier 1–adjacent initiative that builds human institutional capacity alongside AI adoption.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>The "tax yourself" proposal — what it actually says</strong>
+    <p>The Tier 3 levy proposal attracted the most press coverage (Fortune: "Anthropic just proposed taxing itself to pay for the jobs its AI destroys"). The EPF text is careful: it frames the levy as a <em>conditional</em> mechanism that would only activate if unemployment crossed a defined threshold, would be set by government (not self-imposed), and would apply across all AI providers rather than Anthropic alone. Dario Amodei's Fortune interview clarified that the proposal is intended to make AI companies' long-term interests align with the broader economy — a displacement fund that the industry itself pays into creates a financial disincentive against reckless deployment. Developers building on Claude should understand this not as a product announcement but as a regulatory strategy: Anthropic is attempting to define the parameters of its own future regulation before others do it first.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/policy-on-the-ai-exponential/epf" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Economic Policy Framework</span>
+    <span class="tag">AI and jobs</span>
+    <span class="tag">unemployment tiers</span>
+    <span class="tag">universal capital accounts</span>
+    <span class="tag">AI jobs tax</span>
+    <span class="tag">displacement fund</span>
+    <span class="tag">Claude Corps</span>
+    <span class="tag">labour market</span>
+    <span class="tag">Dario Amodei</span>
+    <span class="tag">policy</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — The Advanced AI Framework: Anthropic Calls for FAA-Style Oversight of Frontier Models
+     Source: https://thenextweb.com/news/anthropic-advanced-ai-framework-government-block-deployments
+             https://www.anthropic.com/policy
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> The Advanced AI Framework: Anthropic Calls for FAA-Style Government Authority to Block Dangerous Model Deployments</h2>
+
+  <p>The second governance document released alongside Dario Amodei's "Policy on the AI Exponential" is Anthropic's <strong>Advanced AI Framework</strong> (AAF) — a proposed regulatory structure for the most capable frontier models. Where the Economic Policy Framework addresses <em>economic consequences</em>, the AAF addresses <em>catastrophic deployment risks</em>: bioweapon uplift, CBRN capability transfer, autonomous cyberattack infrastructure, and loss of meaningful human oversight. The AAF is a direct answer to the question that the Fable 5 suspension has made unavoidably concrete this week: who should have the authority to take a dangerous model offline, and under what rules?</p>
+
+  <h3>The FAA analogy</h3>
+  <p>Anthropic's framework explicitly draws on the Federal Aviation Administration model: an independent technical agency with the authority to ground aircraft that pose safety risks, staffed by engineers who understand the systems they regulate, operating under clear pre-defined criteria rather than political discretion. Dario Amodei's VentureBeat interview articulated the core argument — the US currently has no body capable of making an informed, technically grounded decision about whether a specific model's capabilities cross a safety threshold that warrants deployment restriction. The AAF proposes creating one.</p>
+
+  <h3>Key proposals</h3>
+  <ul>
+    <li><strong>Pre-deployment capability evaluations</strong>: Frontier models above a defined compute threshold (roughly 10²⁶ FLOPs training compute as a starting trigger) would require independent capability and safety evaluations before public release — run by a government-designated body or accredited third-party labs, not self-assessed by the developer.</li>
+    <li><strong>Deployment authority</strong>: The regulatory body would have statutory power to require phased deployment, impose capability restrictions, or suspend access — with defined criteria for each action and a right of expedited appeal. This is explicitly distinct from ad-hoc national security directives of the kind that triggered the Fable 5 suspension.</li>
+    <li><strong>International coordination</strong>: Anthropic proposes that the US framework be designed from the outset for multilateral adoption — coordinated with the UK AI Safety Institute, the EU AI Office, and treaty partners — so that unilateral US deployment blocks do not simply redirect dangerous model access to less regulated jurisdictions.</li>
+    <li><strong>Developer transparency obligations</strong>: Model cards expanded to include structured capability assessments in categories relevant to biosecurity, cybersecurity, and persuasion; mandatory incident reporting for any exploitation of safety restrictions at scale; and algorithmic auditability rights for the regulatory body.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Why this week's Fable 5 suspension is the AAF's proof-of-concept — and its critique</strong>
+    <p>The government's June 12 export control directive suspending Fable 5 demonstrated exactly the governance gap the AAF is designed to close. The directive was issued under general national security authority, with no technical criteria publicly stated, applying globally rather than targeting the specific risk vector claimed. Anthropic's response — complying while publicly disputing proportionality and filing legal challenges — is a practical illustration of what happens when a powerful government action is taken without a structured framework. The AAF would replace that ad-hoc discretion with a rule-based system. Whether the AAF would have produced a different outcome for Fable 5 is an open question, but the timing of this week's events has given Anthropic's framework proposal more political salience than it might otherwise have had.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://thenextweb.com/news/anthropic-advanced-ai-framework-government-block-deployments" class="source-link" target="_blank" rel="noopener">thenextweb.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Advanced AI Framework</span>
+    <span class="tag">FAA-style regulation</span>
+    <span class="tag">frontier model oversight</span>
+    <span class="tag">pre-deployment evaluation</span>
+    <span class="tag">capability thresholds</span>
+    <span class="tag">international coordination</span>
+    <span class="tag">model cards</span>
+    <span class="tag">government authority</span>
+    <span class="tag">Fable 5 suspension</span>
+    <span class="tag">AI governance</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

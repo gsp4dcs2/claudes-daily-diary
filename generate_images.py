@@ -9993,6 +9993,78 @@ def img_moholy_20260615():
     return base
 
 
+def img_miro_20260616():
+    """Joan Miró — deep indigo bg, bold biomorphic blobs, playful stars — small business tools, design, finance theme."""
+    base = Image.new("RGB", (W, H), (18, 12, 58))   # deep indigo bg
+
+    # 1. Background texture — grid of tiny dots suggesting a network of connected tools
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    for gx in range(0, W, 70):
+        for gy in range(0, H, 70):
+            td.ellipse([(gx - 2, gy - 2), (gx + 2, gy + 2)], fill=(90, 60, 180, 55))
+    base = comp(base, tl)
+
+    # 2. Bold black connector lines — the "toggle install" between tools
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    connections = [
+        (170, 310, 440, 200),   # left blob → centre-top blob
+        (440, 200, 720, 380),   # centre-top → centre blob
+        (720, 380, 980, 180),   # centre → right-top blob
+        (980, 180, 1090, 460),  # right-top → right-bottom blob
+        (440, 200, 680, 490),   # centre-top → lower blob
+        (680, 490, 980, 180),   # lower → right-top (cross-connection)
+    ]
+    for x0, y0, x1, y1 in connections:
+        ld.line([(x0, y0), (x1, y1)], fill=(0, 0, 0, 200), width=7)
+    base = comp(base, ll)
+
+    # 3. Large biomorphic blobs — each represents an integrated tool / product
+    blobs = [
+        (170, 310, 115, 85,  (220, 45,  45,  220)),    # red — QuickBooks / finance
+        (440, 200, 100, 72,  (255, 210,  0,  210)),    # yellow — Canva / design
+        (720, 380, 130, 95,  (30,  90,  230, 215)),    # blue — HubSpot / CRM
+        (980, 180, 110, 78,  (45,  195,  80, 210)),    # green — Claude Design
+        (680, 490, 105, 72,  (230,  90, 200, 200)),    # magenta — finance agents
+        (1090, 460, 90, 65,  (255, 255, 255, 185)),    # white — approval model node
+    ]
+    for cx, cy, rw, rh, col in blobs:
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        bd.ellipse([(cx - rw, cy - rh), (cx + rw, cy + rh)], fill=col, outline=(0, 0, 0, 240), width=5)
+        base = comp(base, bl)
+
+    # 4. Star scatter — the 15 agentic skills / workflows
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    star_cols = [(255, 215, 0, 215), (255, 80, 80, 195), (255, 255, 255, 195), (60, 210, 255, 195)]
+    for _ in range(32):
+        sx = rng.randint(25, W - 25)
+        sy = rng.randint(25, H - 25)
+        r = rng.randint(5, 14)
+        col = star_cols[rng.randint(0, 3)]
+        pts = []
+        for i in range(10):
+            angle = math.pi / 5 * i - math.pi / 2
+            rr = r if i % 2 == 0 else r // 2
+            pts.append((int(sx + rr * math.cos(angle)), int(sy + rr * math.sin(angle))))
+        sd.polygon(pts, fill=col)
+    base = comp(base, sl)
+
+    # 5. Miró dot accents — small coloured circles echoing the blob palette
+    dot_l = layer()
+    dot_d = ImageDraw.Draw(dot_l)
+    accents = [(310, 420), (550, 280), (840, 250), (1030, 330), (760, 130), (200, 160), (1110, 240), (490, 540)]
+    for ax, ay in accents:
+        r = rng.randint(12, 26)
+        col = [(255, 210, 0, 235), (255, 80, 80, 225), (255, 255, 255, 205), (60, 210, 255, 225)][rng.randint(0, 3)]
+        dot_d.ellipse([(ax - r, ay - r), (ax + r, ay + r)], fill=col, outline=(0, 0, 0, 200), width=3)
+    base = comp(base, dot_l)
+
+    return base
+
+
 def img_seurat_20260613():
     """Georges Seurat pointillist — public opinion survey, 52,000 data points, trust landscape."""
     base = Image.new("RGB", (W, H), (10, 16, 42))   # deep midnight-indigo bg
@@ -10302,6 +10374,7 @@ DAYS = [
     ("2026-06-13", img_seurat_20260613,  "Public Data",       "Georges Seurat"),
     ("2026-06-14", img_leger_20260614,   "Enterprise Wave",   "Fernand Léger"),
     ("2026-06-15", img_moholy_20260615,  "Credits & Policy",  "László Moholy-Nagy"),
+    ("2026-06-16", img_miro_20260616,    "Design & Tools",    "Joan Miró"),
 ]
 
 for date, fn, kw, artist in DAYS:

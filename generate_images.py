@@ -10176,6 +10176,77 @@ def img_seurat_20260613():
     return base
 
 
+def img_mondrian_20260617():
+    """Piet Mondrian neo-plasticism — G7 governance grid, global policy structure, recursive growth."""
+    base = Image.new("RGB", (W, H), (248, 244, 236))   # off-white/cream bg
+
+    # 1. Primary Mondrian grid: thick black horizontal and vertical lines
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    # Vertical lines
+    for vx, w in [(200, 8), (560, 12), (820, 8), (1050, 10)]:
+        ld.rectangle([(vx, 0), (vx + w, H)], fill=(10, 10, 10, 255))
+    # Horizontal lines
+    for hy, h in [(140, 10), (320, 8), (490, 10), (580, 8)]:
+        ld.rectangle([(0, hy), (W, hy + h)], fill=(10, 10, 10, 255))
+    base = comp(base, ll)
+
+    # 2. Primary colour rectangles — seven G7 nations / three policy domains
+    rects = [
+        # (x0, y0, x1, y1, colour, alpha) — primary Mondrian palette
+        (0,    0,   200, 140,  (220,  45,  30), 210),   # top-left: red — biosecurity
+        (568,  0,   820, 140,  (30,   80, 200), 200),   # top-centre: blue — cyber governance
+        (1058, 330, W,   490,  (220, 170,  20), 205),   # right-mid: yellow — compute thresholds
+        (0,    330, 200, 490,  (220,  45,  30), 160),   # left-mid: red (lighter)
+        (568,  330, 820, 490,  (30,   80, 200), 155),   # centre-mid: blue (lighter)
+        (0,    588, 200, H,    (220, 170,  20), 190),   # bottom-left: yellow
+        (828,  148, 1050, 320, (220,  45,  30), 175),   # right-upper: red band
+    ]
+    for x0, y0, x1, y1, col, alpha in rects:
+        rl = layer()
+        ImageDraw.Draw(rl).rectangle([(x0, y0), (x1, y1)], fill=(*col, alpha))
+        base = comp(base, rl)
+
+    # 3. Thin secondary lines — G7 coordination grid overlay
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    for vx in [380, 700, 940]:
+        sd.rectangle([(vx, 0), (vx + 3, H)], fill=(10, 10, 10, 60))
+    for hy in [220, 410, 540]:
+        sd.rectangle([(0, hy), (W, hy + 3)], fill=(10, 10, 10, 50))
+    base = comp(base, sl)
+
+    # 4. Small accent squares — policy pillars / capability threshold markers
+    pillars = [
+        (828, 498, 1050, 580, (30,   80, 200), 180),   # blue square
+        (208, 148, 552,  320, (220, 170,  20), 170),   # yellow wide band
+        (208, 498, 552,  580, (10,   10,  10), 140),   # black accent bar
+        (1058, 148, W,   320, (248, 244, 236), 0),     # off-white (no-fill, keep bg)
+    ]
+    for x0, y0, x1, y1, col, alpha in pillars:
+        if alpha > 0:
+            pl = layer()
+            ImageDraw.Draw(pl).rectangle([(x0, y0), (x1, y1)], fill=(*col, alpha))
+            base = comp(base, pl)
+
+    # 5. Fine dot scatter — minimal pointillist texture in white cells
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    for _ in range(600):
+        dx = rng.randint(210, 550)
+        dy = rng.randint(150, 310)
+        r = rng.randint(1, 3)
+        dd.ellipse([(dx - r, dy - r), (dx + r, dy + r)], fill=(10, 10, 10, 25))
+    for _ in range(400):
+        dx = rng.randint(830, 1040)
+        dy = rng.randint(150, 310)
+        r = rng.randint(1, 3)
+        dd.ellipse([(dx - r, dy - r), (dx + r, dy + r)], fill=(10, 10, 10, 20))
+    base = comp(base, dl)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -10375,6 +10446,7 @@ DAYS = [
     ("2026-06-14", img_leger_20260614,   "Enterprise Wave",   "Fernand Léger"),
     ("2026-06-15", img_moholy_20260615,  "Credits & Policy",  "László Moholy-Nagy"),
     ("2026-06-16", img_miro_20260616,    "Design & Tools",    "Joan Miró"),
+    ("2026-06-17", img_mondrian_20260617, "G7 AI Summit",     "Piet Mondrian"),
 ]
 
 for date, fn, kw, artist in DAYS:

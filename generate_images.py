@@ -10247,6 +10247,114 @@ def img_mondrian_20260617():
     return base
 
 
+def img_kandinsky_20260618():
+    """Wassily Kandinsky — prussian-blue bg, radiating composition nodes — European founder community theme."""
+    base = Image.new("RGB", (W, H), (14, 26, 62))  # deep prussian blue
+
+    # 1. Diagonal grid — background lattice
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    step = 80
+    for offset in range(-H, W + H, step):
+        gd.line([(offset, 0), (offset + H, H)], fill=(255, 255, 255, 14), width=1)
+    for offset in range(0, W + H + step, step):
+        gd.line([(offset, 0), (offset - H, H)], fill=(255, 255, 255, 14), width=1)
+    base = comp(base, grid_l)
+
+    # 2. Large yellow semicircle — the "gathering" hemisphere (left side)
+    semi_l = layer()
+    semi_d = ImageDraw.Draw(semi_l)
+    semi_d.pieslice([(60, 80), (500, 520)], start=270, end=90,
+                    fill=(245, 198, 28, 210), outline=(0, 0, 0, 200), width=5)
+    base = comp(base, semi_l)
+
+    # 3. Red trapezoid — structural stage / podium shape (centre)
+    trap_l = layer()
+    trap_d = ImageDraw.Draw(trap_l)
+    trap_d.polygon([(480, 200), (750, 200), (820, 440), (410, 440)],
+                   fill=(215, 35, 50, 205), outline=(0, 0, 0, 240), width=5)
+    base = comp(base, trap_l)
+
+    # 4. Blue circle cluster — attendee nodes (right side)
+    blue_l = layer()
+    blue_d = ImageDraw.Draw(blue_l)
+    cluster_centers = [(900, 150), (1020, 240), (1130, 160), (980, 350), (1100, 400)]
+    cluster_radii   = [70, 55, 45, 80, 60]
+    for (cx, cy), r in zip(cluster_centers, cluster_radii):
+        blue_d.ellipse([(cx - r, cy - r), (cx + r, cy + r)],
+                       fill=(30, 100, 210, 190), outline=(0, 0, 0, 200), width=3)
+    base = comp(base, blue_l)
+
+    # 5. Teal arc — connecting thread sweeping across the composition
+    arc_l = layer()
+    arc_d = ImageDraw.Draw(arc_l)
+    arc_d.arc([(550, 50), (1180, 580)], start=215, end=350, fill=(20, 200, 180, 220), width=10)
+    base = comp(base, arc_l)
+
+    # 6. Orange accent circles — energy nodes scattered across the canvas
+    oc_l = layer()
+    oc_d = ImageDraw.Draw(oc_l)
+    oc_positions = [(130, 480), (350, 555), (680, 500), (820, 80)]
+    oc_radii     = [45, 35, 25, 40]
+    for (px, py), r in zip(oc_positions, oc_radii):
+        oc_d.ellipse([(px - r, py - r), (px + r, py + r)],
+                     fill=(255, 125, 25, 215), outline=(0, 0, 0, 200), width=3)
+    base = comp(base, oc_l)
+
+    # 7. White and gold diagonal composition lines
+    lines_l = layer()
+    ld = ImageDraw.Draw(lines_l)
+    ld.line([(0, 430), (600, 50)],    fill=(255, 255, 255, 200), width=4)
+    ld.line([(430, 630), (1200, 220)], fill=(255, 255, 255, 160), width=3)
+    ld.line([(0, 310), (350, 580)],   fill=(245, 198, 28, 180),  width=3)
+    base = comp(base, lines_l)
+
+    # 8. Green diamond — European hub symbol
+    gem_l = layer()
+    gem_d = ImageDraw.Draw(gem_l)
+    gem_d.polygon([(580, 515), (660, 440), (740, 515), (660, 590)],
+                  fill=(38, 185, 85, 215), outline=(0, 0, 0, 230), width=4)
+    base = comp(base, gem_l)
+
+    # 9. Scatter of small Kandinsky dots — spectral variety
+    scatter = layer()
+    sd = ImageDraw.Draw(scatter)
+    dot_positions = [
+        (80, 200),  (180, 350), (290, 120), (420, 290), (550, 380),
+        (700, 270), (770, 160), (870, 490), (960, 90),  (1050, 530),
+        (1140, 300),(200, 570), (360, 460), (640, 600), (850, 580),
+        (500, 100), (1000, 430),(760, 590), (95, 560),  (1185, 450),
+    ]
+    dot_colors = [
+        (245, 198, 28,  200),  # gold
+        (20,  200, 180, 200),  # teal
+        (215,  35,  50, 200),  # red
+        (255, 255, 255, 180),  # white
+        (255, 125,  25, 200),  # orange
+        (38,  185,  85, 190),  # green
+        (140,  42, 205, 190),  # purple
+        (30,  100, 210, 200),  # blue
+        (245, 198,  28, 210),  # gold
+        (20,  200, 180, 190),  # teal
+        (215,  35,  50, 195),  # red
+        (255, 255, 255, 170),  # white
+        (140,  42, 205, 180),  # purple
+        (38,  185,  85, 200),  # green
+        (255, 125,  25, 200),  # orange
+        (30,  100, 210, 185),  # blue
+        (245, 198,  28, 195),  # gold
+        (20,  200, 180, 185),  # teal
+        (215,  35,  50, 190),  # red
+        (255, 255, 255, 165),  # white
+    ]
+    dot_radii = [12, 9, 15, 11, 8, 13, 10, 14, 7, 11, 16, 8, 12, 9, 13, 10, 14, 8, 11, 7]
+    for (px, py), col, r in zip(dot_positions, dot_colors, dot_radii):
+        sd.ellipse([(px - r, py - r), (px + r, py + r)], fill=col, outline=(0, 0, 0, 160), width=2)
+    base = comp(base, scatter)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -10447,6 +10555,7 @@ DAYS = [
     ("2026-06-15", img_moholy_20260615,  "Credits & Policy",  "László Moholy-Nagy"),
     ("2026-06-16", img_miro_20260616,    "Design & Tools",    "Joan Miró"),
     ("2026-06-17", img_mondrian_20260617, "G7 AI Summit",     "Piet Mondrian"),
+    ("2026-06-18", img_kandinsky_20260618, "Founder House",   "Wassily Kandinsky"),
 ]
 
 for date, fn, kw, artist in DAYS:

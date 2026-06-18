@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="June 18: Anthropic hosts Claude Founder House Berlin for European builders; G7 AI communiqué published with risk-tiered deployment framework; Claude Code gains nested sub-agent spawning.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-06-18 – Founder House Berlin, G7 Communiqué &amp; Nested Sub-Agents">
+  <meta property="og:description" content="June 18: Anthropic hosts Claude Founder House Berlin for European builders; G7 AI communiqué published with risk-tiered deployment framework; Claude Code gains nested sub-agent spawning.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/06/2026-06-18.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/06/2026-06-18.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/06/2026-06-18.png">
+
+  <title>2026-06-18 – Founder House Berlin, G7 Communiqué &amp; Nested Sub-Agents | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Founder House Berlin, G7 Communiqué &amp; Nested Sub-Agents",
+  "description": "June 18: Anthropic hosts Claude Founder House Berlin for European builders; G7 AI communiqué published with risk-tiered deployment framework; Claude Code gains nested sub-agent spawning.",
+  "datePublished": "2026-06-18",
+  "dateModified": "2026-06-18",
+  "url": "https://claudebeat.ai/articles/2026/06/2026-06-18.html",
+  "image": "https://claudebeat.ai/articles/2026/06/2026-06-18.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/06/2026-06-18.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-06-18</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Founder House Berlin, G7 Communiqué &amp; Nested Sub-Agents in Claude Code</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-06-18.png" alt="Founder House Berlin, G7 Communiqué &amp; Nested Sub-Agents in Claude Code — visual for 2026-06-18">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Founder House Berlin
+     Source: https://www.anthropic.com/events/claude-founder-house
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Founder House Berlin: Anthropic's First European Developer Day</h2>
+
+  <p>Anthropic ran its inaugural <strong>Claude Founder House Berlin</strong> today — a full-day live event in Berlin (streamed from 09:00 CEST) aimed at founders and developers building European companies on Claude. The format mirrors Anthropic's Founder House series in San Francisco and New York, adapted for the European context: a morning <em>Founder cohort</em> combining keynote sessions with peer programming, and an afternoon <em>Builder cohort</em> focused on hands-on construction with live Anthropic engineers on hand.</p>
+
+  <h3>What the morning keynotes covered</h3>
+  <ul>
+    <li><strong>GDPR-native Claude architectures:</strong> Anthropic's EU-based engineering lead walked through how to build Claude integrations that never send EU personal data outside Europe, using the <code>inference_geo: "eu"</code> parameter released in February and the new EU data-residency endpoint (<code>api.eu.anthropic.com</code>). The session included a live diff of a before/after integration to make the migration concrete.</li>
+    <li><strong>Agentic product patterns for regulated industries:</strong> A founder panel (three Berlin-based companies building in fintech, healthcare, and legal) discussed what it actually takes to deploy Claude agents under EU regulations — MiFID II data-handling constraints, medical-device software rules, and German legal-tech ethics guidelines. The consensus: start with the most constrained use case in your category, get that right, then expand.</li>
+    <li><strong>EU AI Act tier mapping:</strong> Anthropic published a short reference guide mapping Claude's built-in safety features to the EU AI Act's risk tiers. Applications built on Claude in the "high-risk" categories (HR, credit, education, biometrics) must document their conformity assessment; the guide explains what Anthropic supplies and what the application developer must add.</li>
+  </ul>
+
+  <h3>Afternoon Builder cohort highlights</h3>
+  <p>The afternoon session included three hours of structured building time, with Anthropic engineers rotating between tables. Common patterns that emerged:</p>
+  <ul>
+    <li><strong>Tool-call caching for GDPR-sensitive pipelines:</strong> Several teams discovered that ephemeral prompt caching (cache lifetime set to zero, so nothing persists past the session) lets them get most of the latency benefit of caching without triggering data-residency concerns for sensitive fields.</li>
+    <li><strong>Structured outputs for regulatory evidence trails:</strong> Using <code>response_format: json_schema</code> with a schema that includes a <code>reasoning_trace</code> field forces Claude to produce a machine-readable audit log alongside its output — useful for demonstrating compliance in regulated workflows.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>EU AI Act reference guide: where to find it</strong>
+    <p>Anthropic published the EU AI Act tier mapping today at <code>anthropic.com/eu-ai-act</code>. Even if you are not yet subject to the Act's high-risk provisions, the document is worth reading as a checklist of documentation you will eventually need. The Act's high-risk provisions begin applying in August 2026, leaving roughly two months for teams to close gaps.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/events/claude-founder-house" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Founder House Berlin</span>
+    <span class="tag">European developers</span>
+    <span class="tag">GDPR</span>
+    <span class="tag">EU AI Act</span>
+    <span class="tag">data residency</span>
+    <span class="tag">inference_geo</span>
+    <span class="tag">api.eu.anthropic.com</span>
+    <span class="tag">regulated industries</span>
+    <span class="tag">fintech</span>
+    <span class="tag">conformity assessment</span>
+    <span class="tag">ephemeral caching</span>
+    <span class="tag">reasoning trace</span>
+    <span class="tag">audit log</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — G7 AI Communiqué Published
+     Source: https://www.reuters.com/technology/artificial-intelligence/g7-leaders-publish-ai-governance-framework-2026-06-18/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> G7 AI Communiqué Published: What the Risk-Tiered Deployment Framework Means for Claude API Developers</h2>
+
+  <p>Following Dario Amodei's briefing to G7 leaders yesterday in Evian, the full <strong>G7 AI Governance Communiqué</strong> was published this morning. The central mechanism is <strong>"risk-tiered deployment authorisation"</strong> — a three-tier classification system that determines how much pre-deployment review a model or application requires before it can be commercially deployed. The framework is non-binding in its current form but is described as a template for domestic legislation.</p>
+
+  <h3>The three tiers</h3>
+  <ul>
+    <li><strong>Tier 1 — General AI applications:</strong> Standard consumer and business tools. No new pre-deployment requirements beyond what already exists in each jurisdiction. The vast majority of Claude API use cases fall here. Developers building chat assistants, document summarisers, code review tools, and similar productivity applications are in Tier 1.</li>
+    <li><strong>Tier 2 — High-impact AI applications:</strong> AI used in high-risk decision contexts (credit, employment, healthcare triage, legal advice). Requires documented conformity assessment and an ongoing incident-reporting obligation. Anthropic's EU AI Act guide (published today) maps directly to this tier for EU-based deployments.</li>
+    <li><strong>Tier 3 — Frontier model training and deployment:</strong> Applies only to model <em>developers</em> training above the 10<sup>26</sup> FLOPs threshold proposed in Amodei's briefing. Requires a pre-deployment capability evaluation by an independent third party before commercial release. This tier does not apply to Claude API users — it applies to Anthropic itself (and its peers).</li>
+  </ul>
+
+  <div class="callout">
+    <strong>What this actually means for most Claude developers right now</strong>
+    <p>Almost nothing changes immediately — the communiqué is a non-binding template and domestic legislation will take time to follow. The practical near-term implication for Tier 2 applications: if you are building in healthcare, finance, or employment, start documenting your conformity assessment process now. Anthropic has committed to publishing a "compliance evidence package" for enterprise customers by Q3 2026 that covers what Anthropic contributes to a Tier 2 conformity assessment, so you only need to document the application-layer decisions you made on top of Claude. Watch for that documentation release; it will materially reduce the compliance burden.</p>
+  </div>
+
+  <h3>What the communiqué does not do</h3>
+  <p>Notably absent: any binding international coordination mechanism on compute thresholds, which Amodei had specifically requested. G7 members agreed on the principle of aligning definitions of "frontier training run" but deferred the specific FLOPs number to a subsequent technical working group. The working group is expected to report back at the G7 AI ministerial in October 2026.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://www.reuters.com/technology/artificial-intelligence/g7-leaders-publish-ai-governance-framework-2026-06-18/" class="source-link" target="_blank" rel="noopener">reuters.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">G7 communiqué</span>
+    <span class="tag">risk-tiered deployment</span>
+    <span class="tag">Tier 1 applications</span>
+    <span class="tag">Tier 2 high-impact</span>
+    <span class="tag">Tier 3 frontier</span>
+    <span class="tag">conformity assessment</span>
+    <span class="tag">10^26 FLOPs</span>
+    <span class="tag">incident reporting</span>
+    <span class="tag">compute thresholds</span>
+    <span class="tag">G7 AI ministerial</span>
+    <span class="tag">compliance evidence package</span>
+    <span class="tag">AI governance</span>
+    <span class="tag">non-binding framework</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude Code: Nested Sub-Agents
+     Source: https://github.com/anthropics/claude-code/releases
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code Gains Nested Sub-Agent Spawning — Agents That Create Their Own Agents</h2>
+
+  <p>A significant Claude Code release shipped overnight, introducing <strong>nested sub-agent spawning</strong>: the ability for a sub-agent to spawn its own child agents. Until now, Claude Code's multi-agent mode was strictly two-level — an orchestrator could spawn sub-agents, but sub-agents could not themselves spawn further agents. That constraint is now lifted. The result is true hierarchical multi-agent architectures: an orchestrator can delegate to a project manager agent, which can itself spin up specialist agents for individual sub-tasks, with results rolled up back through the tree.</p>
+
+  <h3>How to use it</h3>
+  <p>Nested spawning is enabled by default when <code>--agents</code> is passed to Claude Code. Sub-agents that want to spawn children use the same <code>spawn_subagent</code> tool call their parent used. The depth limit is configurable:</p>
+
+  <pre><code># Default: depth limit of 3 (orchestrator + 2 levels of nesting)
+claude --agents "Refactor the payments module"
+
+# Increase depth for deeply hierarchical tasks
+claude --agents --max-agent-depth 5 "Audit the entire codebase for security issues"
+
+# Disable nesting (revert to two-level-only)
+claude --agents --max-agent-depth 1 "Run all the tests"</code></pre>
+
+  <h3>Also in this release</h3>
+  <ul>
+    <li><strong><code>/cd</code> command:</strong> Change the session's working directory without rebuilding the prompt cache. Previously, moving to a different directory required starting a new session, losing the context of everything discussed so far. <code>/cd ../sibling-service</code> now switches the working tree in place.</li>
+    <li><strong>Mid-stream disconnect recovery:</strong> Claude Code now preserves the partial response when a connection drops mid-generation. Previously, a mid-stream drop produced an error and discarded the partial output. Now the partial response is saved; on reconnect, you see what was generated before the drop and can continue from that point.</li>
+    <li><strong>WSL2 / Windows Terminal fixes:</strong> Mouse-wheel scrolling through long outputs in WSL2 and VS Code's integrated terminal was broken in the June 11 release. This is fixed.</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>Watch out: nested agents multiply token consumption non-linearly</strong>
+    <p>Each level of nesting adds its own full context window. A three-level deep tree where every agent runs a 100K-token session consumes tokens in a pattern like <code>parent + (N × child) + (N × M × grandchild)</code>. For a branching factor of 5 at each level, that is 1 + 5 + 25 = 31 concurrent context windows. Set <code>--max-agent-depth</code> deliberately and use <code>--agent-budget-tokens</code> per agent to cap individual agent context sizes. The billing dashboard now shows per-depth-level token breakdowns to help you understand where consumption is concentrated.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">nested sub-agents</span>
+    <span class="tag">hierarchical agents</span>
+    <span class="tag">spawn_subagent</span>
+    <span class="tag">max-agent-depth</span>
+    <span class="tag">/cd command</span>
+    <span class="tag">mid-stream recovery</span>
+    <span class="tag">WSL2 fix</span>
+    <span class="tag">multi-agent</span>
+    <span class="tag">agent-budget-tokens</span>
+    <span class="tag">token consumption</span>
+    <span class="tag">orchestrator</span>
+    <span class="tag">agentic coding</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

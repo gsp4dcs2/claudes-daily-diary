@@ -10355,6 +10355,89 @@ def img_kandinsky_20260618():
     return base
 
 
+def img_delaunay_20260619():
+    """Robert Delaunay spectral rings — Seoul global hub, identity federation, live artifact signals."""
+    base = Image.new("RGB", (W, H), (5, 4, 22))   # deep indigo bg
+
+    spectral_rings = [
+        (210, 30, 30), (210, 110, 0), (210, 190, 0),
+        (0, 180, 70), (0, 120, 210), (90, 0, 210),
+        (180, 0, 160), (230, 230, 230),
+    ]
+
+    # 1. Large central disc — Seoul hub: main broadcast node
+    cx, cy, max_r = 560, 300, 270
+    for i, col in enumerate(spectral_rings):
+        r = max_r - i * 28
+        if r < 8:
+            break
+        rl = layer()
+        rd = ImageDraw.Draw(rl)
+        alpha = 180 if i < 3 else 140
+        rd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=(col[0], col[1], col[2], alpha))
+        base = comp(base, rl)
+
+    # 2. Smaller disc upper-left — Workload Identity keyless auth node
+    for i, col in enumerate(spectral_rings):
+        r = 150 - i * 17
+        if r < 6:
+            break
+        rl = layer()
+        rd = ImageDraw.Draw(rl)
+        rd.ellipse([(170 - r, 145 - r), (170 + r, 145 + r)], fill=(col[0], col[1], col[2], 155))
+        base = comp(base, rl)
+
+    # 3. Smaller disc lower-right — Artifacts live page signal
+    for i, col in enumerate(spectral_rings):
+        r = 125 - i * 14
+        if r < 6:
+            break
+        rl = layer()
+        rd = ImageDraw.Draw(rl)
+        rd.ellipse([(1030 - r, 490 - r), (1030 + r, 490 + r)], fill=(col[0], col[1], col[2], 140))
+        base = comp(base, rl)
+
+    # 4. Medium disc upper-right — Korea enterprise partner cluster
+    for i, col in enumerate(spectral_rings):
+        r = 100 - i * 11
+        if r < 5:
+            break
+        rl = layer()
+        rd = ImageDraw.Draw(rl)
+        rd.ellipse([(980 - r, 130 - r), (980 + r, 130 + r)], fill=(col[0], col[1], col[2], 130))
+        base = comp(base, rl)
+
+    # 5. Arc broadcast rings radiating from central Seoul disc
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(8):
+        r_arc = 295 + i * 52
+        ad.arc([(cx - r_arc, cy - r_arc), (cx + r_arc, cy + r_arc)],
+               start=0, end=360, fill=(220, 220, 220, max(8, 65 - i * 8)), width=2)
+    base = comp(base, al)
+
+    # 6. Coral identity link lines — connecting Seoul hub to satellite nodes
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    nodes = [(170, 145), (1030, 490), (980, 130)]
+    for nx, ny in nodes:
+        ld.line([(cx, cy), (nx, ny)], fill=(232, 115, 74, 70), width=2)
+    base = comp(base, ll)
+
+    # 7. Star scatter — global developer nodes
+    stl = layer()
+    std = ImageDraw.Draw(stl)
+    for _ in range(120):
+        sx = rng.randint(0, W)
+        sy = rng.randint(0, H)
+        sr = rng.randint(1, 3)
+        std.ellipse([(sx - sr, sy - sr), (sx + sr, sy + sr)],
+                    fill=(255, 255, 255, rng.randint(50, 180)))
+    base = comp(base, stl)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -10556,6 +10639,7 @@ DAYS = [
     ("2026-06-16", img_miro_20260616,    "Design & Tools",    "Joan Miró"),
     ("2026-06-17", img_mondrian_20260617, "G7 AI Summit",     "Piet Mondrian"),
     ("2026-06-18", img_kandinsky_20260618, "Founder House",   "Wassily Kandinsky"),
+    ("2026-06-19", img_delaunay_20260619, "Seoul Global Hub", "Robert Delaunay"),
 ]
 
 for date, fn, kw, artist in DAYS:

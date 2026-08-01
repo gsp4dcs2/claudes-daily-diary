@@ -11060,6 +11060,89 @@ def img_kandinsky_20260724():
     return base
 
 
+def img_mondrian_20260725():
+    """Piet Mondrian — grid, primary rectangles — default model / structure theme."""
+    base = Image.new("RGB", (W, H), (240, 236, 224))
+    grid_l = layer(); gd = ImageDraw.Draw(grid_l)
+    gd.line([(420, 0), (420, H)], fill=(20, 20, 20, 255), width=6)
+    gd.line([(0, 280), (W, 280)], fill=(20, 20, 20, 255), width=6)
+    base = comp(base, grid_l)
+    fill_l = layer(); fd = ImageDraw.Draw(fill_l)
+    fd.rectangle([(0, 0), (420, 280)], fill=(210, 30, 40, 235))
+    fd.rectangle([(420, 280), (W, H)], fill=(30, 70, 190, 235))
+    base = comp(base, fill_l)
+    return base
+
+
+def img_calder_20260726():
+    """Alexander Calder — flat shapes on lines — effort toggle balance theme."""
+    base = Image.new("RGB", (W, H), (248, 246, 242))
+    line_l = layer(); ld = ImageDraw.Draw(line_l)
+    ld.line([(600, 40), (600, 560)], fill=(20, 20, 20, 255), width=5)
+    ld.line([(280, 250), (920, 200), (600, 300)], fill=(20, 20, 20, 255), width=4)
+    base = comp(base, line_l)
+    shapes_l = layer(); sd = ImageDraw.Draw(shapes_l)
+    sd.ellipse([(560, 20), (640, 100)], fill=(220, 40, 40, 255))
+    sd.ellipse([(250, 220), (310, 280)], fill=(40, 90, 200, 255))
+    sd.ellipse([(890, 170), (950, 230)], fill=(235, 195, 30, 255))
+    base = comp(base, shapes_l)
+    return base
+
+
+def img_franzmarc_20260727():
+    """Franz Marc — jewel-toned bg, nature shapes — privacy / trust theme."""
+    base = Image.new("RGB", (W, H), (12, 32, 48))
+    shapes_l = layer(); sd = ImageDraw.Draw(shapes_l)
+    sd.polygon([(280, 470), (400, 190), (520, 470)], fill=(200, 80, 40, 220))
+    sd.ellipse([(620, 140), (900, 400)], fill=(30, 130, 100, 210))
+    base = comp(base, shapes_l)
+    return base
+
+
+def img_lissitzky_20260728():
+    """El Lissitzky — bars — MCP spec / structured protocol theme."""
+    base = Image.new("RGB", (W, H), (236, 232, 222))
+    bars_l = layer(); bd = ImageDraw.Draw(bars_l)
+    bd.rectangle([(140, 440), (1060, 480)], fill=(20, 20, 20, 255))
+    bd.polygon([(220, 440), (880, 180), (920, 220), (260, 480)], fill=(200, 30, 40, 235))
+    bd.rectangle([(700, 90), (740, 440)], fill=(20, 20, 20, 255))
+    base = comp(base, bars_l)
+    return base
+
+
+def img_seurat_20260729():
+    """Georges Seurat — pointillist dots — network / distributed data theme."""
+    base = Image.new("RGB", (W, H), (16, 18, 32))
+    dots_l = layer(); dd = ImageDraw.Draw(dots_l)
+    for _ in range(5500):
+        x = rng.randint(0, W); y = rng.randint(0, H)
+        col = rng.choice([(230, 120, 90), (90, 150, 220), (230, 200, 90)])
+        dd.ellipse([(x-2, y-2), (x+2, y+2)], fill=(col[0], col[1], col[2], rng.randint(90, 200)))
+    base = comp(base, dots_l)
+    return base
+
+
+def img_malevich_20260730():
+    """Kazimir Malevich — tilted shapes — security disclosure / absolutes theme."""
+    base = Image.new("RGB", (W, H), (236, 229, 212))
+    shapes_l = layer(); sd = ImageDraw.Draw(shapes_l)
+    sd.polygon([(160, 470), (720, 390), (780, 480), (210, 570)], fill=(20, 20, 20, 255))
+    sd.rectangle([(540, 100), (770, 420)], fill=(200, 30, 40, 235))
+    base = comp(base, shapes_l)
+    return base
+
+
+def img_leger_20260731():
+    """Fernand Léger — mechanical outlines — network isolation checklist theme."""
+    base = Image.new("RGB", (W, H), (20, 20, 22))
+    shapes_l = layer(); sd = ImageDraw.Draw(shapes_l)
+    sd.rectangle([(180, 160), (460, 440)], outline=(230, 60, 40, 240), width=10)
+    sd.ellipse([(560, 190), (800, 430)], outline=(240, 200, 30, 240), width=10)
+    sd.rectangle([(870, 200), (1080, 420)], outline=(40, 130, 220, 240), width=8)
+    base = comp(base, shapes_l)
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -11297,6 +11380,13 @@ DAYS = [
     ("2026-07-22", img_klee_20260722,      "Fork & Caps",      "Paul Klee"),
     ("2026-07-23", img_balla_20260723,     "Voice Mode",       "Giacomo Balla"),
     ("2026-07-24", img_kandinsky_20260724, "Opus 5 Launch",    "Wassily Kandinsky"),
+    ("2026-07-25", img_mondrian_20260725,  "Default Opus 5",   "Piet Mondrian"),
+    ("2026-07-26", img_calder_20260726,    "Effort Balance",   "Alexander Calder"),
+    ("2026-07-27", img_franzmarc_20260727, "Privacy Trust",    "Franz Marc"),
+    ("2026-07-28", img_lissitzky_20260728, "MCP Spec",         "El Lissitzky"),
+    ("2026-07-29", img_seurat_20260729,    "Network Failure",  "Georges Seurat"),
+    ("2026-07-30", img_malevich_20260730,  "Security Disclose","Kazimir Malevich"),
+    ("2026-07-31", img_leger_20260731,     "Isolation Check",  "Fernand Léger"),
 ]
 
 for date, fn, kw, artist in DAYS:

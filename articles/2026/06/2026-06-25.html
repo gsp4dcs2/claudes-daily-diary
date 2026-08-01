@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="June 25: Claude Code v2.1.193 ships 15 changes — auto-mode gets a classifyAllShell setting and automatic memory reclamation for background shells, plus live bash path completion and an MCP auth startup notice.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-06-25 – Claude Code v2.1.193: Auto-Mode Visibility &amp; Background Shell Cleanup">
+  <meta property="og:description" content="June 25: Claude Code v2.1.193 ships 15 changes — auto-mode gets a classifyAllShell setting and automatic memory reclamation for background shells, plus live bash path completion and an MCP auth startup notice.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/06/2026-06-25.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/06/2026-06-25.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/06/2026-06-25.png">
+
+  <title>2026-06-25 – Claude Code v2.1.193: Auto-Mode Visibility &amp; Background Shell Cleanup | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Code v2.1.193: Auto-Mode Visibility &amp; Background Shell Cleanup",
+  "description": "June 25: Claude Code v2.1.193 ships 15 changes — auto-mode gets a classifyAllShell setting and automatic memory reclamation for background shells, plus live bash path completion and an MCP auth startup notice.",
+  "datePublished": "2026-06-25",
+  "dateModified": "2026-06-25",
+  "url": "https://claudebeat.ai/articles/2026/06/2026-06-25.html",
+  "image": "https://claudebeat.ai/articles/2026/06/2026-06-25.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/06/2026-06-25.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-06-25</span>
+      <span class="cat-badge cat-tips">💡 Tips 'n' Tricks</span>
+      <h1>Claude Code v2.1.193: Auto-Mode Visibility &amp; Background Shell Cleanup</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-06-25.png" alt="Claude Code v2.1.193: Auto-Mode Visibility &amp; Background Shell Cleanup — visual for 2026-06-25">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — v2.1.193 auto-mode + background shells
+     Source: https://code.claude.com/docs/en/changelog
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> autoMode.classifyAllShell and Automatic Memory Reclamation for Background Shells</h2>
+
+  <p>Claude Code v2.1.193 landed 15 changes, and the two most consequential are both about auto mode. The new <code>autoMode.classifyAllShell</code> setting extends auto mode's command-risk classification to <strong>every</strong> shell command it runs, not just a pre-defined subset — closing a gap where commands outside the classifier's known list previously fell through to a less scrutinised default path. Separately, background shells now get <strong>automatic memory reclamation</strong>: long-running or forgotten background processes launched during a session no longer silently accumulate memory until something else notices.</p>
+
+  <pre><code>// settings.json
+{
+  "autoMode": {
+    "classifyAllShell": true
+  }
+}</code></pre>
+
+  <h3>Why the classification gap mattered</h3>
+  <p>Auto mode's safety model depends on correctly categorising what a command will do before running it unattended. A command that fell outside the classifier's known patterns previously got treated more permissively than it should have — not necessarily unsafe, but inconsistent with the rest of the safety model. Making classification apply universally removes that inconsistency rather than patching a specific exploit.</p>
+
+  <div class="callout tip">
+    <strong>Turn this on if you run long autonomous sessions</strong>
+    <p>If you use Claude Code for extended unattended runs — overnight test suites, long refactors, background monitoring scripts — both changes in this release are worth adopting immediately: <code>classifyAllShell</code> tightens the safety net, and automatic background-shell cleanup prevents the slow memory creep that used to require a manual restart on very long sessions.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://code.claude.com/docs/en/changelog" class="source-link" target="_blank" rel="noopener">code.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">v2.1.193</span>
+    <span class="tag">auto mode</span>
+    <span class="tag">classifyAllShell</span>
+    <span class="tag">background shells</span>
+    <span class="tag">memory reclamation</span>
+    <span class="tag">agent safety</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — bash path completion + MCP auth notice
+     Source: https://code.claude.com/docs/en/changelog
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> Two Smaller v2.1.193 Wins: Live Bash Path Completion &amp; MCP Auth Startup Notices</h2>
+
+  <p>The same release adds <strong>live file path completion in bash mode</strong> — typing a partial path in an inline bash command now surfaces real filesystem matches as you type, rather than requiring a full correct path or a failed command to discover a typo. It also adds a <strong>startup notification when an MCP server requires authentication</strong>, surfacing the auth requirement immediately when a session begins rather than only when the server is first invoked mid-conversation.</p>
+
+  <div class="callout tip">
+    <strong>Small changes, real friction removed</strong>
+    <p>Neither of these is a headline feature, but both remove a specific "wait, why didn't that work" moment: path completion cuts down bash-command typos, and the upfront MCP auth notice means you resolve authentication before you're mid-task and blocked, rather than after.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://code.claude.com/docs/en/changelog" class="source-link" target="_blank" rel="noopener">code.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">v2.1.193</span>
+    <span class="tag">bash mode</span>
+    <span class="tag">path completion</span>
+    <span class="tag">MCP</span>
+    <span class="tag">authentication</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

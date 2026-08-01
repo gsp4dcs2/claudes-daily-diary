@@ -10540,6 +10540,66 @@ def img_balla_20260623():
     return base
 
 
+def img_moholy_20260624():
+    """László Moholy-Nagy — transparent overlapping circles on white — account security / transparency theme."""
+    base = Image.new("RGB", (W, H), (245, 245, 240))
+
+    shapes_l = layer()
+    sd = ImageDraw.Draw(shapes_l)
+    circles = [
+        (280, 280, 190, (210, 40, 60, 140)),
+        (520, 220, 160, (40, 90, 200, 140)),
+        (700, 380, 210, (230, 190, 30, 140)),
+        (420, 420, 140, (30, 160, 120, 140)),
+    ]
+    for (cx, cy, r, col) in circles:
+        sd.ellipse([(cx-r, cy-r), (cx+r, cy+r)], fill=col, outline=(20, 20, 20, 220), width=3)
+    base = comp(base, shapes_l)
+
+    rect_l = layer()
+    rd = ImageDraw.Draw(rect_l)
+    rd.rectangle([(760, 80), (1120, 260)], outline=(20, 20, 20, 220), width=4)
+    rd.rectangle([(820, 340), (1080, 540)], outline=(20, 20, 20, 220), width=4)
+    base = comp(base, rect_l)
+    return base
+
+
+def img_rothko_20260625():
+    """Mark Rothko — hazy colour bands — auto-mode depth / long-running sessions theme."""
+    base = Image.new("RGB", (W, H), (25, 18, 20))
+
+    band_l = layer()
+    bd = ImageDraw.Draw(band_l)
+    bd.rectangle([(80, 60), (1120, 280)], fill=(180, 70, 40, 210))
+    for _ in range(4000):
+        x = rng.randint(80, 1120); y = rng.randint(60, 280)
+        bd.point((x, y), fill=(200, 90, 50, rng.randint(20, 60)))
+    base = comp(base, band_l)
+
+    band2_l = layer()
+    b2d = ImageDraw.Draw(band2_l)
+    b2d.rectangle([(80, 320), (1120, 560)], fill=(40, 60, 110, 210))
+    for _ in range(4000):
+        x = rng.randint(80, 1120); y = rng.randint(320, 560)
+        b2d.point((x, y), fill=(60, 80, 140, rng.randint(20, 60)))
+    base = comp(base, band2_l)
+    return base
+
+
+def img_lissitzky_20260626():
+    """El Lissitzky — white/cream bg, red+black bars — CLAUDE.md / tooling / structure theme."""
+    base = Image.new("RGB", (W, H), (240, 236, 226))
+
+    bars_l = layer()
+    bd = ImageDraw.Draw(bars_l)
+    bd.rectangle([(120, 460), (1080, 500)], fill=(20, 20, 20, 255))
+    bd.polygon([(200, 460), (900, 200), (940, 240), (240, 500)], fill=(200, 30, 40, 235))
+    bd.rectangle([(700, 100), (740, 460)], fill=(20, 20, 20, 255))
+    bd.ellipse([(660, 260), (760, 360)], fill=(200, 30, 40, 235), outline=(20,20,20,255), width=3)
+    base = comp(base, bars_l)
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -10746,6 +10806,9 @@ DAYS = [
     ("2026-06-21", img_malevich_20260621,  "Auto-Mode Safety",  "Kazimir Malevich"),
     ("2026-06-22", img_klimt_20260622,     "Micron Deal",       "Gustav Klimt"),
     ("2026-06-23", img_balla_20260623,     "Governed AI",       "Giacomo Balla"),
+    ("2026-06-24", img_moholy_20260624,    "Account Security",  "László Moholy-Nagy"),
+    ("2026-06-25", img_rothko_20260625,    "Auto-Mode Depth",   "Mark Rothko"),
+    ("2026-06-26", img_lissitzky_20260626, "Scaling CLAUDE.md", "El Lissitzky"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="June 23: A practical look at governed AI in the enterprise — what Snowflake and Anthropic's approach to AI governance means for teams building on Claude — plus a deployment checklist for data residency with inference_geo.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-06-23 – Governed AI in the Enterprise &amp; a Data-Residency Checklist">
+  <meta property="og:description" content="June 23: A practical look at governed AI in the enterprise — what Snowflake and Anthropic's approach to AI governance means for teams building on Claude — plus a deployment checklist for data residency with inference_geo.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/06/2026-06-23.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/06/2026-06-23.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/06/2026-06-23.png">
+
+  <title>2026-06-23 – Governed AI in the Enterprise &amp; a Data-Residency Checklist | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Governed AI in the Enterprise &amp; a Data-Residency Checklist",
+  "description": "June 23: A practical look at governed AI in the enterprise — what Snowflake and Anthropic's approach to AI governance means for teams building on Claude — plus a deployment checklist for data residency with inference_geo.",
+  "datePublished": "2026-06-23",
+  "dateModified": "2026-06-23",
+  "url": "https://claudebeat.ai/articles/2026/06/2026-06-23.html",
+  "image": "https://claudebeat.ai/articles/2026/06/2026-06-23.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/06/2026-06-23.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-06-23</span>
+      <span class="cat-badge cat-practice">✅ Best Practices</span>
+      <h1>Governed AI in the Enterprise &amp; a Data-Residency Checklist</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-06-23.png" alt="Governed AI in the Enterprise &amp; a Data-Residency Checklist — visual for 2026-06-23">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Governed AI (Snowflake/Anthropic angle)
+     Source: https://www.snowflake.com/en/news/press-releases/snowflake-and-anthropic-accelerate-enterprise-ai-adoption-driven-by-rising-demand-for-governed-ai/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✅</span> "Governed AI": What Snowflake and Anthropic's Enterprise Push Reveals About Buyer Priorities</h2>
+
+  <p>Snowflake and Anthropic have deepened their partnership around what both companies are calling <strong>governed AI</strong> — enterprise AI adoption built around data lineage, access controls, and auditability from the start, rather than bolted on afterward. The framing is a useful signal for any team building Claude into an enterprise product: buyers increasingly evaluate AI features on governance posture as a first-class requirement, not a follow-up question after the demo.</p>
+
+  <h3>What "governed" tends to mean in practice</h3>
+  <ul>
+    <li><strong>Data lineage</strong> — knowing exactly which underlying data a Claude-powered feature touched to produce a given output.</li>
+    <li><strong>Access controls</strong> — enforcing the same row/column-level permissions your data warehouse already has, inside the AI layer too, not just at the database.</li>
+    <li><strong>Auditability</strong> — a queryable record of what was asked, what was retrieved, and what was generated, sufficient to satisfy a compliance review after the fact.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Practical takeaway if you're pitching Claude internally</strong>
+    <p>If your organisation runs on Snowflake (or any warehouse with similar governance tooling), the fastest path to enterprise buy-in is usually to keep Claude's data access inside that existing governance boundary — via a connector or MCP server that inherits the warehouse's permission model — rather than exporting data to a separate pipeline for the AI layer. It's an easier security review, and it's the pattern buyers are increasingly expecting by default.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://www.snowflake.com/en/news/press-releases/snowflake-and-anthropic-accelerate-enterprise-ai-adoption-driven-by-rising-demand-for-governed-ai/" class="source-link" target="_blank" rel="noopener">snowflake.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">governed AI</span>
+    <span class="tag">Snowflake</span>
+    <span class="tag">enterprise adoption</span>
+    <span class="tag">data lineage</span>
+    <span class="tag">access controls</span>
+    <span class="tag">auditability</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — inference_geo deployment checklist
+     Source: https://claude.com/blog (data residency controls, referenced from 2026-06-08 entry)
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✅</span> A Pre-Deployment Checklist for inference_geo Data Residency</h2>
+
+  <p>Anthropic's per-request <code>inference_geo</code> parameter (shipped 2026-06-08) lets you pin inference to a specific geography, but adopting it correctly across an existing production system takes more than adding the parameter to your API calls. A short checklist for teams rolling it out:</p>
+
+  <ul>
+    <li><strong>Audit every call site</strong> — a missed endpoint that doesn't set <code>inference_geo</code> silently falls back to default routing, which can quietly violate a residency commitment you believe is already enforced everywhere.</li>
+    <li><strong>Decide your failure mode</strong> — should a request fail closed (error out) or fail open (route elsewhere) if the requested region is temporarily unavailable? Pick deliberately; don't let the SDK's default decide for you.</li>
+    <li><strong>Log the geo actually used</strong>, not just the geo requested — for audit purposes, "we asked for EU routing" and "the request was served from the EU" are different claims, and only the second one satisfies most residency commitments.</li>
+    <li><strong>Re-test after any SDK upgrade</strong> — residency-relevant defaults are exactly the kind of setting that can shift quietly in a minor version bump.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Why this is worth a dedicated review, not just a config change</strong>
+    <p>Data residency commitments are usually contractual, not just technical preferences — getting this wrong isn't a bug, it's a compliance gap. Treat the rollout as you would any other regulated-data control: a named owner, a written test plan, and a periodic re-audit, not a one-time parameter addition.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://claude.com/blog" class="source-link" target="_blank" rel="noopener">claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">inference_geo</span>
+    <span class="tag">data residency</span>
+    <span class="tag">compliance</span>
+    <span class="tag">deployment checklist</span>
+    <span class="tag">audit logging</span>
+    <span class="tag">regulated industries</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

@@ -10438,6 +10438,108 @@ def img_delaunay_20260619():
     return base
 
 
+def img_klee_20260620():
+    """Paul Klee — warm-to-cool grid cells, node circles — background subagents / stream hints theme."""
+    base = Image.new("RGB", (W, H), (28, 24, 40))
+
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    cols, rows = 12, 7
+    cw, ch = W / cols, H / rows
+    palette = [(214, 168, 90), (120, 150, 120), (90, 120, 160), (200, 110, 90), (170, 190, 150)]
+    for r in range(rows):
+        for c in range(cols):
+            if rng.random() < 0.55:
+                col = rng.choice(palette)
+                a = rng.randint(60, 150)
+                gd.rectangle([(c*cw, r*ch), ((c+1)*cw, (r+1)*ch)], fill=(col[0], col[1], col[2], a))
+    base = comp(base, grid_l)
+
+    line_l = layer()
+    ld = ImageDraw.Draw(line_l)
+    for r in range(rows + 1):
+        ld.line([(0, r*ch), (W, r*ch)], fill=(20, 16, 30, 200), width=2)
+    for c in range(cols + 1):
+        ld.line([(c*cw, 0), (c*cw, H)], fill=(20, 16, 30, 200), width=2)
+    base = comp(base, line_l)
+
+    node_l = layer()
+    nd = ImageDraw.Draw(node_l)
+    nodes = [(200, 180), (420, 340), (650, 200), (860, 420), (980, 160), (330, 480)]
+    for (nx, ny) in nodes:
+        nd.ellipse([(nx-22, ny-22), (nx+22, ny+22)], fill=(250, 245, 235, 230), outline=(20, 16, 30, 255), width=3)
+    for i in range(len(nodes) - 1):
+        nd.line([nodes[i], nodes[i+1]], fill=(250, 245, 235, 140), width=2)
+    base = comp(base, node_l)
+
+    return base
+
+
+def img_malevich_20260621():
+    """Kazimir Malevich — cream bg, tilted geometric shapes — git safety / config guardrails theme."""
+    base = Image.new("RGB", (W, H), (238, 231, 214))
+
+    shapes_l = layer()
+    sd = ImageDraw.Draw(shapes_l)
+    sd.polygon([(150, 460), (700, 380), (760, 470), (200, 560)], fill=(20, 20, 20, 255))
+    sd.rectangle([(520, 90), (760, 420)], fill=(200, 30, 40, 235))
+    sd.polygon([(780, 460), (1080, 340), (1140, 420), (860, 540)], fill=(30, 60, 150, 230))
+    sd.polygon([(880, 60), (1000, 60), (960, 260), (860, 250)], fill=(230, 190, 20, 230))
+    base = comp(base, shapes_l)
+
+    line_l = layer()
+    ld = ImageDraw.Draw(line_l)
+    ld.line([(60, 560), (1140, 90)], fill=(20, 20, 20, 160), width=3)
+    base = comp(base, line_l)
+    return base
+
+
+def img_klimt_20260622():
+    """Gustav Klimt — dark bg, gold mosaic — Micron partnership / infrastructure theme."""
+    base = Image.new("RGB", (W, H), (18, 14, 10))
+
+    gold_l = layer()
+    gd = ImageDraw.Draw(gold_l)
+    gd.ellipse([(360, 60), (900, 570)], fill=(160, 120, 30, 60))
+    for _ in range(220):
+        x = rng.randint(300, 950)
+        y = rng.randint(40, 590)
+        s = rng.randint(6, 18)
+        shade = rng.choice([(212, 175, 55), (180, 140, 40), (230, 200, 100), (140, 100, 30)])
+        gd.rectangle([(x, y), (x+s, y+s)], fill=(shade[0], shade[1], shade[2], rng.randint(120, 220)))
+    base = comp(base, gold_l)
+
+    teal_l = layer()
+    td = ImageDraw.Draw(teal_l)
+    td.ellipse([(560, 250), (700, 390)], fill=(30, 120, 120, 220), outline=(10, 60, 60, 255), width=4)
+    base = comp(base, teal_l)
+    return base
+
+
+def img_balla_20260623():
+    """Giacomo Balla / Futurism — near-black bg, radiating planes — governed-AI / data residency theme."""
+    base = Image.new("RGB", (W, H), (10, 10, 12))
+
+    rays_l = layer()
+    rd = ImageDraw.Draw(rays_l)
+    vp = (600, 300)
+    cols = [(60, 140, 210), (210, 90, 40), (230, 200, 40), (90, 200, 140)]
+    for i in range(28):
+        ang = i * (360/28) * math.pi / 180
+        length = rng.randint(300, 560)
+        x2 = vp[0] + length * math.cos(ang)
+        y2 = vp[1] + length * math.sin(ang) * 0.6
+        col = rng.choice(cols)
+        rd.line([vp, (x2, y2)], fill=(col[0], col[1], col[2], 130), width=rng.randint(3, 9))
+    base = comp(base, rays_l)
+
+    core_l = layer()
+    cd = ImageDraw.Draw(core_l)
+    cd.ellipse([(vp[0]-70, vp[1]-70), (vp[0]+70, vp[1]+70)], fill=(240, 235, 220, 235))
+    base = comp(base, core_l)
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -10640,6 +10742,10 @@ DAYS = [
     ("2026-06-17", img_mondrian_20260617, "G7 AI Summit",     "Piet Mondrian"),
     ("2026-06-18", img_kandinsky_20260618, "Founder House",   "Wassily Kandinsky"),
     ("2026-06-19", img_delaunay_20260619, "Seoul Global Hub", "Robert Delaunay"),
+    ("2026-06-20", img_klee_20260620,      "Background Review", "Paul Klee"),
+    ("2026-06-21", img_malevich_20260621,  "Auto-Mode Safety",  "Kazimir Malevich"),
+    ("2026-06-22", img_klimt_20260622,     "Micron Deal",       "Gustav Klimt"),
+    ("2026-06-23", img_balla_20260623,     "Governed AI",       "Giacomo Balla"),
 ]
 
 for date, fn, kw, artist in DAYS:

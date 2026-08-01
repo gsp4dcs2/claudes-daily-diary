@@ -11143,6 +11143,23 @@ def img_leger_20260731():
     return base
 
 
+def img_miro_20260801():
+    """Joan Miró — indigo bg, biomorphic blobs — accessibility / QoL fixes theme."""
+    base = Image.new("RGB", (W, H), (16, 12, 42))
+    blob_l = layer(); bd = ImageDraw.Draw(blob_l)
+    bd.ellipse([(220, 210), (440, 410)], fill=(230, 190, 30, 230))
+    bd.ellipse([(620, 160), (780, 320)], fill=(210, 40, 60, 230))
+    bd.ellipse([(840, 360), (1060, 530)], fill=(40, 150, 200, 230))
+    bd.line([(330, 310), (700, 240)], fill=(240, 240, 230, 200), width=4)
+    base = comp(base, blob_l)
+    star_l = layer(); sd = ImageDraw.Draw(star_l)
+    for _ in range(18):
+        x = rng.randint(60, 1140); y = rng.randint(40, 580)
+        sd.ellipse([(x-3, y-3), (x+3, y+3)], fill=(240, 240, 230, 200))
+    base = comp(base, star_l)
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -11387,6 +11404,7 @@ DAYS = [
     ("2026-07-29", img_seurat_20260729,    "Network Failure",  "Georges Seurat"),
     ("2026-07-30", img_malevich_20260730,  "Security Disclose","Kazimir Malevich"),
     ("2026-07-31", img_leger_20260731,     "Isolation Check",  "Fernand Léger"),
+    ("2026-08-01", img_miro_20260801,      "Screen Reader",    "Joan Miró"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -10600,6 +10600,138 @@ def img_lissitzky_20260626():
     return base
 
 
+def img_calder_20260627():
+    """Alexander Calder — white bg, flat primary shapes on thin lines — balance / self-verification theme."""
+    base = Image.new("RGB", (W, H), (250, 248, 244))
+
+    line_l = layer()
+    ld = ImageDraw.Draw(line_l)
+    ld.line([(600, 40), (600, 560)], fill=(20, 20, 20, 255), width=5)
+    ld.line([(300, 200), (900, 260)], fill=(20, 20, 20, 255), width=4)
+    ld.line([(150, 380), (500, 340)], fill=(20, 20, 20, 255), width=4)
+    ld.line([(700, 400), (1050, 440)], fill=(20, 20, 20, 255), width=4)
+    base = comp(base, line_l)
+
+    shapes_l = layer()
+    sd = ImageDraw.Draw(shapes_l)
+    sd.ellipse([(560, 20), (640, 100)], fill=(220, 40, 40, 255))
+    sd.ellipse([(280, 175), (330, 225)], fill=(40, 90, 200, 255))
+    sd.ellipse([(870, 235), (930, 295)], fill=(235, 195, 30, 255))
+    sd.ellipse([(130, 360), (185, 415)], fill=(40, 150, 90, 255))
+    sd.ellipse([(1020, 415), (1080, 475)], fill=(220, 40, 40, 255))
+    base = comp(base, shapes_l)
+    return base
+
+
+def img_miro_20260628():
+    """Joan Miró — indigo bg, biomorphic blobs — sub-agent networks / playful automation theme."""
+    base = Image.new("RGB", (W, H), (18, 14, 45))
+
+    blob_l = layer()
+    bd = ImageDraw.Draw(blob_l)
+    bd.ellipse([(200, 200), (420, 400)], fill=(230, 190, 30, 230))
+    bd.ellipse([(600, 150), (760, 310)], fill=(210, 40, 60, 230))
+    bd.ellipse([(820, 350), (1040, 520)], fill=(40, 150, 200, 230))
+    bd.line([(310, 300), (680, 230)], fill=(240, 240, 230, 200), width=4)
+    bd.line([(680, 230), (930, 430)], fill=(240, 240, 230, 200), width=4)
+    base = comp(base, blob_l)
+
+    star_l = layer()
+    sd = ImageDraw.Draw(star_l)
+    for _ in range(20):
+        x = rng.randint(60, 1140); y = rng.randint(40, 580)
+        sd.ellipse([(x-3, y-3), (x+3, y+3)], fill=(240, 240, 230, 200))
+    base = comp(base, star_l)
+    return base
+
+
+def img_mondrian_20260629():
+    """Piet Mondrian — off-white grid, primary rectangles — government structure theme."""
+    base = Image.new("RGB", (W, H), (240, 236, 224))
+
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    gd.line([(300, 0), (300, H)], fill=(20, 20, 20, 255), width=6)
+    gd.line([(700, 0), (700, H)], fill=(20, 20, 20, 255), width=6)
+    gd.line([(0, 220), (W, 220)], fill=(20, 20, 20, 255), width=6)
+    gd.line([(0, 440), (W, 440)], fill=(20, 20, 20, 255), width=6)
+    base = comp(base, grid_l)
+
+    fill_l = layer()
+    fd = ImageDraw.Draw(fill_l)
+    fd.rectangle([(0, 0), (300, 220)], fill=(210, 30, 40, 235))
+    fd.rectangle([(700, 220), (W, 440)], fill=(30, 70, 190, 235))
+    fd.rectangle([(300, 440), (700, H)], fill=(235, 195, 30, 235))
+    base = comp(base, fill_l)
+    return base
+
+
+def img_kandinsky_20260630():
+    """Wassily Kandinsky — bold composition, launch-day energy theme."""
+    base = Image.new("RGB", (W, H), (16, 30, 66))
+
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    for offset in range(-H, W + H, 90):
+        gd.line([(offset, 0), (offset + H, H)], fill=(255, 255, 255, 16), width=1)
+    base = comp(base, grid_l)
+
+    shapes_l = layer()
+    sd = ImageDraw.Draw(shapes_l)
+    sd.ellipse([(430, 130), (770, 470)], outline=(245, 198, 28, 240), width=8)
+    sd.ellipse([(500, 200), (700, 400)], fill=(215, 35, 50, 210))
+    sd.polygon([(600, 60), (900, 300), (600, 300)], fill=(30, 120, 210, 190), outline=(0,0,0,200), width=3)
+    sd.line([(150, 500), (1050, 120)], fill=(255,255,255,180), width=4)
+    base = comp(base, shapes_l)
+    return base
+
+
+def img_delaunay_20260701():
+    """Robert Delaunay — spectral rings, global return / broadcast theme."""
+    base = Image.new("RGB", (W, H), (6, 5, 24))
+
+    spectral_rings = [
+        (210, 30, 30), (210, 110, 0), (210, 190, 0),
+        (0, 180, 70), (0, 120, 210), (90, 0, 210), (180, 0, 160),
+    ]
+    for cx, cy, maxr in [(400, 300, 240), (860, 220, 170)]:
+        for i, col in enumerate(spectral_rings):
+            r = maxr - i * (maxr // 8)
+            if r < 8: break
+            rl = layer(); rd = ImageDraw.Draw(rl)
+            rd.ellipse([(cx-r, cy-r), (cx+r, cy+r)], fill=(col[0], col[1], col[2], 160))
+            base = comp(base, rl)
+    return base
+
+
+def img_leger_20260702():
+    """Fernand Léger — dark bg, mechanical outlines — platform / desktop infrastructure theme."""
+    base = Image.new("RGB", (W, H), (18, 18, 20))
+
+    shapes_l = layer()
+    sd = ImageDraw.Draw(shapes_l)
+    sd.rectangle([(150, 150), (450, 450)], outline=(230, 60, 40, 240), width=10)
+    sd.ellipse([(550, 180), (800, 430)], outline=(240, 200, 30, 240), width=10)
+    sd.polygon([(850, 420), (1080, 420), (1000, 180)], outline=(40, 130, 220, 240), width=8)
+    sd.rectangle([(280, 260), (350, 340)], fill=(230, 60, 40, 220))
+    base = comp(base, shapes_l)
+    return base
+
+
+def img_seurat_20260703():
+    """Georges Seurat — pointillist dots — background processes / lo-fi radio theme."""
+    base = Image.new("RGB", (W, H), (14, 16, 30))
+
+    dots_l = layer()
+    dd = ImageDraw.Draw(dots_l)
+    for _ in range(6000):
+        x = rng.randint(0, W); y = rng.randint(0, H)
+        col = rng.choice([(230, 120, 90), (90, 150, 220), (230, 200, 90), (120, 200, 150)])
+        dd.ellipse([(x-2, y-2), (x+2, y+2)], fill=(col[0], col[1], col[2], rng.randint(90, 200)))
+    base = comp(base, dots_l)
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -10809,6 +10941,13 @@ DAYS = [
     ("2026-06-24", img_moholy_20260624,    "Account Security",  "László Moholy-Nagy"),
     ("2026-06-25", img_rothko_20260625,    "Auto-Mode Depth",   "Mark Rothko"),
     ("2026-06-26", img_lissitzky_20260626, "Scaling CLAUDE.md", "El Lissitzky"),
+    ("2026-06-27", img_calder_20260627,    "Verify as You Go",  "Alexander Calder"),
+    ("2026-06-28", img_miro_20260628,      "Sub-Agent Shape",   "Joan Miró"),
+    ("2026-06-29", img_mondrian_20260629,  "California Deal",  "Piet Mondrian"),
+    ("2026-06-30", img_kandinsky_20260630, "Sonnet 5 Launch",  "Wassily Kandinsky"),
+    ("2026-07-01", img_delaunay_20260701,  "Fable 5 Returns",  "Robert Delaunay"),
+    ("2026-07-02", img_leger_20260702,     "Chrome & Linux",   "Fernand Léger"),
+    ("2026-07-03", img_seurat_20260703,    "Claude FM",        "Georges Seurat"),
 ]
 
 for date, fn, kw, artist in DAYS:

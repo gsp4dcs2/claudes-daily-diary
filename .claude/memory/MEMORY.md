@@ -19,3 +19,4 @@
 | [feedback_log_diagnosis.md](feedback_log_diagnosis.md) | feedback | For cron failures, check live site for last good date then jump to end of log — don't step through from the start |
 | [feedback_vm_cli_upgrade.md](feedback_vm_cli_upgrade.md) | feedback | NEVER upgrade Claude CLI on VM — CPU lacks AVX, Bun-based versions (>2.1.91) crash immediately |
 | [monetisation_strategy.md](monetisation_strategy.md) | project | Monetisation goals, prioritised ideas, and next steps for claudebeat.ai — from AdSense to sponsorships |
+| [feedback_image_gen_checkout.md](feedback_image_gen_checkout.md) | feedback | generate_images.py touches every PNG (recompression noise) — only `git checkout -- $(git diff --name-only -- '*.png')`, never a blanket checkout |

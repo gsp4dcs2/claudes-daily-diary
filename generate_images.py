@@ -10732,6 +10732,126 @@ def img_seurat_20260703():
     return base
 
 
+def img_franzmarc_20260704():
+    """Franz Marc — jewel-toned bg, stylised nature shapes — genetics / rare-disease research theme."""
+    base = Image.new("RGB", (W, H), (10, 40, 55))
+
+    shapes_l = layer()
+    sd = ImageDraw.Draw(shapes_l)
+    sd.polygon([(300, 480), (420, 200), (540, 480)], fill=(210, 90, 40, 220))
+    sd.ellipse([(600, 150), (900, 420)], fill=(30, 120, 90, 210))
+    sd.polygon([(750, 460), (950, 300), (1080, 470)], fill=(180, 40, 120, 210))
+    base = comp(base, shapes_l)
+
+    line_l = layer()
+    ld = ImageDraw.Draw(line_l)
+    for _ in range(14):
+        x1 = rng.randint(100, 1100); y1 = rng.randint(80, 550)
+        x2 = x1 + rng.randint(-80, 80); y2 = y1 + rng.randint(-80, 80)
+        ld.line([(x1, y1), (x2, y2)], fill=(240, 220, 190, 140), width=2)
+    base = comp(base, line_l)
+    return base
+
+
+def img_klimt_20260705():
+    """Gustav Klimt — dark bg, gold mosaic — model-tier craftsmanship theme."""
+    base = Image.new("RGB", (W, H), (16, 12, 8))
+
+    gold_l = layer()
+    gd = ImageDraw.Draw(gold_l)
+    gd.ellipse([(300, 60), (860, 570)], fill=(160, 120, 30, 55))
+    for _ in range(200):
+        x = rng.randint(280, 900); y = rng.randint(50, 590)
+        s = rng.randint(6, 16)
+        shade = rng.choice([(212, 175, 55), (180, 140, 40), (230, 200, 100)])
+        gd.rectangle([(x, y), (x+s, y+s)], fill=(shade[0], shade[1], shade[2], rng.randint(120, 210)))
+    base = comp(base, gold_l)
+    return base
+
+
+def img_lissitzky_20260706():
+    """El Lissitzky — cream bg, red+black bars — MCP tooling theme."""
+    base = Image.new("RGB", (W, H), (238, 234, 224))
+
+    bars_l = layer()
+    bd = ImageDraw.Draw(bars_l)
+    bd.rectangle([(140, 440), (1060, 480)], fill=(20, 20, 20, 255))
+    bd.polygon([(220, 440), (860, 180), (900, 220), (260, 480)], fill=(200, 30, 40, 235))
+    bd.ellipse([(560, 240), (660, 340)], fill=(30, 80, 190, 230), outline=(20,20,20,255), width=3)
+    base = comp(base, bars_l)
+    return base
+
+
+def img_moholy_20260707():
+    """László Moholy-Nagy — transparent circles on white — cloud / connected-workflows theme."""
+    base = Image.new("RGB", (W, H), (245, 245, 240))
+
+    shapes_l = layer()
+    sd = ImageDraw.Draw(shapes_l)
+    circles = [
+        (300, 260, 170, (40, 130, 200, 140)),
+        (560, 200, 150, (230, 150, 30, 140)),
+        (760, 380, 190, (40, 160, 120, 140)),
+        (460, 420, 130, (200, 40, 60, 140)),
+    ]
+    for (cx, cy, r, col) in circles:
+        sd.ellipse([(cx-r, cy-r), (cx+r, cy+r)], fill=col, outline=(20, 20, 20, 210), width=3)
+    base = comp(base, shapes_l)
+    return base
+
+
+def img_klee_20260708():
+    """Paul Klee — grid cells, node circles — Cowork vs Claude Code decision theme."""
+    base = Image.new("RGB", (W, H), (30, 26, 42))
+
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    cols, rows = 10, 6
+    cw, ch = W / cols, H / rows
+    palette = [(200, 160, 90), (110, 140, 110), (90, 120, 170), (190, 100, 90)]
+    for r in range(rows):
+        for c in range(cols):
+            if rng.random() < 0.5:
+                col = rng.choice(palette)
+                gd.rectangle([(c*cw, r*ch), ((c+1)*cw, (r+1)*ch)], fill=(col[0], col[1], col[2], rng.randint(70, 150)))
+    base = comp(base, grid_l)
+    return base
+
+
+def img_rothko_20260709():
+    """Mark Rothko — hazy colour bands — Reflect / introspection theme."""
+    base = Image.new("RGB", (W, H), (20, 16, 18))
+
+    band_l = layer()
+    bd = ImageDraw.Draw(band_l)
+    bd.rectangle([(100, 70), (1100, 270)], fill=(160, 90, 130, 200))
+    band2_l = layer()
+    b2d = ImageDraw.Draw(band2_l)
+    b2d.rectangle([(100, 330), (1100, 550)], fill=(60, 90, 150, 200))
+    base = comp(base, band_l)
+    base = comp(base, band2_l)
+    return base
+
+
+def img_balla_20260710():
+    """Giacomo Balla / Futurism — radiating planes — browser + desktop speed theme."""
+    base = Image.new("RGB", (W, H), (12, 12, 14))
+
+    rays_l = layer()
+    rd = ImageDraw.Draw(rays_l)
+    vp = (600, 300)
+    cols = [(60, 160, 220), (220, 100, 40), (230, 200, 40)]
+    for i in range(24):
+        ang = i * (360/24) * math.pi / 180
+        length = rng.randint(280, 540)
+        x2 = vp[0] + length * math.cos(ang)
+        y2 = vp[1] + length * math.sin(ang) * 0.6
+        col = rng.choice(cols)
+        rd.line([vp, (x2, y2)], fill=(col[0], col[1], col[2], 130), width=rng.randint(3, 8))
+    base = comp(base, rays_l)
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -10948,6 +11068,13 @@ DAYS = [
     ("2026-07-01", img_delaunay_20260701,  "Fable 5 Returns",  "Robert Delaunay"),
     ("2026-07-02", img_leger_20260702,     "Chrome & Linux",   "Fernand Léger"),
     ("2026-07-03", img_seurat_20260703,    "Claude FM",        "Georges Seurat"),
+    ("2026-07-04", img_franzmarc_20260704, "Rare Disease AI",  "Franz Marc"),
+    ("2026-07-05", img_klimt_20260705,     "Model Craft",      "Gustav Klimt"),
+    ("2026-07-06", img_lissitzky_20260706, "MCP Tooling",      "El Lissitzky"),
+    ("2026-07-07", img_moholy_20260707,    "Cowork Cloud",     "László Moholy-Nagy"),
+    ("2026-07-08", img_klee_20260708,      "Cowork vs Code",   "Paul Klee"),
+    ("2026-07-09", img_rothko_20260709,    "Reflect Recap",    "Mark Rothko"),
+    ("2026-07-10", img_balla_20260710,     "Browser Speed",    "Giacomo Balla"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="July 17: Closing the week with a practical guide to using mid-conversation system messages well — three patterns worth adopting and one anti-pattern to avoid when updating instructions mid-session.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-07-17 – Three Good Patterns for Mid-Conversation System Messages">
+  <meta property="og:description" content="July 17: Closing the week with a practical guide to using mid-conversation system messages well — three patterns worth adopting and one anti-pattern to avoid when updating instructions mid-session.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/07/2026-07-17.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/07/2026-07-17.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/07/2026-07-17.png">
+
+  <title>2026-07-17 – Three Good Patterns for Mid-Conversation System Messages | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Three Good Patterns for Mid-Conversation System Messages",
+  "description": "July 17: Closing the week with a practical guide to using mid-conversation system messages well — three patterns worth adopting and one anti-pattern to avoid when updating instructions mid-session.",
+  "datePublished": "2026-07-17",
+  "dateModified": "2026-07-17",
+  "url": "https://claudebeat.ai/articles/2026/07/2026-07-17.html",
+  "image": "https://claudebeat.ai/articles/2026/07/2026-07-17.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/07/2026-07-17.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-07-17</span>
+      <span class="cat-badge cat-tips">💡 Tips 'n' Tricks</span>
+      <h1>Three Good Patterns for Mid-Conversation System Messages</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-07-17.png" alt="Three Good Patterns for Mid-Conversation System Messages — visual for 2026-07-17">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Patterns for mid-conversation system messages
+     Source: https://docs.claude.com/en/docs/build-with-claude
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> Three Patterns Worth Adopting Now That Mid-Conversation System Messages Are GA</h2>
+
+  <p>With mid-conversation system messages now generally available (see this week's earlier entry), a few concrete patterns are worth building into long-running sessions:</p>
+
+  <ul>
+    <li><strong>Phase transitions in multi-stage agents</strong> — an orchestrator moving from "research" to "implementation" phase can update the system message to reflect the new phase's constraints, rather than relying on the model to infer the transition from conversation flow alone.</li>
+    <li><strong>Permission tightening mid-session</strong> — if a session starts broad and narrows in scope (e.g. moving from exploratory research to a specific destructive operation), inject a system message reinforcing the narrower constraint at that exact point, rather than trusting an early-session instruction is still salient.</li>
+    <li><strong>Context injected from external state changes</strong> — if something relevant changes outside the conversation (a deploy completes, a ticket status updates), a system message is a cleaner way to surface that than working it awkwardly into the next user turn.</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>The anti-pattern: using it as a workaround for a badly-scoped initial prompt</strong>
+    <p>Mid-conversation system messages are for genuine state changes during a session, not a patch for a system prompt that should have been better-scoped from the start. If you find yourself injecting corrections repeatedly for the same recurring gap, the fix is a better initial system prompt or CLAUDE.md entry — not more mid-conversation patches.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://docs.claude.com/en/docs/build-with-claude" class="source-link" target="_blank" rel="noopener">docs.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">mid-conversation system messages</span>
+    <span class="tag">multi-stage agents</span>
+    <span class="tag">permission scoping</span>
+    <span class="tag">prompt design</span>
+    <span class="tag">anti-patterns</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

@@ -10852,6 +10852,112 @@ def img_balla_20260710():
     return base
 
 
+def img_mondrian_20260711():
+    """Piet Mondrian — grid, primary rectangles — cloud platform structure theme."""
+    base = Image.new("RGB", (W, H), (242, 238, 226))
+
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    gd.line([(400, 0), (400, H)], fill=(20, 20, 20, 255), width=6)
+    gd.line([(800, 0), (800, H)], fill=(20, 20, 20, 255), width=6)
+    gd.line([(0, 300), (W, 300)], fill=(20, 20, 20, 255), width=6)
+    base = comp(base, grid_l)
+
+    fill_l = layer()
+    fd = ImageDraw.Draw(fill_l)
+    fd.rectangle([(0, 0), (400, 300)], fill=(30, 70, 190, 235))
+    fd.rectangle([(800, 300), (W, H)], fill=(210, 30, 40, 235))
+    fd.rectangle([(400, 0), (800, 300)], fill=(235, 195, 30, 235))
+    base = comp(base, fill_l)
+    return base
+
+
+def img_calder_20260712():
+    """Alexander Calder — flat shapes on thin lines — platform choice / balance theme."""
+    base = Image.new("RGB", (W, H), (248, 246, 242))
+
+    line_l = layer()
+    ld = ImageDraw.Draw(line_l)
+    ld.line([(600, 40), (600, 560)], fill=(20, 20, 20, 255), width=5)
+    ld.line([(250, 220), (950, 260)], fill=(20, 20, 20, 255), width=4)
+    base = comp(base, line_l)
+
+    shapes_l = layer()
+    sd = ImageDraw.Draw(shapes_l)
+    sd.ellipse([(560, 20), (640, 100)], fill=(220, 40, 40, 255))
+    sd.ellipse([(220, 195), (280, 255)], fill=(40, 90, 200, 255))
+    sd.ellipse([(900, 235), (960, 295)], fill=(235, 195, 30, 255))
+    base = comp(base, shapes_l)
+    return base
+
+
+def img_delaunay_20260713():
+    """Robert Delaunay — spectral rings — global reach / India pricing theme."""
+    base = Image.new("RGB", (W, H), (8, 6, 26))
+
+    spectral_rings = [(210, 30, 30), (210, 110, 0), (210, 190, 0), (0, 180, 70), (0, 120, 210), (90, 0, 210)]
+    for cx, cy, maxr in [(420, 280, 230), (850, 320, 180)]:
+        for i, col in enumerate(spectral_rings):
+            r = maxr - i * (maxr // 7)
+            if r < 8: break
+            rl = layer(); rd = ImageDraw.Draw(rl)
+            rd.ellipse([(cx-r, cy-r), (cx+r, cy+r)], fill=(col[0], col[1], col[2], 160))
+            base = comp(base, rl)
+    return base
+
+
+def img_kandinsky_20260714():
+    """Wassily Kandinsky — bold composition — major product launch theme."""
+    base = Image.new("RGB", (W, H), (18, 32, 68))
+
+    shapes_l = layer()
+    sd = ImageDraw.Draw(shapes_l)
+    sd.ellipse([(420, 120), (760, 460)], outline=(245, 198, 28, 240), width=8)
+    sd.ellipse([(490, 190), (690, 390)], fill=(215, 35, 50, 210))
+    sd.polygon([(600, 60), (880, 290), (600, 290)], fill=(30, 120, 210, 190), outline=(0,0,0,200), width=3)
+    base = comp(base, shapes_l)
+    return base
+
+
+def img_leger_20260715():
+    """Fernand Léger — mechanical outlines — admin/infrastructure tooling theme."""
+    base = Image.new("RGB", (W, H), (20, 20, 22))
+
+    shapes_l = layer()
+    sd = ImageDraw.Draw(shapes_l)
+    sd.rectangle([(180, 160), (460, 440)], outline=(230, 60, 40, 240), width=10)
+    sd.ellipse([(560, 190), (800, 430)], outline=(240, 200, 30, 240), width=10)
+    sd.rectangle([(870, 200), (1080, 420)], outline=(40, 130, 220, 240), width=8)
+    base = comp(base, shapes_l)
+    return base
+
+
+def img_lissitzky_20260716():
+    """El Lissitzky — red+black bars — structured API feature theme."""
+    base = Image.new("RGB", (W, H), (236, 232, 222))
+
+    bars_l = layer()
+    bd = ImageDraw.Draw(bars_l)
+    bd.rectangle([(150, 450), (1050, 490)], fill=(20, 20, 20, 255))
+    bd.polygon([(230, 450), (880, 190), (920, 230), (270, 490)], fill=(200, 30, 40, 235))
+    base = comp(base, bars_l)
+    return base
+
+
+def img_seurat_20260717():
+    """Georges Seurat — pointillist dots — patterns / week-closer theme."""
+    base = Image.new("RGB", (W, H), (16, 18, 32))
+
+    dots_l = layer()
+    dd = ImageDraw.Draw(dots_l)
+    for _ in range(5500):
+        x = rng.randint(0, W); y = rng.randint(0, H)
+        col = rng.choice([(230, 120, 90), (90, 150, 220), (230, 200, 90), (120, 200, 150)])
+        dd.ellipse([(x-2, y-2), (x+2, y+2)], fill=(col[0], col[1], col[2], rng.randint(90, 200)))
+    base = comp(base, dots_l)
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -11075,6 +11181,13 @@ DAYS = [
     ("2026-07-08", img_klee_20260708,      "Cowork vs Code",   "Paul Klee"),
     ("2026-07-09", img_rothko_20260709,    "Reflect Recap",    "Mark Rothko"),
     ("2026-07-10", img_balla_20260710,     "Browser Speed",    "Giacomo Balla"),
+    ("2026-07-11", img_mondrian_20260711,  "Cloud Auto Mode",  "Piet Mondrian"),
+    ("2026-07-12", img_calder_20260712,    "Platform Choice",  "Alexander Calder"),
+    ("2026-07-13", img_delaunay_20260713,  "India Pricing",    "Robert Delaunay"),
+    ("2026-07-14", img_kandinsky_20260714, "Teachers Launch",  "Wassily Kandinsky"),
+    ("2026-07-15", img_leger_20260715,     "Admin API",        "Fernand Léger"),
+    ("2026-07-16", img_lissitzky_20260716, "System Messages",  "El Lissitzky"),
+    ("2026-07-17", img_seurat_20260717,    "Weekly Patterns",  "Georges Seurat"),
 ]
 
 for date, fn, kw, artist in DAYS:

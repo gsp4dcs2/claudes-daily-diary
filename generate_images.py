@@ -10958,6 +10958,108 @@ def img_seurat_20260717():
     return base
 
 
+def img_malevich_20260718():
+    """Kazimir Malevich — cream bg, tilted shapes — confirmed announcement / finality theme."""
+    base = Image.new("RGB", (W, H), (236, 229, 212))
+
+    shapes_l = layer()
+    sd = ImageDraw.Draw(shapes_l)
+    sd.polygon([(160, 470), (720, 390), (780, 480), (210, 570)], fill=(20, 20, 20, 255))
+    sd.rectangle([(540, 100), (770, 420)], fill=(200, 30, 40, 235))
+    sd.polygon([(800, 460), (1080, 350), (1130, 430), (870, 540)], fill=(30, 60, 150, 230))
+    base = comp(base, shapes_l)
+    return base
+
+
+def img_rothko_20260719():
+    """Mark Rothko — hazy colour bands — reflective / practice-piece theme."""
+    base = Image.new("RGB", (W, H), (22, 18, 20))
+
+    band_l = layer(); bd = ImageDraw.Draw(band_l)
+    bd.rectangle([(90, 70), (1110, 280)], fill=(150, 80, 60, 200))
+    base = comp(base, band_l)
+    band2_l = layer(); b2d = ImageDraw.Draw(band2_l)
+    b2d.rectangle([(90, 330), (1110, 550)], fill=(50, 70, 130, 200))
+    base = comp(base, band2_l)
+    return base
+
+
+def img_klimt_20260720():
+    """Gustav Klimt — dark bg, gold mosaic — subscription value / pricing theme."""
+    base = Image.new("RGB", (W, H), (16, 12, 8))
+
+    gold_l = layer(); gd = ImageDraw.Draw(gold_l)
+    gd.ellipse([(320, 60), (880, 570)], fill=(160, 120, 30, 55))
+    for _ in range(200):
+        x = rng.randint(300, 920); y = rng.randint(50, 590)
+        s = rng.randint(6, 16)
+        shade = rng.choice([(212, 175, 55), (180, 140, 40), (230, 200, 100)])
+        gd.rectangle([(x, y), (x+s, y+s)], fill=(shade[0], shade[1], shade[2], rng.randint(120, 210)))
+    base = comp(base, gold_l)
+    return base
+
+
+def img_moholy_20260721():
+    """László Moholy-Nagy — transparent circles — data policy transparency theme."""
+    base = Image.new("RGB", (W, H), (245, 245, 240))
+
+    shapes_l = layer(); sd = ImageDraw.Draw(shapes_l)
+    circles = [(320, 260, 170, (40, 130, 200, 140)), (580, 210, 150, (230, 150, 30, 140)),
+               (780, 390, 190, (40, 160, 120, 140)), (470, 430, 130, (200, 40, 60, 140))]
+    for (cx, cy, r, col) in circles:
+        sd.ellipse([(cx-r, cy-r), (cx+r, cy+r)], fill=col, outline=(20, 20, 20, 210), width=3)
+    base = comp(base, shapes_l)
+    return base
+
+
+def img_klee_20260722():
+    """Paul Klee — grid cells, node circles — fork / subagent coordination theme."""
+    base = Image.new("RGB", (W, H), (28, 24, 40))
+
+    grid_l = layer(); gd = ImageDraw.Draw(grid_l)
+    cols, rows = 11, 6
+    cw, ch = W / cols, H / rows
+    palette = [(200, 160, 90), (110, 140, 110), (90, 120, 170), (190, 100, 90)]
+    for r in range(rows):
+        for c in range(cols):
+            if rng.random() < 0.5:
+                col = rng.choice(palette)
+                gd.rectangle([(c*cw, r*ch), ((c+1)*cw, (r+1)*ch)], fill=(col[0], col[1], col[2], rng.randint(70, 150)))
+    base = comp(base, grid_l)
+    return base
+
+
+def img_balla_20260723():
+    """Giacomo Balla / Futurism — radiating planes — voice mode / fast pace theme."""
+    base = Image.new("RGB", (W, H), (10, 10, 14))
+
+    rays_l = layer(); rd = ImageDraw.Draw(rays_l)
+    vp = (600, 300)
+    cols = [(60, 160, 220), (220, 100, 40), (230, 200, 40)]
+    for i in range(26):
+        ang = i * (360/26) * math.pi / 180
+        length = rng.randint(280, 550)
+        x2 = vp[0] + length * math.cos(ang)
+        y2 = vp[1] + length * math.sin(ang) * 0.6
+        col = rng.choice(cols)
+        rd.line([vp, (x2, y2)], fill=(col[0], col[1], col[2], 130), width=rng.randint(3, 8))
+    base = comp(base, rays_l)
+    return base
+
+
+def img_kandinsky_20260724():
+    """Wassily Kandinsky — bold composition — flagship model launch theme."""
+    base = Image.new("RGB", (W, H), (16, 30, 66))
+
+    shapes_l = layer(); sd = ImageDraw.Draw(shapes_l)
+    sd.ellipse([(430, 130), (770, 470)], outline=(245, 198, 28, 240), width=8)
+    sd.ellipse([(500, 200), (700, 400)], fill=(215, 35, 50, 210))
+    sd.polygon([(600, 60), (900, 300), (600, 300)], fill=(30, 120, 210, 190), outline=(0,0,0,200), width=3)
+    sd.line([(150, 500), (1050, 120)], fill=(255,255,255,170), width=4)
+    base = comp(base, shapes_l)
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -11188,6 +11290,13 @@ DAYS = [
     ("2026-07-15", img_leger_20260715,     "Admin API",        "Fernand Léger"),
     ("2026-07-16", img_lissitzky_20260716, "System Messages",  "El Lissitzky"),
     ("2026-07-17", img_seurat_20260717,    "Weekly Patterns",  "Georges Seurat"),
+    ("2026-07-18", img_malevich_20260718,  "Fable Confirmed",  "Kazimir Malevich"),
+    ("2026-07-19", img_rothko_20260719,    "Promo Skepticism", "Mark Rothko"),
+    ("2026-07-20", img_klimt_20260720,     "Tier Pricing",     "Gustav Klimt"),
+    ("2026-07-21", img_moholy_20260721,    "Data Transparency","László Moholy-Nagy"),
+    ("2026-07-22", img_klee_20260722,      "Fork & Caps",      "Paul Klee"),
+    ("2026-07-23", img_balla_20260723,     "Voice Mode",       "Giacomo Balla"),
+    ("2026-07-24", img_kandinsky_20260724, "Opus 5 Launch",    "Wassily Kandinsky"),
 ]
 
 for date, fn, kw, artist in DAYS:

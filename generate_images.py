@@ -11221,11 +11221,141 @@ def img_klee_20260802():
         if a < len(coords) and b < len(coords):
             cd.line([coords[a], coords[b]], fill=(255, 255, 255, 100), width=2)
     base = comp(base, conn_l)
+    return base
 
+
+def img_kandinsky_20251124():
+    """Wassily Kandinsky — bold composition, flagship model launch theme."""
+    base = Image.new("RGB", (W, H), (16, 30, 66))
+
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    for offset in range(-H, W + H, 90):
+        gd.line([(offset, 0), (offset + H, H)], fill=(255, 255, 255, 16), width=1)
+    base = comp(base, grid_l)
+
+    shapes_l = layer()
+    sd = ImageDraw.Draw(shapes_l)
+    sd.ellipse([(420, 120), (780, 480)], outline=(245, 198, 28, 240), width=8)
+    sd.ellipse([(500, 200), (700, 400)], fill=(215, 35, 50, 210))
+    sd.polygon([(620, 60), (940, 300), (620, 300)], fill=(30, 120, 210, 190), outline=(0, 0, 0, 200), width=3)
+    sd.polygon([(150, 480), (330, 380), (300, 520)], fill=(240, 180, 30, 200))
+    sd.line([(120, 520), (1080, 100)], fill=(255, 255, 255, 180), width=4)
+    base = comp(base, shapes_l)
+    return base
+
+
+def img_lissitzky_20251125():
+    """El Lissitzky — bars — desktop app / developer tooling theme."""
+    base = Image.new("RGB", (W, H), (236, 232, 222))
+    bars_l = layer(); bd = ImageDraw.Draw(bars_l)
+    bd.rectangle([(120, 420), (1080, 470)], fill=(20, 20, 20, 255))
+    bd.polygon([(200, 420), (860, 160), (900, 200), (240, 460)], fill=(200, 30, 40, 235))
+    bd.rectangle([(660, 80), (700, 420)], fill=(20, 20, 20, 255))
+    bd.rectangle([(760, 80), (800, 420)], fill=(30, 90, 200, 235))
+    base = comp(base, bars_l)
+    return base
+
+
+def img_malevich_20251126():
+    """Kazimir Malevich — tilted shapes — congressional scrutiny theme."""
+    base = Image.new("RGB", (W, H), (236, 229, 212))
+    shapes_l = layer(); sd = ImageDraw.Draw(shapes_l)
+    sd.polygon([(160, 470), (720, 390), (780, 480), (210, 570)], fill=(20, 20, 20, 255))
+    sd.rectangle([(540, 100), (770, 420)], fill=(200, 30, 40, 235))
+    sd.ellipse([(180, 130), (340, 290)], fill=(30, 70, 160, 220))
+    base = comp(base, shapes_l)
+    return base
+
+
+def img_franz_marc_20251127():
+    """Franz Marc — jewel-toned, stylised organic forms — Africa education theme."""
+    base = Image.new("RGB", (W, H), (18, 42, 105))
+    fl = layer(); fd = ImageDraw.Draw(fl)
+    fd.polygon([(0, 420), (300, 280), (600, 350), (900, 240), (1200, 320), (1200, 630), (0, 630)],
+               fill=(22, 140, 90, 230))
+    base = comp(base, fl)
+    sl = layer(); sd = ImageDraw.Draw(sl)
+    sd.polygon([(0, 500), (200, 380), (500, 440), (800, 360), (1100, 430), (1200, 400),
+                (1200, 630), (0, 630)], fill=(18, 110, 130, 200))
+    base = comp(base, sl)
+    sun_l = layer(); sund = ImageDraw.Draw(sun_l)
+    sund.ellipse([(880, 100), (1040, 260)], fill=(235, 190, 40, 220))
+    base = comp(base, sun_l)
+    star_l = layer(); std = ImageDraw.Draw(star_l)
+    for _ in range(14):
+        x = rng.randint(60, 1140); y = rng.randint(30, 220)
+        std.ellipse([(x - 2, y - 2), (x + 2, y + 2)], fill=(240, 240, 230, 190))
+    base = comp(base, star_l)
+    return base
+
+
+def img_balla_20251128():
+    """Giacomo Balla Futurism — cost/effort speed theme."""
+    base = Image.new("RGB", (W, H), (10, 10, 18))
+    vp = (200, 315)
+    colours = [
+        (230, 60, 40, 200), (240, 180, 0, 190), (40, 120, 220, 190),
+        (180, 40, 200, 160), (40, 200, 100, 160), (230, 60, 40, 140),
+        (240, 180, 0, 140), (40, 120, 220, 140),
+    ]
+    angles = [i * (360 / len(colours)) for i in range(len(colours))]
+    plane_l = layer(); pd = ImageDraw.Draw(plane_l)
+    for col, ang in zip(colours, angles):
+        rad = math.radians(ang)
+        ex = int(vp[0] + 1400 * math.cos(rad))
+        ey = int(vp[1] + 1400 * math.sin(rad))
+        rad2 = math.radians(ang + 360 / len(colours))
+        ex2 = int(vp[0] + 1400 * math.cos(rad2))
+        ey2 = int(vp[1] + 1400 * math.sin(rad2))
+        pd.polygon([vp, (ex, ey), (ex2, ey2)], fill=col)
+    base = comp(base, plane_l)
+    line_l = layer(); ld = ImageDraw.Draw(line_l)
+    for i in range(6):
+        y = 100 + i * 80
+        ld.line([(vp[0], y), (1150, y - 40)], fill=(255, 255, 255, 90), width=2)
+    base = comp(base, line_l)
+    return base
+
+
+def img_moholy_20251129():
+    """László Moholy-Nagy Bauhaus — benchmark transparency theme."""
+    base = Image.new("RGB", (W, H), (252, 250, 245))
+    circles = [(300, 315, 240, (220, 80, 30)), (700, 315, 200, (30, 80, 200)),
+               (1000, 200, 160, (220, 180, 20)), (500, 450, 140, (40, 160, 100))]
+    for cx, cy, r, col in circles:
+        for opacity in [40, 80, 150]:
+            cl = layer(); ImageDraw.Draw(cl).ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=(*col, opacity), outline=(*col, 220), width=4); base = comp(base, cl)
+    rects = [(50, 100, 300, 350, (30, 80, 200)), (800, 200, 1100, 500, (220, 80, 30))]
+    for x0, y0, x1, y1, col in rects:
+        rl = layer(); ImageDraw.Draw(rl).rectangle([(x0, y0), (x1, y1)], fill=(*col, 60), outline=(*col, 200), width=5); base = comp(base, rl)
+    ll = layer(); ld = ImageDraw.Draw(ll)
+    ld.line([(0, 315), (W, 315)], fill=(0, 0, 0, 180), width=3)
+    ld.line([(600, 0), (600, H)], fill=(0, 0, 0, 180), width=3)
+    base = comp(base, ll)
+    return base
+
+
+def img_leger_20251130():
+    """Fernand Léger — mechanical outlines — infrastructure investment theme."""
+    base = Image.new("RGB", (W, H), (20, 20, 22))
+    shapes_l = layer(); sd = ImageDraw.Draw(shapes_l)
+    sd.rectangle([(160, 150), (440, 440)], outline=(230, 60, 40, 240), width=10)
+    sd.ellipse([(540, 180), (790, 430)], outline=(240, 200, 30, 240), width=10)
+    sd.rectangle([(860, 190), (1080, 420)], outline=(40, 130, 220, 240), width=8)
+    sd.rectangle([(340, 480), (760, 520)], fill=(240, 200, 30, 220))
+    base = comp(base, shapes_l)
     return base
 
 
 DAYS = [
+    ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
+    ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
+    ("2025-11-26", img_malevich_20251126,  "Hill Scrutiny",    "Kazimir Malevich"),
+    ("2025-11-27", img_franz_marc_20251127,"Africa Education", "Franz Marc"),
+    ("2025-11-28", img_balla_20251128,     "Token Economics",  "Giacomo Balla"),
+    ("2025-11-29", img_moholy_20251129,    "Benchmark Depth",  "László Moholy-Nagy"),
+    ("2025-11-30", img_leger_20251130,     "Anthropic Valuation","Fernand Léger"),
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
     ("2025-12-03", img_rothko_20251203,    "Financial AI",     "Mark Rothko"),

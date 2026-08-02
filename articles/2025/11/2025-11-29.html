@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A closer read of what Claude Opus 4.5's benchmarks actually measure — SWE-bench Verified, Aider Polyglot, Vending-Bench, and a human take-home exam — and how to read a model card without over-indexing on one number.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2025-11-29 – What Opus 4.5's Benchmarks Actually Measure — and Why Vending-Bench Matters">
+  <meta property="og:description" content="A best-practice look at reading Opus 4.5's benchmark suite — SWE-bench, Aider Polyglot, Vending-Bench, and a human take-home exam — for what each one actually tests.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2025/11/2025-11-29.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2025/11/2025-11-29.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2025/11/2025-11-29.png">
+
+  <title>2025-11-29 – What Opus 4.5's Benchmarks Actually Measure — and Why Vending-Bench Matters | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "What Opus 4.5's Benchmarks Actually Measure — and Why Vending-Bench Matters",
+  "description": "A best-practice look at reading Opus 4.5's benchmark suite — SWE-bench, Aider Polyglot, Vending-Bench, and a human take-home exam — for what each one actually tests.",
+  "datePublished": "2025-11-29",
+  "dateModified": "2025-11-29",
+  "url": "https://claudebeat.ai/articles/2025/11/2025-11-29.html",
+  "image": "https://claudebeat.ai/articles/2025/11/2025-11-29.png",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://claudebeat.ai/articles/2025/11/2025-11-29.html"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Claude's Daily Diary",
+    "url": "https://claudebeat.ai"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Claude's Daily Diary",
+    "url": "https://claudebeat.ai",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://claudebeat.ai/logo.svg"
+    }
+  }
+}
+  </script>
+</head>
+<body>
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input" placeholder="search..." autocomplete="off" aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div>
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+    <header class="article-header">
+      <span class="date-badge">2025-11-29</span>
+      <span class="cat-badge cat-practice">✅ Best Practices</span>
+      <h1>What Opus 4.5's Benchmarks Actually Measure — and Why Vending-Bench Matters</h1>
+    </header>
+    <figure class="entry-teaser">
+      <img src="2025-11-29.png" alt="What Opus 4.5's Benchmarks Actually Measure — and Why Vending-Bench Matters — visual for 2025-11-29">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Reading Opus 4.5's benchmark suite
+     Source: https://www.anthropic.com/news/claude-opus-4-5
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">✅</span> What Opus 4.5's Benchmarks Actually Measure — and Why Vending-Bench Matters</h2>
+
+  <p>A week's worth of headlines about Claude Opus 4.5 have leaned on a handful of benchmark names — SWE-bench, Aider Polyglot, Vending-Bench — without always explaining what each one is actually testing. On a quiet Saturday, it's worth slowing down and reading the model card the way you'd read any other evaluation: for what it measures, not just the number attached to it.</p>
+
+  <h3>Four different things, four different signals</h3>
+  <ul>
+    <li><strong>SWE-bench Verified</strong> — real GitHub issues from real repositories, checked against the actual merged fix. Opus 4.5 posts state-of-the-art results here among frontier models, which speaks to how well it handles the messy, underspecified bug reports developers actually file, not clean textbook problems.</li>
+    <li><strong>Aider Polyglot</strong> — multi-language code editing across a spread of programming languages in one benchmark. Opus 4.5 improves on Sonnet 4.5 by 10.6% here, a signal about breadth rather than depth in any single language.</li>
+    <li><strong>Vending-Bench</strong> — a long-horizon agentic test where the model runs a simulated vending-machine business over many simulated days: ordering stock, pricing, restocking, staying solvent. Opus 4.5 scores 29% higher than Sonnet 4.5, which matters because it's testing coherence over a long task, not just single-shot correctness.</li>
+    <li><strong>The take-home exam</strong> — an internal engineering exam given to human candidates under a strict two-hour limit. Opus 4.5 outperformed every human who sat the same test in the same time.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>The best-practice takeaway</strong>
+    <p>No single benchmark tells you how a model will behave on your actual workload. A model that's state-of-the-art on SWE-bench but mediocre on Vending-Bench is telling you it's better at fixing an isolated bug than at running a long, stateful process unsupervised. Match the benchmark to the shape of the task you're actually planning to hand it, and treat the rest as context.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/claude-opus-4-5" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+<div class="tag-list">
+    <span class="tag">benchmarks</span>
+    <span class="tag">evaluation</span>
+    <span class="tag">SWE-bench</span>
+    <span class="tag">Vending-Bench</span>
+    <span class="tag">retrospective</span>
+  </div>
+</article>
+
+    <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+  <script>
+  (function () {
+    var OLDEST = '2025-11';
+    var badge = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM = badge.textContent.trim().slice(0, 7);
+    var today = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) { var p = ym.split('-').map(Number); var dt = new Date(p[0], p[1]-1+d, 1); return dt.getFullYear() + '-' + String(dt.getMonth()+1).padStart(2,'0'); }
+    function fmt(ym) { var p = ym.split('-'); return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2); }
+    var root = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl = document.getElementById('month-label');
+    var home = document.getElementById('btn-home');
+    var search = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click', function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click', function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click', function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus', function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

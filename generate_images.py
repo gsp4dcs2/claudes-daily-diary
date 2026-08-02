@@ -11160,6 +11160,71 @@ def img_miro_20260801():
     return base
 
 
+def img_klee_20260802():
+    """Paul Klee colour-grid style — team agents / multiplayer collaboration theme."""
+    # Warm background
+    base = Image.new("RGB", (W, H), (38, 28, 18))
+
+    # 1. Colour-field grid cells (warm→cool gradient across columns)
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    cols = 14
+    rows = 8
+    cw = W // cols
+    ch = H // rows
+    warm_cool = [
+        (210, 90, 40), (220, 140, 50), (200, 180, 60), (160, 200, 70),
+        (80, 190, 120), (50, 160, 180), (40, 110, 210), (60, 70, 200),
+        (100, 50, 190), (150, 60, 180), (190, 70, 140), (210, 80, 90),
+        (220, 100, 60), (215, 120, 50),
+    ]
+    for ci in range(cols):
+        base_col = warm_cool[ci % len(warm_cool)]
+        for ri in range(rows):
+            brightness = int(100 + rng.randint(0, 80) - ri * 8)
+            brightness = max(60, min(220, brightness))
+            cell_col = tuple(min(255, int(c * brightness / 180)) for c in base_col)
+            x0, y0 = ci * cw, ri * ch
+            x1, y1 = x0 + cw - 2, y0 + ch - 2
+            gd.rectangle([(x0, y0), (x1, y1)], fill=(cell_col[0], cell_col[1], cell_col[2], 200))
+    base = comp(base, grid_l)
+
+    # 2. Dark grid lines
+    lines_l = layer()
+    ld = ImageDraw.Draw(lines_l)
+    for ci in range(cols + 1):
+        ld.line([(ci * cw, 0), (ci * cw, H)], fill=(20, 14, 8, 220), width=3)
+    for ri in range(rows + 1):
+        ld.line([(0, ri * ch), (W, ri * ch)], fill=(20, 14, 8, 220), width=3)
+    base = comp(base, lines_l)
+
+    # 3. White node circles at grid intersections (selected)
+    nodes_l = layer()
+    nd = ImageDraw.Draw(nodes_l)
+    node_positions = [
+        (2, 2), (5, 1), (8, 3), (11, 2), (13, 4),
+        (1, 5), (4, 6), (7, 4), (10, 5), (12, 6),
+        (3, 7), (6, 3), (9, 6),
+    ]
+    for (nc, nr) in node_positions:
+        cx = nc * cw
+        cy = nr * ch
+        nd.ellipse([(cx - 10, cy - 10), (cx + 10, cy + 10)], fill=(255, 255, 255, 230), outline=(20, 14, 8, 255), width=2)
+    base = comp(base, nodes_l)
+
+    # 4. Connecting lines between selected nodes (network / team links)
+    conn_l = layer()
+    cd = ImageDraw.Draw(conn_l)
+    connections = [(0, 1), (1, 2), (2, 3), (3, 4), (5, 6), (6, 7), (7, 8), (8, 9), (10, 11), (11, 12)]
+    coords = [(nc * cw, nr * ch) for (nc, nr) in node_positions]
+    for (a, b) in connections:
+        if a < len(coords) and b < len(coords):
+            cd.line([coords[a], coords[b]], fill=(255, 255, 255, 100), width=2)
+    base = comp(base, conn_l)
+
+    return base
+
+
 DAYS = [
     ("2025-12-01", img_miro_20251201,      "Agent Skills",     "Joan Miró"),
     ("2025-12-02", img_klee_20251202,      "AI at Work",       "Paul Klee"),
@@ -11405,6 +11470,7 @@ DAYS = [
     ("2026-07-30", img_malevich_20260730,  "Security Disclose","Kazimir Malevich"),
     ("2026-07-31", img_leger_20260731,     "Isolation Check",  "Fernand Léger"),
     ("2026-08-01", img_miro_20260801,      "Screen Reader",    "Joan Miró"),
+    ("2026-08-02", img_klee_20260802,      "Team Agents",      "Paul Klee"),
 ]
 
 for date, fn, kw, artist in DAYS:

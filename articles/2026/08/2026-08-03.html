@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="August 3: Sonnet 5's introductory pricing ends August 31 — and tokenizer inflation means September costs could be 50% higher than July. Plus: Anthropic's 400,000-session study on what expertise really does to Claude Code output, and Opus 4.1 retires in two days.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-08-03 – Sonnet 5's Cost Cliff, Expertise Research, and Opus 4.1's Final Days">
+  <meta property="og:description" content="August 3: Sonnet 5's introductory pricing ends August 31 — and tokenizer inflation means September costs could be 50% higher than July. Plus: Anthropic's 400,000-session study on what expertise really does to Claude Code output, and Opus 4.1 retires in two days.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/08/2026-08-03.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/08/2026-08-03.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/08/2026-08-03.png">
+
+  <title>2026-08-03 – Sonnet 5's Cost Cliff, Expertise Research, and Opus 4.1's Final Days | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Sonnet 5's Cost Cliff, Expertise Research, and Opus 4.1's Final Days",
+  "description": "August 3: Sonnet 5's introductory pricing ends August 31 — and tokenizer inflation means September costs could be 50% higher than July. Plus: Anthropic's 400,000-session study on what expertise really does to Claude Code output, and Opus 4.1 retires in two days.",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "url": "https://claudebeat.ai/articles/2026/08/2026-08-03.html",
+  "image": "https://claudebeat.ai/articles/2026/08/2026-08-03.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/08/2026-08-03.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-08-03</span>
+      <span class="cat-badge cat-tips">💡 Tips 'n' Tricks</span>
+      <h1>Sonnet 5's Cost Cliff, Expertise Research, and Opus 4.1's Final Days</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-08-03.png" alt="Sonnet 5's Cost Cliff, Expertise Research, and Opus 4.1's Final Days — visual for 2026-08-03">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Sonnet 5 pricing cliff: promo ends Aug 31, tokenizer compounds it
+     Source: https://www.anthropic.com/news/claude-sonnet-5
+     Source: https://platform.claude.com/docs/en/about-claude/models/whats-new-sonnet-5
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> Sonnet 5's September Price Cliff Is Bigger Than the List Price Suggests</h2>
+
+  <p>Claude Sonnet 5's introductory pricing — <strong>$2 / $10 per million input/output tokens</strong> — expires on <strong>August 31, 2026</strong>. Standard pricing of <strong>$3 / $15</strong> takes over on September 1. That's a 50% hike on both sides of the ledger. But here's the part most teams aren't accounting for: Sonnet 5 ships with a <strong>new tokenizer</strong> that inflates token counts by roughly 27–42% for identical input compared to Claude 4.x models. The effective cost of an unchanged workload is already higher than Sonnet 4.6 — before the rate card changes.</p>
+
+  <h3>What this means in practice</h3>
+  <ul>
+    <li>A workload that costs $100/day on Sonnet 4.6 might cost ~$130–140/day on Sonnet 5 during the promo window, purely from tokenizer inflation.</li>
+    <li>On September 1, that same workload hits standard pricing <em>on top of</em> inflated token counts — the combined effect can push September's run rate to roughly <strong>1.5–1.9× the pre-migration July baseline</strong>.</li>
+    <li>Budgeting off August invoices will underestimate September costs, because August still benefits from the promotional rate masking part of the inflation impact.</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>Audit your benchmarks now, not on September 2</strong>
+    <p>Run your highest-volume production prompts through both models and compare token counts directly using the <code>usage</code> field in the API response. If Sonnet 5's token counts are 30% higher for the same input, that needs to be in your September budget before the rate card flips — not after.</p>
+  </div>
+
+  <h3>How to measure tokenizer inflation for your workload</h3>
+  <pre><code># Compare token counts for the same prompt on both models
+import anthropic
+client = anthropic.Anthropic()
+
+prompt = "Your representative production prompt here..."
+
+for model in ["claude-sonnet-4-6-20250904", "claude-sonnet-5-20260630"]:
+    r = client.messages.create(
+        model=model, max_tokens=1,
+        messages=[{"role": "user", "content": prompt}]
+    )
+    print(f"{model}: {r.usage.input_tokens} input tokens")</code></pre>
+
+  <p>Run this across your ten highest-traffic prompt templates to get a realistic inflation multiplier for your workload specifically — generic estimates (27–42%) hide wide variance by content type.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/claude-sonnet-5" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Sonnet 5</span>
+    <span class="tag">pricing</span>
+    <span class="tag">tokenizer</span>
+    <span class="tag">cost planning</span>
+    <span class="tag">API</span>
+    <span class="tag">September 2026</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Anthropic research: 400k sessions, expertise amplifies Claude Code output
+     Source: https://www.anthropic.com/research/claude-code-expertise
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> What 400,000 Claude Code Sessions Reveal About Expertise and Output</h2>
+
+  <p>Anthropic published a new research report — <em>How Claude Code is used in practice</em> — based on a privacy-preserving analysis of approximately <strong>400,000 interactive sessions</strong> from ~235,000 people between October 2025 and April 2026. The headline finding is nuanced but directly actionable: the more domain expertise a person brings to a session, <strong>the more work Claude does per instruction</strong>. Experts don't just use Claude Code more — they unlock a qualitatively different mode of collaboration.</p>
+
+  <h3>Key findings</h3>
+  <ul>
+    <li><strong>Work split:</strong> In a typical session, people make most of the <em>planning</em> decisions (what to do) and Claude makes most of the <em>execution</em> decisions (how to do it). This division holds across occupation types.</li>
+    <li><strong>Expertise multiplier:</strong> Domain experts give fewer, higher-level instructions and Claude runs longer, more autonomous execution chains per instruction. Non-experts tend to micro-direct, which limits Claude's leverage.</li>
+    <li><strong>Occupation parity on success rate:</strong> On coding tasks, every major occupation achieves nearly the same <em>success rate</em> (verifiable outcomes like passing tests or committed work) as software engineers — but experts achieve more per session.</li>
+    <li><strong>Implication:</strong> The bottleneck for most teams isn't Claude's capability — it's the quality and specificity of the direction given to it.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Practical takeaway: plan like an expert, delegate like one too</strong>
+    <p>The research suggests a two-part discipline: (1) invest time upfront in precise, outcome-oriented instructions (not step-by-step how-tos), and (2) give Claude room to run multi-step execution without interrupting at each step. The sessions where Claude did the most work were those where the human had already done the hard thinking about <em>what success looks like</em> before the session started.</p>
+  </div>
+
+  <p>This is the same logic behind the shift from "give me code that does X" to "here is the acceptance criterion, here are the constraints — go." The research gives that intuition an empirical backing at scale.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/research/claude-code-expertise" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">research</span>
+    <span class="tag">expertise</span>
+    <span class="tag">productivity</span>
+    <span class="tag">prompting</span>
+    <span class="tag">agentic coding</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude Opus 4.1 retires August 5 — migrate to Opus 4.8
+     Source: https://platform.claude.com/docs/en/release-notes/overview
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> Two Days' Notice: Claude Opus 4.1 Retires on August 5</h2>
+
+  <p><strong>Claude Opus 4.1</strong> (<code>claude-opus-4-1-20250805</code>) is being retired from the Claude API on <strong>August 5, 2026</strong> — the day after tomorrow. If any of your production workflows, CI pipelines, or API integrations are pinned to this model ID, they will break in 48 hours. Anthropic's recommended migration target is <strong>Claude Opus 4.8</strong>.</p>
+
+  <h3>What to update</h3>
+  <ul>
+    <li>Search your codebase for the string <code>claude-opus-4-1</code> — it may appear in config files, environment variables, or hardcoded strings in client initialisation.</li>
+    <li>If you're on Claude Code and have an explicit model override set, check your <code>.claude/settings.json</code> for a pinned <code>model</code> key.</li>
+    <li>Replace with <code>claude-opus-4-8-20260101</code> (or the model alias <code>claude-opus-4-8</code> if your SDK version supports it).</li>
+  </ul>
+
+  <pre><code># Find Opus 4.1 references in your project
+grep -r "claude-opus-4-1" . --include="*.json" --include="*.env" \
+  --include="*.py" --include="*.ts" --include="*.js"</code></pre>
+
+  <div class="callout">
+    <strong>Check third-party integrations too</strong>
+    <p>If you're using Claude via a third-party platform (LangChain, LlamaIndex, Bedrock, Vertex AI), the model ID may be configured in their console or SDK layer rather than your own code. Check each integration point before August 5.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/release-notes/overview" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Opus 4.1</span>
+    <span class="tag">deprecation</span>
+    <span class="tag">migration</span>
+    <span class="tag">Opus 4.8</span>
+    <span class="tag">API</span>
+    <span class="tag">August 5</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

@@ -11224,6 +11224,48 @@ def img_klee_20260802():
     return base
 
 
+def img_kandinsky_20260803():
+    """Wassily Kandinsky — bold primaries, diagonal grid — cost planning / expertise leverage theme."""
+    base = Image.new("RGB", (W, H), (14, 26, 58))
+
+    # 1. Diagonal diagonal-line grid (signature Kandinsky construction)
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    for offset in range(-H, W + H, 80):
+        gd.line([(offset, 0), (offset + H, H)], fill=(255, 255, 255, 18), width=1)
+    for offset in range(W + H, -H, -80):
+        gd.line([(offset, 0), (offset - H, H)], fill=(255, 255, 255, 12), width=1)
+    base = comp(base, grid_l)
+
+    # 2. Large bold geometric shapes
+    shapes_l = layer()
+    sd = ImageDraw.Draw(shapes_l)
+    # Gold circle outline — "the cost cliff"
+    sd.ellipse([(380, 80), (820, 520)], outline=(245, 195, 30, 240), width=10)
+    # Red filled ellipse (inner urgency)
+    sd.ellipse([(480, 180), (720, 420)], fill=(210, 38, 48, 215))
+    # Prussian-blue triangle (expertise leverage)
+    sd.polygon([(100, 540), (370, 160), (500, 540)], fill=(28, 100, 200, 195), outline=(0, 0, 0, 180), width=3)
+    # Small yellow triangle (counterpoint)
+    sd.polygon([(820, 420), (1060, 260), (1060, 540)], fill=(242, 185, 28, 200))
+    base = comp(base, shapes_l)
+
+    # 3. White diagonal accent line (Kandinsky's signature cross-canvas stroke)
+    line_l = layer()
+    ld = ImageDraw.Draw(line_l)
+    ld.line([(90, 570), (1110, 60)], fill=(255, 255, 255, 190), width=5)
+    base = comp(base, line_l)
+
+    # 4. Small arc scatter (Kandinsky's arcs / tick marks)
+    arcs_l = layer()
+    ad = ImageDraw.Draw(arcs_l)
+    arc_positions = [(880, 90, 80), (150, 200, 55), (960, 480, 65), (310, 490, 45)]
+    for (ax, ay, ar) in arc_positions:
+        ad.arc([(ax - ar, ay - ar), (ax + ar, ay + ar)], start=20, end=160, fill=(240, 240, 240, 160), width=4)
+    base = comp(base, arcs_l)
+    return base
+
+
 def img_kandinsky_20251124():
     """Wassily Kandinsky — bold composition, flagship model launch theme."""
     base = Image.new("RGB", (W, H), (16, 30, 66))
@@ -11601,6 +11643,7 @@ DAYS = [
     ("2026-07-31", img_leger_20260731,     "Isolation Check",  "Fernand Léger"),
     ("2026-08-01", img_miro_20260801,      "Screen Reader",    "Joan Miró"),
     ("2026-08-02", img_klee_20260802,      "Team Agents",      "Paul Klee"),
+    ("2026-08-03", img_kandinsky_20260803, "Cost Planning",    "Wassily Kandinsky"),
 ]
 
 for date, fn, kw, artist in DAYS:

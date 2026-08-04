@@ -11266,6 +11266,54 @@ def img_kandinsky_20260803():
     return base
 
 
+def img_delaunay_20260804():
+    """Robert Delaunay — overlapping spectral rings — security signals / cryptographic waves theme."""
+    base = Image.new("RGB", (W, H), (6, 4, 22))
+
+    # 1. Three overlapping spectral-ring disc clusters radiating outward
+    spectral = [
+        (200, 28, 28), (210, 105, 0), (200, 185, 0),
+        (0, 170, 65), (0, 110, 200), (85, 0, 200),
+    ]
+    disc_centres = [(320, 290, 210), (740, 210, 180), (960, 390, 155)]
+    for cx, cy, maxr in disc_centres:
+        for i, col in enumerate(spectral):
+            r = maxr - i * (maxr // 7)
+            if r < 10:
+                break
+            rl = layer()
+            rd = ImageDraw.Draw(rl)
+            rd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=(col[0], col[1], col[2], 145))
+            base = comp(base, rl)
+
+    # 2. Thin concentric rings emanating from the left disc (signal / breach ripple)
+    ring_l = layer()
+    rnd = ImageDraw.Draw(ring_l)
+    for r in range(220, 430, 28):
+        rnd.ellipse([(320 - r, 290 - r), (320 + r, 290 + r)],
+                    outline=(255, 255, 255, 30), width=1)
+    base = comp(base, ring_l)
+
+    # 3. Semi-transparent arc sweep (Delaunay signature motion arc)
+    arc_l = layer()
+    ad = ImageDraw.Draw(arc_l)
+    ad.arc([(80, 50), (580, 550)], start=340, end=100, fill=(240, 240, 240, 55), width=6)
+    ad.arc([(600, 80), (1120, 540)], start=160, end=340, fill=(240, 240, 240, 40), width=4)
+    base = comp(base, arc_l)
+
+    # 4. Small bright dot scatter (stars / signal noise)
+    dot_l = layer()
+    dd = ImageDraw.Draw(dot_l)
+    for _ in range(60):
+        x = rng.randint(30, W - 30)
+        y = rng.randint(30, H - 30)
+        r = rng.randint(2, 5)
+        dd.ellipse([(x - r, y - r), (x + r, y + r)], fill=(255, 255, 240, 180))
+    base = comp(base, dot_l)
+
+    return base
+
+
 def img_kandinsky_20251124():
     """Wassily Kandinsky — bold composition, flagship model launch theme."""
     base = Image.new("RGB", (W, H), (16, 30, 66))
@@ -11644,6 +11692,7 @@ DAYS = [
     ("2026-08-01", img_miro_20260801,      "Screen Reader",    "Joan Miró"),
     ("2026-08-02", img_klee_20260802,      "Team Agents",      "Paul Klee"),
     ("2026-08-03", img_kandinsky_20260803, "Cost Planning",    "Wassily Kandinsky"),
+    ("2026-08-04", img_delaunay_20260804,  "Safety Signals",   "Robert Delaunay"),
 ]
 
 for date, fn, kw, artist in DAYS:

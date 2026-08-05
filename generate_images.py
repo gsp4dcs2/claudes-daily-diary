@@ -11314,6 +11314,66 @@ def img_delaunay_20260804():
     return base
 
 
+def img_klimt_20260805():
+    """Gustav Klimt — dark bg, gold mosaics, teal accents — policy hire / compute deal theme."""
+    base = Image.new("RGB", (W, H), (14, 10, 6))
+
+    # 1. Deep golden glow at centre-right (the 'power source' — Volta deal)
+    glow_l = layer()
+    gd = ImageDraw.Draw(glow_l)
+    gd.ellipse([(480, 80), (1080, 560)], fill=(140, 100, 18, 50))
+    gd.ellipse([(560, 140), (1000, 500)], fill=(160, 118, 22, 45))
+    base = comp(base, glow_l)
+
+    # 2. Dense gold mosaic fragments (Klimt's signature decorated field)
+    mosaic_l = layer()
+    md = ImageDraw.Draw(mosaic_l)
+    gold_shades = [
+        (212, 175, 55), (200, 160, 44), (228, 196, 80),
+        (180, 140, 38), (240, 210, 100), (190, 152, 50),
+    ]
+    for _ in range(340):
+        x = rng.randint(60, W - 60)
+        y = rng.randint(40, H - 40)
+        s = rng.randint(5, 18)
+        shade = rng.choice(gold_shades)
+        alpha = rng.randint(100, 220)
+        shape = rng.randint(0, 2)
+        if shape == 0:
+            md.rectangle([(x, y), (x + s, y + s)], fill=(shade[0], shade[1], shade[2], alpha))
+        elif shape == 1:
+            md.ellipse([(x, y), (x + s, y + s)], fill=(shade[0], shade[1], shade[2], alpha))
+        else:
+            md.polygon([(x, y + s), (x + s // 2, y), (x + s, y + s)],
+                       fill=(shade[0], shade[1], shade[2], alpha))
+    base = comp(base, mosaic_l)
+
+    # 3. Gold spiral curves (Klimt's decorative swirls — policy/legal complexity)
+    spiral_l = layer()
+    sd = ImageDraw.Draw(spiral_l)
+    for cx, cy, maxr in [(320, 300, 160), (720, 180, 120), (980, 420, 140)]:
+        for r in range(20, maxr, 22):
+            sd.arc([(cx - r, cy - r), (cx + r, cy + r)],
+                   start=rng.randint(0, 60), end=rng.randint(180, 320),
+                   fill=(212, 175, 55, rng.randint(60, 130)), width=rng.randint(2, 4))
+    base = comp(base, spiral_l)
+
+    # 4. Teal accent strokes (technology / infrastructure counterpoint)
+    teal_l = layer()
+    td = ImageDraw.Draw(teal_l)
+    teal_shades = [(40, 160, 140), (30, 130, 120), (60, 180, 160)]
+    for _ in range(40):
+        x = rng.randint(30, W - 30)
+        y = rng.randint(30, H - 30)
+        s = rng.randint(6, 14)
+        shade = rng.choice(teal_shades)
+        td.rectangle([(x, y), (x + s, y + s // 2)],
+                     fill=(shade[0], shade[1], shade[2], rng.randint(90, 180)))
+    base = comp(base, teal_l)
+
+    return base
+
+
 def img_kandinsky_20251124():
     """Wassily Kandinsky — bold composition, flagship model launch theme."""
     base = Image.new("RGB", (W, H), (16, 30, 66))
@@ -11693,6 +11753,7 @@ DAYS = [
     ("2026-08-02", img_klee_20260802,      "Team Agents",      "Paul Klee"),
     ("2026-08-03", img_kandinsky_20260803, "Cost Planning",    "Wassily Kandinsky"),
     ("2026-08-04", img_delaunay_20260804,  "Safety Signals",   "Robert Delaunay"),
+    ("2026-08-05", img_klimt_20260805,     "Policy & Compute", "Gustav Klimt"),
 ]
 
 for date, fn, kw, artist in DAYS:

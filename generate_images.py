@@ -11374,6 +11374,43 @@ def img_klimt_20260805():
     return base
 
 
+def img_lissitzky_20260806():
+    """El Lissitzky Constructivism — security patches / code-review ultra theme."""
+    base = Image.new("RGB", (W, H), (236, 232, 222))
+
+    # 1. Bold red diagonal beam — /code-review ultra 'scan' sweep
+    beam_l = layer(); bd = ImageDraw.Draw(beam_l)
+    bd.polygon([(80, H - 80), (1100, 60), (1100, 120), (80, H - 20)],
+               fill=(200, 30, 40, 245))
+    base = comp(base, beam_l)
+
+    # 2. Black horizontal structure bars (code/permission layers)
+    bars_l = layer(); brd = ImageDraw.Draw(bars_l)
+    brd.rectangle([(60, 200), (560, 248)], fill=(20, 20, 20, 255))
+    brd.rectangle([(60, 340), (860, 376)], fill=(20, 20, 20, 255))
+    brd.rectangle([(60, 480), (420, 510)], fill=(20, 20, 20, 255))
+    base = comp(base, bars_l)
+
+    # 3. Bold black vertical bar on right (structured authority / org policy)
+    vert_l = layer(); vd = ImageDraw.Draw(vert_l)
+    vd.rectangle([(1040, 60), (1086, 560)], fill=(20, 20, 20, 255))
+    base = comp(base, vert_l)
+
+    # 4. Red circle — the patched vulnerability node
+    circ_l = layer(); cd = ImageDraw.Draw(circ_l)
+    cd.ellipse([(680, 80), (940, 340)], fill=(200, 30, 40, 220))
+    cd.ellipse([(730, 130), (890, 290)], fill=(236, 232, 222, 200))
+    base = comp(base, circ_l)
+
+    # 5. Small black squares — the four security fixes
+    sq_l = layer(); sqd = ImageDraw.Draw(sq_l)
+    for x, y in [(160, 430), (280, 430), (400, 430), (520, 430)]:
+        sqd.rectangle([(x, y), (x + 38, y + 38)], fill=(20, 20, 20, 230))
+    base = comp(base, sq_l)
+
+    return base
+
+
 def img_kandinsky_20251124():
     """Wassily Kandinsky — bold composition, flagship model launch theme."""
     base = Image.new("RGB", (W, H), (16, 30, 66))
@@ -11754,6 +11791,7 @@ DAYS = [
     ("2026-08-03", img_kandinsky_20260803, "Cost Planning",    "Wassily Kandinsky"),
     ("2026-08-04", img_delaunay_20260804,  "Safety Signals",   "Robert Delaunay"),
     ("2026-08-05", img_klimt_20260805,     "Policy & Compute", "Gustav Klimt"),
+    ("2026-08-06", img_lissitzky_20260806, "Code Review Ultra", "El Lissitzky"),
 ]
 
 for date, fn, kw, artist in DAYS:

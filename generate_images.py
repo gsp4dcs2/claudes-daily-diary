@@ -11411,6 +11411,50 @@ def img_lissitzky_20260806():
     return base
 
 
+def img_franzmarc_20260807():
+    """Franz Marc — jewel-toned organic shapes — biology safeguards / safety theme."""
+    base = Image.new("RGB", (W, H), (14, 26, 68))  # deep cobalt bg
+
+    # 1. Large emerald organic body form (nature / biology)
+    body_l = layer(); bd = ImageDraw.Draw(body_l)
+    bd.ellipse([(60, 160), (520, 490)], fill=(25, 130, 88, 225))
+    base = comp(base, body_l)
+
+    # 2. Cobalt arc — safety classifier sweep
+    arc_l = layer(); ad = ImageDraw.Draw(arc_l)
+    ad.ellipse([(380, 50), (720, 360)], fill=(35, 55, 185, 205))
+    base = comp(base, arc_l)
+
+    # 3. Gold disc — safe / approved signal
+    sun_l = layer(); sd = ImageDraw.Draw(sun_l)
+    sd.ellipse([(820, 70), (1080, 330)], fill=(205, 172, 28, 225))
+    # Inner ring to give depth
+    sd.ellipse([(870, 120), (1030, 280)], fill=(235, 205, 60, 180))
+    base = comp(base, sun_l)
+
+    # 4. Teal rolling hills — landscape / ecosystem safety
+    hill_l = layer(); hd = ImageDraw.Draw(hill_l)
+    hd.polygon([(0, 490), (320, 340), (680, 430), (1020, 310), (1200, 380), (1200, 630), (0, 630)],
+               fill=(18, 105, 115, 215))
+    base = comp(base, hill_l)
+
+    # 5. Rust/amber inner animal form
+    rust_l = layer(); rd = ImageDraw.Draw(rust_l)
+    rd.ellipse([(140, 250), (380, 460)], fill=(192, 78, 32, 195))
+    base = comp(base, rust_l)
+
+    # 6. Star scatter (night sky, jewel-like)
+    star_l = layer(); std = ImageDraw.Draw(star_l)
+    for _ in range(22):
+        x = rng.randint(580, 1180)
+        y = rng.randint(20, 290)
+        r = rng.randint(1, 3)
+        std.ellipse([(x - r, y - r), (x + r, y + r)], fill=(242, 232, 212, 175))
+    base = comp(base, star_l)
+
+    return base
+
+
 def img_kandinsky_20251124():
     """Wassily Kandinsky — bold composition, flagship model launch theme."""
     base = Image.new("RGB", (W, H), (16, 30, 66))
@@ -11792,6 +11836,7 @@ DAYS = [
     ("2026-08-04", img_delaunay_20260804,  "Safety Signals",   "Robert Delaunay"),
     ("2026-08-05", img_klimt_20260805,     "Policy & Compute", "Gustav Klimt"),
     ("2026-08-06", img_lissitzky_20260806, "Code Review Ultra", "El Lissitzky"),
+    ("2026-08-07", img_franzmarc_20260807, "Biology Safety",   "Franz Marc"),
 ]
 
 for date, fn, kw, artist in DAYS:

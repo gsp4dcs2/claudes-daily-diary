@@ -11579,6 +11579,57 @@ def img_leger_20251130():
     return base
 
 
+def img_leger_20260808():
+    """Fernand Léger — mechanical outlines + flat primaries — budget controls / spend limits theme."""
+    base = Image.new("RGB", (W, H), (18, 18, 20))  # near-black bg
+
+    # 1. Large industrial cylinder (left) — red outline
+    cyl_l = layer(); cd = ImageDraw.Draw(cyl_l)
+    cd.ellipse([(60, 120), (340, 380)], outline=(230, 60, 40, 240), width=10)
+    cd.rectangle([(60, 250), (340, 480)], outline=(230, 60, 40, 200), width=8)
+    cd.ellipse([(60, 360), (340, 480)], fill=(230, 60, 40, 35), outline=(230, 60, 40, 180), width=6)
+    base = comp(base, cyl_l)
+
+    # 2. Central dial / gauge (yellow rectangle + hollow circle + crosshairs)
+    gear_l = layer(); gd = ImageDraw.Draw(gear_l)
+    gd.rectangle([(430, 100), (780, 520)], fill=(240, 195, 30, 40), outline=(240, 195, 30, 240), width=10)
+    gd.ellipse([(530, 200), (680, 420)], fill=(18, 18, 20, 255), outline=(240, 195, 30, 220), width=8)
+    gd.line([(605, 160), (605, 460)], fill=(240, 195, 30, 180), width=4)
+    gd.line([(440, 310), (770, 310)], fill=(240, 195, 30, 180), width=4)
+    base = comp(base, gear_l)
+
+    # 3. Right mechanical block (blue) with grid interior
+    block_l = layer(); bd = ImageDraw.Draw(block_l)
+    bd.rectangle([(850, 160), (1120, 470)], outline=(40, 130, 220, 240), width=10)
+    bd.rectangle([(900, 220), (1070, 410)], fill=(40, 130, 220, 35), outline=(40, 130, 220, 180), width=6)
+    for yi in range(3):
+        y = 280 + yi * 50
+        bd.line([(900, y), (1070, y)], fill=(40, 130, 220, 120), width=2)
+    for xi in range(2):
+        x = 970 + xi * 50
+        bd.line([(x, 220), (x, 410)], fill=(40, 130, 220, 120), width=2)
+    base = comp(base, block_l)
+
+    # 4. Connecting pipes between shapes
+    pipes_l = layer(); pd = ImageDraw.Draw(pipes_l)
+    pd.rectangle([(340, 295), (430, 325)], fill=(255, 255, 255, 50), outline=(255, 255, 255, 150), width=3)
+    pd.rectangle([(780, 295), (850, 325)], fill=(255, 255, 255, 50), outline=(255, 255, 255, 150), width=3)
+    base = comp(base, pipes_l)
+
+    # 5. Rivet dots at shape corners (industrial detail)
+    rivet_l = layer(); rd = ImageDraw.Draw(rivet_l)
+    rivets = [
+        (70, 130), (330, 130), (70, 370), (330, 370),
+        (440, 110), (770, 110), (440, 520), (770, 520),
+        (860, 170), (1110, 170), (860, 460), (1110, 460),
+    ]
+    for (rx, ry) in rivets:
+        rd.ellipse([(rx - 6, ry - 6), (rx + 6, ry + 6)], fill=(200, 200, 200, 200), outline=(80, 80, 80, 255), width=2)
+    base = comp(base, rivet_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -11837,6 +11888,7 @@ DAYS = [
     ("2026-08-05", img_klimt_20260805,     "Policy & Compute", "Gustav Klimt"),
     ("2026-08-06", img_lissitzky_20260806, "Code Review Ultra", "El Lissitzky"),
     ("2026-08-07", img_franzmarc_20260807, "Biology Safety",   "Franz Marc"),
+    ("2026-08-08", img_leger_20260808,     "Budget Agents",    "Fernand Léger"),
 ]
 
 for date, fn, kw, artist in DAYS:

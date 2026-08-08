@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="August 8: Claude Code v2.1.225 ships gateway spend-limit messages, Remote Control naming for SendMessage, and nine bug fixes — plus Claude Managed Agents adds session budgets with a budget_reached stop reason, advisor models for mid-turn guidance, inference geo-routing for data residency, and GitHub-sourced skills.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-08-08 – Claude Code v2.1.225, Managed Agents Budget Controls, and Inference Geo-Routing">
+  <meta property="og:description" content="August 8: Claude Code v2.1.225 ships gateway spend-limit messages, Remote Control naming for SendMessage, and nine bug fixes — plus Claude Managed Agents adds session budgets with a budget_reached stop reason, advisor models for mid-turn guidance, inference geo-routing for data residency, and GitHub-sourced skills.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/08/2026-08-08.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/08/2026-08-08.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/08/2026-08-08.png">
+
+  <title>2026-08-08 – Claude Code v2.1.225, Managed Agents Budget Controls, and Inference Geo-Routing | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Code v2.1.225, Managed Agents Budget Controls, and Inference Geo-Routing",
+  "description": "August 8: Claude Code v2.1.225 ships gateway spend-limit messages, Remote Control naming for SendMessage, and nine bug fixes — plus Claude Managed Agents adds session budgets with a budget_reached stop reason, advisor models for mid-turn guidance, inference geo-routing for data residency, and GitHub-sourced skills.",
+  "datePublished": "2026-08-08",
+  "dateModified": "2026-08-08",
+  "url": "https://claudebeat.ai/articles/2026/08/2026-08-08.html",
+  "image": "https://claudebeat.ai/articles/2026/08/2026-08-08.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/08/2026-08-08.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-08-08</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Claude Code v2.1.225, Managed Agents Budget Controls, and Inference Geo-Routing</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-08-08.png" alt="Claude Code v2.1.225, Managed Agents Budget Controls, and Inference Geo-Routing — visual for 2026-08-08">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code v2.1.225: Gateway Spend Limits, Remote Control Naming, Nine Bug Fixes
+     Source: https://github.com/anthropics/claude-code/releases/tag/v2.1.225
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.225: Gateway Spend-Limit Messages, Remote Control by Name, and Nine Bug Fixes</h2>
+
+  <p>Two Claude Code releases landed early on August 8: v2.1.225 (01:09 UTC) with a full set of new features and fixes, and v2.1.226 (02:48 UTC) with reliability improvements. The most developer-visible changes in v2.1.225 are richer gateway spend-limit feedback, a name-based discovery upgrade to <code>SendMessage</code>, and a significant sweep of OAuth and session-stability bug fixes.</p>
+
+  <h3>Gateway spend-limit messages now name the cap</h3>
+  <p>When a user or session hits a gateway-defined spend limit, Claude Code's usage warning previously gave a generic "limit reached" notice. As of v2.1.225, the message now surfaces three pieces of information the gateway operator controls:</p>
+  <ul>
+    <li>The <strong>cap amount</strong> (e.g. "$50 monthly")</li>
+    <li>The <strong>reset time</strong> (e.g. "resets September 1")</li>
+    <li>The <strong>operator's custom message</strong> (e.g. "Contact your team admin to request an increase")</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>What this means for operators</strong>
+    <p>If your organisation runs Claude Code behind a gateway with spend controls — common in enterprise deployments where teams have per-user or per-project budgets — you can now write a message that appears verbatim to users when they hit the cap. Use this to direct users to your internal request workflow rather than leaving them confused. The gateway must be on v2.1.225 or later for the enhanced message to be passed through.</p>
+  </div>
+
+  <h3>SendMessage can now address Remote Control sessions by name</h3>
+  <p>Cross-session <code>SendMessage</code> previously required you to already be in a two-way conversation with a Remote Control session before you could send it a message. In v2.1.225, <code>ListAgents</code> now surfaces Remote Control sessions on other machines in the format <code>name [ref]</code>, and <code>SendMessage</code> can open a conversation with them by that name — no prior exchange needed.</p>
+
+  <pre><code># Discover all reachable sessions (including Remote Control on other machines)
+ListAgents()
+# → local-session-1, laptop-main [ref], desktop-work [ref]
+
+# Start a conversation with a Remote Control session by name
+SendMessage(
+  to: "desktop-work",
+  content: "Run the full test suite and report back"
+)
+</code></pre>
+
+  <p>This makes coordinator-worker patterns more robust: a headless coordinator can target named workers without needing them to initiate contact first.</p>
+
+  <h3>Workspace trust prompt added to <code>claude agents</code></h3>
+  <p>Launching <code>claude agents</code> in an untrusted directory now shows the same workspace trust prompt that <code>claude</code> itself shows. Previously, the agents subcommand skipped the trust check, meaning an untrusted directory could spin up agent sessions without the user explicitly accepting trust for that workspace.</p>
+
+  <h3>Bug fixes worth knowing</h3>
+  <ul>
+    <li><strong>MCP OAuth on macOS 401 burst:</strong> A keychain read timeout could cause MCP OAuth servers to fire a burst of 401 errors in rapid succession. Fixed — the retry now backs off correctly.</li>
+    <li><strong>Long-lived CLAUDE_CODE_OAUTH_TOKEN 401:</strong> Replacing a long-lived <code>CLAUDE_CODE_OAUTH_TOKEN</code> with a stored login's short-lived token caused transient 401s that would break headless sessions until restart. Fixed.</li>
+    <li><strong>Auto mode + safety-filter refusals:</strong> If auto mode's own permission check was refused by a safety filter, that refusal was incorrectly counted toward the consecutive-block limit, which could stall the session. Fixed.</li>
+    <li><strong>Cross-session message parking:</strong> Messages sent to headless sessions during startup were silently parked with no notice and no expiry. They now surface correctly.</li>
+    <li><strong>Remote Control conversation history:</strong> After a very large conversation was compacted, resuming a Remote Control session could corrupt the conversation history. Fixed.</li>
+    <li><strong>Agents list hover side-effect:</strong> Hovering over a session in another project in the agents panel was changing the directory the next local agent would start in. Fixed.</li>
+    <li><strong>self-hosted-runner with unwriteable base-dir:</strong> <code>claude self-hosted-runner</code> would register successfully and then fail every session if <code>--base-dir</code> could not be created or written. It now reports the error upfront.</li>
+    <li><strong>VSCode Focus view:</strong> The Focus view was folding away the latest to-do list, pending questions' context, and settled answers. Thinking-only folds now show "Thought for Ns" and re-collapse correctly when the turn completes.</li>
+    <li><strong>Web sessions reconnect storm:</strong> Claude Code on the web was misreporting sessions as stuck and re-sending a growing event backlog on every reconnect. Fixed.</li>
+  </ul>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.225" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">2.1.225</span>
+    <span class="tag">gateway spend limits</span>
+    <span class="tag">SendMessage</span>
+    <span class="tag">Remote Control</span>
+    <span class="tag">MCP OAuth</span>
+    <span class="tag">workspace trust</span>
+    <span class="tag">bug fixes</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Managed Agents: Session Budgets, Advisor Models, Inference Geo, GitHub Skills
+     Source: https://platform.claude.com/docs/en/release-notes/api
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Managed Agents Gets Session Budgets, Advisor Models, Inference Geo-Routing, and GitHub-Sourced Skills</h2>
+
+  <p>The August 7 platform release notes added four substantial capabilities to Claude Managed Agents that collectively give enterprise operators much finer control over cost, quality, compliance, and skill management for agentic deployments.</p>
+
+  <h3>Session budgets: hard spend caps with a clean stop reason</h3>
+  <p>You can now set a budget on any Claude Managed Agents session — a hard cap on the session's spend, priced at public list rates. When a session reaches its budget, it pauses with <code>stop_reason: "budget_reached"</code> instead of continuing to accrue costs. Removing or raising the budget immediately resumes the session. Deployments can carry a default budget that is applied to every session they start.</p>
+
+  <pre><code># Creating a session with a spend budget
+POST /v1/sessions
+{
+  "agent_id": "ag_...",
+  "budget": {
+    "amount": 5.00,
+    "currency": "usd"
+  }
+}
+
+# Resuming a paused session by clearing the budget
+PATCH /v1/sessions/{session_id}
+{ "budget": null }
+</code></pre>
+
+  <div class="callout tip">
+    <strong>How to handle budget_reached in your code</strong>
+    <p>Poll or stream session events for <code>session.stopped</code> with <code>stop_reason: "budget_reached"</code>. At that point your application can notify the user, log the overage, escalate for approval, or programmatically increase the budget. Unlike a hard API error, the session state is fully preserved — context, tool state, and memory — so resumption is seamless after the budget is adjusted.</p>
+  </div>
+
+  <h3>Advisor model: consult a smarter model mid-turn</h3>
+  <p>You can now give any Managed Agents session an <strong>advisor</strong>: a second model (which must be at least as capable as the primary agent's model) that the primary thread can consult mid-turn for strategic guidance. Configure it in the agent's multiagent roster:</p>
+
+  <pre><code># Agent definition with an advisor
+{
+  "model": { "id": "claude-sonnet-5" },
+  "multiagent": {
+    "roster": [
+      {
+        "type": "advisor",
+        "model": "claude-opus-5"
+      }
+    ]
+  }
+}
+</code></pre>
+
+  <p>The advisor pattern is designed for deployments where a lower-cost model handles the bulk of execution but needs occasional high-capability reasoning for decision points — for example, a Sonnet 5 agent that consults Opus 5 only when it encounters ambiguous requirements. The primary thread makes the advisor call explicitly; the advisor does not act autonomously.</p>
+
+  <h3>Inference geo-routing: pin model inference to a specific region</h3>
+  <p>Enterprise operators with data-residency requirements can now control where model inference physically runs for a Managed Agents agent. Set <code>inference_geo</code> inside the <code>model</code> object when creating the agent, or override it on a per-session basis:</p>
+
+  <pre><code># Creating an agent pinned to EU inference
+POST /v1/agents
+{
+  "model": {
+    "id": "claude-fable-5",
+    "inference_geo": "eu"
+  },
+  ...
+}
+
+# Overriding per-session (e.g. for a specific customer's data)
+POST /v1/sessions
+{
+  "agent_id": "ag_...",
+  "agent": {
+    "type": "agent_with_overrides",
+    "model": { "inference_geo": "us" }
+  }
+}
+</code></pre>
+
+  <div class="callout">
+    <strong>GDPR and data-sovereignty implications</strong>
+    <p>For operators subject to GDPR, HIPAA, or national data-sovereignty rules, <code>inference_geo</code> is the recommended mechanism to ensure that prompt and response content does not leave a specified geographic boundary during inference. The available regions and their pricing differentials are listed in the <a href="https://platform.claude.com/docs/en/manage-claude/data-residency">Data residency</a> documentation. Note that <code>inference_geo</code> controls inference location only — data retention and storage policies are governed separately.</p>
+  </div>
+
+  <h3>Skills now loadable from GitHub repositories</h3>
+  <p>When a Managed Agents session mounts a GitHub repository (via the existing repository mounting feature), Claude now automatically discovers any skills in the repository's root <code>.claude/skills</code> directory at session start — without requiring the operator to enumerate them in the agent configuration. Skills become available to the agent for that session only.</p>
+
+  <p>This enables a workflow where skills live alongside the code they support: a repository for a product can carry its own <code>.claude/skills/</code> directory, and any agent session working on that repo automatically gains those skills without manual wiring in the agent definition.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/release-notes/api" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Managed Agents</span>
+    <span class="tag">session budget</span>
+    <span class="tag">budget_reached</span>
+    <span class="tag">advisor model</span>
+    <span class="tag">inference geo</span>
+    <span class="tag">data residency</span>
+    <span class="tag">GitHub skills</span>
+    <span class="tag">enterprise</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Choosing the right cost-control layer for agentic deployments
+     Source: https://platform.claude.com/docs/en/managed-agents/budgets
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Three Cost-Control Layers for Agentic Deployments — and When to Use Each</h2>
+
+  <p>With today's Claude Code and Managed Agents releases, there are now three distinct mechanisms for controlling spending in agentic deployments. They sit at different layers and serve different purposes — understanding which to apply where can prevent both unexpected bills and unnecessary friction for users.</p>
+
+  <h3>Layer 1: Effort level (model-level)</h3>
+  <p>The <code>effort</code> parameter controls how much reasoning the model applies per request. Lower effort means less thinking, faster responses, and lower token costs. Set it in the agent's <code>model</code> config:</p>
+
+  <pre><code>{ "model": { "id": "claude-opus-5", "effort": "medium" } }
+</code></pre>
+  <p><strong>Best for:</strong> Workloads where you know most tasks don't need maximum reasoning (e.g. extraction, summarisation, routing). This is a quality-vs-cost trade-off, not a hard spend cap.</p>
+
+  <h3>Layer 2: Gateway spend limit (Claude Code — operator layer)</h3>
+  <p>Operators running Claude Code behind a gateway can set per-user or per-team spend limits that surface in Claude Code's UI. As of v2.1.225, when a user hits the limit they now see the cap amount, reset time, and a custom operator message. This is the right layer for <strong>human-interactive</strong> Claude Code usage where you want to give users visibility into their budget and route them to your internal request workflow.</p>
+
+  <h3>Layer 3: Session budget (Managed Agents — session layer)</h3>
+  <p>The new <code>budget</code> field on Managed Agents sessions sets a hard spend cap that triggers <code>stop_reason: "budget_reached"</code> when reached. This is designed for <strong>automated / agentic</strong> workflows where there is no interactive user to warn — you need the session to stop cleanly and preserve state so your application can decide what to do next.</p>
+
+  <div class="callout tip">
+    <strong>Recommended layering for enterprise deployments</strong>
+    <ul>
+      <li>Use <strong>effort level</strong> on the agent definition to set a cost/quality baseline appropriate for the typical task.</li>
+      <li>Use <strong>session budget</strong> on every production Managed Agents session as a safety backstop — set it conservatively at first and raise it based on observed usage patterns.</li>
+      <li>Use <strong>gateway spend limits</strong> for your human-facing Claude Code rollout to give employees budget visibility and drive them to your internal approval process.</li>
+    </ul>
+  </div>
+
+  <p>These three controls compose cleanly: a session can have low effort (cheap per-turn), a session budget (total cap), and the operator's gateway enforcing a separate per-user monthly ceiling — all three active simultaneously with no conflicts.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/managed-agents/budgets" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">cost control</span>
+    <span class="tag">session budget</span>
+    <span class="tag">effort level</span>
+    <span class="tag">gateway spend limit</span>
+    <span class="tag">Managed Agents</span>
+    <span class="tag">Claude Code</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">best practices</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

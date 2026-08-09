@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="August 9: Claude Enterprise gains real-time inference hooks — a vendor-agnostic DLP layer that inspects every prompt before inference runs — and Anthropic, Amazon, Microsoft, and Google align on a four-factor jailbreak severity taxonomy to standardise AI safety disclosures.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-08-09 – Enterprise Inference Hooks and Cross-Company Jailbreak Severity Standards">
+  <meta property="og:description" content="August 9: Claude Enterprise gains real-time inference hooks — a vendor-agnostic DLP layer that inspects every prompt before inference runs — and Anthropic, Amazon, Microsoft, and Google align on a four-factor jailbreak severity taxonomy to standardise AI safety disclosures.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/08/2026-08-09.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/08/2026-08-09.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/08/2026-08-09.png">
+
+  <title>2026-08-09 – Enterprise Inference Hooks and Cross-Company Jailbreak Severity Standards | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Enterprise Inference Hooks and Cross-Company Jailbreak Severity Standards",
+  "description": "August 9: Claude Enterprise gains real-time inference hooks — a vendor-agnostic DLP layer that inspects every prompt before inference runs — and Anthropic, Amazon, Microsoft, and Google align on a four-factor jailbreak severity taxonomy to standardise AI safety disclosures.",
+  "datePublished": "2026-08-09",
+  "dateModified": "2026-08-09",
+  "url": "https://claudebeat.ai/articles/2026/08/2026-08-09.html",
+  "image": "https://claudebeat.ai/articles/2026/08/2026-08-09.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/08/2026-08-09.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-08-09</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Enterprise Inference Hooks and Cross-Company Jailbreak Severity Standards</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-08-09.png" alt="Enterprise Inference Hooks and Cross-Company Jailbreak Severity Standards — visual for 2026-08-09">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Enterprise Inference Hooks: Real-Time DLP Before Every Claude Prompt
+     Source: https://platform.claude.com/docs/en/manage-claude/inference-hooks
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Enterprise Inference Hooks: Real-Time DLP Before Every Claude Prompt</h2>
+
+  <p>Anthropic has shipped <strong>inference hooks</strong> in beta for all Claude Enterprise organisations — a vendor-agnostic inspection layer that intercepts every governed prompt <em>before</em> the model sees it. The organisation's AI security or DLP server receives the full conversation transcript via a signed HTTPS POST, returns an <code>allow</code> or <code>deny</code> verdict within 5 seconds, and Claude either proceeds or halts. Denied prompts never reach the model.</p>
+
+  <h3>How it works</h3>
+  <p>When inference hooks are configured, every covered request follows this path:</p>
+  <ol>
+    <li>Claude receives the user's message but pauses before inference.</li>
+    <li>Anthropic sends a <code>POST</code> to the organisation's configured endpoint with the transcript, signed using the Standard Webhooks spec (<code>webhook-id</code> / <code>webhook-timestamp</code> / <code>webhook-signature</code> headers, HMAC-SHA256).</li>
+    <li>The AI security server inspects the content and returns a compact JSON verdict.</li>
+    <li>Claude either generates a response (allow) or returns a denial message (deny).</li>
+  </ol>
+
+  <pre><code># Allow verdict
+{ "action": "allow" }
+
+# Deny verdict — deny_reason shown to user; reference_id logged
+{
+  "action": "deny",
+  "deny_reason": "This request contains regulated financial data. Please remove account numbers before continuing.",
+  "reference_id": "dlp-event-20260809-00421"
+}
+</code></pre>
+
+  <h3>Scope and limits</h3>
+  <ul>
+    <li><strong>Covered surfaces:</strong> claude.ai chat, Claude Cowork, and Claude Code sessions for Enterprise orgs.</li>
+    <li><strong>Not covered:</strong> Amazon Bedrock or Google Cloud deployments; voice mode; system prompts; raw file bytes and images (text content of attachments is included).</li>
+    <li><strong>Timeout:</strong> 5,000 ms default (configurable 1–10,000 ms); one automatic retry after 100 ms on connection failure only.</li>
+    <li><strong>Failure mode:</strong> configurable as "block the request" (fail-closed) or "allow the request" (fail-open).</li>
+    <li><strong>Source IPs:</strong> <code>160.79.106.0/24</code>; <code>User-Agent: anthropic-dlp/1</code>.</li>
+    <li><strong>Request schema fields:</strong> <code>type</code> (always <code>"prompt"</code> today), <code>request_id</code>, <code>tenant_id</code>, <code>actor</code> (user id + email), <code>source.application</code> (<code>claude-ai</code> or <code>claude-code</code>), <code>messages</code>, <code>session_id</code>, <code>model</code>.</li>
+  </ul>
+
+  <h3>Rollout controls</h3>
+  <p>Inference hooks ship with three safeguards designed for phased enterprise deployments:</p>
+  <ul>
+    <li><strong>Shadow mode:</strong> hooks receive the request and return verdicts, but Claude ignores denials — lets you measure false-positive rates before enforcement goes live.</li>
+    <li><strong>Rollout percentage:</strong> inspect 0–100% of requests, so you can start with a small traffic slice and increase gradually.</li>
+    <li><strong>Role-based exclusions:</strong> custom roles (e.g. IT admins, security analysts) can be exempted from inspection.</li>
+    <li><strong>Circuit breaker:</strong> sustained hook failures automatically stop enforcement; an admin must manually re-enable. Every denial is recorded in the Compliance Activity Feed.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>What to build your hook server with</strong>
+    <p>The inference hooks endpoint is fully vendor-agnostic: any organisation can implement the HTTPS endpoint themselves or use a security vendor that supports the Standard Webhooks spec. The system prompt, file bytes, and images are never sent to your hook server, so your DLP logic sees only the text conversation — the same transcript a human reviewer would read. Start with shadow mode on 5–10% of traffic, tune your rules, then raise rollout percentage and switch to enforcement.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/manage-claude/inference-hooks" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">inference hooks</span>
+    <span class="tag">DLP</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">security</span>
+    <span class="tag">claude.ai</span>
+    <span class="tag">Claude Code</span>
+    <span class="tag">compliance</span>
+    <span class="tag">Standard Webhooks</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Jailbreak Severity Framework: Anthropic, Amazon, Microsoft, Google Align
+     Source: https://www.anthropic.com/news/improving-fable-5s-biology-safeguards
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Four-Factor Jailbreak Severity Framework: Anthropic, Amazon, Microsoft, and Google Align on Standards</h2>
+
+  <p>Buried inside Anthropic's August 7 post on Fable 5 biology safeguards is a quietly significant announcement: Anthropic is working with Amazon, Microsoft, and Google to develop a <strong>shared jailbreak severity taxonomy</strong> for scoring how dangerous a discovered bypass technique actually is. The goal is to give AI companies a common language for evaluating and disclosing vulnerabilities — similar in intent to the CVSSv3 scoring system used for software security.</p>
+
+  <h3>The four scoring dimensions</h3>
+  <p>The emerging framework rates every reported jailbreak across four factors:</p>
+  <ul>
+    <li><strong>Capability gain:</strong> does the bypass actually unlock new harmful capability, or does it merely produce off-topic content? A technique that enables synthesis routes for dangerous pathogens scores highest here.</li>
+    <li><strong>Breadth of capability gain:</strong> how wide is the uplift — a narrow edge case, or a reliable unlock of a broad category of restricted behaviour?</li>
+    <li><strong>Ease of weaponisation:</strong> could a low-skill actor exploit this with minimal effort, or does it require specialist knowledge to operationalise?</li>
+    <li><strong>Discoverability:</strong> is the technique already publicly known (and therefore already in adversary playbooks), or is it novel?</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Why this matters for operators</strong>
+    <p>A standardised severity score means AI vendors can disclose jailbreaks with a common vocabulary instead of ad-hoc "critical / high / medium" labels that differ by company. For operators building on Claude, it creates a path toward structured vulnerability notifications — similar to how CVE advisories work in software — so you know whether a disclosed technique is a hypothetical edge case or something you need to respond to immediately. The framework is still in development; watch Anthropic's safety research publications for a formal specification.</p>
+  </div>
+
+  <h3>Context: why this framework is being built now</h3>
+  <p>The June 12 incident — in which Amazon researchers discovered a bypass that caused Fable 5 to provide dangerous biology assistance — forced Anthropic to suspend two flagship models and collaborate with US government agencies for 18 days. That episode exposed a gap: when a cross-company team is responding to an AI security incident in real time, there was no shared vocabulary for quickly communicating how serious a newly found bypass actually was. The four-factor framework is a direct response to that gap, designed to let AI companies, researchers, and regulators communicate severity without ambiguity.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/improving-fable-5s-biology-safeguards" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">safety</span>
+    <span class="tag">jailbreak severity</span>
+    <span class="tag">industry standards</span>
+    <span class="tag">Fable 5</span>
+    <span class="tag">Amazon</span>
+    <span class="tag">Microsoft</span>
+    <span class="tag">Google</span>
+    <span class="tag">vulnerability disclosure</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

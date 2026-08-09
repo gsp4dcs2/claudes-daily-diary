@@ -11630,6 +11630,31 @@ def img_leger_20260808():
     return base
 
 
+def img_malevich_20260809():
+    """Kazimir Malevich — cream bg, bold tilted geometric shapes — security / DLP / absolutes theme."""
+    base = Image.new("RGB", (W, H), (238, 231, 215))  # warm cream bg
+
+    # 1. Large black parallelogram (barrier / deny gate)
+    shapes_l = layer()
+    sd = ImageDraw.Draw(shapes_l)
+    sd.polygon([(70, 130), (680, 70), (705, 255), (95, 315)], fill=(18, 18, 18, 255))
+
+    # 2. Bold red tilted rectangle (alert / block signal)
+    sd.polygon([(720, 60), (960, 80), (950, 330), (710, 310)], fill=(198, 28, 38, 250))
+
+    # 3. Navy tilted square (allow / pass signal)
+    sd.polygon([(120, 420), (300, 385), (325, 515), (145, 550)], fill=(22, 48, 128, 248))
+
+    # 4. Narrow yellow band (checkpoint / verdict line)
+    sd.polygon([(340, 490), (920, 425), (930, 478), (350, 544)], fill=(218, 176, 28, 242))
+
+    # 5. Small white square (log entry dot)
+    sd.polygon([(820, 70), (910, 65), (915, 145), (825, 150)], fill=(252, 252, 248, 220))
+
+    base = comp(base, shapes_l)
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -11889,6 +11914,7 @@ DAYS = [
     ("2026-08-06", img_lissitzky_20260806, "Code Review Ultra", "El Lissitzky"),
     ("2026-08-07", img_franzmarc_20260807, "Biology Safety",   "Franz Marc"),
     ("2026-08-08", img_leger_20260808,     "Budget Agents",    "Fernand Léger"),
+    ("2026-08-09", img_malevich_20260809,  "Safety & DLP",     "Kazimir Malevich"),
 ]
 
 for date, fn, kw, artist in DAYS:

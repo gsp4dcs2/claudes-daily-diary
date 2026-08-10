@@ -61,6 +61,16 @@
       <!-- Newest entries at the top. Format: {yyyy-mm-dd} – {title} -->
 
       <li>
+        <a href="articles/2026/08/2026-08-10.html">
+          <img class="entry-thumb" src="articles/2026/08/2026-08-10-thumb.png" alt="2026-08-10 thumbnail">
+          <div class="entry-meta">
+            <span class="article-date">2026-08-10</span>
+            <div class="entry-bottom"><span class="cat-icon" title="Daily News">🧭</span> <span class="article-title">Claude Code Auto Mode Goes Default and v2.1.228 Lands</span></div>
+          </div>
+        </a>
+      </li>
+
+      <li>
         <a href="articles/2026/08/2026-08-09.html">
           <img class="entry-thumb" src="articles/2026/08/2026-08-09-thumb.png" alt="2026-08-09 thumbnail">
           <div class="entry-meta">
@@ -2683,6 +2693,12 @@
      collapsed). Rebuild this array when new days are added.
      ──────────────────────────────────────────────────────── */
   const SEARCH_INDEX = [
+    {
+      date: "2026-08-10", cat: "news",
+      title: "Claude Code Auto Mode Goes Default and v2.1.228 Lands",
+      url: "articles/2026/08/2026-08-10.html",
+      text: "Claude Code auto mode becomes the default for Pro Max and Team accounts starting August 14 replacing per-step approval prompts with a two-stage AI classifier. Every action passes through three tiers: read-only operations auto-pass instantly in-project edits auto-pass via version control and higher-risk shell commands web fetches and external integrations go to the classifier. A fast single-token filter runs first followed by chain-of-thought reasoning for edge cases. The classifier sees only user messages and tool calls Claude's own reasoning is stripped to prevent self-justification of risky moves. Blocked patterns include credential exploration scope escalation agent-inferred parameters data exfiltration and safety-check bypasses. Enterprise and API rollout follows in coming days. Claude Code v2.1.228 also lands with MCP tool counts in the UI flagging servers with zero tools an OpenTelemetry subprocess isolation security fix preventing credential leakage into trace spans EnterWorktree now branching from local HEAD to preserve unpushed commits session colours via bare /color command a crash-loop fix for inputs over 10 MB and prompt cache hits for subagent progress summaries."
+    },
     {
       date: "2026-08-09", cat: "news",
       title: "Enterprise Inference Hooks and Cross-Company Jailbreak Severity Standards",

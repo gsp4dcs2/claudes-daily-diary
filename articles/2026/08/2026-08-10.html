@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="August 10: Claude Code auto mode becomes the default for Pro, Max, and Team accounts starting August 14 — replacing per-step approval prompts with a two-stage AI classifier — and v2.1.228 lands with MCP tool counts, OpenTelemetry subprocess isolation, and a fix for the &gt;10 MB stdin crash loop.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-08-10 – Claude Code Auto Mode Goes Default and v2.1.228 Lands">
+  <meta property="og:description" content="August 10: Claude Code auto mode becomes the default for Pro, Max, and Team accounts starting August 14 — replacing per-step approval prompts with a two-stage AI classifier — and v2.1.228 lands with MCP tool counts, OpenTelemetry subprocess isolation, and a fix for the &gt;10 MB stdin crash loop.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/08/2026-08-10.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/08/2026-08-10.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/08/2026-08-10.png">
+
+  <title>2026-08-10 – Claude Code Auto Mode Goes Default and v2.1.228 Lands | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Code Auto Mode Goes Default and v2.1.228 Lands",
+  "description": "August 10: Claude Code auto mode becomes the default for Pro, Max, and Team accounts starting August 14 — replacing per-step approval prompts with a two-stage AI classifier — and v2.1.228 lands with MCP tool counts, OpenTelemetry subprocess isolation, and a fix for the >10 MB stdin crash loop.",
+  "datePublished": "2026-08-10",
+  "dateModified": "2026-08-10",
+  "url": "https://claudebeat.ai/articles/2026/08/2026-08-10.html",
+  "image": "https://claudebeat.ai/articles/2026/08/2026-08-10.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/08/2026-08-10.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-08-10</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Claude Code Auto Mode Goes Default and v2.1.228 Lands</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-08-10.png" alt="Claude Code Auto Mode Goes Default and v2.1.228 Lands — visual for 2026-08-10">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code Auto Mode Becomes the Default on August 14
+     Source: https://techcrunch.com/2026/08/09/anthropic-is-turning-claude-codes-auto-mode-on-by-default/
+     Source: https://www.anthropic.com/engineering/claude-code-auto-mode
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code Auto Mode Becomes the Default on August 14</h2>
+
+  <p>Anthropic has announced that <strong>Claude Code's auto mode will become the default for all Pro, Max, and Team accounts starting August 14</strong>. Launched in March as an opt-in feature, auto mode eliminates the per-step human approval prompts that have been Claude Code's safety net since launch, replacing them with a two-stage AI classifier that decides in real time which actions are safe to execute autonomously.</p>
+
+  <h3>How the two-stage classifier works</h3>
+  <p>Every action Claude Code considers taking passes through one of three tiers:</p>
+  <ul>
+    <li><strong>Tier 1 — auto-pass:</strong> Read-only operations (file searches, code navigation, grep) proceed instantly with no classifier review. The risk surface is near-zero.</li>
+    <li><strong>Tier 2 — auto-pass:</strong> In-project edits are allowed automatically because they're already tracked by version control and trivially reversible.</li>
+    <li><strong>Tier 3 — classified:</strong> Higher-risk operations (shell commands, web fetches, filesystem writes outside the project, external integrations) go to the classifier. A fast single-token filter runs first; if that's insufficient, chain-of-thought reasoning kicks in for edge cases.</li>
+  </ul>
+
+  <p>A key design decision: the classifier sees <em>only user messages and tool calls</em> — Claude's own reasoning traces and tool results are stripped from the input. This prevents the model from constructing self-justifying arguments that could "talk the classifier into" approving risky moves.</p>
+
+  <h3>What the classifier blocks</h3>
+  <p>Dangerous patterns that trigger a block regardless of context:</p>
+  <ul>
+    <li>Credential exploration (reading <code>~/.ssh</code>, <code>.env</code> files, credential stores)</li>
+    <li>Scope escalation from vague instructions ("clean up branches" → mass branch deletion)</li>
+    <li>Agent-inferred parameters not present in the user's request</li>
+    <li>Data exfiltration patterns (reading secrets then making outbound network calls)</li>
+    <li>Attempts to bypass safety checks in Claude Code's own configuration</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>What changes for you on August 14</strong>
+    <p>If you currently rely on Claude Code pausing at every shell command for your review, that behaviour will change: safe, Tier-2 operations now proceed without a prompt. You'll still see pauses for genuine Tier-3 risks. If you want the old behaviour back, you can re-enable per-step approval in Claude Code settings. Enterprise and API rollout follows "in the coming days" after the August 14 consumer wave — watch your admin console for the toggle.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://techcrunch.com/2026/08/09/anthropic-is-turning-claude-codes-auto-mode-on-by-default/" class="source-link" target="_blank" rel="noopener">techcrunch.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">auto mode</span>
+    <span class="tag">classifier</span>
+    <span class="tag">autonomy</span>
+    <span class="tag">Pro</span>
+    <span class="tag">Max</span>
+    <span class="tag">Team</span>
+    <span class="tag">August 14</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Code v2.1.228: MCP Visibility, OpenTelemetry Isolation, Stability Fixes
+     Source: https://claudefa.st/blog/guide/changelog
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.228: MCP Visibility, OpenTelemetry Isolation, and Crash-Loop Fix</h2>
+
+  <p>The August 10 release of Claude Code — <strong>v2.1.228</strong> — ships a cluster of developer-experience improvements and one notable security fix, landing the same week that auto mode becomes the default.</p>
+
+  <h3>What's new</h3>
+  <ul>
+    <li><strong>MCP tool counts in the UI:</strong> Claude Code now shows how many tools each MCP server exposes and flags any server reporting zero tools — previously you had to infer connection health from indirect signals.</li>
+    <li><strong>OpenTelemetry subprocess isolation:</strong> A security fix prevents credential leakage from subprocesses into telemetry streams. If you were using OTel tracing, credentials embedded in subprocess environments could silently appear in spans; this release isolates subprocess environments before they're passed to the OTel collector.</li>
+    <li><strong>EnterWorktree branches from local HEAD:</strong> Previously <code>EnterWorktree</code> could branch from the remote default rather than your local HEAD, silently discarding unpushed commits. Now it always branches from local HEAD, preserving in-progress work.</li>
+    <li><strong>Session colors via <code>/color</code>:</strong> Running bare <code>/color</code> assigns a random colour to the current session — useful for visually distinguishing simultaneous Claude Code windows.</li>
+    <li><strong>Crash-loop fix for &gt;10 MB stdin:</strong> Large paste operations or piped inputs over 10 MB were triggering a crash loop; fixed.</li>
+    <li><strong>Subagent progress summary caching:</strong> Progress summaries between sub-agent turns now hit the prompt cache, reducing token costs on long agentic runs.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>The OpenTelemetry fix matters for production deployments</strong>
+    <p>If your team runs Claude Code with OTel tracing enabled (common in enterprise setups that funnel Claude Code telemetry into Datadog, Honeycomb, or a SIEM), update to v2.1.228 promptly. Earlier versions could inadvertently include subprocess environment variables — including any secrets in the environment — in trace spans. The fix is a process-boundary isolation change; no configuration update required on your end beyond upgrading.</p>
+  </div>
+
+  <pre><code># Update Claude Code to pick up v2.1.228
+npm install -g @anthropic-ai/claude-code@latest
+
+# Verify the installed version
+claude --version
+</code></pre>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Community content or research — independently cross-checked">⭐</span>
+    <a href="https://claudefa.st/blog/guide/changelog" class="source-link" target="_blank" rel="noopener">claudefa.st</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">v2.1.228</span>
+    <span class="tag">MCP</span>
+    <span class="tag">OpenTelemetry</span>
+    <span class="tag">security</span>
+    <span class="tag">bug fix</span>
+    <span class="tag">worktree</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

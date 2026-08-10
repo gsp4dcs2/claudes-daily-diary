@@ -11655,6 +11655,61 @@ def img_malevich_20260809():
     return base
 
 
+def img_balla_20260810():
+    """Giacomo Balla Futurist style — near-black bg, radiating coloured planes, motion lines — auto mode / speed / autonomy theme."""
+    img = Image.new("RGB", (W, H), (10, 8, 20))  # near-black bg
+
+    # 1. Radiating planes bursting from left vanishing point (speed lines)
+    vp = (80, H // 2)
+    planes = [
+        ((255, 60, 20), [(80, 315), (W, 0), (W, 120), (80, 315)]),
+        ((255, 165, 0), [(80, 315), (W, 110), (W, 240), (80, 315)]),
+        ((240, 220, 0), [(80, 315), (W, 225), (W, 355), (80, 315)]),
+        ((0, 200, 80),  [(80, 315), (W, 340), (W, 470), (80, 315)]),
+        ((0, 140, 255), [(80, 315), (W, 455), (W, 580), (80, 315)]),
+        ((160, 0, 255), [(80, 315), (W, 565), (W, 630), (80, 315)]),
+    ]
+    planes_l = layer()
+    pd = ImageDraw.Draw(planes_l)
+    for colour, pts in planes:
+        pd.polygon(pts, fill=colour + (210,))
+    img = comp(img, planes_l)
+
+    # 2. Thin bright motion streaks radiating from VP (Balla speed lines)
+    streaks_l = layer()
+    sd = ImageDraw.Draw(streaks_l)
+    streak_cols = [
+        (255, 255, 255), (255, 200, 60), (100, 220, 255),
+        (255, 80, 40),   (180, 255, 80), (200, 100, 255),
+    ]
+    for i, col in enumerate(streak_cols):
+        frac = (i + 0.5) / len(streak_cols)
+        y_end = int(frac * H)
+        sd.line([vp, (W, y_end)], fill=col + (180,), width=2)
+    img = comp(img, streaks_l)
+
+    # 3. Overlapping translucent speed arcs (motion blur effect)
+    arcs_l = layer()
+    ad = ImageDraw.Draw(arcs_l)
+    arc_data = [
+        ((-60, 130, 400, 500), (255, 120, 0, 90), 14),
+        ((-100, 80, 500, 560), (255, 220, 0, 70), 10),
+        ((-40, 160, 320, 480), (0, 180, 255, 80), 8),
+        ((-80, 100, 420, 530), (200, 0, 255, 60), 6),
+    ]
+    for bbox, fill, width in arc_data:
+        ad.arc(bbox, start=300, end=60, fill=fill, width=width)
+    img = comp(img, arcs_l)
+
+    # 4. Diagonal dark band at bottom (ground plane / stability)
+    ground_l = layer()
+    gd = ImageDraw.Draw(ground_l)
+    gd.polygon([(0, 530), (W, 490), (W, H), (0, H)], fill=(6, 4, 14, 200))
+    img = comp(img, ground_l)
+
+    return img
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -11915,6 +11970,7 @@ DAYS = [
     ("2026-08-07", img_franzmarc_20260807, "Biology Safety",   "Franz Marc"),
     ("2026-08-08", img_leger_20260808,     "Budget Agents",    "Fernand Léger"),
     ("2026-08-09", img_malevich_20260809,  "Safety & DLP",     "Kazimir Malevich"),
+    ("2026-08-10", img_balla_20260810,     "Auto Mode",        "Giacomo Balla"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="August 11: Anthropic launches Claude for Government in beta — FedRAMP High, hash-chained audit logs, and no separate cloud-provider relationship required — while the Claude Code changelog delivers five stability fixes including memory frontmatter truncation, feature-flag staleness after OAuth rotation, and new docker permission prompts.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-08-11 – Claude for Government Goes Beta and August Patch Notes">
+  <meta property="og:description" content="August 11: Anthropic launches Claude for Government in beta — FedRAMP High, hash-chained audit logs, and no separate cloud-provider relationship required — while the Claude Code changelog delivers five stability fixes including memory frontmatter truncation, feature-flag staleness after OAuth rotation, and new docker permission prompts.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/08/2026-08-11.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/08/2026-08-11.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/08/2026-08-11.png">
+
+  <title>2026-08-11 – Claude for Government Goes Beta and August Patch Notes | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude for Government Goes Beta and August Patch Notes",
+  "description": "August 11: Anthropic launches Claude for Government in beta — FedRAMP High, hash-chained audit logs, and no separate cloud-provider relationship required — while the Claude Code changelog delivers five stability fixes including memory frontmatter truncation, feature-flag staleness after OAuth rotation, and new docker permission prompts.",
+  "datePublished": "2026-08-11",
+  "dateModified": "2026-08-11",
+  "url": "https://claudebeat.ai/articles/2026/08/2026-08-11.html",
+  "image": "https://claudebeat.ai/articles/2026/08/2026-08-11.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/08/2026-08-11.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-08-11</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Claude for Government Goes Beta and August Patch Notes</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-08-11.png" alt="Claude for Government Goes Beta and August Patch Notes — visual for 2026-08-11">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude for Government Launches in Beta
+     Source: https://anthropic.com/news/expanding-access-to-claude-for-government
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude for Government Launches in Beta</h2>
+
+  <p>Anthropic today opened <strong>Claude for Government</strong> in beta — a dedicated offering that lets federal, state, and local agencies access Claude's most capable models without needing a separate cloud-provider relationship. Anthropic remains the contracted and billing party; agencies request access directly at <code>claude.com/solutions/government</code>.</p>
+
+  <h3>What sets it apart from Claude Enterprise</h3>
+  <p>Claude for Government is built on the same foundation as Claude Enterprise but operates inside an isolated, dedicated FedRAMP boundary with additional compliance guarantees:</p>
+  <ul>
+    <li><strong>FedRAMP High authorization</strong> — the highest tier, covering workloads that handle sensitive but unclassified federal data.</li>
+    <li><strong>Hash-chained audit log</strong> — every administrative action is recorded in a tamper-evident log that organisation administrators can review directly in the product. No Anthropic support ticket required to pull audit data.</li>
+    <li><strong>Two-person approval for sensitive operations</strong> — Anthropic's own access to customer data requires a second internal approver, closing a class of insider-threat scenarios that single-admin-approval architectures leave open.</li>
+    <li><strong>Metering-only usage exports</strong> — usage reports contain only counts and timestamps, not prompt content, so agencies can respond to ATO and IG audit requests without moving sensitive material outside the FedRAMP boundary.</li>
+    <li><strong>FedRAMP Secure Configuration Guide</strong> — Anthropic is publishing this as a public-facing document, giving agency security teams a concrete baseline for hardening their Claude for Government deployments.</li>
+  </ul>
+
+  <h3>Scope: all three branches, direct billing</h3>
+  <p>A companion announcement, <em>Offering Expanded Claude Access Across All Three Branches of Government</em>, extends coverage to the legislative and judiciary branches alongside the federal civilian executive. A limited-time programme makes Claude for Government (Enterprise tier, unlimited seats) available to federal agencies at $1 through August 2026 — the intent being to eliminate procurement friction so agencies can pilot and generate the ATO evidence needed for a full deployment.</p>
+
+  <div class="callout tip">
+    <strong>The "no cloud-provider relationship" detail matters operationally</strong>
+    <p>Most FedRAMP-authorised AI services route through AWS GovCloud or Azure Government, meaning agencies must maintain a separate cloud-account relationship, pass through a reseller, and reconcile two billing streams. Claude for Government removes that layer: one contract, one invoice, direct with Anthropic. For smaller agencies without an existing GovCloud relationship, this materially lowers the procurement barrier.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://anthropic.com/news/expanding-access-to-claude-for-government" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude for Government</span>
+    <span class="tag">FedRAMP</span>
+    <span class="tag">federal</span>
+    <span class="tag">audit log</span>
+    <span class="tag">compliance</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">beta</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Code August Patch Notes: Five Stability Fixes
+     Source: https://code.claude.com/docs/en/changelog
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code August Patch Notes: Five Stability Fixes Worth Knowing</h2>
+
+  <p>The Claude Code changelog for this week carries five fixes that are easy to miss but meaningful for daily use — particularly for teams running long Claude Code sessions or using the memory system heavily.</p>
+
+  <h3>Fix-by-fix breakdown</h3>
+  <ul>
+    <li>
+      <strong>Memory frontmatter truncated at inline <code>#</code></strong> — If a memory file's frontmatter contained a value like <code>description: Track cache-hit rates # updated</code>, everything after the <code>#</code> was silently dropped on save. The bug affected any memory whose description used an inline comment. Fixed: values are now written verbatim and the inline comment is preserved.
+    </li>
+    <li>
+      <strong>Feature flags going stale after OAuth token rotation</strong> — In sessions longer than the OAuth access-token lifetime, GrowthBook feature flags cached on startup were not refreshed when the token rotated. Features that changed mid-session (such as new model rollout toggles) would stay in their at-launch state for the rest of the session. Fixed: flag cache is invalidated on token rotation.
+    </li>
+    <li>
+      <strong>GrowthBook null-feature crash</strong> — A separate GrowthBook bug: if a feature evaluated to <code>null</code> (e.g. a flag targeting no users in the current environment), Claude Code would crash rather than treating it as a disabled flag. Fixed with a null-guard.
+    </li>
+    <li>
+      <strong>Unbounded memory growth from oversized <code>--settings</code> files</strong> — Pointing <code>--settings</code> at a device file, a named pipe, or a multi-gigabyte file caused Claude Code to grow without bound as it attempted to read the settings. Files larger than 2 MiB now fail at startup with a clear error message rather than consuming all available memory.
+    </li>
+    <li>
+      <strong>Bash tool killing the Claude session via <code>pkill</code> pattern match</strong> — On Linux, a <code>pkill -f</code> command whose pattern accidentally matched the Claude Code CLI process would terminate the CLI itself. Claude Code now spawns commands in a process group that is explicitly excluded from the pattern match scope.
+    </li>
+  </ul>
+
+  <h3>New: docker and Podman permission prompts</h3>
+  <p>Claude Code now shows permission prompts for <code>docker</code> commands (including the Podman docker shim) that carry daemon-redirect flags: <code>--url</code>, <code>--connection</code>, <code>--identity</code>, and Podman's <code>--remote</code> mode. These flags can redirect the docker client to an arbitrary daemon — including one outside the project's intended scope — so they now require explicit user approval before execution.</p>
+
+  <h3>New: <code>--forward-subagent-text</code> flag</h3>
+  <p>The new <code>--forward-subagent-text</code> CLI flag (and its environment-variable equivalent <code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code>) includes subagent text and thinking in <code>stream-json</code> output. This is useful for building observability tooling around multi-agent runs where you want to stream subagent reasoning to a log aggregator or custom UI.</p>
+
+  <div class="callout">
+    <strong>The memory frontmatter fix affects ClaudeBeat users directly</strong>
+    <p>If you use Claude Code's memory system (the <code>.claude/memory/</code> directory) and your memory files contain inline <code>#</code> comments in frontmatter values — which is common in description fields — upgrade to pick up this fix. Previous versions silently truncated those values on every save, meaning your descriptions were getting shorter and shorter without any indication something was wrong.</p>
+  </div>
+
+  <pre><code># Update Claude Code to pick up the August patch set
+npm install -g @anthropic-ai/claude-code@latest
+claude --version
+
+# Verify memory files are no longer truncating inline # values
+# (open any .claude/memory/*.md and check the description field)
+</code></pre>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://code.claude.com/docs/en/changelog" class="source-link" target="_blank" rel="noopener">code.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">bug fix</span>
+    <span class="tag">memory</span>
+    <span class="tag">feature flags</span>
+    <span class="tag">docker</span>
+    <span class="tag">Podman</span>
+    <span class="tag">stability</span>
+    <span class="tag">stream-json</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

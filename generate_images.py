@@ -11710,6 +11710,39 @@ def img_balla_20260810():
     return img
 
 
+def img_mondrian_20260811():
+    """Piet Mondrian grid — government structure / compliance framework theme."""
+    base = Image.new("RGB", (W, H), (240, 236, 224))
+
+    # 1. Primary grid lines (thick black)
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    gd.line([(310, 0), (310, H)], fill=(20, 20, 20, 255), width=8)
+    gd.line([(760, 0), (760, H)], fill=(20, 20, 20, 255), width=6)
+    gd.line([(0, 210), (W, 210)], fill=(20, 20, 20, 255), width=8)
+    gd.line([(0, 490), (W, 490)], fill=(20, 20, 20, 255), width=5)
+    gd.line([(0, 350), (310, 350)], fill=(20, 20, 20, 255), width=4)
+    gd.line([(760, 340), (W, 340)], fill=(20, 20, 20, 255), width=4)
+    base = comp(base, grid_l)
+
+    # 2. Colour rectangle fills
+    fill_l = layer()
+    fd = ImageDraw.Draw(fill_l)
+    # Red: top-left
+    fd.rectangle([(0, 0), (310, 210)], fill=(205, 35, 42, 230))
+    # Blue: bottom-right large block
+    fd.rectangle([(760, 490), (W, H)], fill=(28, 68, 186, 230))
+    # Yellow: mid-right band
+    fd.rectangle([(760, 210), (W, 340)], fill=(228, 193, 28, 215))
+    # Smaller red accent: bottom-left
+    fd.rectangle([(0, 490), (310, H)], fill=(205, 35, 42, 180))
+    # Blue accent: top-right strip
+    fd.rectangle([(760, 0), (W, 210)], fill=(28, 68, 186, 160))
+    base = comp(base, fill_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -11971,6 +12004,7 @@ DAYS = [
     ("2026-08-08", img_leger_20260808,     "Budget Agents",    "Fernand Léger"),
     ("2026-08-09", img_malevich_20260809,  "Safety & DLP",     "Kazimir Malevich"),
     ("2026-08-10", img_balla_20260810,     "Auto Mode",        "Giacomo Balla"),
+    ("2026-08-11", img_mondrian_20260811,  "Gov & Fixes",      "Piet Mondrian"),
 ]
 
 for date, fn, kw, artist in DAYS:

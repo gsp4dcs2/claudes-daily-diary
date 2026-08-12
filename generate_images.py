@@ -11743,6 +11743,80 @@ def img_mondrian_20260811():
     return base
 
 
+def img_seurat_20260812():
+    """Georges Seurat pointillist style — compliance, data auditing, silicon precision theme."""
+    base = Image.new("RGB", (W, H), (18, 24, 52))   # deep navy bg
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Background dot field — low-saturation fine scatter
+    for _ in range(4000):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        r = rng.randint(1, 2)
+        val = rng.randint(25, 65)
+        draw.ellipse([(x-r, y-r), (x+r, y+r)], fill=(val, val+8, val+28))
+
+    # 2. Three luminous disc forms (compliance audit nodes)
+    centers = [(240, 200), (600, 330), (980, 190)]
+    palettes = [
+        [(220, 70, 40), (255, 130, 60), (255, 200, 130), (255, 240, 210)],
+        [(40, 100, 230), (80, 160, 255), (140, 210, 255), (210, 235, 255)],
+        [(50, 190, 100), (90, 225, 120), (150, 250, 160), (215, 255, 215)],
+    ]
+    for (cx, cy), pal in zip(centers, palettes):
+        for radius, col in zip([100, 68, 40, 18], pal):
+            nl = layer()
+            nd = ImageDraw.Draw(nl)
+            for _ in range(700):
+                angle = rng.uniform(0, 2 * math.pi)
+                dist = rng.uniform(0, radius)
+                dx = int(cx + dist * math.cos(angle))
+                dy = int(cy + dist * math.sin(angle))
+                dr = rng.randint(1, 4)
+                alpha = int(200 * (1 - dist / radius))
+                nd.ellipse([(dx-dr, dy-dr), (dx+dr, dy+dr)],
+                           fill=(col[0], col[1], col[2], alpha))
+            base = comp(base, nl)
+
+    # 3. Data-stream arcs between nodes
+    pairs = [(0, 1), (1, 2), (0, 2)]
+    arc_cols = [(255, 150, 50), (100, 190, 255), (140, 255, 150)]
+    for idx, (i, j) in enumerate(pairs):
+        ax, ay = centers[i]
+        bx, by = centers[j]
+        al = layer()
+        ad = ImageDraw.Draw(al)
+        col = arc_cols[idx]
+        for t_i in range(220):
+            t = t_i / 219
+            mx = ax + (bx - ax) * t
+            my = ay + (by - ay) * t - 70 * math.sin(math.pi * t)
+            dr = rng.randint(2, 5)
+            alpha = int(210 * math.sin(math.pi * t))
+            ad.ellipse([(mx-dr, my-dr), (mx+dr, my+dr)],
+                       fill=(col[0], col[1], col[2], alpha))
+        base = comp(base, al)
+
+    # 4. Lower half — dense silicon-grid dot matrix in spectral colours
+    spectral = [
+        (255, 60, 60), (255, 140, 0), (230, 220, 0),
+        (60, 220, 90), (60, 160, 255), (190, 90, 255),
+    ]
+    fl = layer()
+    fd = ImageDraw.Draw(fl)
+    for _ in range(2500):
+        x = rng.randint(0, W)
+        y = rng.randint(320, H)
+        col = rng.choice(spectral)
+        r = rng.randint(1, 3)
+        alpha = rng.randint(40, 130)
+        fd.ellipse([(x-r, y-r), (x+r, y+r)], fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, fl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -12005,6 +12079,7 @@ DAYS = [
     ("2026-08-09", img_malevich_20260809,  "Safety & DLP",     "Kazimir Malevich"),
     ("2026-08-10", img_balla_20260810,     "Auto Mode",        "Giacomo Balla"),
     ("2026-08-11", img_mondrian_20260811,  "Gov & Fixes",      "Piet Mondrian"),
+    ("2026-08-12", img_seurat_20260812,   "Compliance & Chips","Georges Seurat"),
 ]
 
 for date, fn, kw, artist in DAYS:

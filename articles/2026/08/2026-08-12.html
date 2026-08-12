@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="August 12: Anthropic's Compliance API expands to cover Claude Cowork and Claude Code sessions for unified enterprise audit access, Claude Sonnet 5's introductory pricing is permanently locked in at $2/$10 per million tokens, and Anthropic confirms an in-house custom silicon team targeting Claude inference and training workloads.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-08-12 – Compliance API Expands, Sonnet 5 Price Locked In, and Anthropic's Chip Team">
+  <meta property="og:description" content="August 12: Anthropic's Compliance API expands to cover Claude Cowork and Claude Code sessions for unified enterprise audit access, Claude Sonnet 5's introductory pricing is permanently locked in at $2/$10 per million tokens, and Anthropic confirms an in-house custom silicon team targeting Claude inference and training workloads.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/08/2026-08-12.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/08/2026-08-12.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/08/2026-08-12.png">
+
+  <title>2026-08-12 – Compliance API Expands, Sonnet 5 Price Locked In, and Anthropic's Chip Team | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Compliance API Expands, Sonnet 5 Price Locked In, and Anthropic's Chip Team",
+  "description": "August 12: Anthropic's Compliance API expands to cover Claude Cowork and Claude Code sessions for unified enterprise audit access, Claude Sonnet 5's introductory pricing is permanently locked in at $2/$10 per million tokens, and Anthropic confirms an in-house custom silicon team targeting Claude inference and training workloads.",
+  "datePublished": "2026-08-12",
+  "dateModified": "2026-08-12",
+  "url": "https://claudebeat.ai/articles/2026/08/2026-08-12.html",
+  "image": "https://claudebeat.ai/articles/2026/08/2026-08-12.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/08/2026-08-12.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-08-12</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Compliance API Expands, Sonnet 5 Price Locked In, and Anthropic's Chip Team</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-08-12.png" alt="Compliance API Expands, Sonnet 5 Price Locked In, and Anthropic's Chip Team — visual for 2026-08-12">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Compliance API Now Covers Cowork and Claude Code Sessions
+     Source: https://claude.com/blog/compliance-api-cowork-and-claude-code
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Compliance API Now Covers Cowork and Claude Code Sessions</h2>
+
+  <p>Anthropic has expanded its <strong>Compliance API</strong> — previously limited to Claude chat sessions — to include <strong>Claude Cowork</strong> (desktop, web, and mobile) and <strong>Claude Code</strong> (CLI and desktop app). Enterprise security teams can now pull a unified record of session content and metadata across all three surfaces through a single API endpoint, with no new infrastructure or separate access keys required.</p>
+
+  <h3>What the Compliance API surfaces</h3>
+  <p>For each covered session, the API returns:</p>
+  <ul>
+    <li><strong>Full prompt and response text</strong> — every user turn and Claude turn in the session.</li>
+    <li><strong>Tool calls and results</strong> — for Claude Code, this includes file reads, shell commands, and web fetches with their inputs and outputs.</li>
+    <li><strong>Artifacts</strong> — documents, code files, or other structured outputs produced during the session.</li>
+    <li><strong>Session metadata</strong> — timestamps, user identity, seat ID, model version, and token counts.</li>
+  </ul>
+
+  <h3>eDiscovery and audit workflow</h3>
+  <p>The coverage extension is aimed directly at eDiscovery and internal audit use cases. Previously, enterprise legal and compliance teams had to handle Claude chat exports separately from any Claude Code activity logs, creating a gap when an incident spanned both surfaces. The unified endpoint closes that gap: a single query returns everything a user did across chat, Cowork, and Code for a given time range or user.</p>
+
+  <div class="callout tip">
+    <strong>Practical implication for Claude Code deployments</strong>
+    <p>Claude Code tool calls — including shell commands, file writes, and any MCP-connected operations — are now individually addressable records in the Compliance API response. For teams running Claude Code on production infrastructure or handling sensitive codebases, this means you can finally answer "what did Claude touch and when?" from your existing audit tooling without needing to parse local session logs.</p>
+  </div>
+
+  <p>The expansion is in beta for Claude Enterprise customers with an existing Compliance Access Key. No configuration change is needed; Cowork and Code sessions begin appearing automatically in the API output once beta access is active.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://claude.com/blog/compliance-api-cowork-and-claude-code" class="source-link" target="_blank" rel="noopener">claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Compliance API</span>
+    <span class="tag">Claude Code</span>
+    <span class="tag">Cowork</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">eDiscovery</span>
+    <span class="tag">audit</span>
+    <span class="tag">security</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Sonnet 5 Introductory Pricing Made Permanent
+     Source: https://platform.claude.com/docs/en/about-claude/pricing
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Sonnet 5 Introductory Pricing Made Permanent</h2>
+
+  <p>Anthropic has confirmed that <strong>Claude Sonnet 5's introductory pricing — $2 per million input tokens, $10 per million output tokens — is now permanent</strong>. The planned September 1 step-up to $3/$15 per million tokens has been cancelled. Developers and businesses that had already budgeted for the higher rates can revise their cost models downward.</p>
+
+  <h3>Context: the original pricing cliff</h3>
+  <p>When Sonnet 5 launched earlier this year, Anthropic set an introductory rate with an explicit end date, positioning the September increase as the "standard" price once the launch period ended. The decision to lock in the introductory rate reflects competitive pressure: both OpenAI and several Chinese AI labs have cut frontier model prices in recent months, making a price increase difficult to sustain without a meaningful capability gap. Anthropic has not announced further price changes for other models at this time.</p>
+
+  <h3>Cost comparison at current rates</h3>
+  <ul>
+    <li><strong>Claude Sonnet 5</strong> — $2 input / $10 output per MTok (permanent)</li>
+    <li><strong>Claude Haiku 4.5</strong> — $0.80 input / $4 output per MTok</li>
+    <li><strong>Claude Opus 4.6</strong> — $15 input / $75 output per MTok</li>
+  </ul>
+
+  <div class="callout">
+    <strong>What this means for teams choosing between models</strong>
+    <p>With the Sonnet 5 cliff removed, the Sonnet-to-Opus cost ratio stays at 7.5×. Teams running hybrid routing — Sonnet for most tasks, Opus for deep reasoning — no longer face a September decision point about whether to re-route more traffic to Haiku. The stable ratio lets you fix your cost-per-task model now rather than revisiting it after autumn pricing changes.</p>
+  </div>
+
+  <pre><code># Quick cost estimate for a typical Claude Code session
+# Using Sonnet 5 at permanent rates:
+# ~200K input tokens + ~40K output tokens
+# = (200 * 2 + 40 * 10) / 1000 = $0.40 + $0.40 = $0.80 / session
+# Compare to what the Sep cliff would have cost:
+# = (200 * 3 + 40 * 15) / 1000 = $0.60 + $0.60 = $1.20 / session
+</code></pre>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/about-claude/pricing" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">pricing</span>
+    <span class="tag">Sonnet 5</span>
+    <span class="tag">cost</span>
+    <span class="tag">API</span>
+    <span class="tag">developer</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Anthropic Confirms In-House Custom Silicon Team
+     Source: https://www.forbes.com/sites/jonmarkman/2026/08/06/anthropic-enters-the-ai-chip-race-with-in-house-chip-team/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Anthropic Confirms In-House Custom Silicon Team</h2>
+
+  <p>Anthropic has confirmed it is building an in-house team dedicated to designing <strong>custom silicon optimised specifically for Claude's inference and training workloads</strong>. Job listings published this week span chip architecture, RTL design, physical design, and verification, with reported compensation as high as $485,000 for principal-level roles. The team will operate alongside — not replace — Anthropic's existing compute partnerships with Nvidia, AMD, AWS, and Google.</p>
+
+  <h3>Strategic rationale</h3>
+  <p>General-purpose AI accelerators are designed to serve a wide range of model architectures. A chip purpose-built for Claude's specific attention patterns, context lengths, and memory access requirements could deliver meaningfully better performance-per-watt and cost-per-token than rack-and-stack GPU deployments. Amazon's Trainium, Google's TPU, and Meta's MTIA are all examples of the same bet paying off for other frontier labs.</p>
+
+  <h3>Timeline and scope</h3>
+  <p>Anthropic has not disclosed a target tape-out date or production volume. Custom silicon typically takes three to five years from team formation to production-scale deployment, meaning the first Claude-specific chips would arrive no earlier than 2028 on an aggressive schedule. In the interim, the $10 billion compute deal with Volta (announced earlier this month) and existing AWS and Google cloud arrangements remain the primary compute path for Claude inference.</p>
+
+  <div class="callout tip">
+    <strong>What this means for Claude's long-term cost trajectory</strong>
+    <p>Custom silicon is fundamentally a cost and efficiency play. If Anthropic achieves even a 30–40% improvement in inference efficiency over commodity GPUs — a conservative target for purpose-built chips — that translates directly to lower cost-per-token at scale, which gives Anthropic more pricing flexibility and margin headroom without sacrificing capability. The permanent Sonnet 5 price lock announced today is sustainable partly because of the roadmap this silicon investment represents.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://www.forbes.com/sites/jonmarkman/2026/08/06/anthropic-enters-the-ai-chip-race-with-in-house-chip-team/" class="source-link" target="_blank" rel="noopener">forbes.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">custom silicon</span>
+    <span class="tag">chips</span>
+    <span class="tag">hardware</span>
+    <span class="tag">infrastructure</span>
+    <span class="tag">compute</span>
+    <span class="tag">Anthropic</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

@@ -61,6 +61,16 @@
       <!-- Newest entries at the top. Format: {yyyy-mm-dd} – {title} -->
 
       <li>
+        <a href="articles/2026/08/2026-08-13.html">
+          <img class="entry-thumb" src="articles/2026/08/2026-08-13-thumb.png" alt="2026-08-13 thumbnail">
+          <div class="entry-meta">
+            <span class="article-date">2026-08-13</span>
+            <div class="entry-bottom"><span class="cat-icon" title="Daily News">🧭</span> <span class="article-title">Claude Code v2.1.229, SSE Keepalives, and Auto Mode Eve</span></div>
+          </div>
+        </a>
+      </li>
+
+      <li>
         <a href="articles/2026/08/2026-08-12.html">
           <img class="entry-thumb" src="articles/2026/08/2026-08-12-thumb.png" alt="2026-08-12 thumbnail">
           <div class="entry-meta">
@@ -2713,6 +2723,12 @@
      collapsed). Rebuild this array when new days are added.
      ──────────────────────────────────────────────────────── */
   const SEARCH_INDEX = [
+    {
+      date: "2026-08-13", cat: "news",
+      title: "Claude Code v2.1.229, SSE Keepalives, and Auto Mode Eve",
+      url: "articles/2026/08/2026-08-13.html",
+      text: "Claude Code v2.1.229 shipped today with SSE keepalive pings sent to gateway streaming responses during extended thinking pauses — a targeted fix for idle-timeout disconnects killing long agentic sessions. SSE keepalive pings prevent load balancers and reverse proxies from treating silent streams as stale connections. Matters most for xhigh reasoning tasks and multi-step agentic runs sitting quiet 30–90 seconds mid-think. Server-supplied hook support for self-hosted runner sessions — hook configurations provided server-side centrally through org rather than local settings.json. Bug fixes: Remote Control resume continue now works, IDE diagnostics multi-second UI stall fixed, Code Review PR posting fixed, subagent context leak fixed. Auto Mode becomes default for all new Claude Code sessions August 14 tomorrow. Pre-flight checklist: audit tool permissions allow deny list, check hooks PreToolUse PostToolUse behaviour in auto mode, opt out with autoMode false in settings.json or CLAUDE_AUTO_MODE=false environment variable, review max-turns and cost limits for longer autonomous runs, test one non-critical project with claude --auto today. CI/CD pipelines unaffected non-interactive invocations already autonomous."
+    },
     {
       date: "2026-08-12", cat: "news",
       title: "Compliance API Expands, Sonnet 5 Price Locked In, and Anthropic's Chip Team",

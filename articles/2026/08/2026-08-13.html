@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="August 13: Claude Code v2.1.229 lands today with SSE keepalive pings that prevent long agentic sessions from timing out mid-task, plus server-supplied hook support for self-hosted runners and four targeted bug fixes. Also: a practical checklist for the Auto Mode default switch happening tomorrow.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-08-13 – Claude Code v2.1.229, SSE Keepalives, and Auto Mode Eve">
+  <meta property="og:description" content="August 13: Claude Code v2.1.229 lands today with SSE keepalive pings that prevent long agentic sessions from timing out mid-task, plus server-supplied hook support for self-hosted runners and four targeted bug fixes. Also: a practical checklist for the Auto Mode default switch happening tomorrow.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/08/2026-08-13.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/08/2026-08-13.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/08/2026-08-13.png">
+
+  <title>2026-08-13 – Claude Code v2.1.229, SSE Keepalives, and Auto Mode Eve | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Code v2.1.229, SSE Keepalives, and Auto Mode Eve",
+  "description": "August 13: Claude Code v2.1.229 lands today with SSE keepalive pings that prevent long agentic sessions from timing out mid-task, plus server-supplied hook support for self-hosted runners and four targeted bug fixes. Also: a practical checklist for the Auto Mode default switch happening tomorrow.",
+  "datePublished": "2026-08-13",
+  "dateModified": "2026-08-13",
+  "url": "https://claudebeat.ai/articles/2026/08/2026-08-13.html",
+  "image": "https://claudebeat.ai/articles/2026/08/2026-08-13.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/08/2026-08-13.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-08-13</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Claude Code v2.1.229, SSE Keepalives, and Auto Mode Eve</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-08-13.png" alt="Claude Code v2.1.229, SSE Keepalives, and Auto Mode Eve — visual for 2026-08-13">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code v2.1.229: SSE Keepalives, Runner Hooks, and Four Bug Fixes
+     Source: https://github.com/anthropics/claude-code/releases/tag/v2.1.229
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.229: SSE Keepalives, Runner Hooks, and Four Bug Fixes</h2>
+
+  <p>Claude Code v2.1.229 shipped today with two additions and four bug fixes. The standout change is <strong>SSE keepalive pings</strong> sent to gateway streaming responses during extended thinking pauses — a targeted fix for the idle-timeout disconnects that were silently killing long agentic sessions partway through deep tasks.</p>
+
+  <h3>What's new</h3>
+  <ul>
+    <li><strong>SSE keepalive pings on gateway streams</strong> — Claude Code now sends periodic pings to the SSE connection during long thinking pauses, preventing load balancers and reverse proxies from treating the silent stream as a stale connection and dropping it. This matters most for <code>xhigh</code> reasoning tasks and multi-step agentic runs that can sit quiet for 30–90 seconds mid-think.</li>
+    <li><strong>Server-supplied hook support for self-hosted runner sessions</strong> — Hook configurations can now be provided server-side when starting a self-hosted runner session, closing a gap where teams running Claude Code on their own compute had to bake hooks into local <code>.claude/settings.json</code> rather than managing them centrally through the org.</li>
+  </ul>
+
+  <h3>Bug fixes</h3>
+  <ul>
+    <li><strong>Remote Control resume</strong> — <code>claude remote-control --continue</code> now correctly resumes the most recent Remote Control session instead of erroring out.</li>
+    <li><strong>IDE diagnostics stall</strong> — Multi-second UI freezes that occurred after editing files with thousands of IDE diagnostics while the extension was connected are resolved.</li>
+    <li><strong>Code Review PR posting</strong> — The <code>/code-review</code> workflow now reliably posts its review as a pull request comment; the previous release occasionally produced a review locally but failed to push the comment to the PR.</li>
+    <li><strong>Subagent context leak</strong> — Fixed a rare case where a terminated subagent's context could bleed into the parent session's next turn, producing unexpected continuations.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Why keepalives matter for production agentic pipelines</strong>
+    <p>Without keepalives, a reverse proxy (Nginx, AWS ALB, Cloudflare) with a 60-second idle timeout would silently sever a streaming connection mid-task. Claude Code would either hang waiting for the response or surface a generic network error — with no clear indication that the task had been abandoned, not completed. The v2.1.229 keepalives resolve this at the transport layer, so long multi-step tasks running through self-hosted runners or standard gateway endpoints no longer require a custom proxy idle-timeout workaround.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.229" class="source-link" target="_blank" rel="noopener">github.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">v2.1.229</span>
+    <span class="tag">SSE</span>
+    <span class="tag">keepalive</span>
+    <span class="tag">self-hosted runner</span>
+    <span class="tag">bug fixes</span>
+    <span class="tag">streaming</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Auto Mode Default Switches On Tomorrow: Five Things to Check Today
+     Source: https://docs.anthropic.com/en/docs/claude-code/auto-mode
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Auto Mode Default Switches On Tomorrow: Five Things to Check Today</h2>
+
+  <p>As covered on August 10, Claude Code's <strong>Auto Mode becomes the default for all new sessions starting August 14</strong>. That's tomorrow. Teams who have not yet evaluated how Auto Mode will affect their workflows have one day to do so. Here is a concise pre-flight checklist.</p>
+
+  <h3>What changes at midnight</h3>
+  <p>Before August 14, Claude Code sessions start in <em>confirm mode</em> — Claude asks for approval before each tool call. From August 14 onward, new sessions start in <em>Auto Mode</em> — Claude executes tool calls autonomously within configured permission boundaries, only pausing when it hits an operation outside its allowed scope. Existing sessions and projects with an explicit <code>autoMode: false</code> in their settings are unaffected.</p>
+
+  <h3>Pre-flight checklist</h3>
+  <ul>
+    <li><strong>1. Audit your tool permissions.</strong> Open <code>.claude/settings.json</code> and review <code>permissions.allow</code> and <code>permissions.deny</code>. Auto Mode will execute anything in the allow list without pausing. Tighten the deny list before tomorrow if any listed tools are too broad for unsupervised use.</li>
+    <li><strong>2. Check for hardcoded confirm-mode assumptions in your hooks.</strong> If you have <code>PreToolUse</code> or <code>PostToolUse</code> hooks that rely on a human being present to respond to a pause prompt, they will behave differently in Auto Mode — Claude will not pause between hooks unless the hook explicitly exits non-zero to block the action.</li>
+    <li><strong>3. Opt out at the project level if needed.</strong> Add <code>"autoMode": false</code> to <code>.claude/settings.json</code> to keep confirm-mode behaviour for a specific project. You can also set <code>CLAUDE_AUTO_MODE=false</code> as an environment variable to opt out globally on a given machine.</li>
+    <li><strong>4. Review max-turns and cost limits.</strong> Auto Mode sessions can run significantly more turns before reaching a natural pause point. If you have budget controls configured, verify that your per-session token limit and spend cap are set appropriately for longer autonomous runs.</li>
+    <li><strong>5. Test one non-critical project today.</strong> Start a session with <code>claude --auto</code> on a low-stakes repo and observe how Auto Mode handles a typical task. Pay attention to which tool calls it executes without pausing — these are the ones your deny list needs to cover if they're unexpected.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>CI/CD pipelines: Auto Mode is likely already what you want</strong>
+    <p>If you're running Claude Code in a non-interactive CI pipeline (via <code>claude --print</code> or as a GitHub Actions step), the Auto Mode default has no practical effect — non-interactive invocations have always executed tool calls autonomously. The change only affects interactive sessions where confirm mode was previously the starting point.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://docs.anthropic.com/en/docs/claude-code/auto-mode" class="source-link" target="_blank" rel="noopener">docs.anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Auto Mode</span>
+    <span class="tag">Claude Code</span>
+    <span class="tag">permissions</span>
+    <span class="tag">agentic</span>
+    <span class="tag">configuration</span>
+    <span class="tag">hooks</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

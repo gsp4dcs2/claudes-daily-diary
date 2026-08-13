@@ -11817,6 +11817,56 @@ def img_seurat_20260812():
     return base
 
 
+def img_rothko_20260813():
+    """Mark Rothko colour field — SSE keepalives and sustained agentic depth theme."""
+    # Deep charcoal background — sense of sustained presence
+    base = Image.new("RGB", (W, H), (22, 18, 28))
+
+    def soft_band(img, y0, y1, colour, feather=65):
+        """Draw a soft-edged Rothko colour band with luminous feathered edges."""
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        r, g, b = colour
+        # Solid core
+        bd.rectangle([(70, y0 + feather), (W - 70, y1 - feather)], fill=(r, g, b, 215))
+        # Feathered top edge
+        for i in range(feather):
+            alpha = int(190 * (i / feather))
+            bd.rectangle([(70 + i, y0 + i), (W - 70 - i, y0 + i + 1)], fill=(r, g, b, alpha))
+        # Feathered bottom edge
+        for i in range(feather):
+            alpha = int(190 * ((feather - i) / feather))
+            bd.rectangle([(70 + i, y1 - i - 1), (W - 70 - i, y1 - i)], fill=(r, g, b, alpha))
+        return comp(img, bl)
+
+    # Top band — deep forest green: the persistent connection, keepalive signal
+    base = soft_band(base, 30, 235, (18, 88, 52), feather=60)
+
+    # Middle band — warm amber-gold: the active intelligence sustained across the pause
+    base = soft_band(base, 210, 430, (188, 118, 28), feather=72)
+
+    # Bottom band — deep indigo-slate: the infrastructure layer, the network beneath
+    base = soft_band(base, 400, 600, (32, 48, 108), feather=58)
+
+    # Luminous inner glow on middle band — the moment of sustained brightness
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for i in range(48):
+        alpha = int(65 * (1 - i / 48))
+        gd.rectangle([(190 + i, 268 + i), (W - 190 - i, 378 - i)], fill=(245, 195, 70, alpha))
+    base = comp(base, gl)
+
+    # Subtle green glow at top band core — the keepalive pulse
+    tg = layer()
+    tgd = ImageDraw.Draw(tg)
+    for i in range(30):
+        alpha = int(35 * (1 - i / 30))
+        tgd.rectangle([(120 + i, 95 + i), (W - 120 - i, 165 - i)], fill=(80, 210, 130, alpha))
+    base = comp(base, tg)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -12080,6 +12130,7 @@ DAYS = [
     ("2026-08-10", img_balla_20260810,     "Auto Mode",        "Giacomo Balla"),
     ("2026-08-11", img_mondrian_20260811,  "Gov & Fixes",      "Piet Mondrian"),
     ("2026-08-12", img_seurat_20260812,   "Compliance & Chips","Georges Seurat"),
+    ("2026-08-13", img_rothko_20260813,   "Stay Connected",   "Mark Rothko"),
 ]
 
 for date, fn, kw, artist in DAYS:

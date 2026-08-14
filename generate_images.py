@@ -11867,6 +11867,99 @@ def img_rothko_20260813():
     return base
 
 
+def img_klee_20260814():
+    """Paul Klee colour-grid style — subagent forking and branching multi-agent networks theme."""
+    # Warm dark background
+    base = Image.new("RGB", (W, H), (30, 22, 14))
+
+    # 1. Colour-field grid cells — a dense mosaic of warm-to-cool hues
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    cols = 16
+    rows = 9
+    cw = W // cols
+    ch = H // rows
+    palette = [
+        (218, 82, 36),  (225, 130, 45), (210, 175, 55), (170, 205, 65),
+        (90,  200, 110),(50,  170, 180),(45,  115, 215),(70,  68, 205),
+        (115, 50, 195), (165, 58, 185),(205, 68, 145),(218, 80, 90),
+        (222, 105, 55), (215, 150, 50),(195, 185, 60),(145, 210, 70),
+    ]
+    for ci in range(cols):
+        base_col = palette[ci % len(palette)]
+        for ri in range(rows):
+            brightness = int(110 + rng.randint(0, 70) - ri * 7)
+            brightness = max(55, min(215, brightness))
+            cell_col = tuple(min(255, int(c * brightness / 175)) for c in base_col)
+            x0, y0 = ci * cw, ri * ch
+            x1, y1 = x0 + cw - 2, y0 + ch - 2
+            gd.rectangle([(x0, y0), (x1, y1)], fill=(cell_col[0], cell_col[1], cell_col[2], 205))
+    base = comp(base, grid_l)
+
+    # 2. Dark grid lines — the structural skeleton of the cell network
+    lines_l = layer()
+    ld = ImageDraw.Draw(lines_l)
+    for ci in range(cols + 1):
+        ld.line([(ci * cw, 0), (ci * cw, H)], fill=(18, 12, 6, 230), width=3)
+    for ri in range(rows + 1):
+        ld.line([(0, ri * ch), (W, ri * ch)], fill=(18, 12, 6, 230), width=3)
+    base = comp(base, lines_l)
+
+    # 3. Parent node (large circle) and forked child nodes — the fork topology
+    nodes_l = layer()
+    nd = ImageDraw.Draw(nodes_l)
+    # Parent node — centre-left
+    parent = (4 * cw, 4 * ch)
+    nd.ellipse([(parent[0]-18, parent[1]-18), (parent[0]+18, parent[1]+18)],
+               fill=(255, 255, 255, 240), outline=(18, 12, 6, 255), width=3)
+    # Branch lines from parent to children
+    children = [
+        (8 * cw, 2 * ch),
+        (8 * cw, 4 * ch),
+        (8 * cw, 6 * ch),
+    ]
+    branch_l = layer()
+    bd2 = ImageDraw.Draw(branch_l)
+    mid_x = 6 * cw
+    bd2.line([parent, (mid_x, parent[1])], fill=(255, 255, 255, 180), width=4)
+    bd2.line([(mid_x, 2 * ch), (mid_x, 6 * ch)], fill=(255, 255, 255, 140), width=3)
+    for cx, cy in children:
+        bd2.line([(mid_x, cy), (cx, cy)], fill=(255, 255, 255, 160), width=3)
+    base = comp(base, branch_l)
+    for cx, cy in children:
+        nd.ellipse([(cx-13, cy-13), (cx+13, cy+13)],
+                   fill=(255, 255, 255, 220), outline=(18, 12, 6, 255), width=2)
+    # Grand-children from child 2 — a second fork level
+    grandchildren = [(12 * cw, 3 * ch), (12 * cw, 5 * ch)]
+    branch2_l = layer()
+    bd3 = ImageDraw.Draw(branch2_l)
+    mid2_x = 10 * cw
+    child2 = children[1]
+    bd3.line([child2, (mid2_x, child2[1])], fill=(255, 255, 255, 130), width=2)
+    bd3.line([(mid2_x, 3 * ch), (mid2_x, 5 * ch)], fill=(255, 255, 255, 100), width=2)
+    for gx, gy in grandchildren:
+        bd3.line([(mid2_x, gy), (gx, gy)], fill=(255, 255, 255, 120), width=2)
+    base = comp(base, branch2_l)
+    for gx, gy in grandchildren:
+        nd.ellipse([(gx-9, gy-9), (gx+9, gy+9)],
+                   fill=(255, 240, 200, 200), outline=(18, 12, 6, 255), width=2)
+    base = comp(base, nodes_l)
+
+    # 4. Scattered small accent dots — cache tokens flowing through the network
+    dots_l = layer()
+    dd = ImageDraw.Draw(dots_l)
+    accent_cols = [(255, 200, 100), (180, 255, 180), (150, 200, 255), (255, 150, 150)]
+    for _ in range(60):
+        dx = rng.randint(0, W)
+        dy = rng.randint(0, H)
+        dr = rng.randint(2, 5)
+        dc = accent_cols[rng.randint(0, len(accent_cols) - 1)]
+        dd.ellipse([(dx - dr, dy - dr), (dx + dr, dy + dr)], fill=(dc[0], dc[1], dc[2], 140))
+    base = comp(base, dots_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -12131,6 +12224,7 @@ DAYS = [
     ("2026-08-11", img_mondrian_20260811,  "Gov & Fixes",      "Piet Mondrian"),
     ("2026-08-12", img_seurat_20260812,   "Compliance & Chips","Georges Seurat"),
     ("2026-08-13", img_rothko_20260813,   "Stay Connected",   "Mark Rothko"),
+    ("2026-08-14", img_klee_20260814,     "Agent Fork",       "Paul Klee"),
 ]
 
 for date, fn, kw, artist in DAYS:

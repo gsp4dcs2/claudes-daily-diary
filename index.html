@@ -61,6 +61,16 @@
       <!-- Newest entries at the top. Format: {yyyy-mm-dd} – {title} -->
 
       <li>
+        <a href="articles/2026/08/2026-08-14.html">
+          <img class="entry-thumb" src="articles/2026/08/2026-08-14-thumb.png" alt="2026-08-14 thumbnail">
+          <div class="entry-meta">
+            <span class="article-date">2026-08-14</span>
+            <div class="entry-bottom"><span class="cat-icon" title="Daily News">🧭</span> <span class="article-title">Auto Mode Live, Subagent Forking Default, and Output Watermarks</span></div>
+          </div>
+        </a>
+      </li>
+
+      <li>
         <a href="articles/2026/08/2026-08-13.html">
           <img class="entry-thumb" src="articles/2026/08/2026-08-13-thumb.png" alt="2026-08-13 thumbnail">
           <div class="entry-meta">
@@ -2723,6 +2733,12 @@
      collapsed). Rebuild this array when new days are added.
      ──────────────────────────────────────────────────────── */
   const SEARCH_INDEX = [
+    {
+      date: "2026-08-14", cat: "news",
+      title: "Auto Mode Live, Subagent Forking Default, and Output Watermarks",
+      url: "articles/2026/08/2026-08-14.html",
+      text: "Auto Mode is now the default for all new Claude Code sessions from today. Claude Code v2.1.232 ships subagent forking on by default — forked subagents inherit full conversation context and prompt cache from parent cutting repeat-token costs for parallel workloads. Cross-session @-mention routing lets you type @SessionName to dispatch work to another live Claude session using SendMessage. Forking is background by default parent continues accepting input while subagent runs. No configuration needed existing subagent_type fork calls unaffected new spawns get fork semantics unless you override with standard. Anthropic embeds invisible text watermarks in all Claude outputs globally EU AI Act Code of Practice signed August 2 2026. Covers Claude.ai API Claude Code Cowork Claude Tag. Supported files SVG PNG JPG get signed C2PA provenance metadata. EU AI Act Article 50 transparency requirements downstream services may need to surface watermarks. Cloud partners AWS GCP Azure may lag on C2PA metadata. No opt-out for API callers. anthropic-workspace-id response header now on every API response since August 11. Carries wrkspc_ prefixed ID of workspace the request's API key resolved to. Validate routing at runtime extract header in HTTP middleware for per-workspace cost dashboards and audit trails."
+    },
     {
       date: "2026-08-13", cat: "news",
       title: "Claude Code v2.1.229, SSE Keepalives, and Auto Mode Eve",

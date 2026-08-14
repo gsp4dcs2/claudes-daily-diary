@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="August 14: Auto Mode is now the default for all new Claude Code sessions. Also today: v2.1.232 ships subagent forking on by default plus cross-session @-mention routing; Anthropic rolls out invisible output watermarks globally; and a new anthropic-workspace-id response header lands on every API call.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-08-14 – Auto Mode Live, Subagent Forking Default, and Output Watermarks">
+  <meta property="og:description" content="August 14: Auto Mode is now the default for all new Claude Code sessions. Also today: v2.1.232 ships subagent forking on by default plus cross-session @-mention routing; Anthropic rolls out invisible output watermarks globally; and a new anthropic-workspace-id response header lands on every API call.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/08/2026-08-14.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/08/2026-08-14.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/08/2026-08-14.png">
+
+  <title>2026-08-14 – Auto Mode Live, Subagent Forking Default, and Output Watermarks | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Auto Mode Live, Subagent Forking Default, and Output Watermarks",
+  "description": "August 14: Auto Mode is now the default for all new Claude Code sessions. Also today: v2.1.232 ships subagent forking on by default plus cross-session @-mention routing; Anthropic rolls out invisible output watermarks globally; and a new anthropic-workspace-id response header lands on every API call.",
+  "datePublished": "2026-08-14",
+  "dateModified": "2026-08-14",
+  "url": "https://claudebeat.ai/articles/2026/08/2026-08-14.html",
+  "image": "https://claudebeat.ai/articles/2026/08/2026-08-14.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/08/2026-08-14.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-08-14</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Auto Mode Live, Subagent Forking Default, and Output Watermarks</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-08-14.png" alt="Auto Mode Live, Subagent Forking Default, and Output Watermarks — visual for 2026-08-14">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code v2.1.232: Subagent Forking On by Default and Cross-Session @-Mention
+     Source: https://github.com/anthropics/claude-code/releases
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.232: Subagent Forking On by Default and Cross-Session @-Mention</h2>
+
+  <p>Claude Code v2.1.232 ships today with two features that substantially change how parallel and multi-session agentic work operates. <strong>Subagent forking is now on by default</strong>: forked subagents inherit the full conversation context and prompt cache from the parent, cutting repeat-token costs for parallel workloads without requiring any configuration change. Alongside this, <strong>cross-session @-mention routing</strong> lets you type <code>@SessionName</code> in any prompt to dispatch work directly to another live Claude session using <code>SendMessage</code>.</p>
+
+  <h3>Subagent forking: what changes day-to-day</h3>
+  <p>Before v2.1.232, spawning a subagent with <code>subagent_type: "fork"</code> was opt-in and required explicit configuration. From today, forking is the default behaviour for non-teammate agent spawns in interactive sessions, and those agents run in the background by default rather than blocking the parent turn. The practical upshot:</p>
+  <ul>
+    <li><strong>Prompt cache inheritance</strong> — the forked subagent starts with the parent's cache warmed, so it does not pay re-tokenisation costs for the conversation prefix on its first turn. For long agentic workflows where the parent has already built up a large context, this can meaningfully reduce per-subtask cost.</li>
+    <li><strong>Background execution</strong> — the parent session continues accepting input while the subagent runs, rather than pausing until the fork returns. Long-running parallel tasks (linting a large codebase, running a test suite across multiple branches) no longer block the interactive session.</li>
+    <li><strong>No configuration needed</strong> — existing <code>subagent_type: "fork"</code> calls are unaffected; new agent spawns automatically get fork semantics unless you override with <code>subagent_type: "standard"</code>.</li>
+  </ul>
+
+  <h3>Cross-session @-mention routing</h3>
+  <p>Typing <code>@</code> in a Claude Code prompt now triggers a session-name picker. If the bare name you type matches exactly one live session, <code>SendMessage</code> fires without a confirmation step. This closes the loop for multi-session orchestration: a coordinating session can delegate to named specialist sessions (e.g. <code>@frontend-agent</code>, <code>@db-agent</code>) without requiring a separate tool invocation. The confirmation step remains for ambiguous names or when multiple sessions match.</p>
+
+  <div class="callout tip">
+    <strong>Cost arithmetic for fork-by-default</strong>
+    <p>Forking inherits prompt cache, but it also inherits the full context — including any large files, tool results, or conversation history the parent has accumulated. If your parent session has grown to 100K+ tokens, every forked subagent starts with that prefix in cache (effectively free on the first hit) but will still count it against your context window. For very large parent sessions, consider whether a fresh <code>standard</code> subagent with a targeted system prompt is cheaper overall than a fork with the full inherited context.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases" class="source-link" target="_blank" rel="noopener">github.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">v2.1.232</span>
+    <span class="tag">subagent</span>
+    <span class="tag">forking</span>
+    <span class="tag">multi-session</span>
+    <span class="tag">prompt cache</span>
+    <span class="tag">agentic</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Anthropic Rolls Out Invisible Output Watermarks Globally
+     Source: https://the-decoder.com/anthropic-watermarks-all-claude-outputs-globally-with-marks-that-may-persist-through-some-editing/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Anthropic Rolls Out Invisible Output Watermarks Globally</h2>
+
+  <p>As of August 2, 2026 — in response to signing the EU AI Act Code of Practice — Anthropic began embedding <strong>invisible text watermarks</strong> in outputs from all new Claude models globally. The rollout covers Claude.ai, the API, Claude Code, Cowork, and Claude Tag. Supported file types (SVG, PNG, JPG) additionally receive signed <strong>C2PA provenance metadata</strong>. Watermarks are described as persisting through some editing but removable via format conversion or screenshots.</p>
+
+  <h3>What this means for developers integrating Claude</h3>
+  <ul>
+    <li><strong>EU AI Act Article 50 transparency requirements</strong> — if your downstream service is covered by Article 50 (AI-generated content disclosure rules), you may need to surface these watermarks or the C2PA metadata to end users. Anthropic's implementation satisfies the AI Act's technical requirement on Anthropic's side, but the disclosure obligation for your own service depends on how you use the output.</li>
+    <li><strong>Cloud partner lag</strong> — AWS Bedrock, Google Cloud Vertex, and Azure AI Foundry deployments may not yet surface the file-metadata C2PA piece in their managed API responses. Check your cloud provider's release notes before relying on C2PA provenance for compliance.</li>
+    <li><strong>Watermark stripping is possible</strong> — screenshots, copy-paste into plain text, and format conversion (e.g. PNG → JPEG re-encode) can remove the watermarks. Anthropic's implementation is a good-faith technical measure, not a cryptographic guarantee.</li>
+    <li><strong>No opt-out for API callers</strong> — the watermarks are applied at the model layer and cannot be disabled via API parameters or headers.</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>Check your output pipelines before September</strong>
+    <p>If you post-process Claude outputs (resizing images, converting file formats, re-encoding text through your own pipeline), verify that your steps do not inadvertently strip the C2PA provenance before delivery — doing so could create a gap between Anthropic's compliance posture and your own service's obligations under the EU AI Act.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Community content or research — independently cross-checked">⭐</span>
+    <a href="https://the-decoder.com/anthropic-watermarks-all-claude-outputs-globally-with-marks-that-may-persist-through-some-editing/" class="source-link" target="_blank" rel="noopener">the-decoder.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">watermarks</span>
+    <span class="tag">C2PA</span>
+    <span class="tag">EU AI Act</span>
+    <span class="tag">compliance</span>
+    <span class="tag">provenance</span>
+    <span class="tag">API</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — anthropic-workspace-id Header Now on Every API Response
+     Source: https://platform.claude.com/docs/en/release-notes/api
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> <code>anthropic-workspace-id</code> Header Now on Every API Response</h2>
+
+  <p>As of August 11, every Claude API response includes a new <strong><code>anthropic-workspace-id</code></strong> response header carrying the <code>wrkspc_</code>-prefixed ID of the workspace the request's API key resolved to — including the Default Workspace. No opt-in, no beta flag; it appears on all responses immediately.</p>
+
+  <h3>Why this matters for multi-workspace setups</h3>
+  <p>Teams running multiple workspaces (e.g. separate environments for prod, staging, and dev, or separate business units on a shared Enterprise account) previously had to cross-reference the API key with the Console to confirm which workspace was being billed. With this header, you can:</p>
+  <ul>
+    <li><strong>Validate routing at runtime</strong> — assert in your integration tests that the correct workspace key is in use by checking the header on the first response, catching misconfigured environment variables before they result in charges to the wrong workspace.</li>
+    <li><strong>Attribute costs per workspace in your own logging</strong> — extract <code>anthropic-workspace-id</code> in your HTTP middleware and tag it alongside <code>anthropic-request-id</code> and token-usage fields for per-workspace cost dashboards without a separate Console API call.</li>
+    <li><strong>Audit trails</strong> — log the header value alongside request timestamps for any audit requirement that needs to map API activity to billing entities.</li>
+  </ul>
+
+  <pre><code># Example: extracting the header with the Python SDK
+import anthropic
+
+client = anthropic.Anthropic()
+response = client.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=256,
+    messages=[{"role": "user", "content": "Hello"}],
+)
+# The raw HTTP response carries the header:
+workspace_id = response._raw_response.headers.get("anthropic-workspace-id")
+print(workspace_id)  # e.g. "wrkspc_01ABC..."
+</code></pre>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/release-notes/api" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">API</span>
+    <span class="tag">workspace</span>
+    <span class="tag">response headers</span>
+    <span class="tag">multi-tenant</span>
+    <span class="tag">cost attribution</span>
+    <span class="tag">audit</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

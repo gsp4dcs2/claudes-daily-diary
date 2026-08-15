@@ -11960,6 +11960,66 @@ def img_klee_20260814():
     return base
 
 
+def img_moholy_20260815():
+    """László Moholy-Nagy (Bauhaus) — overlapping transparent geometry — risk transparency theme."""
+    base = Image.new("RGB", (W, H), (248, 246, 240))
+
+    # 1. Large overlapping transparent rectangles — structural disclosure layers
+    rect_l = layer()
+    rd = ImageDraw.Draw(rect_l)
+    rects = [
+        (60,  80,  560, 420, (30,  110, 190, 110)),
+        (340, 200, 860, 560, (200, 50,  50,  100)),
+        (500, 40,  1000, 360, (40,  160, 100, 90)),
+        (150, 310, 700, 590, (200, 150, 20,  80)),
+    ]
+    for (x1, y1, x2, y2, col) in rects:
+        rd.rectangle([(x1, y1), (x2, y2)], fill=col, outline=(20, 20, 20, 180), width=3)
+    base = comp(base, rect_l)
+
+    # 2. Overlapping transparent circles — information rings / probability bands
+    circ_l = layer()
+    cd = ImageDraw.Draw(circ_l)
+    circles = [
+        (300, 300, 200, (30, 80, 200, 90)),
+        (600, 220, 160, (210, 60, 30, 80)),
+        (820, 390, 140, (40, 150, 90, 85)),
+        (480, 480, 110, (180, 130, 20, 95)),
+    ]
+    for (cx, cy, r, col) in circles:
+        cd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=col, outline=(20, 20, 20, 200), width=2)
+    base = comp(base, circ_l)
+
+    # 3. Thin black structural lines crossing the composition — Bauhaus grid scaffold
+    line_l = layer()
+    ld = ImageDraw.Draw(line_l)
+    lines = [
+        [(0, 200), (W, 200)],
+        [(0, 430), (W, 430)],
+        [(380, 0), (380, H)],
+        [(720, 0), (720, H)],
+        [(80, 0), (500, H)],
+        [(900, 0), (500, H)],
+    ]
+    for pts in lines:
+        ld.line(pts, fill=(20, 20, 20, 160), width=2)
+    base = comp(base, line_l)
+
+    # 4. Small primary-colour accent dots — data points / risk indicators
+    dot_l = layer()
+    dd = ImageDraw.Draw(dot_l)
+    accent = [(210, 30, 40, 200), (30, 100, 200, 200), (220, 190, 20, 200), (20, 150, 80, 200)]
+    for _ in range(40):
+        dx = rng.randint(50, W - 50)
+        dy = rng.randint(50, H - 50)
+        dr = rng.randint(4, 10)
+        dc = accent[rng.randint(0, len(accent) - 1)]
+        dd.ellipse([(dx - dr, dy - dr), (dx + dr, dy + dr)], fill=dc)
+    base = comp(base, dot_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -12225,6 +12285,7 @@ DAYS = [
     ("2026-08-12", img_seurat_20260812,   "Compliance & Chips","Georges Seurat"),
     ("2026-08-13", img_rothko_20260813,   "Stay Connected",   "Mark Rothko"),
     ("2026-08-14", img_klee_20260814,     "Agent Fork",       "Paul Klee"),
+    ("2026-08-15", img_moholy_20260815,  "Risk & Release",   "László Moholy-Nagy"),
 ]
 
 for date, fn, kw, artist in DAYS:

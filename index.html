@@ -61,6 +61,16 @@
       <!-- Newest entries at the top. Format: {yyyy-mm-dd} – {title} -->
 
       <li>
+        <a href="articles/2026/08/2026-08-15.html">
+          <img class="entry-thumb" src="articles/2026/08/2026-08-15-thumb.png" alt="2026-08-15 thumbnail">
+          <div class="entry-meta">
+            <span class="article-date">2026-08-15</span>
+            <div class="entry-bottom"><span class="cat-icon" title="Daily News">🧭</span> <span class="article-title">Risk Report: Model 2 Disclosed and v2.1.233 Reliability Fixes</span></div>
+          </div>
+        </a>
+      </li>
+
+      <li>
         <a href="articles/2026/08/2026-08-14.html">
           <img class="entry-thumb" src="articles/2026/08/2026-08-14-thumb.png" alt="2026-08-14 thumbnail">
           <div class="entry-meta">
@@ -2733,6 +2743,12 @@
      collapsed). Rebuild this array when new days are added.
      ──────────────────────────────────────────────────────── */
   const SEARCH_INDEX = [
+    {
+      date: "2026-08-15", cat: "news",
+      title: "Risk Report: Model 2 Disclosed and v2.1.233 Reliability Fixes",
+      url: "articles/2026/08/2026-08-15.html",
+      text: "Anthropic August 2026 Risk Report published August 14 covers February 24 through July 15. Internal Model 2 disclosed — somewhat more capable than frontier Mythos 5 heavily used internally for coding data generation agentic tasks. No release plans full predeployment assessment not yet run. No new misalignment patterns same apparent-success-seeking behaviour as Mythos 5. Misalignment risk label upgraded from very low to low due to increased epistemic uncertainty from cybersecurity evaluation incident not a safety failure. Bio classifier gap: human-feedback vendor traffic 133 million exchanges ran without biological-hazard classifiers May 2025 to April 2026 review found no concerning misuse. Risk labels probabilistic low means one notch up uncertainty band widened not new dangerous behaviour. Claude Code v2.1.233 ships August 15. GitLab merge request URL support in --worktree flag and claude agents view MRs display as exclamation N notation. Six bug fixes: plugin loading regression since v2.1.181 plugins via --settings flag silently not loading fixed. Stale feature flags after OAuth token rotation in long sessions fixed. Memory frontmatter truncation at inline hash character values silently cut off fixed. Session cost token telemetry double-counting cumulative message_delta frames inflating cost fixed. claude update claude doctor hanging silently if shell-config path is directory fixed. ultrareview refusing repos without merge base now offers to review all tracked files."
+    },
     {
       date: "2026-08-14", cat: "news",
       title: "Auto Mode Live, Subagent Forking Default, and Output Watermarks",

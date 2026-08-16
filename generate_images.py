@@ -12020,6 +12020,75 @@ def img_moholy_20260815():
     return base
 
 
+def img_kandinsky_20260816():
+    """Wassily Kandinsky — bold primaries, diagonal grid — multiagent collision / turf war theme."""
+    base = Image.new("RGB", (W, H), (12, 22, 52))
+
+    # 1. Diagonal grid (signature Kandinsky construction — represents interconnected agent topology)
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    for offset in range(-H, W + H, 75):
+        gd.line([(offset, 0), (offset + H, H)], fill=(255, 255, 255, 16), width=1)
+    for offset in range(W + H, -H, -75):
+        gd.line([(offset, 0), (offset - H, H)], fill=(255, 255, 255, 10), width=1)
+    base = comp(base, grid_l)
+
+    # 2. Three large bold agent-circles (representing three colliding agents)
+    circles_l = layer()
+    cd = ImageDraw.Draw(circles_l)
+    # Agent 1 — red (aggressive)
+    cd.ellipse([(80, 80), (420, 420)], fill=(210, 35, 48, 200))
+    # Agent 2 — prussian blue (structural)
+    cd.ellipse([(400, 200), (740, 540)], fill=(28, 98, 210, 195))
+    # Agent 3 — gold (competitive)
+    cd.ellipse([(720, 60), (1060, 400)], fill=(220, 170, 20, 185))
+    base = comp(base, circles_l)
+
+    # 3. Crossing conflict lines (representing sabotage vectors between agents)
+    conflict_l = layer()
+    fld = ImageDraw.Draw(conflict_l)
+    # Red → Blue conflict
+    fld.line([(250, 250), (570, 370)], fill=(255, 255, 255, 210), width=6)
+    # Blue → Gold conflict
+    fld.line([(570, 370), (890, 230)], fill=(255, 255, 255, 210), width=6)
+    # Red → Gold cross-conflict
+    fld.line([(250, 250), (890, 230)], fill=(255, 80, 80, 150), width=3)
+    # Arrow-head marks at intersections
+    fld.ellipse([(560, 360), (580, 380)], fill=(255, 255, 255, 230))
+    base = comp(base, conflict_l)
+
+    # 4. Triangles (Kandinsky's geometric tension markers — malware propagation shapes)
+    tri_l = layer()
+    td = ImageDraw.Draw(tri_l)
+    # White sharp triangle (forward aggression)
+    td.polygon([(1050, 450), (1160, 290), (1170, 600)], fill=(240, 240, 240, 180))
+    # Small red triangle (replication marker)
+    td.polygon([(60, 520), (160, 430), (200, 570)], fill=(230, 60, 50, 200))
+    base = comp(base, tri_l)
+
+    # 5. Arc scatter (Kandinsky's tick / arc motif — representing attempted truces)
+    arcs_l = layer()
+    ad = ImageDraw.Draw(arcs_l)
+    arc_defs = [(200, 540, 55, 10, 140), (980, 500, 70, 200, 330), (580, 120, 45, 0, 180), (100, 300, 38, 240, 360)]
+    for (ax, ay, ar, a1, a2) in arc_defs:
+        ad.arc([(ax - ar, ay - ar), (ax + ar, ay + ar)], start=a1, end=a2, fill=(255, 240, 200, 170), width=4)
+    base = comp(base, arcs_l)
+
+    # 6. Small dot scatter (noise / entropy from malware replication)
+    dot_l = layer()
+    dd = ImageDraw.Draw(dot_l)
+    dot_colors = [(255, 220, 60, 180), (80, 200, 255, 160), (255, 100, 80, 150), (200, 255, 120, 140)]
+    for _ in range(55):
+        dx = rng.randint(30, W - 30)
+        dy = rng.randint(30, H - 30)
+        dr = rng.randint(2, 6)
+        dc = dot_colors[rng.randint(0, len(dot_colors) - 1)]
+        dd.ellipse([(dx - dr, dy - dr), (dx + dr, dy + dr)], fill=dc)
+    base = comp(base, dot_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -12286,6 +12355,7 @@ DAYS = [
     ("2026-08-13", img_rothko_20260813,   "Stay Connected",   "Mark Rothko"),
     ("2026-08-14", img_klee_20260814,     "Agent Fork",       "Paul Klee"),
     ("2026-08-15", img_moholy_20260815,  "Risk & Release",   "László Moholy-Nagy"),
+    ("2026-08-16", img_kandinsky_20260816, "Agent Collisions", "Wassily Kandinsky"),
 ]
 
 for date, fn, kw, artist in DAYS:

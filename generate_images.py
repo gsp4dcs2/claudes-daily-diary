@@ -12089,6 +12089,91 @@ def img_kandinsky_20260816():
     return base
 
 
+def img_calder_20260817():
+    """Alexander Calder — flat primary shapes on thin black armature — M&A deals and alignment audits theme."""
+    base = Image.new("RGB", (W, H), (248, 246, 242))  # warm off-white Calder canvas
+
+    # 1. Main mobile armature — three tiers representing deals and audit layers
+    arm_l = layer(); ad = ImageDraw.Draw(arm_l)
+    # Top horizontal spine
+    ad.line([(120, 100), (1080, 100)], fill=(18, 18, 18, 240), width=5)
+    # Central drop from spine midpoint
+    ad.line([(600, 100), (600, 240)], fill=(18, 18, 18, 230), width=4)
+    # Second-tier horizontal bar
+    ad.line([(280, 240), (920, 240)], fill=(18, 18, 18, 225), width=4)
+    # Left drop from second-tier
+    ad.line([(280, 240), (280, 400)], fill=(18, 18, 18, 210), width=3)
+    # Right drop from second-tier
+    ad.line([(920, 240), (920, 380)], fill=(18, 18, 18, 210), width=3)
+    # Far-left arm from spine
+    ad.line([(120, 100), (120, 220)], fill=(18, 18, 18, 200), width=3)
+    ad.line([(60, 220), (230, 220)], fill=(18, 18, 18, 195), width=3)
+    ad.line([(60, 220), (60, 370)], fill=(18, 18, 18, 185), width=2)
+    ad.line([(230, 220), (230, 350)], fill=(18, 18, 18, 185), width=2)
+    # Far-right arm from spine
+    ad.line([(1080, 100), (1080, 210)], fill=(18, 18, 18, 200), width=3)
+    ad.line([(980, 210), (1080, 210)], fill=(18, 18, 18, 195), width=3)
+    ad.line([(980, 210), (980, 360)], fill=(18, 18, 18, 180), width=2)
+    base = comp(base, arm_l)
+
+    # 2. Bold primary flat shapes — each representing a deal or audit node
+    shapes_data = [
+        # Large red disc — Decart acquisition (largest shape = biggest deal)
+        ("ellipse", [(460, 20),  (740, 190)],  (210, 28, 40, 250),  (18, 18, 18, 255), 4),
+        # Blue elongated oval — Riot data centre deal
+        ("ellipse", [(155, 150), (415, 320)],  (26, 82, 205, 240),  (18, 18, 18, 255), 4),
+        # Yellow disc — AuditBench / alignment research (right side)
+        ("ellipse", [(870, 130), (1140, 290)], (240, 195, 10, 235), (18, 18, 18, 255), 4),
+        # Red elongated shape — left execution sandbox (Decart integration)
+        ("ellipse", [(175, 310), (385, 480)],  (210, 28, 40, 225),  (18, 18, 18, 255), 4),
+        # Blue disc — right audit probe node
+        ("ellipse", [(795, 295), (1055, 475)], (26, 82, 205, 220),  (18, 18, 18, 255), 4),
+        # Small yellow — far-left sub-node
+        ("ellipse", [(20,  275), (140, 390)],  (240, 195, 10, 215), (18, 18, 18, 255), 3),
+        # Small red — far-left lower
+        ("ellipse", [(145, 270), (265, 380)],  (210, 28, 40, 205),  (18, 18, 18, 255), 3),
+        # Small blue — far-right sub-node
+        ("ellipse", [(940, 270), (1080, 380)], (26, 82, 205, 210),  (18, 18, 18, 255), 3),
+    ]
+    for kind, bbox, fill, outline, lw in shapes_data:
+        sl = layer(); sd = ImageDraw.Draw(sl)
+        sd.ellipse(bbox, fill=fill, outline=outline, width=lw)
+        base = comp(base, sl)
+
+    # 3. Black pivot dots at all balance/junction points
+    dots_l = layer(); dd = ImageDraw.Draw(dots_l)
+    pivots = [
+        (120, 100), (600, 100), (1080, 100),
+        (280, 240), (600, 240), (920, 240),
+        (120, 220), (60, 220), (230, 220),
+        (1080, 210), (980, 210),
+    ]
+    for px, py in pivots:
+        dd.ellipse([(px - 7, py - 7), (px + 7, py + 7)], fill=(18, 18, 18, 255))
+    base = comp(base, dots_l)
+
+    # 4. Ground line and hanging weight dots at the bottom of each drop
+    ground_l = layer(); gd = ImageDraw.Draw(ground_l)
+    ground_l2 = layer(); gd2 = ImageDraw.Draw(ground_l2)
+    weights = [(280, 400), (920, 380), (60, 370), (230, 350), (980, 360)]
+    weight_fills = [
+        (210, 28, 40, 230), (26, 82, 205, 225),
+        (240, 195, 10, 215), (210, 28, 40, 200), (26, 82, 205, 200),
+    ]
+    for (wx, wy), wfill in zip(weights, weight_fills):
+        gd.ellipse([(wx - 22, wy - 22), (wx + 22, wy + 22)], fill=wfill, outline=(18, 18, 18, 255), width=3)
+    base = comp(base, ground_l)
+
+    # 5. Light background texture — faint diagonal pencil strokes (Calder canvas grain)
+    grain_l = layer(); grd = ImageDraw.Draw(grain_l)
+    for i in range(0, W + H, 90):
+        grd.line([(i, 0), (0, i)], fill=(180, 170, 155, 18), width=1)
+        grd.line([(W - i, H), (W, H - i)], fill=(180, 170, 155, 12), width=1)
+    base = comp(base, grain_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -12356,6 +12441,7 @@ DAYS = [
     ("2026-08-14", img_klee_20260814,     "Agent Fork",       "Paul Klee"),
     ("2026-08-15", img_moholy_20260815,  "Risk & Release",   "László Moholy-Nagy"),
     ("2026-08-16", img_kandinsky_20260816, "Agent Collisions", "Wassily Kandinsky"),
+    ("2026-08-17", img_calder_20260817,   "Deals & Audits",   "Alexander Calder"),
 ]
 
 for date, fn, kw, artist in DAYS:

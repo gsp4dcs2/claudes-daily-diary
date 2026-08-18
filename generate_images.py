@@ -12174,6 +12174,67 @@ def img_calder_20260817():
     return base
 
 
+def img_delaunay_20260818():
+    """Robert Delaunay — overlapping spectral-ring discs — revenue surge / IPO valuation theme."""
+    base = Image.new("RGB", (W, H), (4, 6, 18))  # deep near-black bg
+
+    # 1. Five large overlapping spectral-ring disc clusters — each ring = valuation layer
+    spectral = [
+        (220, 40,  20),   # crimson
+        (215, 120,  0),   # amber
+        (195, 200,  0),   # chartreuse
+        (0,  175,  80),   # emerald
+        (0,  120, 215),   # cobalt
+        (100,  0, 215),   # violet
+    ]
+    disc_centres = [
+        (230, 200, 230),   # top-left cluster (Riot / revenue)
+        (580, 310, 195),   # centre cluster (overall growth)
+        (940, 190, 210),   # top-right cluster (IPO valuation)
+        (360, 470, 155),   # lower-left (enterprise)
+        (820, 470, 170),   # lower-right (SynthID)
+    ]
+    for cx, cy, maxr in disc_centres:
+        for i, col in enumerate(spectral):
+            r = maxr - i * (maxr // 7)
+            if r < 8:
+                break
+            rl = layer()
+            rd = ImageDraw.Draw(rl)
+            alpha = 130 + i * 8
+            rd.ellipse([(cx - r, cy - r), (cx + r, cy + r)],
+                       fill=(col[0], col[1], col[2], min(alpha, 190)))
+            base = comp(base, rl)
+
+    # 2. Thin concentric rings from the centre cluster (signal = growth rippling outward)
+    ring_l = layer()
+    rnd = ImageDraw.Draw(ring_l)
+    for r in range(210, 520, 35):
+        rnd.ellipse([(580 - r, 310 - r), (580 + r, 310 + r)],
+                    outline=(255, 255, 255, 22), width=1)
+    base = comp(base, ring_l)
+
+    # 3. Bold Delaunay arc sweeps (signature arcs framing the composition)
+    arc_l = layer()
+    ad = ImageDraw.Draw(arc_l)
+    ad.arc([(40, 30),  (560, 590)], start=320, end=90,  fill=(255, 255, 200, 50), width=7)
+    ad.arc([(640, 20), (1160, 560)], start=140, end=320, fill=(255, 255, 200, 40), width=5)
+    ad.arc([(200, 120), (980, 560)], start=200, end=360, fill=(200, 255, 240, 30), width=4)
+    base = comp(base, arc_l)
+
+    # 4. Fine star-field scatter (depth / space behind the discs)
+    dot_l = layer()
+    dd = ImageDraw.Draw(dot_l)
+    for _ in range(80):
+        x = rng.randint(20, W - 20)
+        y = rng.randint(20, H - 20)
+        r = rng.randint(1, 4)
+        dd.ellipse([(x - r, y - r), (x + r, y + r)], fill=(255, 250, 230, 160))
+    base = comp(base, dot_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -12442,6 +12503,7 @@ DAYS = [
     ("2026-08-15", img_moholy_20260815,  "Risk & Release",   "László Moholy-Nagy"),
     ("2026-08-16", img_kandinsky_20260816, "Agent Collisions", "Wassily Kandinsky"),
     ("2026-08-17", img_calder_20260817,   "Deals & Audits",   "Alexander Calder"),
+    ("2026-08-18", img_delaunay_20260818, "Revenue Surge",    "Robert Delaunay"),
 ]
 
 for date, fn, kw, artist in DAYS:

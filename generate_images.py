@@ -12235,6 +12235,93 @@ def img_delaunay_20260818():
     return base
 
 
+def img_balla_20260819():
+    """Giacomo Balla Futurism — radiating planes, motion lines — developer velocity theme."""
+    base = Image.new("RGB", (W, H), (5, 5, 18))  # near-black bg
+
+    # 1. Radiating wedge planes from vanishing point (bottom-left, speed rushing right/up)
+    vp = (180, 560)  # vanishing point: lower-left
+    plane_tips = [
+        (W + 60, -40),
+        (W + 60, 120),
+        (W + 60, 280),
+        (W + 60, 420),
+        (W + 60, 580),
+        (900, -50),
+        (700, -50),
+        (500, -50),
+        (300, -50),
+    ]
+    plane_colours = [
+        (220, 50,  30,  160),   # crimson
+        (230, 130,  0,  145),   # amber
+        (200, 210,  0,  140),   # chartreuse
+        (0,  195,  80,  155),   # emerald
+        (0,  140, 230,  150),   # cobalt
+        (130,  0, 230,  140),   # violet
+        (220, 60, 160,  135),   # magenta
+        (240, 200,  0,  130),   # gold
+        (0,  220, 210,  125),   # teal
+    ]
+    for i, (tx, ty) in enumerate(plane_tips):
+        col = plane_colours[i % len(plane_colours)]
+        # Each wedge: vp + two slightly spread rays to tip
+        spread = 28 + i * 8
+        import math as _math
+        dx = tx - vp[0]
+        dy = ty - vp[1]
+        length = _math.hypot(dx, dy) or 1
+        perp_x = -dy / length * spread
+        perp_y =  dx / length * spread
+        poly = [
+            vp,
+            (tx + perp_x, ty + perp_y),
+            (tx - perp_x, ty - perp_y),
+        ]
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        pd.polygon(poly, fill=col)
+        base = comp(base, pl)
+
+    # 2. Bold motion lines (thin arcs sweeping left-to-right at speed)
+    ml = layer()
+    md = ImageDraw.Draw(ml)
+    for i in range(18):
+        y_start = 40 + i * 32
+        md.arc([(vp[0] - 80, y_start - 220), (vp[0] + 1400, y_start + 220)],
+               start=345, end=15,
+               fill=(255, 255, 255, 18 + i * 3), width=2)
+    base = comp(base, ml)
+
+    # 3. Speed-dot scatter — dense near VP, sparse toward right edge (velocity gradient)
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    for _ in range(320):
+        # Bias x toward left (near VP)
+        x = int(rng.triangular(0, W, 220))
+        y = rng.randint(0, H)
+        r = rng.randint(1, 3)
+        alpha = rng.randint(60, 180)
+        hue_choice = rng.choice(plane_colours)
+        dd.ellipse([(x - r, y - r), (x + r, y + r)],
+                   fill=(hue_choice[0], hue_choice[1], hue_choice[2], alpha))
+    base = comp(base, dl)
+
+    # 4. Three bold horizontal speed bars across the mid-section (Futurist signature)
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bar_specs = [
+        (210, 215, (220, 60,  30,  90), 14),
+        (305, 310, (0,  170, 230,  80), 10),
+        (395, 400, (195, 200,  0,  70),  8),
+    ]
+    for y0, y1, col, _ in bar_specs:
+        bd.rectangle([(vp[0] + 60, y0), (W, y1)], fill=col)
+    base = comp(base, bl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -12504,6 +12591,7 @@ DAYS = [
     ("2026-08-16", img_kandinsky_20260816, "Agent Collisions", "Wassily Kandinsky"),
     ("2026-08-17", img_calder_20260817,   "Deals & Audits",   "Alexander Calder"),
     ("2026-08-18", img_delaunay_20260818, "Revenue Surge",    "Robert Delaunay"),
+    ("2026-08-19", img_balla_20260819,   "Dev Velocity",     "Giacomo Balla"),
 ]
 
 for date, fn, kw, artist in DAYS:

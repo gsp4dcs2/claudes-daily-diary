@@ -61,6 +61,16 @@
       <!-- Newest entries at the top. Format: {yyyy-mm-dd} – {title} -->
 
       <li>
+        <a href="articles/2026/08/2026-08-19.html">
+          <img class="entry-thumb" src="articles/2026/08/2026-08-19-thumb.png" alt="2026-08-19 thumbnail">
+          <div class="entry-meta">
+            <span class="article-date">2026-08-19</span>
+            <div class="entry-bottom"><span class="cat-icon" title="Tips 'n' Tricks">💡</span> <span class="article-title">Hooks, Cache-Aware Prompting, and Parallel Subagent Design</span></div>
+          </div>
+        </a>
+      </li>
+
+      <li>
         <a href="articles/2026/08/2026-08-18.html">
           <img class="entry-thumb" src="articles/2026/08/2026-08-18-thumb.png" alt="2026-08-18 thumbnail">
           <div class="entry-meta">
@@ -2773,6 +2783,12 @@
      collapsed). Rebuild this array when new days are added.
      ──────────────────────────────────────────────────────── */
   const SEARCH_INDEX = [
+    {
+      date: "2026-08-19", cat: "tips",
+      title: "Hooks, Cache-Aware Prompting, and Parallel Subagent Design",
+      url: "articles/2026/08/2026-08-19.html",
+      text: "Claude Code settings.json hooks system four lifecycle events PreToolUse PostToolUse Stop Notification. PreToolUse fires before any tool call exit code 2 blocks tool call returns stdout to Claude as error. PostToolUse fires after tool call returns trigger side effects formatting linting logging. Stop fires when Claude finishes complete response turn notifications summaries downstream automation. Notification fires when Claude Code emits notification relay alerts phone Slack. Block dangerous shell commands before they run Python script reads stdin JSON checks command field denylist rm -rf git push force exits 2 explanation. Auto-format after every file write prettier Write hook PostToolUse formatter side effect. Push notification long task finishes ntfy.sh Stop hook cross-device alerts. Hook exit codes exit 0 success continue exit 2 block tool surface error to Claude conversational veto layer. Prompt caching tool results 90 percent cost cut input token costs repeated content. cache_control ephemeral tool result blocks file contents database rows search results. Stable content before dynamic content cache checkpoints left-to-right. System prompt cache_control last block always wins. Ephemeral cache TTL 5 minutes batch calls within window. Break-even two calls first call 25 percent write-cache price every subsequent call 90 percent less. Subagent forking default since Claude Code v2.1.232 August 14 parallel subagents independent context window tool access working scope. Claude forks when tasks do not depend on each other well-defined completion signal combined token cost exceeds overhead. Name independence explicitly speed up forking decision. Distinct workspace per subagent src/auth src/billing collisions shared directories most common forked agent bugs. Inject peer awareness shared state read-only unless authorised. max-subagents cap concurrency cost one subagent per log file expensive. Read subagent outputs explicitly before synthesis. Cross-session at-mention session ID long background tasks 20 minute test suite new session status update without interrupting."
+    },
     {
       date: "2026-08-18", cat: "news",
       title: "$65B Revenue, $2T IPO, and How SynthID Watermarks Work",

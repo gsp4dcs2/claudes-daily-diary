@@ -12322,6 +12322,93 @@ def img_balla_20260819():
     return base
 
 
+def img_leger_20260820():
+    """Fernand Léger — mechanical outlines, flat primaries — S-1 filing / custom silicon / IPO theme."""
+    base = Image.new("RGB", (W, H), (14, 14, 18))  # near-black bg
+
+    # 1. Silicon wafer (left) — circular die with hexagonal grid interior
+    wafer_l = layer()
+    wd = ImageDraw.Draw(wafer_l)
+    # Outer wafer ring
+    wd.ellipse([(30, 60), (440, 570)], fill=(30, 30, 38, 200), outline=(230, 60, 40, 240), width=9)
+    # Inner die grid — horizontal
+    for row in range(7):
+        y = 120 + row * 65
+        wd.line([(60, y), (410, y)], fill=(230, 60, 40, 90), width=2)
+    # Inner die grid — vertical
+    for col in range(6):
+        x = 90 + col * 58
+        wd.line([(x, 80), (x, 550)], fill=(230, 60, 40, 90), width=2)
+    # Highlight cells (individual die sites)
+    cell_cols = [(220, 50, 30, 140), (240, 180, 30, 120), (40, 120, 220, 130), (40, 180, 80, 110)]
+    positions = [(120, 140), (240, 205), (178, 335), (295, 405), (145, 470), (350, 270)]
+    for i, (cx, cy) in enumerate(positions):
+        col = cell_cols[i % len(cell_cols)]
+        wd.rectangle([(cx, cy), (cx + 52, cy + 52)], fill=col)
+    base = comp(base, wafer_l)
+
+    # 2. Central S-1 document rectangle (yellow outline, inner structure)
+    doc_l = layer()
+    dd = ImageDraw.Draw(doc_l)
+    dd.rectangle([(490, 70), (820, 560)], fill=(240, 190, 30, 28), outline=(240, 190, 30, 240), width=9)
+    # Document rule lines (filing text visual metaphor)
+    for row in range(9):
+        y = 130 + row * 47
+        width_var = 270 if row % 3 == 2 else 295
+        dd.rectangle([(520, y), (520 + width_var, y + 14)], fill=(240, 190, 30, 55))
+    # SEC logo circle
+    dd.ellipse([(590, 88), (720, 118)], fill=(240, 190, 30, 80))
+    dd.text((617, 88), "SEC", fill=(240, 190, 30, 255), font=fnt(20, bold=True))
+    base = comp(base, doc_l)
+
+    # 3. Right exchange tower (blue — Nasdaq / capital markets)
+    tower_l = layer()
+    td = ImageDraw.Draw(tower_l)
+    # Outer frame
+    td.rectangle([(870, 80), (1150, 540)], fill=(38, 110, 220, 25), outline=(40, 130, 220, 240), width=9)
+    # Three horizontal bands (trading floors / bar chart)
+    bars = [(540, 470, 52), (395, 475, 72), (250, 480, 95), (105, 485, 40)]
+    for y_bottom, alpha, bar_h in bars:
+        td.rectangle([(910, y_bottom - bar_h), (1110, y_bottom)], fill=(40, 130, 220, alpha))
+    # Vertical grid
+    for xi in range(3):
+        x = 940 + xi * 58
+        td.line([(x, 90), (x, 540)], fill=(40, 130, 220, 70), width=1)
+    # NASDAQ label area
+    td.rectangle([(880, 90), (1140, 135)], fill=(40, 130, 220, 100))
+    base = comp(base, tower_l)
+
+    # 4. Connecting pipes (L→C and C→R)
+    pipes_l = layer()
+    pd = ImageDraw.Draw(pipes_l)
+    pd.rectangle([(440, 295), (492, 320)], fill=(255, 255, 255, 50), outline=(255, 255, 255, 150), width=3)
+    pd.rectangle([(820, 295), (872, 320)], fill=(255, 255, 255, 50), outline=(255, 255, 255, 150), width=3)
+    base = comp(base, pipes_l)
+
+    # 5. Rivet dots (Léger industrial signature)
+    rivet_l = layer()
+    rd = ImageDraw.Draw(rivet_l)
+    rivets = [
+        (490, 80), (820, 80), (490, 560), (820, 560),
+        (870, 90), (1140, 90), (870, 540), (1140, 540),
+    ]
+    for rx, ry in rivets:
+        rd.ellipse([(rx - 6, ry - 6), (rx + 6, ry + 6)], fill=(200, 200, 200, 200), outline=(80, 80, 80, 255), width=2)
+    base = comp(base, rivet_l)
+
+    # 6. Fine dot scatter (depth)
+    scatter_l = layer()
+    sd = ImageDraw.Draw(scatter_l)
+    for _ in range(60):
+        x = rng.randint(20, W - 20)
+        y = rng.randint(20, H - 20)
+        r = rng.randint(1, 3)
+        sd.ellipse([(x - r, y - r), (x + r, y + r)], fill=(200, 200, 200, 60))
+    base = comp(base, scatter_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -12592,6 +12679,7 @@ DAYS = [
     ("2026-08-17", img_calder_20260817,   "Deals & Audits",   "Alexander Calder"),
     ("2026-08-18", img_delaunay_20260818, "Revenue Surge",    "Robert Delaunay"),
     ("2026-08-19", img_balla_20260819,   "Dev Velocity",     "Giacomo Balla"),
+    ("2026-08-20", img_leger_20260820,   "Silicon & IPO",    "Fernand Léger"),
 ]
 
 for date, fn, kw, artist in DAYS:

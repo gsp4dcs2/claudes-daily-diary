@@ -12409,6 +12409,78 @@ def img_leger_20260820():
     return base
 
 
+def img_mondrian_20260821():
+    """Piet Mondrian grid — 4D AI Fluency Framework / Claude Academy theme.
+    Four quadrants (Delegation, Description, Discernment, Diligence) in primary
+    Mondrian colours, thick black dividers, accent strips, and intersection markers.
+    """
+    base = Image.new("RGB", (W, H), (238, 234, 218))  # warm cream bg
+
+    # 1. Primary grid lines (thick black) — major cross dividing four quadrants
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    # Main vertical spine
+    gd.line([(520, 0), (520, H)], fill=(15, 15, 15, 255), width=11)
+    # Main horizontal spine
+    gd.line([(0, 315), (W, 315)], fill=(15, 15, 15, 255), width=11)
+    # Secondary vertical (splits right half)
+    gd.line([(860, 0), (860, 315)], fill=(15, 15, 15, 255), width=5)
+    # Secondary horizontal (splits left half lower)
+    gd.line([(0, 490), (520, 490)], fill=(15, 15, 15, 255), width=5)
+    # Sub-divider: top-left inner horizontal
+    gd.line([(0, 145), (520, 145)], fill=(15, 15, 15, 255), width=4)
+    # Sub-divider: bottom-right inner vertical
+    gd.line([(710, 315), (710, H)], fill=(15, 15, 15, 255), width=4)
+    base = comp(base, grid_l)
+
+    # 2. Colour rectangle fills — four primary Mondrian colours, one per D
+    fill_l = layer()
+    fd = ImageDraw.Draw(fill_l)
+    # Delegation — red: top-left large block
+    fd.rectangle([(0, 145), (520, 315)], fill=(208, 36, 40, 220))
+    # Description — blue: top-right large block
+    fd.rectangle([(860, 0), (W, 315)], fill=(26, 66, 196, 215))
+    # Discernment — yellow: bottom-right main block
+    fd.rectangle([(520, 315), (710, H)], fill=(228, 190, 22, 210))
+    # Diligence — deep blue accent: bottom-left narrow strip
+    fd.rectangle([(0, 490), (520, H)], fill=(26, 66, 196, 165))
+    # Red accent: top-left sub-cell
+    fd.rectangle([(0, 0), (520, 145)], fill=(208, 36, 40, 130))
+    # Yellow accent: top-right upper strip
+    fd.rectangle([(520, 0), (860, 315)], fill=(228, 190, 22, 100))
+    # Blue accent: bottom-right far block
+    fd.rectangle([(710, 315), (W, H)], fill=(26, 66, 196, 185))
+    # White inner accent: bottom-left mid panel
+    fd.rectangle([(0, 315), (520, 490)], fill=(250, 248, 238, 220))
+    base = comp(base, fill_l)
+
+    # 3. Intersection markers — small filled squares where grid lines cross
+    marker_l = layer()
+    md = ImageDraw.Draw(marker_l)
+    intersections = [
+        (520, 315), (520, 145), (520, 490),
+        (860, 315), (710, 315),
+        (0, 145), (0, 490),
+    ]
+    for ix, iy in intersections:
+        half = 10
+        md.rectangle([(ix - half, iy - half), (ix + half, iy + half)],
+                     fill=(15, 15, 15, 255))
+    base = comp(base, marker_l)
+
+    # 4. Fine dot scatter (Mondrian paper texture)
+    dot_l = layer()
+    dd = ImageDraw.Draw(dot_l)
+    for _ in range(90):
+        x = rng.randint(10, W - 10)
+        y = rng.randint(10, H - 10)
+        r = rng.randint(1, 4)
+        dd.ellipse([(x - r, y - r), (x + r, y + r)], fill=(15, 15, 15, 45))
+    base = comp(base, dot_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -12680,6 +12752,7 @@ DAYS = [
     ("2026-08-18", img_delaunay_20260818, "Revenue Surge",    "Robert Delaunay"),
     ("2026-08-19", img_balla_20260819,   "Dev Velocity",     "Giacomo Balla"),
     ("2026-08-20", img_leger_20260820,   "Silicon & IPO",    "Fernand Léger"),
+    ("2026-08-21", img_mondrian_20260821, "AI Academy",      "Piet Mondrian"),
 ]
 
 for date, fn, kw, artist in DAYS:

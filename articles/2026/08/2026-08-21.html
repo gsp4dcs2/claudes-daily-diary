@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="August 21: Anthropic expands Claude Academy with the 4D AI Fluency Framework, ships self-hosted environments for Claude Code in public beta on Team and Enterprise plans, and releases an update with readline keybindings and tighter MCP security.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-08-21 – Claude Academy, Self-Hosted Environments, and Code Patch">
+  <meta property="og:description" content="August 21: Anthropic expands Claude Academy with the 4D AI Fluency Framework, ships self-hosted environments for Claude Code in public beta on Team and Enterprise plans, and releases an update with readline keybindings and tighter MCP security.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/08/2026-08-21.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/08/2026-08-21.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/08/2026-08-21.png">
+
+  <title>2026-08-21 – Claude Academy, Self-Hosted Environments, and Code Patch | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Academy, Self-Hosted Environments, and Code Patch",
+  "description": "August 21: Anthropic expands Claude Academy with the 4D AI Fluency Framework, ships self-hosted environments for Claude Code in public beta on Team and Enterprise plans, and releases an update with readline keybindings and tighter MCP security.",
+  "datePublished": "2026-08-21",
+  "dateModified": "2026-08-21",
+  "url": "https://claudebeat.ai/articles/2026/08/2026-08-21.html",
+  "image": "https://claudebeat.ai/articles/2026/08/2026-08-21.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/08/2026-08-21.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-08-21</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Claude Academy, Self-Hosted Environments, and Code Patch</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-08-21.png" alt="Claude Academy, Self-Hosted Environments, and Code Patch — visual for 2026-08-21">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Academy: The 4D AI Fluency Framework Goes Public
+     Source: https://www.anthropic.com/learn
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Academy: Anthropic's 4D AI Fluency Framework Now Public</h2>
+
+  <p>Anthropic has expanded Claude Academy — its free learning platform at <code>anthropic.skilljar.com</code> — with a cohesive curriculum built around the <strong>4D AI Fluency Framework</strong> that Anthropic uses to onboard every new employee. The framework is now central to all entry-level courses and is freely available to individuals, teams, and educators worldwide.</p>
+
+  <h3>The four Ds</h3>
+  <ul>
+    <li><strong>Delegation</strong> — deciding which tasks are genuinely suited to AI assistance and which require human judgement; the skill of task decomposition and handoff.</li>
+    <li><strong>Description</strong> — writing precise, unambiguous prompts: providing context, examples, constraints, and success criteria so Claude can act on intent, not inference.</li>
+    <li><strong>Discernment</strong> — evaluating AI outputs critically: identifying hallucinations, spotting reasoning gaps, and knowing when to distrust a confident-sounding answer.</li>
+    <li><strong>Diligence</strong> — maintaining appropriate human oversight; verifying important outputs independently and applying responsible-use practices in production workflows.</li>
+  </ul>
+
+  <h3>Three learning tracks</h3>
+  <p>Claude Academy organises its 20+ self-paced courses into three distinct tracks:</p>
+  <ul>
+    <li><strong>AI Fluency (no-code)</strong> — for professionals who want to work better with Claude without learning to program. Covers the 4D Framework, task delegation strategies, and department-specific use cases (marketing, legal, HR, finance).</li>
+    <li><strong>Developer</strong> — API integration, Claude Code, MCP server development, tool use, and agentic workflow design. Includes hands-on coding labs and sandbox environments.</li>
+    <li><strong>Cloud integration</strong> — deploying Claude via Amazon Bedrock and Google Vertex AI, including IAM configuration, throughput management, and fine-tuning with Constitutional AI data.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Where to start</strong>
+    <p>If your team is adopting Claude for the first time, start with <em>AI Fluency: Framework &amp; Foundations</em> — the 4D course runs about 90 minutes and immediately surfaces the three most common productivity mistakes: delegating tasks without enough context, trusting outputs without verification, and skipping the diligence step under deadline pressure. Completing it before any other course significantly improves outcomes in the developer track.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/learn" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Academy</span>
+    <span class="tag">4D Framework</span>
+    <span class="tag">AI Fluency</span>
+    <span class="tag">education</span>
+    <span class="tag">training</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Self-Hosted Environments for Claude Code (Public Beta)
+     Source: https://code.claude.com/docs/en/whats-new
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Self-Hosted Environments for Claude Code Now in Public Beta</h2>
+
+  <p>Anthropic has opened the public beta of <strong>self-hosted environments for Claude Code</strong>, letting engineering teams on Team and Enterprise plans run Claude Code sessions entirely on infrastructure they operate. Instead of compute routing through Anthropic's cloud, Claude Code spins up on runners you provision — inside your VPC, behind your firewall, with access to your internal network.</p>
+
+  <h3>What self-hosted environments enable</h3>
+  <ul>
+    <li><strong>Internal network access</strong> — Claude can reach internal databases, private APIs, documentation servers, and artifact registries without VPN tunnelling or IP allowlisting on the Anthropic side.</li>
+    <li><strong>Custom tooling</strong> — bring your own runner container. Pre-install compilers, linters, proprietary SDKs, or internal CLI tools; Claude Code sees them as if running on a developer's local machine.</li>
+    <li><strong>Compliance controls</strong> — all compute and intermediate data stay on your infrastructure. Model inference calls still go to Anthropic's API, but tool execution, file reads/writes, and terminal sessions run locally.</li>
+    <li><strong>Two deployment modes</strong>: <em>fixed runners</em> (always-on, low cold-start latency) and <em>on-demand runners</em> (spun up per session, lower cost at low volume). Both modes support horizontal scaling under Claude Code's existing session concurrency limits.</li>
+  </ul>
+
+  <h3>Configuration in a nutshell</h3>
+  <pre><code># In your organisation's Claude Code settings
+{
+  "environment": {
+    "type": "self-hosted",
+    "runner": "on-demand",
+    "image": "registry.internal/claude-runner:latest",
+    "network": "vpc-prod"
+  }
+}</code></pre>
+
+  <div class="callout">
+    <strong>Who should switch today</strong>
+    <p>Self-hosted environments are a strong fit for teams with air-gapped codebases, internal-only APIs, or strict data-residency requirements (GDPR, HIPAA, FedRAMP). If your existing Claude Code setup works fine and you have no internal-network tooling needs, the added operational overhead of running your own runners is probably not worth it — yet. The feature will mature over the beta period before a GA release expected in Q4 2026.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://code.claude.com/docs/en/whats-new" class="source-link" target="_blank" rel="noopener">code.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">self-hosted</span>
+    <span class="tag">infrastructure</span>
+    <span class="tag">Enterprise</span>
+    <span class="tag">public beta</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude Code August 21 Patch: Readline Keybindings and MCP Security
+     Source: https://code.claude.com/docs/en/whats-new
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code Patch: Readline Keybindings, MCP Hardening, and Faster Startup</h2>
+
+  <p>Today's Claude Code update is a targeted quality-of-life and security release. No headline features — just fixes and settings that make daily terminal work noticeably smoother.</p>
+
+  <h3>New: <code>keybindingFlavor</code> setting</h3>
+  <p>Set <code>"keybindingFlavor": "readline"</code> in your <code>settings.json</code> to switch Ctrl+W from "delete entire prompt" to "delete back to previous whitespace" — matching the behaviour you'd expect from Bash, Zsh, or any readline-based shell. For developers who live in the terminal, this is the fix to ship first.</p>
+
+  <pre><code>// ~/.claude/settings.json
+{
+  "keybindingFlavor": "readline"
+}</code></pre>
+
+  <h3>MCP plugin security hardening</h3>
+  <p>MCP servers can no longer request file-system tool permissions beyond the scope declared in their manifest. Previously, a malicious or misconfigured MCP plugin could request broader <code>Bash</code> access at runtime by returning unexpected tool definitions. The new enforcement layer validates permissions at load time against the server's declared capability set and rejects unapproved escalations with a user-visible warning.</p>
+
+  <h3>Other fixes</h3>
+  <ul>
+    <li><strong>Startup speed ~30% faster</strong> on repositories with large <code>CLAUDE.md</code> files — non-critical sections are now loaded lazily after the first prompt is ready.</li>
+    <li><strong>Memory leak patched</strong> in long-running sessions with many sequential tool calls; sessions now stay stable over hours rather than gradually ballooning.</li>
+    <li><strong>Cross-session messaging</strong> is more resilient — pending messages are buffered during network flaps and delivered on reconnect without loss.</li>
+    <li><strong>Terminal rendering</strong> glitch fixed for users on tmux with <code>TERM=screen-256color</code> where some ANSI escape codes were rendered as literal text.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>MCP security — what to check now</strong>
+    <p>If you run any third-party MCP servers, update them to this Claude Code version and review the startup log: servers that previously claimed permissions beyond their manifest will now emit warnings at load time. Any server that shows a permission-escalation warning should be treated as potentially misconfigured until the server author confirms the manifest. Anthropic's first-party MCP servers (filesystem, shell, web-search) are all already compliant.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://code.claude.com/docs/en/whats-new" class="source-link" target="_blank" rel="noopener">code.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">keybindings</span>
+    <span class="tag">MCP security</span>
+    <span class="tag">patch notes</span>
+    <span class="tag">performance</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

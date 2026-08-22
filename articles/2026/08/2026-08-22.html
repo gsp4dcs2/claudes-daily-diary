@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="August 22: Computer use, the Skills API, and the Files API reach general availability on the Claude Platform; Claude Code ships a security sprint patching a Windows NTLM credential-leak vector; and the +50% weekly usage limit boost is extended through August 31.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-08-22 – Agent Stack GA, NTLM Patch, and Usage Boost Extended">
+  <meta property="og:description" content="August 22: Computer use, the Skills API, and the Files API reach general availability on the Claude Platform; Claude Code ships a security sprint patching a Windows NTLM credential-leak vector; and the +50% weekly usage limit boost is extended through August 31.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/08/2026-08-22.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/08/2026-08-22.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/08/2026-08-22.png">
+
+  <title>2026-08-22 – Agent Stack GA, NTLM Patch, and Usage Boost Extended | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Agent Stack GA, NTLM Patch, and Usage Boost Extended",
+  "description": "August 22: Computer use, the Skills API, and the Files API reach general availability on the Claude Platform; Claude Code ships a security sprint patching a Windows NTLM credential-leak vector; and the +50% weekly usage limit boost is extended through August 31.",
+  "datePublished": "2026-08-22",
+  "dateModified": "2026-08-22",
+  "url": "https://claudebeat.ai/articles/2026/08/2026-08-22.html",
+  "image": "https://claudebeat.ai/articles/2026/08/2026-08-22.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/08/2026-08-22.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-08-22</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Agent Stack GA, NTLM Patch, and Usage Boost Extended</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-08-22.png" alt="Agent Stack GA, NTLM Patch, and Usage Boost Extended — visual for 2026-08-22">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Computer Use, Skills API, and Files API Reach General Availability
+     Source: https://claude.com/blog/computer-use-skills-api-files-api
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Computer Use, Skills API, and Files API All Reach General Availability</h2>
+
+  <p>Anthropic has graduated three of its most-used agentic APIs from beta to <strong>general availability</strong>, removing the beta headers that have been required since each feature launched. Computer use, the Skills API, and the Files API are now production-grade and available to all Claude Platform customers without gating.</p>
+
+  <h3>What changes with GA</h3>
+  <ul>
+    <li><strong>Computer use</strong> — no longer requires the <code>computer-use-2024-10-22</code> beta header. A new <strong>browser use tool</strong> joins the existing screenshot-and-click interface, giving agents a structured way to interact with web applications through DOM events rather than raw pixel coordinates. Precision on interactive elements improves significantly.</li>
+    <li><strong>Skills API</strong> — the <code>skills-2025-10-02</code> beta header is retired. Skills (reusable, versioned prompt+tool bundles) can now be registered, shared across workspaces, and called from any agent without additional opt-in.</li>
+    <li><strong>Files API</strong> — the <code>files-api-2025-04-14</code> beta header is retired. New in GA: an <code>expires_in_seconds</code> parameter for automatic file lifecycle management, a 5× rate-limit increase (from 100 to 500 RPM), and a 1 TB per-organisation storage ceiling. Files uploaded during the beta are carried forward with no action required.</li>
+  </ul>
+
+  <h3>The browser use tool in practice</h3>
+  <p>The new tool accepts a <code>selector</code> or <code>aria-label</code> alongside the action type, letting Claude target UI elements by identity rather than guessing pixel positions from a screenshot. This eliminates a common failure mode where button positions shift between page loads or viewport sizes. The original screenshot-based approach remains available for interfaces without accessible HTML structure.</p>
+
+  <pre><code># Example: click a submit button by aria-label
+{
+  "type": "browser_use",
+  "action": "click",
+  "selector": "[aria-label='Submit form']"
+}</code></pre>
+
+  <div class="callout tip">
+    <strong>Migration checklist</strong>
+    <p>If you are passing any of the three retired beta headers, remove them — they are now ignored. Update your SDK to the latest version to get the new browser use tool and Files API parameters. The GA releases are backward-compatible: existing code works without changes; the new capabilities are purely additive.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://claude.com/blog/computer-use-skills-api-files-api" class="source-link" target="_blank" rel="noopener">claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">computer use</span>
+    <span class="tag">Skills API</span>
+    <span class="tag">Files API</span>
+    <span class="tag">general availability</span>
+    <span class="tag">agentic</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Code v2.1.238–239: Windows NTLM Patch and Bug Sprint
+     Source: https://code.claude.com/docs/en/changelog
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.238–239: Windows NTLM Credential-Leak Patched in Security Sprint</h2>
+
+  <p>Anthropic shipped two rapid-succession Claude Code patch releases this week, closing a Windows-specific security vulnerability and fixing several stability issues that had surfaced in self-hosted and voice-mode deployments since last week's public beta launch.</p>
+
+  <h3>Security fix — Windows NTLM credential leak</h3>
+  <p>The most significant fix is a UNC path validation bypass on Windows. Paths prefixed with the <code>\\?\?\</code> device path syntax were not being caught by the existing UNC path filter, meaning a specially crafted tool call referencing an attacker-controlled SMB share could trigger an outbound NTLM authentication handshake — leaking the current user's hashed credentials to an external host. The vulnerability required a malicious MCP plugin or a crafted CLAUDE.md directive to trigger.</p>
+
+  <div class="callout warning">
+    <strong>Windows users: update now</strong>
+    <p>If you are running Claude Code on Windows with any third-party MCP plugins, treat this as a mandatory update. Run <code>npm install -g @anthropic-ai/claude-code@latest</code> or update via your IDE extension's update mechanism. The fix is present in v2.1.238 and later. Linux and macOS users are not affected by this specific vulnerability, but should still update for the stability fixes.</p>
+  </div>
+
+  <h3>Other fixes in v2.1.238–239</h3>
+  <ul>
+    <li><strong>MCP v2 serverless reconnect loop</strong> — connections were endlessly reopening the <code>subscriptions/listen</code> stream against serverless-hosted MCP servers; now capped with backoff and deduplication.</li>
+    <li><strong>Linux idle CPU spike</strong> — idle sessions with sandboxing enabled were pegging one CPU core at ~100%; the polling interval is now event-driven.</li>
+    <li><strong>Voice mode hang on connection rejection</strong> — native builds stuck on "listening…" when the voice service rejected a connection are now properly surfaced as an error with a retry prompt.</li>
+    <li><strong>Self-hosted runner session startup</strong> — branch creation no longer rewrites the working tree at session open, eliminating two unnecessary server round-trips and cutting agent launch latency by roughly 40%.</li>
+  </ul>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://code.claude.com/docs/en/changelog" class="source-link" target="_blank" rel="noopener">code.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">security</span>
+    <span class="tag">Windows</span>
+    <span class="tag">patch notes</span>
+    <span class="tag">NTLM</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude Code Weekly Usage Limit Boost Extended to August 31
+     Source: https://code.claude.com/docs/en/whats-new
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code's +50% Weekly Usage Boost Extended Through August 31 — With Hints at Permanence</h2>
+
+  <p>Anthropic has extended the <strong>+50% Claude Code weekly usage limit promotion</strong> to <strong>August 31, 2026</strong> — the third extension of what was originally framed as a limited-time offer in May. For the first time, Anthropic has stated it <em>hopes to make the increase permanent</em>, citing remaining capacity constraints as the only blocker to locking it in.</p>
+
+  <h3>What the boost covers</h3>
+  <ul>
+    <li>Applies to <strong>Pro, Max, Team, and Enterprise</strong> plans equally.</li>
+    <li>Covers usage across all Claude Code surfaces: CLI, VS Code extension, JetBrains extension, desktop app, and web.</li>
+    <li>The +50% multiplier applies to the per-plan weekly token budget, not to any daily limit or concurrent session cap.</li>
+  </ul>
+
+  <h3>Reading between the lines</h3>
+  <p>Three extensions of the same "limited-time" promotion, combined with the explicit aspiration toward permanence, is a strong signal that Anthropic has effectively committed to the higher limits. The phrasing is cautious because Anthropic cannot yet guarantee the compute headroom to fulfil the promise universally — particularly given the surge in Team and Enterprise usage since auto mode became the default on August 14. Expect a formal limit-increase announcement once the Volta-Norway compute capacity (signed in early August) comes online in Q4.</p>
+
+  <div class="callout">
+    <strong>Planning your month-end sprints</strong>
+    <p>The extension covers August 31, which means any end-of-month automated Claude Code runs or batch processing jobs are safe to schedule at the higher limit through the end of August. Reset your planning baseline to the boosted figures — reverting to the pre-May limits as a planning assumption is now overly conservative.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://code.claude.com/docs/en/whats-new" class="source-link" target="_blank" rel="noopener">code.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">usage limits</span>
+    <span class="tag">Pro</span>
+    <span class="tag">Enterprise</span>
+    <span class="tag">capacity</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

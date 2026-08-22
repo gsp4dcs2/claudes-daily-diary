@@ -12481,6 +12481,70 @@ def img_mondrian_20260821():
     return base
 
 
+def img_lissitzky_20260822():
+    """El Lissitzky Constructivism — agent stack GA, developer platform theme.
+    White/cream bg, bold red diagonal bar (lower-left to upper-right), heavy
+    black structural cross, large red circle upper-left, parallel hatching
+    lower-right, geometric punctuation squares.
+    """
+    base = Image.new("RGB", (W, H), (244, 241, 230))  # cream bg
+
+    # 1. Bold red diagonal bar — lower-left to upper-right (reversed wedge)
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.polygon([(0, H), (580, 0), (680, 0), (120, H)], fill=(208, 22, 22, 235))
+    base = comp(base, rl)
+
+    # 2. Heavy black horizontal bar — mid-height structural rule
+    hl = layer()
+    hd = ImageDraw.Draw(hl)
+    hd.rectangle([(0, 295), (W, 345)], fill=(15, 15, 15, 255))
+    base = comp(base, hl)
+
+    # 3. Heavy black vertical bar — right-side anchor
+    vl = layer()
+    vd = ImageDraw.Draw(vl)
+    vd.rectangle([(820, 0), (875, H)], fill=(15, 15, 15, 255))
+    base = comp(base, vl)
+
+    # 4. Large red circle — upper-left focal element (Lissitzky's Proun motif)
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    cd.ellipse([(40, 30), (260, 250)], fill=(208, 22, 22, 215))
+    base = comp(base, cl)
+
+    # 5. Black hollow square — geometric anchor lower-left (above horizontal bar)
+    sql = layer()
+    sqd = ImageDraw.Draw(sql)
+    sqd.rectangle([(60, 360), (220, 520)], fill=(15, 15, 15, 255))
+    sqd.rectangle([(90, 390), (190, 490)], fill=(244, 241, 230, 255))
+    base = comp(base, sql)
+
+    # 6. Parallel diagonal lines — upper-right hatching (constructivist tension)
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    for i in range(7):
+        x_off = i * 52
+        ld.line([(920 + x_off, 0), (700 + x_off, 293)], fill=(15, 15, 15, 185), width=4)
+    base = comp(base, ll)
+
+    # 7. Red thin accent lines — lower-right echo
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(5):
+        y_off = i * 32
+        ad.line([(880, 360 + y_off), (1180, 420 + y_off)], fill=(208, 22, 22, 160), width=3)
+    base = comp(base, al)
+
+    # 8. Small filled black rectangle — top-right structural tab
+    tr = layer()
+    trd = ImageDraw.Draw(tr)
+    trd.rectangle([(950, 30), (1180, 100)], fill=(15, 15, 15, 240))
+    base = comp(base, tr)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -12753,6 +12817,7 @@ DAYS = [
     ("2026-08-19", img_balla_20260819,   "Dev Velocity",     "Giacomo Balla"),
     ("2026-08-20", img_leger_20260820,   "Silicon & IPO",    "Fernand Léger"),
     ("2026-08-21", img_mondrian_20260821, "AI Academy",      "Piet Mondrian"),
+    ("2026-08-22", img_lissitzky_20260822, "Agent Stack GA",  "El Lissitzky"),
 ]
 
 for date, fn, kw, artist in DAYS:

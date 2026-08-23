@@ -61,6 +61,16 @@
       <!-- Newest entries at the top. Format: {yyyy-mm-dd} – {title} -->
 
       <li>
+        <a href="articles/2026/08/2026-08-23.html">
+          <img class="entry-thumb" src="articles/2026/08/2026-08-23-thumb.png" alt="2026-08-23 thumbnail">
+          <div class="entry-meta">
+            <span class="article-date">2026-08-23</span>
+            <div class="entry-bottom"><span class="cat-icon" title="Daily News">🧭</span> <span class="article-title">Mythos 5 Enters Claude Security, Admin API Goes GA, and Code Gets a Quality Sprint</span></div>
+          </div>
+        </a>
+      </li>
+
+      <li>
         <a href="articles/2026/08/2026-08-22.html">
           <img class="entry-thumb" src="articles/2026/08/2026-08-22-thumb.png" alt="2026-08-22 thumbnail">
           <div class="entry-meta">
@@ -2813,6 +2823,12 @@
      collapsed). Rebuild this array when new days are added.
      ──────────────────────────────────────────────────────── */
   const SEARCH_INDEX = [
+    {
+      date: "2026-08-23", cat: "news",
+      title: "Mythos 5 Enters Claude Security, Admin API Goes GA, and Code Gets a Quality Sprint",
+      url: "articles/2026/08/2026-08-23.html",
+      text: "Claude Mythos 5 Now Powers Claude Security's Vulnerability Scanner Backed by a $35M Open-Source Fund Anthropic has brought Claude Mythos 5 previously available only to vetted defenders through Project Glasswing into Claude Security the enterprise vulnerability-scanning product now in public beta for Claude Enterprise customers. The same announcement launches the Defender Advantage Fund 0xDAF a $35 million pool of Claude credits for organisations improving the security of widely used open-source software. Claude Security scans a selected repository with Mythos 5 returning findings classified by Common Weakness Enumeration CWE category severity level confidence rating and AI-generated suggested patches. Patch Track credits for closing live CVEs. Automation Track credits for building reusable scanning pipelines. Architecture Track credits for structural security work eliminating entire vulnerability classes. Enterprise Admin API User-Management Endpoints Reach General Availability Anthropic graduated the Admin API user-management endpoints for Claude Enterprise organisations from beta to general availability. The anthropic-beta ce-user-management-2026-07-13 header is no longer required. Members invites groups and custom roles are all production-grade. List members look up users by email change roles remove members manage groups and read custom role definitions. Claude Code v2.1.240-241 Bedrock Alpine musl Python Upgrade Helper and Skill-Alias Fix Two successive Claude Code releases ship native AWS Bedrock session support Alpine musl build for minimal Linux containers a Python 1.x to 2.x upgrade helper and a fix for bundled skill aliases failing in non-interactive mode. Fixed skill alias shadowing in -p mode Fixed Remote Control deleted-session recovery Fixed cost estimate 1.1x premium for data-residency workspaces."
+    },
     {
       date: "2026-08-22", cat: "news",
       title: "Agent Stack GA, NTLM Patch, and Usage Boost Extended",

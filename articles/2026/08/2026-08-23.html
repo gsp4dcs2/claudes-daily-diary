@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="August 23: Claude Mythos 5 powers the Claude Security vulnerability scanner for Enterprise customers, backed by a new $35M Defender Advantage Fund; the Admin API user-management endpoints reach general availability; and Claude Code v2.1.240–241 ships Bedrock support, an Alpine build, a Python upgrade helper, and a skill-alias fix.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-08-23 – Mythos 5 Enters Claude Security, Admin API Goes GA, and Code Gets a Quality Sprint">
+  <meta property="og:description" content="August 23: Claude Mythos 5 powers the Claude Security vulnerability scanner for Enterprise customers, backed by a new $35M Defender Advantage Fund; the Admin API user-management endpoints reach general availability; and Claude Code v2.1.240–241 ships Bedrock support, an Alpine build, a Python upgrade helper, and a skill-alias fix.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/08/2026-08-23.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/08/2026-08-23.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/08/2026-08-23.png">
+
+  <title>2026-08-23 – Mythos 5 Enters Claude Security, Admin API Goes GA, and Code Gets a Quality Sprint | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Mythos 5 Enters Claude Security, Admin API Goes GA, and Code Gets a Quality Sprint",
+  "description": "August 23: Claude Mythos 5 powers the Claude Security vulnerability scanner for Enterprise customers, backed by a new $35M Defender Advantage Fund; the Admin API user-management endpoints reach general availability; and Claude Code v2.1.240–241 ships Bedrock support, an Alpine build, a Python upgrade helper, and a skill-alias fix.",
+  "datePublished": "2026-08-23",
+  "dateModified": "2026-08-23",
+  "url": "https://claudebeat.ai/articles/2026/08/2026-08-23.html",
+  "image": "https://claudebeat.ai/articles/2026/08/2026-08-23.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/08/2026-08-23.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-08-23</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Mythos 5 Enters Claude Security, Admin API Goes GA, and Code Gets a Quality Sprint</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-08-23.png" alt="Mythos 5 Enters Claude Security, Admin API Goes GA, and Code Gets a Quality Sprint — visual for 2026-08-23">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Mythos 5 Enters Claude Security + $35M Defender Advantage Fund
+     Source: https://claude.com/blog/bringing-claude-mythos-5-to-more-defenders
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Mythos 5 Now Powers Claude Security's Vulnerability Scanner — Backed by a $35M Open-Source Fund</h2>
+
+  <p>Anthropic has brought <strong>Claude Mythos 5</strong> — previously available only to vetted defenders through Project Glasswing — into <strong>Claude Security</strong>, the company's enterprise vulnerability-scanning product now in public beta for Claude Enterprise customers. The same announcement launches the <strong>Defender Advantage Fund (0xDAF)</strong>, a $35 million pool of Claude credits for organisations improving the security of widely used open-source software.</p>
+
+  <h3>What Claude Security does with Mythos 5</h3>
+  <p>Claude Security scans a selected repository with Mythos 5 and returns findings classified by <strong>Common Weakness Enumeration (CWE)</strong> category, severity level, confidence rating, and AI-generated suggested patches. The upgrade from the prior model to Mythos 5 meaningfully increases recall on complex, multi-file vulnerability patterns — the kind that require understanding inter-module data flow rather than matching individual function signatures.</p>
+
+  <pre><code># Triggering a Claude Security scan via Admin API
+curl -X POST https://api.anthropic.com/v1/security/scans \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "repo_url": "https://github.com/your-org/your-repo",
+    "branch": "main",
+    "severity_threshold": "medium"
+  }'</code></pre>
+
+  <h3>Defender Advantage Fund (0xDAF) — three grant tracks</h3>
+  <ul>
+    <li><strong>Patch Track</strong> — credits for directly closing live CVEs and CWEs in widely used open-source projects.</li>
+    <li><strong>Automation Track</strong> — credits for building reusable scanning and patching pipelines that other projects can adopt.</li>
+    <li><strong>Architecture Track</strong> — credits for structural security work that eliminates entire vulnerability classes (e.g. migrating a C project to memory-safe alternatives).</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Who should apply for 0xDAF</strong>
+    <p>Maintainers of open-source projects with high downstream dependents (npm, PyPI, Debian, Maven) are the primary target. Security research teams doing systematic remediation — not one-off bounty hunting — are also eligible. The grant is in Claude credits, not cash, so recipients use Claude Security and the API directly to do the patching work. Applications open at the link below.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://claude.com/blog/bringing-claude-mythos-5-to-more-defenders" class="source-link" target="_blank" rel="noopener">claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Security</span>
+    <span class="tag">Mythos 5</span>
+    <span class="tag">vulnerability scanning</span>
+    <span class="tag">open source</span>
+    <span class="tag">cybersecurity</span>
+    <span class="tag">0xDAF</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Enterprise Admin API User-Management Reaches General Availability
+     Source: https://platform.claude.com/docs/en/release-notes/overview
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Enterprise Admin API User-Management Endpoints Reach General Availability</h2>
+
+  <p>Anthropic has graduated the Admin API's user-management endpoints for <strong>Claude Enterprise (claude.ai) organisations</strong> from beta to <strong>general availability</strong>. The <code>anthropic-beta: ce-user-management-2026-07-13</code> header is no longer required; requests that still include it are accepted without error, but new integrations should omit it. All four resource types — <strong>members, invites, groups, and custom roles</strong> — are now production-grade.</p>
+
+  <h3>What you can do programmatically</h3>
+  <ul>
+    <li>List all organisation members or look up a specific user by email address.</li>
+    <li>Change member roles (e.g. promote to admin or demote to standard user).</li>
+    <li>Remove members and withdraw pending invites without touching the claude.ai console.</li>
+    <li>Create, update, and query groups, and manage group membership in bulk.</li>
+    <li>Read custom role definitions to verify permission sets before assigning them via script.</li>
+  </ul>
+
+  <h3>Practical integration pattern</h3>
+  <pre><code># List all members (GA — no beta header needed)
+curl https://api.anthropic.com/v1/organizations/members \
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
+  -H "anthropic-version: 2023-06-01"
+
+# Invite a new user
+curl -X POST https://api.anthropic.com/v1/organizations/invites \
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{"email": "newuser@example.com", "role": "user"}'</code></pre>
+
+  <div class="callout">
+    <strong>SCIM vs Admin API — which to use</strong>
+    <p>The Admin API is a direct REST interface best suited for custom scripts, audit tooling, and platforms that already call the Anthropic API. If your identity provider (Okta, Azure AD, OneLogin) supports SCIM and you want automated provisioning tied to your IdP lifecycle events, the Claude Enterprise SCIM connector is the better fit. The two systems are compatible: SCIM handles provisioning; the Admin API handles bulk operations and custom automation that falls outside standard provisioning flows.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/release-notes/overview" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Admin API</span>
+    <span class="tag">Enterprise</span>
+    <span class="tag">user management</span>
+    <span class="tag">general availability</span>
+    <span class="tag">groups</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude Code v2.1.240–241: Bedrock Support, Alpine Build, Python Upgrade Helper
+     Source: https://code.claude.com/docs/en/changelog
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.240–241: Bedrock, Alpine/musl, Python Upgrade Helper, and Skill-Alias Fix</h2>
+
+  <p>Two successive Claude Code releases this weekend pack a range of new capabilities alongside targeted bug fixes. The headline additions are <strong>native AWS Bedrock session support</strong>, an <strong>Alpine/musl build</strong> for minimal Linux containers, a <strong>Python 1.x → 2.x upgrade helper</strong>, and a fix for bundled skill aliases silently failing in non-interactive mode.</p>
+
+  <h3>New capabilities in v2.1.240–241</h3>
+  <ul>
+    <li><strong>Bedrock session support</strong> — Claude Code agents running via AWS Bedrock can now create, resume, and list sessions, matching parity with the direct Anthropic API. Bedrock customers no longer need to maintain a separate session registry outside Claude Code.</li>
+    <li><strong>Alpine/musl build</strong> — a statically linked <code>claude-code-musl</code> binary is now published alongside the standard glibc build, enabling use in Alpine-based Docker images without compatibility shims. Size is approximately 30% smaller than the glibc binary.</li>
+    <li><strong>Python upgrade helper</strong> — running <code>/upgrade python</code> in a repo detects Python 1.x syntax patterns and proposes an incremental migration plan. The helper is aware of common breaking changes (print statements, integer division, unicode handling) and generates a per-file migration diff for review.</li>
+    <li><strong>Improved <code>/resume</code> and <code>/goal</code> behaviour</strong> — <code>/resume</code> now surfaces a disambiguation menu when multiple sessions match the active branch; <code>/goal</code> persists across session restarts and is included in the session summary shown at startup.</li>
+  </ul>
+
+  <h3>Bug fixes</h3>
+  <ul>
+    <li><strong>Skill alias shadowing in <code>-p</code> mode</strong> — bundled aliases like <code>/checkup</code> and <code>/review</code> were reporting "Unknown command" when a user-level or project-level skill with the same name was loaded via plugins or MCP. The alias resolution order is now: user skill → project skill → bundled alias, so bundled fallbacks survive the shadow correctly.</li>
+    <li><strong>Remote Control: deleted-session recovery</strong> — resuming a conversation whose backing session had been deleted from claude.ai or the desktop app now starts a fresh replacement session instead of returning an opaque failure message.</li>
+    <li><strong>Cost estimate 1.1× premium for data-residency workspaces</strong> — the <code>/cost</code> command, status line, and <code>--max-budget-usd</code> now include the US-only inference surcharge for data-residency workspaces, preventing budget overruns when routing to data-residency endpoints.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Updating to the Alpine/musl build</strong>
+    <p>If your CI or production containers are Alpine-based, swap <code>@anthropic-ai/claude-code</code> for <code>@anthropic-ai/claude-code-musl</code> in your Dockerfile. The API, session behaviour, and all skill files are identical; only the underlying C runtime differs. The musl build is published to npm alongside the standard package from v2.1.240 onward.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://code.claude.com/docs/en/changelog" class="source-link" target="_blank" rel="noopener">code.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">patch notes</span>
+    <span class="tag">Bedrock</span>
+    <span class="tag">Alpine</span>
+    <span class="tag">Python</span>
+    <span class="tag">bug fix</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

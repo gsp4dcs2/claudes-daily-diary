@@ -12545,6 +12545,80 @@ def img_lissitzky_20260822():
     return base
 
 
+def img_malevich_20260823():
+    """Kazimir Malevich Suprematism — cybersecurity / Claude Security scanner theme.
+    Cream bg, large tilted black shield-like square as anchor, bold red diagonal
+    slash (scan beam), navy elongated rectangle (code block), yellow accent bar,
+    small scattered geometric fragments suggesting vulnerability findings.
+    """
+    base = Image.new("RGB", (W, H), (236, 232, 216))  # warm cream
+
+    def rotated_rect(cx, cy, hw, hh, angle_deg):
+        rad = math.radians(angle_deg)
+        corners = [(-hw, -hh), (hw, -hh), (hw, hh), (-hw, hh)]
+        return [(cx + p[0]*math.cos(rad) - p[1]*math.sin(rad),
+                 cy + p[0]*math.sin(rad) + p[1]*math.cos(rad)) for p in corners]
+
+    # 1. Large tilted black square — Suprematist anchor / shield metaphor
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bd.polygon(rotated_rect(480, 290, 195, 195, -14), fill=(16, 16, 16, 255))
+    base = comp(base, bl)
+
+    # 2. Bold red diagonal slash — scan beam crossing the composition
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.polygon([(0, 160), (W, 390), (W, 430), (0, 200)], fill=(208, 28, 28, 230))
+    base = comp(base, rl)
+
+    # 3. Navy elongated tilted rectangle — code / codebase block
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    nd.polygon(rotated_rect(880, 180, 200, 38, 6), fill=(22, 38, 130, 235))
+    base = comp(base, nl)
+
+    # 4. Yellow thin diagonal accent bar — Suprematist energy line
+    yl = layer()
+    yd = ImageDraw.Draw(yl)
+    yd.polygon([(60, 490), (600, 415), (606, 455), (66, 530)], fill=(230, 190, 0, 220))
+    base = comp(base, yl)
+
+    # 5. Small black rectangle — upper-right structural tab
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    td.rectangle([(920, 40), (1140, 110)], fill=(16, 16, 16, 245))
+    base = comp(base, tl)
+
+    # 6. Red small square — lower-right punctuation (vulnerability marker)
+    vl = layer()
+    vd = ImageDraw.Draw(vl)
+    vd.polygon(rotated_rect(1060, 470, 55, 55, 18), fill=(208, 28, 28, 220))
+    base = comp(base, vl)
+
+    # 7. Cream circle cutout — Suprematist void / negative space
+    wl = layer()
+    wd = ImageDraw.Draw(wl)
+    wd.ellipse([(170, 60), (350, 240)], fill=(236, 232, 216, 245), outline=(16, 16, 16, 200), width=4)
+    base = comp(base, wl)
+
+    # 8. Scatter of small geometric fragments — CWE finding dots
+    fl = layer()
+    fd = ImageDraw.Draw(fl)
+    fragments = [
+        (740, 80, 18, (16, 16, 16)),
+        (800, 500, 14, (208, 28, 28)),
+        (160, 390, 12, (22, 38, 130)),
+        (1100, 300, 16, (230, 190, 0)),
+        (380, 570, 10, (16, 16, 16)),
+        (960, 560, 13, (208, 28, 28)),
+    ]
+    for fx, fy, fr, col in fragments:
+        fd.polygon(rotated_rect(fx, fy, fr, fr, 30), fill=(*col, 210))
+    base = comp(base, fl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -12818,6 +12892,7 @@ DAYS = [
     ("2026-08-20", img_leger_20260820,   "Silicon & IPO",    "Fernand Léger"),
     ("2026-08-21", img_mondrian_20260821, "AI Academy",      "Piet Mondrian"),
     ("2026-08-22", img_lissitzky_20260822, "Agent Stack GA",  "El Lissitzky"),
+    ("2026-08-23", img_malevich_20260823, "Cyber Defense",   "Kazimir Malevich"),
 ]
 
 for date, fn, kw, artist in DAYS:

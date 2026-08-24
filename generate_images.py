@@ -12619,6 +12619,86 @@ def img_malevich_20260823():
     return base
 
 
+def img_klimt_20260824():
+    """Gustav Klimt — dark bg, gold mosaics, teal/rust accents — platform outage + protein design + constitutional AI theme."""
+    base = Image.new("RGB", (W, H), (12, 8, 4))  # near-black bg
+
+    # 1. Deep golden central glow — the 'nucleus' (protein binding site / constitutional centre)
+    glow_l = layer()
+    gd = ImageDraw.Draw(glow_l)
+    gd.ellipse([(300, 60), (920, 570)], fill=(130, 90, 14, 45))
+    gd.ellipse([(380, 120), (840, 510)], fill=(155, 112, 22, 50))
+    gd.ellipse([(460, 180), (760, 440)], fill=(180, 135, 35, 40))
+    base = comp(base, glow_l)
+
+    # 2. Dense gold mosaic fragments — Klimt's signature decorative field
+    mosaic_l = layer()
+    md = ImageDraw.Draw(mosaic_l)
+    gold_shades = [
+        (212, 175, 55), (200, 160, 44), (228, 196, 80),
+        (180, 140, 38), (240, 210, 100), (255, 220, 60),
+        (190, 152, 50), (170, 130, 32),
+    ]
+    for _ in range(420):
+        x = rng.randint(50, W - 50)
+        y = rng.randint(30, H - 30)
+        s = rng.randint(4, 20)
+        shade = rng.choice(gold_shades)
+        alpha = rng.randint(80, 210)
+        shape = rng.randint(0, 3)
+        if shape == 0:
+            md.rectangle([(x, y), (x + s, y + s)], fill=(shade[0], shade[1], shade[2], alpha))
+        elif shape == 1:
+            md.ellipse([(x, y), (x + s, y + s)], fill=(shade[0], shade[1], shade[2], alpha))
+        elif shape == 2:
+            md.polygon([(x, y + s), (x + s // 2, y), (x + s, y + s)],
+                       fill=(shade[0], shade[1], shade[2], alpha))
+        else:
+            md.rectangle([(x, y), (x + s * 2, y + s // 3)],
+                         fill=(shade[0], shade[1], shade[2], alpha))
+    base = comp(base, mosaic_l)
+
+    # 3. Gold spiral curves — constitutional AI complexity / protein helix motif
+    spiral_l = layer()
+    sd = ImageDraw.Draw(spiral_l)
+    for cx, cy, maxr in [(220, 310, 190), (610, 130, 140), (1000, 390, 160), (780, 510, 110)]:
+        for r in range(18, maxr, 20):
+            sd.arc([(cx - r, cy - r), (cx + r, cy + r)],
+                   start=rng.randint(0, 80), end=rng.randint(170, 330),
+                   fill=(212, 175, 55, rng.randint(55, 140)), width=rng.randint(2, 5))
+    base = comp(base, spiral_l)
+
+    # 4. Teal accent elements — technology / science / reliability counterpoint
+    teal_l = layer()
+    td = ImageDraw.Draw(teal_l)
+    teal_shades = [(38, 158, 138), (28, 124, 116), (58, 176, 158), (20, 100, 100)]
+    for _ in range(55):
+        x = rng.randint(30, W - 30)
+        y = rng.randint(30, H - 30)
+        s = rng.randint(5, 16)
+        shade = rng.choice(teal_shades)
+        shape = rng.randint(0, 1)
+        if shape == 0:
+            td.rectangle([(x, y), (x + s, y + s // 2)],
+                         fill=(shade[0], shade[1], shade[2], rng.randint(100, 190)))
+        else:
+            td.ellipse([(x, y), (x + s, y + s)],
+                       fill=(shade[0], shade[1], shade[2], rng.randint(80, 160)))
+    base = comp(base, teal_l)
+
+    # 5. Rust-red accent dots — outage / alert signals
+    rust_l = layer()
+    rd = ImageDraw.Draw(rust_l)
+    rust_positions = [(120, 80), (1050, 150), (940, 560), (200, 540), (660, 80), (1080, 430)]
+    for rx, ry in rust_positions:
+        r = rng.randint(8, 18)
+        rd.ellipse([(rx - r, ry - r), (rx + r, ry + r)],
+                   fill=(180, 62, 30, rng.randint(160, 240)))
+    base = comp(base, rust_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -12893,6 +12973,7 @@ DAYS = [
     ("2026-08-21", img_mondrian_20260821, "AI Academy",      "Piet Mondrian"),
     ("2026-08-22", img_lissitzky_20260822, "Agent Stack GA",  "El Lissitzky"),
     ("2026-08-23", img_malevich_20260823, "Cyber Defense",   "Kazimir Malevich"),
+    ("2026-08-24", img_klimt_20260824,   "Ethics & Science", "Gustav Klimt"),
 ]
 
 for date, fn, kw, artist in DAYS:

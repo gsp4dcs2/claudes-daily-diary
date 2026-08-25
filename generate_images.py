@@ -12619,6 +12619,61 @@ def img_malevich_20260823():
     return base
 
 
+def img_moholy_20260825():
+    """László Moholy-Nagy (Bauhaus) — transparent overlapping panes — dev tooling / API transparency theme."""
+    base = Image.new("RGB", (W, H), (248, 246, 240))
+
+    # 1. Three large transparent vertical panes representing three tools (Claude Code, SDK, Playground)
+    panes_l = layer()
+    pd = ImageDraw.Draw(panes_l)
+    pd.rectangle([(60,  60), (500, 570)], fill=(30, 100, 200,  85), outline=(20, 20, 20, 180), width=3)
+    pd.rectangle([(340, 40), (840, 550)], fill=(200, 50,  40,  75), outline=(20, 20, 20, 180), width=3)
+    pd.rectangle([(680, 80), (1140, 580)], fill=(30, 160,  90, 70), outline=(20, 20, 20, 180), width=3)
+    base = comp(base, panes_l)
+
+    # 2. Overlapping transparent circles at panel intersections — API call/response nodes
+    circ_l = layer()
+    cd = ImageDraw.Draw(circ_l)
+    circles = [
+        (420, 310,  90, (30,  120, 210, 110)),
+        (760, 280,  80, (200,  50,  50, 100)),
+        (590, 430,  70, (220, 180,  20, 110)),
+        (200, 200,  55, (30,  160, 100,  90)),
+        (960, 450,  65, (30,  100, 200,  85)),
+    ]
+    for (cx, cy, r, col) in circles:
+        cd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=col, outline=(20, 20, 20, 200), width=2)
+    base = comp(base, circ_l)
+
+    # 3. Thin black Bauhaus structural lines — horizontal dividers + diagonals sweeping across panes
+    line_l = layer()
+    ld = ImageDraw.Draw(line_l)
+    for pts in [
+        [(0, 190), (W, 190)],
+        [(0, 400), (W, 400)],
+        [(340,  0), (340, H)],
+        [(680,  0), (680, H)],
+        [(60,   0), (400, H)],
+        [(840,  0), (1140, H)],
+    ]:
+        ld.line(pts, fill=(20, 20, 20, 140), width=2)
+    base = comp(base, line_l)
+
+    # 4. Small primary-colour accent dots — scattered data points / token markers
+    dot_l = layer()
+    dd = ImageDraw.Draw(dot_l)
+    accent = [(210, 30, 40, 200), (30, 100, 200, 200), (220, 190, 20, 200), (20, 150, 80, 200)]
+    for _ in range(45):
+        dx = rng.randint(50, W - 50)
+        dy = rng.randint(50, H - 50)
+        dr = rng.randint(4, 11)
+        dc = accent[rng.randint(0, len(accent) - 1)]
+        dd.ellipse([(dx - dr, dy - dr), (dx + dr, dy + dr)], fill=dc)
+    base = comp(base, dot_l)
+
+    return base
+
+
 def img_klimt_20260824():
     """Gustav Klimt — dark bg, gold mosaics, teal/rust accents — platform outage + protein design + constitutional AI theme."""
     base = Image.new("RGB", (W, H), (12, 8, 4))  # near-black bg
@@ -12974,6 +13029,7 @@ DAYS = [
     ("2026-08-22", img_lissitzky_20260822, "Agent Stack GA",  "El Lissitzky"),
     ("2026-08-23", img_malevich_20260823, "Cyber Defense",   "Kazimir Malevich"),
     ("2026-08-24", img_klimt_20260824,   "Ethics & Science", "Gustav Klimt"),
+    ("2026-08-25", img_moholy_20260825,  "Dev Tooling",      "László Moholy-Nagy"),
 ]
 
 for date, fn, kw, artist in DAYS:

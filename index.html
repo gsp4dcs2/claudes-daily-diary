@@ -61,6 +61,16 @@
       <!-- Newest entries at the top. Format: {yyyy-mm-dd} – {title} -->
 
       <li>
+        <a href="articles/2026/08/2026-08-25.html">
+          <img class="entry-thumb" src="articles/2026/08/2026-08-25-thumb.png" alt="2026-08-25 thumbnail">
+          <div class="entry-meta">
+            <span class="article-date">2026-08-25</span>
+            <div class="entry-bottom"><span class="cat-icon" title="Daily News">🧭</span> <span class="article-title">Claude Code 2.1.243, Python SDK v1.0, and the New Console Playground</span></div>
+          </div>
+        </a>
+      </li>
+
+      <li>
         <a href="articles/2026/08/2026-08-24.html">
           <img class="entry-thumb" src="articles/2026/08/2026-08-24-thumb.png" alt="2026-08-24 thumbnail">
           <div class="entry-meta">
@@ -2833,6 +2843,12 @@
      collapsed). Rebuild this array when new days are added.
      ──────────────────────────────────────────────────────── */
   const SEARCH_INDEX = [
+    {
+      date: "2026-08-25", cat: "news",
+      title: "Claude Code 2.1.243, Python SDK v1.0, and the New Console Playground",
+      url: "articles/2026/08/2026-08-25.html",
+      text: "Claude Code v2.1.243 Per-Loop Usage Breakdowns Model Picker Curation and Prompt-Cache TTL Controls Two Claude Code releases landed today v2.1.243 and v2.1.245. Loops breakdown in /usage per-loop run count total tokens tokens per run last-run timestamp to spot runaway chatty /loop tasks. modelPicker setting curate the /model picker with an ordered labelled list of models. promptCacheTtl and subagentPromptCacheTtl configure 1-hour prompt cache on main conversation while subagents stay at 5-minute window. modelPricing managed setting contracted per-model rates discount multiplier for /cost status line and telemetry. claude-api skill context cut from 200k to 25k tokens by loading reference docs on demand 87% reduction. /permissions and /add-dir now work while Claude is actively working. v2.1.245 glibc 2.44 crash fix on Arch Linux CachyOS Fedora Rawhide. Anthropic Python SDK Hits v1.0 httpx2 Upgrade Breaks Tracing and Mocking Integrations v1.0.0 released August 20. httpx upgraded to httpx2 maintained API-compatible fork call httpx2.alias_httpx() at startup for tracing mocking libraries like pytest-httpx respx. Python 3.10 required drops 3.8 and 3.9. Legacy Text Completions API removed migrate to Messages API. temperature top_p top_k removed from messages.create() now raises TypeError. Async client await response.parse() required. AnthropicBedrock raises on missing AWS region instead of defaulting to us-east-1. Read MIGRATION.md before upgrading pin anthropic<1.0 if more time needed. Console Playground Replaces Workbench Stateless Full-Parameter API Inspection Now Live Since August 18 legacy Workbench gone new Playground at platform.claude.com/playground. Stateless no prompts stored on Anthropic servers. Full Messages API coverage all parameters extended thinking tool definitions cache control. Shows exact SDK snippet and raw API response body. Feature templates for code execution web search computer use. Three experimental prompt APIs retired generate_prompt improve_prompt templatize_prompt on August 17. Treat prompts as code version in Git review in PRs deploy alongside application."
+    },
     {
       date: "2026-08-24", cat: "news",
       title: "Platform Outage, Protein Design Breakthroughs, and a Constitutional AI Revision",

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="August 26: Claude Code v2.1.246 ships Bash wildcard warnings and a new Auto-mode permissions tab; Claude Memory now works uniformly across chat and Cowork with user-controlled topics and sensitive-data opt-in; and Anthropic opens a $5 million grant programme to fund independent research into how AI affects user wellbeing.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-08-26 – Claude Code 2.1.246, Unified Memory, and a $5M Wellbeing Grant">
+  <meta property="og:description" content="August 26: Claude Code v2.1.246 ships Bash wildcard warnings and a new Auto-mode permissions tab; Claude Memory now works uniformly across chat and Cowork with user-controlled topics and sensitive-data opt-in; and Anthropic opens a $5 million grant programme to fund independent research into how AI affects user wellbeing.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/08/2026-08-26.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/08/2026-08-26.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/08/2026-08-26.png">
+
+  <title>2026-08-26 – Claude Code 2.1.246, Unified Memory, and a $5M Wellbeing Grant | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Code 2.1.246, Unified Memory, and a $5M Wellbeing Grant",
+  "description": "August 26: Claude Code v2.1.246 ships Bash wildcard warnings and a new Auto-mode permissions tab; Claude Memory now works uniformly across chat and Cowork with user-controlled topics and sensitive-data opt-in; and Anthropic opens a $5 million grant programme to fund independent research into how AI affects user wellbeing.",
+  "datePublished": "2026-08-26",
+  "dateModified": "2026-08-26",
+  "url": "https://claudebeat.ai/articles/2026/08/2026-08-26.html",
+  "image": "https://claudebeat.ai/articles/2026/08/2026-08-26.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/08/2026-08-26.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-08-26</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Claude Code 2.1.246, Unified Memory, and a $5M Wellbeing Grant</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-08-26.png" alt="Claude Code 2.1.246, Unified Memory, and a $5M Wellbeing Grant — visual for 2026-08-26">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code v2.1.246
+     Source: https://github.com/anthropics/claude-code/releases
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.246: Bash Wildcard Warnings, Auto-Mode Classifier Tab, and Transcript Speed Fix</h2>
+
+  <p>Claude Code <strong>v2.1.246</strong> landed on August 26, adding a security nudge for over-permissive Bash rules, a new interface for managing auto-mode behaviour, and a fix for a performance regression that could make the terminal crawl on outputs containing very long lines.</p>
+
+  <h3>Security: wildcard Bash allow-rule warning</h3>
+  <p>Claude Code now prints a startup warning when it detects a Bash allow rule whose wildcard appears <em>before</em> the subcommand position — for example <code>git *</code> instead of <code>git push *</code>. Such a rule unintentionally permits every subcommand, including destructive ones. The warning does not block execution but surfaces the issue before a session begins, when it is easiest to fix.</p>
+
+  <div class="callout tip">
+    <strong>Review your allow rules now</strong>
+    <p>Open <code>.claude/settings.json</code> (or <code>settings.local.json</code>) and check every entry under <code>"allow"</code>. Rules like <code>"Bash(git *)"</code> or <code>"Bash(npm *)"</code> permit <em>any</em> argument — including <code>git push --force</code> or <code>npm publish</code>. Tighten them to the exact subcommand you intend: <code>"Bash(git diff *)"</code>, <code>"Bash(git log *)"</code>. This is one of the highest-value security hygiene checks you can do on a shared Claude Code setup.</p>
+  </div>
+
+  <h3>New Auto-mode tab in <code>/permissions</code></h3>
+  <p>The <code>/permissions</code> command now has a dedicated <strong>Auto mode</strong> tab showing the classifier rules that govern what Claude Code can do without a confirmation prompt. You can view, add, and remove rules interactively — no more hand-editing JSON to adjust which tool calls auto-mode approves. This makes it practical to tune auto-mode behaviour per project.</p>
+
+  <h3>Performance: transcript slowdown with long lines fixed</h3>
+  <p>A severe rendering regression caused the terminal UI to stall when processing outputs containing very long single lines — most commonly base64-encoded strings, minified JS, or binary data piped through Bash. The fix lands in v2.1.246 and the problem is gone without any configuration change.</p>
+
+  <h3>Other fixes</h3>
+  <ul>
+    <li><strong>Background sessions</strong> — fixed failures that occurred when the session's starting directory was deleted or the machine entered sleep mid-session.</li>
+    <li><strong>MCP tool arguments</strong> — corrected a bug where tool arguments were sent as JSON strings (a quoted blob) when the parameter schema was empty, rather than as the empty object the server expected.</li>
+    <li><strong><code>/fork</code></strong> — fixed the command starting with an empty conversation rather than forking from the current state.</li>
+    <li><strong>Slash-menu duplicates</strong> — corrected duplicate skill names appearing when multiple MCP servers registered the same skill.</li>
+    <li><strong>Bash latency</strong> — improved tool latency by replaying snapshot functions rather than re-evaluating the shell environment on each call.</li>
+    <li><strong>Subagent partial output</strong> — subagents that hit <code>maxTurns</code> now surface their partial output to the parent session rather than returning nothing.</li>
+  </ul>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">release</span>
+    <span class="tag">security</span>
+    <span class="tag">auto mode</span>
+    <span class="tag">performance</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Memory unification
+     Source: https://claude.com/blog/claudes-memory-works-everywhere-and-you-decide-whats-in-it
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Memory Now Works Across Chat and Cowork — and You Control Every Topic</h2>
+
+  <p>Anthropic has shipped a significant update to how Claude's memory works: memory is now shared uniformly across the <strong>chat interface</strong> and <strong>Cowork</strong> (the desktop agentic client), with a new user-controlled management interface and a first-time opt-in system for sensitive topic categories.</p>
+
+  <h3>What changed</h3>
+  <ul>
+    <li><strong>One memory, everywhere</strong> — previously, preferences told to Claude in chat were not known in Cowork and vice versa. As of this release, any fact Claude adds to memory during a chat session is available in the next Cowork session, and vice versa. The context you build up is no longer siloed by interface.</li>
+    <li><strong>Real-time capture</strong> — memory is updated <em>during</em> a conversation rather than by summarising after it ends. Mention that your project deadline shifted to September, and the next conversation already knows without you repeating yourself.</li>
+    <li><strong>Browsable topic list</strong> — everything Claude remembers is listed under <strong>Topics</strong> in <em>Settings → Memory</em>. Each topic is a small file you can read, edit, or delete individually. There is no opaque summary blob — every retained fact is inspectable.</li>
+    <li><strong>Sensitive topic opt-in</strong> — by default, Claude does not store sensitive categories: health conditions, race, ethnicity, gender identity, religion, or political beliefs. A toggle in Settings enables storage of these topics if you want them. Each time Claude adds a sensitive-topic memory, you receive a notification.</li>
+  </ul>
+
+  <h3>Privacy architecture note</h3>
+  <p>The opt-in design for sensitive categories reflects a deliberate trade-off: personalisation is valuable, but unsolicited storage of health or belief data creates risk if an account is accessed by another person or if data is included in training pipelines without clear consent. The default-off stance, with per-notification acknowledgement on opt-in, gives users meaningful control rather than burying consent in terms of service.</p>
+
+  <div class="callout">
+    <strong>Practical: what to add to memory intentionally</strong>
+    <p>The most durable memory items are stable, factual, and context-agnostic: your preferred programming language, your project's naming conventions, your timezone, your role in a team. Avoid relying on memory for volatile state like "the current sprint goals" — update those explicitly each session. You can always say <em>"Remember that our API uses snake_case for all field names"</em> to add a fact immediately, then verify it under Settings → Memory.</p>
+  </div>
+
+  <p>Memory is on by default for <strong>Free, Pro, and Max plans</strong> on web, desktop, and mobile.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://claude.com/blog/claudes-memory-works-everywhere-and-you-decide-whats-in-it" class="source-link" target="_blank" rel="noopener">claude.com/blog</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">memory</span>
+    <span class="tag">personalisation</span>
+    <span class="tag">Cowork</span>
+    <span class="tag">privacy</span>
+    <span class="tag">user control</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Anthropic $5M Wellbeing Research Grants
+     Source: https://www.anthropic.com/news/wellbeing-research-grants
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Anthropic Opens $5M Grant Programme for AI Wellbeing Research</h2>
+
+  <p>Anthropic has announced a <strong>$5 million grant programme</strong> to fund independent research into how AI affects user wellbeing — an area the company identifies as critically under-evaluated despite growing real-world impact.</p>
+
+  <h3>Why this gap exists</h3>
+  <p>Standard safety benchmarks evaluate single responses to single prompts. Wellbeing harms — over-reliance, inappropriate companionship, mishandled mental-health conversations — are multi-turn, context-dependent phenomena that simple benchmarks cannot capture. As Anthropic puts it: <em>"as an industry, we are still working towards developing clear standards for how models should behave"</em> when a user begins seeking emotional support or navigating a mental health crisis through an AI.</p>
+
+  <h3>What funded research must do</h3>
+  <p>Grantees must produce <strong>open-source evaluations and benchmarks</strong>. Anthropic specifies five criteria for rigorous work:</p>
+  <ul>
+    <li><strong>Clear pass/fail standards</strong> — what does "good" look like, and how is it measured?</li>
+    <li><strong>Clinical expert involvement</strong> — design and validation must draw on domain specialists, not just AI researchers.</li>
+    <li><strong>Balanced scope</strong> — evaluations must test both <em>overcompliance</em> risks (model telling a user what they want to hear) and <em>underprotection</em> harms (model failing to refer a user in crisis).</li>
+    <li><strong>Realistic scenarios</strong> — multi-turn conversations reflecting actual usage patterns, not synthetic single-turn prompts.</li>
+    <li><strong>Expert grader validation</strong> — automated graders must be calibrated against real specialists.</li>
+  </ul>
+
+  <h3>What grantees receive</h3>
+  <p>Direct funding, access to Anthropic's models for research, and technical support. Grantees maintain full independence and are expected to publish all work as open-source, making the resulting benchmarks available for the entire AI industry to use.</p>
+
+  <div class="callout tip">
+    <strong>Applying? Key dates</strong>
+    <p>Application deadline: <strong>September 21, 2026</strong>. Notification for full proposals: <strong>October 5, 2026</strong>. Teams working on AI safety evaluation, clinical psychology, human-computer interaction, or responsible AI should examine the programme — the combination of model access and cash funding is rare for external researchers.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/wellbeing-research-grants" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">wellbeing</span>
+    <span class="tag">research grants</span>
+    <span class="tag">safety</span>
+    <span class="tag">evaluation</span>
+    <span class="tag">mental health</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

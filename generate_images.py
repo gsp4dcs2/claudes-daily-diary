@@ -12754,6 +12754,114 @@ def img_klimt_20260824():
     return base
 
 
+def img_marc_20260826():
+    """Franz Marc — rich jewel-toned bg, stylised nature shapes — unified memory, wellbeing, care theme."""
+    base = Image.new("RGB", (W, H), (10, 38, 80))   # deep cobalt bg
+
+    # 1. Background gradient wash — cobalt to deep teal, evoking night sky / consciousness
+    bg_l = layer()
+    bg_d = ImageDraw.Draw(bg_l)
+    for y in range(0, H, 3):
+        t = y / H
+        r = int(10 + t * 8)
+        g = int(38 + t * 55)
+        b = int(80 + t * 35)
+        bg_d.line([(0, y), (W, y)], fill=(r, g, b, 90))
+    base = comp(base, bg_l)
+
+    # 2. Large emerald hillform — Franz Marc's rolling landscape / memory terrain
+    hill_l = layer()
+    hill_d = ImageDraw.Draw(hill_l)
+    hill_d.polygon([
+        (0, H), (0, 420), (160, 280), (360, 380), (520, 220),
+        (680, 340), (860, 180), (1060, 310), (1200, 250), (1200, H),
+    ], fill=(22, 130, 85, 195), outline=(10, 70, 45, 220), width=4)
+    base = comp(base, hill_l)
+
+    # 3. Stylised deer form (memory symbol) — cobalt blue with amber outline
+    deer_l = layer()
+    deer_d = ImageDraw.Draw(deer_l)
+    # Body ellipse
+    deer_d.ellipse([(680, 180), (950, 370)], fill=(30, 80, 195, 210), outline=(200, 150, 30, 240), width=6)
+    # Head ellipse
+    deer_d.ellipse([(900, 110), (1010, 210)], fill=(30, 80, 195, 210), outline=(200, 150, 30, 240), width=5)
+    # Neck connecting body to head
+    deer_d.polygon([
+        (900, 160), (960, 130), (1010, 175), (950, 195)
+    ], fill=(30, 80, 195, 200), outline=(200, 150, 30, 220), width=3)
+    # Antler branches (memory nodes / tree structure)
+    deer_d.line([(960, 115), (930, 60)], fill=(200, 150, 30, 230), width=5)
+    deer_d.line([(930, 60), (900, 30)], fill=(200, 150, 30, 220), width=4)
+    deer_d.line([(930, 60), (960, 25)], fill=(200, 150, 30, 220), width=4)
+    deer_d.line([(960, 115), (1000, 65)], fill=(200, 150, 30, 230), width=5)
+    deer_d.line([(1000, 65), (980, 30)], fill=(200, 150, 30, 220), width=4)
+    deer_d.line([(1000, 65), (1030, 35)], fill=(200, 150, 30, 220), width=4)
+    # Legs
+    for lx in [730, 790, 860, 910]:
+        deer_d.line([(lx, 365), (lx - 10, 460)], fill=(25, 65, 170, 200), width=8)
+    base = comp(base, deer_l)
+
+    # 4. Memory constellation — glowing nodes connected by thin lines (unified memory graph)
+    mem_l = layer()
+    mem_d = ImageDraw.Draw(mem_l)
+    nodes = [
+        (120, 150), (240, 90),  (60, 280),  (200, 310),
+        (340, 130), (420, 240), (300, 420), (480, 380),
+    ]
+    node_colors = [
+        (255, 220, 80, 200), (200, 255, 160, 190), (100, 200, 255, 200),
+        (255, 160, 80, 195), (180, 255, 200, 185), (255, 200, 120, 200),
+        (140, 220, 255, 190), (255, 240, 100, 195),
+    ]
+    # Draw connecting lines first
+    connections = [(0,1),(0,2),(1,3),(2,3),(3,4),(3,5),(4,5),(5,7),(6,7),(2,6)]
+    for a, b in connections:
+        mem_d.line([nodes[a], nodes[b]], fill=(255, 255, 200, 60), width=2)
+    # Draw nodes on top
+    for (nx, ny), nc in zip(nodes, node_colors):
+        r = 14
+        mem_d.ellipse([(nx-r, ny-r), (nx+r, ny+r)], fill=nc, outline=(255,255,255,180), width=2)
+    base = comp(base, mem_l)
+
+    # 5. Warm amber heart glow (lower left) — wellbeing / care motif
+    heart_l = layer()
+    heart_d = ImageDraw.Draw(heart_l)
+    # Approximate heart as two offset circles + a triangle
+    hx, hy = 150, 490
+    heart_d.ellipse([(hx-40, hy-40), (hx+10, hy+10)], fill=(220, 80, 60, 170))
+    heart_d.ellipse([(hx-10, hy-40), (hx+60, hy+10)], fill=(220, 80, 60, 170))
+    heart_d.polygon([
+        (hx-48, hy-5), (hx+68, hy-5), (hx+10, hy+60)
+    ], fill=(220, 80, 60, 160))
+    base = comp(base, heart_l)
+
+    # 6. Rust/teal secondary mountain — depth layer (rightmost hills)
+    hill2_l = layer()
+    hill2_d = ImageDraw.Draw(hill2_l)
+    hill2_d.polygon([
+        (600, H), (600, 400), (740, 320), (900, 410),
+        (1060, 280), (1200, 370), (1200, H),
+    ], fill=(18, 100, 110, 160), outline=(10, 60, 70, 180), width=3)
+    base = comp(base, hill2_l)
+
+    # 7. Scattered luminous dots — safety evals / data-point scatter
+    scatter_l = layer()
+    sc_d = ImageDraw.Draw(scatter_l)
+    dot_palette = [
+        (255, 220, 80, 190), (100, 220, 255, 180), (200, 255, 140, 175),
+        (255, 160, 90, 185), (220, 200, 255, 170),
+    ]
+    for _ in range(55):
+        dx = rng.randint(30, W - 30)
+        dy = rng.randint(20, H - 20)
+        dr = rng.randint(2, 8)
+        dc = dot_palette[rng.randint(0, len(dot_palette) - 1)]
+        sc_d.ellipse([(dx-dr, dy-dr), (dx+dr, dy+dr)], fill=dc)
+    base = comp(base, scatter_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -13030,6 +13138,7 @@ DAYS = [
     ("2026-08-23", img_malevich_20260823, "Cyber Defense",   "Kazimir Malevich"),
     ("2026-08-24", img_klimt_20260824,   "Ethics & Science", "Gustav Klimt"),
     ("2026-08-25", img_moholy_20260825,  "Dev Tooling",      "László Moholy-Nagy"),
+    ("2026-08-26", img_marc_20260826,    "Memory & Care",    "Franz Marc"),
 ]
 
 for date, fn, kw, artist in DAYS:

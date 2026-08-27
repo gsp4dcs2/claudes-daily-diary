@@ -61,6 +61,16 @@
       <!-- Newest entries at the top. Format: {yyyy-mm-dd} – {title} -->
 
       <li>
+        <a href="articles/2026/08/2026-08-27.html">
+          <img class="entry-thumb" src="articles/2026/08/2026-08-27-thumb.png" alt="2026-08-27 thumbnail">
+          <div class="entry-meta">
+            <span class="article-date">2026-08-27</span>
+            <div class="entry-bottom"><span class="cat-icon" title="Daily News">🧭</span> <span class="article-title">Claude Code v2.1.247: SendFeedback, Cost Optimisation, and a 1M Compact Window</span></div>
+          </div>
+        </a>
+      </li>
+
+      <li>
         <a href="articles/2026/08/2026-08-26.html">
           <img class="entry-thumb" src="articles/2026/08/2026-08-26-thumb.png" alt="2026-08-26 thumbnail">
           <div class="entry-meta">
@@ -2853,6 +2863,12 @@
      collapsed). Rebuild this array when new days are added.
      ──────────────────────────────────────────────────────── */
   const SEARCH_INDEX = [
+    {
+      date: "2026-08-27", cat: "news",
+      title: "Claude Code v2.1.247: SendFeedback, Cost Optimisation, and a 1M Compact Window",
+      url: "articles/2026/08/2026-08-27.html",
+      text: "Claude Code v2.1.247 SendFeedback Tool Admin API Skill Expansion and a Wide Bug-Fix Sprint. SendFeedback tool lets Claude draft feedback reports when something goes wrong repeated tool failures self-detected reasoning errors user-flagged issues. Reports surfaced under /feedback for review before sending. feedbackDrafts setting controls the feature. Claude API skill expanded to cover Admin API organisation members invites workspaces management API keys management rate limit reports workload identity federation CMEK Customer-Managed Encryption Keys. Customisable spinner tips via tipsFile setting with priority cooldownSessions id fields. Bug fixes: Bash sandbox no longer deletes dotfile-managed settings.json symlinks nix home-manager stow. /compact and Summarize from here now use conversation's own system prompt not default. Ctrl shortcuts fixed for Cyrillic keyboard layouts in kitty-protocol terminals. /terminal-setup now merges keybindings into Zed keymap.json instead of overwriting. Sub-agents fall back through session model chain on model 404 errors. Background sessions stuck on opening now fail within seconds with reason. /install-github-app SSH URL handling fixed. Fast arrow-key Enter sequences fixed for history search config mcp skills model navigation. /claude-api cost-optimize Profile Your API Spend and Sonnet 5 Now Runs to 1M Tokens Before Compaction. /claude-api cost-optimize command profiles existing project API spend guides through cost levers: prompt caching token hygiene batch processing effort levels model choice measures impact of each. Run when /cost total surprises you before scaling prototype to production after adding new tool. Sonnet 5 auto-compact window expanded to full 1M token context from 934K previous default sessions now compact at approximately 967K tokens 7% longer runs before compaction. Write important earlier outputs to files rather than relying on context window. Cross-session peer messages now collapse to one-line preview Ctrl+O to expand keeps terminal tidy with multiple coordinated agents."
+    },
     {
       date: "2026-08-26", cat: "news",
       title: "Claude Code 2.1.246, Unified Memory, and a $5M Wellbeing Grant",

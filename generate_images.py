@@ -12862,6 +12862,100 @@ def img_marc_20260826():
     return base
 
 
+def img_seurat_20260827():
+    """Georges Seurat pointillist style — cost analytics & feedback theme."""
+    base = Image.new("RGB", (W, H), (14, 20, 50))   # deep navy
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Background dot field — faint scattered dots
+    for _ in range(4000):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        r = rng.randint(1, 2)
+        val = rng.randint(25, 70)
+        draw.ellipse([(x-r, y-r), (x+r, y+r)], fill=(val, val+8, val+28))
+
+    # 2. Central "cost gauge" — concentric rings of dots radiating outward
+    cx, cy = 600, 290
+    gauge_colours = [
+        (255, 200, 40),   # gold — innermost
+        (255, 140, 30),   # amber
+        (240, 80, 40),    # coral
+        (180, 50, 200),   # purple
+        (60, 130, 255),   # blue
+        (40, 200, 120),   # green — outermost
+    ]
+    for i, col in enumerate(gauge_colours):
+        ring_r = 55 + i * 48
+        gl = layer()
+        gd = ImageDraw.Draw(gl)
+        for _ in range(700):
+            angle = rng.uniform(0, 2 * math.pi)
+            dist = rng.gauss(ring_r, 10)
+            dx = int(cx + dist * math.cos(angle))
+            dy = int(cy + dist * math.sin(angle))
+            dr = rng.randint(2, 5)
+            alpha = rng.randint(140, 230)
+            gd.ellipse([(dx-dr, dy-dr), (dx+dr, dy+dr)],
+                       fill=(col[0], col[1], col[2], alpha))
+        base = comp(base, gl)
+
+    # 3. Three satellite "cost-centre" discs (left, right, upper)
+    satellites = [
+        (190, 420, (255, 90, 50)),    # coral-red — left
+        (1010, 390, (80, 190, 255)),  # sky-blue — right
+        (900, 120, (255, 220, 60)),   # gold — upper right
+    ]
+    for sx, sy, col in satellites:
+        sl = layer()
+        sd = ImageDraw.Draw(sl)
+        for _ in range(500):
+            angle = rng.uniform(0, 2 * math.pi)
+            dist = rng.uniform(0, 65)
+            dx = int(sx + dist * math.cos(angle))
+            dy = int(sy + dist * math.sin(angle))
+            dr = rng.randint(2, 5)
+            alpha = int(200 * (1 - dist / 65))
+            sd.ellipse([(dx-dr, dy-dr), (dx+dr, dy+dr)],
+                       fill=(col[0], col[1], col[2], alpha))
+        base = comp(base, sl)
+
+    # 4. Radial scan lines — dot trails from centre to satellites (profiling beams)
+    beam_pairs = [(cx, cy, sx, sy) for sx, sy, _ in satellites]
+    beam_cols = [(255, 160, 80), (120, 210, 255), (255, 240, 100)]
+    for (ax, ay, bx, by), col in zip(beam_pairs, beam_cols):
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        for t_i in range(180):
+            t = t_i / 179
+            mx = ax + (bx - ax) * t
+            my = ay + (by - ay) * t
+            dr = rng.randint(2, 4)
+            alpha = int(160 * math.sin(math.pi * t))
+            bd.ellipse([(mx-dr, my-dr), (mx+dr, my+dr)],
+                       fill=(col[0], col[1], col[2], alpha))
+        base = comp(base, bl)
+
+    # 5. Foreground spectral scatter — bright accent dots
+    spectral = [
+        (255, 60, 60), (255, 160, 20), (255, 240, 0),
+        (60, 230, 90), (60, 160, 255), (200, 80, 255),
+    ]
+    fl = layer()
+    fd = ImageDraw.Draw(fl)
+    for _ in range(1400):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        r = rng.randint(1, 4)
+        col = rng.choice(spectral)
+        fd.ellipse([(x-r, y-r), (x+r, y+r)],
+                   fill=(col[0], col[1], col[2], rng.randint(50, 160)))
+    base = comp(base, fl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -13139,6 +13233,7 @@ DAYS = [
     ("2026-08-24", img_klimt_20260824,   "Ethics & Science", "Gustav Klimt"),
     ("2026-08-25", img_moholy_20260825,  "Dev Tooling",      "László Moholy-Nagy"),
     ("2026-08-26", img_marc_20260826,    "Memory & Care",    "Franz Marc"),
+    ("2026-08-27", img_seurat_20260827,  "Cost & Feedback",  "Georges Seurat"),
 ]
 
 for date, fn, kw, artist in DAYS:

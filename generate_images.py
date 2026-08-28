@@ -12956,6 +12956,128 @@ def img_seurat_20260827():
     return base
 
 
+def img_kandinsky_20260828():
+    """Wassily Kandinsky style — physical AI, MHS device network, hardware agents."""
+    base = Image.new("RGB", (W, H), (18, 34, 72))   # prussian-blue bg
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Faint diagonal grid — thin lines across the canvas
+    grid_col = (40, 65, 120)
+    step = 60
+    for i in range(-H, W + H, step):
+        draw.line([(i, 0), (i + H, H)], fill=grid_col, width=1)
+        draw.line([(i + H, 0), (i, H)], fill=grid_col, width=1)
+
+    # 2. Central hub circle — gold, represents MHS device registry
+    cx, cy = 600, 290
+    hub_r = 72
+    hl = layer()
+    hd = ImageDraw.Draw(hl)
+    hd.ellipse([(cx - hub_r, cy - hub_r), (cx + hub_r, cy + hub_r)],
+               fill=(255, 210, 40, 230))
+    # inner ring
+    hd.ellipse([(cx - hub_r + 12, cy - hub_r + 12),
+                (cx + hub_r - 12, cy + hub_r - 12)],
+               fill=(255, 180, 20, 200))
+    # centre dot
+    hd.ellipse([(cx - 14, cy - 14), (cx + 14, cy + 14)],
+               fill=(220, 120, 10, 255))
+    base = comp(base, hl)
+
+    # 3. Six peripheral device nodes (microscope, arm, liquid handler, etc.)
+    device_nodes = [
+        (190, 130, (220, 50, 50)),    # red — top-left
+        (470, 80,  (80, 190, 255)),   # sky-blue — top-centre
+        (880, 110, (80, 210, 80)),    # green — top-right
+        (1040, 360, (200, 80, 220)),  # purple — right
+        (820, 520,  (255, 130, 40)),  # orange — bottom-right
+        (250, 500,  (60, 220, 200)),  # teal — bottom-left
+    ]
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    for nx, ny, col in device_nodes:
+        nr = 36
+        nd.ellipse([(nx - nr, ny - nr), (nx + nr, ny + nr)],
+                   fill=(col[0], col[1], col[2], 220))
+        nd.ellipse([(nx - nr + 8, ny - nr + 8), (nx + nr - 8, ny + nr - 8)],
+                   fill=(min(col[0] + 60, 255), min(col[1] + 60, 255),
+                         min(col[2] + 60, 255), 180))
+    base = comp(base, nl)
+
+    # 4. Radiating arc connectors — from hub to each device node
+    arc_colours = [(255, 230, 80), (120, 200, 255), (160, 240, 120),
+                   (220, 120, 255), (255, 180, 80), (80, 240, 220)]
+    for (nx, ny, _), arc_col in zip(device_nodes, arc_colours):
+        al = layer()
+        ad = ImageDraw.Draw(al)
+        # draw 3 parallel lines (fat arc illusion)
+        for offset in [-3, 0, 3]:
+            dx, dy = nx - cx, ny - cy
+            length = math.sqrt(dx * dx + dy * dy)
+            ux, uy = dx / length, dy / length
+            px, py = -uy * offset, ux * offset
+            sx, sy = cx + ux * hub_r, cy + uy * hub_r
+            ex, ey = nx - ux * 36, ny - uy * 36
+            ad.line([(sx + px, sy + py), (ex + px, ey + py)],
+                    fill=(arc_col[0], arc_col[1], arc_col[2], 170), width=2)
+        base = comp(base, al)
+
+    # 5. Bold geometric accent shapes — Kandinsky primaries
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+
+    # Red triangle — upper-left region
+    gd.polygon([(120, 250), (185, 155), (250, 250)],
+               fill=(220, 40, 40, 200))
+
+    # Blue rectangle — right region
+    gd.rectangle([(950, 220), (1060, 310)], fill=(40, 80, 210, 190))
+
+    # Yellow circle — lower-left
+    gd.ellipse([(80, 420), (160, 500)], fill=(255, 220, 0, 200))
+
+    # Black outlined circle — decorative, near top-right
+    gd.ellipse([(970, 55), (1060, 145)], fill=(10, 10, 40, 220))
+    gd.ellipse([(985, 70), (1045, 130)], fill=(255, 200, 40, 160))
+
+    # Small red rectangle — lower-right accent
+    gd.rectangle([(900, 450), (980, 500)], fill=(210, 50, 50, 180))
+
+    base = comp(base, gl)
+
+    # 6. Diagonal accent arcs — bold Kandinsky sweeps
+    al2 = layer()
+    ad2 = ImageDraw.Draw(al2)
+    # Large arc sweeping upper-right to lower-left
+    ad2.arc([(300, -100), (900, 500)], start=30, end=120,
+            fill=(80, 160, 255, 140), width=8)
+    # Smaller orange arc
+    ad2.arc([(650, 200), (1100, 580)], start=200, end=290,
+            fill=(255, 140, 40, 130), width=6)
+    # Thin white arc accent
+    ad2.arc([(50, 100), (450, 480)], start=340, end=70,
+            fill=(255, 255, 255, 90), width=3)
+    base = comp(base, al2)
+
+    # 7. Small scatter — bright accent dots (Kandinsky texture)
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    accent_cols = [(255, 255, 80), (255, 80, 80), (80, 210, 255),
+                   (200, 255, 80), (255, 160, 40), (200, 80, 255)]
+    for _ in range(600):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        r = rng.randint(2, 6)
+        col = rng.choice(accent_cols)
+        alpha = rng.randint(40, 140)
+        sd.ellipse([(x - r, y - r), (x + r, y + r)],
+                   fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, sl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -13234,6 +13356,7 @@ DAYS = [
     ("2026-08-25", img_moholy_20260825,  "Dev Tooling",      "László Moholy-Nagy"),
     ("2026-08-26", img_marc_20260826,    "Memory & Care",    "Franz Marc"),
     ("2026-08-27", img_seurat_20260827,  "Cost & Feedback",  "Georges Seurat"),
+    ("2026-08-28", img_kandinsky_20260828, "Physical AI",    "Wassily Kandinsky"),
 ]
 
 for date, fn, kw, artist in DAYS:

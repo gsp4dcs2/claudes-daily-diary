@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="August 28: Claude Code v2.1.248 ships restricted mode, per-agent cache TTL, and cross-session messaging on Bedrock/Vertex/Foundry; Anthropic previews the Model Hardware Standard, enabling AI agents to operate physical lab equipment via MCP; and 10,000 scientist seats open for academic researchers.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-08-28 – Model Hardware Standard Preview, 10K Science Seats, and Claude Code v2.1.248">
+  <meta property="og:description" content="August 28: Claude Code v2.1.248 ships restricted mode, per-agent cache TTL, and cross-session messaging on Bedrock/Vertex/Foundry; Anthropic previews the Model Hardware Standard, enabling AI agents to operate physical lab equipment via MCP; and 10,000 scientist seats open for academic researchers.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/08/2026-08-28.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/08/2026-08-28.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/08/2026-08-28.png">
+
+  <title>2026-08-28 – Model Hardware Standard Preview, 10K Science Seats, and Claude Code v2.1.248 | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Model Hardware Standard Preview, 10K Science Seats, and Claude Code v2.1.248",
+  "description": "August 28: Claude Code v2.1.248 ships restricted mode, per-agent cache TTL, and cross-session messaging on Bedrock/Vertex/Foundry; Anthropic previews the Model Hardware Standard, enabling AI agents to operate physical lab equipment via MCP; and 10,000 scientist seats open for academic researchers.",
+  "datePublished": "2026-08-28",
+  "dateModified": "2026-08-28",
+  "url": "https://claudebeat.ai/articles/2026/08/2026-08-28.html",
+  "image": "https://claudebeat.ai/articles/2026/08/2026-08-28.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/08/2026-08-28.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-08-28</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Model Hardware Standard Preview, 10K Science Seats, and Claude Code v2.1.248</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-08-28.png" alt="Model Hardware Standard Preview, 10K Science Seats, and Claude Code v2.1.248 — visual for 2026-08-28">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code v2.1.248 + v2.1.250: Restricted Mode, Cache TTL, Cross-Session Messaging
+     Source: https://github.com/anthropics/claude-code/releases/tag/v2.1.248
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.248 + v2.1.250: Restricted Mode, Per-Agent Cache TTL, and Cloud Cross-Session Messaging</h2>
+
+  <p>Claude Code <strong>v2.1.248</strong> (released August 27 at 22:12 UTC) is one of the larger feature drops of the month, followed within hours by a <strong>v2.1.250</strong> reliability patch (August 28, 00:49 UTC). The headline additions are a new locked-down deployment mode, per-agent prompt-cache TTL controls, and cross-session messaging finally available on all three major cloud providers.</p>
+
+  <h3>--restricted mode: a clean sandbox surface for untrusted contexts</h3>
+  <p>The new <code>--restricted</code> flag (or <code>CLAUDE_CODE_RESTRICTED=1</code> environment variable) removes all tools that execute commands or code, disables <code>WebFetch</code>, confines file tools to the working directory, and refuses <code>bypassPermissions</code> and any user/project settings overrides. The result is a well-defined, auditable tool surface for deployments where Claude should read and modify files but never run shell commands or make outbound HTTP calls.</p>
+
+  <div class="callout tip">
+    <strong>When to use --restricted</strong>
+    <p>Pass <code>--restricted</code> when spawning subagents that process untrusted codebases, when integrating Claude Code into CI environments where command execution must route through an explicit approval layer, or when building customer-facing features where you want to guarantee Claude cannot execute arbitrary system commands regardless of what appears in the conversation. Pairing it with a narrow MCP server that exposes only the tools your use case needs gives you the tightest possible permission boundary without writing a custom harness.</p>
+  </div>
+
+  <h3>experimental.cacheTtl — per-agent prompt cache control</h3>
+  <p>Agents can now declare <code>experimental.cacheTtl</code> in their frontmatter (<code>"5m"</code> or <code>"1h"</code>) to control how long their system-prompt prefix stays in Anthropic's prompt cache. The use case: an agent whose system prompt changes slowly (documentation context, a fixed tool list) can declare <code>"1h"</code> to keep the prefix warm across many calls, cutting costs significantly on high-frequency invocations without any changes to the calling code.</p>
+
+  <pre><code># agent frontmatter example
+model: claude-sonnet-5
+experimental:
+  cacheTtl: "1h"
+system: |
+  You are a code-review agent. You have access to the following tools:
+  …</code></pre>
+
+  <h3>Cross-session messaging on Bedrock, Vertex, and Foundry</h3>
+  <p>The <code>SendMessage</code> / <code>ListAgents</code> cross-session tools, previously limited to direct API connections, now work on AWS Bedrock, Google Vertex AI, and Azure AI Foundry. Multi-agent pipelines running on cloud providers can now pass structured messages between sessions without polling an external queue, a shared file system, or a bespoke message broker.</p>
+
+  <h3>Server-managed settings diagnostics</h3>
+  <p>If Claude Code fails to load organisation or project settings from the server at startup, it now displays a startup warning and surfaces the failure via <code>/doctor</code> and <code>/status</code>. Previously, these failures were silent — policy settings would silently not apply, with no way to diagnose why.</p>
+
+  <h3>/usage-credits for Enterprise AWS Marketplace accounts</h3>
+  <p>Enterprise organisations billing through AWS Marketplace can now run <code>/usage-credits</code> at the session prompt to check remaining purchased credits without leaving the terminal.</p>
+
+  <h3>Notable bug fixes in v2.1.248</h3>
+  <ul>
+    <li><strong>Prompt-cache miss ~hourly</strong> — OAuth token refresh was forcing tool definitions to re-render, invalidating the prompt cache prefix roughly once per hour in long sessions. Fixed.</li>
+    <li><strong>Sessions disappearing from Claude Desktop after 30 days</strong> — Fixed.</li>
+    <li><strong>Windows <code>claude agents</code> keyboard responsiveness</strong> — Fixed.</li>
+    <li><strong>Agent view opening wrong session</strong> — Fixed.</li>
+    <li><strong>Background sessions losing worktree checkouts</strong> — Fixed.</li>
+    <li><strong>Credential files uploading to cloud sessions</strong> — <code>.env</code>, <code>*.tfvars</code>, and swap files no longer upload. Fixed.</li>
+    <li><strong>/ultrareview pre-flight check</strong> — now verifies repository access before starting a review run. Fixed.</li>
+  </ul>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.248" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">release</span>
+    <span class="tag">restricted mode</span>
+    <span class="tag">prompt caching</span>
+    <span class="tag">cross-session</span>
+    <span class="tag">Bedrock</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Model Hardware Standard Research Preview
+     Source: https://www.anthropic.com/news/model-hardware-standard-research-preview
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Model Hardware Standard: Anthropic's Research Preview Brings AI Agents into Physical Labs</h2>
+
+  <p>Anthropic opened a research preview of the <strong>Model Hardware Standard (MHS)</strong> on August 27 — a shared specification that lets AI agents safely operate physical laboratory and manufacturing equipment through the Model Context Protocol. It is Anthropic's first formal move into the physical-world AI space, and the first attempt to standardise how AI agents communicate with instruments that exist outside a computer.</p>
+
+  <h3>The core idea: standardised drivers for physical devices</h3>
+  <p>MHS defines drivers that translate between an operating system and a physical device using two simple primitives: <code>read</code> (retrieve data from a device) and <code>write</code> (send a command). Drivers contain natural-language tags describing device characteristics, safety limits, and operational parameters — tags that agents can read directly rather than relying on a bespoke "translator" program written for each piece of hardware.</p>
+  <p>Agents access devices through three paths: MCP servers (the primary route), CLIs, and code-based APIs. Because the standard is model-agnostic, any agent harness that speaks MCP can connect to any MHS-compatible device.</p>
+
+  <h3>What hardware does it support?</h3>
+  <p>Any device with a programmable interface: liquid handlers, robotic arms, microscopes, plate readers, lasers, cameras, and specialised research equipment across biotech, robotics, quantum computing, and advanced manufacturing.</p>
+
+  <h3>Why the integration bottleneck mattered</h3>
+  <p>Before MHS, connecting a new device to an autonomous pipeline required writing a custom integration — typically 3–8 weeks per device. Few devices communicated with each other, meaning a lab with ten instruments might require ten separate integrations. MHS reduces that to hours. More practically, autonomous agents can now orchestrate <em>multiple</em> instruments in parallel, running round-the-clock experiments that previously required constant human hand-offs between equipment.</p>
+
+  <div class="callout">
+    <strong>Safety design</strong>
+    <p>Device-level safety limits are embedded in the driver spec. An agent cannot issue a command that exceeds the device's rated parameters — e.g., it cannot set a laser to unsafe power levels even if instructed to. Human oversight hooks are preserved for critical decisions, and the standard is designed to make out-of-bounds commands structurally impossible rather than relying on model-level refusal.</p>
+  </div>
+
+  <h3>Early research partners</h3>
+  <ul>
+    <li><strong>Genentech</strong> — protein assays</li>
+    <li><strong>University of Washington</strong> — microscopy workflows</li>
+    <li><strong>Carnegie Mellon University</strong> — robotic dose-response experiments</li>
+    <li><strong>HHMI Janelia</strong> — imaging pipelines</li>
+    <li><strong>QuEra Computing</strong> — quantum laser stabilisation</li>
+    <li><strong>Tetsuwan Scientific</strong> — multi-instrument orchestration</li>
+  </ul>
+
+  <p>After the research preview concludes, Anthropic plans to open-source the standard so any hardware vendor or research institution can build compatible drivers without a commercial agreement.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/model-hardware-standard-research-preview" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Model Hardware Standard</span>
+    <span class="tag">MHS</span>
+    <span class="tag">physical AI</span>
+    <span class="tag">MCP</span>
+    <span class="tag">scientific research</span>
+    <span class="tag">robotics</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Anthropic Opens 10,000 Science Seats
+     Source: https://www.anthropic.com/news/expanding-support-for-scientists
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Anthropic Opens 10,000 Free Scientist Seats and Expands AI-for-Science Credits to All Fields</h2>
+
+  <p>Anthropic announced a significant expansion of its academic access programme, opening <strong>10,000 seats</strong> for scientists at academic and nonprofit research institutions. The move extends the AI for Science initiative beyond biology and chemistry to cover compute-intensive research in any scientific discipline.</p>
+
+  <h3>Who qualifies and what they get</h3>
+  <p>Principal investigators (or equivalent roles) at academic or nonprofit institutions are eligible. Verified PIs receive a <strong>free Team-tier seat for one year</strong>; their research teams receive Standard or Premium seats at <strong>$15/month</strong> (5× standard usage limits).</p>
+
+  <h3>Expanded AI for Science credits</h3>
+  <p>The AI for Science credits programme now covers "researchers in other scientific fields… including those working on ambitious, compute-heavy research" — a broadening from the previous biology/chemistry focus. Research projects can receive up to <strong>$50,000 in API credits per project</strong>.</p>
+
+  <div class="callout tip">
+    <strong>Model access tiers for scientists</strong>
+    <p>Biology and chemistry researchers remain limited to Opus-class models while Anthropic works with U.S. government partners on broader access controls for life sciences work. Researchers in other fields have access to the full model range. The tier distinction reflects ongoing discussions about appropriate safeguards for dual-use biology research rather than capability limitations — Opus-class models are still Anthropic's most capable general-purpose models.</p>
+  </div>
+
+  <h3>Context: the scientific AI moment</h3>
+  <p>The announcement pairs with the Model Hardware Standard preview (above) to signal a coherent push into scientific infrastructure. The combination — cloud access for computation plus physical-world control for lab instruments — addresses the two largest friction points for labs trying to run autonomous research pipelines: API cost/access barriers and hardware integration complexity.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/expanding-support-for-scientists" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">AI for Science</span>
+    <span class="tag">academic access</span>
+    <span class="tag">research</span>
+    <span class="tag">credits</span>
+    <span class="tag">Claude Team</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

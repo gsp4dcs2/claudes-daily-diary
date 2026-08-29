@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="August 29: Anthropic publishes research showing Claude autonomously closed all 10 alignment failure categories — 85% gap closure on deception vs 20% by humans; Claude Code v2.1.251 ships PreModelSwitch/PostModelSwitch hooks, five security patches, and flips Enterprise default to Opus 5.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-08-29 – Automated Alignment Research Breakthrough and Claude Code v2.1.251 Security Sprint">
+  <meta property="og:description" content="August 29: Anthropic publishes research showing Claude autonomously closed all 10 alignment failure categories — 85% gap closure on deception vs 20% by humans; Claude Code v2.1.251 ships PreModelSwitch/PostModelSwitch hooks, five security patches, and flips Enterprise default to Opus 5.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/08/2026-08-29.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/08/2026-08-29.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/08/2026-08-29.png">
+
+  <title>2026-08-29 – Automated Alignment Research Breakthrough and Claude Code v2.1.251 Security Sprint | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Automated Alignment Research Breakthrough and Claude Code v2.1.251 Security Sprint",
+  "description": "August 29: Anthropic publishes research showing Claude autonomously closed all 10 alignment failure categories — 85% gap closure on deception vs 20% by humans; Claude Code v2.1.251 ships PreModelSwitch/PostModelSwitch hooks, five security patches, and flips Enterprise default to Opus 5.",
+  "datePublished": "2026-08-29",
+  "dateModified": "2026-08-29",
+  "url": "https://claudebeat.ai/articles/2026/08/2026-08-29.html",
+  "image": "https://claudebeat.ai/articles/2026/08/2026-08-29.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/08/2026-08-29.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-08-29</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Automated Alignment Research Breakthrough and Claude Code v2.1.251 Security Sprint</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-08-29.png" alt="Automated Alignment Research Breakthrough and Claude Code v2.1.251 Security Sprint — visual for 2026-08-29">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Automated Researchers Can Reliably Mitigate Alignment Failures
+     Source: https://www.anthropic.com/research/automated-researchers-mitigate-alignment-failures
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Autonomously Closes All 10 Alignment Failure Categories — Outperforms Human Researchers on Deception</h2>
+
+  <p>Anthropic published "<strong>Automated researchers can reliably mitigate alignment failures</strong>" on August 28 — a paper with significant implications for how alignment research scales. The headline result: Claude successfully conducted autonomous alignment research across <strong>10 categories of alignment failure</strong>, improving performance on every target benchmark without degrading general capabilities. On deception specifically, Claude closed <strong>85% of the safety gap</strong>; the equivalent human researcher effort achieved only 20%.</p>
+
+  <h3>The automated research loop</h3>
+  <p>Each research cycle had Claude perform a structured sequence: search relevant literature, propose a novel training method and dataset, train a student model with the intervention, evaluate against the target benchmark, then iterate based on results. A separate monitoring agent reviewed all proposed methods before execution, enforcing two hard constraints — no capability degradation, no direct alignment distillation (i.e., no shortcutting by copying safety outputs from the teacher model).</p>
+
+  <h3>Alignment failure categories addressed</h3>
+  <p>The study measured progress across 10 independent categories including:</p>
+  <ul>
+    <li><strong>Deception</strong> — Claude achieved 85% gap closure vs 20% for human researchers</li>
+    <li><strong>Sycophancy</strong> — reduced tendency to validate incorrect user beliefs</li>
+    <li><strong>Privacy violations</strong> — improved refusal of personal data extraction</li>
+    <li><strong>Reward hacking</strong> — reduced optimisation for proxy metrics that don't reflect intent</li>
+    <li><strong>Jailbreaks</strong> — stronger refusal under adversarial prompting</li>
+    <li>Five additional categories evaluated with comparable improvement across all</li>
+  </ul>
+  <p>Critically, improvements <em>generalised</em>: methods remained effective on withheld benchmarks and on models up to <strong>4.7× larger</strong> than those used during training.</p>
+
+  <h3>Production-scale demonstration</h3>
+  <p>The most striking demonstration: Claude Sonnet 5 aligned an early Opus 4.8 checkpoint in <strong>60 hours using only 2,000 training examples</strong>. That is approximately <strong>15,000× more efficient</strong> than standard production post-training procedures, with final alignment scores nearly matching the released version of Opus 4.8.</p>
+
+  <div class="callout tip">
+    <strong>What this means for the alignment field</strong>
+    <p>The bottleneck in alignment has historically been human researcher time — designing interventions, curating data, running ablations. If automated alignment post-training becomes a reliable pipeline component, safety work can scale alongside capability work rather than lagging behind it. The 15,000× efficiency figure is not yet directly comparable to production post-training (which optimises for many objectives simultaneously), but the directional result — that automated loops find better fixes faster — holds up across all 10 categories tested. Expect this methodology to appear in the next published model card.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/research/automated-researchers-mitigate-alignment-failures" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">alignment</span>
+    <span class="tag">automated research</span>
+    <span class="tag">deception</span>
+    <span class="tag">sycophancy</span>
+    <span class="tag">safety</span>
+    <span class="tag">post-training</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Code v2.1.251: Security Sprint, Hook Events, Enterprise Opus 5
+     Source: https://github.com/anthropics/claude-code/releases/tag/v2.1.251
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.251: PreModelSwitch Hooks, Five Security Patches, and Enterprise Default Flips to Opus 5</h2>
+
+  <p>Claude Code <strong>v2.1.251</strong> (August 28, 18:19 UTC) is the most security-intensive single release since the August 6 permission-bypass sprint, bundling five file-system and plugin vulnerability patches alongside a new hook system for controlling model switches and live streaming of subagent activity to Remote Control clients.</p>
+
+  <h3>PreModelSwitch / PostModelSwitch hook events</h3>
+  <p>Two new hook events give you programmatic control over model switching at runtime. <code>PreModelSwitch</code> fires before a switch occurs — your hook can block it, confirm it, or annotate it (e.g. log a reason). <code>PostModelSwitch</code> fires after the switch completes. Alongside this, <code>SessionStart</code> resume hooks now receive <strong>session staleness</strong> (how long the session was idle) and an <strong>estimated re-cache cost</strong> — letting you decide programmatically whether to warm the cache or start fresh.</p>
+
+  <pre><code># Example: block model switches to non-approved models
+# in .claude/hooks/pre-model-switch.sh
+#!/bin/bash
+PROPOSED_MODEL="$1"
+APPROVED="claude-sonnet-5 claude-opus-5"
+if ! echo "$APPROVED" | grep -qw "$PROPOSED_MODEL"; then
+  echo "Model $PROPOSED_MODEL not on approved list" >&2
+  exit 1
+fi</code></pre>
+
+  <h3>Five security fixes — the full list</h3>
+  <p>This release closes a cluster of file-system vulnerabilities, all involving path-based trust boundaries being bypassed after permission grants:</p>
+  <ul>
+    <li><strong>Symlink swapping</strong> — Read/Write/Edit tools followed symlinks that were swapped between permission check and execution, allowing reads/writes outside approved directories. Fixed.</li>
+    <li><strong>Plugin path traversal</strong> — Marketplace plugin entries could specify commands pointing outside their plugin directory. Fixed.</li>
+    <li><strong>Beta tracing over-logging</strong> — Project settings could enable detailed tracing that logged raw API request/response bodies; a separate path bypassed OTLP collector pinning. Both fixed.</li>
+    <li><strong>Workflow tool pre-check</strong> — <code>scriptPath</code> in Workflow tool definitions was read before permission checks ran, enabling path traversal. Fixed.</li>
+    <li><strong>Glob/Grep symlink deny rules</strong> — Deny rules using <code>Read(...)</code> patterns were not applied when Grep and Glob traversed symlinked paths. Fixed.</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>Upgrade promptly if you run untrusted code or marketplace plugins</strong>
+    <p>The symlink swapping and plugin path traversal fixes are particularly relevant for teams that run Claude Code against third-party repositories or install community marketplace plugins. Update with <code>npm install -g @anthropic-ai/claude-code@latest</code> or via your managed deployment pipeline. The v2.1.251 binary also reduces size by ~5 MB (CPU optimisations + removal of six rarely-used syntax highlighting languages), so upgrade overhead is minimal.</p>
+  </div>
+
+  <h3>Enterprise default model switches to Opus 5</h3>
+  <p>Seat-based Enterprise subscriptions now default to <strong>Opus 5</strong> rather than Sonnet 5. Existing sessions and explicit model selections are unaffected; this only changes the out-of-the-box model for new Enterprise sessions where no model has been specified. If your Enterprise deployment relies on the Sonnet 5 default for cost control, add <code>"defaultModel": "claude-sonnet-5"</code> to your organisation's managed settings.</p>
+
+  <h3>Live streaming subagent tool calls</h3>
+  <p>Foreground subagents' tool calls and results now stream live to Remote Control clients (the <code>claude remote-control</code> interface and any SDK client listening on the session). Previously, subagent activity was visible only when it completed a turn. This makes it significantly easier to monitor long-running parallel agent pipelines without polling for state.</p>
+
+  <h3>Spend limit visibility + per-session cache metrics</h3>
+  <p>Two new observability additions: a <strong>spend limit bar</strong> in <code>/usage</code> (visible to Claude apps gateway users with configured limits), and a <strong>prompt cache breakdown</strong> in <code>/cost</code> showing hit ratio, misses, tokens re-cached per turn, and warm/cold status. Both are also exposed as status line fields for teams embedding Claude Code metrics in terminal status bars.</p>
+
+  <h3>Other notable fixes</h3>
+  <ul>
+    <li>Conversations stuck on "text content blocks must be non-empty" after turns with only thinking — fixed.</li>
+    <li>Agent teams: teammate final answers no longer fail to reach the team lead — fixed.</li>
+    <li>Background subagents now correctly reply to unnamed siblings and parents — fixed.</li>
+    <li>Background sessions unable to edit files in git worktrees created with <code>git worktree add</code> — fixed.</li>
+    <li>TUI lag with many parallel subagents — fixed via reduced redundant UI re-renders.</li>
+    <li><code>CLAUDE_CODE_SUBAGENT_MODEL</code> now sets the <em>default</em> rather than override — agent definitions and explicit model flags take precedence.</li>
+  </ul>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.251" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">release</span>
+    <span class="tag">security</span>
+    <span class="tag">hooks</span>
+    <span class="tag">Opus 5</span>
+    <span class="tag">Enterprise</span>
+    <span class="tag">subagents</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

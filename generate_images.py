@@ -13078,6 +13078,94 @@ def img_kandinsky_20260828():
     return base
 
 
+def img_klee_20260829():
+    """Paul Klee colour-grid style — automated alignment research and security patching theme."""
+    # Dark warm background
+    base = Image.new("RGB", (W, H), (28, 20, 12))
+
+    # 1. Colour-field grid cells — mosaic of warm-to-cool hues representing 10 alignment categories
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    cols = 10
+    rows = 6
+    cw = W // cols
+    ch = H // rows
+    # 10 distinct hues — one per alignment failure category
+    palette = [
+        (215, 60,  40),   # deception — deep red
+        (230, 120, 35),   # sycophancy — amber
+        (215, 195, 45),   # privacy — gold
+        (145, 210, 60),   # reward hacking — lime
+        (55,  195, 110),  # jailbreaks — teal green
+        (45,  165, 210),  # category 6 — sky blue
+        (55,  90,  220),  # category 7 — cobalt
+        (115, 55,  210),  # category 8 — violet
+        (195, 55,  175),  # category 9 — magenta
+        (215, 75,  115),  # category 10 — rose
+    ]
+    for ci in range(cols):
+        base_col = palette[ci % len(palette)]
+        for ri in range(rows):
+            # Gradient from dim (top) to bright (bottom) — gap closure visualised as filling down
+            brightness = int(80 + ri * 25 + rng.randint(0, 20))
+            brightness = max(60, min(220, brightness))
+            cell_col = tuple(min(255, int(c * brightness / 190)) for c in base_col)
+            x0, y0 = ci * cw, ri * ch
+            x1, y1 = x0 + cw - 2, y0 + ch - 2
+            gd.rectangle([(x0, y0), (x1, y1)], fill=(cell_col[0], cell_col[1], cell_col[2], 200))
+    base = comp(base, grid_l)
+
+    # 2. Dark grid lines — structural skeleton
+    lines_l = layer()
+    ld = ImageDraw.Draw(lines_l)
+    for ci in range(cols + 1):
+        ld.line([(ci * cw, 0), (ci * cw, H)], fill=(16, 10, 4, 235), width=4)
+    for ri in range(rows + 1):
+        ld.line([(0, ri * ch), (W, ri * ch)], fill=(16, 10, 4, 235), width=4)
+    base = comp(base, lines_l)
+
+    # 3. White node circles at cell intersections — the monitoring agent checkpoints
+    nodes_l = layer()
+    nd = ImageDraw.Draw(nodes_l)
+    # Highlight intersections at the "fixed" columns (all 10)
+    for ci in range(1, cols):
+        for ri in [2, 3, 4]:
+            nx, ny = ci * cw, ri * ch
+            r = 10 if ri == 3 else 7
+            alpha = 230 if ri == 3 else 180
+            nd.ellipse([(nx - r, ny - r), (nx + r, ny + r)],
+                       fill=(255, 255, 255, alpha), outline=(16, 10, 4, 255), width=2)
+    base = comp(base, nodes_l)
+
+    # 4. Upward-pointing arrows in each column — gap closure arrows
+    arrows_l = layer()
+    ad = ImageDraw.Draw(arrows_l)
+    for ci in range(cols):
+        ax = ci * cw + cw // 2
+        ay_base = 5 * ch - 10
+        ay_tip  = 1 * ch + 15
+        col = palette[ci]
+        ad.line([(ax, ay_base), (ax, ay_tip)], fill=(col[0], col[1], col[2], 200), width=3)
+        # arrowhead
+        ad.polygon([(ax, ay_tip - 12), (ax - 7, ay_tip + 4), (ax + 7, ay_tip + 4)],
+                   fill=(col[0], col[1], col[2], 210))
+    base = comp(base, arrows_l)
+
+    # 5. Scattered small dots — training examples (2000 examples)
+    dots_l = layer()
+    dd = ImageDraw.Draw(dots_l)
+    accent_cols = [(255, 230, 180), (200, 255, 200), (180, 220, 255), (255, 190, 190)]
+    for _ in range(80):
+        dx = rng.randint(0, W)
+        dy = rng.randint(0, H)
+        dr = rng.randint(2, 4)
+        dc = accent_cols[rng.randint(0, len(accent_cols) - 1)]
+        dd.ellipse([(dx - dr, dy - dr), (dx + dr, dy + dr)], fill=(dc[0], dc[1], dc[2], 130))
+    base = comp(base, dots_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -13357,6 +13445,7 @@ DAYS = [
     ("2026-08-26", img_marc_20260826,    "Memory & Care",    "Franz Marc"),
     ("2026-08-27", img_seurat_20260827,  "Cost & Feedback",  "Georges Seurat"),
     ("2026-08-28", img_kandinsky_20260828, "Physical AI",    "Wassily Kandinsky"),
+    ("2026-08-29", img_klee_20260829,     "Safety Net",     "Paul Klee"),
 ]
 
 for date, fn, kw, artist in DAYS:

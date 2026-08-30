@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="August 30: Salesforce and Anthropic launch Claudeforce with 37 prebuilt sales skills; Claude Code's Linux binary shrinks 4.5× to ~75 MB with faster startup and a new /permissions tab; the +50% usage boost expires tomorrow at 11:59 PM PT.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-08-30 – Claudeforce, Claude Code's Linux Sprint, and the 50% Boost's Last Day">
+  <meta property="og:description" content="August 30: Salesforce and Anthropic launch Claudeforce with 37 prebuilt sales skills; Claude Code's Linux binary shrinks 4.5× to ~75 MB with faster startup and a new /permissions tab; the +50% usage boost expires tomorrow at 11:59 PM PT.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/08/2026-08-30.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/08/2026-08-30.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/08/2026-08-30.png">
+
+  <title>2026-08-30 – Claudeforce, Claude Code's Linux Sprint, and the 50% Boost's Last Day | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claudeforce, Claude Code's Linux Sprint, and the 50% Boost's Last Day",
+  "description": "August 30: Salesforce and Anthropic launch Claudeforce with 37 prebuilt sales skills; Claude Code's Linux binary shrinks 4.5× to ~75 MB with faster startup and a new /permissions tab; the +50% usage boost expires tomorrow at 11:59 PM PT.",
+  "datePublished": "2026-08-30",
+  "dateModified": "2026-08-30",
+  "url": "https://claudebeat.ai/articles/2026/08/2026-08-30.html",
+  "image": "https://claudebeat.ai/articles/2026/08/2026-08-30.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/08/2026-08-30.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-08-30</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Claudeforce, Claude Code's Linux Sprint, and the 50% Boost's Last Day</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-08-30.png" alt="Claudeforce, Claude Code's Linux Sprint, and the 50% Boost's Last Day — visual for 2026-08-30">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claudeforce: Salesforce and Anthropic Bring Claude into Enterprise CRM
+     Source: https://www.salesforce.com/news/press-releases/2026/08/26/salesforce-and-anthropic-announce-claudeforce/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claudeforce: Salesforce and Anthropic Bring Claude Natively into Enterprise CRM</h2>
+
+  <p>Salesforce and Anthropic have announced <strong>Claudeforce</strong>, an expanded strategic partnership that embeds Claude's reasoning directly inside Salesforce's enterprise data, workflows, and governance layer. The launch product, <strong>Salesforce in Claude</strong>, is a plugin with <strong>37 prebuilt sales skills</strong> that lets sellers query live revenue context, automate pipeline updates, and take governed actions without leaving Claude.</p>
+
+  <h3>How Salesforce in Claude works</h3>
+  <p>An admin connects the Salesforce organisation to Claude once — authentication and role-based permissions are managed centrally, so every seller on the team gets access from day one with no per-user setup. Claude reads the seller's full enterprise context (accounts, opportunities, pipeline stages, Slack history, any connected CRM connector) and generates tailored interactive dashboards on first open. Skills highlighted at launch include:</p>
+  <ul>
+    <li><strong>Meeting prep</strong> — pulls deal history, stakeholder map, and recent comms before a call</li>
+    <li><strong>Deal health review</strong> — surfaces risk signals from CRM data and Slack activity</li>
+    <li><strong>Pipeline review</strong> — shows stage-by-stage status with suggested next actions</li>
+    <li>34 additional skills covering forecasting, account planning, competitive intelligence, and renewal tracking</li>
+  </ul>
+
+  <h3>Governance built in, not bolted on</h3>
+  <p>All actions Claude takes — creating records, updating fields, logging calls — are routed <em>through Salesforce</em>, not around it. Business rules, validation rules, and field-level security enforced in your Salesforce org apply automatically. This means IT and RevOps teams keep their existing governance model without writing Claude-specific guardrails.</p>
+
+  <div class="callout tip">
+    <strong>What this means for enterprise Claude deployments</strong>
+    <p>Claudeforce is the first major "Claude natively in a vertical SaaS" integration, and its architecture is instructive. Rather than asking Claude to call Salesforce's REST API ad hoc, Anthropic and Salesforce built a plugin layer where Salesforce's data, logic, and permissions are pre-indexed and accessible via Claude's native tool-use. The same pattern — pre-index your enterprise system's permissions model so Claude never bypasses it — is what teams building internal agents should be doing today. If your agent can write to a system that has existing access controls, those controls should be enforced at the integration layer, not solely in the system prompt.</p>
+  </div>
+
+  <h3>Timeline and market response</h3>
+  <p>The plugin is available to <strong>select pilot customers now</strong>, with an open beta planned for September 2026. Additional skills for service, marketing, and finance roles will launch in Q3–Q4 2026. Salesforce stock climbed <strong>12% in after-hours trading</strong> on the announcement day, which coincided with the company's Q2 FY27 earnings release. No pricing has been disclosed; the announcement notes pricing and packaging are subject to change.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://www.salesforce.com/news/press-releases/2026/08/26/salesforce-and-anthropic-announce-claudeforce/" class="source-link" target="_blank" rel="noopener">salesforce.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claudeforce</span>
+    <span class="tag">Salesforce</span>
+    <span class="tag">CRM</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">partnerships</span>
+    <span class="tag">plugins</span>
+    <span class="tag">governance</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Code Linux Build Shrinks 4.5×, CLI Starts Before Its Own Sandbox
+     Source: https://github.com/anthropics/claude-code/releases/tag/v2.1.251
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code's Linux Binary Shrinks 4.5× — CLI Now Starts Before Its Own Sandbox</h2>
+
+  <p>The v2.1.251 release shipped a performance sprint that got less coverage than its security patches yesterday: the <strong>Linux x64 binary is now approximately 75 MB</strong> — 4.5× smaller than before — thanks to removal of six rarely-used syntax highlighting language bundles and CPU-level optimisations that also cut per-session memory by <strong>40–70 MB</strong>. For CI pipelines and container deployments where Claude Code runs in minimal images, this substantially reduces pull times and layer cache churn.</p>
+
+  <h3>Startup: CLI before sandbox</h3>
+  <p>The most immediately noticeable change for interactive users is that the CLI's REPL now appears before the sandbox and MCP servers finish initialising. Previously, starting Claude Code in a project with many MCP servers meant staring at a loading indicator for several seconds. Now the prompt is ready immediately; MCP tools become available as each server comes online in the background. Subcommands that don't need the full runtime (version checks, config reads, <code>--help</code>) also skip unnecessary setup and return near-instantly.</p>
+
+  <h3>Three new visibility features: /usage, /tasks, /permissions</h3>
+  <ul>
+    <li><strong>/usage per-loop breakdown</strong> — each recurring agent loop now shows its own run count and token consumption, making it easy to identify which loop is driving most of your weekly usage</li>
+    <li><strong>/tasks subagent model + effort display</strong> — the task list now shows which model each subagent ran on and at what effort level, so you can verify that cost-control settings are being applied as intended</li>
+    <li><strong>/permissions auto-mode tab</strong> — a new tab in the permissions interface lists the default auto-mode allow/deny rules in human-readable form and lets you add custom rules without manually editing <code>settings.json</code></li>
+  </ul>
+
+  <h3>Remote Control: auto-reconnect</h3>
+  <p>Remote Control sessions previously exited when the server-side disconnected (network blips, server restarts). They now auto-reconnect and resume phone notifications after reconnection. Live viewing of foreground subagent tool calls also streams through Remote Control, giving monitoring dashboards a real-time feed without polling.</p>
+
+  <pre><code># Verify you're on the updated binary after upgrading:
+$ claude update
+$ claude --version    # should show v2.1.251 or later
+$ ls -lh $(which claude)  # confirm Linux size is ~75 MB</code></pre>
+
+  <div class="callout tip">
+    <strong>Container deployment tip</strong>
+    <p>The 4.5× size reduction is particularly valuable if you build Docker images that install Claude Code as part of the layer. Switching from the old binary to v2.1.251 on a Debian slim base cuts the Claude Code layer from ~340 MB to ~75 MB, putting it well under a single layer's typical cache threshold. Add <code>RUN npm install -g @anthropic-ai/claude-code@2.1.251</code> pinned to this version until v2.1.252 is validated for your environment.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.251" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">performance</span>
+    <span class="tag">Linux</span>
+    <span class="tag">startup</span>
+    <span class="tag">binary size</span>
+    <span class="tag">CI/CD</span>
+    <span class="tag">Remote Control</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude Code's 50% Weekly Boost Expires Tomorrow at 11:59 PM PT
+     Source: https://x.com/ClaudeDevs/status/2089798442306711646
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code's +50% Weekly Boost Expires Tomorrow at 11:59 PM PT — No Fourth Extension Announced</h2>
+
+  <p>The promotional <strong>+50% weekly usage limit</strong> for Claude Code expires at <strong>11:59 PM Pacific Time on August 31, 2026</strong> — tomorrow. Anthropic has not announced a fourth extension. The boost, which has been in place since May 13, has been extended three times:</p>
+
+  <ul>
+    <li><strong>May 13</strong> — boost first applied; billed as a limited-time offer</li>
+    <li><strong>July 19</strong> — first extension; expiry pushed from the original date</li>
+    <li><strong>August 19</strong> — second extension; expiry pushed to August 31</li>
+    <li><strong>August 31, 11:59 PM PT</strong> — current expiry; no further extension confirmed</li>
+  </ul>
+
+  <h3>Who is affected</h3>
+  <p>The boost applies to <strong>Pro, Max, Team, and legacy seat-based Enterprise</strong> plans. It raises weekly Claude Code limits by 50% above the published standard — for example, if your plan's standard weekly allowance is 100 sessions, you currently get 150. After expiry, you revert to 100.</p>
+  <p>The <strong>5-hour rolling session limit</strong> is a separate mechanism and is <em>not</em> affected by this expiry.</p>
+
+  <h3>What Anthropic has said</h3>
+  <p>The @ClaudeDevs account stated: <em>"We hope to make this a permanent change to our plans, but strong demand for our models means that capacity may be tight over the coming weeks."</em> That language — "hope to make permanent" — has remained consistent across all three extension announcements without becoming a commitment. Anthropic has cited model capacity constraints as the reason it has not locked in higher limits.</p>
+
+  <div class="callout warning">
+    <strong>If you're mid-way through intensive work</strong>
+    <p>Check <code>/usage</code> now to see how much of this week's boosted allowance you have remaining. If you have significant work queued, prioritise it today. After the expiry, the standard (lower) limit will apply until Anthropic either restores the boost or officially raises plan limits. Teams on Max or Pro who regularly hit the weekly ceiling may want to evaluate upgrading a tier or switching to API-direct access with budget controls for burst workloads.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://x.com/ClaudeDevs/status/2089798442306711646" class="source-link" target="_blank" rel="noopener">x.com/ClaudeDevs</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">usage limits</span>
+    <span class="tag">weekly boost</span>
+    <span class="tag">pricing</span>
+    <span class="tag">Pro</span>
+    <span class="tag">Max</span>
+    <span class="tag">Team</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

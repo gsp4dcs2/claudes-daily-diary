@@ -13166,6 +13166,93 @@ def img_klee_20260829():
     return base
 
 
+def img_mondrian_20260830():
+    """Piet Mondrian grid — Claudeforce CRM pipeline launch theme.
+    Off-white background, vertical pipeline-stage columns in Salesforce blue,
+    red accent blocks, yellow separator bands, bold black grid lines.
+    """
+    base = Image.new("RGB", (W, H), (242, 238, 222))  # off-white cream
+
+    SFBLUE = (0, 112, 210)    # Salesforce blue
+    RED    = (210, 35, 40)    # Mondrian red
+    YELLOW = (240, 185, 20)   # Mondrian yellow
+
+    # 1. Main horizontal spine lines
+    spine_l = layer()
+    sd = ImageDraw.Draw(spine_l)
+    sd.line([(0, 200), (W, 200)], fill=(12, 12, 12, 255), width=10)
+    sd.line([(0, 430), (W, 430)], fill=(12, 12, 12, 255), width=8)
+    sd.line([(0, 320), (W, 320)], fill=(12, 12, 12, 255), width=4)
+    base = comp(base, spine_l)
+
+    # 2. Vertical stage dividers — 4 pipeline stages (Prospecting / Qualify / Propose / Close)
+    stage_xs = [250, 510, 760, 1010]
+    vstage_l = layer()
+    vd = ImageDraw.Draw(vstage_l)
+    for sx in stage_xs:
+        vd.line([(sx, 0), (sx, H)], fill=(12, 12, 12, 255), width=8)
+    base = comp(base, vstage_l)
+
+    # 3. Colour fills — some cells left as off-white (classic Mondrian restraint)
+    fill_l = layer()
+    fd = ImageDraw.Draw(fill_l)
+
+    # Row 1 (y=0..200): stages 1, 3 in Salesforce blue; last stage in red
+    fd.rectangle([(0, 0), (250, 200)],
+                 fill=(SFBLUE[0], SFBLUE[1], SFBLUE[2], 215))
+    fd.rectangle([(510, 0), (760, 200)],
+                 fill=(SFBLUE[0], SFBLUE[1], SFBLUE[2], 195))
+    fd.rectangle([(1010, 0), (W, 200)],
+                 fill=(RED[0], RED[1], RED[2], 180))
+
+    # Row 2a (y=200..320): stage 2 yellow, stage 4 red
+    fd.rectangle([(250, 200), (510, 320)],
+                 fill=(YELLOW[0], YELLOW[1], YELLOW[2], 175))
+    fd.rectangle([(760, 200), (1010, 320)],
+                 fill=(RED[0], RED[1], RED[2], 160))
+
+    # Row 2b (y=320..430): stage 1 yellow, stage 3 blue, last yellow
+    fd.rectangle([(0, 320), (250, 430)],
+                 fill=(YELLOW[0], YELLOW[1], YELLOW[2], 140))
+    fd.rectangle([(510, 320), (760, 430)],
+                 fill=(SFBLUE[0], SFBLUE[1], SFBLUE[2], 160))
+    fd.rectangle([(1010, 320), (W, 430)],
+                 fill=(YELLOW[0], YELLOW[1], YELLOW[2], 145))
+
+    # Row 3 (y=430..H): stages 1-2 blue, stage 3 red, stage 4 blue
+    fd.rectangle([(0, 430), (510, H)],
+                 fill=(SFBLUE[0], SFBLUE[1], SFBLUE[2], 135))
+    fd.rectangle([(510, 430), (760, H)],
+                 fill=(RED[0], RED[1], RED[2], 120))
+    fd.rectangle([(760, 430), (1010, H)],
+                 fill=(SFBLUE[0], SFBLUE[1], SFBLUE[2], 148))
+
+    base = comp(base, fill_l)
+
+    # 4. Intersection markers — bold black squares at all grid crossings
+    marker_l = layer()
+    md = ImageDraw.Draw(marker_l)
+    for ix in [0] + stage_xs + [W]:
+        for iy in [200, 320, 430]:
+            half = 9
+            md.rectangle([(ix - half, iy - half), (ix + half, iy + half)],
+                         fill=(12, 12, 12, 255))
+    base = comp(base, marker_l)
+
+    # 5. Fine dot scatter — Mondrian paper texture
+    dot_l = layer()
+    dd = ImageDraw.Draw(dot_l)
+    for _ in range(90):
+        x = rng.randint(5, W - 5)
+        y = rng.randint(5, H - 5)
+        r = rng.randint(1, 4)
+        dd.ellipse([(x - r, y - r), (x + r, y + r)],
+                   fill=(12, 12, 12, 38))
+    base = comp(base, dot_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -13446,6 +13533,7 @@ DAYS = [
     ("2026-08-27", img_seurat_20260827,  "Cost & Feedback",  "Georges Seurat"),
     ("2026-08-28", img_kandinsky_20260828, "Physical AI",    "Wassily Kandinsky"),
     ("2026-08-29", img_klee_20260829,     "Safety Net",     "Paul Klee"),
+    ("2026-08-30", img_mondrian_20260830, "CRM Launch",     "Piet Mondrian"),
 ]
 
 for date, fn, kw, artist in DAYS:

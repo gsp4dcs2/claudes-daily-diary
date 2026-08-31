@@ -13253,6 +13253,73 @@ def img_mondrian_20260830():
     return base
 
 
+def img_lissitzky_20260831():
+    """El Lissitzky Constructivism — personal API keys, Admin SDK, identity theme.
+    Cream bg, three bold black vertical pillars (identity columns), large red rectangle
+    upper-left, red accent circle lower-right (API endpoint motif), heavy horizontal
+    beam crossing all pillars, diagonal hatching upper-right.
+    """
+    base = Image.new("RGB", (W, H), (244, 241, 230))  # cream bg
+
+    # 1. Three bold black vertical pillars — identity/key columns
+    pl = layer()
+    pd = ImageDraw.Draw(pl)
+    for x in [310, 620, 930]:
+        pd.rectangle([(x - 22, 0), (x + 22, H)], fill=(15, 15, 15, 255))
+    base = comp(base, pl)
+
+    # 2. Large red rectangle — upper-left dominant focal element
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.rectangle([(0, 0), (280, 320)], fill=(208, 22, 22, 230))
+    base = comp(base, rl)
+
+    # 3. Heavy black horizontal beam — structural rule crossing all pillars
+    hl = layer()
+    hd = ImageDraw.Draw(hl)
+    hd.rectangle([(0, 340), (W, 390)], fill=(15, 15, 15, 255))
+    base = comp(base, hl)
+
+    # 4. Red accent circle lower-right — Proun / API endpoint motif
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    cd.ellipse([(970, 420), (1185, 620)], fill=(208, 22, 22, 210))
+    base = comp(base, cl)
+
+    # 5. Black hollow rectangle over red rectangle — key-in-lock motif
+    kl = layer()
+    kd = ImageDraw.Draw(kl)
+    kd.rectangle([(40, 50), (230, 270)], fill=(15, 15, 15, 200))
+    kd.rectangle([(75, 85), (195, 235)], fill=(244, 241, 230, 255))
+    base = comp(base, kl)
+
+    # 6. Diagonal hatching lines — upper-right constructivist tension
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    for i in range(8):
+        x_off = i * 48
+        ld.line([(970 + x_off, 0), (740 + x_off, 335)], fill=(15, 15, 15, 180), width=4)
+    base = comp(base, ll)
+
+    # 7. Small red accent bar — lower-left below beam
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    ad.rectangle([(0, 420), (130, 460)], fill=(208, 22, 22, 200))
+    base = comp(base, al)
+
+    # 8. Fine dot scatter — Lissitzky paper texture
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    for _ in range(70):
+        x = rng.randint(5, W - 5)
+        y = rng.randint(5, H - 5)
+        r = rng.randint(1, 3)
+        dd.ellipse([(x - r, y - r), (x + r, y + r)], fill=(15, 15, 15, 35))
+    base = comp(base, dl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -13534,6 +13601,7 @@ DAYS = [
     ("2026-08-28", img_kandinsky_20260828, "Physical AI",    "Wassily Kandinsky"),
     ("2026-08-29", img_klee_20260829,     "Safety Net",     "Paul Klee"),
     ("2026-08-30", img_mondrian_20260830, "CRM Launch",     "Piet Mondrian"),
+    ("2026-08-31", img_lissitzky_20260831, "Dev Platform",  "El Lissitzky"),
 ]
 
 for date, fn, kw, artist in DAYS:

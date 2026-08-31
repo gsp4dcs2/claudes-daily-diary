@@ -61,6 +61,16 @@
       <!-- Newest entries at the top. Format: {yyyy-mm-dd} – {title} -->
 
       <li>
+        <a href="articles/2026/08/2026-08-31.html">
+          <img class="entry-thumb" src="articles/2026/08/2026-08-31-thumb.png" alt="2026-08-31 thumbnail">
+          <div class="entry-meta">
+            <span class="article-date">2026-08-31</span>
+            <div class="entry-bottom"><span class="cat-icon" title="Daily News">🧭</span> <span class="article-title">Personal API Keys, Admin SDK, and Beta Header Graduation</span></div>
+          </div>
+        </a>
+      </li>
+
+      <li>
         <a href="articles/2026/08/2026-08-30.html">
           <img class="entry-thumb" src="articles/2026/08/2026-08-30-thumb.png" alt="2026-08-30 thumbnail">
           <div class="entry-meta">
@@ -2893,6 +2903,12 @@
      collapsed). Rebuild this array when new days are added.
      ──────────────────────────────────────────────────────── */
   const SEARCH_INDEX = [
+    {
+      date: "2026-08-31", cat: "news",
+      title: "Personal API Keys, Admin SDK, and Beta Header Graduation",
+      url: "articles/2026/08/2026-08-31.html",
+      text: "Personal Keys and Service Account Keys API Access Now Tied to Identities Not Just Workspaces. Personal keys act as creating user carry exactly user permissions stop working when linked account removed from organisation. Service account keys act as dedicated identity independent of any individual expire when service account is removed. Both scoped to specific workspace or admin-level access across all workspaces. Legacy workspace API key model remains supported. Key hygiene offboarding risk workspace-key model creating engineer keys lived on unless explicitly revoked manual step easy to miss. Personal keys remove manual step account removed every personal key stops working. Rotate developer testing keys to personal keys create service account for CI/CD pipelines reserve workspace keys for shared owner-independent contexts. Admin API Lands in Every Official SDK and the ant CLI curl One-Liners No Longer Required. Admin API available in ant CLI Python TypeScript C# Go Java PHP Ruby SDKs under client.beta.organization. Covers organisation info members invites workspaces workspace membership API keys rate limits service accounts workload identity federation issuers rules customer-managed encryption key configuration. Usage cost reports Claude Enterprise user-management analytics remain curl-only. Reads Admin API key from ANTHROPIC_API_KEY or org:admin OAuth token from ANTHROPIC_AUTH_TOKEN. Build offboarding checker enumerate members flag emails no longer matching org domain deactivate keys via SDK without curl. Files API and Skills API Drop Beta Headers in SDK 1.2.0 Two Migration Gotchas. Python SDK 1.2.0 TypeScript SDK 0.122.0 Go 1.68.0 Java 2.59.0 Ruby 1.67.0 C# 12.44.0 graduate client.beta.files and client.beta.skills. No longer send files-api-2025-04-14 and skills-2025-10-02 beta headers return same shapes as client.files and client.skills. Skills delete now removes all versions not just current version breaking change check code calling skills.delete before upgrading. BetaSkill renamed to BetaContainerSkill compile error on upgrade in typed SDKs. Requests still sending beta headers keep receiving old shapes upgrade SDK without immediately adopting new behaviour by keeping header temporarily. Check before upgrading for calls to beta.skills.delete and imports referencing BetaSkill."
+    },
     {
       date: "2026-08-30", cat: "news",
       title: "Claudeforce, Claude Code's Linux Sprint, and the 50% Boost's Last Day",

@@ -13320,6 +13320,64 @@ def img_lissitzky_20260831():
     return base
 
 
+def img_rothko_20260901():
+    """Mark Rothko colour field — music rights lawsuit, agent reach, and limits walk-back theme."""
+    # Very deep near-black warm background — weight and gravity
+    base = Image.new("RGB", (W, H), (16, 12, 18))
+
+    def soft_band(img, y0, y1, colour, feather=68):
+        """Soft-edged Rothko colour band with luminous feathered edges."""
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        r, g, b = colour
+        # Solid core
+        bd.rectangle([(55, y0 + feather), (W - 55, y1 - feather)], fill=(r, g, b, 210))
+        # Feathered top edge
+        for i in range(feather):
+            alpha = int(185 * (i / feather))
+            bd.rectangle([(55 + i, y0 + i), (W - 55 - i, y0 + i + 1)], fill=(r, g, b, alpha))
+        # Feathered bottom edge
+        for i in range(feather):
+            alpha = int(185 * ((feather - i) / feather))
+            bd.rectangle([(55 + i, y1 - i - 1), (W - 55 - i, y1 - i)], fill=(r, g, b, alpha))
+        return comp(img, bl)
+
+    # Top band — deep burgundy-crimson: the legal weight, the rights at stake
+    base = soft_band(base, 18, 230, (112, 22, 38), feather=62)
+
+    # Middle band — warm amber-coral: the platform reach, the active API surface
+    base = soft_band(base, 205, 420, (196, 98, 42), feather=75)
+
+    # Bottom band — midnight slate-blue: the infrastructure beneath, the limits floor
+    base = soft_band(base, 390, 608, (28, 42, 98), feather=60)
+
+    # Inner glow on top band — the burning legal core
+    tg = layer()
+    tgd = ImageDraw.Draw(tg)
+    for i in range(42):
+        alpha = int(55 * (1 - i / 42))
+        tgd.rectangle([(160 + i, 70 + i), (W - 160 - i, 158 - i)], fill=(195, 55, 65, alpha))
+    base = comp(base, tg)
+
+    # Inner glow on middle band — warm luminous centre
+    mg = layer()
+    mgd = ImageDraw.Draw(mg)
+    for i in range(52):
+        alpha = int(72 * (1 - i / 52))
+        mgd.rectangle([(170 + i, 265 + i), (W - 170 - i, 368 - i)], fill=(240, 155, 72, alpha))
+    base = comp(base, mg)
+
+    # Thin luminous seam between top and middle bands — the contested boundary
+    sl = layer()
+    sld = ImageDraw.Draw(sl)
+    for i in range(18):
+        alpha = int(88 * (1 - i / 18))
+        sld.rectangle([(80, 218 + i), (W - 80, 219 + i)], fill=(230, 175, 100, alpha))
+    base = comp(base, sl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -13602,6 +13660,7 @@ DAYS = [
     ("2026-08-29", img_klee_20260829,     "Safety Net",     "Paul Klee"),
     ("2026-08-30", img_mondrian_20260830, "CRM Launch",     "Piet Mondrian"),
     ("2026-08-31", img_lissitzky_20260831, "Dev Platform",  "El Lissitzky"),
+    ("2026-09-01", img_rothko_20260901,   "Rights & Reach", "Mark Rothko"),
 ]
 
 for date, fn, kw, artist in DAYS:

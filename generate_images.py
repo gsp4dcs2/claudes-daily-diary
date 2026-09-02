@@ -13378,6 +13378,79 @@ def img_rothko_20260901():
     return base
 
 
+def img_leger_20260902():
+    """Fernand Léger mechanical style — Fable 5.1 launch / compute infrastructure / self-hosted."""
+    base = Image.new("RGB", (W, H), (14, 14, 20))
+
+    # 1. Background grid — industrial blueprint lines
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for x in range(0, W, 80):
+        gd.line([(x, 0), (x, H)], fill=(40, 55, 80, 50), width=1)
+    for y in range(0, H, 80):
+        gd.line([(0, y), (W, y)], fill=(40, 55, 80, 50), width=1)
+    base = comp(base, gl)
+
+    # 2. Server rack towers — bold vertical cylinders (Léger's tubular forms as compute nodes)
+    towers = [
+        (100, 40, 200, 560, (210, 35, 35, 220)),    # red tower — left
+        (320, 80, 420, 580, (235, 195, 0, 210)),     # yellow tower
+        (540, 40, 640, 560, (30, 95, 210, 220)),     # blue tower
+        (760, 80, 860, 580, (210, 35, 35, 190)),     # red tower
+        (980, 40, 1080, 560, (30, 95, 210, 200)),    # blue tower — right
+    ]
+    for x0, y0, x1, y1, col in towers:
+        tl = layer()
+        td = ImageDraw.Draw(tl)
+        td.rectangle([(x0, y0), (x1, y1)], fill=col, outline=(0, 0, 0, 255), width=6)
+        # Highlight stripe — Léger's metallic sheen
+        td.rectangle([(x0 + 8, y0 + 10), (x0 + 22, y1 - 10)], fill=(255, 255, 255, 55))
+        base = comp(base, tl)
+
+    # 3. Horizontal data-flow pipes crossing the towers
+    pipes = [
+        (0, 160, W, 195, (255, 255, 255, 140)),    # white pipe — top
+        (0, 310, W, 345, (210, 35, 35, 160)),       # red pipe — mid
+        (0, 450, W, 480, (235, 195, 0, 150)),       # yellow pipe — lower
+    ]
+    for x0, y0, x1, y1, col in pipes:
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        pd.rectangle([(x0, y0), (x1, y1)], fill=col, outline=(0, 0, 0, 200), width=3)
+        base = comp(base, pl)
+
+    # 4. Large mechanical gear / disc — Léger's signature industrial circle
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    dd.ellipse([(820, 50), (1160, 390)], fill=(30, 95, 210, 80),
+               outline=(30, 95, 210, 240), width=10)
+    # Inner ring
+    dd.ellipse([(860, 90), (1120, 350)], fill=(0, 0, 0, 0),
+               outline=(235, 195, 0, 180), width=5)
+    # Spokes
+    cx, cy = 990, 220
+    for angle in range(0, 360, 45):
+        rad = math.radians(angle)
+        ex = cx + int(150 * math.cos(rad))
+        ey = cy + int(150 * math.sin(rad))
+        dd.line([(cx, cy), (ex, ey)], fill=(255, 255, 255, 90), width=3)
+    base = comp(base, dl)
+
+    # 5. Bolt / rivet dots at pipe-tower intersections — Léger's industrial texture
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    rivet_xs = [100, 200, 320, 420, 540, 640, 760, 860, 980, 1080]
+    rivet_ys = [160, 310, 450]
+    for rx in rivet_xs:
+        for ry in rivet_ys:
+            r = 9
+            bd.ellipse([(rx - r, ry - r), (rx + r, ry + r)],
+                       fill=(220, 215, 200, 200), outline=(0, 0, 0, 220), width=3)
+    base = comp(base, bl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -13661,6 +13734,7 @@ DAYS = [
     ("2026-08-30", img_mondrian_20260830, "CRM Launch",     "Piet Mondrian"),
     ("2026-08-31", img_lissitzky_20260831, "Dev Platform",  "El Lissitzky"),
     ("2026-09-01", img_rothko_20260901,   "Rights & Reach", "Mark Rothko"),
+    ("2026-09-02", img_leger_20260902,    "Fable 5.1",      "Fernand Léger"),
 ]
 
 for date, fn, kw, artist in DAYS:

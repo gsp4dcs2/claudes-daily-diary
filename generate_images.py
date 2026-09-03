@@ -13451,6 +13451,84 @@ def img_leger_20260902():
     return base
 
 
+def img_delaunay_20260903():
+    """Robert Delaunay Orphism style — Claudeforce CRM integration / overlapping data spheres / G20 policy."""
+    base = Image.new("RGB", (W, H), (12, 10, 28))
+
+    # 1. Large overlapping spectral ring discs — CRM data intersecting with Claude reasoning
+    discs = [
+        (260, 240, 280),   # left-centre disc — large
+        (680, 180, 240),   # upper-right disc
+        (500, 420, 210),   # lower-centre disc
+        (980, 340, 250),   # far-right disc
+        (120, 480, 175),   # lower-left accent
+    ]
+    spectrum = [
+        (200, 20, 20),    # deep red — outermost
+        (220, 100, 0),    # orange
+        (200, 200, 0),    # yellow
+        (20, 180, 30),    # green
+        (0, 90, 210),     # blue
+        (110, 0, 200),    # violet — innermost
+    ]
+    for cx, cy, max_r in discs:
+        for i, col in enumerate(reversed(spectrum)):
+            r = max_r - i * (max_r // len(spectrum))
+            if r <= 0:
+                continue
+            rl = layer()
+            rd = ImageDraw.Draw(rl)
+            alpha = 170 - i * 16
+            rd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=col + (alpha,))
+            base = comp(base, rl)
+
+    # 2. White spark centres — data nodes
+    wl = layer()
+    wd = ImageDraw.Draw(wl)
+    for cx, cy, _ in discs:
+        wd.ellipse([(cx - 12, cy - 12), (cx + 12, cy + 12)], fill=(255, 255, 255, 230))
+        wd.ellipse([(cx - 5,  cy - 5),  (cx + 5,  cy + 5)],  fill=(255, 240, 200, 255))
+    base = comp(base, wl)
+
+    # 3. Thin radiating lines from the two largest discs — signal propagation
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    for dcx, dcy, spoke_r in [(260, 240, 340), (680, 180, 300)]:
+        for i in range(18):
+            ang = i * (360 / 18)
+            rad = math.radians(ang)
+            ex = int(dcx + spoke_r * math.cos(rad))
+            ey = int(dcy + spoke_r * math.sin(rad))
+            ld.line([(dcx, dcy), (ex, ey)], fill=(255, 255, 255, 45), width=1)
+    base = comp(base, ll)
+
+    # 4. Connection arcs between disc centres — partnership data flows
+    arc_layer = layer()
+    ad = ImageDraw.Draw(arc_layer)
+    connections = [
+        (discs[0][:2], discs[1][:2], (200, 200, 0, 100)),
+        (discs[1][:2], discs[3][:2], (0, 150, 210, 90)),
+        (discs[0][:2], discs[2][:2], (110, 0, 200, 80)),
+        (discs[2][:2], discs[4][:2], (200, 80, 0, 80)),
+    ]
+    for (x1, y1), (x2, y2), col in connections:
+        ad.line([(x1, y1), (x2, y2)], fill=col, width=3)
+    base = comp(base, arc_layer)
+
+    # 5. Small scattered spectrum dots — ambient signal field
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    for _ in range(120):
+        dx = rng.randint(0, W)
+        dy = rng.randint(0, H)
+        dr = rng.randint(2, 7)
+        col = spectrum[rng.randint(0, len(spectrum) - 1)]
+        dd.ellipse([(dx - dr, dy - dr), (dx + dr, dy + dr)], fill=col + (110,))
+    base = comp(base, dl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -13735,6 +13813,7 @@ DAYS = [
     ("2026-08-31", img_lissitzky_20260831, "Dev Platform",  "El Lissitzky"),
     ("2026-09-01", img_rothko_20260901,   "Rights & Reach", "Mark Rothko"),
     ("2026-09-02", img_leger_20260902,    "Fable 5.1",      "Fernand Léger"),
+    ("2026-09-03", img_delaunay_20260903, "CRM & Policy",   "Robert Delaunay"),
 ]
 
 for date, fn, kw, artist in DAYS:

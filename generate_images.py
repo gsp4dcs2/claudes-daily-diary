@@ -13529,6 +13529,106 @@ def img_delaunay_20260903():
     return base
 
 
+def img_calder_20260904():
+    """Alexander Calder — flat primary shapes on thin black armature — outage recovery and resilience theme."""
+    base = Image.new("RGB", (W, H), (248, 246, 242))  # warm off-white Calder canvas
+
+    # 1. Light background grain — Calder canvas texture
+    grain_l = layer(); grd = ImageDraw.Draw(grain_l)
+    for i in range(0, W + H, 80):
+        grd.line([(i, 0), (0, i)], fill=(175, 165, 150, 15), width=1)
+        grd.line([(W - i, H), (W, H - i)], fill=(175, 165, 150, 10), width=1)
+    base = comp(base, grain_l)
+
+    # 2. Three-tier mobile armature — representing three topics (outage, research, resilience)
+    arm_l = layer(); ad = ImageDraw.Draw(arm_l)
+    # Top horizontal spine — widest
+    ad.line([(80, 90), (1100, 90)], fill=(18, 18, 18, 245), width=6)
+    # Central drop from spine
+    ad.line([(590, 90), (590, 250)], fill=(18, 18, 18, 235), width=5)
+    # Second-tier horizontal bar
+    ad.line([(250, 250), (930, 250)], fill=(18, 18, 18, 225), width=4)
+    # Left second-tier drop
+    ad.line([(250, 250), (250, 420)], fill=(18, 18, 18, 210), width=3)
+    # Right second-tier drop
+    ad.line([(930, 250), (930, 390)], fill=(18, 18, 18, 210), width=3)
+    # Far-left arm from spine — top left
+    ad.line([(80, 90), (80, 200)], fill=(18, 18, 18, 205), width=3)
+    ad.line([(20, 200), (180, 200)], fill=(18, 18, 18, 195), width=3)
+    ad.line([(20, 200), (20, 370)], fill=(18, 18, 18, 180), width=2)
+    ad.line([(180, 200), (180, 350)], fill=(18, 18, 18, 180), width=2)
+    # Far-right arm from spine
+    ad.line([(1100, 90), (1100, 195)], fill=(18, 18, 18, 205), width=3)
+    ad.line([(1000, 195), (1100, 195)], fill=(18, 18, 18, 195), width=3)
+    ad.line([(1000, 195), (1000, 355)], fill=(18, 18, 18, 180), width=2)
+    # Third-tier from second-tier left drop
+    ad.line([(250, 420), (250, 570)], fill=(18, 18, 18, 195), width=3)
+    ad.line([(130, 570), (430, 570)], fill=(18, 18, 18, 185), width=3)
+    ad.line([(130, 570), (130, 590)], fill=(18, 18, 18, 165), width=2)
+    ad.line([(430, 570), (430, 590)], fill=(18, 18, 18, 165), width=2)
+    base = comp(base, arm_l)
+
+    # 3. Primary flat shapes — each colour represents a theme
+    shapes = [
+        # Large red disc — outage disruption (top-centre, dominant)
+        ("ellipse", [(400, 18),  (780, 180)],  (210, 32, 38, 252),  (18, 18, 18, 255), 5),
+        # Blue elongated shape — research institution (top-left spine)
+        ("ellipse", [(10,  120), (250, 290)],  (24, 78, 200, 245),  (18, 18, 18, 255), 4),
+        # Yellow disc — developer tools / resilience (top-right spine)
+        ("ellipse", [(900, 100), (1180, 300)], (235, 192, 8, 238),  (18, 18, 18, 255), 4),
+        # Red elongated shape — second-tier left (incident timeline)
+        ("ellipse", [(145, 275), (375, 440)],  (210, 32, 38, 228),  (18, 18, 18, 255), 4),
+        # Blue disc — second-tier right (API patterns)
+        ("ellipse", [(795, 270), (1070, 450)], (24, 78, 200, 222),  (18, 18, 18, 255), 4),
+        # Small yellow — far-left upper node
+        ("ellipse", [(-18, 155), (135, 295)],  (235, 192, 8, 210),  (18, 18, 18, 255), 3),
+        # Small red — far-left lower node
+        ("ellipse", [(-10, 280), (135, 400)],  (210, 32, 38, 200),  (18, 18, 18, 255), 3),
+        # Small blue — far-right node
+        ("ellipse", [(910, 230), (1100, 360)], (24, 78, 200, 205),  (18, 18, 18, 255), 3),
+        # Third-tier discs — small resilience nodes
+        ("ellipse", [(68,  490), (210, 610)],  (24, 78, 200, 215),  (18, 18, 18, 255), 3),
+        ("ellipse", [(350, 490), (490, 610)],  (235, 192, 8, 210),  (18, 18, 18, 255), 3),
+    ]
+    for kind, bbox, fill, outline, lw in shapes:
+        # Clamp coords to valid range
+        x0, y0 = max(0, bbox[0][0]), max(0, bbox[0][1])
+        x1, y1 = min(W, bbox[1][0]), min(H, bbox[1][1])
+        if x1 <= x0 or y1 <= y0:
+            continue
+        sl = layer(); sd = ImageDraw.Draw(sl)
+        sd.ellipse([(x0, y0), (x1, y1)], fill=fill, outline=outline, width=lw)
+        base = comp(base, sl)
+
+    # 4. Black pivot dots at all armature junction points
+    dots_l = layer(); dd = ImageDraw.Draw(dots_l)
+    pivots = [
+        (80, 90), (590, 90), (1100, 90),
+        (250, 250), (590, 250), (930, 250),
+        (80, 200), (20, 200), (180, 200),
+        (1100, 195), (1000, 195),
+        (250, 420), (250, 570), (130, 570), (430, 570),
+    ]
+    for px, py in pivots:
+        dd.ellipse([(px - 8, py - 8), (px + 8, py + 8)], fill=(18, 18, 18, 255))
+    base = comp(base, dots_l)
+
+    # 5. Small weight dots hanging at the end of each terminal wire
+    wt_l = layer(); wd = ImageDraw.Draw(wt_l)
+    weights = [
+        (20, 370, (210, 32, 38, 230)),
+        (180, 350, (24, 78, 200, 225)),
+        (1000, 355, (235, 192, 8, 215)),
+        (130, 590, (24, 78, 200, 220)),
+        (430, 590, (235, 192, 8, 215)),
+    ]
+    for wx, wy, wfill in weights:
+        wd.ellipse([(wx - 18, wy - 18), (wx + 18, wy + 18)], fill=wfill, outline=(18, 18, 18, 255), width=3)
+    base = comp(base, wt_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -13814,6 +13914,7 @@ DAYS = [
     ("2026-09-01", img_rothko_20260901,   "Rights & Reach", "Mark Rothko"),
     ("2026-09-02", img_leger_20260902,    "Fable 5.1",      "Fernand Léger"),
     ("2026-09-03", img_delaunay_20260903, "CRM & Policy",   "Robert Delaunay"),
+    ("2026-09-04", img_calder_20260904,  "Outage & Recovery", "Alexander Calder"),
 ]
 
 for date, fn, kw, artist in DAYS:

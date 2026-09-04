@@ -61,6 +61,16 @@
       <!-- Newest entries at the top. Format: {yyyy-mm-dd} – {title} -->
 
       <li>
+        <a href="articles/2026/09/2026-09-04.html">
+          <img class="entry-thumb" src="articles/2026/09/2026-09-04-thumb.png" alt="2026-09-04 thumbnail">
+          <div class="entry-meta">
+            <span class="article-date">2026-09-04</span>
+            <div class="entry-bottom"><span class="cat-icon" title="Daily News">🧭</span> <span class="article-title">September Outage Debrief, Anthropic Institute Agenda, and Resilient API Patterns</span></div>
+          </div>
+        </a>
+      </li>
+
+      <li>
         <a href="articles/2026/09/2026-09-03.html">
           <img class="entry-thumb" src="articles/2026/09/2026-09-03-thumb.png" alt="2026-09-03 thumbnail">
           <div class="entry-meta">
@@ -2933,6 +2943,12 @@
      collapsed). Rebuild this array when new days are added.
      ──────────────────────────────────────────────────────── */
   const SEARCH_INDEX = [
+    {
+      date: "2026-09-04", cat: "news",
+      title: "September Outage Debrief, Anthropic Institute Agenda, and Resilient API Patterns",
+      url: "articles/2026/09/2026-09-04.html",
+      text: "Claude September 3 partial outage 2.5 hours 9:41 AM ET 12:27 PM ET Fable 5.1 Mythos 5.1 Opus 5 Opus 4.8 Opus 4.6 claude.ai Claude Code Claude Cowork Claude API 6000 user reports Downdetector infrastructure fault not model error. status.anthropic.com monitoring runbook 529 overloaded 500 errors HTTP distinguish infrastructure from model errors. Fable 5.1 timing coincidence 48 hours deployment load spike monitoring headroom 72 hours. Anthropic Institute four research focus areas Frontier Red Team biosecurity cybersecurity chemical threats critical infrastructure pre-deployment safety evaluations. Societal Impacts epistemic homogenisation expertise acquisition collective reasoning. Economic Research labour market sector regional productivity distribution economic gains usage data privacy controls. AI and the Rule of Law contracts regulatory governance AI-generated outputs legal ambiguity. Matt Botvinick Senior Director Research Google DeepMind cognitive social neuroscience AI and rule of law human reasoning under pressure. Building resilient Claude API pipelines retry exponential backoff jitter 529 InternalServerError OverloadedError. Do not retry 400 401 only retry 429 rate limited 500 529 retry-after header. Timeout connect 5 seconds read 120 seconds write 10 pool 5 Anthropic Timeout. status.anthropic.com webhook Atom feed incident data. Circuit breaker fallback model claude-sonnet-5 claude-fable-5-1 per-model error rates independently. platform.claude.com errors API error handling."
+    },
     {
       date: "2026-09-03", cat: "news",
       title: "Claudeforce Open Beta, Claude Design Brand Controls, and a G20 Policy Signal",

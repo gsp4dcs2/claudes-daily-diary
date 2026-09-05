@@ -13629,6 +13629,87 @@ def img_calder_20260904():
     return base
 
 
+def img_klimt_20260905():
+    """Gustav Klimt — dark bg, dense gold mosaics, teal/rust accents — enterprise privacy, developer tooling, wellbeing ethics theme."""
+    base = Image.new("RGB", (W, H), (10, 6, 2))  # near-black bg
+
+    # 1. Deep golden central glow — the 'vault' of EFS customer-held data at centre
+    glow_l = layer()
+    gd = ImageDraw.Draw(glow_l)
+    gd.ellipse([(260, 40), (960, 590)], fill=(120, 82, 10, 40))
+    gd.ellipse([(360, 110), (860, 520)], fill=(148, 108, 20, 48))
+    gd.ellipse([(460, 190), (760, 430)], fill=(172, 130, 32, 38))
+    base = comp(base, glow_l)
+
+    # 2. Dense gold mosaic tile field — Klimt decorative language
+    mosaic_l = layer()
+    md = ImageDraw.Draw(mosaic_l)
+    gold_shades = [
+        (215, 178, 58), (198, 158, 42), (232, 200, 84),
+        (176, 138, 36), (244, 214, 106), (258, 224, 64),
+        (188, 150, 48), (166, 128, 30), (250, 208, 78),
+    ]
+    for _ in range(460):
+        x = rng.randint(40, W - 40)
+        y = rng.randint(25, H - 25)
+        s = rng.randint(3, 18)
+        shade = rng.choice(gold_shades)
+        alpha = rng.randint(75, 215)
+        shape = rng.randint(0, 3)
+        if shape == 0:
+            md.rectangle([(x, y), (x + s, y + s)], fill=(shade[0], shade[1], shade[2], alpha))
+        elif shape == 1:
+            md.ellipse([(x, y), (x + s, y + s)], fill=(shade[0], shade[1], shade[2], alpha))
+        elif shape == 2:
+            md.polygon([(x, y + s), (x + s // 2, y), (x + s, y + s)],
+                       fill=(shade[0], shade[1], shade[2], alpha))
+        else:
+            md.rectangle([(x, y), (x + s * 2, y + s // 3)],
+                         fill=(shade[0], shade[1], shade[2], alpha))
+    base = comp(base, mosaic_l)
+
+    # 3. Teal arc rings — three concentric data-sovereignty boundaries (EFS layered trust model)
+    teal_l = layer()
+    td = ImageDraw.Draw(teal_l)
+    for cx, cy, radii in [
+        (600, 315, range(80, 280, 38)),   # central vault — EFS
+        (160, 480, range(50, 180, 32)),   # bottom-left node — developer tooling
+        (1040, 140, range(40, 160, 28)),  # top-right node — wellbeing research
+    ]:
+        for r in radii:
+            a_start = rng.randint(0, 60)
+            a_end = rng.randint(175, 340)
+            td.arc([(cx - r, cy - r), (cx + r, cy + r)],
+                   start=a_start, end=a_end,
+                   fill=(34, 152, 132, rng.randint(50, 130)), width=rng.randint(2, 5))
+    base = comp(base, teal_l)
+
+    # 4. Gold spiral swirls — Klimt constitutional-complexity motif
+    spiral_l = layer()
+    sd = ImageDraw.Draw(spiral_l)
+    for cx, cy, maxr in [(200, 120, 160), (600, 315, 200), (980, 480, 145), (820, 80, 110)]:
+        for r in range(16, maxr, 22):
+            sd.arc([(cx - r, cy - r), (cx + r, cy + r)],
+                   start=rng.randint(0, 90), end=rng.randint(160, 320),
+                   fill=(215, 178, 58, rng.randint(60, 150)), width=rng.randint(2, 4))
+    base = comp(base, spiral_l)
+
+    # 5. Rust accent dots — human-in-the-loop / wellbeing warmth counterpoint
+    rust_l = layer()
+    rd = ImageDraw.Draw(rust_l)
+    rust_shades = [(178, 68, 32), (196, 84, 40), (158, 54, 24), (210, 100, 52)]
+    for _ in range(48):
+        x = rng.randint(30, W - 30)
+        y = rng.randint(30, H - 30)
+        s = rng.randint(4, 14)
+        shade = rng.choice(rust_shades)
+        rd.ellipse([(x, y), (x + s, y + s)],
+                   fill=(shade[0], shade[1], shade[2], rng.randint(100, 200)))
+    base = comp(base, rust_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -13915,6 +13996,7 @@ DAYS = [
     ("2026-09-02", img_leger_20260902,    "Fable 5.1",      "Fernand Léger"),
     ("2026-09-03", img_delaunay_20260903, "CRM & Policy",   "Robert Delaunay"),
     ("2026-09-04", img_calder_20260904,  "Outage & Recovery", "Alexander Calder"),
+    ("2026-09-05", img_klimt_20260905,   "Enterprise Privacy", "Gustav Klimt"),
 ]
 
 for date, fn, kw, artist in DAYS:

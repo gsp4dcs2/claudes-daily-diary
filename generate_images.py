@@ -13710,6 +13710,105 @@ def img_klimt_20260905():
     return base
 
 
+def img_kandinsky_20260906():
+    """Wassily Kandinsky style — bold primaries, diagonal grid, circles + triangles — IPO milestone, browser launch, security research theme."""
+    base = Image.new("RGB", (W, H), (18, 34, 72))  # prussian-blue bg
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Faint diagonal grid — characteristic Kandinsky scaffolding
+    grid_col = (38, 62, 118)
+    step = 58
+    for i in range(-H, W + H, step):
+        draw.line([(i, 0), (i + H, H)], fill=grid_col, width=1)
+        draw.line([(i + H, 0), (i, H)], fill=grid_col, width=1)
+
+    # 2. Large gold central circle — the IPO milestone / capital event
+    ipo_l = layer()
+    id_ = ImageDraw.Draw(ipo_l)
+    cx, cy = 580, 295
+    for r, alpha in [(140, 80), (115, 140), (90, 200), (65, 240), (38, 255)]:
+        id_.ellipse([(cx - r, cy - r), (cx + r, cy + r)],
+                    fill=(255, 210, 40, alpha))
+    # inner dark centre — the unknown (private financials)
+    id_.ellipse([(cx - 20, cy - 20), (cx + 20, cy + 20)],
+                fill=(18, 34, 72, 255))
+    base = comp(base, ipo_l)
+
+    # 3. Bold red triangle — security alert / vulnerability detection
+    tri_l = layer()
+    td = ImageDraw.Draw(tri_l)
+    td.polygon([(130, 480), (240, 290), (350, 480)], fill=(210, 42, 42, 220))
+    # inner highlight
+    td.polygon([(160, 465), (240, 320), (318, 465)], fill=(240, 80, 60, 120))
+    base = comp(base, tri_l)
+
+    # 4. Blue rectangle — browser window / sandboxed frame
+    browser_l = layer()
+    bd = ImageDraw.Draw(browser_l)
+    bd.rectangle([(820, 140), (1080, 340)], fill=(40, 90, 210, 200))
+    # address bar stripe
+    bd.rectangle([(835, 155), (1065, 185)], fill=(70, 120, 240, 200))
+    # tab nubs
+    for tx in [835, 905, 975]:
+        bd.rectangle([(tx, 145), (tx + 60, 160)], fill=(60, 110, 230, 180))
+    # content lines
+    for ly in [205, 225, 245, 265, 285, 305]:
+        bd.rectangle([(840, ly), (1060, ly + 8)], fill=(140, 180, 255, 120))
+    base = comp(base, browser_l)
+
+    # 5. Arc connectors from circle to triangle and circle to browser — Kandinsky radiating lines
+    arc_l = layer()
+    ad = ImageDraw.Draw(arc_l)
+    # IPO circle → security triangle apex
+    for off in [-3, 0, 3]:
+        ad.line([(cx - 90 + off, cy + 30), (240 + off, 300)],
+                fill=(255, 210, 40, 160), width=2)
+    # IPO circle → browser rect
+    for off in [-3, 0, 3]:
+        ad.line([(cx + 100, cy - 20 + off), (820, 240 + off)],
+                fill=(120, 180, 255, 160), width=2)
+    base = comp(base, arc_l)
+
+    # 6. Scatter of small geometric accents — Kandinsky vocabulary
+    acc_l = layer()
+    acd = ImageDraw.Draw(acc_l)
+
+    # Small yellow circle — top-left
+    acd.ellipse([(90, 80), (170, 160)], fill=(255, 220, 0, 200))
+    acd.ellipse([(108, 98), (152, 142)], fill=(255, 200, 20, 120))
+
+    # Black + gold circle — upper-right corner
+    acd.ellipse([(960, 60), (1060, 160)], fill=(10, 10, 40, 230))
+    acd.ellipse([(978, 78), (1042, 142)], fill=(255, 200, 40, 160))
+
+    # Red mini-rectangle — lower-right accent
+    acd.rectangle([(900, 460), (980, 510)], fill=(200, 45, 45, 190))
+
+    # Teal arc sweep — lower-left decorative
+    acd.arc([(30, 360), (200, 530)], start=200, end=340, fill=(40, 200, 180, 200), width=6)
+
+    # Small diagonal bar — upper-centre accent
+    acd.rectangle([(500, 60), (620, 90)], fill=(255, 110, 20, 200))
+
+    base = comp(base, acc_l)
+
+    # 7. Fine dot scatter — energy texture across the canvas
+    dot_l = layer()
+    dd = ImageDraw.Draw(dot_l)
+    dot_cols = [(255, 220, 40), (80, 140, 255), (220, 50, 50), (40, 200, 180), (255, 140, 40)]
+    for _ in range(320):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        r = rng.randint(1, 4)
+        col = rng.choice(dot_cols)
+        dd.ellipse([(x - r, y - r), (x + r, y + r)],
+                   fill=(col[0], col[1], col[2], rng.randint(60, 160)))
+    base = comp(base, dot_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -13997,6 +14096,7 @@ DAYS = [
     ("2026-09-03", img_delaunay_20260903, "CRM & Policy",   "Robert Delaunay"),
     ("2026-09-04", img_calder_20260904,  "Outage & Recovery", "Alexander Calder"),
     ("2026-09-05", img_klimt_20260905,   "Enterprise Privacy", "Gustav Klimt"),
+    ("2026-09-06", img_kandinsky_20260906, "IPO & Browser",   "Wassily Kandinsky"),
 ]
 
 for date, fn, kw, artist in DAYS:

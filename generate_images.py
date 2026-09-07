@@ -13809,6 +13809,109 @@ def img_kandinsky_20260906():
     return base
 
 
+def img_klee_20260907():
+    """Paul Klee colour-grid style — AI education, Claude Academy, and learning pathway theme.
+    Warm-to-cool mosaic of course-module cells connected by node circles and path lines,
+    representing structured learning journeys across AI literacy and developer skills.
+    """
+    base = Image.new("RGB", (W, H), (22, 16, 10))  # deep warm-brown bg
+
+    # 1. Colour-grid cells — each cell = a learning module category
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    cols = 9
+    rows = 5
+    cw = W // cols
+    ch = H // rows
+    # 9 hues — one per learning domain (AI fluency, delegation, description, discernment,
+    # diligence, build-with-claude, responsible-use, K-12, developer-agents)
+    palette = [
+        (210, 70,  50),   # AI fluency fundamentals — deep red
+        (230, 130, 40),   # delegation — amber
+        (220, 200, 50),   # description — gold
+        (120, 210, 65),   # discernment — lime green
+        (50,  195, 125),  # diligence — teal
+        (45,  170, 215),  # build-with-claude — sky blue
+        (60,  95,  225),  # responsible-use — cobalt
+        (120, 55,  215),  # K-12 education — violet
+        (205, 60,  170),  # developer-agents — magenta
+    ]
+    for ci in range(cols):
+        base_col = palette[ci % len(palette)]
+        for ri in range(rows):
+            # Brightness ramps from dim (top-left) to bright (centre-bottom)
+            brightness = int(70 + ri * 28 + ci * 8 + rng.randint(-10, 15))
+            brightness = max(55, min(230, brightness))
+            cell_col = tuple(min(255, int(c * brightness / 185)) for c in base_col)
+            x0, y0 = ci * cw, ri * ch
+            x1, y1 = x0 + cw - 3, y0 + ch - 3
+            gd.rectangle([(x0, y0), (x1, y1)], fill=(cell_col[0], cell_col[1], cell_col[2], 195))
+    base = comp(base, grid_l)
+
+    # 2. Dark Klee grid lines — structural skeleton
+    lines_l = layer()
+    ld = ImageDraw.Draw(lines_l)
+    for ci in range(cols + 1):
+        ld.line([(ci * cw, 0), (ci * cw, H)], fill=(12, 7, 3, 240), width=5)
+    for ri in range(rows + 1):
+        ld.line([(0, ri * ch), (W, ri * ch)], fill=(12, 7, 3, 240), width=5)
+    base = comp(base, lines_l)
+
+    # 3. Learning path lines — diagonal connections across the grid
+    path_l = layer()
+    pd = ImageDraw.Draw(path_l)
+    # Three curved-ish paths spanning the image (simulated with line segments)
+    paths = [
+        [(0, 3 * ch), (2 * cw, 2 * ch), (4 * cw, 1 * ch), (6 * cw, 2 * ch), (W, 1 * ch)],
+        [(0, 5 * ch), (2 * cw, 3 * ch), (4 * cw, 4 * ch), (6 * cw, 2 * ch), (W, 3 * ch)],
+        [(cw, 0),     (3 * cw, 2 * ch), (5 * cw, ch),     (7 * cw, 3 * ch), (W, 2 * ch)],
+    ]
+    path_colors = [
+        (255, 230, 180, 160),
+        (180, 240, 210, 140),
+        (200, 210, 255, 130),
+    ]
+    for pts, col in zip(paths, path_colors):
+        for i in range(len(pts) - 1):
+            pd.line([pts[i], pts[i + 1]], fill=col, width=3)
+    base = comp(base, path_l)
+
+    # 4. White node circles at key grid intersections — course completion checkpoints
+    nodes_l = layer()
+    nd = ImageDraw.Draw(nodes_l)
+    # "Completed" nodes: filled white; "future" nodes: outline only
+    completed = [(1, 1), (2, 2), (3, 1), (4, 3), (5, 2), (6, 1), (7, 2)]
+    future    = [(2, 4), (4, 4), (6, 3), (8, 2), (1, 3)]
+    for ci, ri in completed:
+        nx, ny = ci * cw, ri * ch
+        r = 11
+        nd.ellipse([(nx - r, ny - r), (nx + r, ny + r)],
+                   fill=(255, 255, 240, 235), outline=(12, 7, 3, 255), width=2)
+        # inner dot — a tiny coral pip indicating "done"
+        nd.ellipse([(nx - 4, ny - 4), (nx + 4, ny + 4)], fill=(232, 115, 74, 220))
+    for ci, ri in future:
+        nx, ny = ci * cw, ri * ch
+        r = 9
+        nd.ellipse([(nx - r, ny - r), (nx + r, ny + r)],
+                   fill=(0, 0, 0, 0), outline=(230, 230, 220, 180), width=2)
+    base = comp(base, nodes_l)
+
+    # 5. Scattered knowledge-spark dots — learning momentum texture
+    sparks_l = layer()
+    sd = ImageDraw.Draw(sparks_l)
+    spark_cols = [(255, 240, 190), (200, 255, 215), (190, 215, 255), (255, 200, 215)]
+    for _ in range(70):
+        sx = rng.randint(0, W)
+        sy = rng.randint(0, H)
+        sr = rng.randint(2, 5)
+        sc = spark_cols[rng.randint(0, len(spark_cols) - 1)]
+        sd.ellipse([(sx - sr, sy - sr), (sx + sr, sy + sr)],
+                   fill=(sc[0], sc[1], sc[2], rng.randint(70, 150)))
+    base = comp(base, sparks_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -14097,6 +14200,7 @@ DAYS = [
     ("2026-09-04", img_calder_20260904,  "Outage & Recovery", "Alexander Calder"),
     ("2026-09-05", img_klimt_20260905,   "Enterprise Privacy", "Gustav Klimt"),
     ("2026-09-06", img_kandinsky_20260906, "IPO & Browser",   "Wassily Kandinsky"),
+    ("2026-09-07", img_klee_20260907,     "AI Education",    "Paul Klee"),
 ]
 
 for date, fn, kw, artist in DAYS:

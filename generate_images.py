@@ -13912,6 +13912,130 @@ def img_klee_20260907():
     return base
 
 
+def img_franzmarc_20260908():
+    """Franz Marc — rich jewel-toned bg, stylised lab-instrument and organic shapes —
+    MHS physical lab agents, mid-conversation tool changes, Admin API GA theme.
+    Deep amethyst bg; stylised microscope / liquid-handler circles; robotic-arm arcs;
+    jewel-toned particle field; central glow representing the hardware-AI interface.
+    """
+    base = Image.new("RGB", (W, H), (30, 12, 58))   # deep amethyst bg
+
+    # 1. Background gradient wash — amethyst to deep teal-indigo
+    bg_l = layer()
+    bg_d = ImageDraw.Draw(bg_l)
+    for y in range(0, H, 3):
+        t = y / H
+        r = int(30 + t * 10)
+        g = int(12 + t * 42)
+        b = int(58 + t * 60)
+        bg_d.line([(0, y), (W, y)], fill=(r, g, b, 80))
+    base = comp(base, bg_l)
+
+    # 2. Large central hardware-interface glow — the MHS "connection point"
+    glow_l = layer()
+    gd = ImageDraw.Draw(glow_l)
+    # Outer amber glow
+    gd.ellipse([(380, 130), (820, 500)], fill=(190, 130, 20, 30))
+    gd.ellipse([(430, 170), (770, 460)], fill=(210, 155, 30, 40))
+    gd.ellipse([(480, 210), (720, 420)], fill=(230, 185, 55, 45))
+    base = comp(base, glow_l)
+
+    # 3. Stylised microscope eyepiece forms — concentric ring pairs (cobalt + teal)
+    scope_l = layer()
+    sd = ImageDraw.Draw(scope_l)
+    scopes = [
+        (200, 200, 120, (25, 100, 215), (15, 60, 140)),   # left microscope
+        (600, 290, 155, (20, 155, 115), (10, 80, 65)),     # centre liquid handler
+        (980, 180, 100, (135, 45, 195), (75, 20, 110)),    # right spectrometer
+    ]
+    for (cx, cy, r, fill_col, out_col) in scopes:
+        # Outer ring
+        sd.ellipse(
+            [(cx - r, cy - r), (cx + r, cy + r)],
+            outline=(out_col[0], out_col[1], out_col[2], 230), width=8
+        )
+        # Inner ring (eyepiece lens)
+        ri = int(r * 0.58)
+        sd.ellipse(
+            [(cx - ri, cy - ri), (cx + ri, cy + ri)],
+            fill=(fill_col[0], fill_col[1], fill_col[2], 120),
+            outline=(fill_col[0], fill_col[1], fill_col[2], 200), width=5
+        )
+        # Centre pip — agent "eye"
+        rp = 12
+        sd.ellipse([(cx - rp, cy - rp), (cx + rp, cy + rp)],
+                   fill=(255, 230, 120, 220))
+    base = comp(base, scope_l)
+
+    # 4. Robotic-arm sweep arcs — long curved paths connecting instruments
+    arcs_l = layer()
+    ad = ImageDraw.Draw(arcs_l)
+    # Simulate arcs with polyline segments (smooth enough at this resolution)
+    arm_paths = [
+        # Left microscope → centre liquid handler
+        [(200, 200), (310, 120), (450, 160), (600, 290)],
+        # Centre liquid handler → right spectrometer
+        [(600, 290), (730, 200), (850, 145), (980, 180)],
+        # Right spectrometer → bottom right (data output)
+        [(980, 180), (1060, 310), (1100, 440), (1060, 560)],
+        # Left microscope → bottom left
+        [(200, 200), (150, 350), (120, 490), (160, 590)],
+    ]
+    arm_colors = [
+        (255, 180, 50, 160),    # amber
+        (80, 220, 200, 150),    # teal
+        (180, 100, 255, 140),   # violet
+        (255, 140, 80, 130),    # coral-amber
+    ]
+    for pts, col in zip(arm_paths, arm_colors):
+        for i in range(len(pts) - 1):
+            ad.line([pts[i], pts[i + 1]], fill=col, width=4)
+        # Small endpoint dot
+        ex, ey = pts[-1]
+        ad.ellipse([(ex - 7, ey - 7), (ex + 7, ey + 7)], fill=col)
+    base = comp(base, arcs_l)
+
+    # 5. Liquid-handler tube forms — vertical/diagonal rectangles (emerald + teal)
+    tubes_l = layer()
+    td = ImageDraw.Draw(tubes_l)
+    tubes = [
+        [(560, 80), (580, 290)],    # left tube pair
+        [(590, 80), (610, 290)],
+        [(620, 85), (640, 295)],
+        [(880, 60), (900, 200)],    # right tube cluster
+        [(910, 60), (930, 200)],
+    ]
+    tube_cols = [
+        (20, 190, 130, 180), (20, 190, 130, 160), (20, 160, 110, 150),
+        (90, 40, 200, 170), (90, 40, 200, 145),
+    ]
+    for (p0, p1), col in zip(tubes, tube_cols):
+        td.rectangle([p0, p1], fill=col, outline=(255, 255, 255, 80), width=2)
+    base = comp(base, tubes_l)
+
+    # 6. Jewel-toned particle field — lab measurement data scatter
+    particles_l = layer()
+    pd = ImageDraw.Draw(particles_l)
+    jewels = [
+        (212, 175, 55),   # gold
+        (30, 200, 155),   # emerald
+        (100, 60, 220),   # violet
+        (220, 80, 55),    # ruby
+        (55, 155, 230),   # sapphire
+        (190, 50, 165),   # amethyst
+    ]
+    for _ in range(180):
+        px = rng.randint(0, W)
+        py = rng.randint(0, H)
+        pr = rng.randint(2, 7)
+        pc = jewels[rng.randint(0, len(jewels) - 1)]
+        pd.ellipse([(px - pr, py - pr), (px + pr, py + pr)],
+                   fill=(pc[0], pc[1], pc[2], rng.randint(60, 170)))
+    base = comp(base, particles_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -14201,6 +14325,7 @@ DAYS = [
     ("2026-09-05", img_klimt_20260905,   "Enterprise Privacy", "Gustav Klimt"),
     ("2026-09-06", img_kandinsky_20260906, "IPO & Browser",   "Wassily Kandinsky"),
     ("2026-09-07", img_klee_20260907,     "AI Education",    "Paul Klee"),
+    ("2026-09-08", img_franzmarc_20260908, "Physical Agents", "Franz Marc"),
 ]
 
 for date, fn, kw, artist in DAYS:

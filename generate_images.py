@@ -13320,6 +13320,72 @@ def img_lissitzky_20260831():
     return base
 
 
+def img_lissitzky_20260909():
+    """El Lissitzky Constructivism — Claude Code plugin directories, developer tooling theme.
+    Cream bg, bold red vertical bar left (plugin manifest column), black horizontal beams
+    (tool-result cap lines), diagonal red tension bar upper-right, black dot scatter texture,
+    yellow accent block lower-centre (session resume highlight).
+    """
+    base = Image.new("RGB", (W, H), (244, 241, 230))  # cream bg
+
+    # 1. Bold red vertical bar — plugin manifest / identity column
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.rectangle([(60, 0), (140, H)], fill=(208, 22, 22, 240))
+    base = comp(base, rl)
+
+    # 2. Three heavy black horizontal beams — tool-result cap / structured rule lines
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    for y in [160, 320, 490]:
+        bd.rectangle([(0, y), (W, y + 28)], fill=(15, 15, 15, 250))
+    base = comp(base, bl)
+
+    # 3. Large black rectangle — upper-left anchor block
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    ad.rectangle([(0, 0), (330, 148)], fill=(15, 15, 15, 250))
+    base = comp(base, al)
+
+    # 4. Yellow accent block — lower-centre (session resume highlight)
+    yl = layer()
+    yd = ImageDraw.Draw(yl)
+    yd.rectangle([(340, 350), (760, 480)], fill=(230, 185, 0, 210))
+    base = comp(base, yl)
+
+    # 5. Diagonal red tension bar — upper-right Constructivist energy
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    for i in range(6):
+        off = i * 22
+        dd.line([(820 + off, 0), (1190 + off, 310)], fill=(208, 22, 22, 200), width=16)
+    base = comp(base, dl)
+
+    # 6. Second thin red vertical stripe — right edge echo
+    r2 = layer()
+    r2d = ImageDraw.Draw(r2)
+    r2d.rectangle([(1060, 0), (1090, H)], fill=(208, 22, 22, 180))
+    base = comp(base, r2)
+
+    # 7. Fine dot scatter — Lissitzky paper texture
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    for _ in range(80):
+        x = rng.randint(5, W - 5)
+        y = rng.randint(5, H - 5)
+        r = rng.randint(1, 3)
+        td.ellipse([(x - r, y - r), (x + r, y + r)], fill=(15, 15, 15, 30))
+    base = comp(base, tl)
+
+    # 8. Small black square — lower-left Proun accent
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    sd.rectangle([(60, H - 110), (250, H - 30)], fill=(15, 15, 15, 220))
+    base = comp(base, sl)
+
+    return base
+
+
 def img_rothko_20260901():
     """Mark Rothko colour field — music rights lawsuit, agent reach, and limits walk-back theme."""
     # Very deep near-black warm background — weight and gravity
@@ -14326,6 +14392,7 @@ DAYS = [
     ("2026-09-06", img_kandinsky_20260906, "IPO & Browser",   "Wassily Kandinsky"),
     ("2026-09-07", img_klee_20260907,     "AI Education",    "Paul Klee"),
     ("2026-09-08", img_franzmarc_20260908, "Physical Agents", "Franz Marc"),
+    ("2026-09-09", img_lissitzky_20260909, "Dev Tooling",     "El Lissitzky"),
 ]
 
 for date, fn, kw, artist in DAYS:

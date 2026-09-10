@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="September 10: Claude Code 2.1.267 introduces maxEffortLevel to cap thinking-token spend across every provider and --system-prompt-snapshot off for fresh prompts per request; and Anthropic's Frontier Safety Roadmap Phase 1 — including a provable-inference prototype — must reach the finish line by September 30.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-09-10 – Claude Code 2.1.267 Caps Effort Globally, and Safety Roadmap Phase 1 Deadline Looms">
+  <meta property="og:description" content="September 10: Claude Code 2.1.267 introduces maxEffortLevel to cap thinking-token spend across every provider and --system-prompt-snapshot off for fresh prompts per request; and Anthropic's Frontier Safety Roadmap Phase 1 — including a provable-inference prototype — must reach the finish line by September 30.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/09/2026-09-10.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/09/2026-09-10.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/09/2026-09-10.png">
+
+  <title>2026-09-10 – Claude Code 2.1.267 Caps Effort Globally, and Safety Roadmap Phase 1 Deadline Looms | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Code 2.1.267 Caps Effort Globally, and Safety Roadmap Phase 1 Deadline Looms",
+  "description": "September 10: Claude Code 2.1.267 introduces maxEffortLevel to cap thinking-token spend across every provider and --system-prompt-snapshot off for fresh prompts per request; and Anthropic's Frontier Safety Roadmap Phase 1 — including a provable-inference prototype — must reach the finish line by September 30.",
+  "datePublished": "2026-09-10",
+  "dateModified": "2026-09-10",
+  "url": "https://claudebeat.ai/articles/2026/09/2026-09-10.html",
+  "image": "https://claudebeat.ai/articles/2026/09/2026-09-10.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/09/2026-09-10.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-09-10</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Claude Code 2.1.267 Caps Effort Globally, and Safety Roadmap Phase 1 Deadline Looms</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-09-10.png" alt="Claude Code 2.1.267 Caps Effort Globally, and Safety Roadmap Phase 1 Deadline Looms — visual for 2026-09-10">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code 2.1.267: maxEffortLevel and System-Prompt Snapshot Control
+     Source: https://github.com/anthropics/claude-code/releases
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code 2.1.267: maxEffortLevel Caps Thinking-Token Spend Globally, Plus 36 Bug Fixes</h2>
+
+  <p>Released late on September 9 and rolling out on September 10, <strong>Claude Code 2.1.267</strong> is a dense maintenance and feature build. The headline addition is <code>maxEffortLevel</code> — a hard ceiling on reasoning effort that applies across every provider (Bedrock, Vertex, Foundry) and is honoured both in the API and in the <code>/effort</code> UI picker. A second addition, <code>--system-prompt-snapshot off</code>, lets teams that iterate on their system prompt get a freshly rendered version on each request instead of replaying the one captured at the start of the conversation. Underneath those two features sits 36 bug fixes — the largest single-build correction count since 2.1.240.</p>
+
+  <h3>maxEffortLevel in depth</h3>
+  <ul>
+    <li><strong>It is a ceiling, not a default.</strong> Users can still select any effort level at or below the cap. Setting <code>maxEffortLevel: "medium"</code> prevents a user from running at <code>high</code> or <code>max</code>, but does not stop them from explicitly choosing <code>low</code>.</li>
+    <li><strong>UI enforcement is immediate:</strong> The <code>/effort</code> picker stops offering levels above the cap. If a user names a capped level via <code>--effort</code> or <code>/effort high</code> on a session capped at <code>medium</code>, the request silently runs at the cap rather than failing.</li>
+    <li><strong>Per-model overrides supported:</strong> You can set a lower cap for cheaper models and a higher cap for Opus-tier work within the same <code>modelSettings</code> block.</li>
+  </ul>
+
+  <pre><code># ~/.claude/settings.json — global effort cap with per-model override
+{
+  "maxEffortLevel": "medium",
+  "modelSettings": {
+    "claude-opus-4-6": {
+      "maxEffortLevel": "high"
+    }
+  }
+}</code></pre>
+
+  <div class="callout tip">
+    <strong>Who should set this immediately</strong>
+    <p>Any team running Claude Code on shared budgets — especially those whose September 14 usage-limit cut (17%) leaves less headroom — should set <code>maxEffortLevel</code> at the org or project level now. The single setting prevents a runaway overnight agent from burning a disproportionate share of monthly budget on extended reasoning before you notice.</p>
+  </div>
+
+  <h3>--system-prompt-snapshot off</h3>
+  <p>By default, Claude Code records the system prompt text at the start of each conversation and replays that snapshot for cache efficiency. This is optimal for stable prompts but breaks workflows where you are actively iterating on the system prompt text — such as during prompt engineering sessions or when a CI pipeline regenerates the system prompt from templates at runtime. Adding <code>--system-prompt-snapshot off</code> to a session or setting it in config causes the full system prompt to be rendered and sent fresh on every request. The cache saving is lost, but prompt fidelity is guaranteed.</p>
+
+  <h3>Key fixes in 2.1.267</h3>
+  <ul>
+    <li><strong>MCP prompt-cache stability (11 fixes):</strong> Various scenarios where tool registration, schema changes, or server restarts caused prompt-cache invalidation are now handled correctly — most significantly in subagent and multi-session setups.</li>
+    <li><strong>VS Code platform (9 fixes):</strong> CPU-hang on large file diffs is resolved; WSL2 image handling and clipboard clipboard path issues are corrected.</li>
+    <li><strong>Session management:</strong> Dropped tool results during interrupted conversations are recovered; model-switch mid-conversation no longer orphans the prior turn's tool calls.</li>
+    <li><strong>Cowork scheduled tasks:</strong> Organisations requiring sandboxing were seeing scheduled Cowork tasks fail at startup — now fixed.</li>
+    <li><strong>Artifact publish retry:</strong> Publish operations cut off by dropped connections now retry once automatically.</li>
+    <li><strong>Bash tool descriptions:</strong> Now use plain-language explanations rather than echoing the raw command, reducing confusion in permission prompts.</li>
+  </ul>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">2.1.267</span>
+    <span class="tag">maxEffortLevel</span>
+    <span class="tag">effort cap</span>
+    <span class="tag">system prompt</span>
+    <span class="tag">prompt cache</span>
+    <span class="tag">MCP</span>
+    <span class="tag">VS Code</span>
+    <span class="tag">bug fixes</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Anthropic Frontier Safety Roadmap Phase 1 — September 30 Deadline
+     Source: https://www.anthropic.com/responsible-scaling-policy/roadmap
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Anthropic's Frontier Safety Roadmap Phase 1 Closes September 30 — Provable Inference Prototype Is the Landmark Deliverable</h2>
+
+  <p>With twenty days to go, Anthropic's <strong>Frontier Safety Roadmap Phase 1</strong> is heading into its final stretch. Originally due May 15, the deadline was extended to <strong>September 30, 2026</strong> after Anthropic redirected resources toward its "Leveling up across the board" capability push — a prioritisation the company described as producing greater overall safety benefits than adhering to the original schedule. Anthropic must decide on Phase 2 scope and timeline <strong>within two weeks</strong> of the Phase 1 close.</p>
+
+  <h3>What Phase 1 must deliver by September 30</h3>
+  <ul>
+    <li><strong>Component inventory:</strong> A complete catalogue of the systems, evaluations, and organisational structures needed to execute the full Frontier Safety Roadmap, with preliminary cost and timeline analysis for each.</li>
+    <li><strong>Provable inference prototype:</strong> A working demonstration of a technique for cryptographically "signing" AI model outputs so they are reliably attributable to a specific set of model weights. This addresses a growing concern: as Claude is deployed in high-stakes and regulated domains, users and auditors need verifiable proof that a response came from a specific, unchanged model — and not a modified or fine-tuned variant.</li>
+    <li><strong>Moonshot R&amp;D progress report:</strong> The extended timeline was specifically tied to the moonshot R&amp;D workstream; the September 30 deliverable includes a documented progress update on that programme.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Why provable inference matters to enterprise teams</strong>
+    <p>If Anthropic's provable inference prototype progresses to production, it would give compliance and audit teams a tool they currently lack: a cryptographic receipt showing that a given AI response was generated by a specific Claude model version — not a fine-tuned variant, not a proxy, and not a model that was silently updated mid-contract. For regulated industries (finance, healthcare, legal), this shifts AI auditability from "we trust the vendor" to "we can verify the output". Watch the Phase 1 report for API-level access timelines.</p>
+  </div>
+
+  <h3>Background: why the deadline shifted</h3>
+  <p>Anthropic's Responsible Scaling Policy roadmap operates in phases tied to capability thresholds. The original May 15 target for Phase 1 was relaxed specifically to let engineering teams focus on the "Leveling up across the board" goal — which Anthropic assessed as having a higher safety return on investment at the time. A July 29 typo correction clarified the deadline as September 30 (not September 15 as briefly stated). With the IPO prospectus expected in late September, the timing of the Phase 1 completion report will coincide with the most scrutinised period of Anthropic's history.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/responsible-scaling-policy/roadmap" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Frontier Safety Roadmap</span>
+    <span class="tag">Phase 1</span>
+    <span class="tag">provable inference</span>
+    <span class="tag">RSP</span>
+    <span class="tag">safety</span>
+    <span class="tag">September 30</span>
+    <span class="tag">auditability</span>
+    <span class="tag">compliance</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

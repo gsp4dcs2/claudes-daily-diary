@@ -14102,6 +14102,104 @@ def img_franzmarc_20260908():
     return base
 
 
+def img_moholy_20260910():
+    """László Moholy-Nagy Bauhaus style — transparent overlapping geometry, provable trust theme."""
+    base = Image.new("RGB", (W, H), (248, 248, 244))  # near-white Bauhaus bg
+
+    # 1. Large overlapping transparent primary circles
+    circles_l = layer()
+    cd = ImageDraw.Draw(circles_l)
+    circles = [
+        ((80,  60,  680, 560), (220, 40,  40,  90)),   # large red left
+        ((300, 20,  950, 580), (30,  80,  210, 80)),    # large blue centre
+        ((520, 100, 1160, 590), (255, 200, 20,  80)),   # large yellow right
+        ((160, 200, 640, 590), (20,  160, 90,  70)),    # medium green overlap
+    ]
+    for bbox, fill in circles:
+        cd.ellipse(bbox, fill=fill)
+    base = comp(base, circles_l)
+
+    # 2. Overlapping transparent rectangles — Bauhaus grid logic
+    rects_l = layer()
+    rd = ImageDraw.Draw(rects_l)
+    rects = [
+        ((0,   260, 420, 630), (220, 40,  40,  55)),   # red bar lower-left
+        ((380, 0,   780, 320), (30,  80,  210, 60)),    # blue bar upper-mid
+        ((700, 310, 1200, 630), (255, 200, 20,  50)),   # yellow bar lower-right
+        ((500, 130, 900, 490), (20,  160, 90,  45)),    # green rectangle centre
+    ]
+    for bbox, fill in rects:
+        rd.rectangle(bbox, fill=fill)
+    base = comp(base, rects_l)
+
+    # 3. Thin black structural lines — Bauhaus scaffold
+    lines_l = layer()
+    ld = ImageDraw.Draw(lines_l)
+    structural = [
+        ((0, 315), (W, 315)),      # horizontal midline
+        ((600, 0), (600, H)),      # vertical midline
+        ((0, 0), (600, 315)),      # top-left diagonal
+        ((600, 315), (W, H)),      # bottom-right diagonal
+        ((600, 0), (W, 315)),      # top-right diagonal
+        ((0, 315), (600, H)),      # bottom-left diagonal
+    ]
+    for p1, p2 in structural:
+        ld.line([p1, p2], fill=(20, 20, 20, 200), width=3)
+    base = comp(base, lines_l)
+
+    # 4. Small concentric circle pairs — Moholy-Nagy "light modulators"
+    mods_l = layer()
+    md = ImageDraw.Draw(mods_l)
+    modulators = [
+        (180, 158, 60, (220, 40, 40)),
+        (600, 315, 90, (30, 80, 210)),
+        (970, 200, 55, (255, 200, 20)),
+        (430, 490, 45, (20, 160, 90)),
+        (840, 480, 38, (160, 40, 200)),
+    ]
+    for (cx, cy, r, col) in modulators:
+        for ring_r, alpha in [(r, 190), (int(r * 0.65), 150), (int(r * 0.32), 120)]:
+            md.ellipse(
+                [(cx - ring_r, cy - ring_r), (cx + ring_r, cy + ring_r)],
+                outline=(col[0], col[1], col[2], alpha), width=4
+            )
+        # Centre pip
+        rp = 7
+        md.ellipse([(cx - rp, cy - rp), (cx + rp, cy + rp)],
+                   fill=(col[0], col[1], col[2], 230))
+    base = comp(base, mods_l)
+
+    # 5. Fine grid overlay — Bauhaus systematic order
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    for x in range(0, W + 1, 120):
+        gd.line([(x, 0), (x, H)], fill=(20, 20, 20, 18), width=1)
+    for y in range(0, H + 1, 90):
+        gd.line([(0, y), (W, y)], fill=(20, 20, 20, 18), width=1)
+    base = comp(base, grid_l)
+
+    # 6. Small primary-colour squares scattered — data nodes
+    nodes_l = layer()
+    nd = ImageDraw.Draw(nodes_l)
+    node_palette = [
+        (220, 40, 40, 180), (30, 80, 210, 180),
+        (255, 200, 20, 200), (20, 160, 90, 170), (160, 40, 200, 160),
+    ]
+    positions = [
+        (60, 80), (160, 520), (340, 350), (480, 220), (720, 80),
+        (880, 380), (1050, 120), (1120, 550), (260, 70), (540, 570),
+    ]
+    sizes = [22, 18, 14, 20, 16, 24, 12, 18, 15, 20]
+    for i, (px, py) in enumerate(positions):
+        col = node_palette[i % len(node_palette)]
+        s = sizes[i]
+        nd.rectangle([(px - s, py - s), (px + s, py + s)],
+                     fill=col, outline=(20, 20, 20, 160), width=2)
+    base = comp(base, nodes_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -14393,6 +14491,7 @@ DAYS = [
     ("2026-09-07", img_klee_20260907,     "AI Education",    "Paul Klee"),
     ("2026-09-08", img_franzmarc_20260908, "Physical Agents", "Franz Marc"),
     ("2026-09-09", img_lissitzky_20260909, "Dev Tooling",     "El Lissitzky"),
+    ("2026-09-10", img_moholy_20260910,   "Effort Caps",     "László Moholy-Nagy"),
 ]
 
 for date, fn, kw, artist in DAYS:

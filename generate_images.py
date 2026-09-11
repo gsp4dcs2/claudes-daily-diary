@@ -14200,6 +14200,85 @@ def img_moholy_20260910():
     return base
 
 
+def img_malevich_20260911():
+    """Kazimir Malevich Suprematism — threat intelligence / distillation attacks theme.
+    Warm cream bg, large tilted black wedge (threat actor mass), bold red X-cross
+    (attack vectors), navy wide bar (firewall barrier), scattered yellow rectangles
+    (detections/alerts), thin diagonal red lines (data exfiltration), white-framed
+    black square (contained threat node).
+    """
+    base = Image.new("RGB", (W, H), (238, 234, 218))  # warm cream / Suprematist ground
+
+    def rotated_rect(cx, cy, hw, hh, angle_deg):
+        rad = math.radians(angle_deg)
+        corners = [(-hw, -hh), (hw, -hh), (hw, hh), (-hw, hh)]
+        return [(cx + p[0]*math.cos(rad) - p[1]*math.sin(rad),
+                 cy + p[0]*math.sin(rad) + p[1]*math.cos(rad)) for p in corners]
+
+    # 1. Large tilted black wedge (upper-left) — threat actor mass
+    wl = layer()
+    wd = ImageDraw.Draw(wl)
+    wd.polygon(rotated_rect(195, 195, 225, 165, -22), fill=(16, 16, 16, 255))
+    base = comp(base, wl)
+
+    # 2. Bold red bar — attack vector 1 (shallow diagonal, lower-left to upper-right)
+    r1 = layer()
+    r1d = ImageDraw.Draw(r1)
+    r1d.polygon(rotated_rect(600, 305, 530, 23, -8), fill=(212, 22, 22, 235))
+    base = comp(base, r1)
+
+    # 3. Bold red bar — attack vector 2 (steeper crossing diagonal)
+    r2 = layer()
+    r2d = ImageDraw.Draw(r2)
+    r2d.polygon(rotated_rect(600, 275, 490, 20, 17), fill=(212, 22, 22, 215))
+    base = comp(base, r2)
+
+    # 4. Navy wide horizontal rectangle — firewall / defensive barrier
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    nd.polygon(rotated_rect(910, 468, 245, 46, -3), fill=(18, 30, 128, 248))
+    base = comp(base, nl)
+
+    # 5. Scattered yellow rectangles — detected threats / alert fragments
+    yl = layer()
+    yd = ImageDraw.Draw(yl)
+    detections = [
+        (725, 138, 52, 15, 13),
+        (985, 198, 46, 13, -9),
+        (835, 392, 56, 14, 19),
+        (1058, 332, 50, 12, -6),
+        (138, 434, 48, 14, 11),
+        (382, 512, 54, 15, -15),
+        (510, 162, 44, 12, 7),
+    ]
+    for cx, cy, hw, hh, ang in detections:
+        yd.polygon(rotated_rect(cx, cy, hw, hh, ang), fill=(228, 188, 0, 232))
+    base = comp(base, yl)
+
+    # 6. White-framed black square — contained / neutralised threat node
+    fl = layer()
+    fd = ImageDraw.Draw(fl)
+    fd.polygon(rotated_rect(1055, 98, 66, 66, 12), fill=(245, 242, 230, 210))
+    fd.polygon(rotated_rect(1055, 98, 44, 44, 12), fill=(16, 16, 16, 230))
+    base = comp(base, fl)
+
+    # 7. Thin red diagonal lines (upper band) — data exfiltration traces
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    for i in range(6):
+        x_off = i * 86
+        ld.line([(48 + x_off, 22), (175 + x_off, 92)], fill=(212, 22, 22, 135), width=3)
+    base = comp(base, ll)
+
+    # 8. Small navy tilted rectangle — secondary structural accent (lower-right)
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    ad.polygon(rotated_rect(1080, 560, 105, 18, -8), fill=(18, 30, 128, 190))
+    base = comp(base, al)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -14492,6 +14571,7 @@ DAYS = [
     ("2026-09-08", img_franzmarc_20260908, "Physical Agents", "Franz Marc"),
     ("2026-09-09", img_lissitzky_20260909, "Dev Tooling",     "El Lissitzky"),
     ("2026-09-10", img_moholy_20260910,   "Effort Caps",     "László Moholy-Nagy"),
+    ("2026-09-11", img_malevich_20260911, "Threat Intel",    "Kazimir Malevich"),
 ]
 
 for date, fn, kw, artist in DAYS:

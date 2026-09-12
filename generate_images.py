@@ -14279,6 +14279,105 @@ def img_malevich_20260911():
     return base
 
 
+def img_seurat_20260912():
+    """Georges Seurat pointillist style — plugin eval / quality scoring theme.
+    Thousands of tiny scored dots accumulate into three overlapping score-disc forms —
+    representing the plugin result, no-plugin baseline, and delta — on a deep midnight bg.
+    Spectral dot trails connect the discs like CI pipeline edges.
+    """
+    base = Image.new("RGB", (W, H), (10, 14, 40))   # deep midnight navy
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Background dot field — faint blue-grey scatter across full canvas
+    for _ in range(5000):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        r = rng.randint(1, 2)
+        val = rng.randint(20, 65)
+        draw.ellipse([(x-r, y-r), (x+r, y+r)], fill=(val, val+5, val+25))
+
+    # 2. Three score discs: plugin result (left), baseline (right), delta (top-centre)
+    discs = [
+        (310, 340, [                               # plugin disc — warm amber/gold tones
+            (255, 215, 40),   # gold core
+            (255, 170, 30),   # amber
+            (240, 110, 30),   # coral-orange
+            (200, 60, 50),    # red outer
+            (140, 30, 80),    # deep rose
+        ]),
+        (890, 340, [                               # baseline disc — cool blue tones
+            (100, 210, 255),  # sky-blue core
+            (60, 155, 235),   # azure
+            (30, 100, 210),   # cobalt
+            (20, 55, 170),    # deep blue
+            (15, 25, 120),    # navy outer
+        ]),
+        (600, 160, [                               # delta disc — green positive diff
+            (120, 255, 140),  # bright mint core
+            (70, 210, 100),   # green
+            (40, 160, 80),    # forest
+            (20, 110, 60),    # dark green
+            (10, 65, 40),     # deep green outer
+        ]),
+    ]
+
+    for cx, cy, colours in discs:
+        radii = [25, 58, 92, 126, 158]
+        for ring_r, col in zip(radii, colours):
+            rl = layer()
+            rd = ImageDraw.Draw(rl)
+            n_dots = 900 if ring_r < 60 else 1400
+            for _ in range(n_dots):
+                angle = rng.uniform(0, 2 * math.pi)
+                dist = rng.gauss(ring_r, 9)
+                dx = int(cx + dist * math.cos(angle))
+                dy = int(cy + dist * math.sin(angle))
+                dr = rng.randint(2, 5)
+                alpha = int(220 * math.exp(-0.5 * ((dist - ring_r) / 9) ** 2))
+                rd.ellipse([(dx-dr, dy-dr), (dx+dr, dy+dr)],
+                           fill=(col[0], col[1], col[2], max(0, min(255, alpha))))
+            base = comp(base, rl)
+
+    # 3. CI pipeline dot trails connecting discs — spectral coloured arcs
+    trail_specs = [
+        (310, 340, 600, 160, (255, 180, 60)),    # plugin → delta  (amber)
+        (890, 340, 600, 160, (80,  190, 255)),   # baseline → delta (blue)
+        (310, 340, 890, 340, (160, 255, 180)),   # plugin → baseline (green)
+    ]
+    for ax, ay, bx, by, col in trail_specs:
+        tl = layer()
+        td = ImageDraw.Draw(tl)
+        for t_i in range(220):
+            t = t_i / 219
+            bow = -55 * math.sin(math.pi * t)
+            mx = ax + (bx - ax) * t
+            my = ay + (by - ay) * t + bow
+            dr = rng.randint(2, 5)
+            alpha = int(190 * math.sin(math.pi * t))
+            td.ellipse([(mx-dr, my-dr), (mx+dr, my+dr)],
+                       fill=(col[0], col[1], col[2], alpha))
+        base = comp(base, tl)
+
+    # 4. Foreground score-scatter — bright spectral dots across lower half (raw data points)
+    spectral = [
+        (255, 70, 50),  (255, 150, 20), (255, 235, 0),
+        (50,  225, 85), (50,  155, 255),(190, 80,  255),
+    ]
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    for _ in range(2200):
+        x = rng.randint(0, W)
+        y = rng.randint(250, H)
+        r = rng.randint(1, 3)
+        col = rng.choice(spectral)
+        sd.ellipse([(x-r, y-r), (x+r, y+r)],
+                   fill=(col[0], col[1], col[2], rng.randint(35, 130)))
+    base = comp(base, sl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -14572,6 +14671,7 @@ DAYS = [
     ("2026-09-09", img_lissitzky_20260909, "Dev Tooling",     "El Lissitzky"),
     ("2026-09-10", img_moholy_20260910,   "Effort Caps",     "László Moholy-Nagy"),
     ("2026-09-11", img_malevich_20260911, "Threat Intel",    "Kazimir Malevich"),
+    ("2026-09-12", img_seurat_20260912,  "Plugin Scores",   "Georges Seurat"),
 ]
 
 for date, fn, kw, artist in DAYS:

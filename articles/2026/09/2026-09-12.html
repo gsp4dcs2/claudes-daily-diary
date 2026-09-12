@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="September 12: Claude Code v2.1.269 ships `claude plugin eval` — a reproducible evaluation runner with six grader types, a no-plugin baseline, and a CI gate for automated plugin quality checks; plus /output-style switching, a Bash diff panel, and a VSCode agent map for visual sub-agent orchestration.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-09-12 – Claude Code 2.1.269: Plugin Eval Runner, Bash Diff Panel, and VSCode Agent Map">
+  <meta property="og:description" content="September 12: Claude Code v2.1.269 ships `claude plugin eval` — a reproducible evaluation runner with six grader types, a no-plugin baseline, and a CI gate for automated plugin quality checks; plus /output-style switching, a Bash diff panel, and a VSCode agent map for visual sub-agent orchestration.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/09/2026-09-12.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/09/2026-09-12.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/09/2026-09-12.png">
+
+  <title>2026-09-12 – Claude Code 2.1.269: Plugin Eval Runner, Bash Diff Panel, and VSCode Agent Map | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Code 2.1.269: Plugin Eval Runner, Bash Diff Panel, and VSCode Agent Map",
+  "description": "September 12: Claude Code v2.1.269 ships `claude plugin eval` — a reproducible evaluation runner with six grader types, a no-plugin baseline, and a CI gate for automated plugin quality checks; plus /output-style switching, a Bash diff panel, and a VSCode agent map for visual sub-agent orchestration.",
+  "datePublished": "2026-09-12",
+  "dateModified": "2026-09-12",
+  "url": "https://claudebeat.ai/articles/2026/09/2026-09-12.html",
+  "image": "https://claudebeat.ai/articles/2026/09/2026-09-12.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/09/2026-09-12.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-09-12</span>
+      <span class="cat-badge cat-tips">💡 Tips 'n' Tricks</span>
+      <h1>Claude Code 2.1.269: Plugin Eval Runner, Bash Diff Panel, and VSCode Agent Map</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-09-12.png" alt="Claude Code 2.1.269: Plugin Eval Runner, Bash Diff Panel, and VSCode Agent Map — visual for 2026-09-12">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — claude plugin eval: Reproducible Plugin Quality Scoring
+     Source: https://github.com/anthropics/claude-code/releases/tag/v2.1.269
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> <code>claude plugin eval</code>: A Reproducible, CI-Ready Evaluation Runner for Your Plugins</h2>
+
+  <p>Claude Code v2.1.269 ships the most significant plugin development feature since the plugin system launched: <code>claude plugin eval</code>, a built-in evaluation runner that executes a suite of test prompts against your plugin, scores outputs using one of six grader types, and produces a JSON + HTML report you can gate in CI. Crucially, it also runs the same prompts against a <em>no-plugin baseline</em> — so you get an empirical answer to the question "does my plugin actually help?"</p>
+
+  <h3>The six grader types</h3>
+  <p>Four graders are free (no additional API calls); two call a judge model and consume tokens:</p>
+  <ul>
+    <li><strong><code>exact</code></strong> — string equality after normalisation. Use for deterministic outputs (IDs, structured JSON keys).</li>
+    <li><strong><code>contains</code></strong> — checks that the response includes a required substring. Use for mandatory disclaimers, required field mentions, or keyword presence.</li>
+    <li><strong><code>regex</code></strong> — matches against a regular expression. Use for format validation (phone numbers, dates, codes).</li>
+    <li><strong><code>json-schema</code></strong> — validates response against a JSON Schema. Use for any plugin that returns structured data.</li>
+    <li><strong><code>llm-judge</code></strong> — sends the prompt, expected criteria, and Claude's response to a judge model for a pass/fail verdict with reasoning. Use for open-ended quality or tone requirements.</li>
+    <li><strong><code>rubric</code></strong> — a scored variant of <code>llm-judge</code> that returns a 0–10 score on each rubric dimension. Use when you want aggregate quality tracking over time.</li>
+  </ul>
+
+  <h3>Running an eval</h3>
+  <pre><code># Run eval suite defined in plugin-eval.yaml
+claude plugin eval --config plugin-eval.yaml
+
+# Output: JSON report + HTML visualisation in ./eval-results/
+# Exit code 0 if all pass-threshold checks pass, 1 if any fail
+# --baseline flag included by default; suppress with --no-baseline</code></pre>
+
+  <p>The eval config file declares test cases, expected outputs, and which grader(s) to use per case. A minimal two-grader example:</p>
+
+  <pre><code>version: 1
+plugin: my-plugin
+threshold: 0.85   # overall pass rate required; CI fails below this
+cases:
+  - id: basic-lookup
+    prompt: "What is the capital of France?"
+    graders:
+      - type: contains
+        value: "Paris"
+  - id: tone-check
+    prompt: "Explain quantum entanglement in one sentence."
+    graders:
+      - type: llm-judge
+        criteria: "Response is accurate, uses an analogy, and is under 30 words."</code></pre>
+
+  <div class="callout tip">
+    <strong>How to use this in CI within 10 minutes</strong>
+    <p>Add a GitHub Actions step after your plugin test suite:</p>
+    <pre><code>- name: Plugin eval gate
+  run: claude plugin eval --config plugin-eval.yaml
+  env:
+    ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}</code></pre>
+    <p>The command exits non-zero if your overall pass rate falls below <code>threshold</code> or if any <code>exact</code>/<code>regex</code>/<code>json-schema</code> case fails. The HTML report is available as an artifact for debugging. The no-plugin baseline score is emitted to stdout so you can track the delta over time — a shrinking delta means your plugin is losing its edge.</p>
+  </div>
+
+  <h3>The baseline comparison</h3>
+  <p>This is the feature most plugin developers have been waiting for. Without a baseline, a plugin's 82% pass rate on your eval suite tells you nothing — is that good? Bad? The baseline run executes the same prompts with the plugin disabled and scores them with the same graders. If Claude scores 79% without your plugin, your plugin is adding 3 percentage points of net value. If Claude scores 84% without it, your plugin is actively hurting quality and you need to investigate why before shipping.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.269" class="source-link" target="_blank" rel="noopener">github.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">plugin eval</span>
+    <span class="tag">CI gate</span>
+    <span class="tag">graders</span>
+    <span class="tag">plugin development</span>
+    <span class="tag">v2.1.269</span>
+    <span class="tag">quality assurance</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — v2.1.269 Quality-of-Life: /output-style, Bash Diff, VSCode Agent Map
+     Source: https://github.com/anthropics/claude-code/releases/tag/v2.1.269
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> Four More v2.1.269 Upgrades Worth Knowing: Output Styles, Bash Diffs, Agent Maps, and Concurrent Limits</h2>
+
+  <p>Alongside the plugin eval runner, v2.1.269 ships four quality-of-life improvements that each address a common friction point in Claude Code workflows. None of these require configuration changes to start using — they are all available immediately after upgrading.</p>
+
+  <h3><code>/output-style [name]</code> — switch response format mid-session</h3>
+  <p>The new <code>/output-style</code> slash command lets you change Claude Code's output format inside a running remote or headless session without restarting. Available styles include <code>compact</code> (terse, no explanatory prose — useful for CI log parsing), <code>verbose</code> (full reasoning traces — useful for debugging), and <code>markdown</code> (default for interactive sessions). This is especially useful in remote sessions where you cannot interactively re-launch with different flags.</p>
+  <pre><code># Switch to compact output for the rest of this remote session
+/output-style compact
+
+# Back to markdown
+/output-style markdown</code></pre>
+
+  <h3>Bash tool diff panel — see exactly what changed</h3>
+  <p>When Claude Code's Bash tool writes or modifies a file, a new diff panel now appears inline showing the precise character-level changes made — the same format as <code>git diff</code>. This was one of the top-requested improvements from Claude Code users: previously, you had to run <code>git diff</code> yourself to confirm whether a Bash command had the intended effect. The diff panel appears automatically for any Bash invocation that modifies tracked files; it can be dismissed with <kbd>Escape</kbd> or suppressed globally with <code>--no-bash-diff</code>.</p>
+
+  <div class="callout tip">
+    <strong>Practical implication</strong>
+    <p>For permission-gated workflows — where a human reviews each Bash step before approving — the diff panel dramatically reduces review time. You can now verify changes at the character level without context-switching to a terminal.</p>
+  </div>
+
+  <h3>VSCode agent map — visual sub-agent orchestration</h3>
+  <p>The VSCode extension gains an <em>agent map</em>: a sidebar panel that renders your active Claude Code session as a graph, showing the root agent and all spawned sub-agents as nodes with per-agent status cards (running, waiting, completed, failed). Edges represent the spawn relationship. This makes it much easier to understand what is happening in complex multi-agent workflows — particularly when a sub-agent has stalled or is consuming unexpectedly high resources. Clicking a node opens that agent's tool-call log.</p>
+
+  <h3>Concurrent agent limits via <code>CLAUDE_CODE_WORKFLOW_MAX_CONCURRENT_AGENTS</code></h3>
+  <p>A new environment variable caps how many sub-agents can run simultaneously within a single Claude Code session. The default remains uncapped for backward compatibility, but setting this variable prevents resource exhaustion on shared machines or in environments with API rate limits:</p>
+  <pre><code># Allow at most 4 concurrent sub-agents (others queue until a slot opens)
+export CLAUDE_CODE_WORKFLOW_MAX_CONCURRENT_AGENTS=4</code></pre>
+  <p>When the cap is hit, additional <code>Task</code> tool invocations queue internally and resume as slots free up. This pairs well with the new agent map — you can watch the queue drain in real time from the VSCode sidebar.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.269" class="source-link" target="_blank" rel="noopener">github.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">output-style</span>
+    <span class="tag">Bash diff</span>
+    <span class="tag">VSCode</span>
+    <span class="tag">agent map</span>
+    <span class="tag">concurrent agents</span>
+    <span class="tag">v2.1.269</span>
+    <span class="tag">developer experience</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

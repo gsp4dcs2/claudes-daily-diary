@@ -14378,6 +14378,69 @@ def img_seurat_20260912():
     return base
 
 
+def img_rothko_20260913():
+    """Mark Rothko colour field — three gravely luminous bands — nuclear safeguards, weapons evals, cyber incidents."""
+    # Near-black background — weight and depth
+    base = Image.new("RGB", (W, H), (14, 11, 18))
+
+    def soft_band(img, y0, y1, colour, feather=65):
+        """Soft-edged Rothko colour band with feathered top and bottom."""
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        r, g, b = colour
+        # Core solid band
+        bd.rectangle([(90, y0 + feather), (W - 90, y1 - feather)], fill=(r, g, b, 210))
+        # Feathered top edge
+        for i in range(feather):
+            alpha = int(175 * (i / feather))
+            bd.rectangle([(90 + i, y0 + i), (W - 90 - i, y0 + i + 1)], fill=(r, g, b, alpha))
+        # Feathered bottom edge
+        for i in range(feather):
+            alpha = int(175 * ((feather - i) / feather))
+            bd.rectangle([(90 + i, y1 - i - 1), (W - 90 - i, y1 - i)], fill=(r, g, b, alpha))
+        return comp(img, bl)
+
+    # Top band — deep government-slate blue: nuclear partnership and national security
+    base = soft_band(base, 35,  235, (32, 62, 128),  feather=60)
+    # Middle band — dark warning amber: dual-use capability signal, widest and most luminous
+    base = soft_band(base, 210, 420, (178, 98, 22),  feather=70)
+    # Bottom band — deep crimson-rust: gravity of cyber incidents and autonomous access
+    base = soft_band(base, 395, 595, (122, 28, 38),  feather=58)
+
+    # Inner glow on middle (amber) band — heightened tension, luminous core
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for i in range(45):
+        alpha = int(55 * (1 - i / 45))
+        y0g, y1g = 275 + i, 360 - i
+        if y1g <= y0g:
+            break
+        gd.rectangle([(220 + i, y0g), (W - 220 - i, y1g)], fill=(230, 170, 60, alpha))
+    base = comp(base, gl)
+
+    # Subtle luminous edge on top band — government authority glint
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    for i in range(35):
+        alpha = int(45 * (1 - i / 35))
+        td.rectangle([(150 + i, 80 + i), (W - 150 - i, 100 + i)], fill=(100, 150, 230, alpha))
+    base = comp(base, tl)
+
+    # Faint vertical texture — sense of weight and gravitas
+    vl = layer()
+    vd = ImageDraw.Draw(vl)
+    for _ in range(180):
+        x = rng.randint(90, W - 90)
+        y0v = rng.randint(0, H - 80)
+        y1v = y0v + rng.randint(30, 120)
+        alpha = rng.randint(4, 18)
+        shade = rng.randint(30, 80)
+        vd.rectangle([(x, y0v), (x + 1, y1v)], fill=(shade, shade + 10, shade + 30, alpha))
+    base = comp(base, vl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -14672,6 +14735,7 @@ DAYS = [
     ("2026-09-10", img_moholy_20260910,   "Effort Caps",     "László Moholy-Nagy"),
     ("2026-09-11", img_malevich_20260911, "Threat Intel",    "Kazimir Malevich"),
     ("2026-09-12", img_seurat_20260912,  "Plugin Scores",   "Georges Seurat"),
+    ("2026-09-13", img_rothko_20260913,  "Safety Reckoning", "Mark Rothko"),
 ]
 
 for date, fn, kw, artist in DAYS:

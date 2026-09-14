@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="September 14: Anthropic's temporary 50% Claude Code boost ends today as the permanent 25% increase kicks in — a net 17% cut from current levels; auto mode classifier calls are now exempt from limits; Smart Reports land in Enterprise beta; and ant apply ships Terraform-style agent deployment.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-09-14 – Limits Reset, Smart Reports Beta, and ant apply IaC">
+  <meta property="og:description" content="September 14: Anthropic's temporary 50% Claude Code boost ends today as the permanent 25% increase kicks in — a net 17% cut from current levels; auto mode classifier calls are now exempt from limits; Smart Reports land in Enterprise beta; and ant apply ships Terraform-style agent deployment.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/09/2026-09-14.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/09/2026-09-14.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/09/2026-09-14.png">
+
+  <title>2026-09-14 – Limits Reset, Smart Reports Beta, and ant apply IaC | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Limits Reset, Smart Reports Beta, and ant apply IaC",
+  "description": "September 14: Anthropic's temporary 50% Claude Code boost ends today as the permanent 25% increase kicks in — a net 17% cut from current levels; auto mode classifier calls are now exempt from limits; Smart Reports land in Enterprise beta; and ant apply ships Terraform-style agent deployment.",
+  "datePublished": "2026-09-14",
+  "dateModified": "2026-09-14",
+  "url": "https://claudebeat.ai/articles/2026/09/2026-09-14.html",
+  "image": "https://claudebeat.ai/articles/2026/09/2026-09-14.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/09/2026-09-14.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-09-14</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Limits Reset, Smart Reports Beta, and ant apply IaC</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-09-14.png" alt="Limits Reset, Smart Reports Beta, and ant apply IaC — visual for 2026-09-14">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code Weekly Limits Reset: Permanent +25% Replaces Temporary +50%
+     Source: https://www.bleepingcomputer.com/news/artificial-intelligence/anthropic-is-cutting-claude-codes-current-weekly-limits-by-17-percent/
+     Source: https://aicatchup.com/news/claude-code-weekly-limits-50-percent-promo
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code Limits Reset Today: The +25% Is Permanent, but It Replaced a +50% — Here Is the Actual Math</h2>
+
+  <p>Today, September 14, Anthropic's five-month temporary 50% weekly usage boost for Claude Code expires, and the permanent 25% increase takes its place. Anthropic has framed this as a permanent uplift — and structurally it is — but the practical effect for anyone who has been using Claude Code since May is a 17% reduction in what they can do this week versus last week. The community flagged the framing gap and Anthropic's own employees acknowledged the messaging could have led with the net change.</p>
+
+  <h3>The arithmetic, clearly</h3>
+  <ul>
+    <li>Original baseline weekly allowance: call it <strong>100 units</strong>.</li>
+    <li>Temporary +50% boost (in effect since May 2026): <strong>150 units</strong>.</li>
+    <li>New permanent +25% baseline (effective today): <strong>125 units</strong>.</li>
+    <li>Change from what you had yesterday: <strong>−17%</strong>.</li>
+  </ul>
+
+  <p>The temporary boost was extended repeatedly — through mid-July, then July 19, then August 19, then August 31, then September 13. Users who stretched their workloads to fill the 150-unit envelope will need to trim. Users who never hit the ceiling will notice nothing.</p>
+
+  <h3>The partial offset: auto mode classifier calls are now free</h3>
+  <p>In the same announcement, Anthropic confirmed that auto mode's background permission classifier no longer counts against weekly usage limits on Pro, Max, and Team plans. Auto mode routes every tool call through a safety classifier before executing it — previously those classifier API calls consumed the same quota as any other turn. They no longer do. For users who run Claude Code in auto mode on long agentic sessions with many tool calls, this partially offsets the raw limit reduction. The exemption applies immediately and requires no configuration change.</p>
+
+  <div class="callout tip">
+    <strong>What to check right now</strong>
+    <p>If your Claude Code sessions regularly approach the weekly ceiling, do two things. First, run <code>/status</code> in a Claude Code session to see your current weekly usage. Second, evaluate whether the work patterns that were filling your 150-unit allowance can be restructured — for example, by consolidating multiple short sessions into fewer, denser ones, or by routing high-volume automation through the API directly (which has separate rate limits). The limit change is permanent; it will not be boosted again for the foreseeable future.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://www.bleepingcomputer.com/news/artificial-intelligence/anthropic-is-cutting-claude-codes-current-weekly-limits-by-17-percent/" class="source-link" target="_blank" rel="noopener">bleepingcomputer.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">usage limits</span>
+    <span class="tag">weekly quota</span>
+    <span class="tag">auto mode</span>
+    <span class="tag">permission classifier</span>
+    <span class="tag">Pro</span>
+    <span class="tag">Max</span>
+    <span class="tag">Team</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Smart Reports in Claude Enterprise (Beta)
+     Source: https://support.claude.com/en/articles/12883420-view-usage-analytics-for-team-and-enterprise-plans
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Enterprise Gets Smart Reports: AI-Written Usage Analytics That Surface Costs, Friction, and Reusable Patterns</h2>
+
+  <p>Anthropic has launched Smart Reports in beta for Claude Enterprise customers. Rather than exposing raw usage dashboards, Smart Reports generates a narrative AI-written analysis of how an organisation actually uses Claude — covering what kinds of work dominate, what each category costs, where sessions run into repeated friction, and which repeated workflows are good candidates for packaging as shared skills. The feature covers Claude chat, Claude Code, and Claude Cowork, with a look-back window of up to 28 days.</p>
+
+  <h3>What a Smart Report covers</h3>
+  <ul>
+    <li><strong>Usage breakdown by work type:</strong> Categorises sessions into coding, writing, research, analysis, and other buckets automatically.</li>
+    <li><strong>Cost per category:</strong> Shows token cost disaggregated by work type and by team, group, department, or cost center — scoping is flexible.</li>
+    <li><strong>Friction signals:</strong> Surfaces common failure patterns in aggregate — connector failures, rework loops, tool errors, and unproductive session sequences — without exposing individual conversations.</li>
+    <li><strong>Skill packaging candidates:</strong> Flags repeated prompt patterns that appear across users and that would benefit from being wrapped into a shared skill with a stable system prompt and tool configuration.</li>
+  </ul>
+
+  <h3>Setup and restrictions</h3>
+  <p>Smart Reports is off by default. An Enterprise Owner or Primary Owner must enable it in admin settings. Beta access includes 10 free reports per organisation per month. The feature is not available for organisations using customer-managed encryption keys, HIPAA configurations, Access Transparency, or zero-data-retention Claude Code — because generating the report requires aggregating session metadata that those privacy configurations explicitly prohibit.</p>
+
+  <div class="callout">
+    <strong>What this means for platform buyers and IT leads</strong>
+    <p>Smart Reports addresses one of the hardest questions in enterprise AI adoption: "Where exactly is the value?" Instead of requiring custom BI work to parse API logs, the feature gives a quarterly-review-ready narrative automatically. For teams considering Anthropic's higher-tier Enterprise pricing, the ability to demonstrate ROI by work category — rather than just token counts — is a meaningful differentiator. Enable it, run a report scoped to your highest-cost team, and use the friction findings to prioritise where to invest in shared skills or connector fixes.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://support.claude.com/en/articles/12883420-view-usage-analytics-for-team-and-enterprise-plans" class="source-link" target="_blank" rel="noopener">support.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Enterprise</span>
+    <span class="tag">Smart Reports</span>
+    <span class="tag">usage analytics</span>
+    <span class="tag">cost tracking</span>
+    <span class="tag">shared skills</span>
+    <span class="tag">beta</span>
+    <span class="tag">admin</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — ant apply: Terraform-Style Deployment for Claude Platform Resources
+     Source: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/apply
+     Source: https://github.com/anthropics/anthropic-cli
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> ant apply Ships in v1.30.0 — Declare Claude Agents, Skills, and Environments as Code</h2>
+
+  <p>Version 1.30.0 of Anthropic's <code>ant</code> CLI, released September 3, adds <code>ant apply</code> — a Terraform-style workflow that lets you declare Claude Platform resources (agents, skills, environments, memory stores, and scheduled deployments) as files in your repository and reconcile them against the API with a single command. The feature addresses one of the key friction points in production agent deployments: the divergence between what is in your codebase and what is actually running in the Claude Platform.</p>
+
+  <h3>How it works</h3>
+  <p>Each resource type has a YAML or JSON definition format. You create these files alongside your application code, then run <code>ant apply</code>. The CLI reads your local definitions, compares them to the current API state, shows you a diff-style plan of what will be created, updated, or deleted, and asks you to confirm before making any changes. On the first run, it writes a <code>claude-lock.json</code> that records the resource IDs — subsequent runs update the same resources rather than creating duplicates.</p>
+
+  <pre><code># Example: declare an agent in agents/my-agent.yaml
+name: my-agent
+model: claude-opus-5
+system_prompt_file: prompts/my-agent.md
+tools:
+  - bash
+  - file_editor
+memory_store: my-project-memory
+environment: production
+
+# Then deploy:
+ant apply</code></pre>
+
+  <h3>Why this matters for teams</h3>
+  <ul>
+    <li><strong>Drift prevention:</strong> Without <code>ant apply</code>, it is common for an agent's system prompt to be updated in the platform UI but not reflected in version control — or vice versa. The lock file enforces a single source of truth.</li>
+    <li><strong>PR-driven deployment:</strong> Because agent definitions are plain files, they go through code review, CI checks, and branch protection like any other infrastructure change.</li>
+    <li><strong>Rollback:</strong> Revert a commit, re-run <code>ant apply</code>, and the platform resources revert to the previous state.</li>
+    <li><strong>Scheduled deployment support:</strong> Cron-based deployments (like a daily diary update agent) can be declared in the repository rather than configured manually in the platform console.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Getting started</strong>
+    <p>Install or update: <code>npm install -g @anthropic-ai/ant</code> (or the equivalent for your package manager). Run <code>ant apply --help</code> to see all supported resource types. Start by exporting your existing platform resources with <code>ant export</code> to generate the initial definition files — this avoids having to write them from scratch for resources you already have running.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/cli-sdks-libraries/cli/apply" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">ant CLI</span>
+    <span class="tag">ant apply</span>
+    <span class="tag">infrastructure as code</span>
+    <span class="tag">Claude Platform</span>
+    <span class="tag">agents</span>
+    <span class="tag">deployment</span>
+    <span class="tag">developer tooling</span>
+    <span class="tag">GitOps</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

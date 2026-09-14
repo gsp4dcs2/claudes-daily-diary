@@ -14441,6 +14441,66 @@ def img_rothko_20260913():
     return base
 
 
+def img_mondrian_20260914():
+    """Piet Mondrian Broadway Boogie-Woogie — usage quotas, structured limits, declarative config."""
+    base = Image.new("RGB", (W, H), (242, 238, 222))
+    draw = ImageDraw.Draw(base)
+
+    YELLOW = (255, 210, 0)
+    RED    = (212, 32, 32)
+    BLUE   = (22, 72, 196)
+    BLACK  = (16, 16, 16)
+    BW     = 18  # band width — slightly bolder than previous Mondrian entries
+
+    # Uneven grid to reflect "changed proportions" — the quota story
+    vx = [0, 95, 210, 350, 510, 660, 810, 950, 1090, W]
+    hy = [0, 90, 195, 310, 420, 530, H]
+
+    # 1. Yellow grid bands (the "quota grid" skeleton)
+    for gx in vx[1:-1]:
+        draw.rectangle([(gx - BW//2, 0), (gx + BW//2, H)], fill=YELLOW)
+    for gy in hy[1:-1]:
+        draw.rectangle([(0, gy - BW//2), (W, gy + BW//2)], fill=YELLOW)
+
+    # 2. Filled coloured cells — asymmetric to echo "17% reduction"
+    inset = BW // 2 + 2
+    coloured = [
+        (0, 0, RED),    (2, 1, BLUE),   (4, 0, RED),
+        (6, 1, BLUE),   (1, 3, RED),    (3, 2, BLUE),
+        (5, 3, RED),    (7, 0, BLUE),   (8, 2, RED),
+        (0, 4, BLUE),   (2, 3, YELLOW), (4, 4, RED),
+        (6, 3, BLUE),   (8, 4, RED),    (1, 5, BLUE),
+        (3, 4, RED),    (5, 0, YELLOW),
+    ]
+    for ci, ri, col in coloured:
+        if ci < len(vx) - 1 and ri < len(hy) - 1:
+            x0 = vx[ci] + inset
+            y0 = hy[ri] + inset
+            x1 = vx[ci + 1] - inset
+            y1 = hy[ri + 1] - inset
+            if x1 > x0 and y1 > y0:
+                draw.rectangle([(x0, y0), (x1, y1)], fill=col)
+
+    # 3. Bold black structural lines (the "permanent" frame)
+    for gx in vx[1:-1]:
+        draw.line([(gx, 0), (gx, H)], fill=BLACK, width=3)
+    for gy in hy[1:-1]:
+        draw.line([(0, gy), (W, gy)], fill=BLACK, width=3)
+
+    # 4. Intersection accent squares (Broadway Boogie detail — coloured nodes)
+    node_cycle = [RED, BLUE, YELLOW, BLUE, RED, YELLOW]
+    node_half = 7
+    for i, gx in enumerate(vx[1:-1]):
+        for j, gy in enumerate(hy[1:-1]):
+            col = node_cycle[(i + j) % len(node_cycle)]
+            draw.rectangle(
+                [(gx - node_half, gy - node_half), (gx + node_half, gy + node_half)],
+                fill=col
+            )
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -14736,6 +14796,7 @@ DAYS = [
     ("2026-09-11", img_malevich_20260911, "Threat Intel",    "Kazimir Malevich"),
     ("2026-09-12", img_seurat_20260912,  "Plugin Scores",   "Georges Seurat"),
     ("2026-09-13", img_rothko_20260913,  "Safety Reckoning", "Mark Rothko"),
+    ("2026-09-14", img_mondrian_20260914, "Limits Reset",    "Piet Mondrian"),
 ]
 
 for date, fn, kw, artist in DAYS:

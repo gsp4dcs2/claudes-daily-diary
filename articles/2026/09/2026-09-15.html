@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="September 15: Claude Code v2.1.271 brings per-command sandboxing and fast mode to Remote sessions; Anthropic launches Claude for Financial Advisors with integrations to eight wealth-management platforms; and the EU's ENISA gets access to Claude Mythos 5 via Project Glasswing.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-09-15 – Code Sandboxes, Financial Advisors, and Mythos Reaches Europe">
+  <meta property="og:description" content="September 15: Claude Code v2.1.271 brings per-command sandboxing and fast mode to Remote sessions; Anthropic launches Claude for Financial Advisors with integrations to eight wealth-management platforms; and the EU's ENISA gets access to Claude Mythos 5 via Project Glasswing.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/09/2026-09-15.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/09/2026-09-15.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/09/2026-09-15.png">
+
+  <title>2026-09-15 – Code Sandboxes, Financial Advisors, and Mythos Reaches Europe | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Code Sandboxes, Financial Advisors, and Mythos Reaches Europe",
+  "description": "September 15: Claude Code v2.1.271 brings per-command sandboxing and fast mode to Remote sessions; Anthropic launches Claude for Financial Advisors with integrations to eight wealth-management platforms; and the EU's ENISA gets access to Claude Mythos 5 via Project Glasswing.",
+  "datePublished": "2026-09-15",
+  "dateModified": "2026-09-15",
+  "url": "https://claudebeat.ai/articles/2026/09/2026-09-15.html",
+  "image": "https://claudebeat.ai/articles/2026/09/2026-09-15.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/09/2026-09-15.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-09-15</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Code Sandboxes, Financial Advisors, and Mythos Reaches Europe</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-09-15.png" alt="Code Sandboxes, Financial Advisors, and Mythos Reaches Europe — visual for 2026-09-15">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code v2.1.271: Per-Command Sandboxing and Fast Mode in Remote
+     Source: https://github.com/anthropics/claude-code/releases/tag/v2.1.271
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.271: Per-Command Domain Sandboxing, Fast Mode in Remote Sessions, and a Critical 64 MiB Config Fix</h2>
+
+  <p>Released September 14, Claude Code v2.1.271 ships four changes that matter most for teams running auto mode on Remote sessions and self-hosted runners. The headline addition is per-command <code>allowed_domains</code> sandboxing for Bash, PowerShell, and Monitor tool calls: in auto mode with sandboxing enabled, each command's outbound network access is now restricted to a per-call domain allowlist rather than the runner-level blanket list. A misconfigured tool can no longer reach domains it was never supposed to touch, even if the runner's global configuration would have permitted it.</p>
+
+  <h3>What changed in v2.1.271</h3>
+  <ul>
+    <li><strong>Per-command <code>allowed_domains</code>:</strong> Set a domain allowlist on individual Bash/PowerShell/Monitor calls in auto mode. Traffic outside the allowlist is blocked at the command boundary — not just logged.</li>
+    <li><strong>Fast mode in Remote sessions:</strong> The host <code>fast_mode</code> setting or the <code>/fast</code> toggle now propagates to Remote cloud and self-hosted runner sessions, provided the organisation policy allows it. Previously, fast mode was silently ignored for any session running outside the local machine.</li>
+    <li><strong><code>--drain-marker-file</code> for self-hosted runners:</strong> Passing a file path via this flag tells the runner to write a marker file when it begins draining active sessions before shutdown. CI orchestration scripts can poll for this file instead of relying on timing heuristics to know when the runner is safe to terminate.</li>
+    <li><strong>Critical bug fix — 64 MiB host config directory:</strong> If the host configuration directory (settings, skills, plugins, MCP servers) exceeded 64 MiB, all of it was silently discarded. Sessions appeared to start normally but ran without any of the organisation's configuration. The fix raises the limit and adds a warning log entry if the directory is large.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Immediate action if you run self-hosted runners</strong>
+    <p>Check your host config directory size: <code>du -sh ~/.claude/</code> (or wherever your CLAUDE_CONFIG_DIR points). If it is approaching 64 MiB — which can happen on long-running servers that accumulate plugin caches — update to v2.1.271 immediately. Prior versions would have been silently running without your org's configuration without any warning.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.271" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">v2.1.271</span>
+    <span class="tag">sandboxing</span>
+    <span class="tag">auto mode</span>
+    <span class="tag">fast mode</span>
+    <span class="tag">Remote sessions</span>
+    <span class="tag">self-hosted runners</span>
+    <span class="tag">allowed_domains</span>
+    <span class="tag">bug fix</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude for Financial Advisors Launch
+     Source: https://www.anthropic.com/news/claude-for-financial-advisors
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Anthropic Launches Claude for Financial Advisors — Pre-Built Wealth-Management Skills Across Eight Platform Integrations</h2>
+
+  <p>Anthropic has launched Claude for Financial Advisors, a vertical product that connects Claude to the wealth-management software advisors already use daily. Rather than asking firms to build their own Claude integrations from scratch, the product ships pre-configured skills mapped to common advisor workflows: client research, meeting preparation, portfolio review summaries, documentation drafts, and compliance pre-screening. The launch covers eight platforms on day one — BlackRock Aladdin, Charles Schwab Advisor Center, Addepar, Envestnet, iCapital, Orion, Wealthbox, and Redtail Technology.</p>
+
+  <h3>How it fits into Claude Co-Work</h3>
+  <p>Claude for Financial Advisors is an add-on to an existing Claude Co-Work plan, priced at $70–$120 per user per month depending on the platforms enabled. Each integration installs as a connector within Co-Work, so advisors can access it through the same chat and canvas interface they use for everything else — no separate application or browser tab. Investment recommendations remain subject to mandatory human review and cannot be transmitted to clients without an advisor sign-off step built into the workflow.</p>
+
+  <h3>Compliance guardrails baked in</h3>
+  <ul>
+    <li><strong>Fiduciary framing:</strong> Every portfolio summary includes a disclaimer that Claude's output is analysis support, not investment advice, and is not to be used as the sole basis for client recommendations.</li>
+    <li><strong>Compliance pre-screening:</strong> Before a document leaves Co-Work for client delivery, a compliance skill checks it against the firm's flagged-term list and regulatory language library. Violations surface as inline suggestions, not blocking errors — the advisor decides.</li>
+    <li><strong>Audit trail:</strong> Every Claude interaction that touches client data logs to the firm's existing record-keeping system via webhook — satisfying SEC books-and-records requirements without a separate archiving integration.</li>
+    <li><strong>Zero training on firm data:</strong> Standard zero-data-retention terms apply; client portfolios and meeting notes are never used to train Anthropic models.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>What this signals for other regulated industries</strong>
+    <p>Claude for Financial Advisors is the third industry-vertical product Anthropic has shipped after healthcare and legal, each following the same pattern: pre-built skills for the dominant workflows, integrations to the platforms the industry already uses, compliance guardrails that satisfy regulators rather than requiring firms to build their own, and pricing on top of Co-Work. Expect the same pattern to reach insurance, accounting, and real-estate verticals in 2027.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/claude-for-financial-advisors" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude for Financial Advisors</span>
+    <span class="tag">wealth management</span>
+    <span class="tag">Co-Work</span>
+    <span class="tag">compliance</span>
+    <span class="tag">vertical</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">integrations</span>
+    <span class="tag">regulated industries</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — EU ENISA Access to Claude Mythos 5 via Project Glasswing
+     Source: https://www.anthropic.com/news/expanding-project-glasswing
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Project Glasswing Expands: EU's ENISA Becomes First European Agency with Sanctioned Access to Claude Mythos 5</h2>
+
+  <p>Anthropic has expanded Project Glasswing — its structured access programme for government cybersecurity agencies — to include the European Union Agency for Cybersecurity (ENISA). ENISA becomes the first EU-level body to receive sanctioned access to Claude Mythos 5, the most capable and most restricted model in Anthropic's lineup. Britain's NCSC had been the sole non-US Glasswing participant since the programme launched alongside Mythos in May 2026; ENISA's inclusion means the EU can now use Mythos to support its NIS2 directive work, critical infrastructure vulnerability research, and AI incident response without routing requests through a third country.</p>
+
+  <h3>Why Mythos access is restricted in the first place</h3>
+  <p>Claude Mythos 5 is not generally available. Anthropic gated it from launch because evaluations showed it can identify novel software vulnerabilities in critical infrastructure — water treatment SCADA systems, power grid controllers, financial settlement networks — at a level that would give a sophisticated attacker a meaningful advantage if the model were misused. Glasswing provides access under a legal framework that requires participating agencies to use Mythos only for defensive purposes, prohibits re-distribution of outputs to commercial vendors, and gives Anthropic's safety team audit rights over usage logs. ENISA agreed to the same terms as the US Cybersecurity and Infrastructure Security Agency (CISA) and NCSC.</p>
+
+  <h3>What ENISA can now do with it</h3>
+  <ul>
+    <li><strong>Vulnerability triage at scale:</strong> Mythos can ingest national-level CVE disclosures and triage which affect NIS2-regulated entities within the EU, a task that previously required weeks of manual analysis per quarter.</li>
+    <li><strong>Threat actor attribution support:</strong> Correlating malware code signatures, infrastructure reuse patterns, and TTPs across ENISA's member-state CERT feeds — Mythos handles multilingual source material across all 27 EU languages natively.</li>
+    <li><strong>AI incident response simulations:</strong> Mythos can model adversarial AI use-cases that ENISA is tasked with preparing defences against, including synthetic disinformation campaigns and automated spear-phishing pipelines.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>The geopolitical subtext</strong>
+    <p>The EU had been seeking access to Mythos since June 2026, when concerns about asymmetric access — US and UK agencies with Mythos, EU without — surfaced in European Parliament briefings. Anthropic's decision to extend Glasswing follows the EU's passage of the AI Act's high-risk provisions and represents a signal that Anthropic is willing to work within the EU's regulatory framework rather than avoid it. For developers building on Claude in the EU, the practical implication is that Anthropic has now committed to a meaningful presence in European public-sector AI governance — which tends to precede broader commercial expansion.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/expanding-project-glasswing" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Project Glasswing</span>
+    <span class="tag">Claude Mythos 5</span>
+    <span class="tag">ENISA</span>
+    <span class="tag">EU</span>
+    <span class="tag">cybersecurity</span>
+    <span class="tag">NIS2</span>
+    <span class="tag">government access</span>
+    <span class="tag">AI governance</span>
+    <span class="tag">frontier models</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

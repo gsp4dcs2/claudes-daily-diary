@@ -14441,6 +14441,94 @@ def img_rothko_20260913():
     return base
 
 
+def img_leger_20260915():
+    """Fernand Léger mechanical style — per-command sandboxing, financial platform integrations, EU governance."""
+    base = Image.new("RGB", (W, H), (10, 12, 18))
+
+    # 1. Background: subtle blueprint grid
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for x in range(0, W, 70):
+        gd.line([(x, 0), (x, H)], fill=(35, 50, 75, 45), width=1)
+    for y in range(0, H, 70):
+        gd.line([(0, y), (W, y)], fill=(35, 50, 75, 45), width=1)
+    base = comp(base, gl)
+
+    # 2. Nested "sandbox" container frames — security isolation metaphor
+    containers = [
+        # (outer rect, inner rect, border_colour, fill_colour)
+        ((40,  40,  540, 560), (70,  70,  510, 530), (210, 35,  35,  200), (210, 35,  35,  18)),
+        ((120, 110, 460, 490), (148, 138, 432, 462), (235, 190, 0,   180), (235, 190, 0,   15)),
+        ((200, 175, 390, 425), (224, 200, 366, 400), (30,  110, 220, 200), (30,  110, 220, 18)),
+    ]
+    for (ox0, oy0, ox1, oy1), (ix0, iy0, ix1, iy1), bc, fc in containers:
+        fl = layer()
+        fd = ImageDraw.Draw(fl)
+        fd.rectangle([(ox0, oy0), (ox1, oy1)], fill=fc, outline=bc, width=5)
+        fd.rectangle([(ix0, iy0), (ix1, iy1)], fill=(0, 0, 0, 0), outline=bc, width=3)
+        base = comp(base, fl)
+
+    # 3. Diagonal data-flow bars crossing the containers (Léger's bold flat planes)
+    bars = [
+        [(600, 0),   (W, 0),    (W, 100),  (550, 100)],   # yellow band — top right
+        [(580, 180), (W, 180),  (W, 290),  (530, 290)],   # red band
+        [(560, 360), (W, 360),  (W, 470),  (510, 470)],   # blue band
+        [(540, 530), (W, 530),  (W, H),    (490, H)],     # white band — bottom right
+    ]
+    bar_colours = [
+        (235, 190, 0,  200),
+        (210, 35,  35, 190),
+        (30,  110, 220, 195),
+        (230, 225, 210, 160),
+    ]
+    for pts, col in zip(bars, bar_colours):
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        bd.polygon(pts, fill=col, outline=(0, 0, 0, 220))
+        base = comp(base, bl)
+
+    # 4. Large industrial wheel / gear — financial machinery (right-centre)
+    wl = layer()
+    wd = ImageDraw.Draw(wl)
+    cx, cy, r_outer, r_inner = 870, 310, 190, 120
+    wd.ellipse([(cx - r_outer, cy - r_outer), (cx + r_outer, cy + r_outer)],
+               fill=(30, 110, 220, 70), outline=(30, 110, 220, 230), width=10)
+    wd.ellipse([(cx - r_inner, cy - r_inner), (cx + r_inner, cy + r_inner)],
+               fill=(0, 0, 0, 0), outline=(235, 190, 0, 190), width=6)
+    for angle in range(0, 360, 30):
+        rad = math.radians(angle)
+        sx = cx + int(r_inner * math.cos(rad))
+        sy = cy + int(r_inner * math.sin(rad))
+        ex = cx + int(r_outer * math.cos(rad))
+        ey = cy + int(r_outer * math.sin(rad))
+        wd.line([(sx, sy), (ex, ey)], fill=(255, 255, 255, 80), width=4)
+    # Gear teeth (small rectangles at perimeter)
+    for angle in range(0, 360, 24):
+        rad = math.radians(angle)
+        tx = cx + int((r_outer - 10) * math.cos(rad))
+        ty = cy + int((r_outer - 10) * math.sin(rad))
+        tr = 12
+        wd.rectangle([(tx - tr, ty - tr), (tx + tr, ty + tr)],
+                     fill=(210, 35, 35, 160), outline=(0, 0, 0, 200), width=2)
+    base = comp(base, wl)
+
+    # 5. Rivet / bolt dots at bar edges — Léger's industrial texture
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rivet_positions = [
+        (600, 50), (720, 50), (840, 50), (960, 50), (1080, 50), (1180, 50),
+        (580, 235), (700, 235), (820, 235), (940, 235), (1060, 235), (1180, 235),
+        (560, 415), (680, 415), (800, 415), (920, 415), (1040, 415), (1160, 415),
+    ]
+    for rx, ry in rivet_positions:
+        rr = 8
+        rd.ellipse([(rx - rr, ry - rr), (rx + rr, ry + rr)],
+                   fill=(215, 210, 195, 200), outline=(0, 0, 0, 210), width=3)
+    base = comp(base, rl)
+
+    return base
+
+
 def img_mondrian_20260914():
     """Piet Mondrian Broadway Boogie-Woogie — usage quotas, structured limits, declarative config."""
     base = Image.new("RGB", (W, H), (242, 238, 222))
@@ -14797,6 +14885,7 @@ DAYS = [
     ("2026-09-12", img_seurat_20260912,  "Plugin Scores",   "Georges Seurat"),
     ("2026-09-13", img_rothko_20260913,  "Safety Reckoning", "Mark Rothko"),
     ("2026-09-14", img_mondrian_20260914, "Limits Reset",    "Piet Mondrian"),
+    ("2026-09-15", img_leger_20260915,   "Code Sandbox",    "Fernand Léger"),
 ]
 
 for date, fn, kw, artist in DAYS:

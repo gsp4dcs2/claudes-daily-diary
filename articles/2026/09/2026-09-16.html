@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="September 16: Claude Code v2.1.273 ships LLM gateway hint headers, Remote session forking, and critical permission security patches; plus Claude autonomously formalises Fermat's Last Theorem in Lean after 11 continuous days of work.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-09-16 – Gateway Headers, Session Forking, and Fermat's Last Theorem">
+  <meta property="og:description" content="September 16: Claude Code v2.1.273 ships LLM gateway hint headers, Remote session forking, and critical permission security patches; plus Claude autonomously formalises Fermat's Last Theorem in Lean after 11 continuous days of work.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/09/2026-09-16.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/09/2026-09-16.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/09/2026-09-16.png">
+
+  <title>2026-09-16 – Gateway Headers, Session Forking, and Fermat's Last Theorem | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Gateway Headers, Session Forking, and Fermat's Last Theorem",
+  "description": "September 16: Claude Code v2.1.273 ships LLM gateway hint headers, Remote session forking, and critical permission security patches; plus Claude autonomously formalises Fermat's Last Theorem in Lean after 11 continuous days of work.",
+  "datePublished": "2026-09-16",
+  "dateModified": "2026-09-16",
+  "url": "https://claudebeat.ai/articles/2026/09/2026-09-16.html",
+  "image": "https://claudebeat.ai/articles/2026/09/2026-09-16.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/09/2026-09-16.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-09-16</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Gateway Headers, Session Forking, and Fermat's Last Theorem</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-09-16.png" alt="Gateway Headers, Session Forking, and Fermat's Last Theorem — visual for 2026-09-16">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code v2.1.273: LLM Gateway Hint Headers, Session Forking, Permission Security Fixes
+     Source: https://github.com/anthropics/claude-code/releases/tag/v2.1.273
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.273: LLM Gateway Hint Headers, Remote Session Forking, and Critical Permission Security Patches</h2>
+
+  <p>Released late on September 15, Claude Code v2.1.273 is a substantive drop with one brand-new capability for gateway operators, a quality-of-life improvement for Remote Control users, and three security-related permission fixes that close real bypass paths. The headline feature is opt-in request headers that expose session metadata to LLM gateways and proxies — closing a gap that has made gateway-level observability, routing, and cost attribution awkward for teams running Claude behind corporate proxies or custom inference routers.</p>
+
+  <h3>LLM Gateway Hint Headers</h3>
+  <p>Set the environment variable <code>CLAUDE_CODE_GATEWAY_HINT_HEADERS=1</code> in your runner or <code>.env</code> to activate five new request headers on every outbound API call:</p>
+  <ul>
+    <li><code>x-claude-code-request-class</code> — classifies the request type (e.g. <code>tool_use</code>, <code>interactive</code>, <code>batch</code>)</li>
+    <li><code>x-claude-code-agent-type</code> — identifies whether the request came from a human turn, a subagent, or auto mode</li>
+    <li><code>x-claude-code-prev-tool-durations</code> — JSON array of the previous turn's tool execution times in milliseconds, enabling adaptive timeout policies at the proxy</li>
+    <li><code>x-claude-code-compaction</code> — signals that context compaction occurred before this request, so gateways can route to a fresh cache tier</li>
+    <li><code>x-claude-code-context-compacted</code> — boolean confirming whether context compaction has occurred anywhere in the current session</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Practical gateway routing with these headers</strong>
+    <p>Gateway operators can now route long-running auto-mode requests to higher-timeout upstreams automatically, apply tighter rate limits to subagent turns versus interactive ones, and attribute costs accurately by agent type — without parsing response bodies or injecting correlation IDs themselves. If you run Claude Code behind an Nginx proxy or a custom LLM router, add <code>CLAUDE_CODE_GATEWAY_HINT_HEADERS=1</code> to your environment and update your proxy config to forward the <code>x-claude-code-*</code> headers upstream.</p>
+  </div>
+
+  <h3>Session Forking from Remote Control</h3>
+  <p>Sessions started with <code>claude --remote-control</code> (or launched via <code>/remote-control</code> in the Claude app) can now be forked. The fork runs as a background session on your local machine while the original remote session continues uninterrupted. This is especially useful for exploration: fork a session at the exact point you want to diverge, run an experiment in the fork, and the main session remains clean if the experiment goes sideways.</p>
+
+  <h3>Permission Security Fixes</h3>
+  <p>Three related bugs were patched, each representing a path around <code>permissions.blockReadsOutsideWorkingDirectories</code>:</p>
+  <ul>
+    <li>Bash commands the permission checker could not fully analyse were silently passing the prompt in auto mode instead of surfacing for approval — now blocked correctly.</li>
+    <li>Subshell constructs could hide dangerous <code>rm</code> commands from bypass-mode detection — patched.</li>
+    <li>The memory directory was being incorrectly loaded into prompts and indexed, potentially leaking memory contents to the model context — now excluded.</li>
+  </ul>
+  <p>A complementary revert was also included: the previous release had introduced an overly strict check that blocked legitimate <code>eval</code> and <code>env -C</code> Bash patterns; that restriction is rolled back.</p>
+
+  <h3>Other notable fixes</h3>
+  <ul>
+    <li>Skills synced from claude.ai that are subsequently disabled by an org admin now move to recoverable trash rather than disappearing silently.</li>
+    <li>MDM/managed-settings fields <code>allowManagedMcpServersOnly</code>, <code>deniedMcpServers</code>, and <code>disableClaudeAiConnectors</code> were being ignored on some deployments — now applied correctly.</li>
+    <li>401/403 errors on Bedrock, Vertex, Foundry, and Claude app gateways now include clear messaging identifying which credential needs refreshing or pointing to the gateway administrator.</li>
+    <li>MCP server disconnection mid-session now fires a notification with a pointer to <code>/mcp</code> when automatic reconnection fails, instead of failing silently.</li>
+  </ul>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.273" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">v2.1.273</span>
+    <span class="tag">LLM gateway</span>
+    <span class="tag">hint headers</span>
+    <span class="tag">session forking</span>
+    <span class="tag">Remote Control</span>
+    <span class="tag">permission security</span>
+    <span class="tag">MCP</span>
+    <span class="tag">MDM</span>
+    <span class="tag">auto mode</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Autonomously Formalises Fermat's Last Theorem in Lean
+     Source: https://www.anthropic.com/research/formalizing-fermats-last-theorem
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Writes the First Complete Computer-Checked Proof of Fermat's Last Theorem — Autonomously, in Lean, Over 11 Days</h2>
+
+  <p>Anthropic's research team has published a landmark result: Claude worked autonomously for 11 days to produce the first complete, computer-verified formalisation of Fermat's Last Theorem in the Lean proof assistant. Lean's kernel — which mechanically checks every logical inference step — accepted the proof in full. The result closes a 30-year gap between Wiles' 1995 human proof and a machine-checkable version that any formal-methods tool can independently verify.</p>
+
+  <h3>What was actually accomplished</h3>
+  <p>Fermat's Last Theorem states that there are no positive integers <em>a</em>, <em>b</em>, <em>c</em> satisfying <em>a<sup>n</sup> + b<sup>n</sup> = c<sup>n</sup></em> for any integer <em>n</em> &gt; 2. Andrew Wiles' 1995 proof spans roughly 200 pages of advanced mathematics, drawing on modular forms, elliptic curves, and Galois representations. Formalising it in Lean required translating every definition, lemma, and inference — including many steps that Wiles left implicit — into a language strict enough that a proof kernel accepts it. Human formalisers had been working on a partial formalisation for years; significant sections of the required mathematical infrastructure were missing from Lean's Mathlib library entirely.</p>
+  <p>Claude's 11-day autonomous run did not discover a new proof of Fermat's Last Theorem. What it did — filling those library gaps, constructing all intermediate lemmas, and assembling the complete proof file — is arguably the harder engineering challenge.</p>
+
+  <h3>Why this matters for developers</h3>
+  <ul>
+    <li><strong>Long-horizon autonomous reasoning at research depth:</strong> 11 continuous days of self-directed mathematical work, touching the deepest formal mathematics yet handled by an AI model, is the longest validated autonomous reasoning run on a formally precise task published to date.</li>
+    <li><strong>Mathlib gap-filling:</strong> To complete the proof, Claude had to extend Lean's Mathlib library with new definitions and lemmas in modular forms and Galois cohomology — areas where no Lean formalisation previously existed. These extensions are being contributed back to Mathlib.</li>
+    <li><strong>Directly applicable to software verification:</strong> The same formal reasoning capability applies to verifying software correctness proofs in Lean, Coq, and Isabelle. Teams working on formally-verified systems software — operating system kernels, cryptographic primitives, safety-critical controllers — can now consider Claude a capable collaborator for tasks that previously required specialist human formalisers.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>The proof file is public</strong>
+    <p>Anthropic has released the complete Lean proof file alongside the paper. If you work in formal methods or are building AI-assisted verification workflows, the file is worth examining as a concrete example of what Claude can produce autonomously at the boundary of formally expressible mathematics. The Mathlib extensions are being upstreamed; expect them to appear in Mathlib4 in the coming weeks.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/research/formalizing-fermats-last-theorem" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">formal proof</span>
+    <span class="tag">Fermat's Last Theorem</span>
+    <span class="tag">Lean</span>
+    <span class="tag">Mathlib</span>
+    <span class="tag">mathematics</span>
+    <span class="tag">autonomous reasoning</span>
+    <span class="tag">formal verification</span>
+    <span class="tag">long-horizon agents</span>
+    <span class="tag">research</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Anthropic Python SDK v1.6.0
+     Source: https://github.com/anthropics/anthropic-sdk-python/releases/tag/v1.6.0
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Anthropic Python SDK v1.6.0: Managed Agent Permissions, Signed Compaction Blocks, and Async Credential Providers</h2>
+
+  <p>Released September 15 alongside Claude Code v2.1.273, the Anthropic Python SDK v1.6.0 ships a set of additions that collectively improve how developers wire managed agents, handle long-context sessions, and authenticate in serverless and credential-delegation environments. The release requires anyio 4.1+ — check your environment before upgrading if you pin transitive dependencies.</p>
+
+  <h3>What's new</h3>
+  <ul>
+    <li><strong>Auto-mode tool permissions for Managed Agents:</strong> When creating or updating a Managed Agent via the API, you can now pass a <code>tool_permissions</code> block that specifies which tools the agent is allowed to invoke in auto mode. Previously this required a post-creation policy update; it can now be declared at creation time, simplifying infrastructure-as-code deployments.</li>
+    <li><strong>Compaction parameter + signed compaction blocks (beta):</strong> A new <code>compaction</code> parameter in the Messages API lets you opt into context compaction for a specific request. Responses include a signed <code>compaction_block</code> that can be passed back on future turns to prove the compaction was server-authorised — a foundation for audit trails in compliance-sensitive pipelines.</li>
+    <li><strong>URL sources for the web fetch tool:</strong> The <code>web_fetch</code> tool now accepts a <code>url_sources</code> list in addition to a single URL, allowing a single tool call to fetch and aggregate content from multiple URLs. Reduces round-trips in research-agent pipelines.</li>
+    <li><strong>Async credential token providers:</strong> <code>AnthropicAsync</code> now accepts an <code>async</code>-based callable for the <code>api_key</code> argument — useful for serverless environments that rotate credentials via async secrets managers (AWS Secrets Manager, GCP Secret Manager, Azure Key Vault) without blocking the event loop.</li>
+    <li><strong>Workspace ID on user profiles:</strong> The <code>user_profiles</code> endpoint now accepts a <code>workspace_id</code> parameter, enabling per-workspace profile customisation in multi-tenant Claude Co-Work or API deployments.</li>
+    <li><strong>Geo enum types for data-residency fields:</strong> Data-residency geography fields previously accepted free-form strings. They now accept typed <code>Geo</code> enum values (<code>Geo.US</code>, <code>Geo.EU</code>, <code>Geo.APAC</code>), reducing the risk of typos silently routing requests to the wrong region.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Upgrade path</strong>
+    <p>Run <code>pip install --upgrade anthropic</code>. Before upgrading in production, verify your <code>anyio</code> version: <code>pip show anyio</code> should report 4.1.0 or higher. If you use <code>httpx</code> or <code>fastapi</code> in the same environment, both are compatible with anyio 4.1+ but check for any pinned constraints in your <code>requirements.txt</code> or <code>pyproject.toml</code> that may pull in an older anyio.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/anthropic-sdk-python/releases/tag/v1.6.0" class="source-link" target="_blank" rel="noopener">github.com/anthropics/anthropic-sdk-python</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Python SDK</span>
+    <span class="tag">v1.6.0</span>
+    <span class="tag">Managed Agents</span>
+    <span class="tag">compaction</span>
+    <span class="tag">web fetch</span>
+    <span class="tag">async credentials</span>
+    <span class="tag">data residency</span>
+    <span class="tag">Co-Work</span>
+    <span class="tag">anyio</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

@@ -14529,6 +14529,60 @@ def img_leger_20260915():
     return base
 
 
+def img_miro_20260916():
+    """Joan Miró — deep indigo bg, biomorphic blobs + stars — Fermat proof & LLM gateway headers theme."""
+    base = Image.new("RGB", (W, H), (14, 10, 40))
+
+    # 1. Large primary biomorphic blobs (bold outlines, flat fills — Miró hallmarks)
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    # Red amorphous blob — top-left quadrant (mathematical structure)
+    bd.ellipse([(55, 75), (340, 310)], fill=(215, 35, 55, 240), outline=(0, 0, 0, 255), width=6)
+    bd.ellipse([(200, 190), (400, 370)], fill=(215, 35, 55, 190))   # extends blob organically
+    # Yellow blob — upper-centre (proof node / theorem crown)
+    bd.ellipse([(480, 45), (700, 250)], fill=(235, 195, 20, 240), outline=(0, 0, 0, 255), width=6)
+    # Blue blob — right side (gateway / signal flow)
+    bd.ellipse([(855, 195), (1140, 450)], fill=(35, 115, 205, 240), outline=(0, 0, 0, 255), width=6)
+    # Small green accent — lower-left (Lean / formal system symbol)
+    bd.ellipse([(80, 440), (220, 565)], fill=(55, 170, 95, 235), outline=(0, 0, 0, 255), width=4)
+    # Small coral teardrop — lower-centre (connector endpoint)
+    bd.ellipse([(540, 480), (660, 595)], fill=(232, 115, 74, 230), outline=(0, 0, 0, 255), width=4)
+    base = comp(base, bl)
+
+    # 2. Thin white connecting lines between blob centres (gateway header flow)
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    ld.line([(200, 195), (590, 148)], fill=(245, 242, 225, 200), width=3)   # red → yellow
+    ld.line([(590, 148), (998, 322)], fill=(245, 242, 225, 200), width=3)   # yellow → blue
+    ld.line([(150, 315), (150, 490)], fill=(245, 242, 225, 160), width=2)   # red → green (vertical)
+    ld.line([(150, 490), (600, 537)], fill=(245, 242, 225, 140), width=2)   # green → coral
+    base = comp(base, ll)
+
+    # 3. Stars scattered across dark background (Miró's signature sky dots = proof steps)
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    star_coords = [
+        (42, 38), (710, 68), (385, 165), (825, 98), (1158, 172),
+        (330, 490), (565, 385), (1058, 535), (128, 548), (762, 518),
+        (458, 572), (945, 58), (685, 438), (208, 382), (1115, 350),
+        (895, 560), (468, 295), (1040, 245), (350, 52), (620, 580),
+    ]
+    for (sx, sy) in star_coords:
+        r = rng.randint(3, 7)
+        sd.ellipse([(sx - r, sy - r), (sx + r, sy + r)], fill=(245, 240, 220, 210))
+    base = comp(base, sl)
+
+    # 4. Small white circles with black outlines at line junction nodes (Miró's characteristic dots)
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    for (dx, dy) in [(200, 195), (590, 148), (998, 322), (150, 490), (600, 537)]:
+        dd.ellipse([(dx - 13, dy - 13), (dx + 13, dy + 13)],
+                   fill=(245, 240, 220, 235), outline=(0, 0, 0, 255), width=3)
+    base = comp(base, dl)
+
+    return base
+
+
 def img_mondrian_20260914():
     """Piet Mondrian Broadway Boogie-Woogie — usage quotas, structured limits, declarative config."""
     base = Image.new("RGB", (W, H), (242, 238, 222))
@@ -14886,6 +14940,7 @@ DAYS = [
     ("2026-09-13", img_rothko_20260913,  "Safety Reckoning", "Mark Rothko"),
     ("2026-09-14", img_mondrian_20260914, "Limits Reset",    "Piet Mondrian"),
     ("2026-09-15", img_leger_20260915,   "Code Sandbox",    "Fernand Léger"),
+    ("2026-09-16", img_miro_20260916,    "Math & Gateways", "Joan Miró"),
 ]
 
 for date, fn, kw, artist in DAYS:

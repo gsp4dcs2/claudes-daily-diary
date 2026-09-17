@@ -14643,6 +14643,100 @@ def img_mondrian_20260914():
     return base
 
 
+def img_delaunay_20260917():
+    """Robert Delaunay Orphism — dark bg, large overlapping spectral-ring discs — unified workspace, cross-surface signals theme."""
+    base = Image.new("RGB", (W, H), (8, 6, 22))  # near-black deep indigo bg
+
+    # 1. Large overlapping spectral disc rings — each disc = one Claude surface converging
+    disc_configs = [
+        # (cx, cy, max_r, hue_start_rgb, hue_end_rgb)
+        (330, 280, 200, (220, 40, 80),   (255, 130, 30)),   # red-orange — Chat
+        (620, 200, 180, (40, 160, 240),  (100, 220, 120)),  # blue-green — Cowork / Docs
+        (870, 310, 190, (200, 60, 220),  (60, 180, 255)),   # violet-blue — Slides / Design
+        (520, 390, 140, (240, 210, 20),  (240, 100, 40)),   # gold-amber — background tasks
+        (750, 160, 120, (40, 220, 200),  (80, 255, 160)),   # teal-mint — Inference Hooks
+    ]
+    for (cx, cy, max_r, c_inner, c_outer) in disc_configs:
+        dl = layer()
+        dd = ImageDraw.Draw(dl)
+        steps = 18
+        for i in range(steps, 0, -1):
+            r = int(max_r * i / steps)
+            t = i / steps  # 1 = outer, 0 = inner
+            col = (
+                int(c_outer[0] * t + c_inner[0] * (1 - t)),
+                int(c_outer[1] * t + c_inner[1] * (1 - t)),
+                int(c_outer[2] * t + c_inner[2] * (1 - t)),
+                int(60 + 120 * (1 - t)),  # brighter toward centre
+            )
+            dd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=col)
+        base = comp(base, dl)
+
+    # 2. Concentric ring outlines on each disc — Delaunay's signature circular scaffolding
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    ring_centres = [(330, 280), (620, 200), (870, 310), (520, 390), (750, 160)]
+    ring_radii   = [200, 180, 190, 140, 120]
+    for (cx, cy), mr in zip(ring_centres, ring_radii):
+        for frac in [0.85, 0.65, 0.40, 0.20]:
+            r = int(mr * frac)
+            rd.ellipse([(cx - r, cy - r), (cx + r, cy + r)],
+                       outline=(255, 255, 255, 40), width=1)
+    base = comp(base, rl)
+
+    # 3. Radial colour-band slices — full rainbow sweeping around the primary disc
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    # Rainbow arc wedges around the central Chat disc (330, 280)
+    cx, cy, R = 330, 280, 195
+    hues = [
+        (230, 40, 40),   # red
+        (230, 120, 30),  # orange
+        (220, 205, 20),  # yellow
+        (60, 195, 60),   # green
+        (30, 150, 230),  # blue
+        (140, 50, 220),  # violet
+    ]
+    arc_step = 360 // len(hues)
+    for i, hue in enumerate(hues):
+        a0 = i * arc_step - 15
+        a1 = a0 + arc_step + 15
+        sd.pieslice([(cx - R, cy - R), (cx + R, cy + R)],
+                    start=a0, end=a1,
+                    fill=(*hue, 55))
+    base = comp(base, sl)
+
+    # 4. Bright intersection halos — where disc edges overlap (unified surface meeting points)
+    hl = layer()
+    hd = ImageDraw.Draw(hl)
+    intersections = [
+        (490, 250, 42),  # Chat ∩ Cowork
+        (740, 255, 38),  # Cowork ∩ Design
+        (690, 310, 32),  # Cowork ∩ Tasks
+        (800, 230, 28),  # Design ∩ Teal
+        (430, 335, 30),  # Chat ∩ Tasks
+    ]
+    for (hx, hy, hr) in intersections:
+        for r, a in [(hr, 90), (int(hr * 0.65), 160), (int(hr * 0.35), 220)]:
+            hd.ellipse([(hx - r, hy - r), (hx + r, hy + r)],
+                       fill=(255, 252, 230, a))
+    base = comp(base, hl)
+
+    # 5. Fine radial lines from unified centre — Delaunay's solar ray motif
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    centre_x, centre_y = 580, 285  # geometric centre of the composition
+    for angle_deg in range(0, 360, 18):
+        angle_rad = math.radians(angle_deg)
+        ex = int(centre_x + math.cos(angle_rad) * 310)
+        ey = int(centre_y + math.sin(angle_rad) * 250)
+        ld.line([(centre_x, centre_y), (ex, ey)],
+                fill=(255, 240, 210, 22), width=1)
+    base = comp(base, ll)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -14941,6 +15035,7 @@ DAYS = [
     ("2026-09-14", img_mondrian_20260914, "Limits Reset",    "Piet Mondrian"),
     ("2026-09-15", img_leger_20260915,   "Code Sandbox",    "Fernand Léger"),
     ("2026-09-16", img_miro_20260916,    "Math & Gateways", "Joan Miró"),
+    ("2026-09-17", img_delaunay_20260917, "Unified Claude", "Robert Delaunay"),
 ]
 
 for date, fn, kw, artist in DAYS:

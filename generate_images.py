@@ -14737,6 +14737,121 @@ def img_delaunay_20260917():
     return base
 
 
+def img_kandinsky_20260918():
+    """Wassily Kandinsky style — bold primaries, diagonal grid, circles + arcs — AI self-direction, recursive R&D automation theme."""
+    base = Image.new("RGB", (W, H), (18, 34, 72))  # prussian-blue bg
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Faint diagonal grid — Kandinsky's compositional scaffolding
+    grid_col = (38, 62, 118)
+    step = 55
+    for i in range(-H, W + H, step):
+        draw.line([(i, 0), (i + H, H)], fill=grid_col, width=1)
+        draw.line([(i + H, 0), (i, H)], fill=grid_col, width=1)
+
+    # 2. Large gold outer ring + bright inner disc — the 26% milestone / recursive capability
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    cx, cy = 540, 275
+    # outer glow rings
+    for r, a in [(195, 40), (170, 80), (145, 130), (118, 180), (88, 220), (60, 255)]:
+        rd.ellipse([(cx - r, cy - r), (cx + r, cy + r)],
+                   fill=(255, 210, 40, a))
+    # hollow centre — the unknown future (recursive improvement)
+    rd.ellipse([(cx - 32, cy - 32), (cx + 32, cy + 32)],
+               fill=(18, 34, 72, 255))
+    # inner gold ring
+    for r, a in [(28, 200), (18, 255)]:
+        rd.ellipse([(cx - r, cy - r), (cx + r, cy + r)],
+                   fill=(255, 230, 80, a))
+    base = comp(base, rl)
+
+    # 3. Bold red triangle — sharp capability jump (< 1% → 26%)
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    td.polygon([(90, 510), (215, 300), (340, 510)], fill=(215, 40, 40, 220))
+    td.polygon([(118, 494), (215, 328), (312, 494)], fill=(240, 80, 60, 110))
+    base = comp(base, tl)
+
+    # 4. Blue rectangle — the R&D lab / structured research workflow
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bd.rectangle([(830, 130), (1110, 360)], fill=(38, 88, 210, 210))
+    # header bar
+    bd.rectangle([(830, 130), (1110, 168)], fill=(60, 115, 240, 230))
+    # tab nubs
+    for tx in [845, 920, 995]:
+        bd.rectangle([(tx, 134), (tx + 65, 150)], fill=(80, 135, 250, 200))
+    # content rows — research task lines
+    for ly in [188, 210, 232, 254, 276, 298, 318, 340]:
+        w_frac = rng.uniform(0.45, 0.88)
+        bd.rectangle([(848, ly), (848 + int(240 * w_frac), ly + 9)],
+                     fill=(140, 185, 255, 130))
+    base = comp(base, bl)
+
+    # 5. Arc connectors — Kandinsky radiating lines linking shapes
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    # gold circle → red triangle apex
+    for off in [-3, 0, 3]:
+        ad.line([(cx - 100 + off, cy + 40), (215 + off, 308)],
+                fill=(255, 210, 40, 150), width=2)
+    # gold circle → blue lab rect
+    for off in [-3, 0, 3]:
+        ad.line([(cx + 110, cy - 15 + off), (830, 250 + off)],
+                fill=(120, 175, 255, 140), width=2)
+    # arc sweep connecting triangle to rect corner
+    ad.arc([(200, 300), (830, 520)], start=220, end=340,
+           fill=(200, 80, 80, 80), width=2)
+    base = comp(base, al)
+
+    # 6. Geometric accent vocabulary — Kandinsky's small shapes
+    acc = layer()
+    acd = ImageDraw.Draw(acc)
+
+    # Small yellow circle — top-left accent
+    acd.ellipse([(80, 70), (165, 155)], fill=(255, 220, 0, 210))
+    acd.ellipse([(98, 88), (147, 137)], fill=(18, 34, 72, 255))
+    acd.ellipse([(108, 98), (137, 127)], fill=(255, 200, 30, 200))
+
+    # Black + teal circle — upper-right
+    acd.ellipse([(970, 55), (1075, 160)], fill=(10, 10, 40, 240))
+    acd.ellipse([(990, 75), (1055, 140)], fill=(40, 200, 185, 180))
+
+    # Coral diagonal bar — upper centre
+    acd.rectangle([(490, 50), (625, 82)], fill=(232, 115, 74, 210))
+
+    # Teal arc sweep — lower-left decorative
+    acd.arc([(25, 375), (200, 545)], start=195, end=345,
+            fill=(40, 200, 185, 200), width=6)
+
+    # Small red mini-rectangle — lower-right
+    acd.rectangle([(910, 455), (998, 508)], fill=(200, 45, 45, 200))
+
+    # Tiny black triangle — mid-left accent
+    acd.polygon([(42, 240), (90, 190), (138, 240)],
+                fill=(10, 10, 40, 200))
+
+    base = comp(base, acc)
+
+    # 7. Fine energy-dot scatter — Kandinsky's vibratory texture
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    dot_cols = [(255, 220, 40), (80, 145, 255), (220, 50, 50),
+                (40, 200, 185), (255, 140, 40), (180, 60, 220)]
+    for _ in range(360):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        r = rng.randint(1, 4)
+        col = rng.choice(dot_cols)
+        dd.ellipse([(x - r, y - r), (x + r, y + r)],
+                   fill=(col[0], col[1], col[2], rng.randint(55, 165)))
+    base = comp(base, dl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -15036,6 +15151,7 @@ DAYS = [
     ("2026-09-15", img_leger_20260915,   "Code Sandbox",    "Fernand Léger"),
     ("2026-09-16", img_miro_20260916,    "Math & Gateways", "Joan Miró"),
     ("2026-09-17", img_delaunay_20260917, "Unified Claude", "Robert Delaunay"),
+    ("2026-09-18", img_kandinsky_20260918, "AI Self-Direction", "Wassily Kandinsky"),
 ]
 
 for date, fn, kw, artist in DAYS:

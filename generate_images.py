@@ -14852,6 +14852,118 @@ def img_kandinsky_20260918():
     return base
 
 
+def img_klee_20260919():
+    """Paul Klee colour-grid style — parallel agent threads, coordinator, shared memory theme.
+    Grid of distinct-hued cells representing parallel agent threads, dark skeleton lines,
+    bold white coordinator node at centre, diagonal thread-path lines, and scatter sparks.
+    """
+    base = Image.new("RGB", (W, H), (18, 12, 8))  # deep warm-brown bg
+
+    # 1. Colour-grid cells — each column = one parallel agent thread
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    cols = 8
+    rows = 5
+    cw = W // cols
+    ch = H // rows
+    # 8 hues — one per thread lane
+    palette = [
+        (200, 55,  45),   # thread 0 — crimson
+        (225, 120, 35),   # thread 1 — amber
+        (215, 195, 45),   # thread 2 — gold
+        (90,  200, 60),   # thread 3 — lime
+        (45,  190, 130),  # thread 4 — teal
+        (40,  165, 215),  # thread 5 — sky blue
+        (70,  85,  220),  # thread 6 — cobalt
+        (195, 55,  165),  # thread 7 — magenta
+    ]
+    for ci in range(cols):
+        base_col = palette[ci % len(palette)]
+        for ri in range(rows):
+            brightness = int(65 + ri * 30 + rng.randint(-8, 12))
+            brightness = max(50, min(220, brightness))
+            cell_col = tuple(min(255, int(c * brightness / 180)) for c in base_col)
+            x0, y0 = ci * cw, ri * ch
+            x1, y1 = x0 + cw - 4, y0 + ch - 4
+            gd.rectangle([(x0, y0), (x1, y1)], fill=(cell_col[0], cell_col[1], cell_col[2], 190))
+    base = comp(base, grid_l)
+
+    # 2. Dark Klee grid lines — structural thread boundaries
+    lines_l = layer()
+    ld = ImageDraw.Draw(lines_l)
+    for ci in range(cols + 1):
+        ld.line([(ci * cw, 0), (ci * cw, H)], fill=(10, 6, 2, 245), width=6)
+    for ri in range(rows + 1):
+        ld.line([(0, ri * ch), (W, ri * ch)], fill=(10, 6, 2, 245), width=6)
+    base = comp(base, lines_l)
+
+    # 3. Thread-path lines — diagonal coordinator routing across the grid
+    path_l = layer()
+    pd = ImageDraw.Draw(path_l)
+    paths = [
+        [(0, 2 * ch), (2 * cw, ch),     (4 * cw, 2 * ch), (6 * cw, ch),     (W, 2 * ch)],
+        [(0, 4 * ch), (cw,     3 * ch), (3 * cw, 4 * ch), (5 * cw, 3 * ch), (W, 4 * ch)],
+        [(cw, 0),     (3 * cw, 2 * ch), (5 * cw, ch),     (7 * cw, 3 * ch), (W, 2 * ch)],
+        [(0, 3 * ch), (2 * cw, 4 * ch), (4 * cw, 3 * ch), (W, 3 * ch)],
+    ]
+    path_colors = [
+        (255, 230, 180, 155),
+        (180, 245, 210, 135),
+        (200, 215, 255, 125),
+        (255, 195, 210, 115),
+    ]
+    for pts, col in zip(paths, path_colors):
+        for i in range(len(pts) - 1):
+            pd.line([pts[i], pts[i + 1]], fill=col, width=3)
+    base = comp(base, path_l)
+
+    # 4. Coordinator node — large bright circle at grid centre (all threads converge here)
+    coord_l = layer()
+    cd = ImageDraw.Draw(coord_l)
+    cx, cy = W // 2, H // 2
+    # outer glow rings
+    for r, a in [(68, 35), (54, 70), (42, 120), (30, 185), (20, 240)]:
+        cd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=(255, 252, 230, a))
+    # solid white core
+    cd.ellipse([(cx - 14, cy - 14), (cx + 14, cy + 14)], fill=(255, 255, 245, 255))
+    # coral pip inside
+    cd.ellipse([(cx - 6, cy - 6), (cx + 6, cy + 6)], fill=(232, 115, 74, 255))
+    base = comp(base, coord_l)
+
+    # 5. Thread node circles at key grid intersections (completed vs pending)
+    nodes_l = layer()
+    nd = ImageDraw.Draw(nodes_l)
+    completed = [(1, 1), (2, 2), (3, 1), (5, 2), (6, 1), (7, 3)]
+    pending   = [(1, 4), (3, 3), (5, 4), (7, 2), (0, 3)]
+    for ci, ri in completed:
+        nx, ny = ci * cw, ri * ch
+        r = 10
+        nd.ellipse([(nx - r, ny - r), (nx + r, ny + r)],
+                   fill=(255, 255, 240, 230), outline=(10, 6, 2, 255), width=2)
+        nd.ellipse([(nx - 4, ny - 4), (nx + 4, ny + 4)], fill=(232, 115, 74, 220))
+    for ci, ri in pending:
+        nx, ny = ci * cw, ri * ch
+        r = 8
+        nd.ellipse([(nx - r, ny - r), (nx + r, ny + r)],
+                   fill=(0, 0, 0, 0), outline=(225, 220, 210, 170), width=2)
+    base = comp(base, nodes_l)
+
+    # 6. Scatter sparks — activity texture across the parallel thread grid
+    sparks_l = layer()
+    sd = ImageDraw.Draw(sparks_l)
+    spark_cols = [(255, 238, 188), (188, 255, 210), (188, 212, 255), (255, 196, 210)]
+    for _ in range(80):
+        sx = rng.randint(0, W)
+        sy = rng.randint(0, H)
+        sr = rng.randint(2, 5)
+        sc = spark_cols[rng.randint(0, len(spark_cols) - 1)]
+        sd.ellipse([(sx - sr, sy - sr), (sx + sr, sy + sr)],
+                   fill=(sc[0], sc[1], sc[2], rng.randint(60, 145)))
+    base = comp(base, sparks_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -15152,6 +15264,7 @@ DAYS = [
     ("2026-09-16", img_miro_20260916,    "Math & Gateways", "Joan Miró"),
     ("2026-09-17", img_delaunay_20260917, "Unified Claude", "Robert Delaunay"),
     ("2026-09-18", img_kandinsky_20260918, "AI Self-Direction", "Wassily Kandinsky"),
+    ("2026-09-19", img_klee_20260919,     "Parallel Agents",   "Paul Klee"),
 ]
 
 for date, fn, kw, artist in DAYS:

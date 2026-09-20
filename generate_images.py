@@ -14964,6 +14964,84 @@ def img_klee_20260919():
     return base
 
 
+def img_lissitzky_20260920():
+    """El Lissitzky Constructivism — IPO structures, API compaction, agentic safety theme.
+    Cream bg, bold red diagonal wedge, heavy black structural bars, red circle focal point,
+    white negative-space squares, constructivist grid tension lines, and red accent parallels.
+    """
+    # Cream/off-white background
+    base = Image.new("RGB", (W, H), (244, 241, 230))
+
+    # 1. Large bold red diagonal wedge — Lissitzky's signature Proun shape
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.polygon([(0, H), (0, 360), (520, 0), (640, 0), (120, H)], fill=(208, 22, 22, 245))
+    base = comp(base, rl)
+
+    # 2. Heavy black horizontal bar — constructivist structural anchor
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bd.rectangle([(0, 290), (1200, 342)], fill=(14, 12, 10, 255))
+    base = comp(base, bl)
+
+    # 3. Bold black vertical bar — right-side structural column
+    vl = layer()
+    vd = ImageDraw.Draw(vl)
+    vd.rectangle([(860, 0), (916, 630)], fill=(14, 12, 10, 255))
+    base = comp(base, vl)
+
+    # 4. Large red circle focal point — upper-right quadrant
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    cd.ellipse([(968, 52), (1168, 252)], fill=(208, 22, 22, 228))
+    base = comp(base, cl)
+
+    # 5. Thin constructivist diagonal tension lines — mid-field grid
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    for i in range(7):
+        x_off = i * 55
+        ld.line([(680 + x_off, 0), (680 + x_off - 200, 290)], fill=(14, 12, 10, 195), width=3)
+    base = comp(base, ll)
+
+    # 6. Black framed square with white core — geometric punctuation (top-left)
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    sd.rectangle([(52, 52), (212, 212)], fill=(14, 12, 10, 255))
+    sd.rectangle([(82, 82), (182, 182)], fill=(244, 241, 230, 255))
+    # inner red pip — nesting: structure within structure
+    sd.rectangle([(112, 112), (152, 152)], fill=(208, 22, 22, 240))
+    base = comp(base, sl)
+
+    # 7. Second smaller white-core square — lower-left balance
+    s2 = layer()
+    s2d = ImageDraw.Draw(s2)
+    s2d.rectangle([(52, 380), (160, 488)], fill=(14, 12, 10, 255))
+    s2d.rectangle([(72, 400), (140, 468)], fill=(244, 241, 230, 255))
+    base = comp(base, s2)
+
+    # 8. Red accent parallel lines — lower right, echoing the wedge angle
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(6):
+        y_off = i * 28
+        ad.line([(930, 370 + y_off), (1190, 450 + y_off)], fill=(208, 22, 22, 175), width=3)
+    base = comp(base, al)
+
+    # 9. Small black diamonds — scatter punctuation along the horizontal bar
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    diamond_xs = [240, 380, 500, 650, 750]
+    for dx in diamond_xs:
+        dy = 316
+        r = 12
+        dd.polygon([(dx, dy - r), (dx + r, dy), (dx, dy + r), (dx - r, dy)],
+                   fill=(244, 241, 230, 230))
+    base = comp(base, dl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -15265,6 +15343,7 @@ DAYS = [
     ("2026-09-17", img_delaunay_20260917, "Unified Claude", "Robert Delaunay"),
     ("2026-09-18", img_kandinsky_20260918, "AI Self-Direction", "Wassily Kandinsky"),
     ("2026-09-19", img_klee_20260919,     "Parallel Agents",   "Paul Klee"),
+    ("2026-09-20", img_lissitzky_20260920, "IPO & Compaction", "El Lissitzky"),
 ]
 
 for date, fn, kw, artist in DAYS:

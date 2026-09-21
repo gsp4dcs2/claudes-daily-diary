@@ -15042,6 +15042,100 @@ def img_lissitzky_20260920():
     return base
 
 
+def img_malevich_20260921():
+    """Kazimir Malevich Suprematism — embedded AI evaluation / safety oversight theme.
+    Warm cream bg, large tilted black square (model under scrutiny), bold red ring
+    (evaluator's watchful lens), navy authority bar crossing top-right, yellow alert
+    fragments scattered mid-field, white-framed black square (bounded instance),
+    and thin red diagonal scrutiny lines overlaying the whole composition.
+    """
+    base = Image.new("RGB", (W, H), (238, 234, 218))  # warm cream Suprematist ground
+
+    def rotated_rect(cx, cy, hw, hh, angle_deg):
+        rad = math.radians(angle_deg)
+        corners = [(-hw, -hh), (hw, -hh), (hw, hh), (-hw, hh)]
+        return [(cx + p[0]*math.cos(rad) - p[1]*math.sin(rad),
+                 cy + p[0]*math.sin(rad) + p[1]*math.cos(rad)) for p in corners]
+
+    # 1. Large tilted black square (slightly off-square) — the model under evaluation
+    ml = layer()
+    md = ImageDraw.Draw(ml)
+    md.polygon(rotated_rect(310, 290, 195, 185, -14), fill=(14, 12, 10, 255))
+    base = comp(base, ml)
+
+    # 2. Bold red ellipse (evaluator's lens) — upper-right, partially overlapping the bar
+    el = layer()
+    ed = ImageDraw.Draw(el)
+    ed.ellipse([(820, 68), (1140, 338)], fill=(208, 22, 22, 0))
+    ed.ellipse([(820, 68), (1140, 338)], outline=(208, 22, 22, 245), width=28)
+    base = comp(base, el)
+
+    # 3. Inner ellipse fill (semi-transparent red) — depth of scrutiny
+    il = layer()
+    id_ = ImageDraw.Draw(il)
+    id_.ellipse([(854, 102), (1106, 304)], fill=(208, 22, 22, 55))
+    base = comp(base, il)
+
+    # 4. Navy diagonal authority bar — top-right to mid-left (independent reporting line)
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    nd.polygon(rotated_rect(760, 162, 520, 30, -19), fill=(18, 28, 128, 242))
+    base = comp(base, nl)
+
+    # 5. Second navy bar (perpendicular offset) — dual oversight channel
+    n2 = layer()
+    n2d = ImageDraw.Draw(n2)
+    n2d.polygon(rotated_rect(900, 510), fill=(18, 28, 128, 0)) if False else None
+    n2d.rectangle([(0, 470), (1200, 510)], fill=(18, 28, 128, 210))
+    base = comp(base, n2)
+
+    # 6. Yellow alert / finding fragments — scattered audit signals
+    yl = layer()
+    yd = ImageDraw.Draw(yl)
+    alerts = [
+        (630, 108, 56, 14, 11),
+        (745, 385, 50, 13, -8),
+        (1060, 390, 58, 15, 17),
+        (1105, 210, 44, 12, -4),
+        (188, 486, 52, 14, 9),
+        (468, 540, 46, 13, -13),
+        (82, 138, 48, 12, 6),
+    ]
+    for cx, cy, hw, hh, ang in alerts:
+        yd.polygon(rotated_rect(cx, cy, hw, hh, ang), fill=(228, 188, 0, 235))
+    base = comp(base, yl)
+
+    # 7. White-framed black square — bounded, contained model instance (lower-right)
+    fl = layer()
+    fd = ImageDraw.Draw(fl)
+    fd.polygon(rotated_rect(1068, 92, 58, 58, 8), fill=(238, 234, 218, 210))
+    fd.polygon(rotated_rect(1068, 92, 38, 38, 8), fill=(14, 12, 10, 232))
+    base = comp(base, fl)
+
+    # 8. Thin red scrutiny diagonals — lines of review crossing the composition
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    for i in range(5):
+        x_off = i * 95
+        ld.line([(52 + x_off, 16), (200 + x_off, 105)], fill=(208, 22, 22, 128), width=3)
+    base = comp(base, ll)
+
+    # 9. Small black tilted rectangles — embedded evaluator entities in the field
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    evaluators = [
+        (560, 412, 34, 10, -7),
+        (700, 330, 30, 9,  14),
+        (835, 430, 32, 10, -3),
+        (990, 456, 36, 11,  9),
+    ]
+    for cx, cy, hw, hh, ang in evaluators:
+        bd.polygon(rotated_rect(cx, cy, hw, hh, ang), fill=(14, 12, 10, 200))
+    base = comp(base, bl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -15344,6 +15438,7 @@ DAYS = [
     ("2026-09-18", img_kandinsky_20260918, "AI Self-Direction", "Wassily Kandinsky"),
     ("2026-09-19", img_klee_20260919,     "Parallel Agents",   "Paul Klee"),
     ("2026-09-20", img_lissitzky_20260920, "IPO & Compaction", "El Lissitzky"),
+    ("2026-09-21", img_malevich_20260921,  "Safety Oversight", "Kazimir Malevich"),
 ]
 
 for date, fn, kw, artist in DAYS:

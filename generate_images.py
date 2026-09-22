@@ -15136,6 +15136,92 @@ def img_malevich_20260921():
     return base
 
 
+def img_klimt_20260922():
+    """Gustav Klimt — deep plum-black bg, gold lattice web, teal node rings, rust flame dots — threat intelligence, SMB ecosystem, developer billing theme."""
+    base = Image.new("RGB", (W, H), (12, 4, 18))  # deep plum-black bg
+
+    # 1. Radiant gold centre glow — knowledge at the heart of the threat report
+    glow_l = layer()
+    gd = ImageDraw.Draw(glow_l)
+    for r, a in [(290, 28), (210, 38), (140, 46), (85, 36)]:
+        gd.ellipse([(W//2 - r, H//2 - r), (W//2 + r, H//2 + r)], fill=(168, 126, 22, a))
+    base = comp(base, glow_l)
+
+    # 2. Gold lattice web — threat-actor network mapped by the report
+    web_l = layer()
+    wd = ImageDraw.Draw(web_l)
+    nodes = [
+        (600, 315), (160, 120), (1040, 100), (80, 540), (1120, 490),
+        (380, 480), (820, 490), (300, 200), (900, 160), (550, 80), (640, 550),
+        (200, 380), (1000, 280), (460, 310),
+    ]
+    for i, (x1, y1) in enumerate(nodes):
+        for j, (x2, y2) in enumerate(nodes):
+            if j > i and rng.random() < 0.35:
+                alpha = rng.randint(35, 105)
+                wd.line([(x1, y1), (x2, y2)],
+                        fill=(198, 162, 48, alpha), width=rng.randint(1, 2))
+    base = comp(base, web_l)
+
+    # 3. Gold mosaic fragments — Klimt decorative skin over the lattice
+    mosaic_l = layer()
+    md = ImageDraw.Draw(mosaic_l)
+    gold_shades = [
+        (215, 178, 58), (198, 158, 42), (232, 200, 84),
+        (176, 138, 36), (244, 214, 106), (188, 150, 48),
+    ]
+    for _ in range(400):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        s = rng.randint(2, 15)
+        shade = rng.choice(gold_shades)
+        alpha = rng.randint(50, 165)
+        shape = rng.randint(0, 2)
+        if shape == 0:
+            md.rectangle([(x, y), (x+s, y+s)], fill=(shade[0], shade[1], shade[2], alpha))
+        elif shape == 1:
+            md.ellipse([(x, y), (x+s, y+s)], fill=(shade[0], shade[1], shade[2], alpha))
+        else:
+            md.polygon([(x, y+s), (x+s//2, y), (x+s, y+s)],
+                       fill=(shade[0], shade[1], shade[2], alpha))
+    base = comp(base, mosaic_l)
+
+    # 4. Teal concentric rings — SMB ecosystem hubs (6 city/integration nodes)
+    teal_l = layer()
+    td = ImageDraw.Draw(teal_l)
+    smb_nodes = [(160, 120), (1040, 100), (80, 540), (1120, 490), (380, 480), (820, 490)]
+    for cx, cy in smb_nodes:
+        for r in range(18, 72, 18):
+            td.ellipse([(cx-r, cy-r), (cx+r, cy+r)],
+                       outline=(34, 152, 132, rng.randint(80, 155)), width=rng.randint(2, 4))
+    base = comp(base, teal_l)
+
+    # 5. Gold spiral swirls — Klimt constitutional-complexity motif
+    spiral_l = layer()
+    sd = ImageDraw.Draw(spiral_l)
+    for cx, cy, maxr in [(600, 315, 185), (200, 300, 125), (1000, 350, 105), (700, 80, 90)]:
+        for r in range(14, maxr, 22):
+            sd.arc([(cx-r, cy-r), (cx+r, cy+r)],
+                   start=rng.randint(0, 90), end=rng.randint(160, 320),
+                   fill=(215, 178, 58, rng.randint(48, 128)), width=rng.randint(2, 4))
+    base = comp(base, spiral_l)
+
+    # 6. Rust flame drops — disrupted threat-actor operations scattered across the field
+    rust_l = layer()
+    rd = ImageDraw.Draw(rust_l)
+    rust_shades = [(188, 60, 28), (208, 80, 38), (168, 50, 22), (220, 96, 48)]
+    for _ in range(58):
+        x = rng.randint(30, W - 30)
+        y = rng.randint(30, H - 30)
+        s = rng.randint(3, 13)
+        shade = rng.choice(rust_shades)
+        rd.ellipse([(x, y), (x+s, y+s)],
+                   fill=(shade[0], shade[1], shade[2], rng.randint(95, 190)))
+    base = comp(base, rust_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -15439,6 +15525,7 @@ DAYS = [
     ("2026-09-19", img_klee_20260919,     "Parallel Agents",   "Paul Klee"),
     ("2026-09-20", img_lissitzky_20260920, "IPO & Compaction", "El Lissitzky"),
     ("2026-09-21", img_malevich_20260921,  "Safety Oversight", "Kazimir Malevich"),
+    ("2026-09-22", img_klimt_20260922,     "Threat & Business", "Gustav Klimt"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="September 23: Anthropic launches Claude Opus 5.5 — Fable-level performance at 40% lower cost, 1M-token context, always-on adaptive thinking, and no more 5-hour usage caps — alongside Claude Code v2.1.280 which ships Opus 5.5 as the new default, MCP description-length controls, and 113 targeted bug fixes.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-09-23 – Claude Opus 5.5 Launches: Fable-Level Performance at 40% Lower Cost, Plus Code v2.1.280">
+  <meta property="og:description" content="September 23: Anthropic launches Claude Opus 5.5 — Fable-level performance at 40% lower cost, 1M-token context, always-on adaptive thinking, and no more 5-hour usage caps — alongside Claude Code v2.1.280 which ships Opus 5.5 as the new default, MCP description-length controls, and 113 targeted bug fixes.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/09/2026-09-23.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/09/2026-09-23.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/09/2026-09-23.png">
+
+  <title>2026-09-23 – Claude Opus 5.5 Launches: Fable-Level Performance at 40% Lower Cost, Plus Code v2.1.280 | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Opus 5.5 Launches: Fable-Level Performance at 40% Lower Cost, Plus Code v2.1.280",
+  "description": "September 23: Anthropic launches Claude Opus 5.5 — Fable-level performance at 40% lower cost, 1M-token context, always-on adaptive thinking, and no more 5-hour usage caps — alongside Claude Code v2.1.280 which ships Opus 5.5 as the new default, MCP description-length controls, and 113 targeted bug fixes.",
+  "datePublished": "2026-09-23",
+  "dateModified": "2026-09-23",
+  "url": "https://claudebeat.ai/articles/2026/09/2026-09-23.html",
+  "image": "https://claudebeat.ai/articles/2026/09/2026-09-23.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/09/2026-09-23.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-09-23</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Claude Opus 5.5 Launches: Fable-Level Performance at 40% Lower Cost, Plus Code v2.1.280</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-09-23.png" alt="Claude Opus 5.5 Launches: Fable-Level Performance at 40% Lower Cost, Plus Code v2.1.280 — visual for 2026-09-23">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Opus 5.5 Launch
+     Source: https://www.anthropic.com/claude-opus-5-5
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Opus 5.5: Fable-Level Performance at 40% Lower Cost, With Always-On Adaptive Thinking</h2>
+
+  <p>Anthropic has launched <strong>Claude Opus 5.5</strong>, the first model in the new 5.5 efficiency tier. It delivers performance on par with <strong>Claude Fable 5.1</strong> on most workloads — including coding, multi-step reasoning, and document analysis — while costing <strong>40% less per token than Opus 5</strong> and generating output more than <strong>30% faster</strong>. Sonnet 5.5 and Haiku 5.5 will follow within weeks, completing the efficiency-tier trio.</p>
+
+  <h3>Key specs</h3>
+  <ul>
+    <li><strong>Context window:</strong> 1,000,000 tokens (1M) — same as Fable 5.1</li>
+    <li><strong>Max output:</strong> 128,000 tokens per response</li>
+    <li><strong>Adaptive thinking:</strong> Always-on; no extra flag or budget parameter required — the model allocates reasoning steps automatically based on task difficulty</li>
+    <li><strong>Inline tools in mid-conversation system messages:</strong> Beta — system messages can now inject or remove tool definitions between turns without rebuilding the context</li>
+    <li><strong>Pricing:</strong> $4 / $20 per million input/output tokens; cache reads $0.20/MTok (60% cheaper than Opus 5 cache reads)</li>
+    <li><strong>Availability:</strong> Anthropic API, AWS Bedrock, Google Cloud Vertex AI, Microsoft Azure AI</li>
+  </ul>
+
+  <h3>No more 5-hour usage caps</h3>
+  <p>Alongside the model launch, Anthropic is removing the 5-hour hard usage cap that applied to <strong>Pro, Max, Team, and seat-based Enterprise</strong> subscribers when running Opus-tier models. A new <strong>rate-limit reset</strong> feature lets users manually reset their per-window counter — useful for burst workflows that genuinely need more in a single session. Heavy use will still be subject to soft rate limits at sustained load, but the 5-hour wall is gone.</p>
+
+  <div class="callout tip">
+    <strong>Developer decision guide: Opus 5 vs Opus 5.5</strong>
+    <p>If your pipeline is latency-sensitive or runs at scale, Opus 5.5 is an immediate drop-in replacement — same capability tier, better throughput, lower bill. The key caveat is the <em>always-on</em> adaptive thinking: unlike Opus 5 where you controlled extended-thinking budgets explicitly, Opus 5.5 allocates reasoning time internally. In practice this is transparent for most tasks, but if you were deliberately suppressing thinking tokens to cut cost, you lose that knob. Teams doing tightly metered token accounting should benchmark a representative sample before migrating production workloads. The inline-tools-in-system-messages beta is worth enabling immediately if your agent architecture needs to compose tool sets dynamically — it eliminates the need to restart context when the active tool set changes mid-session.</p>
+  </div>
+
+  <pre><code># Switch an existing API call to Opus 5.5
+import anthropic
+
+client = anthropic.Anthropic()
+
+response = client.messages.create(
+    model="claude-opus-5-5",          # new model ID
+    max_tokens=8192,
+    messages=[{"role": "user", "content": "Analyse this codebase and suggest refactors."}]
+)
+# Adaptive thinking is automatic — no `thinking` param needed
+print(response.content[0].text)
+
+# Beta: inject tools mid-conversation via system message
+# Pass betas=["inline-tools-2026-09-22"] in the request headers
+# to enable dynamic tool injection between turns.</code></pre>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/claude-opus-5-5" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Opus 5.5</span>
+    <span class="tag">5.5 family</span>
+    <span class="tag">1M context</span>
+    <span class="tag">adaptive thinking</span>
+    <span class="tag">inline tools</span>
+    <span class="tag">40% cheaper</span>
+    <span class="tag">usage caps removed</span>
+    <span class="tag">Fable 5.1</span>
+    <span class="tag">Bedrock</span>
+    <span class="tag">Vertex AI</span>
+    <span class="tag">Azure</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Code v2.1.280
+     Source: https://github.com/anthropics/claude-code/releases/tag/v2.1.280
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.280: Opus 5.5 as Default, MCP Description Caps, and 113 Fixes</h2>
+
+  <p>Claude Code <strong>v2.1.280</strong> (released September 22) picks up Opus 5.5 as the new default Opus-tier model and ships a dense round of 113 changes across model defaults, MCP controls, UI/UX, session reliability, and integrations. The headline developer-facing additions are a new environment variable for MCP description length, a fix for prompt-cache misses on live model switches, and a correction to how resumed fork subagents rebuild their tool lists.</p>
+
+  <h3>Changes worth acting on</h3>
+  <ul>
+    <li><strong>Opus 5.5 is now the default Opus model</strong> — if you have <code>"model": "opus"</code> in your <code>.claude/settings.json</code>, you're already on 5.5 after upgrading. Pin to <code>claude-opus-5</code> explicitly if you need the prior model.</li>
+    <li><strong><code>CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH</code></strong> — new env var overrides the 2,048-character cap on MCP tool descriptions and server instructions. Set a larger value if your MCP tools have verbose schemas that were being silently truncated.</li>
+    <li><strong>PermissionRequest hook change</strong> — agent-type hooks no longer fire in the <code>PermissionRequest</code> hook; an error message now points you to <code>command</code> or <code>http</code> hooks instead. If you have custom permission scripts, check whether they use the agent hook type.</li>
+    <li><strong>Model-switch prompt-cache fix</strong> — switching the active model from a host app while Claude is processing a message no longer causes a cache miss on the next prompt. Long agentic sessions with dynamic model switching will see meaningfully lower token costs.</li>
+    <li><strong>Fork subagent tool list fix</strong> — resumed fork subagents now re-send the original tool list rather than rebuilding it, preventing tool-schema divergence in long-running parallel workflows.</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>Check your MCP tool description lengths</strong>
+    <p>The 2,048-character default cap has been silently truncating MCP tool descriptions longer than that limit since MCP support launched. If your tools have rich JSON schemas or long <code>description</code> fields, they may have been sending incomplete metadata to Claude, which can cause subtle misuse of tool parameters. After upgrading to v2.1.280, set <code>CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH=8192</code> (or your actual max), run <code>claude /mcp list</code>, and compare tool descriptions against your MCP server definitions. Any mismatch before this version warrants a re-test of tool-calling accuracy on those tools.</p>
+  </div>
+
+  <pre><code># Upgrade to v2.1.280
+npm install -g @anthropic-ai/claude-code@latest
+
+# Confirm the default Opus model
+claude /config
+# → Default model (opus tier): claude-opus-5-5
+
+# Override MCP description cap (e.g. allow up to 8 KB)
+export CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH=8192
+claude /mcp list   # descriptions now shown in full
+
+# Pin to previous Opus if needed
+# In .claude/settings.json:
+# { "model": "claude-opus-5" }</code></pre>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.280" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code v2.1.280</span>
+    <span class="tag">Opus 5.5 default</span>
+    <span class="tag">MCP</span>
+    <span class="tag">CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH</span>
+    <span class="tag">PermissionRequest hook</span>
+    <span class="tag">prompt-cache</span>
+    <span class="tag">fork subagents</span>
+    <span class="tag">model switch</span>
+    <span class="tag">settings.json</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.anthropic.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

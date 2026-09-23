@@ -15222,6 +15222,105 @@ def img_klimt_20260922():
     return base
 
 
+def img_calder_20260923():
+    """Alexander Calder mobile — adaptive thinking & model tiers — Opus 5.5 launch theme."""
+    base = Image.new("RGB", (W, H), (248, 246, 242))  # warm off-white Calder canvas
+
+    # 1. Canvas texture — subtle diagonal grain
+    grain_l = layer(); grd = ImageDraw.Draw(grain_l)
+    for i in range(0, W + H, 80):
+        grd.line([(i, 0), (0, i)], fill=(175, 165, 150, 14), width=1)
+        grd.line([(W - i, H), (W, H - i)], fill=(175, 165, 150, 9), width=1)
+    base = comp(base, grain_l)
+
+    # 2. Four-tier mobile armature — representing model tier / adaptive balance
+    arm_l = layer(); ad = ImageDraw.Draw(arm_l)
+    # Top horizontal spine
+    ad.line([(100, 80), (1080, 80)], fill=(18, 18, 18, 245), width=7)
+    # Central vertical drop from spine
+    ad.line([(590, 80), (590, 230)], fill=(18, 18, 18, 235), width=5)
+    # Second-tier bar
+    ad.line([(300, 230), (880, 230)], fill=(18, 18, 18, 225), width=5)
+    # Left drop from second tier
+    ad.line([(300, 230), (300, 410)], fill=(18, 18, 18, 210), width=4)
+    # Right drop from second tier
+    ad.line([(880, 230), (880, 380)], fill=(18, 18, 18, 210), width=4)
+    # Left sub-bar (third tier)
+    ad.line([(150, 410), (450, 410)], fill=(18, 18, 18, 195), width=3)
+    ad.line([(150, 410), (150, 560)], fill=(18, 18, 18, 180), width=3)
+    ad.line([(450, 410), (450, 535)], fill=(18, 18, 18, 180), width=3)
+    # Far-left drop from spine
+    ad.line([(100, 80), (100, 185)], fill=(18, 18, 18, 205), width=3)
+    ad.line([(40,  185), (190, 185)], fill=(18, 18, 18, 195), width=3)
+    ad.line([(40,  185), (40,  340)], fill=(18, 18, 18, 175), width=2)
+    ad.line([(190, 185), (190, 320)], fill=(18, 18, 18, 175), width=2)
+    # Far-right drop from spine
+    ad.line([(1080, 80), (1080, 190)], fill=(18, 18, 18, 205), width=3)
+    ad.line([(990,  190), (1080, 190)], fill=(18, 18, 18, 195), width=3)
+    ad.line([(990,  190), (990,  355)], fill=(18, 18, 18, 175), width=2)
+    base = comp(base, arm_l)
+
+    # 3. Primary flat shapes — each represents an Opus 5.5 capability / tier
+    shapes = [
+        # Large red oval — Opus 5.5 / adaptive thinking (dominant, top centre)
+        ("ellipse", [(380, 10),  (800, 180)], (210, 32, 38, 252),  (18, 18, 18, 255), 5),
+        # Blue disc — 1M context window (top-left spine)
+        ("ellipse", [(18,  100), (220, 295)], (24, 78, 200, 245),  (18, 18, 18, 255), 4),
+        # Yellow oval — cost reduction / efficiency (top-right spine)
+        ("ellipse", [(880, 95),  (1140, 295)], (235, 192, 8, 238), (18, 18, 18, 255), 4),
+        # Large blue disc — second-tier left (Bedrock / cloud platforms)
+        ("ellipse", [(160, 250), (440, 450)], (24, 78, 200, 228),  (18, 18, 18, 255), 4),
+        # Red disc — second-tier right (usage caps removed)
+        ("ellipse", [(755, 245), (1010, 445)], (210, 32, 38, 222), (18, 18, 18, 255), 4),
+        # Small yellow — far-left upper node
+        ("ellipse", [(-5,  148), (120, 275)], (235, 192, 8, 210),  (18, 18, 18, 255), 3),
+        # Small red — far-left lower node
+        ("ellipse", [(-5,  265), (108, 375)], (210, 32, 38, 200),  (18, 18, 18, 255), 3),
+        # Small blue — far-right node
+        ("ellipse", [(892, 238), (1065, 380)], (24, 78, 200, 205), (18, 18, 18, 255), 3),
+        # Third-tier: inline tools (blue) and model switch fix (yellow)
+        ("ellipse", [(68,  440), (236, 600)], (24, 78, 200, 215),  (18, 18, 18, 255), 3),
+        ("ellipse", [(372, 422), (528, 578)], (235, 192, 8, 210),  (18, 18, 18, 255), 3),
+    ]
+    for kind, bbox, fill, outline, lw in shapes:
+        x0, y0 = max(0, bbox[0][0]), max(0, bbox[0][1])
+        x1, y1 = min(W, bbox[1][0]), min(H, bbox[1][1])
+        if x1 <= x0 or y1 <= y0:
+            continue
+        sl = layer(); sd = ImageDraw.Draw(sl)
+        sd.ellipse([(x0, y0), (x1, y1)], fill=fill, outline=outline, width=lw)
+        base = comp(base, sl)
+
+    # 4. Black pivot dots at armature junctions
+    dots_l = layer(); dd = ImageDraw.Draw(dots_l)
+    pivots = [
+        (100, 80), (590, 80), (1080, 80),
+        (300, 230), (590, 230), (880, 230),
+        (100, 185), (40, 185), (190, 185),
+        (1080, 190), (990, 190),
+        (300, 410), (150, 410), (450, 410),
+    ]
+    for px, py in pivots:
+        dd.ellipse([(px - 8, py - 8), (px + 8, py + 8)], fill=(18, 18, 18, 255))
+    base = comp(base, dots_l)
+
+    # 5. Terminal weight dots at wire ends
+    wt_l = layer(); wd = ImageDraw.Draw(wt_l)
+    weights = [
+        (40,  340, (235, 192, 8,  230)),
+        (190, 320, (210, 32,  38, 225)),
+        (990, 355, (24,  78,  200, 215)),
+        (150, 560, (24,  78,  200, 220)),
+        (450, 535, (235, 192, 8,  215)),
+    ]
+    for wx, wy, wfill in weights:
+        wd.ellipse([(wx - 18, wy - 18), (wx + 18, wy + 18)],
+                   fill=wfill, outline=(18, 18, 18, 255), width=3)
+    base = comp(base, wt_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -15526,6 +15625,7 @@ DAYS = [
     ("2026-09-20", img_lissitzky_20260920, "IPO & Compaction", "El Lissitzky"),
     ("2026-09-21", img_malevich_20260921,  "Safety Oversight", "Kazimir Malevich"),
     ("2026-09-22", img_klimt_20260922,     "Threat & Business", "Gustav Klimt"),
+    ("2026-09-23", img_calder_20260923,    "Opus 5.5 Launch",  "Alexander Calder"),
 ]
 
 for date, fn, kw, artist in DAYS:

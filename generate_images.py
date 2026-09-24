@@ -15321,6 +15321,80 @@ def img_calder_20260923():
     return base
 
 
+def img_franzmarc_20260924():
+    """Franz Marc — jewel-toned organic forms — marketplace ecosystem, enzyme discovery, humanitarian science."""
+    base = Image.new("RGB", (W, H), (12, 30, 72))  # deep cobalt background
+
+    # 1. Large emerald organic body — DNA/enzyme discovery, life science
+    body_l = layer(); bd = ImageDraw.Draw(body_l)
+    bd.ellipse([(30, 80), (460, 500)], fill=(18, 125, 75, 220))
+    # Inner highlight — cellular core
+    bd.ellipse([(100, 160), (360, 420)], fill=(28, 165, 100, 170))
+    base = comp(base, body_l)
+
+    # 2. DNA-like spiral arcs — ART enzyme / CRISPR-like repeats
+    dna_l = layer(); dd = ImageDraw.Draw(dna_l)
+    for i in range(6):
+        y_c = 110 + i * 75
+        x_shift = 30 * (1 if i % 2 == 0 else -1)
+        dd.arc([(180 + x_shift, y_c), (340 + x_shift, y_c + 60)],
+               start=0, end=180, fill=(245, 215, 55, 200), width=5)
+        dd.arc([(190 - x_shift, y_c + 30), (350 - x_shift, y_c + 90)],
+               start=180, end=360, fill=(245, 215, 55, 160), width=3)
+    base = comp(base, dna_l)
+
+    # 3. Cobalt network hub — marketplace connections / 2000+ connectors
+    hub_l = layer(); hd = ImageDraw.Draw(hub_l)
+    hub_x, hub_y = 820, 200
+    hd.ellipse([(hub_x - 80, hub_y - 80), (hub_x + 80, hub_y + 80)], fill=(38, 65, 210, 235))
+    hd.ellipse([(hub_x - 48, hub_y - 48), (hub_x + 48, hub_y + 48)], fill=(65, 95, 240, 200))
+    # Spoke lines radiating to partner nodes
+    spoke_targets = [(680, 100), (970, 80), (1100, 220), (980, 360), (660, 340)]
+    for tx, ty in spoke_targets:
+        hd.line([(hub_x, hub_y), (tx, ty)], fill=(100, 140, 255, 140), width=3)
+    base = comp(base, hub_l)
+
+    # 4. Partner nodes around the hub — connectors / ecosystem partners
+    node_l = layer(); nd = ImageDraw.Draw(node_l)
+    node_data = [
+        (680, 100, 28, (210, 68, 28, 225)),   # rust — Atlassian/Google
+        (970, 80,  24, (232, 185, 20, 230)),   # gold — Microsoft/Notion
+        (1100, 220, 30, (28, 155, 98, 220)),   # emerald — Salesforce
+        (980, 360, 26, (210, 68, 28, 215)),    # rust
+        (660, 340, 22, (232, 185, 20, 210)),   # gold
+    ]
+    for nx, ny, nr, nfill in node_data:
+        nd.ellipse([(nx - nr, ny - nr), (nx + nr, ny + nr)], fill=nfill)
+    base = comp(base, node_l)
+
+    # 5. Teal humanitarian landscape — Ebola DRC / crisis response rolling hills
+    hill_l = layer(); hld = ImageDraw.Draw(hill_l)
+    hld.polygon([(0, 530), (280, 420), (550, 475), (820, 400), (1060, 445), (1200, 415), (1200, 630), (0, 630)],
+                fill=(16, 100, 108, 215))
+    # Lighter band above hills
+    hld.polygon([(0, 570), (350, 490), (700, 530), (1000, 480), (1200, 505), (1200, 630), (0, 630)],
+                fill=(22, 128, 138, 160))
+    base = comp(base, hill_l)
+
+    # 6. Gold sun disc — discovery / enzyme breakthrough
+    sun_l = layer(); sd = ImageDraw.Draw(sun_l)
+    sd.ellipse([(860, 330), (1120, 590)], fill=(205, 168, 22, 220))
+    sd.ellipse([(900, 370), (1080, 550)], fill=(238, 205, 50, 175))
+    base = comp(base, sun_l)
+
+    # 7. Star scatter — 950 parallel agents
+    star_l = layer(); std = ImageDraw.Draw(star_l)
+    for _ in range(42):
+        sx = rng.randint(490, 1160)
+        sy = rng.randint(20, 380)
+        sr = rng.randint(1, 4)
+        std.ellipse([(sx - sr, sy - sr), (sx + sr, sy + sr)],
+                    fill=(245, 238, 210, rng.randint(120, 210)))
+    base = comp(base, star_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -15626,6 +15700,7 @@ DAYS = [
     ("2026-09-21", img_malevich_20260921,  "Safety Oversight", "Kazimir Malevich"),
     ("2026-09-22", img_klimt_20260922,     "Threat & Business", "Gustav Klimt"),
     ("2026-09-23", img_calder_20260923,    "Opus 5.5 Launch",  "Alexander Calder"),
+    ("2026-09-24", img_franzmarc_20260924, "Science & Market", "Franz Marc"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -15321,6 +15321,104 @@ def img_calder_20260923():
     return base
 
 
+def img_moholy_20260925():
+    """László Moholy-Nagy Bauhaus style — connector flows, API transparency, cache clarity theme."""
+    base = Image.new("RGB", (W, H), (250, 248, 245))  # warm near-white Bauhaus bg
+
+    # 1. Large overlapping transparent circles — signal flows / connector channels
+    circles_l = layer()
+    cd = ImageDraw.Draw(circles_l)
+    circles = [
+        ((20,  -40, 580, 520),  (18,  108, 195, 75)),   # large deep-blue left
+        ((260,  40, 820, 590),  (18,  170, 130, 65)),    # large teal centre
+        ((500,  20, 1140, 560), (220, 140,  20, 70)),    # large amber right
+        ((80,  200, 520, 590),  (180,  50, 210, 55)),    # medium violet lower-left
+    ]
+    for bbox, fill in circles:
+        cd.ellipse(bbox, fill=fill)
+    base = comp(base, circles_l)
+
+    # 2. Horizontal pipeline bars — API request/response flow
+    pipe_l = layer()
+    pd = ImageDraw.Draw(pipe_l)
+    pipes = [
+        ((0,  175, W, 215), (18,  108, 195, 50)),   # blue pipe top
+        ((0,  295, W, 335), (18,  170, 130, 45)),   # teal pipe mid-upper
+        ((0,  415, W, 445), (220, 140,  20, 40)),   # amber pipe mid-lower
+        ((0,  535, W, 560), (180,  50, 210, 45)),   # violet pipe base
+    ]
+    for bbox, fill in pipes:
+        pd.rectangle(bbox, fill=fill)
+    base = comp(base, pipe_l)
+
+    # 3. Thin black structural lines — Bauhaus scaffold
+    lines_l = layer()
+    ld = ImageDraw.Draw(lines_l)
+    structural = [
+        ((0, 315),   (W, 315)),      # horizontal midline
+        ((580, 0),   (580, H)),      # vertical midline
+        ((0, 0),     (580, 315)),    # top-left diagonal
+        ((580, 315), (W, H)),        # bottom-right diagonal
+        ((580, 0),   (W, 315)),      # top-right diagonal
+        ((0, 315),   (580, H)),      # bottom-left diagonal
+    ]
+    for p1, p2 in structural:
+        ld.line([p1, p2], fill=(18, 18, 18, 180), width=2)
+    base = comp(base, lines_l)
+
+    # 4. Concentric ring clusters — cache nodes / diagnostics opt-in points
+    rings_l = layer()
+    rd = ImageDraw.Draw(rings_l)
+    nodes = [
+        (160, 148, 68, (18,  108, 195)),   # blue node upper-left
+        (580, 315, 95, (18,  170, 130)),   # teal node centre
+        (990, 180, 58, (220, 140,  20)),   # amber node upper-right
+        (390, 500, 48, (180,  50, 210)),   # violet node lower
+        (840, 490, 42, (18,  108, 195)),   # blue node lower-right
+    ]
+    for (cx, cy, r, col) in nodes:
+        for ring_r, alpha in [(r, 200), (int(r * 0.67), 155), (int(r * 0.34), 120)]:
+            rd.ellipse(
+                [(cx - ring_r, cy - ring_r), (cx + ring_r, cy + ring_r)],
+                outline=(col[0], col[1], col[2], alpha), width=4
+            )
+        # Centre pip
+        rp = 8
+        rd.ellipse([(cx - rp, cy - rp), (cx + rp, cy + rp)],
+                   fill=(col[0], col[1], col[2], 230))
+    base = comp(base, rings_l)
+
+    # 5. Fine Bauhaus grid — systematic order / structured API schema
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    for x in range(0, W + 1, 116):
+        gd.line([(x, 0), (x, H)], fill=(18, 18, 18, 16), width=1)
+    for y in range(0, H + 1, 87):
+        gd.line([(0, y), (W, y)], fill=(18, 18, 18, 16), width=1)
+    base = comp(base, grid_l)
+
+    # 6. Small rectangular data-packet scatter along pipeline bands
+    packets_l = layer()
+    pkd = ImageDraw.Draw(packets_l)
+    packet_palette = [
+        (18,  108, 195, 160),
+        (18,  170, 130, 155),
+        (220, 140,  20, 150),
+        (180,  50, 210, 145),
+    ]
+    packet_ys = [195, 315, 430, 547]
+    for py in packet_ys:
+        for _ in range(14):
+            px = rng.randint(20, W - 20)
+            pw = rng.randint(8, 22)
+            ph = rng.randint(5, 14)
+            col = packet_palette[rng.randint(0, 3)]
+            pkd.rectangle([(px, py - ph // 2), (px + pw, py + ph // 2)], fill=col)
+    base = comp(base, packets_l)
+
+    return base
+
+
 def img_franzmarc_20260924():
     """Franz Marc — jewel-toned organic forms — marketplace ecosystem, enzyme discovery, humanitarian science."""
     base = Image.new("RGB", (W, H), (12, 30, 72))  # deep cobalt background
@@ -15701,6 +15799,7 @@ DAYS = [
     ("2026-09-22", img_klimt_20260922,     "Threat & Business", "Gustav Klimt"),
     ("2026-09-23", img_calder_20260923,    "Opus 5.5 Launch",  "Alexander Calder"),
     ("2026-09-24", img_franzmarc_20260924, "Science & Market", "Franz Marc"),
+    ("2026-09-25", img_moholy_20260925,   "API Clarity",      "László Moholy-Nagy"),
 ]
 
 for date, fn, kw, artist in DAYS:

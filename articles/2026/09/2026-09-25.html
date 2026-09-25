@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="September 25: Cache diagnostics reaches GA on the Claude API — no beta header needed — while pre-output refusals in bio, frontier_llm, and reasoning_extraction categories are now billed. Claude Tag gains personal connectors in Slack channels, and Claude Code v2.1.282 ships maxProseWidth plus critical thinking-block and session-history fixes.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-09-25 – Cache Diagnostics GA, Refusal Billing Expansion, Claude Tag Personal Connectors, and Code v2.1.282">
+  <meta property="og:description" content="September 25: Cache diagnostics reaches GA on the Claude API — no beta header needed — while pre-output refusals in bio, frontier_llm, and reasoning_extraction categories are now billed. Claude Tag gains personal connectors in Slack channels, and Claude Code v2.1.282 ships maxProseWidth plus critical thinking-block and session-history fixes.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/09/2026-09-25.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/09/2026-09-25.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/09/2026-09-25.png">
+
+  <title>2026-09-25 – Cache Diagnostics GA, Refusal Billing Expansion, Claude Tag Personal Connectors, and Code v2.1.282 | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Cache Diagnostics GA, Refusal Billing Expansion, Claude Tag Personal Connectors, and Code v2.1.282",
+  "description": "September 25: Cache diagnostics reaches GA on the Claude API — no beta header needed — while pre-output refusals in bio, frontier_llm, and reasoning_extraction categories are now billed. Claude Tag gains personal connectors in Slack channels, and Claude Code v2.1.282 ships maxProseWidth plus critical thinking-block and session-history fixes.",
+  "datePublished": "2026-09-25",
+  "dateModified": "2026-09-25",
+  "url": "https://claudebeat.ai/articles/2026/09/2026-09-25.html",
+  "image": "https://claudebeat.ai/articles/2026/09/2026-09-25.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/09/2026-09-25.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-09-25</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Cache Diagnostics GA, Refusal Billing Expansion, Claude Tag Personal Connectors, and Code v2.1.282</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-09-25.png" alt="Cache Diagnostics GA, Refusal Billing Expansion, Claude Tag Personal Connectors, and Code v2.1.282 — visual for 2026-09-25">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Cache Diagnostics GA
+     Source: https://platform.claude.com/docs/en/release-notes/overview
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Cache Diagnostics Leaves Beta — Drop the Header, Add the Object</h2>
+
+  <p>Cache diagnostics is now <strong>generally available</strong> on the Claude API. If you've been relying on the <code>cache-diagnosis-2026-04-07</code> beta header to get cache miss reasons in API responses, you can — and should — migrate to the new stable interface: include a <code>diagnostics</code> object in your Messages request body instead. The beta header still works for now, but it will eventually be retired.</p>
+
+  <h3>What changed</h3>
+  <ul>
+    <li><strong>Opt-in mechanism:</strong> Add the <code>diagnostics</code> object to any <code>POST /v1/messages</code> request to enable diagnostics for that call.</li>
+    <li><strong>Always-present response field:</strong> The response from <code>POST /v1/messages</code> now <em>always</em> includes a top-level <code>diagnostics</code> field — it is <code>null</code> when the request did not include the <code>diagnostics</code> object, and populated when it did.</li>
+    <li><strong>Cache miss reasons:</strong> The populated <code>diagnostics</code> object contains <code>cache_miss_reason</code> with concrete variant values so you can distinguish cold misses from expiry from key mismatches.</li>
+  </ul>
+
+  <pre><code># Before (beta header approach — works but will be retired)
+headers = {
+    "anthropic-beta": "cache-diagnosis-2026-04-07"
+}
+
+# After (GA approach — use the diagnostics object)
+body = {
+    "model": "claude-opus-5-5",
+    "messages": [...],
+    "diagnostics": {}      # empty object is enough to opt in
+}
+# Response will include: { "diagnostics": { "cache_miss_reason": "..." } }</code></pre>
+
+  <div class="callout tip">
+    <strong>Actionable: update your staging environments first</strong>
+    <p>If you have monitoring or alerting keyed off the beta header's response fields, check whether the GA response schema is byte-compatible before switching production. The field names are the same, but it is worth a quick diff of the response shape against your existing parsing code. Requests that send <em>both</em> the old header and the new <code>diagnostics</code> object continue to work — useful for a rolling migration.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/release-notes/overview" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">cache diagnostics</span>
+    <span class="tag">GA</span>
+    <span class="tag">API release notes</span>
+    <span class="tag">cache miss reason</span>
+    <span class="tag">beta graduation</span>
+    <span class="tag">Messages API</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Refusal Billing Expansion
+     Source: https://platform.claude.com/docs/en/release-notes/overview
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Pre-Output Refusals Now Billed in Three New Categories — Audit Your Cost Assumptions</h2>
+
+  <p>Anthropic has expanded refusal billing: <strong>pre-output refusals</strong> (those that arrive before any model text is generated) are now billed when they fall into one of three categories: <code>bio</code>, <code>frontier_llm</code>, and <code>reasoning_extraction</code>. The stated reason is that false-positive rates for these classifiers are low enough that billing is now warranted. Mid-stream refusals — where the model begins generating and then stops — were already billed at full rates and remain unchanged.</p>
+
+  <h3>What is and isn't affected</h3>
+  <ul>
+    <li><strong>Now billed (pre-output):</strong> <code>bio</code> (biosafety category), <code>frontier_llm</code> (attempts to elicit Claude to replicate other frontier models), <code>reasoning_extraction</code> (attempts to extract the model's internal reasoning traces).</li>
+    <li><strong>Still free (pre-output):</strong> All other refusal categories retain the existing behaviour — no charge before output.</li>
+    <li><strong>Billing rate:</strong> When billed, refusals are charged at the standard rates of the model that processed the request — the same as a successful completion.</li>
+    <li><strong>Fallback credit policy:</strong> Unchanged — the credit mechanism for valid requests that are incorrectly refused still applies.</li>
+    <li><strong>Surfaces:</strong> Applies across the API, Claude.ai, and Enterprise deployments.</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>If you run red-teaming, safety evals, or adversarial probing pipelines</strong>
+    <p>Pipelines that deliberately send <code>bio</code>-adjacent or model-replication prompts to measure refusal rates will now incur costs. This is a meaningful change for compliance and security teams running automated adversarial test suites at volume. Review your eval budget assumptions and consider batching or rate-limiting adversarial runs, or routing them through a dedicated test API key with cost caps set in the Anthropic Console.</p>
+  </div>
+
+  <p>You can inspect the refusal category in the API response via <code>stop_details.category</code> — this field has been present since the refusal-details rollout and now doubles as the billing signal for these three categories.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/release-notes/overview" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">refusal billing</span>
+    <span class="tag">bio category</span>
+    <span class="tag">frontier_llm</span>
+    <span class="tag">reasoning_extraction</span>
+    <span class="tag">API billing</span>
+    <span class="tag">stop_details</span>
+    <span class="tag">safety classifiers</span>
+    <span class="tag">cost management</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude Tag Personal Connectors in Slack
+     Source: https://claude.com/blog/claude-tag-now-supports-personal-connectors-in-channels
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Tag in Slack Now Pulls from Your Personal Connectors — Not Just Shared Channel Resources</h2>
+
+  <p>Claude Tag in Slack has gained a significant new capability: when you <code>@Claude</code> in a channel, it can now access connectors tied to <strong>your individual account</strong> — Google Drive, calendars, CRM accounts — not just the shared connectors an admin has attached at the channel or workspace level. This distinction matters more than it might seem: it enables individual team members to contribute personalised, permission-gated data to collaborative channel conversations without exposing that data to the whole channel by default.</p>
+
+  <h3>Two output modes to understand</h3>
+  <ul>
+    <li><strong>Review mode (default):</strong> Claude composes a response and shows it to you privately first. You approve before it posts to the channel. Useful when the response might contain data you want to redact or context-check before colleagues see it.</li>
+    <li><strong>Auto mode:</strong> Claude screens the response for sensitive content before posting automatically. Enterprise admins can enforce review mode org-wide, overriding individual user preferences where compliance requires it.</li>
+  </ul>
+
+  <h3>Audit trail and privacy</h3>
+  <p>Activity from personal connectors logs to the <em>individual user's</em> account activity trail — not to the shared channel audit log. This preserves privacy between team members while still giving IT and compliance teams per-user accountability. From a compliance architecture standpoint, it means personal connector invocations do not appear as "channel events" and must be reviewed through per-user access logs in the Anthropic Console.</p>
+
+  <div class="callout">
+    <strong>Where this unlocks real value</strong>
+    <p>The canonical use case from Anthropic's announcement is RFP drafting: one team member pulls from their personal CRM opportunity data, another from their Google Drive proposal archive — Claude aggregates both into a channel-visible draft without either person having to export sensitive data to a shared drive first. If your team already uses Claude Code's connector integrations for individual dev tooling, this is the same model brought into Slack's collaborative surface.</p>
+  </div>
+
+  <p><strong>Availability:</strong> Rolling out now on Team plans. Enterprise to follow.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://claude.com/blog/claude-tag-now-supports-personal-connectors-in-channels" class="source-link" target="_blank" rel="noopener">claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Tag</span>
+    <span class="tag">Slack</span>
+    <span class="tag">personal connectors</span>
+    <span class="tag">Google Drive</span>
+    <span class="tag">CRM</span>
+    <span class="tag">review mode</span>
+    <span class="tag">auto mode</span>
+    <span class="tag">Team plan</span>
+    <span class="tag">Enterprise</span>
+    <span class="tag">channel collaboration</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 4 — Claude Code v2.1.282
+     Source: https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.282: maxProseWidth, Critical Thinking-Block Fixes, and a Web Search Session-History Patch</h2>
+
+  <p>Claude Code v2.1.282 is primarily a stability and correctness release, but it ships one new setting worth knowing — <code>maxProseWidth</code> — alongside fixes for two bugs that could cause silent, hard-to-diagnose session degradation.</p>
+
+  <h3>New: <code>maxProseWidth</code> setting</h3>
+  <p>The new <code>maxProseWidth</code> setting lets you cap the column width of Claude's prose output in terminal sessions while leaving tables and code blocks free to use full terminal width. Add it to your project's <code>settings.json</code>:</p>
+
+  <pre><code>{
+  "maxProseWidth": 100   // prose wraps at 100 chars; code/tables still expand to terminal width
+}</code></pre>
+
+  <p>This is useful when piping Claude's output to tools that expect fixed-width text, or when working in wide terminals where long prose lines become hard to scan.</p>
+
+  <h3>Critical fixes to know about</h3>
+  <ul>
+    <li><strong>Web search results in session history:</strong> Conversations were failing with API errors when resuming sessions whose history contained undecryptable web search results. This manifested as unexplained errors on session resume with no obvious relationship to the current prompt — now fixed.</li>
+    <li><strong>Extended thinking dropped during slash commands:</strong> Running a slash command (e.g. <code>/review</code>, <code>/test</code>) could silently drop extended thinking configuration for the remainder of the session — now preserved correctly.</li>
+    <li><strong>Thinking blocks lost after model switches:</strong> Switching models mid-session caused thinking blocks to disappear from the context — a subtle regression that affected users pinning to specific models for different phases of a task.</li>
+    <li><strong>Auto mode prompt-cache reuse after session resume:</strong> Auto mode now correctly reuses the permission classifier's prompt cache when resuming a session rather than recomputing it from scratch — a meaningful latency and cost improvement for long-running sessions.</li>
+    <li><strong>Security: dangerous-rm check extended to shell variable patterns:</strong> The check that flags potentially dangerous <code>rm</code> operations now catches patterns like <code>rm -rf $DIR/subpath</code> where a shell variable is followed by a directory name — previously only bare paths were flagged.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>If you've seen mysterious API errors on session resume</strong>
+    <p>The web search history bug was subtle: if a previous session used web search and those results were stored in session history, resuming that session could fail with cryptic API errors that looked like network or rate-limit issues. After upgrading to 2.1.282, any session you previously had to abandon and restart from scratch due to these errors should resume correctly. Check the Claude Code <a href="https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG</a> for the full fix list.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">v2.1.282</span>
+    <span class="tag">maxProseWidth</span>
+    <span class="tag">extended thinking</span>
+    <span class="tag">session resume</span>
+    <span class="tag">web search history</span>
+    <span class="tag">model switch</span>
+    <span class="tag">prompt cache</span>
+    <span class="tag">dangerous-rm</span>
+    <span class="tag">security fix</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.anthropic.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

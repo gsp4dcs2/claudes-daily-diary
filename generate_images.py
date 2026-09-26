@@ -15493,6 +15493,100 @@ def img_franzmarc_20260924():
     return base
 
 
+def img_seurat_20260926():
+    """Georges Seurat pointillist style — nine-loop particle physics amplitude, quantum computation theme.
+    Millions of tiny dots accumulate into nested loop rings — each concentric band one loop level —
+    radiating from a bright quantum-white core on a deep space-navy background, with spectral
+    dot trails suggesting Feynman diagram paths between interaction vertices.
+    """
+    base = Image.new("RGB", (W, H), (8, 12, 38))   # deep space navy
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Background quantum vacuum — faint scattered dots across full canvas
+    for _ in range(6000):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        r = rng.randint(1, 2)
+        val = rng.randint(15, 55)
+        b_extra = rng.randint(0, 30)
+        draw.ellipse([(x-r, y-r), (x+r, y+r)], fill=(val, val, val + b_extra))
+
+    # 2. Nine concentric loop rings — one per loop level, spectral gradient
+    #    Centre of amplitude computation
+    cx, cy = 600, 295
+    loop_colours = [
+        (255, 255, 220),   # loop 1 — near-white inner core
+        (255, 240, 100),   # loop 2 — warm gold
+        (255, 190, 40),    # loop 3 — amber
+        (255, 130, 30),    # loop 4 — orange
+        (240, 70,  50),    # loop 5 — coral-red
+        (200, 50, 130),    # loop 6 — magenta
+        (140, 50, 210),    # loop 7 — violet
+        (60,  90, 230),    # loop 8 — deep blue
+        (30, 160, 255),    # loop 9 — outer cyan (record-breaking)
+    ]
+    radii = [22, 50, 82, 116, 152, 188, 224, 260, 296]
+
+    for ring_r, col in zip(radii, loop_colours):
+        rl = layer()
+        rd = ImageDraw.Draw(rl)
+        n_dots = 600 + ring_r * 8
+        sigma = max(6, ring_r * 0.07)
+        for _ in range(n_dots):
+            angle = rng.uniform(0, 2 * math.pi)
+            dist = rng.gauss(ring_r, sigma)
+            dx = int(cx + dist * math.cos(angle))
+            dy = int(cy + dist * math.sin(angle))
+            dr = rng.randint(2, 5)
+            alpha = int(230 * math.exp(-0.5 * ((dist - ring_r) / sigma) ** 2))
+            rd.ellipse([(dx-dr, dy-dr), (dx+dr, dy+dr)],
+                       fill=(col[0], col[1], col[2], max(0, min(255, alpha))))
+        base = comp(base, rl)
+
+    # 3. Feynman-path dot trails — 6 arcing paths between interaction vertices
+    vertices = [
+        (cx + int(310 * math.cos(i * math.pi / 3)),
+         cy + int(310 * math.sin(i * math.pi / 3)))
+        for i in range(6)
+    ]
+    path_cols = [
+        (255, 215, 80),  (255, 110, 50),  (180, 60, 220),
+        (50,  140, 255), (60,  220, 140), (255, 60, 130),
+    ]
+    for (ax, ay), pcol in zip(vertices, path_cols):
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        for t_i in range(180):
+            t = t_i / 179
+            bow = -80 * math.sin(math.pi * t)
+            mx = cx + (ax - cx) * t
+            my = cy + (ay - cy) * t + bow
+            dr = rng.randint(2, 4)
+            alpha = int(170 * math.sin(math.pi * t))
+            pd.ellipse([(mx-dr, my-dr), (mx+dr, my+dr)],
+                       fill=(pcol[0], pcol[1], pcol[2], alpha))
+        base = comp(base, pl)
+
+    # 4. Outer spectral scatter — bright dots in lower third suggest raw data / Smart Reports
+    spectral = [
+        (255, 60, 50),  (255, 160, 20), (255, 240, 0),
+        (50, 230, 90),  (50, 160, 255), (200, 80, 255),
+    ]
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    for _ in range(2400):
+        x = rng.randint(0, W)
+        y = rng.randint(300, H)
+        r = rng.randint(1, 3)
+        col = rng.choice(spectral)
+        sd.ellipse([(x-r, y-r), (x+r, y+r)],
+                   fill=(col[0], col[1], col[2], rng.randint(25, 110)))
+    base = comp(base, sl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -15800,6 +15894,7 @@ DAYS = [
     ("2026-09-23", img_calder_20260923,    "Opus 5.5 Launch",  "Alexander Calder"),
     ("2026-09-24", img_franzmarc_20260924, "Science & Market", "Franz Marc"),
     ("2026-09-25", img_moholy_20260925,   "API Clarity",      "László Moholy-Nagy"),
+    ("2026-09-26", img_seurat_20260926,   "Nine-Loop Amplitude", "Georges Seurat"),
 ]
 
 for date, fn, kw, artist in DAYS:

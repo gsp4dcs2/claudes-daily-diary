@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="September 27: Claude advances the Riemann zeta zero lower bound from 41.6% to 67.2% in a formally verified proof using 60 subagents, while Claude Code v2.1.283 adds exact model version locking and gateway hint headers for LLM proxies, and the Messages API gains thinking_mismatch_allowed for agentic pipeline safety.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-09-27 – Claude Pushes Riemann Zeta Bound to 67.2%, Code v2.1.283 Locks Model Versions, API Gains thinking_mismatch_allowed">
+  <meta property="og:description" content="September 27: Claude advances the Riemann zeta zero lower bound from 41.6% to 67.2% in a formally verified proof using 60 subagents, while Claude Code v2.1.283 adds exact model version locking and gateway hint headers for LLM proxies, and the Messages API gains thinking_mismatch_allowed for agentic pipeline safety.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/09/2026-09-27.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/09/2026-09-27.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/09/2026-09-27.png">
+
+  <title>2026-09-27 – Claude Pushes Riemann Zeta Bound to 67.2%, Code v2.1.283 Locks Model Versions, API Gains thinking_mismatch_allowed | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Pushes Riemann Zeta Bound to 67.2%, Code v2.1.283 Locks Model Versions, API Gains thinking_mismatch_allowed",
+  "description": "September 27: Claude advances the Riemann zeta zero lower bound from 41.6% to 67.2% in a formally verified proof using 60 subagents, while Claude Code v2.1.283 adds exact model version locking and gateway hint headers for LLM proxies, and the Messages API gains thinking_mismatch_allowed for agentic pipeline safety.",
+  "datePublished": "2026-09-27",
+  "dateModified": "2026-09-27",
+  "url": "https://claudebeat.ai/articles/2026/09/2026-09-27.html",
+  "image": "https://claudebeat.ai/articles/2026/09/2026-09-27.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/09/2026-09-27.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-09-27</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Claude Pushes Riemann Zeta Bound to 67.2%, Code v2.1.283 Locks Model Versions, API Gains thinking_mismatch_allowed</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-09-27.png" alt="Claude Pushes Riemann Zeta Bound to 67.2%, Code v2.1.283 Locks Model Versions, API Gains thinking_mismatch_allowed — visual for 2026-09-27">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Riemann Zeta Lower Bound
+     Source: https://www.anthropic.com/research/riemann-zeta
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Advances Riemann Zeta Zero Lower Bound from 41.6% to 67.2%</h2>
+
+  <p>An unreleased research version of Claude has improved the lower bound for the proportion of Riemann zeta zeros lying on the critical line — the core assertion of the Riemann Hypothesis — from 41.6% to 67.2%. The result was validated by external mathematicians Brian Conrey and Dan Goldston and constitutes a formally verifiable proof. Claude deployed roughly 60 subagents issuing approximately 2,400 shell commands across a 1.5-day compute run. Anthropic is explicit that the result does not resolve the full Riemann Hypothesis, but it is a substantial improvement on a bound that has stood for decades and represents a meaningful advance for AI-assisted pure mathematics.</p>
+
+  <h3>What the bound means</h3>
+  <p>The Riemann Hypothesis (RH) states that every non-trivial zero of the zeta function ζ(s) has real part ½ — i.e., lies on the "critical line." Because proving this for all zeros remains out of reach, mathematicians track what fraction of zeros can be proven to lie on the line. Hardy and Littlewood showed in 1921 that infinitely many do; Conrey pushed the density lower bound to 41.6% in 1989. Claude's result extends that to 67.2%, meaning over two thirds of all zeros are now provably critical-line zeros — a number that had not moved in 37 years.</p>
+
+  <h3>How Claude approached it</h3>
+  <ul>
+    <li><strong>Multi-agent parallelism:</strong> ~60 subagents each held a distinct region of the symbolic manipulation space, passing intermediate results to a coordinating agent that checked consistency across branches before committing steps.</li>
+    <li><strong>~2,400 shell commands:</strong> The agents invoked a computer algebra system (CAS) for explicit computations — prime-sum estimates, zero-density estimates, mollifier integrals — rather than attempting pure in-context reasoning at the scale of full CAS sessions.</li>
+    <li><strong>Formal verifiability:</strong> The proof is structured so that each lemma is independently checkable by a human or mechanised prover, not a black-box statistical argument. Conrey and Goldston confirmed the key steps.</li>
+    <li><strong>~1.5 days of compute:</strong> The research blog notes no specific cost figure, in contrast to the nine-loop amplitude ($1–2k/method). Mathematics at this level appears cheaper per result than large physics computations.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Three AI science results in one week</strong>
+    <p>This is the third genuinely novel scientific result attributed to Claude within a single week: the ART enzyme discovery (September 24), the nine-loop N=4 SYM amplitude (September 26), and now an advance on the Riemann Hypothesis lower bound (September 27). All three share a structural feature: Claude was not given a step-by-step algorithm, only an objective and compute resources, and it independently chose its methods. For practitioners the actionable question remains the same — what computationally hard open problems in your field are stalled because execution cost or coordination complexity was prohibitive, not because the method is unknown?</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/research/riemann-zeta" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Riemann Hypothesis</span>
+    <span class="tag">Riemann zeta function</span>
+    <span class="tag">lower bound</span>
+    <span class="tag">critical line</span>
+    <span class="tag">pure mathematics</span>
+    <span class="tag">multi-agent</span>
+    <span class="tag">formal proof</span>
+    <span class="tag">Brian Conrey</span>
+    <span class="tag">AI-assisted science</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Code v2.1.283
+     Source: https://platform.claude.com/docs/en/release-notes/overview
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.283: Exact Model Version Locking and LLM Proxy Gateway Headers</h2>
+
+  <p>Claude Code v2.1.283 (released September 25) introduces two significant enterprise controls. The first is <code>availableModelsMatch='exact'</code> — a new option in managed settings that locks an <code>availableModels</code> entry to a precise named model version, blocking automatic adoption of newly released models until an admin explicitly adds them. The second is an opt-in <code>x-claude-code-prompt-id</code> gateway hint header that lets LLM proxy operators group all API requests serving a single user prompt into a traceable unit, enabling per-prompt cost attribution and request-level debugging at the proxy layer.</p>
+
+  <h3>exact model locking in practice</h3>
+  <p>Previously, <code>availableModels</code> entries matched model families (e.g. all <code>claude-opus-5-x</code> releases). With <code>exact</code>, an org pinned to <code>claude-opus-5-5-20260820</code> will not silently gain access to <code>claude-opus-5-6-20261014</code> when it ships — they stay on the locked version until an admin updates the policy. This is particularly useful for teams with formal change-management requirements, where an unplanned model upgrade would require re-validation before production use.</p>
+
+  <pre><code>// .claude/settings.json — enterprise managed settings
+{
+  "availableModels": [
+    {
+      "pattern": "claude-opus-5-5-20260820",
+      "availableModelsMatch": "exact"
+    }
+  ],
+  "deniedModels": ["claude-haiku-4-5-20251001"]
+}</code></pre>
+
+  <h3>x-claude-code-prompt-id header</h3>
+  <p>When Claude Code sends a user-initiated prompt to the API, it now optionally emits an <code>x-claude-code-prompt-id</code> request header. Intermediate LLM proxies that see this header can correlate all API calls (including tool-use sub-calls, auto-compaction retries, and thinking-block round-trips) back to the originating prompt. The header is opt-in and not sent by default; it is enabled in <code>settings.json</code> under <code>enableGatewayHintHeader: true</code>.</p>
+
+  <div class="callout tip">
+    <strong>Why this matters for self-hosted proxy deployments</strong>
+    <p>Enterprises running an internal LLM gateway (LiteLLM, HelixML, a custom proxy) have historically struggled to attribute multi-call conversations to individual user prompts. With the hint header, the proxy can reconstruct the full prompt-level call tree without needing Claude Code to emit verbose tracing logs. Combine this with <code>exact</code> model pinning and the <code>deniedModels</code> blocklist to build a robust governance layer without touching the Claude Code binary.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/release-notes/overview" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">v2.1.283</span>
+    <span class="tag">model version locking</span>
+    <span class="tag">availableModelsMatch</span>
+    <span class="tag">deniedModels</span>
+    <span class="tag">LLM proxy</span>
+    <span class="tag">gateway headers</span>
+    <span class="tag">enterprise controls</span>
+    <span class="tag">change management</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — thinking_mismatch_allowed
+     Source: https://platform.claude.com/docs/en/release-notes/overview
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Messages API Adds thinking_mismatch_allowed — Guard Agentic Pipelines That Cache and Replay Thinking Blocks</h2>
+
+  <p>A late-September platform release adds <code>thinking_mismatch_allowed</code> to the preserved thinking controls in the Messages API. The parameter addresses a failure mode in agentic pipelines that cache intermediate thinking blocks and replay them in subsequent turns: if a cached thinking block has been altered — by summarisation, token trimming, or a routing layer that modifies context — the API can now detect the mismatch and either raise an error or silently continue, depending on how the developer configures the flag.</p>
+
+  <h3>Background: preserved thinking and context caching</h3>
+  <p>Extended thinking in Claude generates <code>thinking</code> content blocks that are marked as "preserved" — they should be passed back in conversation history verbatim. The model relies on these blocks during subsequent turns; if they are modified, reasoning quality can degrade silently. Before this release, the only safeguard was a client-side responsibility to pass thinking blocks through unchanged. There was no server-side signal if a proxy, summariser, or context-management library had altered them.</p>
+
+  <h3>How thinking_mismatch_allowed works</h3>
+  <ul>
+    <li><strong><code>thinking_mismatch_allowed: false</code> (default):</strong> If a thinking block in the conversation history does not match the cryptographic signature embedded when it was first generated, the API returns a <code>400 thinking_block_mismatch</code> error. Use this for maximum pipeline integrity.</li>
+    <li><strong><code>thinking_mismatch_allowed: true</code>:</strong> The API accepts the modified thinking block and proceeds, but sets a <code>thinking_mismatch_detected: true</code> field in the response metadata. Use this if you want detection without hard failures — e.g., to log and alert while keeping user-facing tasks uninterrupted.</li>
+  </ul>
+
+  <pre><code>// Messages API — enable detection without hard failure
+{
+  "model": "claude-opus-5-5-20260820",
+  "thinking": { "type": "enabled", "budget_tokens": 8000 },
+  "thinking_mismatch_allowed": true,
+  "messages": [...]
+}</code></pre>
+
+  <div class="callout warning">
+    <strong>Migration note for existing agentic pipelines</strong>
+    <p>The default changed from <em>silently accept</em> to <code>thinking_mismatch_allowed: false</code> (hard error). If you have a pipeline that compacts, summarises, or otherwise modifies conversation history before replay, enable <code>thinking_mismatch_allowed: true</code> first, monitor for <code>thinking_mismatch_detected</code> in production, then fix the root cause. Jumping straight to the default-off behaviour may surface 400 errors in pipelines you did not know were touching thinking blocks.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/release-notes/overview" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Messages API</span>
+    <span class="tag">thinking_mismatch_allowed</span>
+    <span class="tag">extended thinking</span>
+    <span class="tag">preserved thinking</span>
+    <span class="tag">agentic pipelines</span>
+    <span class="tag">context caching</span>
+    <span class="tag">pipeline integrity</span>
+    <span class="tag">400 error</span>
+    <span class="tag">developer platform</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.anthropic.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

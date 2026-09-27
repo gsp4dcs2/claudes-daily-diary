@@ -15587,6 +15587,79 @@ def img_seurat_20260926():
     return base
 
 
+def img_mondrian_20260927():
+    """Piet Mondrian Neo-Plasticism — Riemann zeta critical-line theme.
+    Off-white bg, dense yellow grid bands representing the infinite zeta-function
+    grid, red and blue rectangles marking proven critical-line zero clusters,
+    bold black structural lines, and node squares at intersections that
+    visualise the advancing 67.2% lower-bound frontier.
+    """
+    base = Image.new("RGB", (W, H), (245, 240, 225))   # warm off-white bg
+    draw = ImageDraw.Draw(base)
+
+    YELLOW = (255, 205, 0)
+    RED    = (208, 28, 28)
+    BLUE   = (18, 68, 190)
+    BLACK  = (14, 14, 14)
+    BW     = 16   # band width
+
+    # Uneven vertical & horizontal grid — the "critical strip" Re(s)=1/2
+    # Denser columns near the centre to emphasise Re(s)=1/2 zone
+    vx = [0, 80, 185, 290, 390, 500, 600, 700, 800, 905, 1030, 1150, W]
+    hy = [0, 75, 170, 265, 355, 445, H]
+
+    # 1. Yellow grid bands — the skeleton of the zeta-function grid
+    for gx in vx[1:-1]:
+        draw.rectangle([(gx - BW//2, 0), (gx + BW//2, H)], fill=YELLOW)
+    for gy in hy[1:-1]:
+        draw.rectangle([(0, gy - BW//2), (W, gy + BW//2)], fill=YELLOW)
+
+    # 2. Coloured cell fills — red = proven critical-line region (67.2% frontier),
+    #    blue = unproven region, yellow = transition zones
+    inset = BW // 2 + 2
+    coloured = [
+        # (col_idx, row_idx, colour) — asymmetric, weighted to the left (proven side)
+        (0, 0, RED),   (1, 1, RED),   (2, 0, BLUE),
+        (3, 2, RED),   (4, 0, RED),   (5, 1, BLUE),
+        (6, 2, RED),   (7, 0, BLUE),  (8, 1, RED),
+        (9, 3, RED),   (10, 0, BLUE), (11, 2, RED),
+        (0, 3, BLUE),  (1, 4, RED),   (2, 3, RED),
+        (3, 4, BLUE),  (4, 3, RED),   (5, 4, YELLOW),
+        (6, 0, RED),   (7, 3, BLUE),  (8, 4, RED),
+        (9, 1, RED),   (10, 3, YELLOW),(11, 4, BLUE),
+        (0, 5, RED),   (2, 5, BLUE),  (4, 5, RED),
+        (6, 5, RED),   (8, 5, BLUE),  (10, 5, RED),
+    ]
+    for ci, ri, col in coloured:
+        if ci < len(vx) - 1 and ri < len(hy) - 1:
+            x0 = vx[ci] + inset
+            y0 = hy[ri] + inset
+            x1 = vx[ci + 1] - inset
+            y1 = hy[ri + 1] - inset
+            if x1 > x0 and y1 > y0:
+                draw.rectangle([(x0, y0), (x1, y1)], fill=col)
+
+    # 3. Bold black structural lines — the absolute "laws" of the composition
+    for gx in vx[1:-1]:
+        draw.line([(gx, 0), (gx, H)], fill=BLACK, width=4)
+    for gy in hy[1:-1]:
+        draw.line([(0, gy), (W, gy)], fill=BLACK, width=4)
+
+    # 4. Intersection node squares — highlight the 67.2% frontier crossing
+    #    Alternate RED/BLUE/YELLOW at intersections; RED-heavy to show advancing bound
+    node_cycle = [RED, RED, BLUE, YELLOW, RED, BLUE]
+    node_half = 8
+    for i, gx in enumerate(vx[1:-1]):
+        for j, gy in enumerate(hy[1:-1]):
+            col = node_cycle[(i * 3 + j * 2) % len(node_cycle)]
+            draw.rectangle(
+                [(gx - node_half, gy - node_half), (gx + node_half, gy + node_half)],
+                fill=col
+            )
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -15895,6 +15968,7 @@ DAYS = [
     ("2026-09-24", img_franzmarc_20260924, "Science & Market", "Franz Marc"),
     ("2026-09-25", img_moholy_20260925,   "API Clarity",      "László Moholy-Nagy"),
     ("2026-09-26", img_seurat_20260926,   "Nine-Loop Amplitude", "Georges Seurat"),
+    ("2026-09-27", img_mondrian_20260927, "Riemann Zeta",       "Piet Mondrian"),
 ]
 
 for date, fn, kw, artist in DAYS:

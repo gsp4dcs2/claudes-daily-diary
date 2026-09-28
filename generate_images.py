@@ -15587,6 +15587,112 @@ def img_seurat_20260926():
     return base
 
 
+def img_leger_20260928():
+    """Fernand Léger mechanical style — Akamai computing deal, infrastructure, edge network theme.
+    Dark bg, bold industrial cable/pipeline forms, distributed node grid representing
+    Akamai's 4000+ PoP edge network, flat primary planes, rivet/bolt industrial texture.
+    """
+    base = Image.new("RGB", (W, H), (8, 10, 16))
+
+    # 1. Subtle blueprint dot-grid background
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for x in range(0, W + 60, 60):
+        for y in range(0, H + 60, 60):
+            gd.ellipse([(x - 1, y - 1), (x + 1, y + 1)], fill=(40, 60, 90, 60))
+    base = comp(base, gl)
+
+    # 2. Bold horizontal pipeline bars — Léger's flat industrial planes
+    bars = [
+        # (y_centre, height, colour, alpha)
+        (90,  52, (235, 190, 0),   210),   # yellow — top pipeline
+        (235, 48, (210, 35,  35),  200),   # red
+        (375, 52, (30,  110, 220), 205),   # blue
+        (510, 46, (50,  185, 95),  190),   # green — bottom pipeline
+    ]
+    for yc, h, col, alpha in bars:
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        bd.rectangle([(0, yc - h // 2), (W, yc + h // 2)],
+                     fill=col + (alpha,), outline=(0, 0, 0, 240))
+        base = comp(base, bl)
+
+    # 3. Rivet dots along pipeline edges (industrial texture)
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rivet_y_positions = [90 - 26, 90 + 26, 235 - 24, 235 + 24,
+                         375 - 26, 375 + 26, 510 - 23, 510 + 23]
+    for ry in rivet_y_positions:
+        for rx in range(30, W, 90):
+            rd.ellipse([(rx - 6, ry - 6), (rx + 6, ry + 6)],
+                       fill=(215, 210, 195, 200), outline=(0, 0, 0, 220), width=2)
+    base = comp(base, rl)
+
+    # 4. Large mechanical wheel (right side) — network hub
+    wl = layer()
+    wd = ImageDraw.Draw(wl)
+    cx, cy = 900, 315
+    r_outer, r_mid, r_inner = 200, 140, 60
+    wd.ellipse([(cx - r_outer, cy - r_outer), (cx + r_outer, cy + r_outer)],
+               fill=(30, 110, 220, 55), outline=(30, 110, 220, 220), width=12)
+    wd.ellipse([(cx - r_mid, cy - r_mid), (cx + r_mid, cy + r_mid)],
+               fill=(0, 0, 0, 0), outline=(235, 190, 0, 200), width=7)
+    wd.ellipse([(cx - r_inner, cy - r_inner), (cx + r_inner, cy + r_inner)],
+               fill=(210, 35, 35, 180), outline=(0, 0, 0, 240), width=5)
+    # Spokes
+    for angle in range(0, 360, 45):
+        rad = math.radians(angle)
+        sx = cx + int(r_inner * math.cos(rad))
+        sy = cy + int(r_inner * math.sin(rad))
+        ex = cx + int(r_mid * math.cos(rad))
+        ey = cy + int(r_mid * math.sin(rad))
+        wd.line([(sx, sy), (ex, ey)], fill=(255, 255, 255, 110), width=5)
+    # Gear teeth
+    for angle in range(0, 360, 20):
+        rad = math.radians(angle)
+        tx = cx + int((r_outer - 12) * math.cos(rad))
+        ty = cy + int((r_outer - 12) * math.sin(rad))
+        tr = 11
+        wd.rectangle([(tx - tr, ty - tr), (tx + tr, ty + tr)],
+                     fill=(50, 185, 95, 170), outline=(0, 0, 0, 210), width=2)
+    base = comp(base, wl)
+
+    # 5. Small node circles on the pipelines — distributed PoP locations
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    node_specs = [
+        # (x, y_bar_index, colour)
+        (120, 0, (255, 255, 255)),
+        (290, 0, (210, 35, 35)),
+        (500, 1, (255, 255, 255)),
+        (680, 1, (235, 190, 0)),
+        (200, 2, (235, 190, 0)),
+        (430, 2, (255, 255, 255)),
+        (650, 3, (30, 110, 220)),
+        (350, 3, (255, 255, 255)),
+    ]
+    bar_centres = [90, 235, 375, 510]
+    for nx, bi, nc in node_specs:
+        ny = bar_centres[bi]
+        r = 16
+        nd.ellipse([(nx - r, ny - r), (nx + r, ny + r)],
+                   fill=nc + (230,), outline=(0, 0, 0, 240), width=4)
+    base = comp(base, nl)
+
+    # 6. Vertical connector pipes between horizontal bars (left half)
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    connector_xs = [120, 200, 290, 350, 430, 500, 650, 680]
+    bar_y_pairs = [(90, 235), (235, 375), (375, 510)]
+    for vx in connector_xs[:5]:
+        for y1, y2 in bar_y_pairs:
+            cd.rectangle([(vx - 6, y1 + 26), (vx + 6, y2 - 23)],
+                         fill=(180, 175, 160, 120), outline=(0, 0, 0, 160), width=2)
+    base = comp(base, cl)
+
+    return base
+
+
 def img_mondrian_20260927():
     """Piet Mondrian Neo-Plasticism — Riemann zeta critical-line theme.
     Off-white bg, dense yellow grid bands representing the infinite zeta-function
@@ -15969,6 +16075,7 @@ DAYS = [
     ("2026-09-25", img_moholy_20260925,   "API Clarity",      "László Moholy-Nagy"),
     ("2026-09-26", img_seurat_20260926,   "Nine-Loop Amplitude", "Georges Seurat"),
     ("2026-09-27", img_mondrian_20260927, "Riemann Zeta",       "Piet Mondrian"),
+    ("2026-09-28", img_leger_20260928,   "Akamai Deal",        "Fernand Léger"),
 ]
 
 for date, fn, kw, artist in DAYS:

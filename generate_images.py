@@ -15587,6 +15587,101 @@ def img_seurat_20260926():
     return base
 
 
+def img_kandinsky_20260929():
+    """Wassily Kandinsky style — Sonnet 5.5 launch, IPO governance structure, Life Sciences program theme.
+    Prussian-blue bg, diagonal grid scaffolding, large radiant gold circle (new model capability),
+    red triangle (founder voting control apex), blue rectangle (LSVP structured access tiers),
+    arc connectors and geometric accents — bold primaries throughout.
+    """
+    base = Image.new("RGB", (W, H), (18, 34, 72))  # prussian-blue bg
+
+    # 1. Faint diagonal grid — Kandinsky's compositional scaffolding
+    grid_col = (38, 62, 118)
+    step = 58
+    draw = ImageDraw.Draw(base)
+    for i in range(-H, W + H, step):
+        draw.line([(i, 0), (i + H, H)], fill=grid_col, width=1)
+        draw.line([(i + H, 0), (i, H)], fill=grid_col, width=1)
+
+    # 2. Large radiant gold disc (centre-left) — Sonnet 5.5 capability launch
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    cx, cy = 460, 280
+    for r, a in [(210, 30), (185, 60), (160, 100), (132, 145), (100, 185), (70, 220), (42, 255)]:
+        rd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=(255, 210, 30, a))
+    # hollow core — unknown further capability
+    rd.ellipse([(cx - 28, cy - 28), (cx + 28, cy + 28)], fill=(18, 34, 72, 255))
+    for r, a in [(22, 200), (12, 255)]:
+        rd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=(255, 235, 90, a))
+    base = comp(base, rl)
+
+    # 3. Bold red upward triangle — founder governance / voting power apex
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    td.polygon([(100, 540), (245, 290), (390, 540)], fill=(215, 35, 35, 220))
+    td.polygon([(128, 522), (245, 318), (362, 522)], fill=(240, 80, 55, 100))
+    base = comp(base, tl)
+
+    # 4. Deep blue rectangle (right) — LSVP structured access tiers
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bd.rectangle([(810, 110), (1110, 420)], fill=(28, 72, 200, 210))
+    bd.rectangle([(810, 110), (1110, 155)], fill=(50, 100, 230, 230))
+    # Tier bars inside — Standard Use + High-Risk Use
+    for ly, col in [(175, (255, 210, 30)), (225, (255, 210, 30)),
+                    (275, (210, 35, 35)), (325, (210, 35, 35)),
+                    (375, (80, 200, 130))]:
+        bd.rectangle([(830, ly), (830 + int(240 * rng.uniform(0.55, 0.92)), ly + 10)],
+                     fill=col + (140,))
+    # Tab dividers — two tier sections
+    bd.line([(810, 255), (1110, 255)], fill=(255, 255, 255, 60), width=2)
+    base = comp(base, bl)
+
+    # 5. Arc connectors linking the three forms
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    # gold disc → triangle apex
+    for off in [-3, 0, 3]:
+        ad.line([(cx - 115 + off, cy + 55), (245 + off, 300)],
+                fill=(255, 210, 30, 140), width=2)
+    # gold disc → blue rect
+    for off in [-3, 0, 3]:
+        ad.line([(cx + 125, cy - 10 + off), (810, 265 + off)],
+                fill=(100, 155, 255, 130), width=2)
+    # sweeping arc — triangle top to rect left edge
+    ad.arc([(200, 270), (820, 560)], start=225, end=345,
+           fill=(200, 75, 75, 70), width=3)
+    base = comp(base, al)
+
+    # 6. Small geometric accent vocabulary — Kandinsky's corner details
+    acc = layer()
+    acd = ImageDraw.Draw(acc)
+
+    # Yellow concentric ring — top-left
+    acd.ellipse([(55, 55), (155, 155)], fill=(255, 220, 0, 215))
+    acd.ellipse([(75, 75), (135, 135)], fill=(18, 34, 72, 255))
+    acd.ellipse([(88, 88), (122, 122)], fill=(255, 200, 25, 205))
+
+    # Teal ring — upper-right
+    acd.ellipse([(960, 45), (1075, 160)], fill=(10, 10, 40, 240))
+    acd.ellipse([(978, 63), (1057, 142)], fill=(40, 195, 180, 190))
+    acd.ellipse([(996, 81), (1039, 124)], fill=(10, 10, 40, 255))
+
+    # Coral diagonal bar — upper centre
+    acd.rectangle([(470, 42), (620, 74)], fill=(232, 115, 74, 215))
+
+    # Small red mini-triangle — lower-right accent
+    acd.polygon([(960, 490), (1060, 490), (1010, 420)], fill=(215, 35, 35, 160))
+
+    # White arc — lower-left (life sciences / biology curve motif)
+    acd.arc([(30, 380), (220, 570)], start=190, end=350,
+            fill=(255, 255, 255, 130), width=5)
+
+    base = comp(base, acc)
+
+    return base
+
+
 def img_leger_20260928():
     """Fernand Léger mechanical style — Akamai computing deal, infrastructure, edge network theme.
     Dark bg, bold industrial cable/pipeline forms, distributed node grid representing
@@ -16076,6 +16171,7 @@ DAYS = [
     ("2026-09-26", img_seurat_20260926,   "Nine-Loop Amplitude", "Georges Seurat"),
     ("2026-09-27", img_mondrian_20260927, "Riemann Zeta",       "Piet Mondrian"),
     ("2026-09-28", img_leger_20260928,   "Akamai Deal",        "Fernand Léger"),
+    ("2026-09-29", img_kandinsky_20260929, "Sonnet 5.5",       "Wassily Kandinsky"),
 ]
 
 for date, fn, kw, artist in DAYS:

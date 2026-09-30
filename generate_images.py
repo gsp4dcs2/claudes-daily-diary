@@ -15861,6 +15861,75 @@ def img_mondrian_20260927():
     return base
 
 
+def img_rothko_20260930():
+    """Mark Rothko colour field — safety milestone, phase closure, provable inference theme."""
+    # Very deep warm near-black — the weight of a closed chapter
+    base = Image.new("RGB", (W, H), (14, 10, 16))
+
+    def soft_band(img, y0, y1, colour, feather=72):
+        """Soft-edged Rothko colour band with luminous feathered edges."""
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        r, g, b = colour
+        # Solid core
+        bd.rectangle([(50, y0 + feather), (W - 50, y1 - feather)], fill=(r, g, b, 215))
+        # Feathered top edge
+        for i in range(feather):
+            alpha = int(190 * (i / feather))
+            bd.rectangle([(50 + i, y0 + i), (W - 50 - i, y0 + i + 1)], fill=(r, g, b, alpha))
+        # Feathered bottom edge
+        for i in range(feather):
+            alpha = int(190 * ((feather - i) / feather))
+            bd.rectangle([(50 + i, y1 - i - 1), (W - 50 - i, y1 - i)], fill=(r, g, b, alpha))
+        return comp(img, bl)
+
+    # Top band — deep cerulean-indigo: the cryptographic proof layer, the absolute
+    base = soft_band(base, 14, 215, (28, 52, 128), feather=65)
+
+    # Middle band — warm amber-gold: the milestone achieved, the phase closing
+    base = soft_band(base, 192, 435, (188, 130, 22), feather=80)
+
+    # Bottom band — forest emerald: the compliance and trust that follows
+    base = soft_band(base, 408, 614, (22, 88, 58), feather=66)
+
+    # Inner luminous glow on top band — the attestation light
+    tg = layer()
+    tgd = ImageDraw.Draw(tg)
+    for i in range(44):
+        alpha = int(62 * (1 - i / 44))
+        tgd.rectangle([(140 + i, 60 + i), (W - 140 - i, 148 - i)], fill=(80, 120, 220, alpha))
+    base = comp(base, tg)
+
+    # Inner luminous glow on middle band — warm milestone radiance
+    mg = layer()
+    mgd = ImageDraw.Draw(mg)
+    for i in range(55):
+        alpha = int(58 * (1 - i / 55))
+        mgd.rectangle([(100 + i, 255 + i), (W - 100 - i, 370 - i)], fill=(240, 190, 60, alpha))
+    base = comp(base, mg)
+
+    # Thin luminous seam between top and middle — the cryptographic boundary
+    sl = layer()
+    sld = ImageDraw.Draw(sl)
+    seam_y = 215
+    for i in range(22):
+        alpha = int(120 * (1 - abs(i - 11) / 11))
+        sld.rectangle([(0, seam_y - 11 + i), (W, seam_y - 10 + i)], fill=(210, 210, 255, alpha))
+    base = comp(base, sl)
+
+    # Fine noise texture — the granular depth of a Rothko canvas
+    nl = layer()
+    nld = ImageDraw.Draw(nl)
+    for _ in range(2200):
+        x = rng.randint(0, W - 1)
+        y = rng.randint(0, H - 1)
+        alpha = rng.randint(4, 18)
+        nld.point([(x, y)], fill=(200, 200, 200, alpha))
+    base = comp(base, nl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -16172,6 +16241,7 @@ DAYS = [
     ("2026-09-27", img_mondrian_20260927, "Riemann Zeta",       "Piet Mondrian"),
     ("2026-09-28", img_leger_20260928,   "Akamai Deal",        "Fernand Léger"),
     ("2026-09-29", img_kandinsky_20260929, "Sonnet 5.5",       "Wassily Kandinsky"),
+    ("2026-09-30", img_rothko_20260930,   "Safety Milestone", "Mark Rothko"),
 ]
 
 for date, fn, kw, artist in DAYS:

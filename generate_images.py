@@ -15930,6 +15930,110 @@ def img_rothko_20260930():
     return base
 
 
+def img_delaunay_20261001():
+    """Robert Delaunay Orphism — enterprise reach, investor signals, user voices theme.
+    Dark near-black bg, large overlapping spectral-ring discs — three converging
+    signal sources: Barclays enterprise adoption, IPO roadshow, user research voices."""
+    base = Image.new("RGB", (W, H), (6, 8, 24))  # near-black deep navy bg
+
+    # 1. Three primary spectral discs — enterprise, investor, user voice signals
+    disc_configs = [
+        # (cx, cy, max_r, hue_inner, hue_outer)
+        (290, 255, 210, (240, 80, 30),   (255, 200, 40)),   # amber-red — enterprise/Barclays
+        (740, 190, 195, (30, 160, 255),  (100, 230, 140)),  # blue-green — IPO/investor flow
+        (560, 400, 165, (200, 50, 220),  (80, 200, 255)),   # violet-blue — user voices
+        (450, 200, 120, (50, 220, 180),  (240, 220, 60)),   # teal-gold — convergence zone
+        (850, 360, 130, (240, 100, 180), (60, 180, 255)),   # pink-blue — market reach
+    ]
+    for (cx, cy, max_r, c_inner, c_outer) in disc_configs:
+        dl = layer()
+        dd = ImageDraw.Draw(dl)
+        steps = 20
+        for i in range(steps, 0, -1):
+            r = int(max_r * i / steps)
+            t = i / steps  # 1 = outer, 0 = inner
+            col = (
+                int(c_outer[0] * t + c_inner[0] * (1 - t)),
+                int(c_outer[1] * t + c_inner[1] * (1 - t)),
+                int(c_outer[2] * t + c_inner[2] * (1 - t)),
+                int(55 + 130 * (1 - t)),  # brighter toward centre
+            )
+            dd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=col)
+        base = comp(base, dl)
+
+    # 2. Concentric ring outlines — Delaunay's signature circular scaffolding
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    for (cx, cy, mr, _, __) in disc_configs:
+        for frac in [0.92, 0.70, 0.48, 0.24]:
+            r = int(mr * frac)
+            rd.ellipse([(cx - r, cy - r), (cx + r, cy + r)],
+                       outline=(255, 255, 255, 35), width=1)
+    base = comp(base, rl)
+
+    # 3. Full-spectrum rainbow arc slices around the enterprise disc (290, 255)
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    cx, cy, R = 290, 255, 205
+    hues = [
+        (230, 40,  40),   # red
+        (230, 125, 30),   # orange
+        (215, 210, 18),   # yellow
+        (50,  195, 60),   # green
+        (28,  145, 235),  # blue
+        (145, 48,  225),  # violet
+        (220, 40,  150),  # magenta
+    ]
+    arc_step = 360 // len(hues)
+    for i, hue in enumerate(hues):
+        a0 = i * arc_step - 12
+        a1 = a0 + arc_step + 12
+        sd.pieslice([(cx - R, cy - R), (cx + R, cy + R)],
+                    start=a0, end=a1,
+                    fill=(*hue, 50))
+    base = comp(base, sl)
+
+    # 4. Bright intersection halos — signal convergence points
+    hl = layer()
+    hd = ImageDraw.Draw(hl)
+    intersections = [
+        (490, 235, 46),   # enterprise ∩ IPO
+        (660, 310, 40),   # IPO ∩ user voices
+        (430, 340, 36),   # enterprise ∩ user voices
+        (790, 280, 30),   # IPO ∩ market reach
+        (520, 310, 28),   # triple-overlap zone
+    ]
+    for (hx, hy, hr) in intersections:
+        for r, a in [(hr, 85), (int(hr * 0.62), 155), (int(hr * 0.32), 220)]:
+            hd.ellipse([(hx - r, hy - r), (hx + r, hy + r)],
+                       fill=(255, 252, 235, a))
+    base = comp(base, hl)
+
+    # 5. Fine radial spokes from enterprise centre — signal transmission lines
+    spoke_l = layer()
+    spoke_d = ImageDraw.Draw(spoke_l)
+    import math
+    ex, ey = 290, 255
+    for angle_deg in range(0, 360, 24):
+        angle = math.radians(angle_deg)
+        x1 = int(ex + 215 * math.cos(angle))
+        y1 = int(ey + 215 * math.sin(angle))
+        spoke_d.line([(ex, ey), (x1, y1)], fill=(255, 240, 200, 22), width=1)
+    base = comp(base, spoke_l)
+
+    # 6. Fine grain noise for depth
+    nl = layer()
+    nld = ImageDraw.Draw(nl)
+    for _ in range(1800):
+        x = rng.randint(0, W - 1)
+        y = rng.randint(0, H - 1)
+        alpha = rng.randint(5, 20)
+        nld.point([(x, y)], fill=(180, 200, 255, alpha))
+    base = comp(base, nl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -16242,6 +16346,7 @@ DAYS = [
     ("2026-09-28", img_leger_20260928,   "Akamai Deal",        "Fernand Léger"),
     ("2026-09-29", img_kandinsky_20260929, "Sonnet 5.5",       "Wassily Kandinsky"),
     ("2026-09-30", img_rothko_20260930,   "Safety Milestone", "Mark Rothko"),
+    ("2026-10-01", img_delaunay_20261001, "Enterprise Signals", "Robert Delaunay"),
 ]
 
 for date, fn, kw, artist in DAYS:

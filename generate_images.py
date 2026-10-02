@@ -15930,6 +15930,105 @@ def img_rothko_20260930():
     return base
 
 
+def img_klimt_20261002():
+    """Gustav Klimt — deep indigo-black bg, gold lattice of six signatory nodes, teal ring seals,
+    rust founding-flame drops — White House AI accord, IPO investor day, founders' governance theme."""
+    base = Image.new("RGB", (W, H), (10, 6, 22))  # deep indigo-black bg
+
+    # 1. Central gold radiance — the accord seal, the "morally binding" centre
+    glow_l = layer()
+    gd = ImageDraw.Draw(glow_l)
+    for r, a in [(310, 22), (230, 34), (155, 46), (95, 52), (50, 38)]:
+        gd.ellipse([(W//2 - r, H//2 - r), (W//2 + r, H//2 + r)], fill=(168, 130, 24, a))
+    base = comp(base, glow_l)
+
+    # 2. Six signatory nodes — Anthropic, OpenAI, Google, Meta, xAI, Nvidia — arranged in a hex
+    import math as _math
+    hex_cx, hex_cy, hex_r = W // 2, H // 2, 210
+    node_positions = [
+        (int(hex_cx + hex_r * _math.cos(_math.radians(90 + 60 * i))),
+         int(hex_cy + hex_r * _math.sin(_math.radians(90 + 60 * i))))
+        for i in range(6)
+    ]
+    # Gold lattice lines between nodes
+    web_l = layer()
+    wd = ImageDraw.Draw(web_l)
+    all_nodes = node_positions + [(W//2, H//2)]
+    for i, (x1, y1) in enumerate(all_nodes):
+        for j, (x2, y2) in enumerate(all_nodes):
+            if j > i:
+                alpha = rng.randint(30, 90)
+                wd.line([(x1, y1), (x2, y2)], fill=(200, 160, 42, alpha), width=rng.randint(1, 2))
+    base = comp(base, web_l)
+
+    # 3. Teal concentric rings at each signatory node — the institutional seals
+    teal_l = layer()
+    td = ImageDraw.Draw(teal_l)
+    for cx, cy in node_positions:
+        for r in range(14, 58, 14):
+            td.ellipse([(cx-r, cy-r), (cx+r, cy+r)],
+                       outline=(30, 148, 138, rng.randint(75, 155)), width=rng.randint(2, 4))
+    base = comp(base, teal_l)
+
+    # 4. Gold mosaic fragments — Klimt constitutional-complexity skin
+    mosaic_l = layer()
+    md = ImageDraw.Draw(mosaic_l)
+    gold_shades = [
+        (218, 180, 58), (200, 160, 42), (236, 205, 88),
+        (178, 140, 36), (248, 218, 108), (190, 154, 48),
+    ]
+    for _ in range(450):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        s = rng.randint(2, 16)
+        shade = rng.choice(gold_shades)
+        alpha = rng.randint(45, 160)
+        shape = rng.randint(0, 2)
+        if shape == 0:
+            md.rectangle([(x, y), (x+s, y+s)], fill=(*shade, alpha))
+        elif shape == 1:
+            md.ellipse([(x, y), (x+s, y+s)], fill=(*shade, alpha))
+        else:
+            md.polygon([(x, y+s), (x+s//2, y), (x+s, y+s)], fill=(*shade, alpha))
+    base = comp(base, mosaic_l)
+
+    # 5. Gold spiral swirls — governance complexity, the founders' constitutional intent
+    spiral_l = layer()
+    spd = ImageDraw.Draw(spiral_l)
+    spiral_centres = [(W//2, H//2, 175), (node_positions[0][0], node_positions[0][1], 100),
+                      (node_positions[3][0], node_positions[3][1], 95)]
+    for cx, cy, maxr in spiral_centres:
+        for r in range(14, maxr, 20):
+            spd.arc([(cx-r, cy-r), (cx+r, cy+r)],
+                    start=rng.randint(0, 90), end=rng.randint(160, 340),
+                    fill=(215, 178, 58, rng.randint(45, 130)), width=rng.randint(2, 4))
+    base = comp(base, spiral_l)
+
+    # 6. Rust founding-flame drops — founders' stakes, the moral commitment
+    rust_l = layer()
+    rd = ImageDraw.Draw(rust_l)
+    rust_shades = [(192, 62, 30), (212, 82, 40), (172, 52, 22), (224, 98, 50)]
+    for _ in range(65):
+        x = rng.randint(30, W - 30)
+        y = rng.randint(30, H - 30)
+        s = rng.randint(3, 14)
+        shade = rng.choice(rust_shades)
+        rd.ellipse([(x, y), (x+s, y+s)], fill=(*shade, rng.randint(90, 185)))
+    base = comp(base, rust_l)
+
+    # 7. Fine noise texture — the depth of a Klimt canvas
+    nl = layer()
+    nld = ImageDraw.Draw(nl)
+    for _ in range(1800):
+        x = rng.randint(0, W - 1)
+        y = rng.randint(0, H - 1)
+        alpha = rng.randint(4, 18)
+        nld.point([(x, y)], fill=(200, 200, 200, alpha))
+    base = comp(base, nl)
+
+    return base
+
+
 def img_delaunay_20261001():
     """Robert Delaunay Orphism — enterprise reach, investor signals, user voices theme.
     Dark near-black bg, large overlapping spectral-ring discs — three converging
@@ -16347,6 +16446,7 @@ DAYS = [
     ("2026-09-29", img_kandinsky_20260929, "Sonnet 5.5",       "Wassily Kandinsky"),
     ("2026-09-30", img_rothko_20260930,   "Safety Milestone", "Mark Rothko"),
     ("2026-10-01", img_delaunay_20261001, "Enterprise Signals", "Robert Delaunay"),
+    ("2026-10-02", img_klimt_20261002,   "AI Accord",          "Gustav Klimt"),
 ]
 
 for date, fn, kw, artist in DAYS:

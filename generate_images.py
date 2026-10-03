@@ -16029,6 +16029,78 @@ def img_klimt_20261002():
     return base
 
 
+def img_lissitzky_20261003():
+    """El Lissitzky Constructivism — developer tooling / Claude Code Mods theme.
+    Cream bg, bold red diagonal wedge, heavy black structural bars, red circle focal point,
+    grid of small red module squares (suggesting a plugin/mod registry)."""
+    base = Image.new("RGB", (W, H), (245, 242, 232))  # Lissitzky cream bg
+
+    # 1. Bold red diagonal wedge — signature Lissitzky red-wedge composition
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.polygon([(0, H), (0, 390), (540, 0), (650, 0)], fill=(210, 25, 25, 245))
+    base = comp(base, rl)
+
+    # 2. Heavy black horizontal bar — constructivist structure / the command line
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bd.rectangle([(0, 295), (W, 348)], fill=(15, 15, 15, 255))
+    base = comp(base, bl)
+
+    # 3. Bold black vertical bar — right-side anchor / the pipe
+    vl = layer()
+    vd = ImageDraw.Draw(vl)
+    vd.rectangle([(870, 0), (930, H)], fill=(15, 15, 15, 255))
+    base = comp(base, vl)
+
+    # 4. Large red circle — the focal plugin node, upper right
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    cd.ellipse([(975, 48), (1175, 248)], fill=(210, 25, 25, 235))
+    # White inner circle — negative space / the hook event passing through
+    cd.ellipse([(1020, 93), (1130, 203)], fill=(245, 242, 232, 255))
+    base = comp(base, cl)
+
+    # 5. Grid of small red squares — representing mods/plugins in a registry
+    ml = layer()
+    md_draw = ImageDraw.Draw(ml)
+    for row in range(6):
+        for col in range(5):
+            x = 960 + col * 38
+            y = 310 + row * 48
+            if x + 22 < W and y + 24 < H:
+                alpha = rng.randint(140, 220)
+                md_draw.rectangle([(x, y), (x + 22, y + 24)], fill=(210, 25, 25, alpha))
+    base = comp(base, ml)
+
+    # 6. Thin diagonal tension lines — upper centre, constructivist grid
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    for i in range(7):
+        x_off = i * 55
+        ld.line([(680 + x_off, 0), (680 + x_off - 200, 295)], fill=(15, 15, 15, 190), width=3)
+    base = comp(base, ll)
+
+    # 7. Small black square with white negative-space inner — top-left module icon
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    sd.rectangle([(48, 50), (200, 202)], fill=(15, 15, 15, 255))
+    sd.rectangle([(78, 80), (170, 172)], fill=(245, 242, 232, 255))
+    # Small red accent square inside the inner white space — the mod hook point
+    sd.rectangle([(108, 110), (140, 142)], fill=(210, 25, 25, 255))
+    base = comp(base, sl)
+
+    # 8. Red diagonal accent stripes — lower right, energy / velocity
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(6):
+        y_off = i * 28
+        ad.line([(940, 390 + y_off), (W, 462 + y_off)], fill=(210, 25, 25, 170), width=3)
+    base = comp(base, al)
+
+    return base
+
+
 def img_delaunay_20261001():
     """Robert Delaunay Orphism — enterprise reach, investor signals, user voices theme.
     Dark near-black bg, large overlapping spectral-ring discs — three converging
@@ -16447,6 +16519,7 @@ DAYS = [
     ("2026-09-30", img_rothko_20260930,   "Safety Milestone", "Mark Rothko"),
     ("2026-10-01", img_delaunay_20261001, "Enterprise Signals", "Robert Delaunay"),
     ("2026-10-02", img_klimt_20261002,   "AI Accord",          "Gustav Klimt"),
+    ("2026-10-03", img_lissitzky_20261003, "Code Mods",        "El Lissitzky"),
 ]
 
 for date, fn, kw, artist in DAYS:

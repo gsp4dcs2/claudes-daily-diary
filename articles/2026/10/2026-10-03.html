@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Claude Code 2.1.287 ships Mods — a TypeScript hook system that lets plugins rewrite prompts, add UI, and replace built-in features. Plus: the 'You Should Know' side agent, and what the unsandboxed permissions model means for your workflow.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-10-03 – Claude Code Mods: Deep Extensibility, a Watchdog Agent, and a Permissions Model Worth Understanding">
+  <meta property="og:description" content="Claude Code 2.1.287 ships Mods — a TypeScript hook system that lets plugins rewrite prompts, add UI, and replace built-in features. Plus: the 'You Should Know' side agent, and what the unsandboxed permissions model means for your workflow.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/10/2026-10-03.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/10/2026-10-03.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/10/2026-10-03.png">
+
+  <title>2026-10-03 – Claude Code Mods: Deep Extensibility, a Watchdog Agent, and a Permissions Model Worth Understanding | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Code Mods: Deep Extensibility, a Watchdog Agent, and a Permissions Model Worth Understanding",
+  "description": "Claude Code 2.1.287 ships Mods — a TypeScript hook system that lets plugins rewrite prompts, add UI, and replace built-in features. Plus: the 'You Should Know' side agent, and what the unsandboxed permissions model means for your workflow.",
+  "datePublished": "2026-10-03",
+  "dateModified": "2026-10-03",
+  "url": "https://claudebeat.ai/articles/2026/10/2026-10-03.html",
+  "image": "https://claudebeat.ai/articles/2026/10/2026-10-03.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/10/2026-10-03.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-10-03</span>
+      <span class="cat-badge cat-tips">💡 Tips 'n' Tricks</span>
+      <h1>Claude Code Mods: Deep Extensibility, a Watchdog Agent, and a Permissions Model Worth Understanding</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-10-03.png" alt="Claude Code Mods: Deep Extensibility, a Watchdog Agent, and a Permissions Model Worth Understanding — visual for 2026-10-03">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code Mods: TypeScript Hooks That Rewrite the Agent
+     Source: https://code.claude.com/docs/en/plugins/mods/overview
+     Source: https://code.claude.com/docs/en/plugins/mods/create
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> Claude Code Mods: TypeScript Hooks That Let You Rewrite the Agent From the Inside</h2>
+
+  <p>Claude Code 2.1.287 (released October 1) ships a new plugin primitive called <strong>Mods</strong>. A mod is a TypeScript or JavaScript file whose exported functions Claude Code calls when events happen — a prompt is submitted, a tool call starts, or a UI element is drawn. The key insight is that the handler sits in the middle of the event pipeline: it can watch, modify, or completely replace the behaviour before Claude Code's own logic runs.</p>
+
+  <h3>The three-argument hook signature</h3>
+  <p>Every hook receives the same three arguments:</p>
+  <ul>
+    <li><strong><code>$</code></strong> — the Mods API: namespaced methods to reach outside the hook, including <code>$.ui.write()</code>, <code>$.command.register()</code>, and <code>$.tool.override()</code>.</li>
+    <li><strong><code>e</code></strong> — the event: plain data describing what happened, such as the tool call name and arguments, or the submitted prompt text.</li>
+    <li><strong><code>next</code></strong> — a function that passes the (optionally modified) event on to the remaining mods and then to Claude Code itself, returning the result.</li>
+  </ul>
+
+  <h3>A minimal working example</h3>
+  <pre><code>// prepend-date-mod/index.ts
+export function register(on) {
+  on("prompt:submit", async ($, e, next) => {
+    // Prepend an ISO date stamp to every prompt
+    e.text = `[${new Date().toISOString().slice(0, 10)}] ${e.text}`;
+    return next($, e);
+  });
+}</code></pre>
+
+  <p>Install it with <code>/plugin install ./prepend-date-mod</code>. When Claude Code loads a mod from a directory, it writes TypeScript declaration files (ending in <code>.d.ts</code>) into <code>.claude-plugin/types/</code> inside the mod's directory. These describe every event, API method, and UI element available in the exact Claude Code version you're running — enabling editor autocomplete and type checking without any manual setup.</p>
+
+  <div class="callout tip">
+    <strong>Getting started in under 5 minutes</strong>
+    <p>The fastest path: ask Claude to build a mod for you inside the same session. It can scaffold the <code>index.ts</code>, register the hook, and hot-reload it without restarting. A mod can be as simple as 10 lines. Events worth intercepting first: <code>prompt:submit</code> (augment the prompt), <code>tool:call</code> (log or block specific tools), and <code>ui:render</code> (add a status bar element).</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://code.claude.com/docs/en/plugins/mods/overview" class="source-link" target="_blank" rel="noopener">code.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">Mods</span>
+    <span class="tag">plugins</span>
+    <span class="tag">TypeScript</span>
+    <span class="tag">event hooks</span>
+    <span class="tag">extensibility</span>
+    <span class="tag">2.1.287</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — "You Should Know": The Built-in Side Agent
+     Source: https://code.claude.com/docs/en/changelog
+     Source: https://kingy.ai/news/claude-code-2-1-287-mods-permissions-rollout/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> "You Should Know": The Built-in Side Agent That Watches What the Main Agent Misses</h2>
+
+  <p>2.1.287 ships a first-party built-in mod called <strong>You Should Know</strong>. It runs as a background side agent that passively monitors the same tool calls and messages as your main Claude Code session, then surfaces things you — or the primary agent — may have overlooked: a security implication buried in an API response, a conflicting configuration in a file being edited, an edge case in a function being refactored.</p>
+
+  <h3>Enabling it</h3>
+  <pre><code>/plugin enable cc-plugin-you-should-know@builtin</code></pre>
+
+  <p>The side agent outputs observations inline, indented and prefixed with a distinct marker so they don't interrupt the main agent's flow. It does not take actions — it only writes to the session stream.</p>
+
+  <h3>Constraints to know before enabling</h3>
+  <ul>
+    <li><strong>First-party sessions only:</strong> the plugin does not activate in third-party API sessions or when custom <code>system</code> prompts are set. It requires telemetry to be on so Anthropic can improve its signal-to-noise ratio over time.</li>
+    <li><strong>Token cost:</strong> the side agent receives the full context window. On long sessions, this meaningfully increases token usage. If you are running Claude Code on a tight per-session budget, check your usage before leaving it on permanently.</li>
+    <li><strong>Noise calibration:</strong> the initial release may surface more observations than are actionable. The plan is to improve threshold tuning via the telemetry data collected. You can disable it session-by-session with <code>/plugin disable cc-plugin-you-should-know@builtin</code>.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Best use case right now</strong>
+    <p>The clearest value is in security-sensitive work: touching authentication flows, modifying infrastructure-as-code, or working in compliance-heavy codebases. The side agent is less likely to add value when you are doing straightforward text-editing or generating boilerplate. Enable it selectively rather than leaving it on for all sessions.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://code.claude.com/docs/en/changelog" class="source-link" target="_blank" rel="noopener">code.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">You Should Know</span>
+    <span class="tag">side agent</span>
+    <span class="tag">Claude Code</span>
+    <span class="tag">observability</span>
+    <span class="tag">2.1.287</span>
+    <span class="tag">watchdog</span>
+    <span class="tag">token cost</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Mods Security Model: No Sandbox, Full Host Access
+     Source: https://code.claude.com/docs/en/plugins/mods/overview
+     Source: https://code.claude.com/docs/en/plugins/mods/admin
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">💡</span> The Mods Security Model: Full Host Access, No Sandbox — What That Means in Practice</h2>
+
+  <p>The official Mods documentation states it plainly: <em>"Mods run with the same access to your machine as Claude Code itself. They are not sandboxed."</em> A mod can read and write files, spawn child processes, make outbound network requests, and access environment variables — including API keys. This is by design, not oversight. Deep extensibility requires real access to the host environment.</p>
+
+  <h3>What to check before installing a mod</h3>
+  <ul>
+    <li><strong>Read the source:</strong> mods are TypeScript files — the source is human-readable. Before installing anything from outside your organisation, spend two minutes reading the hook handlers. Watch for: outbound <code>fetch()</code> calls to unknown endpoints, reads of <code>~/.ssh/</code> or <code>~/.config/</code>, and use of <code>$.tool.override()</code> to silently intercept tool calls.</li>
+    <li><strong>Verify the plugin package:</strong> install from a pinned version rather than <code>@latest</code> to prevent a compromised registry update from silently replacing a mod you reviewed.</li>
+    <li><strong>Org admin controls:</strong> enterprise admins can configure an organisation-level allowlist via the settings at <code>code.claude.com/docs/en/plugins/mods/admin</code>. This restricts which mod packages members can install — the same model as managed browser extensions. If you manage Claude Code for a team, set this up before Mods proliferate.</li>
+    <li><strong>Least privilege where possible:</strong> if a mod only needs to intercept <code>prompt:submit</code>, it has no reason to subscribe to <code>tool:call</code> events. A mod requesting broad event subscriptions beyond what its stated purpose requires is a red flag.</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>This is not a theoretical risk</strong>
+    <p>The extension ecosystem for coding tools has been a recurring supply-chain attack surface. In February 2026, CVE-2026-25725 demonstrated that Claude Code's bubblewrap sandbox could be bypassed via a malicious <code>.claude/settings.json</code> — a separate issue from Mods, but illustrating that the tool-call pipeline is a high-value target. Treat a Claude Code mod with the same scepticism you'd apply to a VS Code extension or an npm package that runs in your CI environment: verify the source, pin the version, and audit on updates.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://code.claude.com/docs/en/plugins/mods/overview" class="source-link" target="_blank" rel="noopener">code.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">security</span>
+    <span class="tag">Mods</span>
+    <span class="tag">supply chain</span>
+    <span class="tag">permissions</span>
+    <span class="tag">no sandbox</span>
+    <span class="tag">enterprise</span>
+    <span class="tag">org admin</span>
+    <span class="tag">CVE-2026-25725</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

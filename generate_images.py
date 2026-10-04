@@ -16205,6 +16205,99 @@ def img_delaunay_20261001():
     return base
 
 
+def img_klee_20261004():
+    """Paul Klee Magic Squares — Claude Frontier Academy / engineer training / government adoption theme.
+    Warm→cool colour grid cells, dark grid lines, white node circles at intersections
+    representing engineers graduating from cohorts; a subtle certificate-badge shape overlay."""
+    base = Image.new("RGB", (W, H), (20, 16, 28))
+
+    CELL_W, CELL_H = 80, 56
+    cols_n = W // CELL_W + 1
+    rows_n = H // CELL_H + 1
+
+    # Palette: warm enterprise tones at bottom, cooler government blues at top
+    warm_palette = [
+        (200, 80, 30), (210, 120, 35), (225, 160, 45), (195, 65, 80),
+        (215, 100, 50), (190, 145, 55), (200, 55, 95), (180, 130, 45),
+    ]
+    mid_palette = [
+        (65, 120, 175), (80, 145, 160), (55, 100, 185), (90, 165, 145),
+        (70, 130, 190), (100, 155, 75), (60, 110, 170), (85, 140, 160),
+    ]
+    cool_palette = [
+        (35, 75, 155), (50, 95, 170), (30, 65, 145), (45, 115, 160),
+        (55, 80, 180), (30, 105, 145), (45, 90, 165), (60, 120, 155),
+    ]
+
+    draw = ImageDraw.Draw(base)
+    for row in range(rows_n):
+        y0 = row * CELL_H
+        y_c = y0 + CELL_H // 2
+        if y_c > H * 2 // 3:
+            palette = warm_palette
+        elif y_c > H // 3:
+            palette = mid_palette
+        else:
+            palette = cool_palette
+        for col in range(cols_n):
+            x0 = col * CELL_W
+            idx = (row * 3 + col * 2) % len(palette)
+            base_col = palette[idx]
+            r = max(0, min(255, base_col[0] + rng.randint(-12, 12)))
+            g = max(0, min(255, base_col[1] + rng.randint(-12, 12)))
+            b = max(0, min(255, base_col[2] + rng.randint(-12, 12)))
+            draw.rectangle([(x0, y0), (x0 + CELL_W, y0 + CELL_H)], fill=(r, g, b))
+
+    # Dark grid lines — Klee's signature cell boundaries
+    for col in range(cols_n + 1):
+        draw.line([(col * CELL_W, 0), (col * CELL_W, H)], fill=(12, 10, 18), width=2)
+    for row in range(rows_n + 1):
+        draw.line([(0, row * CELL_H), (W, row * CELL_H)], fill=(12, 10, 18), width=2)
+
+    # White node circles at intersections — representing graduating engineers
+    node_layer = layer()
+    nd = ImageDraw.Draw(node_layer)
+    node_positions = [
+        (2, 1), (4, 2), (7, 1), (10, 3), (12, 2),
+        (3, 4), (6, 5), (9, 4), (11, 6), (5, 7),
+        (1, 8), (8, 8), (13, 5),
+    ]
+    for (nc, nr) in node_positions:
+        nx = nc * CELL_W
+        ny = nr * CELL_H
+        r_n = rng.randint(9, 14)
+        nd.ellipse([(nx - r_n, ny - r_n), (nx + r_n, ny + r_n)],
+                   fill=(255, 255, 255, 220), outline=(180, 180, 180, 180), width=2)
+    base = comp(base, node_layer)
+
+    # Connection lines between nodes — cohort progression network
+    conn_layer = layer()
+    cld = ImageDraw.Draw(conn_layer)
+    connections = [
+        (0, 1), (1, 2), (2, 3), (3, 4),   # top tier chain
+        (5, 6), (6, 7), (7, 8),             # mid tier chain
+        (9, 10), (10, 11),                  # lower tier
+        (1, 5), (3, 7), (8, 11),            # cross-tier links (cohort progression)
+    ]
+    node_coords = [(nc * CELL_W, nr * CELL_H) for (nc, nr) in node_positions]
+    for i, j in connections:
+        if i < len(node_coords) and j < len(node_coords):
+            cld.line([node_coords[i], node_coords[j]], fill=(255, 255, 255, 55), width=1)
+    base = comp(base, conn_layer)
+
+    # Certificate badge — large rounded square overlay, lower right, warm gold tone
+    cert_layer = layer()
+    cert_d = ImageDraw.Draw(cert_layer)
+    cert_d.rounded_rectangle([(850, 390), (1130, 590)], radius=16,
+                              fill=(220, 175, 40, 55), outline=(220, 175, 40, 120), width=3)
+    # Inner seal ring
+    cert_d.ellipse([(910, 420), (1060, 560)], fill=(0, 0, 0, 0),
+                   outline=(220, 175, 40, 90), width=2)
+    base = comp(base, cert_layer)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -16520,6 +16613,7 @@ DAYS = [
     ("2026-10-01", img_delaunay_20261001, "Enterprise Signals", "Robert Delaunay"),
     ("2026-10-02", img_klimt_20261002,   "AI Accord",          "Gustav Klimt"),
     ("2026-10-03", img_lissitzky_20261003, "Code Mods",        "El Lissitzky"),
+    ("2026-10-04", img_klee_20261004,      "Engineer Academy", "Paul Klee"),
 ]
 
 for date, fn, kw, artist in DAYS:

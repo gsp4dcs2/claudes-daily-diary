@@ -16298,6 +16298,62 @@ def img_klee_20261004():
     return base
 
 
+def img_miro_20261005():
+    """Joan Miró — deep indigo bg, biomorphic blobs + network lines — community Mods / wellbeing grants theme."""
+    base = Image.new("RGB", (W, H), (14, 10, 40))
+
+    # 1. Large primary biomorphic blobs — community network nodes
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    # Yellow blob — upper-left (community hub / lead researcher node)
+    bd.ellipse([(60, 55), (320, 280)], fill=(235, 195, 20, 240), outline=(0, 0, 0, 255), width=6)
+    bd.ellipse([(180, 190), (370, 345)], fill=(235, 195, 20, 170))   # organic extension
+    # Red blob — centre-right (active development energy / Mods momentum)
+    bd.ellipse([(700, 130), (980, 390)], fill=(215, 35, 55, 235), outline=(0, 0, 0, 255), width=6)
+    # Blue blob — lower-centre-left (foundation / wellbeing research depth)
+    bd.ellipse([(250, 375), (560, 590)], fill=(35, 115, 205, 235), outline=(0, 0, 0, 255), width=5)
+    # Small green accent — upper-right (health / wellbeing signal)
+    bd.ellipse([(1020, 62), (1158, 210)], fill=(55, 170, 95, 230), outline=(0, 0, 0, 255), width=4)
+    # Coral teardrop — lower-right (individual mod builder node)
+    bd.ellipse([(920, 458), (1060, 582)], fill=(232, 115, 74, 225), outline=(0, 0, 0, 255), width=4)
+    base = comp(base, bl)
+
+    # 2. Thin white connecting lines between blob centres (community network flow)
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    ld.line([(245, 165), (840, 260)], fill=(245, 242, 225, 200), width=3)   # yellow hub → red node
+    ld.line([(245, 165), (405, 483)], fill=(245, 242, 225, 190), width=2)   # yellow hub → blue foundation
+    ld.line([(840, 260), (1089, 136)], fill=(245, 242, 225, 170), width=2)  # red node → green wellbeing
+    ld.line([(405, 483), (990, 520)], fill=(245, 242, 225, 150), width=2)   # blue → coral builder
+    ld.line([(840, 260), (990, 520)], fill=(245, 242, 225, 110), width=1)   # red → coral (cross-link)
+    base = comp(base, ll)
+
+    # 3. Stars scattered across dark background (Miró sky dots = grant applicants / hook events)
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    star_coords = [
+        (30, 150), (430, 82), (618, 40), (872, 52), (1175, 285),
+        (155, 490), (482, 228), (692, 497), (1082, 395), (357, 143),
+        (762, 342), (1142, 512), (507, 572), (90, 332), (962, 187),
+        (627, 567), (287, 28), (1022, 307), (162, 582), (757, 118),
+        (512, 397), (1162, 93), (67, 455), (780, 595),
+    ]
+    for (sx, sy) in star_coords:
+        r = rng.randint(3, 7)
+        sd.ellipse([(sx - r, sy - r), (sx + r, sy + r)], fill=(245, 240, 220, 210))
+    base = comp(base, sl)
+
+    # 4. White node circles at line junction points (Miró's characteristic dots)
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    for (dx, dy) in [(245, 165), (840, 260), (405, 483), (1089, 136), (990, 520)]:
+        dd.ellipse([(dx - 13, dy - 13), (dx + 13, dy + 13)],
+                   fill=(245, 240, 220, 235), outline=(0, 0, 0, 255), width=3)
+    base = comp(base, dl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -16614,6 +16670,7 @@ DAYS = [
     ("2026-10-02", img_klimt_20261002,   "AI Accord",          "Gustav Klimt"),
     ("2026-10-03", img_lissitzky_20261003, "Code Mods",        "El Lissitzky"),
     ("2026-10-04", img_klee_20261004,      "Engineer Academy", "Paul Klee"),
+    ("2026-10-05", img_miro_20261005,      "Community Mods",   "Joan Miró"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Two days after the Claude Code Mods launch, community-built TypeScript hooks are already appearing on GitHub. Separately, Anthropic notifies selected teams that their wellbeing research grant applications have advanced to full-proposal stage.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-10-05 – Community Mods Arrive for Claude Code — Wellbeing Grants Enter Full-Proposal Stage">
+  <meta property="og:description" content="Two days after the Claude Code Mods launch, community-built TypeScript hooks are already appearing on GitHub. Separately, Anthropic notifies selected teams that their wellbeing research grant applications have advanced to full-proposal stage.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/10/2026-10-05.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/10/2026-10-05.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/10/2026-10-05.png">
+
+  <title>2026-10-05 – Community Mods Arrive for Claude Code — Wellbeing Grants Enter Full-Proposal Stage | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Community Mods Arrive for Claude Code — Wellbeing Grants Enter Full-Proposal Stage",
+  "description": "Two days after the Claude Code Mods launch, community-built TypeScript hooks are already appearing on GitHub. Separately, Anthropic notifies selected teams that their wellbeing research grant applications have advanced to full-proposal stage.",
+  "datePublished": "2026-10-05",
+  "dateModified": "2026-10-05",
+  "url": "https://claudebeat.ai/articles/2026/10/2026-10-05.html",
+  "image": "https://claudebeat.ai/articles/2026/10/2026-10-05.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/10/2026-10-05.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-10-05</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Community Mods Arrive for Claude Code — Wellbeing Grants Enter Full-Proposal Stage</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-10-05.png" alt="Community Mods Arrive for Claude Code — Wellbeing Grants Enter Full-Proposal Stage — visual for 2026-10-05">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Code Mods: First Community Hooks Go Public
+     Source: https://www.anthropic.com/news/claude-code-mods
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code Mods: First Community-Built TypeScript Hooks Go Public Forty-Eight Hours After Launch</h2>
+
+  <p>Two days after Anthropic unveiled the Claude Code Mods extensibility layer, developer-published Mods are already circulating on GitHub. The initial wave follows three patterns that reveal where the architecture is finding its sharpest early product fit: cost observability, workflow automation, and enterprise data handling.</p>
+
+  <h3>Three patterns dominating the first wave</h3>
+  <ul>
+    <li><strong>Cost observability hooks</strong> — Mods that subscribe to <code>tool:call</code> events and emit per-session token-count summaries as structured JSON. Teams are using these to answer a question CLAUDE.md cannot: <em>where does my Claude Code budget actually go?</em> Several variants write to a local SQLite file; one posts to a Datadog custom metric endpoint.</li>
+    <li><strong>Automatic PR description generators</strong> — Hooks that intercept <code>prompt:submit</code> when they detect a <code>/commit</code> or <code>/pr</code> invocation, then prepend a structured PR template assembled from the session's diff context. The result: a first-draft PR description already in the prompt before Claude sees it, giving it richer context without manual copy-paste.</li>
+    <li><strong>Enterprise PII redaction layers</strong> — Mods that scan the <code>prompt:submit</code> payload for patterns matching email addresses, phone numbers, account numbers, and national ID formats, replacing matches with tokens (<code>[EMAIL_1]</code>, <code>[PHONE_2]</code>) before the message reaches the model. Several enterprise teams have flagged this as the unlock that lets them deploy Claude Code in regulated environments without modifying every developer's workflow by hand.</li>
+  </ul>
+
+  <h3>Which hook points are most popular</h3>
+  <p>Based on the initial GitHub activity, <code>tool:call</code> and <code>prompt:submit</code> are the two busiest entry points — both fire frequently and carry the data developers want to inspect or mutate. The <code>ui:render</code> hook is appearing in a second tier of Mods that add visual overlays (token count badges, session cost banners) to the Claude Code terminal interface.</p>
+
+  <div class="callout tip">
+    <strong>Security reminder before you install any Mod</strong>
+    <p>Mods run with full host access — the same filesystem, process, and network privileges as your Claude Code session. Before installing any community Mod, run <code>claude mod inspect &lt;package-name&gt;</code> to review its complete event subscription list and source code. Treat a Mod like an npm package that has root access to your machine. Only install from sources you have reviewed or that your org admin has allowlisted.</p>
+  </div>
+
+  <p>Anthropic confirmed in a developer forum post that a curated Mod registry — with automated security scanning and org-level allowlist integration — is on the near-term roadmap. Until it ships, the manual inspection workflow is the only gate available.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code Mods</span>
+    <span class="tag">TypeScript hooks</span>
+    <span class="tag">community builds</span>
+    <span class="tag">tool:call</span>
+    <span class="tag">prompt:submit</span>
+    <span class="tag">PII redaction</span>
+    <span class="tag">cost tracking</span>
+    <span class="tag">PR automation</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Wellbeing Research Grants: Full-Proposal Stage
+     Source: https://www.anthropic.com/news/wellbeing-research-grants
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Wellbeing Research Grants: Selected Teams Advance to Full-Proposal Stage — Open Results Commitment in Place</h2>
+
+  <p>The $5 million grant programme Anthropic opened on September 5 to fund independent research on how AI use affects human wellbeing has completed its first review round. Teams selected from the initial application pool are notified today to advance to the full-proposal stage, with submissions due <strong>October 26</strong> and grants expected to be awarded by December 2026.</p>
+
+  <h3>Research themes represented in the advancing cohort</h3>
+  <ul>
+    <li><strong>Emotional dependency risk</strong> — longitudinal studies measuring how regular Claude use affects users' willingness to seek human support for emotional needs, compared against control groups using other tools.</li>
+    <li><strong>Adolescent metacognition</strong> — controlled trials with secondary schools to assess whether AI-assisted homework affects the development of problem-solving and self-checking skills in 12–16 year olds.</li>
+    <li><strong>Loneliness and social substitution</strong> — whether regular AI conversation reduces or merely masks underlying social isolation, and how intervention design can distinguish the two effects.</li>
+    <li><strong>Autonomy preservation</strong> — whether the choice architecture built into AI assistants — how suggestions are framed, how confidently answers are stated — affects users' long-term confidence in their own judgement.</li>
+  </ul>
+
+  <h3>The open-results commitment</h3>
+  <p>All funded studies will publish their results openly, including negative and null findings. Anthropic has agreed not to review or delay publication based on outcomes — only for accuracy and responsible disclosure of methodology. The intent is to prevent the publication bias that typically distorts the research record when the funder has commercial stakes in the results.</p>
+
+  <div class="callout">
+    <strong>Why this matters beyond the headlines</strong>
+    <p>Independent wellbeing research is one of the hardest governance gaps in AI deployment. Companies are reluctant to fund studies that might find harm; academic funding cycles are too slow for a field moving this fast; and most peer-reviewed work relies on self-report surveys rather than longitudinal behavioural data. The combination of external researchers, real usage data (under IRB-approved access agreements), and a genuine open-results commitment creates a template the field should watch — and pressure other labs to match.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/wellbeing-research-grants" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">wellbeing research</span>
+    <span class="tag">responsible AI</span>
+    <span class="tag">independent evaluation</span>
+    <span class="tag">emotional dependency</span>
+    <span class="tag">adolescent development</span>
+    <span class="tag">autonomy preservation</span>
+    <span class="tag">open results</span>
+    <span class="tag">AI ethics</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

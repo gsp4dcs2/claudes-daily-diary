@@ -16354,6 +16354,103 @@ def img_miro_20261005():
     return base
 
 
+def img_moholy_20261006():
+    """László Moholy-Nagy Bauhaus style — transparency, trust, open reporting, eval-network isolation theme."""
+    base = Image.new("RGB", (W, H), (248, 246, 242))  # warm near-white Bauhaus ground
+
+    # 1. Four large overlapping translucent circles — open transparency / network layers
+    circles_l = layer()
+    cd = ImageDraw.Draw(circles_l)
+    circles = [
+        ((-60,  -80, 480, 460),  (18,  100, 200, 68)),   # deep-blue — open-source mission
+        ((280,  30,  860, 550),  (18,  160, 120, 60)),   # teal — eval infrastructure
+        ((580, -40, 1220, 500),  (200,  50,  40, 55)),   # deep-red — incident transparency
+        ((160, 280, 700, 660),   (180,  60, 200, 50)),   # violet — safety assurance
+    ]
+    for bbox, fill in circles:
+        cd.ellipse(bbox, fill=fill)
+    base = comp(base, circles_l)
+
+    # 2. Horizontal structural bands — layered network-isolation policy strata
+    bands_l = layer()
+    bnd = ImageDraw.Draw(bands_l)
+    bands = [
+        ((0, 155, W, 193), (18,  100, 200, 45)),   # blue — hypervisor layer
+        ((0, 265, W, 303), (18,  160, 120, 40)),   # teal — container layer
+        ((0, 375, W, 405), (200,  50,  40, 38)),   # red  — corpus-scan layer
+        ((0, 480, W, 508), (180,  60, 200, 38)),   # violet — package-mirror layer
+    ]
+    for bbox, fill in bands:
+        bnd.rectangle(bbox, fill=fill)
+    base = comp(base, bands_l)
+
+    # 3. Thin black Bauhaus scaffold lines
+    lines_l = layer()
+    ld = ImageDraw.Draw(lines_l)
+    structural = [
+        ((0, 315), (W, 315)),      # primary horizontal axis
+        ((600, 0), (600, H)),      # primary vertical axis
+        ((0, 0),   (600, 315)),    # top-left diagonal
+        ((600, 315),(W, H)),       # bottom-right diagonal
+        ((600, 0), (W, 315)),      # top-right diagonal
+        ((0, 315), (600, H)),      # bottom-left diagonal
+    ]
+    for p1, p2 in structural:
+        ld.line([p1, p2], fill=(20, 20, 20, 165), width=2)
+    base = comp(base, lines_l)
+
+    # 4. Concentric ring nodes — eval environment boundary points
+    rings_l = layer()
+    rd = ImageDraw.Draw(rings_l)
+    nodes = [
+        (148, 132, 72, (18,  100, 200)),   # blue — DNS exfil incident
+        (600, 315, 98, (18,  160, 120)),   # teal — PyPI bypass incident
+        (980, 165, 60, (200,  50,  40)),   # red  — prompt-injection incident
+        (370, 510, 50, (180,  60, 200)),   # violet — mitigation node
+        (860, 480, 44, (18,  100, 200)),   # blue — Cohort 1 launch node
+    ]
+    for (cx, cy, r, col) in nodes:
+        for ring_r, alpha in [(r, 205), (int(r * 0.67), 160), (int(r * 0.34), 125)]:
+            rd.ellipse(
+                [(cx - ring_r, cy - ring_r), (cx + ring_r, cy + ring_r)],
+                outline=(col[0], col[1], col[2], alpha), width=4
+            )
+        rp = 8
+        rd.ellipse([(cx - rp, cy - rp), (cx + rp, cy + rp)],
+                   fill=(col[0], col[1], col[2], 235))
+    base = comp(base, rings_l)
+
+    # 5. Fine Bauhaus grid — systematic rigour / inspection protocol
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    for x in range(0, W + 1, 120):
+        gd.line([(x, 0), (x, H)], fill=(20, 20, 20, 14), width=1)
+    for y in range(0, H + 1, 90):
+        gd.line([(0, y), (W, y)], fill=(20, 20, 20, 14), width=1)
+    base = comp(base, grid_l)
+
+    # 6. Small rectangular data-packet scatter along band lines — network traffic events
+    packets_l = layer()
+    pkd = ImageDraw.Draw(packets_l)
+    packet_palette = [
+        (18,  100, 200, 155),
+        (18,  160, 120, 150),
+        (200,  50,  40, 145),
+        (180,  60, 200, 140),
+    ]
+    packet_ys = [174, 284, 390, 494]
+    for py in packet_ys:
+        for _ in range(14):
+            px = rng.randint(20, W - 20)
+            pw = rng.randint(8, 22)
+            ph = rng.randint(5, 14)
+            col = packet_palette[rng.randint(0, 3)]
+            pkd.rectangle([(px, py - ph // 2), (px + pw, py + ph // 2)], fill=col)
+    base = comp(base, packets_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -16671,6 +16768,7 @@ DAYS = [
     ("2026-10-03", img_lissitzky_20261003, "Code Mods",        "El Lissitzky"),
     ("2026-10-04", img_klee_20261004,      "Engineer Academy", "Paul Klee"),
     ("2026-10-05", img_miro_20261005,      "Community Mods",   "Joan Miró"),
+    ("2026-10-06", img_moholy_20261006,   "Claude Corps",     "László Moholy-Nagy"),
 ]
 
 for date, fn, kw, artist in DAYS:

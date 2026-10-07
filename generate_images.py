@@ -16451,6 +16451,83 @@ def img_moholy_20261006():
     return base
 
 
+def img_malevich_20261007():
+    """Kazimir Malevich Suprematism — Cyber Verification Program tiered access / security structure theme.
+    Cream bg, three stacked bold tilted rectangles in black/red/navy (the three CVP tiers),
+    a large red circle (the verification lens), yellow alert fragments (threat signals),
+    and thin diagonal scrutiny lines — strict geometric order representing controlled trusted access.
+    """
+    base = Image.new("RGB", (W, H), (238, 234, 218))  # warm cream Suprematist ground
+
+    def rotated_rect(cx, cy, hw, hh, angle_deg):
+        rad = math.radians(angle_deg)
+        corners = [(-hw, -hh), (hw, -hh), (hw, hh), (-hw, hh)]
+        return [(cx + p[0]*math.cos(rad) - p[1]*math.sin(rad),
+                 cy + p[0]*math.sin(rad) + p[1]*math.cos(rad)) for p in corners]
+
+    # 1. Tier 1 — large black rectangle (Defence, the broadest base)
+    t1l = layer()
+    t1d = ImageDraw.Draw(t1l)
+    t1d.polygon(rotated_rect(420, 200, 340, 52, -8), fill=(14, 12, 10, 255))
+    base = comp(base, t1l)
+
+    # 2. Tier 2 — bold red rectangle (Red Team, narrower mid-tier)
+    t2l = layer()
+    t2d = ImageDraw.Draw(t2l)
+    t2d.polygon(rotated_rect(560, 320, 260, 44, -8), fill=(210, 25, 25, 245))
+    base = comp(base, t2l)
+
+    # 3. Tier 3 — navy rectangle (Research Access, narrowest / highest trust)
+    t3l = layer()
+    t3d = ImageDraw.Draw(t3l)
+    t3d.polygon(rotated_rect(680, 425, 190, 38, -8), fill=(18, 28, 128, 248))
+    base = comp(base, t3l)
+
+    # 4. Verification lens — large red ring upper-right (CVP approval circle)
+    vl = layer()
+    vd = ImageDraw.Draw(vl)
+    vd.ellipse([(840, 50), (1160, 320)], fill=(210, 25, 25, 0))
+    vd.ellipse([(840, 50), (1160, 320)], outline=(210, 25, 25, 240), width=26)
+    base = comp(base, vl)
+    # semi-transparent inner fill
+    il = layer()
+    id_ = ImageDraw.Draw(il)
+    id_.ellipse([(872, 82), (1128, 288)], fill=(210, 25, 25, 48))
+    base = comp(base, il)
+
+    # 5. Cross-bar (authority divider) — horizontal band separating tiers from lens
+    cb = layer()
+    cbd = ImageDraw.Draw(cb)
+    cbd.polygon(rotated_rect(600, 488, 580, 22, -3), fill=(14, 12, 10, 210))
+    base = comp(base, cb)
+
+    # 6. Yellow alert fragments — threat signals / findings
+    yl = layer()
+    yd = ImageDraw.Draw(yl)
+    alerts = [
+        (108, 108, 54, 13, 7),
+        (198, 510, 50, 12, -5),
+        (1060, 420, 52, 13, 14),
+        (1110, 190, 44, 11, -3),
+        (480, 555, 48, 12, 10),
+        (72, 400, 46, 11, -9),
+        (950, 545, 52, 13, 6),
+    ]
+    for cx, cy, hw, hh, ang in alerts:
+        yd.polygon(rotated_rect(cx, cy, hw, hh, ang), fill=(235, 200, 0, 240))
+    base = comp(base, yl)
+
+    # 7. Thin diagonal scrutiny lines across the whole field
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    for i in range(0, W + H, 85):
+        sd.line([(i, 0), (0, i)], fill=(20, 20, 20, 28), width=1)
+        sd.line([(W - i, 0), (W, i)], fill=(20, 20, 20, 18), width=1)
+    base = comp(base, sl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -16769,6 +16846,7 @@ DAYS = [
     ("2026-10-04", img_klee_20261004,      "Engineer Academy", "Paul Klee"),
     ("2026-10-05", img_miro_20261005,      "Community Mods",   "Joan Miró"),
     ("2026-10-06", img_moholy_20261006,   "Claude Corps",     "László Moholy-Nagy"),
+    ("2026-10-07", img_malevich_20261007, "Cyber Tiers",      "Kazimir Malevich"),
 ]
 
 for date, fn, kw, artist in DAYS:

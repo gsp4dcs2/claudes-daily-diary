@@ -16528,6 +16528,97 @@ def img_malevich_20261007():
     return base
 
 
+def img_balla_20261008():
+    """Giacomo Balla Futurism — radiating coloured planes from top-right VP, motion arcs rushing
+    outward and downward — Haiku 5.5 speed / product-launch velocity theme.
+    Near-black bg, nine spectral wedge planes erupting from upper-right corner,
+    bold horizontal speed bars across the lower half, and a velocity-dot scatter
+    dense at the source and thinning toward the left edge.
+    """
+    base = Image.new("RGB", (W, H), (4, 6, 20))  # very deep navy-black Futurist ground
+
+    vp = (W - 80, 60)  # vanishing point: upper-right corner
+
+    plane_tips = [
+        (-60,  -40),
+        (-60,  160),
+        (-60,  340),
+        (-60,  520),
+        ( 80,  H + 40),
+        (340,  H + 40),
+        (600,  H + 40),
+        (860,  H + 40),
+        (200,  -40),
+    ]
+    plane_colours = [
+        (230,  45,  20, 155),   # crimson
+        (235, 120,   0, 148),   # amber
+        (200, 215,   0, 142),   # chartreuse
+        (  0, 200,  75, 150),   # emerald
+        (  0, 145, 235, 148),   # cobalt
+        (120,   0, 240, 140),   # violet
+        (230,  55, 165, 138),   # magenta
+        (240, 195,   0, 132),   # gold
+        (  0, 225, 210, 128),   # teal
+    ]
+    for i, (tx, ty) in enumerate(plane_tips):
+        col = plane_colours[i % len(plane_colours)]
+        spread = 30 + i * 10
+        dx = tx - vp[0]
+        dy = ty - vp[1]
+        length = math.hypot(dx, dy) or 1
+        perp_x = -dy / length * spread
+        perp_y =  dx / length * spread
+        poly = [
+            vp,
+            (tx + perp_x, ty + perp_y),
+            (tx - perp_x, ty - perp_y),
+        ]
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        pd.polygon(poly, fill=col)
+        base = comp(base, pl)
+
+    # 2. Sweeping motion arcs radiating from the VP (Futurist speed lines)
+    ml = layer()
+    md = ImageDraw.Draw(ml)
+    for i in range(20):
+        r = 160 + i * 55
+        bbox = [(vp[0] - r, vp[1] - r), (vp[0] + r, vp[1] + r)]
+        alpha = max(12, 55 - i * 2)
+        md.arc(bbox, start=100, end=260,
+               fill=(255, 255, 255, alpha), width=2)
+    base = comp(base, ml)
+
+    # 3. Bold horizontal speed bars — three tiers of product launches
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bar_specs = [
+        (240, 248, (230, 45,  20, 100), 16),   # Haiku 5.5 — crimson
+        (330, 338, (  0, 145, 235, 88), 12),   # Workspace — cobalt
+        (415, 423, (200, 215,  0,  78),  8),   # Startups  — chartreuse
+    ]
+    for y0, y1, col, _ in bar_specs:
+        bd.rectangle([(0, y0), (vp[0] - 40, y1)], fill=col)
+    base = comp(base, bl)
+
+    # 4. Velocity-dot scatter — dense near VP (upper-right), sparse toward lower-left
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    for _ in range(380):
+        # Bias x toward right (near VP) using reflected triangular distribution
+        x = int(W - rng.triangular(0, W, 160))
+        y = rng.randint(0, H)
+        r = rng.randint(1, 4)
+        alpha = rng.randint(55, 190)
+        hue_choice = rng.choice(plane_colours)
+        dd.ellipse([(x - r, y - r), (x + r, y + r)],
+                   fill=(hue_choice[0], hue_choice[1], hue_choice[2], alpha))
+    base = comp(base, dl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -16847,6 +16938,7 @@ DAYS = [
     ("2026-10-05", img_miro_20261005,      "Community Mods",   "Joan Miró"),
     ("2026-10-06", img_moholy_20261006,   "Claude Corps",     "László Moholy-Nagy"),
     ("2026-10-07", img_malevich_20261007, "Cyber Tiers",      "Kazimir Malevich"),
+    ("2026-10-08", img_balla_20261008,   "Haiku Launch",     "Giacomo Balla"),
 ]
 
 for date, fn, kw, artist in DAYS:

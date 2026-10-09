@@ -16619,6 +16619,117 @@ def img_balla_20261008():
     return base
 
 
+def img_seurat_20261009():
+    """Georges Seurat pointillist style — UV sky map theme.
+    Thousands of tiny spectral dots accumulate into the shape of the Milky Way
+    galactic plane sweeping across a deep space-black background, with bright
+    UV-emission cores in electric violet, cobalt, and white, fading to sparse
+    infrared-red dots at the map edges. Feynman-style arc trails connect four
+    bright survey-region hotspots.
+    """
+    base = Image.new("RGB", (W, H), (5, 4, 18))   # very deep space black-violet
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Cosmic background — faint scattered dots across full canvas
+    for _ in range(8000):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        r = 1
+        val = rng.randint(10, 45)
+        b_extra = rng.randint(0, 40)
+        draw.ellipse([(x-r, y-r), (x+r, y+r)], fill=(val, val, val + b_extra))
+
+    # 2. Galactic plane sweep — horizontal band of dense UV emission dots
+    #    The band arcs gently across the image (centred at y=310, ±90 px sigma)
+    band_colours = [
+        (220, 200, 255),  # near-UV white-violet
+        (180, 100, 255),  # deep violet
+        (80,  140, 255),  # cobalt blue
+        (40,  220, 230),  # teal-cyan (hot gas)
+        (255, 255, 200),  # near-white stellar core
+        (100, 60,  200),  # indigo
+        (200, 50,  220),  # magenta-UV
+    ]
+    for _ in range(22000):
+        x = rng.randint(0, W)
+        # Galactic plane: Gaussian band centred at y=310, tilted ±30px across width
+        tilt = -30 + 60 * (x / W)
+        centre_y = 310 + tilt
+        y_offset = rng.gauss(0, 70)
+        y = int(centre_y + y_offset)
+        if y < 0 or y >= H:
+            continue
+        # Density peaks toward centre of band
+        density = math.exp(-0.5 * (y_offset / 70) ** 2)
+        if rng.random() > density:
+            continue
+        r = rng.randint(1, 4)
+        col = rng.choice(band_colours)
+        alpha = int(rng.uniform(80, 220) * density)
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        bd.ellipse([(x-r, y-r), (x+r, y+r)],
+                   fill=(col[0], col[1], col[2], min(255, alpha)))
+        base = comp(base, bl)
+
+    # 3. Four bright UV-emission survey hotspots (survey-region intensity peaks)
+    hotspots = [
+        (220,  280, 55, (230, 210, 255)),  # UV bright region 1
+        (580,  290, 70, (255, 255, 240)),  # galactic centre (brightest)
+        (920,  320, 50, (140, 100, 255)),  # region 3
+        (1050, 200, 38, (80,  180, 255)),  # region 4 — high-latitude plume
+    ]
+    for hx, hy, hr, hcol in hotspots:
+        for ring_r in range(hr, 0, -5):
+            hl = layer()
+            hd = ImageDraw.Draw(hl)
+            n_dots = 180 + ring_r * 6
+            sigma = max(4, ring_r * 0.12)
+            for _ in range(n_dots):
+                angle = rng.uniform(0, 2 * math.pi)
+                dist = rng.gauss(ring_r * 0.5, sigma * 2)
+                dx = int(hx + dist * math.cos(angle))
+                dy = int(hy + dist * math.sin(angle))
+                dr = rng.randint(2, 5)
+                alpha = int(200 * math.exp(-0.5 * ((dist - ring_r * 0.5) / (sigma * 2)) ** 2))
+                hd.ellipse([(dx-dr, dy-dr), (dx+dr, dy+dr)],
+                           fill=(hcol[0], hcol[1], hcol[2], max(0, min(255, alpha))))
+            base = comp(base, hl)
+
+    # 4. Arc trails between survey regions — instrument scan paths
+    arc_pairs = [
+        (hotspots[0], hotspots[1], (160, 100, 255)),
+        (hotspots[1], hotspots[2], (80,  200, 255)),
+        (hotspots[2], hotspots[3], (200,  80, 255)),
+    ]
+    for (ax, ay, *_), (bx, by, *_), pcol in arc_pairs:
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        for t_i in range(120):
+            t = t_i / 119
+            bow = -50 * math.sin(math.pi * t)
+            mx = ax + (bx - ax) * t
+            my = ay + (by - ay) * t + bow
+            dr = rng.randint(1, 3)
+            alpha = int(100 * math.sin(math.pi * t))
+            pd.ellipse([(mx-dr, my-dr), (mx+dr, my+dr)],
+                       fill=(pcol[0], pcol[1], pcol[2], alpha))
+        base = comp(base, pl)
+
+    # 5. Missing-region inpainting hint — sparse dots in upper/lower void areas
+    for _ in range(3000):
+        x = rng.randint(0, W)
+        y = rng.choice(
+            [rng.randint(0, 160), rng.randint(450, H)]
+        )
+        r = 1
+        col = rng.choice([(60, 40, 120), (80, 60, 100), (40, 20, 80)])
+        draw.ellipse([(x-r, y-r), (x+r, y+r)], fill=col)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -16939,6 +17050,7 @@ DAYS = [
     ("2026-10-06", img_moholy_20261006,   "Claude Corps",     "László Moholy-Nagy"),
     ("2026-10-07", img_malevich_20261007, "Cyber Tiers",      "Kazimir Malevich"),
     ("2026-10-08", img_balla_20261008,   "Haiku Launch",     "Giacomo Balla"),
+    ("2026-10-09", img_seurat_20261009, "UV Sky Map",       "Georges Seurat"),
 ]
 
 for date, fn, kw, artist in DAYS:

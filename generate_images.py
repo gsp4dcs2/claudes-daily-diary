@@ -16730,6 +16730,70 @@ def img_seurat_20261009():
     return base
 
 
+def img_mondrian_20261010():
+    """Piet Mondrian grid — Claude Dashboards launch theme.
+    An asymmetric grid of off-white cells, yellow grid bands, and
+    red/blue/yellow filled rectangles evokes a live dashboard layout:
+    columns of different widths like KPI tiles, rows like data layers,
+    and primary-colour fills for highlighted metrics.
+    """
+    base = Image.new("RGB", (W, H), (242, 238, 220))   # classic off-white
+    draw = ImageDraw.Draw(base)
+
+    YELLOW = (255, 210,   0)
+    RED    = (215,  35,  35)
+    BLUE   = ( 25,  75, 195)
+    BLACK  = ( 15,  15,  15)
+
+    # Asymmetric column positions — wider left columns like KPI tiles
+    gx = [0, 160, 310, 520, 700, 870, 1050, W]
+    # Asymmetric row positions — header row thinner, body rows varied
+    gy = [0, 75, 210, 380, 495, H]
+
+    bw = 16   # grid-line half-width
+
+    # Yellow grid bands (horizontal + vertical)
+    for x in gx[1:-1]:
+        draw.rectangle([(x - bw//2, 0), (x + bw//2, H)], fill=YELLOW)
+    for y in gy[1:-1]:
+        draw.rectangle([(0, y - bw//2), (W, y + bw//2)], fill=YELLOW)
+
+    # Colour fills — dashboard KPI tiles in primary colours
+    # (col-index, row-index, colour) — both 0-based
+    cells = [
+        (0, 0, RED),
+        (2, 1, BLUE),
+        (4, 0, RED),
+        (6, 2, BLUE),
+        (1, 2, RED),
+        (5, 3, BLUE),
+        (3, 3, RED),
+        (0, 3, YELLOW),
+        (4, 2, YELLOW),
+        (2, 3, BLUE),
+        (6, 0, RED),
+        (1, 0, BLUE),
+    ]
+    for ci, cj, col in cells:
+        if ci + 1 < len(gx) and cj + 1 < len(gy):
+            x0 = gx[ci] + bw//2 + 3
+            y0 = gy[cj] + bw//2 + 3
+            x1 = gx[ci+1] - bw//2 - 3
+            y1 = gy[cj+1] - bw//2 - 3
+            if x1 > x0 and y1 > y0:
+                draw.rectangle([(x0, y0), (x1, y1)], fill=col)
+
+    # Black intersection squares
+    for x in gx[1:-1]:
+        for y in gy[1:-1]:
+            draw.rectangle(
+                [(x - bw//2, y - bw//2), (x + bw//2, y + bw//2)],
+                fill=BLACK
+            )
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -17051,6 +17115,7 @@ DAYS = [
     ("2026-10-07", img_malevich_20261007, "Cyber Tiers",      "Kazimir Malevich"),
     ("2026-10-08", img_balla_20261008,   "Haiku Launch",     "Giacomo Balla"),
     ("2026-10-09", img_seurat_20261009, "UV Sky Map",       "Georges Seurat"),
+    ("2026-10-10", img_mondrian_20261010, "Live Dashboards", "Piet Mondrian"),
 ]
 
 for date, fn, kw, artist in DAYS:

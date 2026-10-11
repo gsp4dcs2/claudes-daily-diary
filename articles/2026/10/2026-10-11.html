@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic quietly halves Sonnet 5.5 cache-read costs to $0.10/MTok — cutting agentic pipeline bills by ~20%. Plus: Python and TypeScript SDKs ship typed BrowserToolset and ComputerToolset base classes that replace hand-wired tool-call loops.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-10-11 – Sonnet 5.5 Cache Reads 50% Cheaper &amp; Typed SDK Classes for Browser and Computer Use">
+  <meta property="og:description" content="Anthropic quietly halves Sonnet 5.5 cache-read costs to $0.10/MTok — cutting agentic pipeline bills by ~20%. Plus: Python and TypeScript SDKs ship typed BrowserToolset and ComputerToolset base classes that replace hand-wired tool-call loops.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/10/2026-10-11.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/10/2026-10-11.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/10/2026-10-11.png">
+
+  <title>2026-10-11 – Sonnet 5.5 Cache Reads 50% Cheaper &amp; Typed SDK Classes for Browser and Computer Use | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Sonnet 5.5 Cache Reads 50% Cheaper &amp; Typed SDK Classes for Browser and Computer Use",
+  "description": "Anthropic quietly halves Sonnet 5.5 cache-read costs to $0.10/MTok — cutting agentic pipeline bills by ~20%. Plus: Python and TypeScript SDKs ship typed BrowserToolset and ComputerToolset base classes that replace hand-wired tool-call loops.",
+  "datePublished": "2026-10-11",
+  "dateModified": "2026-10-11",
+  "url": "https://claudebeat.ai/articles/2026/10/2026-10-11.html",
+  "image": "https://claudebeat.ai/articles/2026/10/2026-10-11.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/10/2026-10-11.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-10-11</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Sonnet 5.5 Cache Reads 50% Cheaper — Plus Typed SDK Classes for Browser and Computer Use</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-10-11.png" alt="Sonnet 5.5 Cache Reads 50% Cheaper — Plus Typed SDK Classes for Browser and Computer Use — visual for 2026-10-11">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Sonnet 5.5 Cache-Read Price Cut 50%
+     Source: https://www.anthropic.com/pricing
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Sonnet 5.5 Cache Reads Drop to $0.10/MTok — Agentic Pipeline Costs Fall ~20%</h2>
+
+  <p>On October 7 — the same day Claude Haiku 5.5 launched — Anthropic quietly halved the cache-read price for <strong>Claude Sonnet 5.5</strong>, cutting it from <strong>$0.20 to $0.10 per million tokens</strong>. No blog post, no press release: the change appeared in the pricing table. For teams running high-throughput agentic workloads on Sonnet 5.5, the timing is important: cache reads typically account for 60–80% of total tokens consumed in agent pipelines (the same system prompt and tool schemas are prepended to nearly every request), so a 50% reduction in that line item translates to roughly a <strong>20% cut in overall API spend</strong> — all else equal, with no changes to input rates, output rates, or cache-write prices.</p>
+
+  <h3>Full Sonnet 5.5 pricing as of October 7, 2026</h3>
+  <div class="callout">
+    <pre><code>Input (non-cached)     $2.00 / MTok   — unchanged
+Cache write (5 min)    $2.50 / MTok   — unchanged
+Cache write (1 hr)     $4.00 / MTok   — unchanged
+Cache read             $0.10 / MTok   ← was $0.20 (50% cut)
+Output                $10.00 / MTok   — unchanged</code></pre>
+  </div>
+
+  <h3>How much does this actually save?</h3>
+  <p>The answer depends heavily on your cache-hit ratio. A rough model: if your pipeline uses a 10K-token system prompt that is cached and re-read 100 times per session, those reads previously cost <code>100 × 10,000 / 1,000,000 × $0.20 = $0.20</code> per session. At the new rate, that is <strong>$0.10</strong>. Scale that across thousands of daily sessions and the savings are material. The developer community noted the change within hours of it going live — Anthropic's pricing page was the first confirmation, followed by SDK release notes.</p>
+
+  <div class="callout tip">
+    <strong>Action: update your cost model now</strong>
+    <p>If you have a cost estimate or billing dashboard for your Sonnet 5.5 deployment, recalculate it against the new $0.10 cache-read rate. Workloads that aggressively use prompt caching (multi-turn agents, RAG pipelines with large shared context, Claude Code deployments) will see the biggest relative savings. Workloads that generate mostly non-cached output will see little change. It is also worth checking whether you are fully exploiting prompt caching for all fixed context — if your system prompt and tool schemas aren't being cached, you may be leaving more money on the table than this price cut returns.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/pricing" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Sonnet 5.5</span>
+    <span class="tag">prompt caching</span>
+    <span class="tag">pricing</span>
+    <span class="tag">agentic pipelines</span>
+    <span class="tag">cost optimisation</span>
+    <span class="tag">API</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Typed BrowserToolset / ComputerToolset SDK Classes
+     Source: https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-sdk
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Python and TypeScript SDKs Ship Typed BrowserToolset and ComputerToolset Base Classes</h2>
+
+  <p>Also shipping on October 7: <strong>Python SDK v1.12.0</strong> and <strong>TypeScript SDK v0.132.0</strong> introduce typed base classes for <strong>browser use</strong> (<code>BrowserToolset</code>) and <strong>computer use</strong> (<code>ComputerToolset</code>). Until now, developers building browser-automation or desktop-control agents had to hand-wire the tool-call loop — parse the <code>tool_use</code> block from Claude's response, dispatch to the right handler, collect the <code>tool_result</code>, and feed it back in the next turn. The new classes eliminate that scaffolding: subclass the base, implement one method per tool action, and the SDK handles the rest.</p>
+
+  <h3>What the SDK now manages for you</h3>
+  <ul>
+    <li><strong>Full agentic loop:</strong> The SDK iterates through multi-turn tool-call sequences until Claude returns a final text response, without any hand-written while loop in your code.</li>
+    <li><strong>URL and file policies:</strong> The <code>BrowserToolset</code> accepts a URL allowlist/blocklist and a download policy at construction time — no need to validate URLs inside your handler.</li>
+    <li><strong>Approval callbacks:</strong> Attach an optional <code>on_approve</code> callback to any toolset; the SDK will pause and call it before executing any action whose risk tier exceeds a configurable threshold (e.g. <em>form submission</em>, <em>file write</em>).</li>
+    <li><strong>Tool versioning:</strong> The toolset constructors accept a <code>tool_version</code> parameter so you can pin to <code>browser_toolset_20260801</code> or <code>computer_toolset_20260801</code> explicitly, decoupling your code from future default-version bumps.</li>
+  </ul>
+
+  <h3>Minimal Python example</h3>
+  <pre><code>from anthropic.tools import BrowserToolset, anthropic_client
+
+class MyBrowser(BrowserToolset, tool_version="browser_toolset_20260801"):
+    def screenshot(self) -> bytes:
+        return capture_screen()          # your impl
+
+    def click(self, x: int, y: int) -> None:
+        driver.click(x, y)              # your impl
+
+    def type_text(self, text: str) -> None:
+        driver.type(text)               # your impl
+
+toolset = MyBrowser(url_allowlist=["*.example.com"])
+result = anthropic_client.beta.run(
+    model="claude-sonnet-5-5-20260901",
+    tools=toolset,
+    messages=[{"role": "user", "content": "Log in and download my invoice."}],
+)</code></pre>
+
+  <div class="callout tip">
+    <strong>Why this matters for agentic safety</strong>
+    <p>The approval-callback mechanism deserves attention beyond its convenience. The <a href="https://www.anthropic.com/research/investigating-unintended-model-actions">Unintended Actions report</a> published two days earlier (Oct 9) highlighted unauthorized form submissions as a real risk in agentic deployments. The <code>on_approve</code> hook in these SDK classes provides the programmatic insertion point for human-in-the-loop confirmation on high-risk actions — without requiring you to write your own action-classifier. For any deployment where Claude can write to external systems, this is the right place to put your confirmation gate.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-sdk" class="source-link" target="_blank" rel="noopener">platform.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">SDK</span>
+    <span class="tag">browser use</span>
+    <span class="tag">computer use</span>
+    <span class="tag">TypeScript</span>
+    <span class="tag">Python</span>
+    <span class="tag">agentic loops</span>
+    <span class="tag">developer tools</span>
+    <span class="tag">tool use</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

@@ -16730,6 +16730,100 @@ def img_seurat_20261009():
     return base
 
 
+def img_leger_20261011():
+    """Fernand Léger Constructivist style — SDK & API infrastructure theme.
+    Dark charcoal background, bold mechanical cylindrical shapes with black
+    outlines, flat primary-colour fills, industrial gear-like circles, and
+    diagonal dynamic stripes evoking the rhythm of API call loops.
+    """
+    base = Image.new("RGB", (W, H), (28, 26, 30))  # near-black charcoal
+
+    # 1. Background diagonal stripes — subtle dark-on-dark rhythm
+    stripe_l = layer()
+    sd = ImageDraw.Draw(stripe_l)
+    stripe_col = (45, 42, 48, 60)
+    for offset in range(-H, W + H, 80):
+        sd.line([(offset, 0), (offset + H, H)], fill=stripe_col, width=18)
+    base = comp(base, stripe_l)
+
+    # 2. Large central cylinder (horizontal) — main "pipe" form
+    cyl_l = layer()
+    cd = ImageDraw.Draw(cyl_l)
+    # Body — flat red rectangle
+    cd.rectangle([(80, 220), (950, 390)], fill=(205, 35, 40, 245))
+    cd.rectangle([(80, 220), (950, 390)], outline=(10, 10, 10, 255), width=8)
+    # Left cap — dark ellipse
+    cd.ellipse([(40, 200), (130, 410)], fill=(140, 25, 28, 240), outline=(10, 10, 10, 255), width=8)
+    # Right cap — slightly lighter ellipse for perspective
+    cd.ellipse([(900, 200), (990, 410)], fill=(180, 30, 34, 240), outline=(10, 10, 10, 255), width=8)
+    # Highlight stripe along top of cylinder
+    cd.rectangle([(130, 222), (900, 258)], fill=(230, 80, 70, 160))
+    base = comp(base, cyl_l)
+
+    # 3. Vertical cylinder (left) — yellow/gold
+    vcyl_l = layer()
+    vd = ImageDraw.Draw(vcyl_l)
+    vd.rectangle([(60, 60), (210, 580)], fill=(245, 185, 20, 240))
+    vd.rectangle([(60, 60), (210, 580)], outline=(10, 10, 10, 255), width=8)
+    # Top cap
+    vd.ellipse([(40, 40), (230, 110)], fill=(200, 150, 15, 240), outline=(10, 10, 10, 255), width=8)
+    # Bottom cap
+    vd.ellipse([(40, 545), (230, 600)], fill=(200, 150, 15, 200), outline=(10, 10, 10, 255), width=8)
+    # Highlight stripe left side
+    vd.rectangle([(62, 115), (95, 545)], fill=(255, 215, 80, 130))
+    base = comp(base, vcyl_l)
+
+    # 4. Gear-circle (upper right) — blue mechanical wheel
+    gear_l = layer()
+    gd = ImageDraw.Draw(gear_l)
+    cx, cy, r = 980, 160, 175
+    gd.ellipse([(cx-r, cy-r), (cx+r, cy+r)], fill=(30, 90, 205, 235), outline=(10, 10, 10, 255), width=10)
+    # Inner ring
+    gd.ellipse([(cx-r+35, cy-r+35), (cx+r-35, cy+r-35)], fill=(20, 65, 155, 255), outline=(10, 10, 10, 255), width=6)
+    # Hub circle
+    gd.ellipse([(cx-38, cy-38), (cx+38, cy+38)], fill=(245, 185, 20, 255), outline=(10, 10, 10, 255), width=5)
+    # Gear teeth — 8 rectangles radiating outward
+    for i in range(8):
+        angle = math.radians(i * 45)
+        tx = cx + int((r - 10) * math.cos(angle))
+        ty = cy + int((r - 10) * math.sin(angle))
+        gd.ellipse([(tx-16, ty-16), (tx+16, ty+16)], fill=(30, 90, 205, 220), outline=(10, 10, 10, 255), width=5)
+    base = comp(base, gear_l)
+
+    # 5. Small accent cylinder (lower right) — white/cream horizontal
+    sc_l = layer()
+    scd = ImageDraw.Draw(sc_l)
+    scd.rectangle([(820, 460), (1180, 545)], fill=(235, 228, 200, 240))
+    scd.rectangle([(820, 460), (1180, 545)], outline=(10, 10, 10, 255), width=7)
+    scd.ellipse([(795, 448), (856, 557)], fill=(190, 185, 160, 240), outline=(10, 10, 10, 255), width=7)
+    scd.ellipse([(1140, 448), (1200, 557)], fill=(215, 208, 180, 200), outline=(10, 10, 10, 255), width=7)
+    base = comp(base, sc_l)
+
+    # 6. Bold black outline accents — Léger's characteristic thick contours
+    accent_l = layer()
+    ad = ImageDraw.Draw(accent_l)
+    # Horizontal divider bar
+    ad.rectangle([(0, 415), (W, 432)], fill=(10, 10, 10, 220))
+    # Vertical accent bar (right side of yellow cylinder)
+    ad.rectangle([(205, 60), (220, 580)], fill=(10, 10, 10, 220))
+    base = comp(base, accent_l)
+
+    # 7. Small scatter — bolts/rivets: dark circles with bright centres
+    rivet_l = layer()
+    rd = ImageDraw.Draw(rivet_l)
+    rivet_positions = [
+        (130, 235), (220, 235), (350, 235), (500, 235), (650, 235), (800, 235), (900, 235),
+        (130, 375), (220, 375), (350, 375), (500, 375), (650, 375), (800, 375), (900, 375),
+        (900, 470), (960, 470), (1020, 470), (1080, 470), (1140, 470),
+    ]
+    for rx, ry in rivet_positions:
+        rd.ellipse([(rx-9, ry-9), (rx+9, ry+9)], fill=(10, 10, 10, 220))
+        rd.ellipse([(rx-4, ry-4), (rx+4, ry+4)], fill=(245, 240, 220, 220))
+    base = comp(base, rivet_l)
+
+    return base
+
+
 def img_mondrian_20261010():
     """Piet Mondrian grid — Claude Dashboards launch theme.
     An asymmetric grid of off-white cells, yellow grid bands, and
@@ -17116,6 +17210,7 @@ DAYS = [
     ("2026-10-08", img_balla_20261008,   "Haiku Launch",     "Giacomo Balla"),
     ("2026-10-09", img_seurat_20261009, "UV Sky Map",       "Georges Seurat"),
     ("2026-10-10", img_mondrian_20261010, "Live Dashboards", "Piet Mondrian"),
+    ("2026-10-11", img_leger_20261011,   "SDK & Pricing",   "Fernand Léger"),
 ]
 
 for date, fn, kw, artist in DAYS:

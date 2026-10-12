@@ -16888,6 +16888,74 @@ def img_mondrian_20261010():
     return base
 
 
+def img_lissitzky_20261012():
+    """El Lissitzky Constructivism — API credits / machine-readable capabilities theme.
+    Cream bg, bold red diagonal wedge (upper-left), heavy black horizontal bar,
+    stacked concentric rectangles (credit tiers), red circle focal point,
+    and a fine diagonal tension grid in the upper-right quadrant."""
+    base = Image.new("RGB", (W, H), (245, 242, 232))  # Lissitzky cream bg
+
+    # 1. Bold red diagonal wedge — upper-left, signature Lissitzky form
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.polygon([(0, 0), (480, 0), (0, 380)], fill=(210, 25, 25, 245))
+    base = comp(base, rl)
+
+    # 2. Heavy black horizontal dividing bar — the constructivist horizon
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bd.rectangle([(0, 310), (W, 358)], fill=(15, 15, 15, 255))
+    base = comp(base, bl)
+
+    # 3. Bold black vertical bar — right-side anchor / the API column
+    vl = layer()
+    vd = ImageDraw.Draw(vl)
+    vd.rectangle([(855, 0), (910, H)], fill=(15, 15, 15, 255))
+    base = comp(base, vl)
+
+    # 4. Stacked concentric outset rectangles — the credit tiers ($100/$200/$500)
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    cx, cy = 1050, 175
+    for i, alpha in enumerate([230, 180, 110]):
+        pad = i * 38
+        td.rectangle(
+            [(cx - 100 - pad, cy - 65 - pad), (cx + 100 + pad, cy + 65 + pad)],
+            outline=(210, 25, 25, alpha), width=6
+        )
+    # Fill innermost rectangle solid red
+    td.rectangle([(cx - 100, cy - 65), (cx + 100, cy + 65)], fill=(210, 25, 25, 235))
+    # White $ symbol in centre — the credit motif
+    td.ellipse([(cx - 38, cy - 38), (cx + 38, cy + 38)], fill=(245, 242, 232, 255))
+    base = comp(base, tl)
+
+    # 5. Fine diagonal tension lines — upper-right zone
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    for i in range(8):
+        x_off = i * 52
+        ld.line([(620 + x_off, 0), (620 + x_off - 220, 310)], fill=(15, 15, 15, 150), width=2)
+    base = comp(base, ll)
+
+    # 6. Small black square with white inner — top-left module icon / capability node
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    sd.rectangle([(52, 420), (185, 553)], fill=(15, 15, 15, 255))
+    sd.rectangle([(82, 450), (155, 523)], fill=(245, 242, 232, 255))
+    sd.rectangle([(107, 475), (130, 498)], fill=(210, 25, 25, 255))
+    base = comp(base, sl)
+
+    # 7. Red diagonal accent stripes — lower right, constructivist energy
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(6):
+        y_off = i * 30
+        ad.line([(920, 400 + y_off), (W, 475 + y_off)], fill=(210, 25, 25, 165), width=3)
+    base = comp(base, al)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -17211,6 +17279,7 @@ DAYS = [
     ("2026-10-09", img_seurat_20261009, "UV Sky Map",       "Georges Seurat"),
     ("2026-10-10", img_mondrian_20261010, "Live Dashboards", "Piet Mondrian"),
     ("2026-10-11", img_leger_20261011,   "SDK & Pricing",   "Fernand Léger"),
+    ("2026-10-12", img_lissitzky_20261012, "API Credits",  "El Lissitzky"),
 ]
 
 for date, fn, kw, artist in DAYS:

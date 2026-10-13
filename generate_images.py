@@ -16956,6 +16956,120 @@ def img_lissitzky_20261012():
     return base
 
 
+def img_klee_20261013():
+    """Paul Klee Magic Squares — distillation defenses + IoT self-replication theme.
+    Cooler teal/indigo grid cells, dark grid lines, white node circles arranged in
+    a distributed-network topology; some nodes carry a red 'shield ring' (protected API
+    accounts); thin horizontal lines connect shards across the grid like pipeline-
+    parallelism; a cluster of smaller nodes in the lower-right represents IoT devices."""
+    base = Image.new("RGB", (W, H), (14, 18, 30))
+
+    CELL_W, CELL_H = 72, 50
+    cols_n = W // CELL_W + 2
+    rows_n = H // CELL_H + 2
+
+    # Palette: deep indigo → teal → cool grey (security / hardware tones)
+    deep_palette = [
+        (20, 40, 110), (25, 55, 135), (15, 45, 100), (30, 60, 120),
+        (18, 50, 108), (28, 48, 130), (22, 38, 115), (32, 65, 125),
+    ]
+    mid_palette = [
+        (30, 95, 130), (40, 110, 145), (25, 90, 120), (50, 120, 140),
+        (35, 100, 135), (45, 115, 125), (28, 85, 128), (55, 105, 138),
+    ]
+    warm_edge = [
+        (60, 130, 110), (50, 140, 100), (70, 120, 115), (45, 135, 105),
+        (65, 125, 118), (55, 145, 95),  (72, 115, 120), (48, 138, 108),
+    ]
+
+    draw = ImageDraw.Draw(base)
+    for row in range(rows_n):
+        y0 = row * CELL_H
+        y_c = y0 + CELL_H // 2
+        if y_c < H // 3:
+            palette = deep_palette
+        elif y_c < H * 2 // 3:
+            palette = mid_palette
+        else:
+            palette = warm_edge
+        for col in range(cols_n):
+            x0 = col * CELL_W
+            idx = (row * 5 + col * 3) % len(palette)
+            base_col = palette[idx]
+            r = max(0, min(255, base_col[0] + rng.randint(-10, 10)))
+            g = max(0, min(255, base_col[1] + rng.randint(-10, 10)))
+            b = max(0, min(255, base_col[2] + rng.randint(-10, 10)))
+            draw.rectangle([(x0, y0), (x0 + CELL_W - 1, y0 + CELL_H - 1)], fill=(r, g, b))
+
+    # Dark grid lines — Klee signature cell boundaries
+    for col in range(cols_n + 1):
+        draw.line([(col * CELL_W, 0), (col * CELL_W, H)], fill=(8, 10, 16), width=2)
+    for row in range(rows_n + 1):
+        draw.line([(0, row * CELL_H), (W, row * CELL_H)], fill=(8, 10, 16), width=2)
+
+    # ── Main cluster nodes (large server / API nodes)
+    main_nodes = [
+        (2, 2), (5, 2), (9, 2), (13, 2),
+        (1, 5), (4, 5), (7, 5), (11, 5), (14, 5),
+        (3, 8), (6, 8), (10, 8),
+        (2, 11), (8, 11), (13, 11),
+    ]
+    # Shield nodes — API accounts with preserved-thinking protection (red ring)
+    shield_nodes = {(5, 2), (7, 5), (11, 5), (8, 11)}
+
+    node_layer = layer()
+    nd = ImageDraw.Draw(node_layer)
+    for (nc, nr) in main_nodes:
+        nx = nc * CELL_W
+        ny = nr * CELL_H
+        r_n = rng.randint(10, 15)
+        nd.ellipse([(nx - r_n, ny - r_n), (nx + r_n, ny + r_n)],
+                   fill=(255, 255, 255, 225), outline=(190, 190, 190, 180), width=2)
+        if (nc, nr) in shield_nodes:
+            # Red shield ring — "preserved thinking" protection marker
+            nd.ellipse([(nx - r_n - 7, ny - r_n - 7), (nx + r_n + 7, ny + r_n + 7)],
+                       fill=(0, 0, 0, 0), outline=(210, 55, 45, 210), width=3)
+    base = comp(base, node_layer)
+
+    # ── IoT device cluster — lower right, many small nodes in a tight cluster
+    iot_layer = layer()
+    id_ = ImageDraw.Draw(iot_layer)
+    iot_positions = [
+        (860 + rng.randint(-18, 18), 380 + rng.randint(-14, 14)) for _ in range(15)
+    ]
+    for (ix, iy) in iot_positions:
+        r_i = rng.randint(5, 8)
+        id_.ellipse([(ix - r_i, iy - r_i), (ix + r_i, iy + r_i)],
+                    fill=(190, 220, 210, 200), outline=(100, 170, 150, 160), width=1)
+    # Faint cluster boundary
+    id_.ellipse([(800, 330), (1020, 460)],
+                fill=(0, 0, 0, 0), outline=(80, 160, 140, 80), width=2)
+    base = comp(base, iot_layer)
+
+    # ── Pipeline-parallelism sharding lines — horizontal spans across mid section
+    shard_layer = layer()
+    sd = ImageDraw.Draw(shard_layer)
+    node_coords = {(nc, nr): (nc * CELL_W, nr * CELL_H) for (nc, nr) in main_nodes}
+    shard_connections = [
+        ((2, 2), (5, 2)), ((5, 2), (9, 2)), ((9, 2), (13, 2)),
+        ((1, 5), (4, 5)), ((4, 5), (7, 5)), ((7, 5), (11, 5)), ((11, 5), (14, 5)),
+        ((3, 8), (6, 8)), ((6, 8), (10, 8)),
+        ((2, 2), (1, 5)), ((5, 2), (4, 5)), ((9, 2), (7, 5)), ((13, 2), (11, 5)),
+        ((1, 5), (3, 8)), ((4, 5), (6, 8)), ((11, 5), (10, 8)),
+        ((3, 8), (2, 11)), ((6, 8), (8, 11)), ((10, 8), (13, 11)),
+    ]
+    for (a, b) in shard_connections:
+        if a in node_coords and b in node_coords:
+            sd.line([node_coords[a], node_coords[b]], fill=(160, 200, 220, 60), width=1)
+    # IoT cluster connection lines — thin dimmer links to a mid node
+    anchor = node_coords.get((8, 11), (8 * CELL_W, 11 * CELL_H))
+    for (ix, iy) in iot_positions[:8]:
+        sd.line([anchor, (ix, iy)], fill=(100, 170, 150, 40), width=1)
+    base = comp(base, shard_layer)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -17280,6 +17394,7 @@ DAYS = [
     ("2026-10-10", img_mondrian_20261010, "Live Dashboards", "Piet Mondrian"),
     ("2026-10-11", img_leger_20261011,   "SDK & Pricing",   "Fernand Léger"),
     ("2026-10-12", img_lissitzky_20261012, "API Credits",  "El Lissitzky"),
+    ("2026-10-13", img_klee_20261013,      "IoT & Shields", "Paul Klee"),
 ]
 
 for date, fn, kw, artist in DAYS:

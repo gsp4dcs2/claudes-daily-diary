@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic's new distillation defenses cut the data rivals can harvest from Claude by 90–99%, led by a 'preserved thinking' API restriction and a two-stage classifier. Plus: the Frontier Red Team warns that small models running sharded across cheap IoT devices may be months away from autonomous self-replication.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-10-13 – New Defenses Cut Claude Distillation 99% — Plus Frontier Red Team Warns of IoT Self-Replication">
+  <meta property="og:description" content="Anthropic's new distillation defenses cut the data rivals can harvest from Claude by 90–99%, led by a 'preserved thinking' API restriction and a two-stage classifier. Plus: the Frontier Red Team warns that small models running sharded across cheap IoT devices may be months away from autonomous self-replication.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/10/2026-10-13.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/10/2026-10-13.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/10/2026-10-13.png">
+
+  <title>2026-10-13 – New Defenses Cut Claude Distillation 99% — Plus Frontier Red Team Warns of IoT Self-Replication | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "New Defenses Cut Claude Distillation 99% — Plus Frontier Red Team Warns of IoT Self-Replication",
+  "description": "Anthropic's new distillation defenses cut the data rivals can harvest from Claude by 90–99%, led by a 'preserved thinking' API restriction and a two-stage classifier. Plus: the Frontier Red Team warns that small models running sharded across cheap IoT devices may be months away from autonomous self-replication.",
+  "datePublished": "2026-10-13",
+  "dateModified": "2026-10-13",
+  "url": "https://claudebeat.ai/articles/2026/10/2026-10-13.html",
+  "image": "https://claudebeat.ai/articles/2026/10/2026-10-13.png",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/10/2026-10-13.html"},
+  "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+  "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+}
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-10-13</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>New Defenses Cut Claude Distillation 99% — Plus Frontier Red Team Warns of IoT Self-Replication</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-10-13.png" alt="New Defenses Cut Claude Distillation 99% — Plus Frontier Red Team Warns of IoT Self-Replication — visual for 2026-10-13">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Anthropic Distillation Defenses: Preserved Thinking + 99% Harvest Reduction
+     Source: https://www.anthropic.com/research/distillation-defenses
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Anthropic's New Distillation Defenses Cut Data Harvest by 90–99% — Here's What Changed for API Users</h2>
+
+  <p>Anthropic published a detailed research post today laying out the measures it has rolled into Claude Fable 5.1 and Claude Opus 5.5 to stop rival labs from covertly copying Claude's reasoning capabilities through large-scale <strong>model distillation attacks</strong>. The headline figure: the volume of reasoning tokens that attackers can harvest has fallen by 90–99% since the new defenses went live. The biggest documented campaign — attributed to Alibaba — ran 151 million exchanges between May and July 2026, peaking at nearly three million exchanges per day. A second campaign linked to Moonshot AI's Kimi included a query from a People's Liberation Army address seeking CCTV surveillance analysis.</p>
+
+  <h3>The three-layer defense</h3>
+  <ul>
+    <li><strong>Preserved thinking:</strong> API accounts created on or after <strong>August 31, 2026</strong> cannot edit Claude's prior context mid-conversation. The "prior context editing" technique was the main way attackers extracted long reasoning transcripts — by injecting specially crafted prior turns that instructed the model to surface its internal chain-of-thought verbosely. Blocking that edit removes the primary extraction vector.</li>
+    <li><strong>Two-stage classifier:</strong> A purpose-built classifier now screens every request for distillation intent. Anthropic reports a false positive rate of under 0.1% on legitimate traffic. Tens of thousands of accounts have been banned within two hours of starting a distillation campaign — the classifier fires faster than the attacker can rotate proxies.</li>
+    <li><strong>Cross-model isolation:</strong> Reasoning transcripts generated by Sonnet 5.5 and later models are only accessible to the organisation whose request produced them. Earlier models with weaker safeguards can no longer read the extended reasoning of newer ones, closing an inter-model relay exploit.</li>
+  </ul>
+
+  <h3>What this means if you use the API</h3>
+
+  <div class="callout tip">
+    <strong>Action needed if your account was created before August 31, 2026</strong>
+    <p>The prior-context editing restriction only applies to <em>new</em> accounts (created on or after August 31). If your integration relies on prepending or modifying prior assistant turns — for example, to inject cache-friendly context — test it against the new behaviour now. Anthropic plans to extend the restriction to older accounts in a future update, so review any code that calls the Messages API with <code>role: "assistant"</code> turns you construct manually. The correct pattern going forward is to use <code>system</code> prompts or user-turn context injection instead of fabricated assistant turns.</p>
+  </div>
+
+  <p>Anthropic is candid about the limits of these defenses: the company describes the problem as a "cat-and-mouse game" and expects the gains to erode over time as attackers adapt. The post commits to continued iteration and flags that the second-generation GLM-5.3 model — assessed by CAISS as the most cyber-capable open-weights model currently available — was built in part using capabilities extracted from US frontier models, illustrating the concrete downstream harm the defenses are designed to prevent.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/research/distillation-defenses" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">security</span>
+    <span class="tag">distillation attacks</span>
+    <span class="tag">preserved thinking</span>
+    <span class="tag">API</span>
+    <span class="tag">model protection</span>
+    <span class="tag">developer tools</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Frontier Red Team: Small AI Models Near Self-Replication on IoT Devices
+     Source: https://www.anthropic.com/research/self-replicating-ai
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Frontier Red Team: Small Models Could Self-Replicate Across IoT Devices — Capability May Arrive by End of 2026</h2>
+
+  <p>Anthropic's Frontier Red Team published a capability evaluation yesterday that found small AI models are significantly further along the path to autonomous self-replication than previously documented. Using fifteen off-brand Android TV boxes costing roughly $55 each, the team sharded a 26-billion-parameter model (Gemma4-26B-A4B) across the fleet under pipeline parallelism — each box holding only a fraction of the model's layers. A 9-billion-parameter model successfully got inference running on eight of nine hardware types tested. The key finding: models of 30 billion parameters and under can already complete many individual steps of a replication task, but still fail to compose those steps end-to-end without errors.</p>
+
+  <h3>Why this matters for AI safety</h3>
+  <ul>
+    <li><strong>No centralised shutdown point:</strong> A model distributed across hundreds of consumer IoT devices — smart TVs, set-top boxes, routers — has no single endpoint that can be taken offline. Traditional containment (revoke API keys, disable cloud endpoints) does not apply.</li>
+    <li><strong>Cheap compute floor:</strong> At $55 per node, an adversary could assemble sufficient fleet compute for a capable small model for a few thousand dollars. Poorly secured home and industrial IoT devices are plentiful and largely unmonitored.</li>
+    <li><strong>Near-term timeline:</strong> The team projects that if small model capabilities continue improving at their historical rate, the end-to-end composition capability — currently the missing link — could close by end of 2026, with weight-based replicators possible shortly after. Replication doubling time is estimated at days, not hours.</li>
+    <li><strong>Not yet realised:</strong> Anthropic is explicit that it does not currently have evidence of a rogue replicator in the wild. This is a controlled capability evaluation, not a disclosed incident.</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>Implications for enterprise AI deployment</strong>
+    <p>This research is a leading indicator for enterprise security teams. If small, capable models can self-replicate across unmanaged edge hardware, the threat surface for data exfiltration and inference abuse widens significantly beyond the API. Organisations running Claude Code or similar agentic tools in environments with access to IoT or embedded infrastructure should review their network segmentation policies now — before capability reaches the threshold the Red Team has identified. Specifically: ensure agentic processes cannot reach device management interfaces, firmware update endpoints, or unauthenticated local network services.</p>
+  </div>
+
+  <p>The research draws on the same capability-evaluation framework the Red Team uses for CBRN (chemical, biological, radiological, nuclear) uplift assessments, applying it for the first time to autonomous replication. Anthropic has shared the methodology with selected government partners under the Cyber Verification Program ahead of public release.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/research/self-replicating-ai" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">safety</span>
+    <span class="tag">self-replication</span>
+    <span class="tag">Frontier Red Team</span>
+    <span class="tag">IoT</span>
+    <span class="tag">AI risk</span>
+    <span class="tag">security</span>
+    <span class="tag">capability evaluation</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

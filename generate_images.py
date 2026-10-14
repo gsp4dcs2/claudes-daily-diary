@@ -17070,6 +17070,134 @@ def img_klee_20261013():
     return base
 
 
+def img_kandinsky_20261014():
+    """Wassily Kandinsky style — Anthropic IPO Investor Day, open-source risk debate,
+    dynamic workflows theme. Prussian-blue bg, diagonal grid scaffolding, large
+    concentric amber rings (IPO revenue milestone), bold red chevron (open-source
+    risk warning), horizontal phase bars (dynamic workflow stages), fan of small
+    blue sub-agent circles, and arc connectors linking all forms.
+    """
+    base = Image.new("RGB", (W, H), (18, 34, 72))  # prussian-blue bg
+
+    # 1. Faint diagonal grid — Kandinsky compositional scaffolding
+    draw = ImageDraw.Draw(base)
+    grid_col = (35, 58, 115)
+    step = 62
+    for i in range(-H, W + H, step):
+        draw.line([(i, 0), (i + H, H)], fill=grid_col, width=1)
+        draw.line([(i + H, 0), (i, H)], fill=grid_col, width=1)
+
+    # 2. Large concentric amber rings (centre) — IPO revenue growth / milestone
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    cx, cy = 500, 295
+    ring_data = [
+        (220, 22), (195, 40), (170, 65), (148, 95),
+        (124, 130), (98, 165), (72, 200), (46, 230), (22, 250),
+    ]
+    amber_pairs = [
+        (255, 195, 20), (255, 215, 45), (255, 185, 10), (255, 225, 55),
+        (255, 200, 30), (255, 210, 40), (255, 190, 15), (255, 220, 50), (255, 230, 70),
+    ]
+    for (r, a), col in zip(ring_data, amber_pairs):
+        rd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=col + (a,))
+    # Hollow prussian core — the "unknown" ahead of the listing
+    rd.ellipse([(cx - 16, cy - 16), (cx + 16, cy + 16)], fill=(18, 34, 72, 255))
+    rd.ellipse([(cx - 8, cy - 8), (cx + 8, cy + 8)], fill=(255, 230, 80, 240))
+    base = comp(base, rl)
+
+    # 3. Bold red chevron (upper-left) — open-source risk warning
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    # Two overlapping right-pointing chevrons — "danger ahead" motif
+    chevron1 = [(80, 120), (230, 220), (80, 320), (115, 320), (265, 220), (115, 120)]
+    chevron2 = [(145, 140), (295, 220), (145, 300), (178, 300), (328, 220), (178, 140)]
+    cd.polygon(chevron1, fill=(215, 35, 35, 210))
+    cd.polygon(chevron2, fill=(235, 65, 50, 165))
+    base = comp(base, cl)
+
+    # 4. Horizontal phase bars (right) — dynamic workflow stages / phases
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    phase_cols = [
+        (40, 110, 220, 200),   # phase 1 — deep blue
+        (60, 155, 240, 185),   # phase 2 — lighter blue
+        (80, 195, 255, 165),   # phase 3 — cyan-blue
+        (255, 210, 30, 150),   # phase 4 — gold (results merge)
+    ]
+    bar_y = 130
+    bar_heights = [52, 52, 52, 52]
+    for i, (col, bh) in enumerate(zip(phase_cols, bar_heights)):
+        y0 = bar_y + i * 68
+        w_frac = rng.uniform(0.52, 0.88)
+        bar_w = int(290 * w_frac)
+        bd.rectangle([(820, y0), (820 + bar_w, y0 + bh)], fill=col)
+        # Phase label tick
+        bd.rectangle([(812, y0 + 20), (820, y0 + 32)], fill=(255, 255, 255, 140))
+    # Outer border for the phase block
+    bd.rectangle([(818, 128), (1120, 414)], fill=(0, 0, 0, 0),
+                 outline=(80, 140, 220, 90), width=2)
+    base = comp(base, bl)
+
+    # 5. Fan of small blue sub-agent circles (lower-centre) — dynamic sub-agent spawning
+    fl = layer()
+    fd = ImageDraw.Draw(fl)
+    fan_cx, fan_cy = 500, 540
+    fan_r_base = 110
+    n_agents = 9
+    for i in range(n_agents):
+        angle = math.pi * (0.15 + 0.7 * i / (n_agents - 1))
+        ax = int(fan_cx + fan_r_base * math.cos(angle))
+        ay = int(fan_cy - fan_r_base * math.sin(angle))
+        r_a = rng.randint(9, 15)
+        fd.ellipse([(ax - r_a, ay - r_a), (ax + r_a, ay + r_a)],
+                   fill=(80, 175, 255, 210), outline=(150, 210, 255, 160), width=2)
+        # Connector from fan centre to each circle
+        fd.line([(fan_cx, fan_cy), (ax, ay)], fill=(80, 160, 240, 70), width=1)
+    # Hub circle
+    fd.ellipse([(fan_cx - 12, fan_cy - 12), (fan_cx + 12, fan_cy + 12)],
+               fill=(255, 255, 255, 230))
+    base = comp(base, fl)
+
+    # 6. Arc connectors — Kandinsky linking vocabulary
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    # Amber ring → chevron
+    for off in [-2, 0, 2]:
+        ad.line([(cx - 195 + off, cy - 30), (255, 200 + off)],
+                fill=(255, 210, 35, 130), width=2)
+    # Amber ring → phase bars
+    for off in [-2, 0, 2]:
+        ad.line([(cx + 190, cy - 20 + off), (820, 215 + off)],
+                fill=(80, 150, 240, 115), width=2)
+    # Sweep arc: chevron base to fan hub
+    ad.arc([(120, 300), (540, 590)], start=195, end=315,
+           fill=(215, 35, 35, 60), width=3)
+    # White arc: upper tying ring to phase top
+    ad.arc([(340, 60), (880, 310)], start=330, end=30,
+           fill=(255, 255, 255, 55), width=2)
+    base = comp(base, al)
+
+    # 7. Small Kandinsky accent vocabulary
+    acc = layer()
+    acd = ImageDraw.Draw(acc)
+    # Teal ring — upper-right corner
+    acd.ellipse([(990, 38), (1110, 158)], fill=(10, 10, 40, 245))
+    acd.ellipse([(1008, 56), (1092, 140)], fill=(30, 185, 175, 185))
+    acd.ellipse([(1028, 76), (1072, 120)], fill=(10, 10, 40, 255))
+    # Coral diagonal bar — lower-left
+    acd.rectangle([(42, 430), (195, 460)], fill=(232, 115, 74, 210))
+    # Yellow concentric ring — upper-left corner
+    acd.ellipse([(28, 28), (118, 118)], fill=(255, 220, 0, 200))
+    acd.ellipse([(48, 48), (98, 98)], fill=(18, 34, 72, 255))
+    acd.ellipse([(60, 60), (86, 86)], fill=(255, 205, 20, 210))
+    # White accent bar — right edge, horizontal
+    acd.rectangle([(1120, 310), (1185, 322)], fill=(255, 255, 255, 140))
+    base = comp(base, acc)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -17395,6 +17523,7 @@ DAYS = [
     ("2026-10-11", img_leger_20261011,   "SDK & Pricing",   "Fernand Léger"),
     ("2026-10-12", img_lissitzky_20261012, "API Credits",  "El Lissitzky"),
     ("2026-10-13", img_klee_20261013,      "IoT & Shields", "Paul Klee"),
+    ("2026-10-14", img_kandinsky_20261014, "IPO Day",       "Wassily Kandinsky"),
 ]
 
 for date, fn, kw, artist in DAYS:

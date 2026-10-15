@@ -17198,6 +17198,102 @@ def img_kandinsky_20261014():
     return base
 
 
+def img_delaunay_20261015():
+    """Robert Delaunay Orphism style — Singapore office, global expansion, election safeguards,
+    Scion VCS theme. Dark bg, three large overlapping spectral-ring disc stacks with full
+    rainbow arcs, smaller accent discs, and thin arc connectors evoking global signal reach.
+    """
+    base = Image.new("RGB", (W, H), (10, 12, 28))  # deep near-black bg
+
+    # 1. Three large spectral disc stacks — overlapping translucent Delaunay rings
+    #    Disc A: left-centre (Singapore / APAC node)
+    #    Disc B: right-centre (US midterms / voter data node)
+    #    Disc C: upper-centre (Scion / engineering node)
+    disc_defs = [
+        # (cx, cy, max_r, hue_start_deg)
+        (310,  360, 255, 0),     # A — warm spectrum (red → yellow)
+        (880,  340, 235, 120),   # B — cool spectrum (green → blue)
+        (600,  155, 200, 240),   # C — violet-to-orange arc
+    ]
+    for cx, cy, max_r, h0 in disc_defs:
+        dl = layer()
+        dd = ImageDraw.Draw(dl)
+        n_rings = 10
+        for i in range(n_rings, 0, -1):
+            r = int(max_r * i / n_rings)
+            # Rotate hue through spectrum
+            hue = (h0 + (n_rings - i) * 32) % 360
+            # Convert HSV → RGB (S=0.85, V=0.9)
+            h_i = hue / 60.0
+            f = h_i - int(h_i)
+            v, s = 230, 0.85
+            p = int(v * (1 - s))
+            q = int(v * (1 - s * f))
+            t = int(v * (1 - s * (1 - f)))
+            hi = int(h_i) % 6
+            rgb_map = [(v, t, p), (q, v, p), (p, v, t), (p, q, v), (t, p, v), (v, p, q)]
+            r_, g_, b_ = rgb_map[hi]
+            alpha = 55 + int(35 * (1 - i / n_rings))   # inner rings slightly more opaque
+            dd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=(r_, g_, b_, alpha))
+        base = comp(base, dl)
+
+    # 2. White node circles at disc centres — Delaunay's luminous focal points
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    for cx, cy, _, _ in disc_defs:
+        nd.ellipse([(cx - 18, cy - 18), (cx + 18, cy + 18)], fill=(255, 255, 255, 220))
+        nd.ellipse([(cx - 8,  cy - 8),  (cx + 8,  cy + 8)],  fill=(10, 12, 28, 255))
+    base = comp(base, nl)
+
+    # 3. Arc connectors — great-circle arcs linking the three disc nodes (global connectivity)
+    acl = layer()
+    acd = ImageDraw.Draw(acl)
+    # A → B (APAC → US): long sweeping arc below centre
+    acd.arc([(240, 290), (950, 560)], start=180, end=355, fill=(255, 230, 180, 80), width=3)
+    # A → C (APAC → engineering): short arc upper-left
+    acd.arc([( 80,  60), (660, 400)], start=310, end=  5, fill=(180, 220, 255, 70), width=2)
+    # B → C (US → engineering): short arc upper-right
+    acd.arc([(480,  20), (980, 400)], start=158, end=248, fill=(200, 255, 200, 65), width=2)
+    base = comp(base, acl)
+
+    # 4. Smaller accent discs — secondary Delaunay satellite rings scattered across canvas
+    sal = layer()
+    sad = ImageDraw.Draw(sal)
+    accents = [
+        (110,  95, 72, 60),    # top-left — small cool disc
+        (1090, 115, 80, 300),  # top-right — violet disc
+        (170,  540, 60, 40),   # bottom-left — warm disc
+        (1050, 490, 68, 180),  # bottom-right — teal disc
+        (620,  490, 50, 90),   # bottom-centre — yellow-green disc
+    ]
+    for ax, ay, ar, ah in accents:
+        for i in range(5, 0, -1):
+            r = int(ar * i / 5)
+            hue = (ah + i * 28) % 360
+            h_i = hue / 60.0
+            f = h_i - int(h_i)
+            v, s = 210, 0.80
+            p = int(v * (1 - s));  q = int(v * (1 - s * f));  t = int(v * (1 - s * (1 - f)))
+            hi = int(h_i) % 6
+            rgb_map = [(v, t, p), (q, v, p), (p, v, t), (p, q, v), (t, p, v), (v, p, q)]
+            r_, g_, b_ = rgb_map[hi]
+            sad.ellipse([(ax - r, ay - r), (ax + r, ay + r)], fill=(r_, g_, b_, 60))
+    base = comp(base, sal)
+
+    # 5. Fine radial lines from each main disc centre — Delaunay light-ray scatter
+    rll = layer()
+    rld = ImageDraw.Draw(rll)
+    for cx, cy, max_r, _ in disc_defs:
+        for angle_deg in range(0, 360, 15):
+            angle = math.radians(angle_deg)
+            x2 = cx + int(max_r * 1.2 * math.cos(angle))
+            y2 = cy + int(max_r * 1.2 * math.sin(angle))
+            rld.line([(cx, cy), (x2, y2)], fill=(255, 255, 255, 18), width=1)
+    base = comp(base, rll)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -17524,6 +17620,7 @@ DAYS = [
     ("2026-10-12", img_lissitzky_20261012, "API Credits",  "El Lissitzky"),
     ("2026-10-13", img_klee_20261013,      "IoT & Shields", "Paul Klee"),
     ("2026-10-14", img_kandinsky_20261014, "IPO Day",       "Wassily Kandinsky"),
+    ("2026-10-15", img_delaunay_20261015, "Asia Pacific",  "Robert Delaunay"),
 ]
 
 for date, fn, kw, artist in DAYS:

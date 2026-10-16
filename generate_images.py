@@ -17294,6 +17294,73 @@ def img_delaunay_20261015():
     return base
 
 
+def img_franzmarc_20261016():
+    """Franz Marc jewel tones — independent AI safety evaluators, oversight, accountability."""
+    base = Image.new("RGB", (W, H), (14, 28, 68))  # deep cobalt background
+
+    # 1. Large emerald shield body — independent oversight / safe harbour
+    shield_l = layer(); sd = ImageDraw.Draw(shield_l)
+    sd.polygon([(180, 55), (510, 55), (610, 175), (345, 525), (80, 175)],
+               fill=(18, 120, 80, 210))
+    sd.polygon([(220, 90), (470, 90), (555, 185), (345, 475), (140, 185)],
+               fill=(28, 158, 102, 155))
+    base = comp(base, shield_l)
+
+    # 2. Gold radiant rays — transparency emanating outward
+    ray_l = layer(); rd = ImageDraw.Draw(ray_l)
+    cx, cy = 345, 290
+    for i in range(14):
+        angle = math.radians(i * (360 / 14))
+        x2 = cx + int(440 * math.cos(angle))
+        y2 = cy + int(440 * math.sin(angle))
+        rd.line([(cx, cy), (x2, y2)], fill=(238, 192, 38, 55), width=2)
+    base = comp(base, ray_l)
+
+    # 3. Three-tier evaluation nodes (cobalt/rust/amber) + connecting lines
+    net_l = layer(); nd = ImageDraw.Draw(net_l)
+    tier_data = [
+        (780, 115, (38, 80, 222, 235)),
+        (970, 290, (185, 58, 28, 220)),
+        (780, 455, (32, 148, 92, 220)),
+        (590, 290, (205, 172, 28, 220)),
+    ]
+    # Connect tiers first (draw below nodes)
+    for i in range(len(tier_data)):
+        ax, ay, _ = tier_data[i]
+        bx, by, _ = tier_data[(i + 1) % len(tier_data)]
+        nd.line([(ax, ay), (bx, by)], fill=(180, 205, 255, 95), width=3)
+    # Cross-connections
+    nd.line([(780, 115), (780, 455)], fill=(180, 205, 255, 60), width=2)
+    nd.line([(970, 290), (590, 290)], fill=(180, 205, 255, 60), width=2)
+    for tx, ty, (tr, tg, tb, ta) in tier_data:
+        nd.ellipse([(tx - 42, ty - 42), (tx + 42, ty + 42)], fill=(tr, tg, tb, ta))
+        nd.ellipse([(tx - 22, ty - 22), (tx + 22, ty + 22)], fill=(255, 255, 255, 80))
+    base = comp(base, net_l)
+
+    # 4. Stylised Franz Marc deer — cobalt + violet, bottom-left
+    deer_l = layer(); dd = ImageDraw.Draw(deer_l)
+    dd.ellipse([(40, 375), (310, 560)], fill=(110, 42, 158, 195))   # body
+    dd.ellipse([(258, 310), (360, 412)], fill=(140, 55, 185, 205))   # head
+    dd.arc([(270, 225), (348, 320)], start=195, end=355, fill=(195, 75, 225, 185), width=5)  # antler L
+    dd.arc([(305, 205), (390, 305)], start=180, end=340, fill=(195, 75, 225, 140), width=3)  # antler R
+    dd.line([(310, 412), (285, 555)], fill=(125, 50, 168, 160), width=6)   # front leg
+    dd.line([(258, 430), (235, 558)], fill=(125, 50, 168, 140), width=5)   # rear leg
+    base = comp(base, deer_l)
+
+    # 5. Jewel-dot scatter — evaluation data points
+    dots_l = layer(); dotd = ImageDraw.Draw(dots_l)
+    dot_cols = [(255, 200, 60), (60, 205, 185), (220, 80, 120), (100, 180, 255), (235, 145, 30)]
+    for _ in range(65):
+        dx = rng.randint(0, W)
+        dy = rng.randint(0, H)
+        dr = rng.randint(2, 7)
+        dc = dot_cols[rng.randint(0, len(dot_cols) - 1)]
+        dotd.ellipse([(dx - dr, dy - dr), (dx + dr, dy + dr)], fill=(*dc, 145))
+    base = comp(base, dots_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -17621,6 +17688,7 @@ DAYS = [
     ("2026-10-13", img_klee_20261013,      "IoT & Shields", "Paul Klee"),
     ("2026-10-14", img_kandinsky_20261014, "IPO Day",       "Wassily Kandinsky"),
     ("2026-10-15", img_delaunay_20261015, "Asia Pacific",  "Robert Delaunay"),
+    ("2026-10-16", img_franzmarc_20261016, "Safety Evaluators", "Franz Marc"),
 ]
 
 for date, fn, kw, artist in DAYS:

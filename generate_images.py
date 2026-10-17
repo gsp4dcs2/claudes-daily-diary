@@ -17361,6 +17361,69 @@ def img_franzmarc_20261016():
     return base
 
 
+def img_rothko_20261017():
+    """Mark Rothko colour field — AI expectations gap, two-population divergence theme.
+    Two luminous bands (electric indigo above, warm ochre below) separated by a razor-white seam
+    representing the chasm between insider AI forecasts and public expectations."""
+    base = Image.new("RGB", (W, H), (10, 8, 18))  # near-black void bg
+
+    def soft_band(img, y0, y1, colour, feather=78):
+        """Rothko soft-edged luminous colour band."""
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        r, g, b = colour
+        bd.rectangle([(44, y0 + feather), (W - 44, y1 - feather)], fill=(r, g, b, 218))
+        for i in range(feather):
+            alpha = int(195 * (i / feather))
+            bd.rectangle([(44 + i, y0 + i), (W - 44 - i, y0 + i + 1)], fill=(r, g, b, alpha))
+        for i in range(feather):
+            alpha = int(195 * ((feather - i) / feather))
+            bd.rectangle([(44 + i, y1 - i - 1), (W - 44 - i, y1 - i)], fill=(r, g, b, alpha))
+        return comp(img, bl)
+
+    # Top band — deep electric indigo-blue: Anthropic insiders' sky-high expectations
+    base = soft_band(base, 10, 248, (32, 28, 148), feather=72)
+
+    # Inner luminous core of top band — the confidence glow
+    tg = layer(); tgd = ImageDraw.Draw(tg)
+    for i in range(52):
+        alpha = int(68 * (1 - i / 52))
+        tgd.rectangle([(130 + i, 58 + i), (W - 130 - i, 168 - i)], fill=(80, 100, 255, alpha))
+    base = comp(base, tg)
+
+    # Thin luminous seam — the gap itself, gleaming white between the worlds
+    sl = layer(); sld = ImageDraw.Draw(sl)
+    seam_y = 255
+    for i in range(28):
+        alpha = int(165 * (1 - abs(i - 14) / 14))
+        sld.rectangle([(0, seam_y - 14 + i), (W, seam_y - 13 + i)], fill=(240, 238, 255, alpha))
+    base = comp(base, sl)
+
+    # Bottom band — warm amber-ochre: grounded public expectations
+    base = soft_band(base, 248, 490, (168, 110, 18), feather=76)
+
+    # Inner luminous core of bottom band — the warmth of the median
+    bg = layer(); bgd = ImageDraw.Draw(bg)
+    for i in range(48):
+        alpha = int(62 * (1 - i / 48))
+        bgd.rectangle([(110 + i, 298 + i), (W - 110 - i, 432 - i)], fill=(230, 165, 45, alpha))
+    base = comp(base, bg)
+
+    # Narrow deep earth accent at bottom — anchoring the ground reality
+    base = soft_band(base, 472, 618, (72, 38, 10), feather=58)
+
+    # Fine noise — Rothko canvas grain
+    nl = layer(); nld = ImageDraw.Draw(nl)
+    for _ in range(2400):
+        x = rng.randint(0, W - 1)
+        y = rng.randint(0, H - 1)
+        alpha = rng.randint(3, 16)
+        nld.point([(x, y)], fill=(200, 200, 200, alpha))
+    base = comp(base, nl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -17689,6 +17752,7 @@ DAYS = [
     ("2026-10-14", img_kandinsky_20261014, "IPO Day",       "Wassily Kandinsky"),
     ("2026-10-15", img_delaunay_20261015, "Asia Pacific",  "Robert Delaunay"),
     ("2026-10-16", img_franzmarc_20261016, "Safety Evaluators", "Franz Marc"),
+    ("2026-10-17", img_rothko_20261017,   "Expectations Gap",  "Mark Rothko"),
 ]
 
 for date, fn, kw, artist in DAYS:

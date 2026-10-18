@@ -17424,6 +17424,96 @@ def img_rothko_20261017():
     return base
 
 
+def img_calder_20261018():
+    """Alexander Calder mobile — financial balance theme — Q3 revenue milestone vs IPO valuation debate.
+    A weighted balance-beam mobile: bull and bear sides tipped by flat primary shapes,
+    with a dominant red disc (profit milestone) and blue oval (growth) above the fulcrum."""
+    base = Image.new("RGB", (W, H), (248, 246, 242))  # warm off-white Calder canvas
+
+    # 1. Canvas texture — subtle diagonal grain
+    grain_l = layer(); grd = ImageDraw.Draw(grain_l)
+    for i in range(0, W + H, 80):
+        grd.line([(i, 0), (0, i)], fill=(175, 165, 150, 14), width=1)
+        grd.line([(W - i, H), (W, H - i)], fill=(175, 165, 150, 9), width=1)
+    base = comp(base, grain_l)
+
+    # 2. Balance-beam mobile armature — fulcrum at top-centre
+    arm_l = layer(); ad = ImageDraw.Draw(arm_l)
+    # Top suspension wire
+    ad.line([(W // 2, 18), (W // 2, 110)], fill=(18, 18, 18, 245), width=5)
+    # Main horizontal balance beam (slightly off-centre — bull side heavier)
+    ad.line([(88, 118), (1108, 110)], fill=(18, 18, 18, 245), width=8)
+    # Left arm drops (bear side — lighter, higher)
+    ad.line([(88, 118), (88, 250)], fill=(18, 18, 18, 225), width=4)
+    ad.line([(32, 250), (260, 250)], fill=(18, 18, 18, 215), width=4)
+    ad.line([(32, 250), (32, 420)], fill=(18, 18, 18, 195), width=3)
+    ad.line([(260, 250), (260, 390)], fill=(18, 18, 18, 195), width=3)
+    # Right arm drops (bull side — heavier, lower)
+    ad.line([(1108, 110), (1108, 270)], fill=(18, 18, 18, 225), width=4)
+    ad.line([(860, 270), (1160, 275)], fill=(18, 18, 18, 215), width=4)
+    ad.line([(860, 270), (860, 455)], fill=(18, 18, 18, 195), width=3)
+    ad.line([(1160, 275), (1160, 420)], fill=(18, 18, 18, 195), width=3)
+    # Central drop — IPO valuation centre bar
+    ad.line([(590, 110), (590, 295)], fill=(18, 18, 18, 220), width=5)
+    ad.line([(390, 295), (790, 295)], fill=(18, 18, 18, 210), width=5)
+    ad.line([(390, 295), (390, 490)], fill=(18, 18, 18, 185), width=3)
+    ad.line([(790, 295), (790, 470)], fill=(18, 18, 18, 185), width=3)
+    base = comp(base, arm_l)
+
+    # 3. Primary flat shapes — each represents a financial theme
+    shape_defs = [
+        # Big red disc — Q3 adjusted profit milestone (dominant, top left of beam)
+        ("ellipse", [(300, 12), (900, 230)], (210, 32, 38, 252), (18, 18, 18, 255), 6),
+        # Blue oval — 85% gross margin / revenue growth (right top)
+        ("ellipse", [(860, 22), (1160, 198)], (24, 78, 200, 242), (18, 18, 18, 255), 5),
+        # Yellow disc — $110B annualised run rate (centre-left mid)
+        ("ellipse", [(310, 268), (590, 490)], (235, 192, 8, 238), (18, 18, 18, 255), 4),
+        # Red oval — bull valuation ($2T+) right mid
+        ("ellipse", [(720, 258), (980, 455)], (210, 32, 38, 225), (18, 18, 18, 255), 4),
+        # Small blue — bear case ($1.5T) far-left upper
+        ("ellipse", [(-20, 165), (190, 330)], (24, 78, 200, 210), (18, 18, 18, 255), 3),
+        # Small yellow — bear-side lower arm
+        ("ellipse", [(-20, 340), (120, 470)], (235, 192, 8, 205), (18, 18, 18, 255), 3),
+        # Small red — left arm lower
+        ("ellipse", [(175, 305), (340, 450)], (210, 32, 38, 200), (18, 18, 18, 255), 3),
+        # Small yellow — far-right upper node
+        ("ellipse", [(1060, 138), (1200, 320)], (235, 192, 8, 205), (18, 18, 18, 255), 3),
+        # Small blue — far-right lower node
+        ("ellipse", [(980, 330), (1195, 490)], (24, 78, 200, 205), (18, 18, 18, 255), 3),
+        # Large yellow — inference cost coverage / cash-flow positive (centre bottom)
+        ("ellipse", [(370, 400), (640, 608)], (235, 192, 8, 232), (18, 18, 18, 255), 4),
+        # Red disc — Claude Code / developer growth (right bottom)
+        ("ellipse", [(668, 388), (896, 580)], (210, 32, 38, 215), (18, 18, 18, 255), 3),
+    ]
+    for kind, bbox, fill, outline, lw in shape_defs:
+        x0, y0 = max(0, bbox[0][0]), max(0, bbox[0][1])
+        x1, y1 = min(W, bbox[1][0]), min(H, bbox[1][1])
+        if x1 <= x0 or y1 <= y0:
+            continue
+        sl = layer(); sd = ImageDraw.Draw(sl)
+        sd.ellipse([(x0, y0), (x1, y1)], fill=fill, outline=outline, width=lw)
+        base = comp(base, sl)
+
+    # 4. Black pivot dots at armature junctions
+    dots_l = layer(); dd = ImageDraw.Draw(dots_l)
+    pivots = [
+        (W // 2, 18), (W // 2, 110),
+        (88, 118), (1108, 110), (590, 110),
+        (32, 250), (260, 250), (88, 250),
+        (860, 270), (1160, 275), (1108, 270),
+        (390, 295), (790, 295), (590, 295),
+        (390, 490), (790, 470), (32, 420), (260, 390),
+        (1160, 420), (860, 455),
+    ]
+    for px, py in pivots:
+        if 0 <= px <= W and 0 <= py <= H:
+            r = 9
+            dd.ellipse([(px - r, py - r), (px + r, py + r)], fill=(18, 18, 18, 255))
+    base = comp(base, dots_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -17753,6 +17843,7 @@ DAYS = [
     ("2026-10-15", img_delaunay_20261015, "Asia Pacific",  "Robert Delaunay"),
     ("2026-10-16", img_franzmarc_20261016, "Safety Evaluators", "Franz Marc"),
     ("2026-10-17", img_rothko_20261017,   "Expectations Gap",  "Mark Rothko"),
+    ("2026-10-18", img_calder_20261018,   "Revenue Balance",   "Alexander Calder"),
 ]
 
 for date, fn, kw, artist in DAYS:

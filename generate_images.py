@@ -17514,6 +17514,107 @@ def img_calder_20261018():
     return base
 
 
+def img_moholy_20261019():
+    """László Moholy-Nagy Bauhaus style — public benefit fund, shared equity, social transparency theme.
+    Warm off-white ground, four large overlapping semi-transparent primary-colour circles (shareholders,
+    public, workers, mission), horizontal structural bands representing governance tiers, Bauhaus scaffold
+    lines, concentric ring nodes for stakeholder intersections, and a fine grid for systematic rigour.
+    """
+    base = Image.new("RGB", (W, H), (246, 244, 238))  # warm near-white Bauhaus ground
+
+    # 1. Four large overlapping translucent circles — shareholders, public, workers, mission
+    circles_l = layer()
+    cd = ImageDraw.Draw(circles_l)
+    circles = [
+        ((-80, -100,  460,  470), (18,  90, 190, 62)),   # deep-blue  — shareholder sphere
+        ((300,  20,   880,  560), (18, 155,  80, 56)),   # teal-green — public benefit sphere
+        ((580, -60,  1240,  480), (195, 50,  30, 52)),   # deep-red   — worker impact sphere
+        ((140, 260,   720,  670), (170, 55, 195, 48)),   # violet     — mission sphere
+    ]
+    for bbox, fill in circles:
+        cd.ellipse(bbox, fill=fill)
+    base = comp(base, circles_l)
+
+    # 2. Horizontal governance bands — public benefit fund tiers
+    bands_l = layer()
+    bnd = ImageDraw.Draw(bands_l)
+    bands = [
+        ((0, 148, W, 182), (18,  90, 190, 42)),   # blue   — 5% initial commitment
+        ((0, 256, W, 290), (18, 155,  80, 38)),   # teal   — escalation clause layer
+        ((0, 368, W, 396), (195, 50,  30, 36)),   # red    — labour market fund
+        ((0, 474, W, 502), (170, 55, 195, 36)),   # violet — no-lobbying constraint
+    ]
+    for bbox, fill in bands:
+        bnd.rectangle(bbox, fill=fill)
+    base = comp(base, bands_l)
+
+    # 3. Thin black Bauhaus scaffold lines
+    lines_l = layer()
+    ld = ImageDraw.Draw(lines_l)
+    structural = [
+        ((0, 315), (W, 315)),       # primary horizontal axis
+        ((600, 0), (600, H)),       # primary vertical axis
+        ((0, 0),   (600, 315)),     # top-left diagonal
+        ((600, 315),(W, H)),        # bottom-right diagonal
+        ((600, 0), (W, 315)),       # top-right diagonal
+        ((0, 315), (600, H)),       # bottom-left diagonal
+    ]
+    for p1, p2 in structural:
+        ld.line([p1, p2], fill=(18, 18, 18, 160), width=2)
+    base = comp(base, lines_l)
+
+    # 4. Concentric ring nodes — stakeholder intersection points
+    rings_l = layer()
+    rd = ImageDraw.Draw(rings_l)
+    nodes = [
+        (160, 140, 78, (18,  90, 190)),   # blue  — initial 5% stake node
+        (600, 315, 96, (18, 155,  80)),   # teal  — central public good node
+        (970, 170, 62, (195, 50,  30)),   # red   — worker distribution node
+        (380, 505, 52, (170, 55, 195)),   # violet— mission governance node
+        (850, 490, 44, (18,  90, 190)),   # blue  — escalation trigger node
+    ]
+    for (cx, cy, r, col) in nodes:
+        for ring_r, alpha in [(r, 200), (int(r * 0.67), 158), (int(r * 0.34), 122)]:
+            rd.ellipse(
+                [(cx - ring_r, cy - ring_r), (cx + ring_r, cy + ring_r)],
+                outline=(col[0], col[1], col[2], alpha), width=4
+            )
+        rp = 8
+        rd.ellipse([(cx - rp, cy - rp), (cx + rp, cy + rp)],
+                   fill=(col[0], col[1], col[2], 232))
+    base = comp(base, rings_l)
+
+    # 5. Fine Bauhaus grid — systematic governance / equity accounting rigour
+    grid_l = layer()
+    gd = ImageDraw.Draw(grid_l)
+    for x in range(0, W + 1, 120):
+        gd.line([(x, 0), (x, H)], fill=(18, 18, 18, 13), width=1)
+    for y in range(0, H + 1, 90):
+        gd.line([(0, y), (W, y)], fill=(18, 18, 18, 13), width=1)
+    base = comp(base, grid_l)
+
+    # 6. Small rectangular equity-packet scatter along governance bands
+    packets_l = layer()
+    pkd = ImageDraw.Draw(packets_l)
+    packet_palette = [
+        (18,  90, 190, 150),
+        (18, 155,  80, 145),
+        (195, 50,  30, 142),
+        (170, 55, 195, 138),
+    ]
+    packet_ys = [165, 273, 382, 488]
+    for py in packet_ys:
+        for _ in range(14):
+            px = rng.randint(20, W - 20)
+            pw = rng.randint(8, 24)
+            ph = rng.randint(5, 14)
+            col = packet_palette[rng.randint(0, 3)]
+            pkd.rectangle([(px, py - ph // 2), (px + pw, py + ph // 2)], fill=col)
+    base = comp(base, packets_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -17844,6 +17945,7 @@ DAYS = [
     ("2026-10-16", img_franzmarc_20261016, "Safety Evaluators", "Franz Marc"),
     ("2026-10-17", img_rothko_20261017,   "Expectations Gap",  "Mark Rothko"),
     ("2026-10-18", img_calder_20261018,   "Revenue Balance",   "Alexander Calder"),
+    ("2026-10-19", img_moholy_20261019,   "Public Benefit",    "László Moholy-Nagy"),
 ]
 
 for date, fn, kw, artist in DAYS:

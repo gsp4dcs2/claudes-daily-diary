@@ -17615,6 +17615,97 @@ def img_moholy_20261019():
     return base
 
 
+def img_balla_20261020():
+    """Giacomo Balla Futurism — usage policy & speed theme.
+    Near-black bg, spectral wedge planes radiating from the upper-LEFT vanishing
+    point (contrast with Oct 8 entry's upper-right VP), three bold horizontal
+    'policy boundary' bars dividing the canvas into rule strata, sweeping motion
+    arcs emanating from the VP, and a velocity-dot scatter that thins from the
+    source toward the lower-right edge.
+    """
+    base = Image.new("RGB", (W, H), (6, 4, 22))  # very deep violet-black ground
+
+    vp = (80, 55)  # vanishing point: upper-left corner
+
+    plane_tips = [
+        (W + 60,  -40),
+        (W + 60,  160),
+        (W + 60,  340),
+        (W + 60,  520),
+        (W - 80,  H + 40),
+        (600,     H + 40),
+        (340,     H + 40),
+        (100,     H + 40),
+        (W - 200, -40),
+    ]
+    plane_colours = [
+        (240,  30,  60, 155),   # crimson
+        (235, 110,   0, 148),   # amber
+        (210, 220,   0, 142),   # chartreuse
+        (  0, 205,  80, 150),   # emerald
+        (  0, 150, 240, 148),   # cobalt
+        (140,   0, 245, 140),   # violet
+        (235,  50, 170, 138),   # magenta
+        (245, 200,   0, 132),   # gold
+        (  0, 230, 215, 128),   # teal
+    ]
+    for i, (tx, ty) in enumerate(plane_tips):
+        col = plane_colours[i % len(plane_colours)]
+        spread = 28 + i * 12
+        dx = tx - vp[0]
+        dy = ty - vp[1]
+        length = math.hypot(dx, dy) or 1
+        perp_x = -dy / length * spread
+        perp_y =  dx / length * spread
+        poly = [
+            vp,
+            (tx + perp_x, ty + perp_y),
+            (tx - perp_x, ty - perp_y),
+        ]
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        pd.polygon(poly, fill=col)
+        base = comp(base, pl)
+
+    # 2. Sweeping motion arcs from the VP
+    ml = layer()
+    md = ImageDraw.Draw(ml)
+    for i in range(18):
+        r = 140 + i * 60
+        bbox = [(vp[0] - r, vp[1] - r), (vp[0] + r, vp[1] + r)]
+        alpha = max(10, 50 - i * 2)
+        md.arc(bbox, start=340, end=145,
+               fill=(255, 255, 255, alpha), width=2)
+    base = comp(base, ml)
+
+    # 3. Three bold horizontal "policy boundary" bars
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bar_specs = [
+        (195, 204, (240,  30,  60, 110), 18),   # deceptive campaigns — crimson
+        (310, 319, (  0, 150, 240,  92), 13),   # elections reframe   — cobalt
+        (420, 428, (210, 220,   0,  82),  9),   # weapons / hardware  — chartreuse
+    ]
+    for y0, y1, col, _ in bar_specs:
+        bd.rectangle([(vp[0] + 30, y0), (W, y1)], fill=col)
+    base = comp(base, bl)
+
+    # 4. Velocity-dot scatter — dense near VP (upper-left), sparse toward lower-right
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    for _ in range(360):
+        x = int(rng.triangular(0, W, 120))
+        y = int(rng.triangular(0, H, 80))
+        r = rng.randint(1, 4)
+        alpha = rng.randint(50, 185)
+        hue_choice = rng.choice(plane_colours)
+        dd.ellipse([(x - r, y - r), (x + r, y + r)],
+                   fill=(hue_choice[0], hue_choice[1], hue_choice[2], alpha))
+    base = comp(base, dl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -17946,6 +18037,7 @@ DAYS = [
     ("2026-10-17", img_rothko_20261017,   "Expectations Gap",  "Mark Rothko"),
     ("2026-10-18", img_calder_20261018,   "Revenue Balance",   "Alexander Calder"),
     ("2026-10-19", img_moholy_20261019,   "Public Benefit",    "László Moholy-Nagy"),
+    ("2026-10-20", img_balla_20261020,    "Policy & Speed",   "Giacomo Balla"),
 ]
 
 for date, fn, kw, artist in DAYS:

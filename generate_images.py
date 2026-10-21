@@ -17706,6 +17706,93 @@ def img_balla_20261020():
     return base
 
 
+def img_lissitzky_20261021():
+    """El Lissitzky Constructivism — S-1 IPO filing, financial disclosure theme.
+    Cream bg, bold red diagonal wedge from upper-left (the announcement),
+    heavy black horizontal rule dividing GAAP-loss upper zone from
+    adjusted-positive lower zone, stacked concentric outset rectangles
+    (revenue tiers), a red circle focal point (the balance pivot),
+    and fine diagonal tension lines upper-right."""
+    base = Image.new("RGB", (W, H), (245, 242, 232))  # Lissitzky cream bg
+
+    # 1. Bold red diagonal wedge — upper-left: the IPO filing announcement
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.polygon([(0, 0), (520, 0), (0, 410)], fill=(210, 25, 25, 240))
+    base = comp(base, rl)
+
+    # 2. Heavy black horizontal dividing bar — GAAP vs adjusted boundary
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bd.rectangle([(0, 338), (W, 390)], fill=(15, 15, 15, 255))
+    base = comp(base, bl)
+
+    # 3. Thin secondary black bar — below the main bar, revenue-mix row
+    b2l = layer()
+    b2d = ImageDraw.Draw(b2l)
+    b2d.rectangle([(0, 490), (W, 510)], fill=(15, 15, 15, 200))
+    base = comp(base, b2l)
+
+    # 4. Bold vertical black pillar on far right — the document spine
+    vl = layer()
+    vd = ImageDraw.Draw(vl)
+    vd.rectangle([(1115, 0), (1165, H)], fill=(15, 15, 15, 255))
+    base = comp(base, vl)
+
+    # 5. Stacked concentric outset rectangles — the revenue tiers
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    cx, cy = 870, 205
+    for i, alpha in enumerate([240, 185, 120]):
+        pad = i * 42
+        td.rectangle(
+            [(cx - 108 - pad, cy - 72 - pad), (cx + 108 + pad, cy + 72 + pad)],
+            outline=(210, 25, 25, alpha), width=7
+        )
+    # Solid red innermost box — the core revenue block
+    td.rectangle([(cx - 108, cy - 72), (cx + 108, cy + 72)], fill=(210, 25, 25, 235))
+    # White "$" ellipse inside — financial document marker
+    td.ellipse([(cx - 42, cy - 42), (cx + 42, cy + 42)], fill=(245, 242, 232, 255))
+    # Red dot at exact centre
+    td.ellipse([(cx - 12, cy - 12), (cx + 12, cy + 12)], fill=(210, 25, 25, 255))
+    base = comp(base, tl)
+
+    # 6. Red circle focal point — the balance / pivot between GAAP and adjusted
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    cd.ellipse([(580, 430), (720, 570)], outline=(210, 25, 25, 220), width=9)
+    cd.ellipse([(610, 460), (690, 540)], fill=(210, 25, 25, 180))
+    base = comp(base, cl)
+
+    # 7. Fine diagonal tension lines — upper-right quadrant, data-relationship cues
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    for i in range(9):
+        x_off = i * 55
+        ld.line([(590 + x_off, 0), (590 + x_off - 240, 338)],
+                fill=(15, 15, 15, 130), width=2)
+    base = comp(base, ll)
+
+    # 8. Small constructivist module — lower-left, operator risk-factor marker
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    sd.rectangle([(40, 430), (185, 575)], fill=(15, 15, 15, 255))
+    sd.rectangle([(72, 462), (153, 543)], fill=(245, 242, 232, 255))
+    sd.rectangle([(98,  488), (127, 517)], fill=(210, 25, 25, 255))
+    base = comp(base, sl)
+
+    # 9. Red diagonal accent stripes — lower-right energy
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(7):
+        y_off = i * 28
+        ad.line([(920, 415 + y_off), (1115, 490 + y_off)],
+                fill=(210, 25, 25, 155), width=3)
+    base = comp(base, al)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -18038,6 +18125,7 @@ DAYS = [
     ("2026-10-18", img_calder_20261018,   "Revenue Balance",   "Alexander Calder"),
     ("2026-10-19", img_moholy_20261019,   "Public Benefit",    "László Moholy-Nagy"),
     ("2026-10-20", img_balla_20261020,    "Policy & Speed",   "Giacomo Balla"),
+    ("2026-10-21", img_lissitzky_20261021, "S-1 Filed",       "El Lissitzky"),
 ]
 
 for date, fn, kw, artist in DAYS:

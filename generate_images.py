@@ -17793,6 +17793,76 @@ def img_lissitzky_20261021():
     return base
 
 
+def img_miro_20261022():
+    """Joan Miró — deep indigo bg, biomorphic agent blobs + proactive loop arcs — Claude Duet / proactive agent theme.
+    Large primary biomorphic shapes represent the Duet agent nodes (morning brief, monitoring,
+    task completion); sweeping arc lines trace the proactive loops connecting them;
+    scattered star dots evoke notification events surfacing from the background.
+    """
+    base = Image.new("RGB", (W, H), (12, 8, 42))  # deep indigo Miró sky
+
+    # 1. Large biomorphic blobs — the three Duet agent nodes
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    # Yellow blob — upper-left: morning brief / daily summary node
+    bd.ellipse([(40, 35), (330, 275)], fill=(240, 200, 18, 238), outline=(0, 0, 0, 255), width=6)
+    bd.ellipse([(180, 200), (390, 350)], fill=(240, 200, 18, 160))   # organic tail
+    # Red blob — centre-right: continuous monitoring energy
+    bd.ellipse([(680, 110), (970, 400)], fill=(215, 38, 55, 232), outline=(0, 0, 0, 255), width=6)
+    # Blue blob — lower-centre: background task completion depth
+    bd.ellipse([(220, 390), (560, 610)], fill=(28, 108, 210, 232), outline=(0, 0, 0, 255), width=5)
+    # Green accent — upper-right: proactive notification dot
+    bd.ellipse([(1000, 45), (1155, 200)], fill=(42, 175, 85, 228), outline=(0, 0, 0, 255), width=4)
+    # Coral teardrop — lower-right: approval gate node
+    bd.ellipse([(900, 460), (1060, 598)], fill=(232, 115, 74, 222), outline=(0, 0, 0, 255), width=4)
+    base = comp(base, bl)
+
+    # 2. Sweeping arc lines — proactive feedback loops between agent nodes
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    # Wide arc from yellow brief node to red monitor node
+    ad.arc([(120, 20), (900, 420)], start=340, end=50, fill=(245, 242, 220, 200), width=3)
+    # Loop arc from monitor node down to blue task node
+    ad.arc([(420, 200), (950, 620)], start=60, end=190, fill=(245, 242, 220, 180), width=2)
+    # Return arc from task node back toward morning brief (closing the loop)
+    ad.arc([(30, 200), (640, 620)], start=200, end=330, fill=(245, 242, 220, 150), width=2)
+    base = comp(base, al)
+
+    # 3. Thin white connecting lines — approval gate signals
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    ld.line([(240, 155), (825, 255)], fill=(245, 242, 225, 195), width=3)   # brief → monitor
+    ld.line([(825, 255), (1078, 123)], fill=(245, 242, 225, 165), width=2)  # monitor → notif
+    ld.line([(390, 390), (980, 529)], fill=(245, 242, 225, 145), width=2)   # task → gate
+    ld.line([(825, 255), (980, 529)], fill=(245, 242, 225, 110), width=1)   # monitor → gate
+    base = comp(base, ll)
+
+    # 4. Scattered star dots — notification events emerging from background
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    star_coords = [
+        (28, 165), (440, 78), (622, 38), (870, 55), (1178, 295),
+        (148, 508), (490, 235), (690, 500), (1085, 405), (360, 140),
+        (770, 345), (1145, 518), (510, 580), (88, 340), (960, 192),
+        (632, 572), (285, 32), (1028, 315), (165, 592), (752, 112),
+        (522, 402), (1165, 88), (62, 462), (785, 600), (415, 320),
+    ]
+    for (sx, sy) in star_coords:
+        r = rng.randint(3, 7)
+        sd.ellipse([(sx - r, sy - r), (sx + r, sy + r)], fill=(245, 240, 220, 215))
+    base = comp(base, sl)
+
+    # 5. White junction circles at node-centre intersections (Miró's characteristic dots)
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    for (dx, dy) in [(240, 155), (825, 255), (390, 500), (1078, 123), (980, 529)]:
+        dd.ellipse([(dx - 14, dy - 14), (dx + 14, dy + 14)],
+                   fill=(245, 240, 220, 232), outline=(0, 0, 0, 255), width=3)
+    base = comp(base, dl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -18126,6 +18196,7 @@ DAYS = [
     ("2026-10-19", img_moholy_20261019,   "Public Benefit",    "László Moholy-Nagy"),
     ("2026-10-20", img_balla_20261020,    "Policy & Speed",   "Giacomo Balla"),
     ("2026-10-21", img_lissitzky_20261021, "S-1 Filed",       "El Lissitzky"),
+    ("2026-10-22", img_miro_20261022,      "Claude Duet",     "Joan Miró"),
 ]
 
 for date, fn, kw, artist in DAYS:

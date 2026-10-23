@@ -17863,6 +17863,93 @@ def img_miro_20261022():
     return base
 
 
+def img_mondrian_20261023():
+    """Piet Mondrian grid — open standards / commons / modular platform theme.
+    An asymmetric grid of off-white cells represents the many platforms in the
+    Agent Skills ecosystem; wide yellow grid bands mark the AAIF governance
+    boundary; bold primary-colour fills flag the three co-founding organisations
+    (Anthropic/red, OpenAI/blue, Block/yellow) and the 70+ integrated platforms.
+    A second denser inner grid in the bottom-right quadrant evokes the 280 million
+    skill installs clustering into cells.
+    """
+    base = Image.new("RGB", (W, H), (242, 238, 220))   # classic Mondrian off-white
+    draw = ImageDraw.Draw(base)
+
+    YELLOW = (255, 210,   0)
+    RED    = (215,  35,  35)
+    BLUE   = ( 25,  75, 195)
+    BLACK  = ( 15,  15,  15)
+
+    # 1. Primary asymmetric grid — platform ecosystem cells
+    gx = [0, 130, 290, 480, 650, 840, 1020, W]
+    gy = [0, 90, 220, 370, 490, H]
+    bw = 18   # grid-line half-width
+
+    # Yellow grid bands (the AAIF governance layer)
+    for x in gx[1:-1]:
+        draw.rectangle([(x - bw//2, 0), (x + bw//2, H)], fill=YELLOW)
+    for y in gy[1:-1]:
+        draw.rectangle([(0, y - bw//2), (W, y + bw//2)], fill=YELLOW)
+
+    # Primary colour fills — founding orgs + key platform tiles
+    cells = [
+        (0, 0, RED),     # Anthropic
+        (2, 1, BLUE),    # OpenAI
+        (4, 0, YELLOW),  # Block
+        (6, 2, RED),
+        (1, 2, BLUE),
+        (5, 3, RED),
+        (3, 3, BLUE),
+        (0, 3, BLUE),
+        (4, 2, RED),
+        (2, 3, YELLOW),
+        (6, 0, BLUE),
+        (1, 0, RED),
+        (5, 1, YELLOW),
+        (3, 1, RED),
+    ]
+    for ci, cj, col in cells:
+        if ci + 1 < len(gx) and cj + 1 < len(gy):
+            x0 = gx[ci] + bw//2 + 3
+            y0 = gy[cj] + bw//2 + 3
+            x1 = gx[ci+1] - bw//2 - 3
+            y1 = gy[cj+1] - bw//2 - 3
+            if x1 > x0 and y1 > y0:
+                draw.rectangle([(x0, y0), (x1, y1)], fill=col)
+
+    # 2. Black intersection squares — standard nodes
+    for x in gx[1:-1]:
+        for y in gy[1:-1]:
+            draw.rectangle(
+                [(x - bw//2, y - bw//2), (x + bw//2, y + bw//2)],
+                fill=BLACK
+            )
+
+    # 3. Dense inner micro-grid — lower-right quadrant: the 280M installs
+    mgx = list(range(840, W + 1, 36))
+    mgy = list(range(370, H + 1, 38))
+    mbw = 5
+    for mx in mgx[1:]:
+        draw.rectangle([(mx - mbw//2, 370), (mx + mbw//2, H)], fill=BLACK)
+    for my in mgy[1:]:
+        draw.rectangle([(840, my - mbw//2), (W, my + mbw//2)], fill=BLACK)
+    # Spot-colour a few micro-cells red/blue
+    micro_fills = [
+        (0, 0, RED), (1, 2, BLUE), (3, 1, RED), (2, 3, BLUE),
+        (4, 0, RED), (0, 2, BLUE), (3, 3, RED),
+    ]
+    for mci, mcj, col in micro_fills:
+        if mci + 1 < len(mgx) and mcj + 1 < len(mgy):
+            mx0 = mgx[mci] + mbw//2 + 1
+            my0 = mgy[mcj] + mbw//2 + 1
+            mx1 = mgx[mci+1] - mbw//2 - 1
+            my1 = mgy[mcj+1] - mbw//2 - 1
+            if mx1 > mx0 and my1 > my0:
+                draw.rectangle([(mx0, my0), (mx1, my1)], fill=col)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -18197,6 +18284,7 @@ DAYS = [
     ("2026-10-20", img_balla_20261020,    "Policy & Speed",   "Giacomo Balla"),
     ("2026-10-21", img_lissitzky_20261021, "S-1 Filed",       "El Lissitzky"),
     ("2026-10-22", img_miro_20261022,      "Claude Duet",     "Joan Miró"),
+    ("2026-10-23", img_mondrian_20261023,  "Open Standards",  "Piet Mondrian"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -17950,6 +17950,112 @@ def img_mondrian_20261023():
     return base
 
 
+def img_kandinsky_20261024():
+    """Wassily Kandinsky style — IPO roadshow, investor tour, collaborative workspaces,
+    hooks debugger theme. Prussian-blue bg, radiating spoke lines from an off-centre hub
+    (the roadshow launch moment), three bold primary triangles aimed outward (investor
+    city nodes), concentric arc bands sweeping the canvas (the 14-city tour arc), a
+    scattered cluster of small audience circles (institutional investors), and Kandinsky
+    accent vocabulary: teal ring, diagonal coral bar, yellow corner ring.
+    """
+    base = Image.new("RGB", (W, H), (18, 34, 72))   # prussian-blue bg
+
+    # 1. Radiating spoke lines from hub — roadshow pitch momentum
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    hub_x, hub_y = 420, 290
+    n_spokes = 24
+    spoke_cols = [
+        (255, 215, 30, 90),   # amber
+        (80,  160, 245, 70),  # blue
+        (215,  35,  35, 80),  # red
+        (255, 255, 255, 50),  # white
+    ]
+    for i in range(n_spokes):
+        angle = 2 * math.pi * i / n_spokes
+        length = rng.randint(310, 490)
+        ex = int(hub_x + length * math.cos(angle))
+        ey = int(hub_y + length * math.sin(angle))
+        col = spoke_cols[i % len(spoke_cols)]
+        sd.line([(hub_x, hub_y), (ex, ey)], fill=col, width=2)
+    base = comp(base, sl)
+
+    # 2. Three bold primary-colour triangles — investor city nodes (NY, London, Tokyo)
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    # Triangle A (red) — pointing upper-right: New York
+    td.polygon([(140, 480), (370, 80), (600, 480)], fill=(215, 35, 35, 200))
+    # Triangle B (blue) — pointing left-centre: London
+    td.polygon([(850, 60), (1170, 300), (850, 540)], fill=(25, 75, 195, 175))
+    # Triangle C (yellow) — pointing lower-right: Tokyo
+    td.polygon([(60, 60), (280, 200), (60, 340)], fill=(255, 210, 0, 190))
+    base = comp(base, tl)
+
+    # 3. Concentric arc bands sweeping across canvas — the 14-city tour arc
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    arc_defs = [
+        # (bbox_x0, bbox_y0, bbox_x1, bbox_y1, start_angle, end_angle, colour, width)
+        (-200, -150, 900, 730,  340,  70, (80, 155, 240, 110), 4),
+        (-160, -100, 860, 680,  340,  70, (255, 215, 30, 80),  3),
+        (-120,  -50, 820, 630,  340,  70, (80, 155, 240, 60),  2),
+        ( 100,  -80, 1100, 700, 200, 340, (215, 35, 35, 90),   3),
+        ( 140,  -40, 1060, 660, 200, 340, (255, 255, 255, 50), 2),
+    ]
+    for x0, y0, x1, y1, sa, ea, col, wid in arc_defs:
+        ad.arc([(x0, y0), (x1, y1)], start=sa, end=ea, fill=col, width=wid)
+    base = comp(base, al)
+
+    # 4. Scattered investor audience circles — institutional investor nodes
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    investor_zones = [
+        (680, 150, 12),   # upper-right cluster
+        (750, 200, 10),
+        (720, 170, 8),
+        (700, 220, 9),
+        (760, 140, 7),
+        (940, 440, 11),   # lower-right cluster
+        (980, 400, 9),
+        (950, 470, 8),
+        (1010, 430, 10),
+        (970, 460, 7),
+        (250, 390, 10),   # lower-left cluster
+        (220, 430, 8),
+        (280, 410, 9),
+        (240, 460, 7),
+        (300, 380, 6),
+    ]
+    for ix, iy, ir in investor_zones:
+        cd.ellipse([(ix - ir, iy - ir), (ix + ir, iy + ir)],
+                   fill=(255, 255, 255, 170), outline=(180, 215, 255, 120), width=1)
+    # Hub circle at roadshow focal point
+    cd.ellipse([(hub_x - 18, hub_y - 18), (hub_x + 18, hub_y + 18)],
+               fill=(255, 215, 30, 255))
+    cd.ellipse([(hub_x - 8,  hub_y - 8),  (hub_x + 8,  hub_y + 8)],
+               fill=(18, 34, 72, 255))
+    base = comp(base, cl)
+
+    # 5. Kandinsky accent vocabulary
+    acc = layer()
+    acd = ImageDraw.Draw(acc)
+    # Teal ring — upper-right corner
+    acd.ellipse([(1010, 30), (1130, 150)], fill=(10, 10, 40, 245))
+    acd.ellipse([(1028, 48), (1112, 132)], fill=(30, 185, 175, 185))
+    acd.ellipse([(1048, 68), (1092, 112)], fill=(10, 10, 40, 255))
+    # Coral diagonal bar — lower-left
+    acd.rectangle([(38, 555), (195, 582)], fill=(232, 115, 74, 210))
+    # Yellow corner ring — lower-right
+    acd.ellipse([(1080, 490), (1170, 580)], fill=(255, 220, 0, 200))
+    acd.ellipse([(1098, 508), (1152, 562)], fill=(18, 34, 72, 255))
+    acd.ellipse([(1110, 520), (1140, 550)], fill=(255, 205, 20, 210))
+    # White accent bar — left edge
+    acd.rectangle([(15, 280), (27, 310)], fill=(255, 255, 255, 140))
+    base = comp(base, acc)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -18285,6 +18391,7 @@ DAYS = [
     ("2026-10-21", img_lissitzky_20261021, "S-1 Filed",       "El Lissitzky"),
     ("2026-10-22", img_miro_20261022,      "Claude Duet",     "Joan Miró"),
     ("2026-10-23", img_mondrian_20261023,  "Open Standards",  "Piet Mondrian"),
+    ("2026-10-24", img_kandinsky_20261024, "IPO Roadshow",   "Wassily Kandinsky"),
 ]
 
 for date, fn, kw, artist in DAYS:

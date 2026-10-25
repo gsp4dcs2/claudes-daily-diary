@@ -18056,6 +18056,92 @@ def img_kandinsky_20261024():
     return base
 
 
+def img_leger_20261025():
+    """Fernand Léger style — API breaking changes, enterprise platform, pre-IPO departures.
+    Near-black background, bold mechanical shapes with thick dark outlines, flat
+    primaries (red, blue, yellow, white). Industrial vocabulary: pipes, connection
+    nodes, blocked segments (the breaking API change), and unified enterprise blocks.
+    """
+    base = Image.new("RGB", (W, H), (12, 12, 20))  # near-black bg
+
+    # 1. Large flat industrial rectangles — Léger's bold colour blocks
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    # Red block — upper-left zone (breaking change danger signal)
+    bd.rectangle([(40, 60), (420, 280)], fill=(210, 30, 30, 200))
+    # Blue block — right zone (enterprise platform)
+    bd.rectangle([(580, 80), (1160, 350)], fill=(25, 80, 185, 190))
+    # Yellow block — lower-left (departures / human element)
+    bd.rectangle([(40, 340), (320, 580)], fill=(240, 195, 0, 190))
+    # White block — centre bridge (API connection)
+    bd.rectangle([(380, 200), (620, 420)], fill=(240, 240, 230, 170))
+    base = comp(base, bl)
+
+    # 2. Thick dark outlines — Léger's defining characteristic
+    ol = layer()
+    od = ImageDraw.Draw(ol)
+    outline_col = (8, 8, 15, 230)
+    lw = 7
+    # Outline the blocks
+    od.rectangle([(40, 60), (420, 280)], outline=outline_col, width=lw)
+    od.rectangle([(580, 80), (1160, 350)], outline=outline_col, width=lw)
+    od.rectangle([(40, 340), (320, 580)], outline=outline_col, width=lw)
+    od.rectangle([(380, 200), (620, 420)], outline=outline_col, width=lw)
+    base = comp(base, ol)
+
+    # 3. Industrial pipe system — horizontal + vertical segments with caps
+    pl = layer()
+    pd = ImageDraw.Draw(pl)
+    # Main horizontal pipe — runs across mid-canvas (API pipeline)
+    pd.rectangle([(40, 295), (1160, 330)], fill=(195, 195, 185, 210))
+    pd.rectangle([(40, 295), (1160, 330)], outline=(8, 8, 15, 220), width=4)
+    # Vertical pipe — left side connector
+    pd.rectangle([(185, 60), (225, 600)], fill=(195, 195, 185, 160))
+    pd.rectangle([(185, 60), (225, 600)], outline=(8, 8, 15, 200), width=3)
+    # Vertical pipe — right side connector
+    pd.rectangle([(950, 80), (990, 580)], fill=(195, 195, 185, 150))
+    pd.rectangle([(950, 80), (990, 580)], outline=(8, 8, 15, 190), width=3)
+    # Pipe cap circles (Léger's cylindrical end caps)
+    pd.ellipse([(160, 270), (250, 360)], fill=(160, 160, 150, 220))
+    pd.ellipse([(160, 270), (250, 360)], outline=(8, 8, 15, 220), width=5)
+    pd.ellipse([(925, 270), (1015, 360)], fill=(160, 160, 150, 220))
+    pd.ellipse([(925, 270), (1015, 360)], outline=(8, 8, 15, 220), width=5)
+    base = comp(base, pl)
+
+    # 4. Breaking change cross mark — X through the white centre block
+    xl = layer()
+    xd = ImageDraw.Draw(xl)
+    # Bold red X stripes crossing the white bridge (API params removed)
+    xd.line([(385, 205), (615, 415)], fill=(210, 30, 30, 200), width=12)
+    xd.line([(615, 205), (385, 415)], fill=(210, 30, 30, 200), width=12)
+    base = comp(base, xl)
+
+    # 5. Scattered mechanical bolts / connection nodes — Léger's industrial detail
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    bolt_positions = [
+        (90, 100), (370, 100), (90, 240), (370, 240),   # red block corners
+        (630, 120), (1120, 120), (630, 310), (1120, 310), # blue block corners
+        (70, 375), (295, 375), (70, 555), (295, 555),   # yellow block corners
+        (490, 330),                                       # centre-pipe junction
+    ]
+    for bx, by in bolt_positions:
+        nd.ellipse([(bx-12, by-12), (bx+12, by+12)], fill=(240, 240, 230, 230))
+        nd.ellipse([(bx-12, by-12), (bx+12, by+12)], outline=(8, 8, 15, 220), width=3)
+        nd.ellipse([(bx-5, by-5), (bx+5, by+5)], fill=(8, 8, 15, 200))
+    base = comp(base, nl)
+
+    # 6. Léger accent — large bold circle upper-right (enterprise unified node)
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    cd.ellipse([(820, 380), (1140, 590)], fill=(240, 195, 0, 185))
+    cd.ellipse([(820, 380), (1140, 590)], outline=(8, 8, 15, 230), width=8)
+    cd.ellipse([(900, 430), (1060, 540)], fill=(12, 12, 20, 220))
+    base = comp(base, cl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -18392,6 +18478,7 @@ DAYS = [
     ("2026-10-22", img_miro_20261022,      "Claude Duet",     "Joan Miró"),
     ("2026-10-23", img_mondrian_20261023,  "Open Standards",  "Piet Mondrian"),
     ("2026-10-24", img_kandinsky_20261024, "IPO Roadshow",   "Wassily Kandinsky"),
+    ("2026-10-25", img_leger_20261025,    "API & Cowork",   "Fernand Léger"),
 ]
 
 for date, fn, kw, artist in DAYS:

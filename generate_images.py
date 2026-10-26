@@ -18142,6 +18142,146 @@ def img_leger_20261025():
     return base
 
 
+def img_seurat_20261026():
+    """Georges Seurat pointillist style — aggregate data, voter counts, autonomous agent theme.
+    Deep navy background. Thousands of tiny spectral dots build up three visual zones:
+    a dense cluster of red/white/blue civic-palette dots forming a ballot-like column on
+    the left; a diffuse emerald-and-gold haze of 'data stream' dots flowing across the
+    centre; and a tight bright-white cluster of locked/forbidden dots on the right,
+    ringed by an amber warning halo. Feynman-style arc trails connect the zones.
+    """
+    base = Image.new("RGB", (W, H), (8, 12, 38))   # deep navy
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Background noise — faint scattered dust dots across full canvas
+    for _ in range(6000):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        r = 1
+        val = rng.randint(12, 40)
+        b_extra = rng.randint(0, 30)
+        draw.ellipse([(x-r, y-r), (x+r, y+r)], fill=(val, val + b_extra // 2, val + b_extra))
+
+    # 2. Civic palette cluster (left zone) — red/white/blue ballot-column dots
+    civic_cols = [
+        (210, 35, 45),    # red
+        (240, 240, 245),  # white
+        (35, 80, 195),    # blue
+        (220, 180, 50),   # gold accent
+        (180, 40, 50),    # deep red
+        (80, 130, 215),   # lighter blue
+    ]
+    for _ in range(18000):
+        # Dense vertical band centred at x=260, y=315
+        x_off = rng.gauss(0, 100)
+        y_off = rng.gauss(0, 160)
+        x = int(260 + x_off)
+        y = int(315 + y_off)
+        if x < 0 or x >= W or y < 0 or y >= H:
+            continue
+        density = math.exp(-0.5 * ((x_off / 100) ** 2 + (y_off / 160) ** 2))
+        if rng.random() > density:
+            continue
+        r = rng.randint(2, 5)
+        col = rng.choice(civic_cols)
+        alpha = int(rng.uniform(100, 230) * density)
+        bl = layer()
+        bd = ImageDraw.Draw(bl)
+        bd.ellipse([(x-r, y-r), (x+r, y+r)], fill=(col[0], col[1], col[2], min(255, alpha)))
+        base = comp(base, bl)
+
+    # 3. Data stream haze (centre zone) — emerald/gold/teal dots flowing diagonally
+    stream_cols = [
+        (40, 200, 130),   # emerald
+        (230, 190, 45),   # gold
+        (50, 210, 200),   # teal
+        (150, 240, 130),  # light green
+        (200, 220, 60),   # yellow-green
+    ]
+    for _ in range(12000):
+        # Diagonal band from (350,500) to (900,130)
+        t = rng.uniform(0, 1)
+        cx = int(350 + t * 550)
+        cy = int(500 - t * 370)
+        x_off = rng.gauss(0, 55)
+        y_off = rng.gauss(0, 55)
+        x = int(cx + x_off)
+        y = int(cy + y_off)
+        if x < 0 or x >= W or y < 0 or y >= H:
+            continue
+        density = math.exp(-0.5 * ((x_off / 55) ** 2 + (y_off / 55) ** 2))
+        if rng.random() > density * 0.7:
+            continue
+        r = rng.randint(1, 4)
+        col = rng.choice(stream_cols)
+        alpha = int(rng.uniform(80, 200) * density)
+        sl = layer()
+        sd = ImageDraw.Draw(sl)
+        sd.ellipse([(x-r, y-r), (x+r, y+r)], fill=(col[0], col[1], col[2], min(255, alpha)))
+        base = comp(base, sl)
+
+    # 4. Locked/forbidden cluster (right zone) — bright white core, amber warning halo
+    # First the amber warning halo (outer ring of dots)
+    amber_cols = [(240, 160, 20), (255, 140, 0), (230, 200, 40), (255, 200, 50)]
+    for ring_pass in range(2):
+        halo_r = 130 - ring_pass * 50
+        for _ in range(3000):
+            angle = rng.uniform(0, 2 * math.pi)
+            dist = rng.gauss(halo_r, 20)
+            x = int(960 + dist * math.cos(angle))
+            y = int(280 + dist * math.sin(angle))
+            if x < 0 or x >= W or y < 0 or y >= H:
+                continue
+            r = rng.randint(2, 4)
+            col = rng.choice(amber_cols)
+            alpha = int(180 * math.exp(-0.5 * ((dist - halo_r) / 20) ** 2))
+            al = layer()
+            ad = ImageDraw.Draw(al)
+            ad.ellipse([(x-r, y-r), (x+r, y+r)], fill=(col[0], col[1], col[2], max(0, min(255, alpha))))
+            base = comp(base, al)
+
+    # Bright white core (the paywalled data)
+    for _ in range(8000):
+        angle = rng.uniform(0, 2 * math.pi)
+        dist = rng.gauss(0, 42)
+        x = int(960 + dist * math.cos(angle))
+        y = int(280 + dist * math.sin(angle))
+        if x < 0 or x >= W or y < 0 or y >= H:
+            continue
+        density = math.exp(-0.5 * (dist / 42) ** 2)
+        if rng.random() > density:
+            continue
+        r = rng.randint(2, 5)
+        val = rng.randint(200, 255)
+        bl = rng.randint(220, 255)
+        alpha = int(rng.uniform(150, 240) * density)
+        wl = layer()
+        wd = ImageDraw.Draw(wl)
+        wd.ellipse([(x-r, y-r), (x+r, y+r)], fill=(val, val, bl, min(255, alpha)))
+        base = comp(base, wl)
+
+    # 5. Arc trails connecting zones (agent scan paths)
+    arc_pairs = [
+        ((260, 315), (625, 315)),   # left cluster → centre stream
+        ((625, 315), (960, 280)),   # centre stream → right cluster
+    ]
+    for (ax, ay), (bx, by) in arc_pairs:
+        for i in range(120):
+            t = i / 119.0
+            mx = int(ax + t * (bx - ax))
+            bulge = int(-60 * math.sin(math.pi * t))
+            my = int(ay + t * (by - ay) + bulge)
+            r = 2
+            alpha = int(130 * math.sin(math.pi * t))
+            tl = layer()
+            td = ImageDraw.Draw(tl)
+            td.ellipse([(mx-r, my-r), (mx+r, my+r)], fill=(200, 200, 255, max(0, min(255, alpha))))
+            base = comp(base, tl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -18479,6 +18619,7 @@ DAYS = [
     ("2026-10-23", img_mondrian_20261023,  "Open Standards",  "Piet Mondrian"),
     ("2026-10-24", img_kandinsky_20261024, "IPO Roadshow",   "Wassily Kandinsky"),
     ("2026-10-25", img_leger_20261025,    "API & Cowork",   "Fernand Léger"),
+    ("2026-10-26", img_seurat_20261026,   "Voter Data",     "Georges Seurat"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -18282,6 +18282,93 @@ def img_seurat_20261026():
     return base
 
 
+def img_malevich_20261027():
+    """Kazimir Malevich Suprematism — internal evaluation safety / internet suspension theme.
+    Warm cream ground. A dominant black rectangle (the severed network / blocked internet)
+    slashed diagonally across the upper canvas. A bold red prohibition disc overlaps its
+    right edge (the hard stop). A navy bar below represents the sandboxed evaluation
+    boundary. Yellow warning shards scatter at the break point. Thin diagonal scrutiny
+    lines cross the whole field. Pure structure, absolute restriction.
+    """
+    import math as _math
+    base = Image.new("RGB", (W, H), (237, 232, 214))  # warm cream Suprematist ground
+
+    def rotated_rect(cx, cy, hw, hh, angle_deg):
+        rad = _math.radians(angle_deg)
+        corners = [(-hw, -hh), (hw, -hh), (hw, hh), (-hw, hh)]
+        return [(cx + p[0]*_math.cos(rad) - p[1]*_math.sin(rad),
+                 cy + p[0]*_math.sin(rad) + p[1]*_math.cos(rad)) for p in corners]
+
+    # 1. Black dominant bar — the severed external network (diagonal, upper canvas)
+    nb = layer()
+    nd = ImageDraw.Draw(nb)
+    nd.polygon(rotated_rect(430, 195, 420, 56, -11), fill=(12, 10, 8, 255))
+    base = comp(base, nb)
+
+    # 2. A second black fragment — dangling disconnected segment
+    fb = layer()
+    fd = ImageDraw.Draw(fb)
+    fd.polygon(rotated_rect(980, 340, 140, 34, -11), fill=(12, 10, 8, 230))
+    base = comp(base, fb)
+
+    # 3. Bold red prohibition disc — the hard stop / suspension order
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.ellipse([(730, 60), (1040, 370)], fill=(215, 20, 20, 0))
+    rd.ellipse([(730, 60), (1040, 370)], outline=(215, 20, 20, 255), width=30)
+    base = comp(base, rl)
+    # semi-transparent interior
+    ri = layer()
+    rid = ImageDraw.Draw(ri)
+    rid.ellipse([(760, 90), (1010, 340)], fill=(215, 20, 20, 38))
+    base = comp(base, ri)
+    # horizontal prohibition bar inside disc
+    pb = layer()
+    pbd = ImageDraw.Draw(pb)
+    pbd.polygon(rotated_rect(885, 215, 130, 24, -8), fill=(215, 20, 20, 220))
+    base = comp(base, pb)
+
+    # 4. Navy sandbox boundary bar (lower canvas — the safe evaluation zone)
+    sb = layer()
+    sbd = ImageDraw.Draw(sb)
+    sbd.polygon(rotated_rect(580, 490, 540, 28, -4), fill=(18, 24, 128, 248))
+    base = comp(base, sb)
+
+    # 5. Small navy box — evaluation container / sandboxed environment
+    eb = layer()
+    ebd = ImageDraw.Draw(eb)
+    ebd.polygon(rotated_rect(165, 440, 88, 56, -4), fill=(18, 24, 128, 220))
+    base = comp(base, eb)
+
+    # 6. Yellow warning shards — break point / injection alert fragments
+    yl = layer()
+    yd = ImageDraw.Draw(yl)
+    shards = [
+        (590, 158, 46, 10, 15),
+        (680, 108, 38, 9, -7),
+        (548, 238, 42, 10, 25),
+        (110, 340, 40, 9, -12),
+        (1090, 450, 44, 10, 8),
+        (1130, 185, 36, 9, -4),
+        (420, 530, 40, 9, 18),
+        (78, 168, 34, 8, -9),
+        (970, 520, 38, 9, 12),
+    ]
+    for cx, cy, hw, hh, ang in shards:
+        yd.polygon(rotated_rect(cx, cy, hw, hh, ang), fill=(232, 196, 0, 238))
+    base = comp(base, yl)
+
+    # 7. Thin diagonal scrutiny lines across whole field
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    for i in range(0, W + H, 90):
+        sd.line([(i, 0), (0, i)], fill=(20, 20, 20, 22), width=1)
+        sd.line([(W - i, 0), (W, i)], fill=(20, 20, 20, 14), width=1)
+    base = comp(base, sl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -18620,6 +18707,7 @@ DAYS = [
     ("2026-10-24", img_kandinsky_20261024, "IPO Roadshow",   "Wassily Kandinsky"),
     ("2026-10-25", img_leger_20261025,    "API & Cowork",   "Fernand Léger"),
     ("2026-10-26", img_seurat_20261026,   "Voter Data",     "Georges Seurat"),
+    ("2026-10-27", img_malevich_20261027, "Eval Safety",    "Kazimir Malevich"),
 ]
 
 for date, fn, kw, artist in DAYS:

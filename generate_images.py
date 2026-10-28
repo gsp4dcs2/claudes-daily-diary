@@ -17361,6 +17361,73 @@ def img_franzmarc_20261016():
     return base
 
 
+def img_franzmarc_20261028():
+    """Franz Marc jewel tones — drug lab, molecular biology, life-sciences research theme."""
+    base = Image.new("RGB", (W, H), (8, 22, 55))  # deep cobalt night bg
+
+    # 1. Large emerald cell body — primary biological form
+    cell_l = layer(); cd = ImageDraw.Draw(cell_l)
+    cd.ellipse([(60, 80), (560, 540)], fill=(14, 105, 68, 200))
+    cd.ellipse([(120, 150), (490, 470)], fill=(22, 148, 95, 140))
+    base = comp(base, cell_l)
+
+    # 2. Nucleus — warm amber/gold centre glow
+    nuc_l = layer(); nd = ImageDraw.Draw(nuc_l)
+    nd.ellipse([(230, 220), (410, 390)], fill=(200, 158, 28, 230))
+    nd.ellipse([(268, 258), (372, 352)], fill=(240, 200, 60, 180))
+    nd.ellipse([(298, 288), (342, 332)], fill=(255, 230, 100, 140))
+    base = comp(base, nuc_l)
+
+    # 3. Gold radiant filaments — molecular pathways emanating from nucleus
+    fil_l = layer(); fd = ImageDraw.Draw(fil_l)
+    cx, cy = 320, 305
+    for i in range(18):
+        angle = math.radians(i * (360 / 18) + 5)
+        r_inner = 80
+        r_outer = rng.randint(160, 310)
+        x1 = cx + int(r_inner * math.cos(angle))
+        y1 = cy + int(r_inner * math.sin(angle))
+        x2 = cx + int(r_outer * math.cos(angle))
+        y2 = cy + int(r_outer * math.sin(angle))
+        fd.line([(x1, y1), (x2, y2)], fill=(230, 185, 40, 80), width=2)
+    base = comp(base, fil_l)
+
+    # 4. Franz Marc stylised animal — cobalt horse form, right side
+    horse_l = layer(); hd = ImageDraw.Draw(horse_l)
+    hd.ellipse([(720, 140), (1120, 430)], fill=(38, 68, 195, 210))   # body
+    hd.ellipse([(1050, 80), (1170, 195)], fill=(55, 92, 230, 215))    # head
+    hd.arc([(1055, 20), (1165, 110)], start=200, end=355, fill=(120, 145, 255, 180), width=6)  # neck arc
+    hd.line([(785, 430), (760, 570)], fill=(45, 75, 210, 175), width=9)   # front leg
+    hd.line([(870, 435), (850, 570)], fill=(45, 75, 210, 155), width=8)   # mid leg
+    hd.line([(1000, 430), (990, 568)], fill=(45, 75, 210, 145), width=8)  # rear leg
+    hd.line([(1075, 420), (1078, 562)], fill=(45, 75, 210, 135), width=7) # tail leg
+    base = comp(base, horse_l)
+
+    # 5. Antibody Y-shapes — scattered small molecular icons
+    ab_l = layer(); abd = ImageDraw.Draw(ab_l)
+    ab_positions = [(620, 95), (670, 490), (590, 290), (1130, 310), (700, 380), (640, 190)]
+    for (ax, ay) in ab_positions:
+        # Y-shape: vertical stem + two diagonal arms
+        abd.line([(ax, ay + 22), (ax, ay + 55)], fill=(60, 215, 175, 195), width=4)
+        abd.line([(ax, ay + 22), (ax - 20, ay)], fill=(60, 215, 175, 185), width=3)
+        abd.line([(ax, ay + 22), (ax + 20, ay)], fill=(60, 215, 175, 185), width=3)
+        abd.ellipse([(ax - 6, ay + 48), (ax + 6, ay + 60)], fill=(100, 240, 200, 180))
+    base = comp(base, ab_l)
+
+    # 6. Jewel scatter — data points / assay results
+    dots_l = layer(); dotd = ImageDraw.Draw(dots_l)
+    dot_cols = [(255, 200, 60), (60, 215, 175), (220, 80, 160), (140, 195, 255), (235, 145, 30)]
+    for _ in range(75):
+        dx = rng.randint(0, W)
+        dy = rng.randint(0, H)
+        dr = rng.randint(2, 6)
+        dc = dot_cols[rng.randint(0, len(dot_cols) - 1)]
+        dotd.ellipse([(dx - dr, dy - dr), (dx + dr, dy + dr)], fill=(*dc, 130))
+    base = comp(base, dots_l)
+
+    return base
+
+
 def img_rothko_20261017():
     """Mark Rothko colour field — AI expectations gap, two-population divergence theme.
     Two luminous bands (electric indigo above, warm ochre below) separated by a razor-white seam
@@ -18708,6 +18775,7 @@ DAYS = [
     ("2026-10-25", img_leger_20261025,    "API & Cowork",   "Fernand Léger"),
     ("2026-10-26", img_seurat_20261026,   "Voter Data",     "Georges Seurat"),
     ("2026-10-27", img_malevich_20261027, "Eval Safety",    "Kazimir Malevich"),
+    ("2026-10-28", img_franzmarc_20261028, "Drug Lab",      "Franz Marc"),
 ]
 
 for date, fn, kw, artist in DAYS:

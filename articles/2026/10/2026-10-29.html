@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic launches Claude Enterprise Smart Reports, in-app surveys and pooled group budgets to help teams measure AI ROI. Plus: Claude Code v2.1.312 fixes a critical CLAUDE.md overwrite bug, adds OIDC user ID claim support and short prompts for custom model names.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-10-29 – Enterprise ROI Toolkit and Code v2.1.312 CLAUDE.md Overwrite Fix">
+  <meta property="og:description" content="Anthropic launches Claude Enterprise Smart Reports, in-app surveys and pooled group budgets to help teams measure AI ROI. Plus: Claude Code v2.1.312 fixes a critical CLAUDE.md overwrite bug, adds OIDC user ID claim support and short prompts for custom model names.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/10/2026-10-29.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/10/2026-10-29.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/10/2026-10-29.png">
+
+  <title>2026-10-29 – Enterprise ROI Toolkit and Code v2.1.312 CLAUDE.md Overwrite Fix | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Enterprise ROI Toolkit and Code v2.1.312 CLAUDE.md Overwrite Fix",
+    "description": "Anthropic launches Claude Enterprise Smart Reports, in-app surveys and pooled group budgets to help teams measure AI ROI. Plus: Claude Code v2.1.312 fixes a critical CLAUDE.md overwrite bug, adds OIDC user ID claim support and short prompts for custom model names.",
+    "datePublished": "2026-10-29",
+    "dateModified": "2026-10-29",
+    "url": "https://claudebeat.ai/articles/2026/10/2026-10-29.html",
+    "image": "https://claudebeat.ai/articles/2026/10/2026-10-29.png",
+    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/10/2026-10-29.html"},
+    "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+    "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-10-29</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Enterprise ROI Toolkit and Code v2.1.312 CLAUDE.md Overwrite Fix</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-10-29.png" alt="Enterprise ROI Toolkit and Code v2.1.312 CLAUDE.md Overwrite Fix — visual for 2026-10-29">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Enterprise Smart Reports, In-App Surveys & Pooled Group Budgets
+     Source: https://techcrunch.com/2026/10/28/anthropic-just-launched-tools-to-show-companies-what-their-ai-spending-is-buying/
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Enterprise Now Measures What AI Spending Actually Buys — Smart Reports, Surveys, and Pooled Budgets Go GA</h2>
+
+  <p>Anthropic has made three new features generally available for Claude Enterprise: Smart Reports, in-app surveys, and pooled group budgets. The trio directly addresses a pressure point for enterprise AI buyers — most organisations can track how much they spend on Claude but struggle to link that spend to measurable business outcomes. The launch coincides with broader industry questioning of AI ROI as multi-year commitments come up for renewal.</p>
+
+  <h3>Smart Reports — what a team spent and what it produced</h3>
+  <p>An admin selects a team, a date range, and one or more Claude products. The report samples that team's transcripts, categorises the work into workstreams, and returns a breakdown of: estimated list-price cost per workstream, deliverables produced (documents, code, analyses), and recurring friction points such as failed tool calls or missing connectors. Claude handles the transcript analysis autonomously — admins do not need to manually tag sessions or define categories in advance.</p>
+
+  <div class="callout tip">
+    <strong>How to write a useful Smart Report prompt</strong>
+    <p>When you first generate a Smart Report, Claude asks you to confirm or adjust the workstream categories it proposes. If your team uses Claude for both code review <em>and</em> customer-support drafting, keep those as separate workstreams — mixed categories obscure cost attribution. Once confirmed, the categories persist for future reports against the same team, so trend data is comparable month-over-month.</p>
+  </div>
+
+  <h3>In-app surveys — self-reported productivity signal</h3>
+  <p>After completing a task in Claude, users see a brief (3–4 question) optional survey asking what they accomplished, how long it would have taken without Claude, and what would slow them down if Claude were unavailable. Response data is aggregated at the team and organisation level and appears alongside Smart Report data in the admin console. Surveys are off by default and must be enabled per workspace by an admin.</p>
+  <p>The self-reported nature of survey data is an important caveat: users tend to over-estimate time saved on tasks they found valuable and under-report for tasks that still required significant revision. Treating survey data as directional rather than precise is the correct mental model.</p>
+
+  <h3>Pooled group budgets — one shared monthly pool per team</h3>
+  <p>Previously, Claude Enterprise admins could set per-user monthly spend limits, but had no way to give a team collective flexibility — a power user who hit their individual cap would be blocked even if the rest of the team had unused budget. Pooled group budgets allocate a single monthly usage pool to a team while retaining individual guardrails as a secondary ceiling. Alert notifications fire at 50%, 75%, 95%, and 100% of the pool. If a team exhausts its pool before month-end, admins can add one-time top-ups without waiting for the monthly reset.</p>
+
+  <h3>Availability notes</h3>
+  <ul>
+    <li>All three features are GA for Claude Enterprise on claude.ai; API-only deployments do not get access to survey or Smart Report features.</li>
+    <li>HIPAA Business Associate Agreement (BAA) customers and customers using customer-managed encryption keys (CMEK) have restricted access — check the admin console for eligibility.</li>
+    <li>Minimum team size for Smart Reports is 5 users (to prevent de-anonymisation of transcript data).</li>
+  </ul>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://techcrunch.com/2026/10/28/anthropic-just-launched-tools-to-show-companies-what-their-ai-spending-is-buying/" class="source-link" target="_blank" rel="noopener">techcrunch.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Enterprise</span>
+    <span class="tag">Smart Reports</span>
+    <span class="tag">ROI</span>
+    <span class="tag">pooled budgets</span>
+    <span class="tag">admin console</span>
+    <span class="tag">spend tracking</span>
+    <span class="tag">surveys</span>
+    <span class="tag">HIPAA</span>
+    <span class="tag">CMEK</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Code v2.1.312
+     Source: https://github.com/anthropics/claude-code/releases/tag/v2.1.312
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code v2.1.312: CLAUDE.md Overwrite Bug Fixed, OIDC Identity Claim, Short Prompts for Custom Model Names</h2>
+
+  <p>Claude Code v2.1.312, released October 27, contains 39 changes — 21 fixes, 6 improvements, 4 new features, 4 breaking changes, 3 developer-experience updates, and 1 security change. Two of the fixes address bugs that have been producing significant silent data loss in production environments.</p>
+
+  <h3>Critical fix: CLAUDE.md overwrite after partial read</h3>
+  <p>A regression caused Claude to overwrite a very large CLAUDE.md, rules file, or <code>@</code>-included file in a subdirectory after reading only the beginning of it. If the file exceeded the token budget available during the read phase, Claude would proceed as though it had read the entire file, then write back a truncated replacement during an edit pass — silently deleting everything after the read boundary. The fix ensures Claude checks that a full read completed before any write is attempted against the same file path.</p>
+
+  <div class="callout warning">
+    <strong>Check your CLAUDE.md files before upgrading</strong>
+    <p>If you have been running v2.1.311 or earlier with a CLAUDE.md longer than approximately 6,000 tokens (≈ 4,500 words) — especially one that uses <code>@path/to/rules.md</code> includes — inspect the file for unexpected truncation. The safest check: <code>git diff HEAD~5 CLAUDE.md</code> to see whether the file shrank unexpectedly in recent commits. If it did, restore from <code>git show HEAD~5:CLAUDE.md</code>.</p>
+  </div>
+
+  <h3>New feature: per-directory and paths skills now found after <code>cd</code></h3>
+  <p>Previously, per-directory skills (skill files keyed to a subdirectory via <code>paths:</code> in settings) were resolved relative to the git root at session start. If a Bash tool then ran <code>cd</code> into a deeper subdirectory, subsequent skill lookups failed to find path-scoped skills. In v2.1.312 skill resolution is re-evaluated against the current working directory after each directory change.</p>
+
+  <h3>New feature: OIDC <code>user_id_claim</code> for Claude Apps Gateway</h3>
+  <p>The Claude Apps Gateway now accepts an <code>oidc.user_id_claim</code> configuration field. By default the gateway identifies users by the <code>sub</code> claim in the OIDC <code>id_token</code>, but some identity providers (notably Microsoft Entra ID) use a different stable identifier — <code>oid</code> in Entra's case. Setting <code>oidc.user_id_claim: "oid"</code> in your gateway config makes per-user spend tracking and rate limiting reliable on Entra-backed deployments.</p>
+
+  <pre><code># gateway-config.yaml — Entra ID example
+oidc:
+  issuer: "https://login.microsoftonline.com/{tenant-id}/v2.0"
+  client_id: "..."
+  user_id_claim: "oid"    # was defaulting to "sub", which rotates on token refresh</code></pre>
+
+  <h3>Short system prompt for unrecognised model names</h3>
+  <p>On Bedrock, Vertex, Foundry, and Mantle, Claude Code now uses a reduced system prompt when the model name it receives is one it does not recognise — such as custom deployment names or inference profile ARNs. Previously, an unrecognised name caused Claude Code to fall back to its full default system prompt, which includes instructions that assume specific model capabilities and sometimes confused custom-finetune deployments. The short prompt is capability-agnostic and avoids those clashes.</p>
+
+  <h3>Click-to-send in fullscreen mode</h3>
+  <p>In fullscreen, clicking the "to send now" hint that appears below a queued message now immediately dispatches that message. Previously the hint was informational only — you had to press Enter. A small change with a meaningful UX impact for users who frequently queue multiple messages while in fullscreen.</p>
+
+  <h3>Breaking changes summary</h3>
+  <ul>
+    <li>Four breaking changes are included; review the full changelog before upgrading automated pipelines.</li>
+    <li>The managed settings and organization policy fetch regression in the VS Code extension is also fixed — settings were not being re-fetched for the rest of a session after signing in from within VS Code.</li>
+  </ul>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.312" class="source-link" target="_blank" rel="noopener">github.com/anthropics/claude-code</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code</span>
+    <span class="tag">v2.1.312</span>
+    <span class="tag">CLAUDE.md</span>
+    <span class="tag">OIDC</span>
+    <span class="tag">Entra ID</span>
+    <span class="tag">per-directory skills</span>
+    <span class="tag">custom models</span>
+    <span class="tag">Bedrock</span>
+    <span class="tag">Vertex</span>
+    <span class="tag">click to send</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

@@ -18436,6 +18436,119 @@ def img_malevich_20261027():
     return base
 
 
+def img_delaunay_20261029():
+    """Robert Delaunay Orphism style — enterprise ROI reports, analytics, budget signals theme.
+    Dark near-black bg, three large overlapping spectral-ring disc stacks (representing Smart
+    Reports, Surveys, and Pooled Budgets) with full rainbow arcs, thin budget-bar indicators,
+    and white node focal points evoking data measurement and signal overlap."""
+    base = Image.new("RGB", (W, H), (10, 12, 28))  # deep near-black bg
+
+    # 1. Three large spectral disc stacks — one per new enterprise feature
+    #    Disc A: left-centre (Smart Reports — warm spectrum)
+    #    Disc B: right-centre (Pooled Budgets — cool spectrum)
+    #    Disc C: upper-right (In-App Surveys — violet-to-yellow)
+    disc_defs = [
+        (290, 370, 260, 10),    # A — warm red → yellow (Smart Reports)
+        (900, 330, 240, 140),   # B — green → blue (Pooled Budgets)
+        (650, 140, 210, 250),   # C — violet → orange (Surveys)
+    ]
+    for cx, cy, max_r, h0 in disc_defs:
+        dl = layer()
+        dd = ImageDraw.Draw(dl)
+        n_rings = 11
+        for i in range(n_rings, 0, -1):
+            r = int(max_r * i / n_rings)
+            hue = (h0 + (n_rings - i) * 30) % 360
+            h_i = hue / 60.0
+            f = h_i - int(h_i)
+            v, s = 225, 0.88
+            p = int(v * (1 - s))
+            q = int(v * (1 - s * f))
+            t = int(v * (1 - s * (1 - f)))
+            hi = int(h_i) % 6
+            rgb_map = [(v, t, p), (q, v, p), (p, v, t), (p, q, v), (t, p, v), (v, p, q)]
+            r_, g_, b_ = rgb_map[hi]
+            alpha = 50 + int(40 * (1 - i / n_rings))
+            dd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=(r_, g_, b_, alpha))
+        base = comp(base, dl)
+
+    # 2. White node circles at disc centres — luminous focal points
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    for cx, cy, _, _ in disc_defs:
+        nd.ellipse([(cx - 20, cy - 20), (cx + 20, cy + 20)], fill=(255, 255, 255, 225))
+        nd.ellipse([(cx - 9,  cy - 9),  (cx + 9,  cy + 9)],  fill=(10, 12, 28, 255))
+    base = comp(base, nl)
+
+    # 3. Arc connectors — great-circle lines linking the three disc nodes
+    acl = layer()
+    acd = ImageDraw.Draw(acl)
+    acd.arc([(210, 280), (970, 560)], start=185, end=350, fill=(255, 235, 160, 75), width=3)
+    acd.arc([( 70,  50), (680, 420)], start=305, end=  5, fill=(180, 220, 255, 65), width=2)
+    acd.arc([(490,  15), (1000, 400)], start=155, end=245, fill=(210, 255, 200, 60), width=2)
+    base = comp(base, acl)
+
+    # 4. Budget-bar indicators — thin horizontal bars evoking spend gauges (bottom-right quadrant)
+    bbl = layer()
+    bbd = ImageDraw.Draw(bbl)
+    bar_data = [
+        (780, 430, 0.50, (255, 210, 60)),    # 50% alert — amber
+        (780, 455, 0.75, (255, 155, 55)),    # 75% alert — orange
+        (780, 480, 0.95, (235, 80,  60)),    # 95% alert — coral-red
+        (780, 505, 1.00, (200, 50,  40)),    # 100% exhausted — deep red
+    ]
+    bar_w_max = 250
+    for bx, by, pct, col in bar_data:
+        # Background track
+        bbd.rectangle([(bx, by), (bx + bar_w_max, by + 14)], fill=(*col, 30))
+        # Fill bar
+        fill_w = int(bar_w_max * pct)
+        bbd.rectangle([(bx, by), (bx + fill_w, by + 14)], fill=(*col, 170))
+        # End cap dot
+        bbd.ellipse([(bx + fill_w - 5, by + 2), (bx + fill_w + 5, by + 12)], fill=(*col, 220))
+    base = comp(base, bbl)
+
+    # 5. Satellite accent discs — small secondary rings scattered around the canvas
+    sal = layer()
+    sad = ImageDraw.Draw(sal)
+    accents = [
+        (110,  90, 65, 50),    # top-left — warm disc
+        (1090, 110, 75, 310),  # top-right — violet disc
+        (155,  545, 55, 35),   # bottom-left — red-orange disc
+        (1045, 495, 62, 190),  # bottom-right — teal disc
+        (580,  510, 45, 100),  # bottom-centre — yellow-green
+    ]
+    for ax, ay, ar, ah in accents:
+        for i in range(5, 0, -1):
+            r = int(ar * i / 5)
+            hue = (ah + i * 25) % 360
+            h_i = hue / 60.0
+            f = h_i - int(h_i)
+            v, s = 210, 0.80
+            p = int(v * (1 - s))
+            q = int(v * (1 - s * f))
+            t = int(v * (1 - s * (1 - f)))
+            hi = int(h_i) % 6
+            rgb_map = [(v, t, p), (q, v, p), (p, v, t), (p, q, v), (t, p, v), (v, p, q)]
+            r_, g_, b_ = rgb_map[hi]
+            sad.ellipse([(ax - r, ay - r), (ax + r, ay + r)], fill=(r_, g_, b_, 45))
+    base = comp(base, sal)
+
+    # 6. Fine dot scatter — data density texture
+    dotl = layer()
+    dotd = ImageDraw.Draw(dotl)
+    dot_cols = [(255, 200, 60), (80, 215, 175), (210, 90, 160), (145, 200, 255), (240, 145, 35)]
+    for _ in range(90):
+        dx = rng.randint(0, W)
+        dy = rng.randint(0, H)
+        dr = rng.randint(2, 5)
+        dc = dot_cols[rng.randint(0, len(dot_cols) - 1)]
+        dotd.ellipse([(dx - dr, dy - dr), (dx + dr, dy + dr)], fill=(*dc, 110))
+    base = comp(base, dotl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -18776,6 +18889,7 @@ DAYS = [
     ("2026-10-26", img_seurat_20261026,   "Voter Data",     "Georges Seurat"),
     ("2026-10-27", img_malevich_20261027, "Eval Safety",    "Kazimir Malevich"),
     ("2026-10-28", img_franzmarc_20261028, "Drug Lab",      "Franz Marc"),
+    ("2026-10-29", img_delaunay_20261029, "ROI Reports",   "Robert Delaunay"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -18436,6 +18436,94 @@ def img_malevich_20261027():
     return base
 
 
+def img_lissitzky_20261030():
+    """El Lissitzky Constructivism — Usage Analytics API and Legal Artifacts theme.
+    Cream bg, stacked bold red horizontal bars (analytics bar-chart),
+    heavy black vertical left pillar (data column spine),
+    diagonal red wedge upper-right (the API launch announcement),
+    concentric rectangle cluster (artifact gallery modules),
+    and fine horizontal rule grid lines (measurement tick marks)."""
+    base = Image.new("RGB", (W, H), (245, 242, 232))  # Lissitzky cream bg
+
+    # 1. Heavy black vertical pillar — left margin, data column spine
+    vl = layer()
+    vd = ImageDraw.Draw(vl)
+    vd.rectangle([(0, 0), (52, H)], fill=(15, 15, 15, 255))
+    base = comp(base, vl)
+
+    # 2. Red diagonal wedge upper-right — the API launch announcement
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.polygon([(W, 0), (W - 480, 0), (W, 370)], fill=(210, 25, 25, 235))
+    base = comp(base, rl)
+
+    # 3. Stacked bold red horizontal bars — analytics bar chart (5 bars, varying widths)
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bar_data = [
+        (80,  80, 720, 134),   # widest bar — highest usage period
+        (80, 158, 560, 212),
+        (80, 236, 820, 290),
+        (80, 314, 460, 368),
+        (80, 392, 680, 446),
+    ]
+    for x0, y0, x1, y1 in bar_data:
+        bd.rectangle([(x0, y0), (x1, y1)], fill=(210, 25, 25, 230))
+    base = comp(base, bl)
+
+    # 4. Thin black horizontal tick-mark grid lines (measurement marks)
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for i in range(9):
+        y = 70 + i * 78
+        gd.line([(52, y), (W - 10, y)], fill=(15, 15, 15, 60), width=1)
+    # Bold zero baseline
+    gd.rectangle([(52, 462), (W, 470)], fill=(15, 15, 15, 200))
+    base = comp(base, gl)
+
+    # 5. Concentric rectangle cluster — artifact gallery modules (lower-right)
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    cx, cy = 960, 555
+    for i, alpha in enumerate([230, 175, 110]):
+        pad = i * 36
+        td.rectangle(
+            [(cx - 92 - pad, cy - 56 - pad), (cx + 92 + pad, cy + 56 + pad)],
+            outline=(15, 15, 15, alpha), width=5
+        )
+    # Solid red innermost rectangle — the core artifact
+    td.rectangle([(cx - 92, cy - 56), (cx + 92, cy + 56)], fill=(210, 25, 25, 220))
+    # Cream cross inside — document/artifact marker
+    td.rectangle([(cx - 8, cy - 48), (cx + 8, cy + 48)], fill=(245, 242, 232, 255))
+    td.rectangle([(cx - 72, cy - 8), (cx + 72, cy + 8)], fill=(245, 242, 232, 255))
+    base = comp(base, tl)
+
+    # 6. Small black module — lower-left, endpoint marker
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    sd.rectangle([(62, 486), (190, 614)], fill=(15, 15, 15, 255))
+    sd.rectangle([(88, 512), (164, 588)], fill=(245, 242, 232, 255))
+    sd.rectangle([(110, 534), (142, 566)], fill=(210, 25, 25, 255))
+    base = comp(base, sl)
+
+    # 7. Thin secondary vertical rule — column separator
+    v2l = layer()
+    v2d = ImageDraw.Draw(v2l)
+    v2d.rectangle([(840, 0), (850, 462)], fill=(15, 15, 15, 180))
+    base = comp(base, v2l)
+
+    # 8. Red accent stripes — diagonal energy lower-right
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    for i in range(6):
+        y_off = i * 24
+        ad.line([(852, 380 + y_off), (1000, 440 + y_off)],
+                fill=(210, 25, 25, 140), width=3)
+    base = comp(base, al)
+
+    return base
+
+
 def img_delaunay_20261029():
     """Robert Delaunay Orphism style — enterprise ROI reports, analytics, budget signals theme.
     Dark near-black bg, three large overlapping spectral-ring disc stacks (representing Smart
@@ -18890,6 +18978,7 @@ DAYS = [
     ("2026-10-27", img_malevich_20261027, "Eval Safety",    "Kazimir Malevich"),
     ("2026-10-28", img_franzmarc_20261028, "Drug Lab",      "Franz Marc"),
     ("2026-10-29", img_delaunay_20261029, "ROI Reports",   "Robert Delaunay"),
+    ("2026-10-30", img_lissitzky_20261030, "Analytics API", "El Lissitzky"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic launches the Usage and Cost Analytics API in beta — programmatic token spend attribution for orgs — and rolls out a gallery of 18 partner-built legal artifacts inside Claude for Legal.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-10-30 – Usage Analytics API Beta and Claude for Legal Artifacts Gallery">
+  <meta property="og:description" content="Anthropic launches the Usage and Cost Analytics API in beta — programmatic token spend attribution for orgs — and rolls out a gallery of 18 partner-built legal artifacts inside Claude for Legal.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/10/2026-10-30.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/10/2026-10-30.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/10/2026-10-30.png">
+
+  <title>2026-10-30 – Usage Analytics API Beta and Claude for Legal Artifacts Gallery | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Usage Analytics API Beta and Claude for Legal Artifacts Gallery",
+    "description": "Anthropic launches the Usage and Cost Analytics API in beta — programmatic token spend attribution for orgs — and rolls out a gallery of 18 partner-built legal artifacts inside Claude for Legal.",
+    "datePublished": "2026-10-30",
+    "dateModified": "2026-10-30",
+    "url": "https://claudebeat.ai/articles/2026/10/2026-10-30.html",
+    "image": "https://claudebeat.ai/articles/2026/10/2026-10-30.png",
+    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/10/2026-10-30.html"},
+    "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+    "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-10-30</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Usage Analytics API Beta and Claude for Legal Artifacts Gallery</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-10-30.png" alt="Usage Analytics API Beta and Claude for Legal Artifacts Gallery — visual for 2026-10-30">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Usage and Cost Analytics API Beta
+     Source: https://docs.anthropic.com/en/api/usage-cost-api
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Usage and Cost Analytics API Launches in Beta — Programmatic Spend Attribution for Every Org</h2>
+
+  <p>Anthropic has opened a beta of its Usage and Cost Analytics API, giving Claude Console and Claude Enterprise organisations programmatic access to historical token usage and USD spend data. The release closes a long-standing gap: until now, admins could view spend in the console UI but could not pull that data into their own billing pipelines, BI dashboards, or cost-allocation tools. The beta is opt-in and requires an explicit header on each request.</p>
+
+  <h3>Two endpoints, many groupings</h3>
+  <p>The API exposes two <code>GET</code> endpoints under <code>/v1/organizations/analytics/</code>:</p>
+  <ul>
+    <li><strong><code>/usage</code></strong> — input tokens, output tokens, and cache read/write tokens, grouped by any combination of model, workspace, API key, service tier, individual user, or service account.</li>
+    <li><strong><code>/cost</code></strong> — USD spend using the same grouping dimensions, at the same granularity.</li>
+  </ul>
+  <p>Both endpoints support arbitrary date ranges up to a maximum 31-day window per request. Data freshness is typically 4 hours, with a worst-case ceiling of 24 hours. The rate limit is 60 requests per minute per organisation.</p>
+
+  <div class="callout tip">
+    <strong>How to opt in to the beta</strong>
+    <p>Every request must include the header <code>anthropic-beta: analytics-usage-cost-2026-08-24</code>. Without it, the endpoints return a 404. Once the API exits beta, Anthropic will version it under the standard API release scheme and the beta header will no longer be required.</p>
+    <pre><code>curl https://api.anthropic.com/v1/organizations/analytics/usage \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: analytics-usage-cost-2026-08-24" \
+  -G \
+  --data-urlencode "start_date=2026-10-01" \
+  --data-urlencode "end_date=2026-10-30" \
+  --data-urlencode "group_by=model,workspace"</code></pre>
+  </div>
+
+  <h3>What this unlocks in practice</h3>
+  <p>The most immediate use cases are chargeback accounting (attributing spend to cost centres) and anomaly detection (spotting a workspace or API key whose usage spikes unexpectedly). Because the <code>group_by</code> parameter supports <code>user_id</code>, organisations under Claude Enterprise can now build per-seat cost reports without relying on Smart Reports inside the admin console. Developers on paid plans running automated pipelines can also instrument cost as an observable signal — if spend per job exceeds a threshold, a webhook can pause non-critical batches.</p>
+  <p>One nuance to watch: the <code>/cost</code> endpoint returns list-price USD, not contract pricing. Organisations on custom agreements will need to apply their discount multiplier after retrieving the data.</p>
+
+  <h3>Alongside: 128 MB request body limit</h3>
+  <p>The same release notes confirm that the maximum HTTP request body size for the Anthropic API has been raised from 32 MB to 128 MB. This benefits large document workflows — PDFs, multi-image batches, and long audio transcripts — that previously required splitting requests to stay within the 32 MB ceiling. No flag or header is needed; the higher limit applies automatically to all API keys.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://docs.anthropic.com/en/api/usage-cost-api" class="source-link" target="_blank" rel="noopener">docs.anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Analytics API</span>
+    <span class="tag">cost attribution</span>
+    <span class="tag">token usage</span>
+    <span class="tag">beta</span>
+    <span class="tag">chargeback</span>
+    <span class="tag">Claude Enterprise</span>
+    <span class="tag">Claude Console</span>
+    <span class="tag">128 MB limit</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude for Legal Artifacts Gallery
+     Source: https://www.abajournal.com/news/article/anthropic-raises-the-bar-with-claude-for-legal-artifacts-law-specific-interactive-tools
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude for Legal Gets 18 Partner-Built Artifacts — Contract Review, Regulatory Scanning, and Cite Checking Out of the Box</h2>
+
+  <p>Anthropic has added an artifacts gallery to Claude for Legal, shipping approximately 18 ready-made interactive tools that cover the most common legal document workflows. The gallery, announced October 28, builds on the Claude for Legal platform launched in May 2026 and marks its first major expansion with partner-contributed content. Legal professionals can use the artifacts immediately — no prompt engineering required — and organisations can fork and customise them to match their practice area or jurisdiction.</p>
+
+  <h3>What's in the gallery</h3>
+  <ul>
+    <li><strong>Contract review</strong> — identifies non-standard clauses, flags missing provisions, and outputs a redline-ready summary per section.</li>
+    <li><strong>Tabular review</strong> — extracts structured data (parties, dates, obligations, governing law) from batches of contracts into a downloadable table.</li>
+    <li><strong>Regulatory horizon scan</strong> — monitors a specified jurisdiction and subject area; surfaces proposed rule changes with estimated effective dates.</li>
+    <li><strong>Jurisdiction survey</strong> — compares the legal treatment of a topic (e.g. non-compete enforceability) across up to 12 US states or EU member states simultaneously.</li>
+    <li><strong>Cite check</strong> — verifies case citations against Westlaw and Bloomberg Law connectors, flagging reversed, distinguished, or overruled authorities.</li>
+    <li><strong>Legal intake</strong> — structured interview artifact that routes matters to the correct team and pre-populates a matter-opening form.</li>
+    <li><strong>Subpoena response tool</strong> (PwC) — maps the subpoena's requests against document holds and identifies custodians.</li>
+    <li><strong>AI Governance Benchmark</strong> (Goodwin Procter) — scores a client's AI governance programme against a customisable framework of controls.</li>
+    <li><strong>Obligations Checker</strong> (Foley &amp; Lardner) — extracts and tracks contractual obligations with deadline alerts.</li>
+    <li><strong>Intake &amp; Triage</strong> (Harvey) — routes legal requests from business users to the right matter type and assigns urgency.</li>
+    <li>Nine <strong>access-to-justice tools</strong> — developed with nonprofit partners, covering tenant rights, employment law, and immigration FAQs.</li>
+  </ul>
+
+  <h3>Connectors and platform reach</h3>
+  <p>The release also adds over 60 legal-specific connectors, including Bloomberg Law (case law and news), Filevine (matter management), and Patlytics (patent analytics). Connectors allow artifacts to pull live data from these systems without copy-pasting — the artifact queries the connector at run time and cites the retrieved source inline. Two additional partner artifacts from Legora and Orrick are listed as forthcoming.</p>
+
+  <div class="callout">
+    <strong>Licensing and customisation</strong>
+    <p>All artifacts in the gallery are provided under Anthropic's standard Claude for Legal terms. Organisations may copy, modify, and deploy any artifact within their Claude for Legal workspace. Modified artifacts must not be redistributed to third parties without Anthropic's written consent. Artifact source is visible and editable — there is no black-box template that users cannot inspect.</p>
+  </div>
+
+  <h3>Legal Ambassadors Program</h3>
+  <p>Anthropic simultaneously launched a Legal Ambassadors Program: a community of legal professionals who get early access to new Claude for Legal features in exchange for structured feedback. Members must be working practitioners (in-house counsel, law firm associates, or legal ops leads) — not vendors or consultants. Applications are open; cohort size is not disclosed.</p>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Established press — verified journalism">⭐⭐</span>
+    <a href="https://www.abajournal.com/news/article/anthropic-raises-the-bar-with-claude-for-legal-artifacts-law-specific-interactive-tools" class="source-link" target="_blank" rel="noopener">abajournal.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude for Legal</span>
+    <span class="tag">artifacts</span>
+    <span class="tag">contract review</span>
+    <span class="tag">legal tech</span>
+    <span class="tag">Goodwin Procter</span>
+    <span class="tag">Harvey</span>
+    <span class="tag">PwC</span>
+    <span class="tag">Foley Lardner</span>
+    <span class="tag">Bloomberg Law</span>
+    <span class="tag">access to justice</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

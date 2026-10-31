@@ -18637,6 +18637,125 @@ def img_delaunay_20261029():
     return base
 
 
+def img_klimt_20261031():
+    """Gustav Klimt — near-black velvet bg, gold lattice of 22 connector nodes,
+    teal verification rings, rust warning drops, dense mosaic fragments —
+    financial-advisor trust networks and training-monitor safety research theme."""
+    import math as _math
+    base = Image.new("RGB", (W, H), (9, 5, 18))  # deep near-black velvet bg
+
+    # 1. Central luminous glow — the trust centre
+    glow_l = layer()
+    gd = ImageDraw.Draw(glow_l)
+    for r, a in [(320, 18), (240, 28), (160, 40), (100, 50), (55, 42)]:
+        gd.ellipse([(W//2 - r, H//2 - r), (W//2 + r, H//2 + r)], fill=(168, 128, 22, a))
+    base = comp(base, glow_l)
+
+    # 2. 22 connector nodes arranged in two concentric rings (inner 8, outer 14)
+    inner_r, outer_r = 165, 280
+    inner_n, outer_n = 8, 14
+    inner_nodes = [
+        (int(W//2 + inner_r * _math.cos(_math.radians(90 + 360 * i / inner_n))),
+         int(H//2 + inner_r * _math.sin(_math.radians(90 + 360 * i / inner_n))))
+        for i in range(inner_n)
+    ]
+    outer_nodes = [
+        (int(W//2 + outer_r * _math.cos(_math.radians(90 + 360 * i / outer_n))),
+         int(H//2 + outer_r * _math.sin(_math.radians(90 + 360 * i / outer_n))))
+        for i in range(outer_n)
+    ]
+    all_nodes = inner_nodes + outer_nodes + [(W//2, H//2)]
+
+    # 3. Gold lattice lines connecting nodes
+    web_l = layer()
+    wd = ImageDraw.Draw(web_l)
+    for i, (x1, y1) in enumerate(all_nodes):
+        for j, (x2, y2) in enumerate(all_nodes):
+            if j > i:
+                dist = _math.hypot(x2 - x1, y2 - y1)
+                if dist < 310:
+                    alpha = rng.randint(25, 85)
+                    wd.line([(x1, y1), (x2, y2)], fill=(200, 158, 40, alpha), width=rng.randint(1, 2))
+    base = comp(base, web_l)
+
+    # 4. Teal concentric verification rings at each inner node
+    teal_l = layer()
+    td = ImageDraw.Draw(teal_l)
+    for cx, cy in inner_nodes:
+        for r in range(10, 48, 12):
+            td.ellipse([(cx-r, cy-r), (cx+r, cy+r)],
+                       outline=(28, 145, 134, rng.randint(65, 145)), width=rng.randint(1, 3))
+    # Larger safety seal at centre
+    for r in range(16, 80, 18):
+        td.ellipse([(W//2-r, H//2-r), (W//2+r, H//2+r)],
+                   outline=(42, 168, 155, rng.randint(55, 130)), width=rng.randint(2, 4))
+    base = comp(base, teal_l)
+
+    # 5. Gold mosaic fragments — Klimt constitutional-complexity skin
+    mosaic_l = layer()
+    md = ImageDraw.Draw(mosaic_l)
+    gold_shades = [
+        (218, 178, 56), (198, 158, 40), (234, 202, 84),
+        (176, 138, 34), (246, 216, 106), (188, 152, 46),
+    ]
+    for _ in range(520):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        s = rng.randint(2, 18)
+        shade = rng.choice(gold_shades)
+        alpha = rng.randint(40, 150)
+        shape = rng.randint(0, 2)
+        if shape == 0:
+            md.rectangle([(x, y), (x+s, y+s)], fill=(*shade, alpha))
+        elif shape == 1:
+            md.ellipse([(x, y), (x+s, y+s)], fill=(*shade, alpha))
+        else:
+            md.polygon([(x, y+s), (x+s//2, y), (x+s, y+s)], fill=(*shade, alpha))
+    base = comp(base, mosaic_l)
+
+    # 6. Gold spiral arcs — interconnected trust, governance depth
+    spiral_l = layer()
+    spd = ImageDraw.Draw(spiral_l)
+    spiral_centres = [
+        (W//2, H//2, 160),
+        (inner_nodes[0][0], inner_nodes[0][1], 80),
+        (inner_nodes[4][0], inner_nodes[4][1], 85),
+        (outer_nodes[2][0], outer_nodes[2][1], 60),
+        (outer_nodes[9][0], outer_nodes[9][1], 58),
+    ]
+    for cx, cy, maxr in spiral_centres:
+        for r in range(12, maxr, 18):
+            spd.arc([(cx-r, cy-r), (cx+r, cy+r)],
+                    start=rng.randint(0, 90), end=rng.randint(180, 350),
+                    fill=(212, 175, 55, rng.randint(40, 125)), width=rng.randint(2, 4))
+    base = comp(base, spiral_l)
+
+    # 7. Rust warning drops — safety monitor flags
+    rust_l = layer()
+    rd = ImageDraw.Draw(rust_l)
+    rust_shades = [(190, 60, 28), (210, 80, 38), (170, 50, 20), (222, 96, 48)]
+    for _ in range(75):
+        x = rng.randint(30, W - 30)
+        y = rng.randint(30, H - 30)
+        s = rng.randint(3, 13)
+        shade = rng.choice(rust_shades)
+        rd.ellipse([(x, y), (x+s, y+s)], fill=(*shade, rng.randint(85, 180)))
+    base = comp(base, rust_l)
+
+    # 8. Fine gold noise texture — depth of a Klimt canvas
+    nl = layer()
+    nld = ImageDraw.Draw(nl)
+    for _ in range(2000):
+        nx = rng.randint(0, W)
+        ny = rng.randint(0, H)
+        nr = rng.randint(1, 3)
+        nld.ellipse([(nx-nr, ny-nr), (nx+nr, ny+nr)],
+                    fill=(210, 170, 50, rng.randint(8, 35)))
+    base = comp(base, nl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -18979,6 +19098,7 @@ DAYS = [
     ("2026-10-28", img_franzmarc_20261028, "Drug Lab",      "Franz Marc"),
     ("2026-10-29", img_delaunay_20261029, "ROI Reports",   "Robert Delaunay"),
     ("2026-10-30", img_lissitzky_20261030, "Analytics API", "El Lissitzky"),
+    ("2026-10-31", img_klimt_20261031,    "Safety & Trust", "Gustav Klimt"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -18756,6 +18756,101 @@ def img_klimt_20261031():
     return base
 
 
+def img_mondrian_20261101():
+    """Piet Mondrian grid — API model lifecycle migration theme.
+    A structured grid encodes the model deprecation table: wide columns for
+    active models (blue), narrower columns for deprecated (red), thin slices
+    for retired (black). Bright yellow grid bands represent the 30-day and
+    60-day notice windows. A dense inner micro-grid in the lower-right quadrant
+    evokes the audit CSV — dozens of API-key/model combinations needing updates.
+    """
+    base = Image.new("RGB", (W, H), (242, 238, 220))   # classic Mondrian off-white
+    draw = ImageDraw.Draw(base)
+
+    YELLOW = (255, 210,   0)
+    RED    = (208,  35,  35)
+    BLUE   = ( 20,  72, 192)
+    BLACK  = ( 15,  15,  15)
+    BW     = 18   # primary grid-line half-width
+
+    # 1. Primary asymmetric grid — columns encode model lifecycle status
+    #    Wide = active; medium = deprecated; narrow = retired
+    gx = [0, 160, 310, 440, 540, 680, 840, 980, W]   # 8 columns
+    gy = [0, 100, 230, 380, 500, H]                   # 5 rows
+
+    # Draw yellow grid bands (the notice-window layer)
+    for x in gx[1:-1]:
+        draw.rectangle([(x - BW//2, 0), (x + BW//2, H)], fill=YELLOW)
+    for y in gy[1:-1]:
+        draw.rectangle([(0, y - BW//2), (W, y + BW//2)], fill=YELLOW)
+
+    # 2. Cell fills — lifecycle status palette
+    #    BLUE = active model   RED = deprecated model   BLACK = retired
+    cells = [
+        (0, 0, BLUE),   # active — large cell
+        (2, 0, BLUE),
+        (4, 1, BLUE),
+        (6, 0, BLUE),
+        (1, 2, BLUE),
+        (5, 2, BLUE),
+        (7, 1, BLUE),
+        (0, 3, BLUE),
+        (3, 3, BLUE),
+        (6, 3, BLUE),
+        (2, 1, RED),    # deprecated — medium cells
+        (4, 0, RED),
+        (1, 3, RED),
+        (7, 3, RED),
+        (5, 0, RED),
+        (3, 2, RED),
+        (0, 1, BLACK),  # retired — small tiles
+        (6, 2, BLACK),
+        (7, 0, BLACK),
+        (2, 3, BLACK),
+        (4, 3, BLACK),
+    ]
+    for ci, cj, col in cells:
+        if ci + 1 < len(gx) and cj + 1 < len(gy):
+            x0 = gx[ci] + BW//2 + 3
+            y0 = gy[cj] + BW//2 + 3
+            x1 = gx[ci+1] - BW//2 - 3
+            y1 = gy[cj+1] - BW//2 - 3
+            if x1 > x0 and y1 > y0:
+                draw.rectangle([(x0, y0), (x1, y1)], fill=col)
+
+    # 3. Black intersection squares — API version nodes
+    for x in gx[1:-1]:
+        for y in gy[1:-1]:
+            draw.rectangle(
+                [(x - BW//2, y - BW//2), (x + BW//2, y + BW//2)],
+                fill=BLACK
+            )
+
+    # 4. Dense inner micro-grid — lower-right quadrant: audit CSV rows
+    mgx = list(range(840, W + 1, 40))
+    mgy = list(range(380, H + 1, 40))
+    mbw = 5
+    for mx in mgx[1:]:
+        draw.rectangle([(mx - mbw//2, 380), (mx + mbw//2, H)], fill=BLACK)
+    for my in mgy[1:]:
+        draw.rectangle([(840, my - mbw//2), (W, my + mbw//2)], fill=BLACK)
+    # Spot-colour micro-cells red/blue for deprecated entries in the audit
+    micro_fills = [
+        (0, 0, RED), (2, 1, BLUE), (1, 2, RED), (3, 0, BLUE),
+        (0, 2, RED), (2, 3, BLUE), (3, 2, RED),
+    ]
+    for mci, mcj, col in micro_fills:
+        if mci + 1 < len(mgx) and mcj + 1 < len(mgy):
+            mx0 = mgx[mci] + mbw//2 + 1
+            my0 = mgy[mcj] + mbw//2 + 1
+            mx1 = mgx[mci+1] - mbw//2 - 1
+            my1 = mgy[mcj+1] - mbw//2 - 1
+            if mx1 > mx0 and my1 > my0:
+                draw.rectangle([(mx0, my0), (mx1, my1)], fill=col)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -19099,6 +19194,7 @@ DAYS = [
     ("2026-10-29", img_delaunay_20261029, "ROI Reports",   "Robert Delaunay"),
     ("2026-10-30", img_lissitzky_20261030, "Analytics API", "El Lissitzky"),
     ("2026-10-31", img_klimt_20261031,    "Safety & Trust", "Gustav Klimt"),
+    ("2026-11-01", img_mondrian_20261101, "Migration Grid", "Piet Mondrian"),
 ]
 
 for date, fn, kw, artist in DAYS:

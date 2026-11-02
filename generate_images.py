@@ -18851,6 +18851,109 @@ def img_mondrian_20261101():
     return base
 
 
+def img_kandinsky_20261102():
+    """Wassily Kandinsky style — Anthropic IPO pricing, Agent SDK v1.0, FSF v3 thresholds.
+    Prussian-blue background. A large central amber disc (the pricing event / valuation
+    moment) radiates concentric arcs outward (oversubscription rings). Three bold triangles
+    point INWARD from three edges — investor demand converging on the price. A vertical
+    yellow bar (the price range bracket) bisects the centre. Small white circles scattered
+    across the mid-field represent institutional investors. Kandinsky accents: teal ring
+    corner, coral diagonal slash, white accent tick.
+    """
+    base = Image.new("RGB", (W, H), (18, 34, 72))   # prussian-blue bg
+
+    # 1. Central amber pricing disc — the valuation moment
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    cx, cy = 600, 310
+    # Outer glow ring
+    dd.ellipse([(cx - 220, cy - 220), (cx + 220, cy + 220)],
+               fill=(255, 195, 20, 60))
+    # Main disc
+    dd.ellipse([(cx - 160, cy - 160), (cx + 160, cy + 160)],
+               fill=(255, 200, 25, 210))
+    # Inner dark ring (tension / uncertainty at the price)
+    dd.ellipse([(cx - 85,  cy - 85),  (cx + 85,  cy + 85)],
+               fill=(18, 34, 72, 240))
+    # Inner dot (deal struck)
+    dd.ellipse([(cx - 30,  cy - 30),  (cx + 30,  cy + 30)],
+               fill=(255, 210, 40, 255))
+    base = comp(base, dl)
+
+    # 2. Concentric arcs radiating out — oversubscription rings (demand > supply)
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    arc_params = [
+        (240, (80, 160, 245, 120), 3),   # r=240, blue, width=3
+        (300, (215,  35,  35,  90), 2),  # r=300, red
+        (360, (255, 215,  30,  70), 2),  # r=360, amber
+        (420, (80,  160, 245,  50), 2),  # r=420, blue faint
+        (480, (255, 255, 255,  35), 1),  # r=480, white ghost
+    ]
+    for r, col, wid in arc_params:
+        ad.arc([(cx - r, cy - r), (cx + r, cy + r)],
+               start=0, end=360, fill=col, width=wid)
+    base = comp(base, al)
+
+    # 3. Three bold triangles pointing inward — investor demand converging
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    # Triangle A (red, top) — pointing downward toward centre
+    td.polygon([(200, 0), (1000, 0), (cx, cy - 170)],
+               fill=(215, 35, 35, 180))
+    # Triangle B (blue, lower-right) — pointing upper-left toward centre
+    td.polygon([(W, 330), (W, H), (cx + 150, cy + 120)],
+               fill=(25, 75, 195, 165))
+    # Triangle C (yellow, lower-left) — pointing upper-right toward centre
+    td.polygon([(0, 380), (0, H), (cx - 145, cy + 110)],
+               fill=(255, 210, 0, 165))
+    base = comp(base, tl)
+
+    # 4. Vertical price-range bracket — yellow bar bisecting the centre
+    pl = layer()
+    pd = ImageDraw.Draw(pl)
+    bx = cx + 190
+    pd.rectangle([(bx - 6, cy - 130), (bx + 6, cy + 130)],
+                 fill=(255, 215, 0, 220))
+    pd.rectangle([(bx - 22, cy - 130), (bx + 22, cy - 124)],
+                 fill=(255, 215, 0, 220))
+    pd.rectangle([(bx - 22, cy + 124), (bx + 22, cy + 130)],
+                 fill=(255, 215, 0, 220))
+    base = comp(base, pl)
+
+    # 5. Scattered institutional investor circles
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    investor_pts = [
+        (130, 120, 7), (165, 95, 5),  (100, 150, 6),  (155, 155, 4),
+        (980, 100, 8), (1050, 80, 5), (1010, 130, 6), (1080, 115, 4),
+        (90,  450, 6), (120, 490, 5), (65,  510, 7),
+        (1090, 430, 6),(1120, 470, 5),(1060, 490, 7),
+        (420, 540, 5), (790, 555, 6), (510, 570, 4), (710, 545, 5),
+    ]
+    for ix, iy, ir in investor_pts:
+        cd.ellipse([(ix - ir, iy - ir), (ix + ir, iy + ir)],
+                   fill=(255, 255, 255, 160), outline=(180, 215, 255, 100), width=1)
+    base = comp(base, cl)
+
+    # 6. Kandinsky accent vocabulary
+    acc = layer()
+    acd = ImageDraw.Draw(acc)
+    # Teal ring — upper-left corner
+    acd.ellipse([(30, 25), (145, 140)],   fill=(10, 10, 40, 245))
+    acd.ellipse([(48, 43), (127, 122)],   fill=(30, 185, 175, 185))
+    acd.ellipse([(66, 61), (109, 104)],   fill=(10, 10, 40, 255))
+    # Coral diagonal slash — upper-right
+    acd.polygon([(1050, 30), (1175, 30), (1145, 68), (1020, 68)],
+                fill=(232, 115, 74, 210))
+    # White accent tick — right edge mid
+    acd.rectangle([(W - 20, cy - 18), (W - 8, cy + 18)],
+                  fill=(255, 255, 255, 130))
+    base = comp(base, acc)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -19195,6 +19298,7 @@ DAYS = [
     ("2026-10-30", img_lissitzky_20261030, "Analytics API", "El Lissitzky"),
     ("2026-10-31", img_klimt_20261031,    "Safety & Trust", "Gustav Klimt"),
     ("2026-11-01", img_mondrian_20261101, "Migration Grid", "Piet Mondrian"),
+    ("2026-11-02", img_kandinsky_20261102, "IPO Pricing",   "Wassily Kandinsky"),
 ]
 
 for date, fn, kw, artist in DAYS:

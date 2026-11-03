@@ -18954,6 +18954,108 @@ def img_kandinsky_20261102():
     return base
 
 
+def img_moholy_20261103():
+    """László Moholy-Nagy Bauhaus style — AI watermarking / transparency / trust theme.
+    Warm near-white ground, large overlapping semi-transparent circles representing
+    signal layers (model output, watermark pattern, detection access, compliance scope),
+    thin Bauhaus structural lines, concentric ring nodes for intersection points,
+    and a fine background grid for systematic rigour.
+    """
+    base = Image.new("RGB", (W, H), (245, 243, 237))  # warm off-white Bauhaus ground
+
+    # 1. Four large overlapping translucent circles — output layer, watermark signal,
+    #    detector access ring, compliance scope
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    circles = [
+        ((-120, -80,   440,  480), (20,  100, 200, 58)),   # deep-blue  — model output layer
+        (( 280,  -40,  860,  540), (20,  170,  90, 52)),   # teal-green — watermark signal field
+        (( 600,   40, 1280,  600), (190,  50,  30, 48)),   # crimson    — detector access ring
+        (( 100,  220,  700,  670), (140,  50, 195, 44)),   # violet     — compliance scope
+    ]
+    for bbox, fill in circles:
+        cd.ellipse(bbox, fill=fill)
+    base = comp(base, cl)
+
+    # 2. Horizontal governance bands — EU AI Act tiers and detection layers
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bands = [
+        ((0, 138, W, 168), (20,  100, 200, 38)),   # blue   — model sampling layer
+        ((0, 248, W, 278), (20,  170,  90, 34)),   # teal   — token-bias embedding band
+        ((0, 358, W, 384), (190,  50,  30, 32)),   # red    — regulated-detector band
+        ((0, 464, W, 490), (140,  50, 195, 30)),   # violet — global compliance band
+    ]
+    for bbox, fill in bands:
+        bd.rectangle(bbox, fill=fill)
+    base = comp(base, bl)
+
+    # 3. Thin black Bauhaus scaffold lines
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    structural = [
+        ((0, 315),   (W, 315)),       # primary horizontal axis
+        ((600, 0),   (600, H)),       # primary vertical axis
+        ((0, 0),     (600, 315)),     # top-left diagonal
+        ((600, 315), (W, H)),         # bottom-right diagonal
+        ((600, 0),   (W, 315)),       # top-right diagonal
+        ((0, 315),   (600, H)),       # bottom-left diagonal
+    ]
+    for p1, p2 in structural:
+        ld.line([p1, p2], fill=(18, 18, 18, 155), width=2)
+    base = comp(base, ll)
+
+    # 4. Concentric ring nodes — watermark / detection intersection markers
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    nodes = [
+        (145, 130, 76, (20,  100, 200)),   # blue  — model output origin
+        (600, 315, 98, (20,  170,  90)),   # teal  — watermark embedding centroid
+        (990, 165, 60, (190,  50,  30)),   # red   — detector access gate
+        (370, 510, 50, (140,  50, 195)),   # violet— compliance boundary node
+        (870, 500, 42, (20,  100, 200)),   # blue  — Bedrock rollout node
+    ]
+    for (cx, cy, r, col) in nodes:
+        for ring_r, alpha in [(r, 200), (int(r * 0.67), 155), (int(r * 0.34), 118)]:
+            rd.ellipse(
+                [(cx - ring_r, cy - ring_r), (cx + ring_r, cy + ring_r)],
+                outline=(col[0], col[1], col[2], alpha), width=4
+            )
+        rp = 8
+        rd.ellipse([(cx - rp, cy - rp), (cx + rp, cy + rp)],
+                   fill=(col[0], col[1], col[2], 230))
+    base = comp(base, rl)
+
+    # 5. Fine Bauhaus grid — token-level precision, systematic rigour
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for x in range(0, W + 1, 120):
+        gd.line([(x, 0), (x, H)], fill=(18, 18, 18, 12), width=1)
+    for y in range(0, H + 1, 90):
+        gd.line([(0, y), (W, y)], fill=(18, 18, 18, 12), width=1)
+    base = comp(base, gl)
+
+    # 6. Small rectangular signal-packet scatter along the band lines
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    packet_cols = [
+        (20,  100, 200, 130),
+        (20,  170,  90, 120),
+        (190,  50,  30, 110),
+        (140,  50, 195, 110),
+    ]
+    band_ys = [153, 263, 371, 477]
+    for band_y, pcol in zip(band_ys, packet_cols):
+        for _ in range(18):
+            px = rng.randint(20, W - 20)
+            pw = rng.randint(14, 38)
+            ph = rng.randint(6, 14)
+            sd.rectangle([(px - pw, band_y - ph), (px + pw, band_y + ph)], fill=pcol)
+    base = comp(base, sl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -19299,6 +19401,7 @@ DAYS = [
     ("2026-10-31", img_klimt_20261031,    "Safety & Trust", "Gustav Klimt"),
     ("2026-11-01", img_mondrian_20261101, "Migration Grid", "Piet Mondrian"),
     ("2026-11-02", img_kandinsky_20261102, "IPO Pricing",   "Wassily Kandinsky"),
+    ("2026-11-03", img_moholy_20261103,   "AI Watermarks", "László Moholy-Nagy"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -19056,6 +19056,102 @@ def img_moholy_20261103():
     return base
 
 
+def img_calder_20261104():
+    """Alexander Calder mobile — talent & change theme — Cat Wu exit, Message Threads latency win, Residency opens.
+    Off-white ground, an asymmetric three-tier mobile armature: left side carries departures
+    (dark shapes tipping down), right side carries new capabilities (bright primaries rising),
+    central pendulum holds a coral disc representing continuity."""
+    base = Image.new("RGB", (W, H), (246, 244, 240))  # warm off-white Calder canvas
+
+    # 1. Canvas texture — subtle warm grain
+    grain_l = layer(); grd = ImageDraw.Draw(grain_l)
+    for i in range(0, W + H, 70):
+        grd.line([(i, 0), (0, i)], fill=(168, 158, 142, 12), width=1)
+        grd.line([(W - i, H), (W, H - i)], fill=(168, 158, 142, 8), width=1)
+    base = comp(base, grain_l)
+
+    # 2. Mobile armature — suspension wire + three tiers of balance beams
+    arm_l = layer(); ad = ImageDraw.Draw(arm_l)
+    ink = (22, 20, 18, 250)
+    # Ceiling suspension wire
+    ad.line([(W // 2, 10), (W // 2, 85)], fill=ink, width=6)
+    # Tier-1 beam — wide, slightly left-heavy (departures side)
+    ad.line([(120, 92), (1080, 85)], fill=ink, width=9)
+    # Left drop (departures)
+    ad.line([(120, 92), (120, 215)], fill=ink, width=5)
+    ad.line([(50, 215), (310, 215)], fill=ink, width=5)
+    ad.line([(50, 215), (50, 400)], fill=ink, width=3)
+    ad.line([(310, 215), (310, 370)], fill=ink, width=3)
+    # Right drop (new capabilities)
+    ad.line([(1080, 85), (1080, 230)], fill=ink, width=5)
+    ad.line([(840, 230), (1148, 235)], fill=ink, width=5)
+    ad.line([(840, 230), (840, 430)], fill=ink, width=3)
+    ad.line([(1148, 235), (1148, 390)], fill=ink, width=3)
+    # Central pendulum — continuity axis
+    ad.line([(600, 85), (600, 290)], fill=ink, width=6)
+    ad.line([(420, 290), (780, 290)], fill=ink, width=5)
+    ad.line([(420, 290), (420, 510)], fill=ink, width=3)
+    ad.line([(780, 290), (780, 480)], fill=ink, width=3)
+    base = comp(base, arm_l)
+
+    # 3. Primary flat shapes — each named to a theme
+    shape_defs = [
+        # Dark grey rounded-rect — departures weight (left-top, pressing down)
+        ("rect",    [(30,  110), (200, 230)],  (58, 54, 50, 238),   (22, 20, 18, 255), 5),
+        # Smaller dark triangle proxy (rect) — second departure
+        ("rect",    [(130, 220), (280, 320)],  (90, 85, 80, 220),   (22, 20, 18, 255), 4),
+        # Tiny dark dot (third departure)
+        ("ellipse", [(20,  370), (115, 455)],  (72, 68, 64, 215),   (22, 20, 18, 255), 3),
+        # Bright red disc — Message Threads latency win (right-top, rising)
+        ("ellipse", [(900, 20),  (1148, 220)], (214, 32, 36, 248),  (22, 20, 18, 255), 6),
+        # Golden yellow oval — Residency programme (right mid)
+        ("ellipse", [(780, 230), (1058, 410)], (232, 190, 12, 240), (22, 20, 18, 255), 5),
+        # Small blue disc — public beta signal (far right lower)
+        ("ellipse", [(1030, 310),(1190, 455)], (18, 72, 198, 232),  (22, 20, 18, 255), 4),
+        # Coral disc — continuity / Claude itself (central pendulum, top)
+        ("ellipse", [(460, 100), (740, 300)],  (232, 115, 74, 245), (22, 20, 18, 255), 6),
+        # Red oval — developer community (central pendulum, left lower)
+        ("ellipse", [(360, 310), (570, 490)],  (214, 32, 36, 230),  (22, 20, 18, 255), 4),
+        # Yellow disc — Anthropic momentum (central pendulum, right lower)
+        ("ellipse", [(640, 300), (860, 475)],  (232, 190, 12, 228), (22, 20, 18, 255), 4),
+        # Small blue oval — API beta (left mid, below departure tier)
+        ("ellipse", [(28,  480), (175, 598)],  (18, 72, 198, 215),  (22, 20, 18, 255), 3),
+        # Small red — lower right accent
+        ("ellipse", [(1060,415), (1198, 580)], (214, 32, 36, 210),  (22, 20, 18, 255), 3),
+    ]
+    for kind, bbox, fill, outline, lw in shape_defs:
+        sl = layer(); sd = ImageDraw.Draw(sl)
+        x0, y0 = max(0, bbox[0][0]), max(0, bbox[0][1])
+        x1, y1 = min(W, bbox[1][0]), min(H, bbox[1][1])
+        if x1 <= x0 or y1 <= y0:
+            continue
+        if kind == "ellipse":
+            sd.ellipse([(x0, y0), (x1, y1)], fill=fill, outline=outline, width=lw)
+        else:
+            sd.rounded_rectangle([(x0, y0), (x1, y1)], radius=12, fill=fill, outline=outline, width=lw)
+        base = comp(base, sl)
+
+    # 4. Black pivot dots at armature junctions
+    dots_l = layer(); dd = ImageDraw.Draw(dots_l)
+    pivots = [
+        (W // 2, 10), (W // 2, 85),
+        (120, 92), (1080, 85), (600, 85),
+        (50, 215), (310, 215), (120, 215),
+        (840, 230), (1148, 235), (1080, 230),
+        (420, 290), (780, 290), (600, 290),
+        (50, 400), (310, 370), (420, 510), (780, 480),
+        (840, 430), (1148, 390),
+    ]
+    for px, py in pivots:
+        if 0 <= px <= W and 0 <= py <= H:
+            r = 8
+            dd.ellipse([(px - r, py - r), (px + r, py + r)],
+                       fill=(22, 20, 18, 255))
+    base = comp(base, dots_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -19402,6 +19498,7 @@ DAYS = [
     ("2026-11-01", img_mondrian_20261101, "Migration Grid", "Piet Mondrian"),
     ("2026-11-02", img_kandinsky_20261102, "IPO Pricing",   "Wassily Kandinsky"),
     ("2026-11-03", img_moholy_20261103,   "AI Watermarks", "László Moholy-Nagy"),
+    ("2026-11-04", img_calder_20261104,   "Team & Change", "Alexander Calder"),
 ]
 
 for date, fn, kw, artist in DAYS:

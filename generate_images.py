@@ -19152,6 +19152,84 @@ def img_calder_20261104():
     return base
 
 
+def img_malevich_20261105():
+    """Kazimir Malevich Suprematism — election integrity / policy absolutes theme.
+    Warm cream ground. A dominant black diagonal bar sweeps across the upper canvas
+    (the absolute rule / ballot boundary). A bold red disc anchors the centre-right
+    (the ballot / democratic process). A navy rectangle anchors the lower left
+    (the enforcement zone). Yellow warning shards mark the classification break points.
+    Thin diagonal scrutiny lines traverse the whole field. Pure structure, hard limits."""
+    import math as _math
+    base = Image.new("RGB", (W, H), (237, 232, 214))  # warm cream Suprematist ground
+
+    def rotated_rect(cx, cy, hw, hh, angle_deg):
+        rad = _math.radians(angle_deg)
+        corners = [(-hw, -hh), (hw, -hh), (hw, hh), (-hw, hh)]
+        return [(cx + p[0]*_math.cos(rad) - p[1]*_math.sin(rad),
+                 cy + p[0]*_math.sin(rad) + p[1]*_math.cos(rad)) for p in corners]
+
+    # 1. Dominant black bar — the absolute rule / ballot boundary (diagonal, upper canvas)
+    nb = layer(); nd = ImageDraw.Draw(nb)
+    nd.polygon(rotated_rect(480, 180, 460, 60, -13), fill=(12, 10, 8, 255))
+    base = comp(base, nb)
+
+    # 2. Second black fragment — a severed prohibition shard (lower right)
+    fb = layer(); fd = ImageDraw.Draw(fb)
+    fd.polygon(rotated_rect(1010, 390, 150, 36, -13), fill=(12, 10, 8, 230))
+    base = comp(base, fb)
+
+    # 3. Bold red disc — the ballot / democratic process (centre-right)
+    rl = layer(); rd = ImageDraw.Draw(rl)
+    rd.ellipse([(680, 80), (1040, 420)], fill=(215, 20, 20, 0))
+    rd.ellipse([(680, 80), (1040, 420)], outline=(215, 20, 20, 255), width=32)
+    base = comp(base, rl)
+    # semi-transparent interior
+    ri = layer(); rid = ImageDraw.Draw(ri)
+    rid.ellipse([(714, 114), (1006, 386)], fill=(215, 20, 20, 36))
+    base = comp(base, ri)
+    # horizontal check-mark bar inside disc — the approval / verification mark
+    pb = layer(); pbd = ImageDraw.Draw(pb)
+    pbd.polygon(rotated_rect(860, 250, 140, 26, -10), fill=(215, 20, 20, 215))
+    base = comp(base, pb)
+
+    # 4. Navy enforcement rectangle — lower left, the policy compliance zone
+    sb = layer(); sbd = ImageDraw.Draw(sb)
+    sbd.polygon(rotated_rect(190, 490, 170, 56, -5), fill=(18, 24, 128, 248))
+    base = comp(base, sb)
+
+    # 5. Smaller navy bar — the platform boundary line (bottom sweep)
+    bb = layer(); bbd = ImageDraw.Draw(bb)
+    bbd.polygon(rotated_rect(560, 530, 480, 26, -5), fill=(18, 24, 128, 232))
+    base = comp(base, bb)
+
+    # 6. Yellow warning shards — classification flags / break-point markers
+    yl = layer(); yd = ImageDraw.Draw(yl)
+    shards = [
+        (600, 148, 48, 11, 16),
+        (710, 95,  40, 10, -6),
+        (540, 240, 44, 11, 28),
+        (95,  370, 42, 10, -14),
+        (1100, 460, 46, 11, 9),
+        (1140, 200, 38, 10, -5),
+        (430, 540, 42, 10, 20),
+        (68,  180, 36, 9,  -11),
+        (980, 540, 40, 10, 14),
+        (340, 320, 38, 9,  22),
+    ]
+    for cx, cy, hw, hh, ang in shards:
+        yd.polygon(rotated_rect(cx, cy, hw, hh, ang), fill=(232, 196, 0, 238))
+    base = comp(base, yl)
+
+    # 7. Thin diagonal scrutiny lines across the whole field
+    sl = layer(); sd = ImageDraw.Draw(sl)
+    for i in range(0, W + H, 90):
+        sd.line([(i, 0), (0, i)], fill=(90, 85, 70, 18), width=1)
+        sd.line([(W - i, H), (W, H - i)], fill=(90, 85, 70, 14), width=1)
+    base = comp(base, sl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -19499,6 +19577,7 @@ DAYS = [
     ("2026-11-02", img_kandinsky_20261102, "IPO Pricing",   "Wassily Kandinsky"),
     ("2026-11-03", img_moholy_20261103,   "AI Watermarks", "László Moholy-Nagy"),
     ("2026-11-04", img_calder_20261104,   "Team & Change", "Alexander Calder"),
+    ("2026-11-05", img_malevich_20261105, "Election Rules", "Kazimir Malevich"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -19230,6 +19230,101 @@ def img_malevich_20261105():
     return base
 
 
+def img_seurat_20261106():
+    """Georges Seurat pointillist style — finance data & trust theme.
+    Deep teal ground. Three golden node clusters represent financial hubs,
+    built up from thousands of tiny warm dots. Cyan data-flow trails arc
+    between the nodes. A broad spectral scatter across the whole field
+    suggests the density of transaction analytics. Rich dot texture."""
+    base = Image.new("RGB", (W, H), (8, 28, 42))   # deep teal-navy
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Background texture — faint cool-teal scatter
+    for _ in range(4000):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        r = rng.randint(1, 3)
+        g = rng.randint(28, 70)
+        b = rng.randint(55, 100)
+        draw.ellipse([(x-r, y-r), (x+r, y+r)], fill=(rng.randint(5, g//2), g, b))
+
+    # 2. Three golden node clusters — financial hubs
+    nodes = [(220, 420), (600, 160), (1000, 400)]
+    hub_palettes = [
+        # gold / amber cluster
+        [(200, 160, 20), (230, 190, 50), (255, 220, 100), (255, 240, 180)],
+        # green / emerald cluster (money / growth)
+        [(20, 140, 70), (50, 180, 100), (100, 220, 140), (180, 255, 200)],
+        # coral / rust cluster (trust / warmth)
+        [(200, 80, 30), (230, 120, 50), (255, 160, 90), (255, 210, 160)],
+    ]
+    for (nx, ny), palette in zip(nodes, hub_palettes):
+        for radius, col in zip([130, 85, 50, 22], palette):
+            nl = layer()
+            nd = ImageDraw.Draw(nl)
+            dot_count = 700 if radius > 80 else 400
+            for _ in range(dot_count):
+                angle = rng.uniform(0, 2 * math.pi)
+                dist = rng.uniform(0, radius)
+                dx = int(nx + dist * math.cos(angle))
+                dy = int(ny + dist * math.sin(angle))
+                dr = rng.randint(1, 5)
+                alpha = int(200 * (1 - dist / radius))
+                nd.ellipse([(dx-dr, dy-dr), (dx+dr, dy+dr)],
+                           fill=(col[0], col[1], col[2], alpha))
+            base = comp(base, nl)
+
+    # 3. Curved data-flow trails between nodes
+    arc_pairs = [(nodes[0], nodes[1]), (nodes[1], nodes[2]), (nodes[0], nodes[2])]
+    trail_colours = [(100, 220, 255), (160, 255, 180), (255, 200, 80)]
+    for idx, ((ax, ay), (bx, by)) in enumerate(arc_pairs):
+        tl = layer()
+        td = ImageDraw.Draw(tl)
+        bow = -80 if idx % 2 == 0 else 80
+        for t_i in range(240):
+            t = t_i / 239
+            mx = ax + (bx - ax) * t
+            my = ay + (by - ay) * t + bow * math.sin(math.pi * t)
+            dr = rng.randint(2, 5)
+            col = trail_colours[idx]
+            alpha = int(190 * math.sin(math.pi * t))
+            td.ellipse([(mx-dr, my-dr), (mx+dr, my+dr)],
+                       fill=(col[0], col[1], col[2], alpha))
+        base = comp(base, tl)
+
+    # 4. Mid-field data-density grid — faint rows of dots suggesting transaction table
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for row in range(60, H - 60, 22):
+        for col_x in range(60, W - 60, 18):
+            jx = rng.randint(-4, 4)
+            jy = rng.randint(-4, 4)
+            r = rng.randint(1, 3)
+            brightness = rng.randint(60, 110)
+            gd.ellipse([(col_x+jx-r, row+jy-r), (col_x+jx+r, row+jy+r)],
+                       fill=(brightness//3, brightness//2, brightness, rng.randint(20, 55)))
+    base = comp(base, gl)
+
+    # 5. Foreground spectral scatter — vivid surface dots across full canvas
+    spectral = [
+        (255, 220, 30), (50, 230, 120), (60, 190, 255),
+        (230, 90, 50), (200, 70, 240), (255, 140, 60),
+    ]
+    fl = layer()
+    fd = ImageDraw.Draw(fl)
+    for _ in range(1400):
+        x = rng.randint(0, W)
+        y = rng.randint(0, H)
+        r = rng.randint(1, 4)
+        col = rng.choice(spectral)
+        fd.ellipse([(x-r, y-r), (x+r, y+r)],
+                   fill=(col[0], col[1], col[2], rng.randint(50, 160)))
+    base = comp(base, fl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -19578,6 +19673,7 @@ DAYS = [
     ("2026-11-03", img_moholy_20261103,   "AI Watermarks", "László Moholy-Nagy"),
     ("2026-11-04", img_calder_20261104,   "Team & Change", "Alexander Calder"),
     ("2026-11-05", img_malevich_20261105, "Election Rules", "Kazimir Malevich"),
+    ("2026-11-06", img_seurat_20261106,   "Finance & Trust", "Georges Seurat"),
 ]
 
 for date, fn, kw, artist in DAYS:

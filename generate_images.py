@@ -19325,6 +19325,92 @@ def img_seurat_20261106():
     return base
 
 
+def img_leger_20261107():
+    """Fernand Léger mechanical style — election scale, developer tools, team collaboration."""
+    base = Image.new("RGB", (W, H), (12, 12, 18))
+
+    # 1. Blueprint grid — industrial precision / structured data
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for x in range(0, W, 70):
+        gd.line([(x, 0), (x, H)], fill=(35, 50, 75, 45), width=1)
+    for y in range(0, H, 70):
+        gd.line([(0, y), (W, y)], fill=(35, 50, 75, 45), width=1)
+    base = comp(base, gl)
+
+    # 2. Five bold vertical columns — server-rack / ballot-tower forms
+    columns = [
+        (60,  30, 180, 580, (210, 40, 40, 215)),    # red — far left
+        (270, 60, 390, 570, (235, 200, 0, 205)),     # yellow
+        (480, 25, 600, 580, (30,  100, 215, 215)),   # blue — centre
+        (710, 55, 830, 570, (210, 40, 40, 190)),     # red — right-centre
+        (950, 30, 1070, 580, (30, 100, 215, 200)),   # blue — far right
+    ]
+    for x0, y0, x1, y1, col in columns:
+        cl = layer()
+        cd = ImageDraw.Draw(cl)
+        cd.rectangle([(x0, y0), (x1, y1)], fill=col, outline=(0, 0, 0, 255), width=6)
+        # Metallic highlight strip
+        cd.rectangle([(x0 + 7, y0 + 8), (x0 + 20, y1 - 8)], fill=(255, 255, 255, 50))
+        base = comp(base, cl)
+
+    # 3. Three horizontal pipes — data-flow bands connecting the columns
+    pipes = [
+        (0, 150, W, 182, (255, 255, 255, 135)),   # white — top band
+        (0, 310, W, 342, (210, 40, 40, 150)),      # red — mid band
+        (0, 465, W, 492, (235, 200, 0, 140)),      # yellow — lower band
+    ]
+    for x0, y0, x1, y1, col in pipes:
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        pd.rectangle([(x0, y0), (x1, y1)], fill=col, outline=(0, 0, 0, 190), width=3)
+        base = comp(base, pl)
+
+    # 4. Large industrial gear disc — Léger's signature mechanical circle (upper right)
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    cx, cy, R = 970, 190, 185
+    dd.ellipse([(cx - R, cy - R), (cx + R, cy + R)],
+               fill=(30, 100, 215, 70), outline=(30, 100, 215, 230), width=10)
+    dd.ellipse([(cx - R + 35, cy - R + 35), (cx + R - 35, cy + R - 35)],
+               fill=(0, 0, 0, 0), outline=(235, 200, 0, 170), width=5)
+    for ang in range(0, 360, 40):
+        rad = math.radians(ang)
+        ex = cx + int((R - 10) * math.cos(rad))
+        ey = cy + int((R - 10) * math.sin(rad))
+        dd.line([(cx, cy), (ex, ey)], fill=(255, 255, 255, 80), width=3)
+    base = comp(base, dl)
+
+    # 5. Smaller accent gear — lower left
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    ax, ay, AR = 155, 460, 110
+    ad.ellipse([(ax - AR, ay - AR), (ax + AR, ay + AR)],
+               fill=(210, 40, 40, 60), outline=(210, 40, 40, 200), width=7)
+    ad.ellipse([(ax - AR + 25, ay - AR + 25), (ax + AR - 25, ay + AR - 25)],
+               fill=(0, 0, 0, 0), outline=(255, 255, 255, 100), width=4)
+    for ang in range(0, 360, 60):
+        rad = math.radians(ang)
+        ex = ax + int((AR - 8) * math.cos(rad))
+        ey = ay + int((AR - 8) * math.sin(rad))
+        ad.line([(ax, ay), (ex, ey)], fill=(255, 255, 255, 65), width=2)
+    base = comp(base, al)
+
+    # 6. Rivet dots at pipe-column intersections — Léger's industrial texture
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    rivet_xs = [60, 180, 270, 390, 480, 600, 710, 830, 950, 1070]
+    rivet_ys = [150, 310, 465]
+    for rx in rivet_xs:
+        for ry in rivet_ys:
+            r = 9
+            bd.ellipse([(rx - r, ry - r), (rx + r, ry + r)],
+                       fill=(220, 215, 200, 195), outline=(0, 0, 0, 215), width=3)
+    base = comp(base, bl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -19674,6 +19760,7 @@ DAYS = [
     ("2026-11-04", img_calder_20261104,   "Team & Change", "Alexander Calder"),
     ("2026-11-05", img_malevich_20261105, "Election Rules", "Kazimir Malevich"),
     ("2026-11-06", img_seurat_20261106,   "Finance & Trust", "Georges Seurat"),
+    ("2026-11-07", img_leger_20261107,    "Tools & Scale",   "Fernand Léger"),
 ]
 
 for date, fn, kw, artist in DAYS:

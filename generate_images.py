@@ -19411,6 +19411,101 @@ def img_leger_20261107():
     return base
 
 
+def img_rothko_20261108():
+    """Mark Rothko Colour Field style — IPO anticipation and agent dreaming theme.
+    Three luminous soft-edged horizontal bands: deep amber-gold at the top (IPO
+    anticipation, capital momentum), a rich indigo-violet centre (the dreaming
+    depth, memory consolidation), and a warm dark-crimson base (foundational
+    compute infrastructure). Hazy glowing edges between bands evoke Rothko's
+    characteristic luminosity. Fine scatter of radiant motes drifts across
+    the surface, suggesting tokens and data points resolving into meaning."""
+
+    # ── Band colours ────────────────────────────────────────────────────────
+    # Top band — amber/gold: IPO, capital, anticipation
+    TOP_COL    = (148, 82, 18)
+    TOP_GLOW   = (220, 155, 60)
+    # Mid band — indigo/violet: Dreaming, memory depth
+    MID_COL    = (28, 18, 90)
+    MID_GLOW   = (100, 68, 200)
+    # Bottom band — dark crimson: compute foundation, infrastructure
+    BOT_COL    = (88, 12, 28)
+    BOT_GLOW   = (200, 55, 80)
+
+    base = Image.new("RGB", (W, H), (8, 6, 12))
+    draw = ImageDraw.Draw(base)
+
+    # 1. Top amber band — y 0..250
+    for y in range(0, 260):
+        t = y / 260.0
+        r = int(TOP_COL[0] + (TOP_GLOW[0] - TOP_COL[0]) * (1 - t) * 0.85)
+        g = int(TOP_COL[1] + (TOP_GLOW[1] - TOP_COL[1]) * (1 - t) * 0.85)
+        b = int(TOP_COL[2] + (TOP_GLOW[2] - TOP_COL[2]) * (1 - t) * 0.85)
+        draw.rectangle([(0, y), (W, y)], fill=(r, g, b))
+
+    # 2. Mid indigo band — y 220..420
+    for y in range(220, 430):
+        # peaks in brightness at centre ~y=320
+        t = abs(y - 325) / 110.0
+        glow = max(0.0, 1.0 - t)
+        r = int(MID_COL[0] + (MID_GLOW[0] - MID_COL[0]) * glow * 0.9)
+        g = int(MID_COL[1] + (MID_GLOW[1] - MID_COL[1]) * glow * 0.9)
+        b = int(MID_COL[2] + (MID_GLOW[2] - MID_COL[2]) * glow * 0.9)
+        draw.rectangle([(0, y), (W, y)], fill=(r, g, b))
+
+    # 3. Bottom crimson band — y 400..630
+    for y in range(400, H):
+        t = (y - 400) / (H - 400)
+        r = int(BOT_GLOW[0] + (BOT_COL[0] - BOT_GLOW[0]) * t * 0.8)
+        g = int(BOT_GLOW[1] + (BOT_COL[1] - BOT_GLOW[1]) * t * 0.8)
+        b = int(BOT_GLOW[2] + (BOT_COL[2] - BOT_GLOW[2]) * t * 0.8)
+        draw.rectangle([(0, y), (W, y)], fill=(r, g, b))
+
+    # 4. Soft luminous edge between top and mid bands (~y=250) — amber glow bleeds down
+    el1 = layer()
+    ed1 = ImageDraw.Draw(el1)
+    for dy in range(40):
+        alpha = int(120 * (1 - dy / 40.0) ** 2)
+        ed1.rectangle([(0, 250 + dy), (W, 251 + dy)], fill=(220, 150, 50, alpha))
+    base = comp(base, el1)
+
+    # 5. Soft luminous edge between mid and bottom bands (~y=415) — violet lifts into crimson
+    el2 = layer()
+    ed2 = ImageDraw.Draw(el2)
+    for dy in range(40):
+        alpha = int(100 * (1 - dy / 40.0) ** 2)
+        ed2.rectangle([(0, 415 + dy), (W, 416 + dy)], fill=(130, 60, 180, alpha))
+    base = comp(base, el2)
+
+    # 6. Fine luminous mote scatter — tokens resolving into meaning
+    ml = layer()
+    md = ImageDraw.Draw(ml)
+    mote_palettes = [
+        (255, 220, 110),   # gold — top zone
+        (140, 100, 255),   # violet — mid zone
+        (255, 90,  110),   # rose — bottom zone
+        (255, 255, 220),   # near-white — crossing zones
+    ]
+    for _ in range(900):
+        mx = rng.randint(0, W)
+        my = rng.randint(0, H)
+        mr = rng.randint(1, 4)
+        col = rng.choice(mote_palettes)
+        alpha = rng.randint(30, 140)
+        md.ellipse([(mx-mr, my-mr), (mx+mr, my+mr)],
+                   fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, ml)
+
+    # 7. Faint horizontal texture lines — Rothko's canvas grain
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    for y in range(0, H, rng.randint(3, 8)):
+        alpha = rng.randint(4, 18)
+        td.line([(0, y), (W, y)], fill=(255, 255, 255, alpha), width=1)
+    base = comp(base, tl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -19761,6 +19856,7 @@ DAYS = [
     ("2026-11-05", img_malevich_20261105, "Election Rules", "Kazimir Malevich"),
     ("2026-11-06", img_seurat_20261106,   "Finance & Trust", "Georges Seurat"),
     ("2026-11-07", img_leger_20261107,    "Tools & Scale",   "Fernand Léger"),
+    ("2026-11-08", img_rothko_20261108,   "IPO & Dreaming",  "Mark Rothko"),
 ]
 
 for date, fn, kw, artist in DAYS:

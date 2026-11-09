@@ -19506,6 +19506,102 @@ def img_rothko_20261108():
     return base
 
 
+def img_balla_20261109():
+    """Giacomo Balla Futurist style — power infrastructure, enterprise velocity, IPO momentum."""
+    base = Image.new("RGB", (W, H), (8, 6, 14))  # near-black bg
+
+    # 1. Radiating force-planes from lower-left VP — industrial energy burst
+    vp_x, vp_y = -80, H + 60   # vanishing point: off lower-left
+    ray_colours = [
+        (220, 60, 20, 180),    # hot orange-red — combustion
+        (255, 180, 0, 160),    # amber — electrical charge
+        (60, 160, 240, 150),   # electric blue — data current
+        (255, 240, 60, 130),   # yellow — voltage
+        (200, 30, 80, 140),    # crimson — power grid
+        (80, 230, 160, 120),   # green — financial pulse
+        (240, 100, 220, 110),  # violet — IPO energy
+    ]
+    for i, col in enumerate(ray_colours):
+        angle = math.radians(-15 + i * 28)
+        far_x = vp_x + int(math.cos(angle) * 2200)
+        far_y = vp_y + int(math.sin(angle) * 2200)
+        # Wedge — draw 3 overlapping lines of decreasing alpha for plane feel
+        for width, alpha_mul in [(38, 1.0), (22, 0.6), (10, 0.3)]:
+            pl = layer()
+            pd = ImageDraw.Draw(pl)
+            a = int(col[3] * alpha_mul)
+            pd.line([(vp_x, vp_y), (far_x, far_y)],
+                    fill=(col[0], col[1], col[2], a), width=width)
+            base = comp(base, pl)
+
+    # 2. Secondary burst from upper-right — counter-thrust (IPO momentum)
+    vp2_x, vp2_y = W + 100, -80
+    burst2 = [
+        (255, 200, 20, 140),   # gold
+        (220, 80, 30, 120),    # orange
+        (60, 200, 255, 110),   # cyan
+        (255, 60, 120, 100),   # rose
+    ]
+    for i, col in enumerate(burst2):
+        angle = math.radians(160 + i * 22)
+        far_x = vp2_x + int(math.cos(angle) * 1800)
+        far_y = vp2_y + int(math.sin(angle) * 1800)
+        for width, alpha_mul in [(28, 1.0), (16, 0.55), (7, 0.25)]:
+            pl = layer()
+            pd = ImageDraw.Draw(pl)
+            a = int(col[3] * alpha_mul)
+            pd.line([(vp2_x, vp2_y), (far_x, far_y)],
+                    fill=(col[0], col[1], col[2], a), width=width)
+            base = comp(base, pl)
+
+    # 3. Motion-arc lines — Balla's signature speed curves (concentric arcs)
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    arc_cx, arc_cy = W // 2 + 80, H // 2 - 40
+    for r in range(80, 420, 55):
+        col_idx = (r // 55) % len(ray_colours)
+        col = ray_colours[col_idx]
+        ad.arc([(arc_cx - r, arc_cy - r), (arc_cx + r, arc_cy + r)],
+               start=200, end=340,
+               fill=(col[0], col[1], col[2], 100), width=4)
+    base = comp(base, al)
+
+    # 4. Central energy node — generator core (bright concentric rings)
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    nx, ny = W // 2 + 60, H // 2 - 20
+    for r, col, alpha in [
+        (95,  (255, 220, 80),  180),
+        (68,  (255, 160, 20),  200),
+        (44,  (255, 240, 140), 220),
+        (22,  (255, 255, 220), 240),
+        (8,   (255, 255, 255), 255),
+    ]:
+        nd.ellipse([(nx - r, ny - r), (nx + r, ny + r)],
+                   fill=(col[0], col[1], col[2], alpha),
+                   outline=(0, 0, 0, 180), width=2)
+    base = comp(base, nl)
+
+    # 5. Kinetic particle scatter — tokens and watts in motion
+    pl2 = layer()
+    pd2 = ImageDraw.Draw(pl2)
+    particle_cols = [
+        (255, 200, 60), (60, 200, 255), (220, 60, 20),
+        (255, 80, 150), (80, 230, 140), (255, 255, 180),
+    ]
+    for _ in range(1600):
+        px = rng.randint(0, W)
+        py = rng.randint(0, H)
+        pr = rng.randint(1, 5)
+        col = rng.choice(particle_cols)
+        alpha = rng.randint(25, 130)
+        pd2.ellipse([(px - pr, py - pr), (px + pr, py + pr)],
+                    fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, pl2)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -19857,6 +19953,7 @@ DAYS = [
     ("2026-11-06", img_seurat_20261106,   "Finance & Trust", "Georges Seurat"),
     ("2026-11-07", img_leger_20261107,    "Tools & Scale",   "Fernand Léger"),
     ("2026-11-08", img_rothko_20261108,   "IPO & Dreaming",  "Mark Rothko"),
+    ("2026-11-09", img_balla_20261109,    "Power & IPO",     "Giacomo Balla"),
 ]
 
 for date, fn, kw, artist in DAYS:

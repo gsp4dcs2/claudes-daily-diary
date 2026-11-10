@@ -19602,6 +19602,127 @@ def img_balla_20261109():
     return base
 
 
+def img_klimt_20261110():
+    """Gustav Klimt — near-black velvet bg, golden orbital rings radiating from
+    a luminous model-launch core, interlocking spiral fragments, ruby velocity
+    arcs for fast-mode speed, teal cognition nodes — New Frontiers theme."""
+    import math as _math
+    base = Image.new("RGB", (W, H), (8, 4, 16))  # near-black deep velvet bg
+
+    # 1. Central luminous launch core — the new model emerges
+    glow_l = layer()
+    gd = ImageDraw.Draw(glow_l)
+    cx, cy = W // 2, H // 2
+    for r, a in [(360, 12), (280, 20), (200, 32), (130, 44), (75, 50), (38, 44)]:
+        gd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=(190, 148, 28, a))
+    base = comp(base, glow_l)
+
+    # 2. Five concentric gold orbital rings — model capability bands
+    ring_l = layer()
+    rd = ImageDraw.Draw(ring_l)
+    for band_r, alpha in [(310, 55), (245, 70), (185, 80), (130, 90), (80, 85)]:
+        rd.ellipse([(cx - band_r, cy - band_r), (cx + band_r, cy + band_r)],
+                   outline=(212, 172, 48, alpha), width=rng.randint(2, 4))
+    base = comp(base, ring_l)
+
+    # 3. 16 cognition nodes arranged on the 245-radius ring, teal glow
+    teal_l = layer()
+    td = ImageDraw.Draw(teal_l)
+    node_r = 245
+    n_nodes = 16
+    nodes = [
+        (int(cx + node_r * _math.cos(_math.radians(360 * i / n_nodes))),
+         int(cy + node_r * _math.sin(_math.radians(360 * i / n_nodes))))
+        for i in range(n_nodes)
+    ]
+    for nx, ny in nodes:
+        for nr in range(6, 28, 7):
+            td.ellipse([(nx - nr, ny - nr), (nx + nr, ny + nr)],
+                       outline=(32, 155, 140, rng.randint(60, 130)), width=rng.randint(1, 3))
+    # Central teal seal for the core
+    for nr in range(10, 60, 14):
+        td.ellipse([(cx - nr, cy - nr), (cx + nr, cy + nr)],
+                   outline=(40, 170, 155, rng.randint(55, 120)), width=rng.randint(2, 4))
+    base = comp(base, teal_l)
+
+    # 4. Gold lattice spokes from centre to each node — Klimt web structure
+    web_l = layer()
+    wd = ImageDraw.Draw(web_l)
+    for nx, ny in nodes:
+        alpha = rng.randint(35, 90)
+        wd.line([(cx, cy), (nx, ny)], fill=(205, 165, 44, alpha), width=rng.randint(1, 2))
+    # Cross-links between adjacent nodes
+    for i in range(n_nodes):
+        nx1, ny1 = nodes[i]
+        nx2, ny2 = nodes[(i + 1) % n_nodes]
+        wd.line([(nx1, ny1), (nx2, ny2)], fill=(190, 155, 38, rng.randint(28, 70)), width=1)
+    base = comp(base, web_l)
+
+    # 5. Ruby velocity arcs — fast mode speed lines sweeping diagonally
+    ruby_l = layer()
+    rbd = ImageDraw.Draw(ruby_l)
+    arc_colours = [(180, 32, 48), (200, 48, 60), (165, 28, 42), (220, 56, 72)]
+    for i in range(14):
+        arc_cx = rng.randint(cx - 220, cx + 220)
+        arc_cy = rng.randint(cy - 180, cy + 180)
+        arc_r  = rng.randint(55, 180)
+        start_a = rng.randint(0, 360)
+        span    = rng.randint(28, 90)
+        col = arc_colours[rng.randint(0, len(arc_colours) - 1)]
+        rbd.arc([(arc_cx - arc_r, arc_cy - arc_r), (arc_cx + arc_r, arc_cy + arc_r)],
+                start=start_a, end=start_a + span,
+                fill=(col[0], col[1], col[2], rng.randint(55, 115)), width=rng.randint(2, 5))
+    base = comp(base, ruby_l)
+
+    # 6. Dense Klimt mosaic fragments — small gold/rust/teal polygons scattered
+    mosaic_l = layer()
+    md = ImageDraw.Draw(mosaic_l)
+    palette = [
+        (218, 178, 56), (200, 158, 42), (236, 204, 88),
+        (176, 138, 36), (158, 118, 28), (246, 218, 108),
+        (28, 148, 136),  (42, 165, 150),
+        (155, 42, 58),   (175, 56, 72),
+    ]
+    for _ in range(380):
+        mx = rng.randint(0, W)
+        my = rng.randint(0, H)
+        mw = rng.randint(4, 18)
+        mh = rng.randint(4, 14)
+        angle = rng.randint(0, 180)
+        col = palette[rng.randint(0, len(palette) - 1)]
+        alpha = rng.randint(28, 80)
+        cosA = _math.cos(_math.radians(angle))
+        sinA = _math.sin(_math.radians(angle))
+        pts = [
+            (mx + cosA * mw - sinA * mh, my + sinA * mw + cosA * mh),
+            (mx - cosA * mw - sinA * mh, my - sinA * mw + cosA * mh),
+            (mx - cosA * mw + sinA * mh, my - sinA * mw - cosA * mh),
+            (mx + cosA * mw + sinA * mh, my + sinA * mw - cosA * mh),
+        ]
+        md.polygon(pts, fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, mosaic_l)
+
+    # 7. Spiral arms unwinding from centre — Klimt golden coils
+    spiral_l = layer()
+    sd = ImageDraw.Draw(spiral_l)
+    for arm in range(4):
+        base_angle = 90 * arm
+        pts = []
+        for step in range(180):
+            theta = _math.radians(base_angle + step * 2.2)
+            radius = 12 + step * 1.55
+            if radius > 290:
+                break
+            pts.append((int(cx + radius * _math.cos(theta)),
+                         int(cy + radius * _math.sin(theta))))
+        for k in range(len(pts) - 1):
+            alpha = int(28 + (k / max(len(pts), 1)) * 60)
+            sd.line([pts[k], pts[k + 1]], fill=(220, 180, 52, alpha), width=rng.randint(1, 2))
+    base = comp(base, spiral_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -19954,6 +20075,7 @@ DAYS = [
     ("2026-11-07", img_leger_20261107,    "Tools & Scale",   "Fernand Léger"),
     ("2026-11-08", img_rothko_20261108,   "IPO & Dreaming",  "Mark Rothko"),
     ("2026-11-09", img_balla_20261109,    "Power & IPO",     "Giacomo Balla"),
+    ("2026-11-10", img_klimt_20261110,   "New Frontiers",   "Gustav Klimt"),
 ]
 
 for date, fn, kw, artist in DAYS:

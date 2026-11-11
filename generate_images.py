@@ -19723,6 +19723,94 @@ def img_klimt_20261110():
     return base
 
 
+def img_klee_20261111():
+    """Paul Klee colour-cell grid — Claude Cowork Suite launch: interconnected
+    productivity cells (Meetings, Whiteboards, Sheets, Data) in warm amber,
+    teal, violet, and green zones with white hub nodes."""
+    import math as _math
+    base = Image.new("RGB", (W, H), (12, 15, 28))
+    draw = ImageDraw.Draw(base)
+
+    # 1. Klee-style colour-cell grid — four zone palette transitions
+    cell_w, cell_h = 80, 65
+    cols_n = _math.ceil(W / cell_w) + 1
+    rows_n = _math.ceil(H / cell_h) + 1
+
+    amber_p  = [(195, 110, 30), (220, 140, 50), (240, 160, 60),
+                (200, 120, 40), (215, 150, 55), (185, 100, 28)]
+    teal_p   = [(25,  110, 120), (40, 140, 155), (55, 160, 175),
+                (30,  125, 135), (50, 150, 165), (20,  95, 108)]
+    violet_p = [(100,  55, 160), (125,  70, 190), (145,  85, 210),
+                (110,  60, 175), (130,  80, 200), (90,   48, 148)]
+    green_p  = [(40,  140,  70), (55, 165,  90), (70, 185, 110),
+                (45,  150,  80), (65, 175, 100), (35, 125,  60)]
+
+    for row in range(rows_n):
+        y0 = row * cell_h
+        for col in range(cols_n):
+            x0 = col * cell_w
+            x_frac = (x0 + cell_w / 2) / W
+            if x_frac < 0.25:
+                palette = amber_p
+            elif x_frac < 0.50:
+                palette = teal_p
+            elif x_frac < 0.75:
+                palette = violet_p
+            else:
+                palette = green_p
+            idx = (row * 3 + col * 7) % len(palette)
+            bc = palette[idx]
+            r = max(0, min(255, bc[0] + rng.randint(-18, 18)))
+            g = max(0, min(255, bc[1] + rng.randint(-18, 18)))
+            b = max(0, min(255, bc[2] + rng.randint(-18, 18)))
+            draw.rectangle([(x0, y0), (x0 + cell_w - 2, y0 + cell_h - 2)],
+                           fill=(r, g, b))
+
+    # 2. Dark Klee grid lines
+    for col in range(cols_n + 1):
+        draw.line([(col * cell_w, 0), (col * cell_w, H)],
+                  fill=(6, 8, 18), width=2)
+    for row in range(rows_n + 1):
+        draw.line([(0, row * cell_h), (W, row * cell_h)],
+                  fill=(6, 8, 18), width=2)
+
+    # 3. White hub nodes at grid intersections — the four Cowork tools + connectors
+    hub_positions = [
+        (160, 130), (400, 130), (640, 130), (880, 130), (1120, 130),
+        (80,  260), (320, 260), (560, 260), (800, 260), (1040, 260),
+        (160, 390), (400, 390), (640, 390), (880, 390), (1120, 390),
+        (80,  520), (320, 520), (560, 520), (800, 520), (1040, 520),
+    ]
+    for nx, ny in hub_positions:
+        r_n = rng.randint(10, 20)
+        nl = layer()
+        nd = ImageDraw.Draw(nl)
+        nd.ellipse([(nx - r_n, ny - r_n), (nx + r_n, ny + r_n)],
+                   fill=(255, 255, 255, 195), outline=(220, 220, 220, 140), width=2)
+        base = comp(base, nl)
+
+    # 4. Connection lines between adjacent hub nodes (tool inter-links)
+    connections = [
+        (0, 1), (1, 2), (2, 3), (3, 4),
+        (5, 6), (6, 7), (7, 8), (8, 9),
+        (10, 11), (11, 12), (12, 13), (13, 14),
+        (15, 16), (16, 17), (17, 18), (18, 19),
+        (0, 5),  (1, 6),  (2, 7),  (3, 8),  (4, 9),
+        (5, 10), (6, 11), (7, 12), (8, 13), (9, 14),
+        (10, 15), (11, 16), (12, 17), (13, 18), (14, 19),
+        (1, 7), (2, 8), (6, 12), (7, 13), (11, 17), (12, 18),
+    ]
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    for a, b_i in connections:
+        if a < len(hub_positions) and b_i < len(hub_positions):
+            cd.line([hub_positions[a], hub_positions[b_i]],
+                    fill=(255, 255, 255, 48), width=1)
+    base = comp(base, cl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -20076,6 +20164,7 @@ DAYS = [
     ("2026-11-08", img_rothko_20261108,   "IPO & Dreaming",  "Mark Rothko"),
     ("2026-11-09", img_balla_20261109,    "Power & IPO",     "Giacomo Balla"),
     ("2026-11-10", img_klimt_20261110,   "New Frontiers",   "Gustav Klimt"),
+    ("2026-11-11", img_klee_20261111,    "Cowork Suite",    "Paul Klee"),
 ]
 
 for date, fn, kw, artist in DAYS:

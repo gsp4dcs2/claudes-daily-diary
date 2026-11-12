@@ -19811,6 +19811,154 @@ def img_klee_20261111():
     return base
 
 
+def img_franz_marc_20261112():
+    """Franz Marc jewel-tone style — AI safety policy and model welfare:
+    rich cobalt background, stylised protective animal forms in emerald and
+    amber, golden halos, forest-green geometric framing shapes."""
+    import math as _math
+    base = Image.new("RGB", (W, H), (18, 32, 95))   # deep cobalt blue
+
+    # 1. Textured cobalt bg — subtle darker/lighter cobalt wash patches
+    tex_l = layer()
+    td = ImageDraw.Draw(tex_l)
+    for _ in range(55):
+        tx = rng.randint(0, W)
+        ty = rng.randint(0, H)
+        tr = rng.randint(60, 220)
+        alpha = rng.randint(10, 36)
+        col = (rng.randint(10, 38), rng.randint(28, 60), rng.randint(100, 155))
+        td.ellipse([(tx - tr, ty - tr), (tx + tr, ty + tr)],
+                   fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, tex_l)
+
+    # 2. Forest-green geometric framing arcs — Franz Marc's nature geometry
+    arc_l = layer()
+    ad = ImageDraw.Draw(arc_l)
+    green_shades = [
+        (28, 118, 72), (38, 148, 92), (22, 96, 58),
+        (50, 165, 105), (18, 82, 50), (60, 180, 115),
+    ]
+    for i in range(14):
+        cx = rng.randint(0, W)
+        cy = rng.randint(0, H)
+        r  = rng.randint(80, 320)
+        sa = rng.randint(0, 360)
+        ea = sa + rng.randint(45, 160)
+        col = green_shades[i % len(green_shades)]
+        alpha = rng.randint(55, 115)
+        w = rng.randint(3, 9)
+        ad.arc([(cx - r, cy - r), (cx + r, cy + r)],
+               start=sa, end=ea,
+               fill=(col[0], col[1], col[2], alpha), width=w)
+    base = comp(base, arc_l)
+
+    # 3. Large stylised stag form (central protective figure) — emerald body
+    stag_l = layer()
+    sd = ImageDraw.Draw(stag_l)
+    # Body — large rounded emerald ellipse, slightly tilted
+    bx, by = 540, 290
+    sd.ellipse([(bx - 170, by - 100), (bx + 170, by + 100)],
+               fill=(30, 142, 88, 185))
+    # Head — smaller circle, upper right
+    hx, hy = bx + 155, by - 115
+    sd.ellipse([(hx - 65, hy - 65), (hx + 65, hy + 65)],
+               fill=(34, 155, 95, 190))
+    # Neck connecting body to head
+    sd.polygon([
+        (bx + 95, by - 60), (bx + 115, by - 85),
+        (hx - 48, hy + 42), (hx - 65, hy + 20),
+    ], fill=(32, 148, 90, 175))
+    # Antler left
+    ax1, ay1 = hx - 18, hy - 60
+    sd.line([(ax1, ay1), (ax1 - 38, ay1 - 72)],
+            fill=(22, 108, 65, 200), width=8)
+    sd.line([(ax1 - 20, ay1 - 38), (ax1 - 58, ay1 - 60)],
+            fill=(22, 108, 65, 185), width=6)
+    # Antler right
+    ax2, ay2 = hx + 18, hy - 55
+    sd.line([(ax2, ay2), (ax2 + 42, ay2 - 68)],
+            fill=(22, 108, 65, 200), width=8)
+    sd.line([(ax2 + 22, ay2 - 35), (ax2 + 60, ay2 - 55)],
+            fill=(22, 108, 65, 185), width=6)
+    # Four amber legs
+    for lx in [bx - 115, bx - 48, bx + 48, bx + 115]:
+        sd.line([(lx, by + 85), (lx + rng.randint(-8, 8), by + 175)],
+                fill=(195, 128, 32, 165), width=10)
+    base = comp(base, stag_l)
+
+    # 4. Golden halo / protective ring around the stag — safety aura
+    halo_l = layer()
+    hd = ImageDraw.Draw(halo_l)
+    for radius, alpha in [(230, 22), (210, 32), (192, 42), (175, 52), (160, 38)]:
+        hd.ellipse([(bx - radius, by - radius), (bx + radius, by + radius)],
+                   outline=(212, 172, 48, alpha), width=rng.randint(3, 7))
+    base = comp(base, halo_l)
+
+    # 5. Secondary figure: small fox form lower-left — amber and rust
+    fox_l = layer()
+    fd = ImageDraw.Draw(fox_l)
+    fx, fy = 195, 445
+    # Fox body
+    fd.ellipse([(fx - 72, fy - 42), (fx + 72, fy + 42)],
+               fill=(195, 95, 28, 178))
+    # Fox head
+    fd.ellipse([(fx + 52, fy - 60), (fx + 115, fy + 5)],
+               fill=(210, 110, 35, 182))
+    # Bushy tail
+    fd.ellipse([(fx - 148, fy - 28), (fx - 55, fy + 48)],
+               fill=(188, 82, 22, 160))
+    fd.ellipse([(fx - 142, fy - 20), (fx - 68, fy + 38)],
+               fill=(240, 230, 220, 90))
+    base = comp(base, fox_l)
+
+    # 6. Scattered amber leaf-like shapes — Franz Marc's nature fragments
+    leaf_l = layer()
+    ld = ImageDraw.Draw(leaf_l)
+    amber_tones = [
+        (220, 160, 42), (200, 138, 32), (235, 178, 55),
+        (175, 115, 25), (245, 195, 72),
+    ]
+    for _ in range(42):
+        lx = rng.randint(0, W)
+        ly = rng.randint(0, H)
+        lw = rng.randint(12, 48)
+        lh = rng.randint(6, 24)
+        angle = rng.randint(0, 180)
+        col = amber_tones[rng.randint(0, len(amber_tones) - 1)]
+        alpha = rng.randint(38, 95)
+        cosA = _math.cos(_math.radians(angle))
+        sinA = _math.sin(_math.radians(angle))
+        pts = [
+            (lx + cosA * lw, ly + sinA * lw),
+            (lx - sinA * lh, ly + cosA * lh),
+            (lx - cosA * lw, ly - sinA * lw),
+            (lx + sinA * lh, ly - cosA * lh),
+        ]
+        ld.polygon(pts, fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, leaf_l)
+
+    # 7. Jewel-tone accent dots scattered — emerald, cobalt, amber
+    dot_l = layer()
+    dd = ImageDraw.Draw(dot_l)
+    dot_palette = [
+        (38, 165, 105), (48, 185, 120),   # emerald
+        (22, 68, 180),  (38, 90, 210),    # cobalt
+        (218, 165, 42), (235, 185, 60),   # amber
+        (155, 32, 72),  (175, 48, 90),    # ruby
+    ]
+    for _ in range(90):
+        dx = rng.randint(0, W)
+        dy = rng.randint(0, H)
+        dr = rng.randint(3, 10)
+        col = dot_palette[rng.randint(0, len(dot_palette) - 1)]
+        alpha = rng.randint(80, 185)
+        dd.ellipse([(dx - dr, dy - dr), (dx + dr, dy + dr)],
+                   fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, dot_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -20165,6 +20313,7 @@ DAYS = [
     ("2026-11-09", img_balla_20261109,    "Power & IPO",     "Giacomo Balla"),
     ("2026-11-10", img_klimt_20261110,   "New Frontiers",   "Gustav Klimt"),
     ("2026-11-11", img_klee_20261111,    "Cowork Suite",    "Paul Klee"),
+    ("2026-11-12", img_franz_marc_20261112, "AI Policy",   "Franz Marc"),
 ]
 
 for date, fn, kw, artist in DAYS:

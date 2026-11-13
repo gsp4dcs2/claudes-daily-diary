@@ -19959,6 +19959,99 @@ def img_franz_marc_20261112():
     return base
 
 
+def img_delaunay_20261113():
+    """Robert Delaunay Orphism style — Claude Meetings signals, cross-platform communication theme.
+    Deep near-black bg, four large overlapping spectral-ring disc stacks representing
+    meeting streams and IPO signal channels, arc connectors linking focal nodes,
+    scattered satellite discs and data-dot texture."""
+    base = Image.new("RGB", (W, H), (8, 10, 25))  # deep near-black bg
+
+    # 1. Four large spectral disc stacks — meetings + signals + IPO channels
+    disc_defs = [
+        (280, 320, 240,  0),   # A — warm red→yellow (meetings/calls)
+        (870, 290, 220, 140),  # B — green→blue (IPO signal)
+        (590, 155, 190, 250),  # C — violet→orange (code mode)
+        (680, 490, 175,  60),  # D — yellow→cyan (platform)
+    ]
+    for cx, cy, max_r, h0 in disc_defs:
+        dl = layer()
+        dd = ImageDraw.Draw(dl)
+        n_rings = 12
+        for i in range(n_rings, 0, -1):
+            r = int(max_r * i / n_rings)
+            hue = (h0 + (n_rings - i) * 28) % 360
+            h_i = hue / 60.0
+            f = h_i - int(h_i)
+            v, s = 220, 0.87
+            p = int(v * (1 - s))
+            q = int(v * (1 - s * f))
+            t = int(v * (1 - s * (1 - f)))
+            hi = int(h_i) % 6
+            rgb_map = [(v, t, p), (q, v, p), (p, v, t), (p, q, v), (t, p, v), (v, p, q)]
+            r_, g_, b_ = rgb_map[hi]
+            alpha = 45 + int(45 * (1 - i / n_rings))
+            dd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=(r_, g_, b_, alpha))
+        base = comp(base, dl)
+
+    # 2. White luminous node circles at disc centres
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    for cx, cy, _, _ in disc_defs:
+        nd.ellipse([(cx - 22, cy - 22), (cx + 22, cy + 22)], fill=(255, 255, 255, 220))
+        nd.ellipse([(cx - 10, cy - 10), (cx + 10, cy + 10)], fill=(8, 10, 25, 255))
+    base = comp(base, nl)
+
+    # 3. Arc connectors — linking the four disc nodes
+    acl = layer()
+    acd = ImageDraw.Draw(acl)
+    acd.arc([(180, 230), (990, 500)], start=200, end=355, fill=(255, 240, 160, 70), width=3)
+    acd.arc([(60,  40),  (700, 440)], start=310, end=  10, fill=(180, 225, 255, 60), width=2)
+    acd.arc([(480,  10), (1050, 420)], start=150, end=250, fill=(210, 255, 195, 55), width=2)
+    acd.arc([(350, 300), (900, 590)], start=185, end=360, fill=(255, 190, 220, 50), width=2)
+    base = comp(base, acl)
+
+    # 4. Satellite accent discs — small secondary rings at canvas corners and edges
+    sal = layer()
+    sad = ImageDraw.Draw(sal)
+    accents = [
+        (100,  80, 60,  45),   # top-left — warm disc
+        (1100, 95, 70, 300),   # top-right — violet disc
+        (160, 555, 52,  30),   # bottom-left — red-orange
+        (1050, 510, 65, 185),  # bottom-right — teal
+        (560,  525, 48, 110),  # bottom-centre — yellow-green
+        (990,  420, 40, 220),  # mid-right — indigo
+    ]
+    for ax, ay, ar, ah in accents:
+        for i in range(5, 0, -1):
+            r = int(ar * i / 5)
+            hue = (ah + i * 28) % 360
+            h_i = hue / 60.0
+            f = h_i - int(h_i)
+            v, s = 205, 0.80
+            p = int(v * (1 - s))
+            q = int(v * (1 - s * f))
+            t = int(v * (1 - s * (1 - f)))
+            hi = int(h_i) % 6
+            rgb_map = [(v, t, p), (q, v, p), (p, v, t), (p, q, v), (t, p, v), (v, p, q)]
+            r_, g_, b_ = rgb_map[hi]
+            sad.ellipse([(ax - r, ay - r), (ax + r, ay + r)], fill=(r_, g_, b_, 42))
+    base = comp(base, sal)
+
+    # 5. Fine dot scatter — signal density texture across the full canvas
+    dotl = layer()
+    dotd = ImageDraw.Draw(dotl)
+    dot_cols = [(255, 205, 60), (75, 215, 175), (215, 88, 165), (140, 200, 255), (240, 148, 32)]
+    for _ in range(100):
+        dx = rng.randint(0, W)
+        dy = rng.randint(0, H)
+        dr = rng.randint(2, 5)
+        dc = dot_cols[rng.randint(0, len(dot_cols) - 1)]
+        dotd.ellipse([(dx - dr, dy - dr), (dx + dr, dy + dr)], fill=(*dc, 105))
+    base = comp(base, dotl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -20314,6 +20407,7 @@ DAYS = [
     ("2026-11-10", img_klimt_20261110,   "New Frontiers",   "Gustav Klimt"),
     ("2026-11-11", img_klee_20261111,    "Cowork Suite",    "Paul Klee"),
     ("2026-11-12", img_franz_marc_20261112, "AI Policy",   "Franz Marc"),
+    ("2026-11-13", img_delaunay_20261113,  "Meetings Live", "Robert Delaunay"),
 ]
 
 for date, fn, kw, artist in DAYS:

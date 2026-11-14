@@ -20052,6 +20052,75 @@ def img_delaunay_20261113():
     return base
 
 
+def img_lissitzky_20261114():
+    """El Lissitzky Constructivism — Cowork GA rollout and security hardening theme.
+    Cream bg, solid red left panel (GA launches), bold black centre pillar
+    (security/stability), right panel with concentric-square bullseye
+    (the security patch target), fine measurement rules, cream diagonal slash
+    cutting the red panel, and a small module endpoint marker."""
+    base = Image.new("RGB", (W, H), (245, 242, 232))  # classic Lissitzky cream
+
+    # 1. Solid red left panel — Cowork GA rollout energy
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.rectangle([(0, 0), (500, H)], fill=(210, 25, 25, 240))
+    base = comp(base, rl)
+
+    # 2. Central black spine — security / stability pillar
+    vl = layer()
+    vd = ImageDraw.Draw(vl)
+    vd.rectangle([(500, 0), (560, H)], fill=(15, 15, 15, 255))
+    base = comp(base, vl)
+
+    # 3. Cream diagonal slash across red panel — product launch announcement
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    dd.polygon([(0, 0), (320, 0), (0, 480)], fill=(245, 242, 232, 200))
+    base = comp(base, dl)
+
+    # 4. Black horizontal baseline at bottom-right panel
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bd.rectangle([(560, H - 50), (W, H)], fill=(15, 15, 15, 255))
+    base = comp(base, bl)
+
+    # 5. Concentric square bullseye — security patch target (right panel centre)
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    cx, cy = 900, 290
+    for s, col in zip(
+        [170, 130, 90, 50, 20],
+        [(15,15,15,230),(245,242,232,255),(15,15,15,230),(210,25,25,235),(245,242,232,255)]
+    ):
+        td.rectangle([(cx - s, cy - s), (cx + s, cy + s)], fill=col)
+    base = comp(base, tl)
+
+    # 6. Horizontal measurement rules (right panel)
+    ml = layer()
+    md = ImageDraw.Draw(ml)
+    for i in range(8):
+        y = 55 + i * 62
+        md.rectangle([(580, y), (760, y + 3)], fill=(15, 15, 15, 100))
+        md.rectangle([(580, y - 2), (592, y + 5)], fill=(15, 15, 15, 160))
+    base = comp(base, ml)
+
+    # 7. Small black square module — lower-right endpoint marker
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    sd.rectangle([(600, 520), (680, 600)], fill=(15, 15, 15, 255))
+    sd.rectangle([(618, 538), (662, 582)], fill=(245, 242, 232, 255))
+    sd.rectangle([(632, 552), (648, 568)], fill=(210, 25, 25, 255))
+    base = comp(base, sl)
+
+    # 8. Thin right-side vertical rule — right margin separator
+    v2l = layer()
+    v2d = ImageDraw.Draw(v2l)
+    v2d.rectangle([(1100, 0), (1108, H - 50)], fill=(15, 15, 15, 160))
+    base = comp(base, v2l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -20408,6 +20477,7 @@ DAYS = [
     ("2026-11-11", img_klee_20261111,    "Cowork Suite",    "Paul Klee"),
     ("2026-11-12", img_franz_marc_20261112, "AI Policy",   "Franz Marc"),
     ("2026-11-13", img_delaunay_20261113,  "Meetings Live", "Robert Delaunay"),
+    ("2026-11-14", img_lissitzky_20261114, "Cowork GA",     "El Lissitzky"),
 ]
 
 for date, fn, kw, artist in DAYS:

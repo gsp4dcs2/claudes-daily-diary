@@ -20121,6 +20121,193 @@ def img_lissitzky_20261114():
     return base
 
 
+def img_kandinsky_20261115():
+    """Wassily Kandinsky style — Boris Cherny / Claude Code profile; IPO S-1/A pricing; Claude for Teachers.
+    Prussian-blue background. A large white circle centre-right represents the engineer at the
+    focal point of Anthropic's IPO moment. Radiating diagonal grid lines evoke a codebase under
+    construction. Three bold coloured shapes (amber triangle = IPO pricing bracket; red arc =
+    education reach; teal disc = Claude Code) converge toward the circle. Scattered small white
+    dots represent 2 million educator accounts. Kandinsky accents: coral slash, black arcs, vivid
+    primary scatter.
+    """
+    base = Image.new("RGB", (W, H), (18, 34, 72))   # prussian-blue
+
+    # 1. Diagonal grid — codebase / engineering foundation
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    step = 70
+    lc = (255, 255, 255, 18)
+    for offset in range(-H, W + H, step):
+        gd.line([(offset, 0), (offset + H, H)], fill=lc, width=1)
+    for offset in range(0, W + H + step, step):
+        gd.line([(offset, 0), (offset - H, H)], fill=lc, width=1)
+    base = comp(base, gl)
+
+    # 2. Central white disc — the engineer, the focal human
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    cx, cy = 760, 290
+    dd.ellipse([(cx - 180, cy - 180), (cx + 180, cy + 180)],
+               fill=(255, 255, 255, 50))
+    dd.ellipse([(cx - 120, cy - 120), (cx + 120, cy + 120)],
+               fill=(255, 255, 255, 180))
+    dd.ellipse([(cx - 50,  cy - 50),  (cx + 50,  cy + 50)],
+               fill=(18, 34, 72, 220))
+    dd.ellipse([(cx - 18,  cy - 18),  (cx + 18,  cy + 18)],
+               fill=(255, 255, 255, 255))
+    base = comp(base, dl)
+
+    # 3. Amber triangle — IPO pricing bracket converging from upper-left
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    td.polygon([(0, 0), (500, 0), (cx - 100, cy - 100)],
+               fill=(255, 200, 20, 170))
+    base = comp(base, tl)
+
+    # 4. Red bold arc — education reach, 2M educators
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    ad.arc([(cx - 340, cy - 340), (cx + 340, cy + 340)],
+           start=140, end=230, fill=(215, 38, 50, 210), width=12)
+    ad.arc([(cx - 400, cy - 400), (cx + 400, cy + 400)],
+           start=145, end=225, fill=(215, 38, 50, 110), width=5)
+    base = comp(base, al)
+
+    # 5. Teal filled disc — Claude Code, lower-left
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    cd.ellipse([(60, 340), (340, 590)],
+               fill=(30, 190, 190, 200), outline=(0, 0, 0, 255), width=5)
+    # Inner dark dot
+    cd.ellipse([(165, 430), (235, 500)],
+               fill=(18, 34, 72, 230))
+    base = comp(base, cl)
+
+    # 6. Coral diagonal slash — Kandinsky tension line
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    sd.line([(380, 580), (680, 20)], fill=(232, 115, 74, 230), width=7)
+    base = comp(base, sl)
+
+    # 7. Scattered educator dots — 2 million accounts
+    pl = layer()
+    pd = ImageDraw.Draw(pl)
+    edu_pts = [
+        (50, 100), (110, 60), (170, 130), (230, 85), (290, 55), (350, 110),
+        (40, 200), (95, 240), (155, 190), (220, 230), (280, 170), (340, 220),
+        (900, 80), (950, 50), (1010, 90), (1070, 55), (1130, 80), (1170, 120),
+        (920, 180), (980, 160), (1040, 200), (1100, 170), (1150, 200),
+        (60, 460), (120, 500), (180, 540), (240, 480), (300, 520),
+        (500, 560), (560, 530), (620, 570), (680, 545),
+        (1030, 450), (1090, 490), (1150, 460), (1170, 530),
+        (430, 90), (490, 60), (550, 95), (610, 65), (670, 100),
+    ]
+    for (px, py) in edu_pts:
+        r = rng.randint(3, 7)
+        pd.ellipse([(px - r, py - r), (px + r, py + r)],
+                   fill=(245, 240, 220, 190))
+    base = comp(base, pl)
+
+    # 8. Three accent arcs — Kandinsky's characteristic bold curves
+    xa = layer()
+    xd = ImageDraw.Draw(xa)
+    xd.arc([(20, 20), (350, 350)], start=270, end=50,
+           fill=(255, 215, 0, 180), width=6)
+    xd.arc([(850, 380), (1180, 620)], start=180, end=310,
+           fill=(30, 100, 220, 170), width=5)
+    base = comp(base, xa)
+
+    return base
+
+
+def img_miro_20261116():
+    """Joan Miró style — IPO market fever, AFT safety pact, Unified Enterprise launch.
+    Deep-indigo sky background. Five large biomorphic blobs in primaries represent the
+    converging forces: yellow = IPO oversubscription demand; red = educator safety compact;
+    blue = unified enterprise rollout; green = strategic tech partners; coral = Anthropic.
+    Sweeping arc lines connect the blobs (the pact, the session merge, the market flows).
+    Scattered star dots evoke notifications and investor signals emerging from the dark.
+    Bold black outlines on every blob — Miró's signature cartoon clarity.
+    """
+    base = Image.new("RGB", (W, H), (12, 8, 42))   # deep indigo
+
+    # 1. Five biomorphic blobs — five converging forces
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    # Yellow blob — upper-left: IPO demand surge
+    bd.ellipse([(30, 20), (350, 300)],
+               fill=(240, 200, 18, 238), outline=(0, 0, 0, 255), width=6)
+    bd.ellipse([(200, 220), (410, 360)],
+               fill=(240, 200, 18, 150))   # organic tail
+    # Red blob — upper-right: educator safety pact
+    bd.ellipse([(820, 30), (1140, 310)],
+               fill=(215, 38, 55, 232), outline=(0, 0, 0, 255), width=6)
+    # Blue blob — lower-centre: unified enterprise session
+    bd.ellipse([(380, 390), (720, 610)],
+               fill=(28, 108, 210, 232), outline=(0, 0, 0, 255), width=5)
+    # Green blob — upper-centre: strategic tech partners (Alphabet/Nvidia/MSFT)
+    bd.ellipse([(490, 50), (730, 250)],
+               fill=(42, 175, 85, 225), outline=(0, 0, 0, 255), width=4)
+    # Coral blob — lower-right: Anthropic itself
+    bd.ellipse([(880, 430), (1130, 610)],
+               fill=(232, 115, 74, 222), outline=(0, 0, 0, 255), width=4)
+    base = comp(base, bl)
+
+    # 2. Sweeping arc lines — flows connecting forces
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    # Yellow demand arc to green partners
+    ad.arc([(100, -30), (800, 320)], start=340, end=60,
+           fill=(245, 242, 220, 195), width=3)
+    # Red pact arc down to blue unified session
+    ad.arc([(600, 100), (1100, 580)], start=100, end=200,
+           fill=(245, 242, 220, 175), width=2)
+    # Blue to coral return arc
+    ad.arc([(300, 300), (1050, 630)], start=200, end=320,
+           fill=(245, 242, 220, 145), width=2)
+    base = comp(base, al)
+
+    # 3. Thin connecting lines — signals between nodes
+    ll = layer()
+    ld = ImageDraw.Draw(ll)
+    ld.line([(190, 160), (610, 150)],
+            fill=(245, 242, 225, 190), width=3)   # demand → partners
+    ld.line([(610, 150), (980, 170)],
+            fill=(245, 242, 225, 165), width=2)   # partners → pact
+    ld.line([(550, 500), (1010, 520)],
+            fill=(245, 242, 225, 145), width=2)   # unified → coral
+    ld.line([(980, 170), (1010, 520)],
+            fill=(245, 242, 225, 110), width=1)   # pact → coral
+    base = comp(base, ll)
+
+    # 4. Star dots — investor signals, notifications
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    star_coords = [
+        (25, 170), (450, 78), (640, 42), (880, 350), (1175, 290),
+        (140, 520), (495, 240), (695, 505), (1090, 395), (360, 148),
+        (775, 348), (1150, 530), (515, 578), (88, 338), (960, 198),
+        (630, 572), (280, 32), (1025, 320), (162, 592), (750, 118),
+        (520, 400), (1162, 95), (60, 462), (782, 598), (412, 318),
+        (340, 390), (730, 460), (200, 390), (1060, 350), (580, 320),
+    ]
+    for (sx, sy) in star_coords:
+        r = rng.randint(3, 7)
+        sd.ellipse([(sx - r, sy - r), (sx + r, sy + r)],
+                   fill=(245, 240, 220, 215))
+    base = comp(base, sl)
+
+    # 5. White Miró junction circles at node centres
+    jl = layer()
+    jd = ImageDraw.Draw(jl)
+    for (jx, jy) in [(190, 160), (610, 150), (980, 170), (550, 500), (1010, 520)]:
+        jd.ellipse([(jx - 14, jy - 14), (jx + 14, jy + 14)],
+                   fill=(245, 240, 220, 232), outline=(0, 0, 0, 255), width=3)
+    base = comp(base, jl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -20478,6 +20665,8 @@ DAYS = [
     ("2026-11-12", img_franz_marc_20261112, "AI Policy",   "Franz Marc"),
     ("2026-11-13", img_delaunay_20261113,  "Meetings Live", "Robert Delaunay"),
     ("2026-11-14", img_lissitzky_20261114, "Cowork GA",     "El Lissitzky"),
+    ("2026-11-15", img_kandinsky_20261115, "Code Builder",  "Wassily Kandinsky"),
+    ("2026-11-16", img_miro_20261116,      "Market Fever",  "Joan Miró"),
 ]
 
 for date, fn, kw, artist in DAYS:

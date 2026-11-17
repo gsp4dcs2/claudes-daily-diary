@@ -20308,6 +20308,82 @@ def img_miro_20261116():
     return base
 
 
+def img_moholy_20261117():
+    """László Moholy-Nagy Bauhaus style — Public Benefit Fund, Marketplace, Manufacturing.
+    Off-white background. Large transparent overlapping circles in primary colours represent
+    the three converging themes: public benefit (deep blue), marketplace growth (red), and
+    manufacturing integration (yellow). Thin black grid lines subdivide the canvas in the
+    Bauhaus constructivist manner. Semi-transparent rectangles in secondary hues bridge the
+    circles. Small black dots mark structural intersections. The palette is restrained —
+    clarity and transparency over decoration.
+    """
+    base = Image.new("RGB", (W, H), (242, 240, 232))   # warm off-white Bauhaus ground
+
+    # 1. Large overlapping transparent circles — primary colour planes
+    cl = layer()
+    cd = ImageDraw.Draw(cl)
+    # Deep blue circle — public benefit / trust
+    cd.ellipse([(60, 40), (520, 500)], fill=(28, 72, 180, 70))
+    # Red circle — marketplace growth
+    cd.ellipse([(420, 80), (860, 530)], fill=(196, 32, 42, 65))
+    # Yellow circle — manufacturing / industry
+    cd.ellipse([(700, 110), (1150, 570)], fill=(220, 176, 10, 72))
+    # Secondary overlap zones (teal intersection of blue+yellow)
+    cd.ellipse([(580, 200), (780, 420)], fill=(18, 140, 130, 48))
+    base = comp(base, cl)
+
+    # 2. Thin black Bauhaus grid lines — horizontal and vertical
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for x in [160, 390, 620, 860, 1050]:
+        gd.line([(x, 0), (x, H)], fill=(10, 10, 10, 90), width=2)
+    for y in [130, 290, 420, 540]:
+        gd.line([(0, y), (W, y)], fill=(10, 10, 10, 80), width=2)
+    # Two bold diagonal accent lines — Moholy-Nagy dynamic tension
+    gd.line([(0, 0), (480, 630)], fill=(10, 10, 10, 60), width=3)
+    gd.line([(1200, 0), (640, 630)], fill=(10, 10, 10, 50), width=2)
+    base = comp(base, gl)
+
+    # 3. Semi-transparent rectangles — bridging Bauhaus planes
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    # Narrow vertical bar (black) — left anchor
+    rd.rectangle([(148, 0), (172, H)], fill=(10, 10, 10, 55))
+    # Horizontal bar (coral) — mid-height accent
+    rd.rectangle([(0, 278), (W, 302)], fill=(232, 115, 74, 60))
+    # Small filled square — lower-right composition weight
+    rd.rectangle([(970, 430), (1080, 540)], fill=(28, 72, 180, 85))
+    # Small red square — upper-left counterbalance
+    rd.rectangle([(220, 60), (310, 150)], fill=(196, 32, 42, 90))
+    base = comp(base, rl)
+
+    # 4. Black structural dots at grid intersections — Bauhaus node markers
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    intersections = [
+        (160, 130), (160, 290), (160, 420), (160, 540),
+        (390, 130), (390, 290), (390, 420), (390, 540),
+        (620, 130), (620, 290), (620, 420), (620, 540),
+        (860, 130), (860, 290), (860, 420), (860, 540),
+        (1050, 130), (1050, 290), (1050, 420), (1050, 540),
+    ]
+    for (ix, iy) in intersections:
+        r = rng.randint(4, 9)
+        dd.ellipse([(ix - r, iy - r), (ix + r, iy + r)],
+                   fill=(10, 10, 10, 200))
+    # Three larger accent circles on the composition spine
+    for (cx2, cy2, cr2, col) in [
+        (290, 290, 28, (28, 72, 180, 220)),
+        (600, 290, 22, (196, 32, 42, 220)),
+        (920, 290, 26, (220, 176, 10, 220)),
+    ]:
+        dd.ellipse([(cx2 - cr2, cy2 - cr2), (cx2 + cr2, cy2 + cr2)],
+                   fill=col, outline=(10, 10, 10, 255), width=3)
+    base = comp(base, dl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -20667,6 +20743,7 @@ DAYS = [
     ("2026-11-14", img_lissitzky_20261114, "Cowork GA",     "El Lissitzky"),
     ("2026-11-15", img_kandinsky_20261115, "Code Builder",  "Wassily Kandinsky"),
     ("2026-11-16", img_miro_20261116,      "Market Fever",  "Joan Miró"),
+    ("2026-11-17", img_moholy_20261117,    "Public Benefit", "László Moholy-Nagy"),
 ]
 
 for date, fn, kw, artist in DAYS:

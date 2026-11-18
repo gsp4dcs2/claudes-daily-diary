@@ -19602,6 +19602,98 @@ def img_balla_20261109():
     return base
 
 
+def img_balla_20261118():
+    """Giacomo Balla Futurist style — IPO pricing night, historic market moment.
+    Near-black background. Radiating force-planes burst from a vanishing point
+    at the upper-right (the Nasdaq bell), sweeping left and downward in gold,
+    white, electric-blue and crimson. Concentric speed arcs curve across the
+    lower half. A dense particle scatter fills the field with kinetic energy.
+    """
+    base = Image.new("RGB", (W, H), (6, 4, 10))  # near-black ground
+
+    # 1. Primary burst from upper-right VP — the IPO pricing announcement
+    vp_x, vp_y = W + 60, -40  # off upper-right corner
+    ray_colours = [
+        (255, 200, 20,  200),  # gold — market value
+        (255, 255, 180, 170),  # pale yellow — exchange floor lights
+        (40,  160, 255, 170),  # electric blue — data ticker
+        (220, 50,  30,  160),  # hot red — price surge
+        (200, 240, 60,  140),  # chartreuse — oversubscription energy
+        (255, 100, 180, 130),  # rose — celebration
+        (60,  220, 180, 120),  # teal — tech sector
+    ]
+    for i, col in enumerate(ray_colours):
+        angle = math.radians(145 + i * 25)
+        far_x = vp_x + int(math.cos(angle) * 2000)
+        far_y = vp_y + int(math.sin(angle) * 2000)
+        for width, alpha_mul in [(42, 1.0), (26, 0.60), (12, 0.28)]:
+            pl = layer()
+            pd = ImageDraw.Draw(pl)
+            a = int(col[3] * alpha_mul)
+            pd.line([(vp_x, vp_y), (far_x, far_y)],
+                    fill=(col[0], col[1], col[2], a), width=width)
+            base = comp(base, pl)
+
+    # 2. Secondary counter-burst from lower-left — market demand wave
+    vp2_x, vp2_y = -60, H + 40
+    burst2 = [
+        (255, 180, 10,  150),  # amber
+        (220, 70,  20,  130),  # orange-red
+        (60,  180, 255, 110),  # blue
+        (255, 240, 100, 100),  # yellow
+    ]
+    for i, col in enumerate(burst2):
+        angle = math.radians(-30 + i * 24)
+        far_x = vp2_x + int(math.cos(angle) * 1800)
+        far_y = vp2_y + int(math.sin(angle) * 1800)
+        for width, alpha_mul in [(32, 1.0), (18, 0.55), (8, 0.25)]:
+            pl = layer()
+            pd = ImageDraw.Draw(pl)
+            a = int(col[3] * alpha_mul)
+            pd.line([(vp2_x, vp2_y), (far_x, far_y)],
+                    fill=(col[0], col[1], col[2], a), width=width)
+            base = comp(base, pl)
+
+    # 3. Concentric speed arcs — Balla's motion signature, centred mid-frame
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    arc_cx, arc_cy = W // 2 - 40, H // 2 + 20
+    for r in range(90, 480, 60):
+        col_idx = (r // 60) % len(ray_colours)
+        col = ray_colours[col_idx]
+        ad.arc([(arc_cx - r, arc_cy - r), (arc_cx + r, arc_cy + r)],
+               start=210, end=350,
+               fill=(col[0], col[1], col[2], 110), width=4)
+    base = comp(base, al)
+
+    # 4. Bright gold flash at VP origin — the bell rings
+    fl = layer()
+    fd = ImageDraw.Draw(fl)
+    for r, a in [(90, 30), (60, 55), (38, 90), (20, 160), (9, 230)]:
+        fd.ellipse([(vp_x - r, vp_y - r), (vp_x + r, vp_y + r)],
+                   fill=(255, 230, 60, a))
+    base = comp(base, fl)
+
+    # 5. Kinetic particle scatter — market data points in motion
+    pl2 = layer()
+    pd2 = ImageDraw.Draw(pl2)
+    particle_cols = [
+        (255, 200, 20), (60, 200, 255), (220, 50, 30),
+        (200, 240, 60), (255, 100, 180), (255, 255, 200),
+    ]
+    for _ in range(1800):
+        px = rng.randint(0, W)
+        py = rng.randint(0, H)
+        pr = rng.randint(1, 4)
+        col = rng.choice(particle_cols)
+        alpha = rng.randint(20, 110)
+        pd2.ellipse([(px - pr, py - pr), (px + pr, py + pr)],
+                    fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, pl2)
+
+    return base
+
+
 def img_klimt_20261110():
     """Gustav Klimt — near-black velvet bg, golden orbital rings radiating from
     a luminous model-launch core, interlocking spiral fragments, ruby velocity
@@ -20744,6 +20836,7 @@ DAYS = [
     ("2026-11-15", img_kandinsky_20261115, "Code Builder",  "Wassily Kandinsky"),
     ("2026-11-16", img_miro_20261116,      "Market Fever",  "Joan Miró"),
     ("2026-11-17", img_moholy_20261117,    "Public Benefit", "László Moholy-Nagy"),
+    ("2026-11-18", img_balla_20261118,     "IPO Priced",     "Giacomo Balla"),
 ]
 
 for date, fn, kw, artist in DAYS:

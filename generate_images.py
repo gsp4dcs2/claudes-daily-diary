@@ -20476,6 +20476,150 @@ def img_moholy_20261117():
     return base
 
 
+def img_seurat_20261119():
+    """Georges Seurat pointillist style — Anthropic ANT first trading day on Nasdaq.
+    Deep navy background. Thousands of tiny coloured dots build up a rising market
+    chart curve across the lower half, with a dense radiant cluster at the peak
+    representing the opening price spike. A broad spectral arc sweeps overhead.
+    Scatter density gradients pull the eye from dark left-field to bright right-field.
+    """
+    base = Image.new("RGB", (W, H), (10, 14, 42))  # deep Nasdaq-night navy
+
+    # 1. Background texture — faint pointillist grain across entire canvas
+    bg_l = layer()
+    bg_d = ImageDraw.Draw(bg_l)
+    bg_cols = [
+        (60, 80, 160), (40, 60, 130), (80, 100, 180),
+        (20, 40, 110), (100, 120, 200),
+    ]
+    for _ in range(6000):
+        px = rng.randint(0, W)
+        py = rng.randint(0, H)
+        col = rng.choice(bg_cols)
+        alpha = rng.randint(8, 28)
+        bg_d.ellipse([(px - 2, py - 2), (px + 2, py + 2)],
+                     fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, bg_l)
+
+    # 2. Rising market curve — dense dot trail from lower-left to upper-right peak
+    curve_l = layer()
+    curve_d = ImageDraw.Draw(curve_l)
+    # Bezier-like curve: start (80, 520), control (600, 480), peak (900, 140), tail (1150, 220)
+    # Approximate with 300 sample points
+    curve_cols = [
+        (255, 220, 40),   # gold — market value
+        (255, 160, 30),   # amber
+        (220, 240, 80),   # chartreuse
+        (255, 255, 180),  # pale yellow
+        (60,  220, 180),  # teal
+    ]
+    for t_i in range(300):
+        t = t_i / 299.0
+        # Cubic Bezier: P0=(80,520) P1=(400,490) P2=(850,100) P3=(1150,220)
+        p0x, p0y = 80, 520
+        p1x, p1y = 400, 490
+        p2x, p2y = 850, 100
+        p3x, p3y = 1150, 220
+        bx = int((1-t)**3*p0x + 3*(1-t)**2*t*p1x + 3*(1-t)*t**2*p2x + t**3*p3x)
+        by = int((1-t)**3*p0y + 3*(1-t)**2*t*p1y + 3*(1-t)*t**2*p2y + t**3*p3y)
+        # Scatter dots in a halo around the curve centre
+        density = int(30 + 80 * math.sin(math.pi * t))  # denser near peak
+        for _ in range(density):
+            ox = rng.randint(-18, 18)
+            oy = rng.randint(-18, 18)
+            r = rng.randint(2, 6)
+            col = rng.choice(curve_cols)
+            alpha = rng.randint(60, 200)
+            curve_d.ellipse([(bx+ox-r, by+oy-r), (bx+ox+r, by+oy+r)],
+                            fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, curve_l)
+
+    # 3. Opening spike cluster — dense radiant burst at peak (850, 100)
+    spike_l = layer()
+    spike_d = ImageDraw.Draw(spike_l)
+    spike_cx, spike_cy = 850, 130
+    spike_cols = [
+        (255, 240, 80),   # bright gold
+        (255, 255, 200),  # near-white
+        (255, 200, 60),   # warm amber
+        (200, 255, 100),  # yellow-green
+        (255, 180, 180),  # salmon
+    ]
+    for _ in range(3200):
+        angle = rng.uniform(0, 2 * math.pi)
+        dist = rng.betavariate(1.2, 4.0) * 180  # concentrated near centre
+        px = int(spike_cx + math.cos(angle) * dist)
+        py = int(spike_cy + math.sin(angle) * dist)
+        r = rng.randint(2, 7)
+        col = rng.choice(spike_cols)
+        alpha = int(220 * (1 - dist / 220)) if dist < 220 else 10
+        alpha = max(10, min(220, alpha + rng.randint(-30, 30)))
+        spike_d.ellipse([(px - r, py - r), (px + r, py + r)],
+                        fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, spike_l)
+
+    # 4. Spectral overhead arc — Seurat's chromatic light source
+    arc_l = layer()
+    arc_d = ImageDraw.Draw(arc_l)
+    arc_cx, arc_cy = W // 2, H + 160  # centre below the canvas for a wide arc
+    spectral = [
+        (220, 50,  50,  80),   # red
+        (230, 130, 30,  80),   # orange
+        (240, 220, 40,  80),   # yellow
+        (60,  200, 80,  80),   # green
+        (40,  160, 240, 80),   # blue
+        (100, 60,  220, 80),   # indigo
+        (200, 60,  200, 70),   # violet
+    ]
+    for i, col in enumerate(spectral):
+        band_r = 440 + i * 55
+        arc_d.arc(
+            [(arc_cx - band_r, arc_cy - band_r), (arc_cx + band_r, arc_cy + band_r)],
+            start=200, end=340,
+            fill=col, width=28,
+        )
+    base = comp(base, arc_l)
+
+    # 5. Volume histogram — tiny dot columns across bottom quarter
+    vol_l = layer()
+    vol_d = ImageDraw.Draw(vol_l)
+    vol_cols = [(80, 160, 255), (60, 200, 160), (255, 180, 40), (200, 80, 80)]
+    n_bars = 60
+    bar_w = W // n_bars
+    for b in range(n_bars):
+        bar_x = b * bar_w + bar_w // 2
+        bar_h = rng.randint(10, 90)
+        col = rng.choice(vol_cols)
+        density = int(bar_h * 1.4)
+        for _ in range(density):
+            px = bar_x + rng.randint(-bar_w // 2 + 2, bar_w // 2 - 2)
+            py = H - 20 - rng.randint(0, bar_h)
+            r = rng.randint(1, 3)
+            alpha = rng.randint(80, 180)
+            vol_d.ellipse([(px - r, py - r), (px + r, py + r)],
+                          fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, vol_l)
+
+    # 6. Fine scatter overlay — pointillist shimmer across full frame
+    shimmer_l = layer()
+    shimmer_d = ImageDraw.Draw(shimmer_l)
+    shimmer_cols = [
+        (255, 240, 100), (60, 200, 255), (200, 255, 120),
+        (255, 120, 80),  (200, 160, 255), (255, 255, 220),
+    ]
+    for _ in range(5000):
+        px = rng.randint(0, W)
+        py = rng.randint(0, H)
+        r = rng.randint(1, 3)
+        col = rng.choice(shimmer_cols)
+        alpha = rng.randint(10, 55)
+        shimmer_d.ellipse([(px - r, py - r), (px + r, py + r)],
+                          fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, shimmer_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -20837,6 +20981,7 @@ DAYS = [
     ("2026-11-16", img_miro_20261116,      "Market Fever",  "Joan Miró"),
     ("2026-11-17", img_moholy_20261117,    "Public Benefit", "László Moholy-Nagy"),
     ("2026-11-18", img_balla_20261118,     "IPO Priced",     "Giacomo Balla"),
+    ("2026-11-19", img_seurat_20261119,    "First Trade",    "Georges Seurat"),
 ]
 
 for date, fn, kw, artist in DAYS:

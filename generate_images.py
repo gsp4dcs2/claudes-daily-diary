@@ -20620,6 +20620,180 @@ def img_seurat_20261119():
     return base
 
 
+def img_mondrian_20261120():
+    """Piet Mondrian neoplastic style — ANT analyst initiations, structured financial grid.
+    Off-white background. Bold black grid lines divide the canvas into asymmetric
+    rectangles filled with the Mondrian primaries (red, yellow, blue) plus white and
+    a small black rectangle. A faint secondary inner-line grid adds depth. The
+    proportions reflect a 3×3 analyst-ratings matrix layout.
+    """
+    base = Image.new("RGB", (W, H), (248, 244, 236))  # warm off-white
+
+    draw = ImageDraw.Draw(base)
+
+    # 1. Primary grid lines — thick black verticals and horizontals
+    line_w = 14
+    # Verticals at x ≈ 320, 580, 860
+    vlines = [320, 580, 860]
+    # Horizontals at y ≈ 160, 340, 500
+    hlines = [160, 340, 500]
+
+    for x in vlines:
+        draw.rectangle([(x - line_w // 2, 0), (x + line_w // 2, H)], fill=(8, 8, 8))
+    for y in hlines:
+        draw.rectangle([(0, y - line_w // 2), (W, y + line_w // 2)], fill=(8, 8, 8))
+    # Outer border
+    bw = 10
+    draw.rectangle([(0, 0), (W - 1, bw)], fill=(8, 8, 8))
+    draw.rectangle([(0, H - bw), (W - 1, H - 1)], fill=(8, 8, 8))
+    draw.rectangle([(0, 0), (bw, H - 1)], fill=(8, 8, 8))
+    draw.rectangle([(W - bw, 0), (W - 1, H - 1)], fill=(8, 8, 8))
+
+    # 2. Colour fills — RGBA layers for semi-transparent Mondrian blocks
+    # Define grid cells: (x0, y0, x1, y1, fill)
+    hw = line_w // 2
+    cells = [
+        # Row 0 (y: 0..160)
+        (bw,         bw,         vlines[0]-hw, hlines[0]-hw, (214, 38,  38,  255)),   # red — top-left
+        (vlines[0]+hw, bw,       vlines[1]-hw, hlines[0]-hw, (248, 244, 236, 255)),   # white
+        (vlines[1]+hw, bw,       vlines[2]-hw, hlines[0]-hw, (232, 195, 50, 255)),    # yellow
+        (vlines[2]+hw, bw,       W-bw,         hlines[0]-hw, (248, 244, 236, 255)),   # white
+        # Row 1 (y: 160..340)
+        (bw,         hlines[0]+hw, vlines[0]-hw, hlines[1]-hw, (248, 244, 236, 255)),  # white
+        (vlines[0]+hw, hlines[0]+hw, vlines[1]-hw, hlines[1]-hw, (38, 70, 170, 255)), # blue
+        (vlines[1]+hw, hlines[0]+hw, vlines[2]-hw, hlines[1]-hw, (248, 244, 236, 255)), # white
+        (vlines[2]+hw, hlines[0]+hw, W-bw,         hlines[1]-hw, (214, 38,  38,  200)), # red-lite
+        # Row 2 (y: 340..500)
+        (bw,         hlines[1]+hw, vlines[0]-hw, hlines[2]-hw, (232, 195, 50, 255)),   # yellow
+        (vlines[0]+hw, hlines[1]+hw, vlines[1]-hw, hlines[2]-hw, (248, 244, 236, 255)), # white
+        (vlines[1]+hw, hlines[1]+hw, vlines[2]-hw, hlines[2]-hw, (8,   8,  8,  255)),   # black rect
+        (vlines[2]+hw, hlines[1]+hw, W-bw,         hlines[2]-hw, (248, 244, 236, 255)), # white
+        # Row 3 (y: 500..H)
+        (bw,         hlines[2]+hw, vlines[0]-hw, H-bw, (248, 244, 236, 255)),  # white
+        (vlines[0]+hw, hlines[2]+hw, vlines[1]-hw, H-bw, (214, 38,  38,  255)), # red
+        (vlines[1]+hw, hlines[2]+hw, vlines[2]-hw, H-bw, (248, 244, 236, 255)), # white
+        (vlines[2]+hw, hlines[2]+hw, W-bw,         H-bw, (38, 70, 170, 255)),  # blue
+    ]
+    for x0, y0, x1, y1, fill in cells:
+        if x1 > x0 and y1 > y0:
+            cell_l = layer()
+            cell_d = ImageDraw.Draw(cell_l)
+            cell_d.rectangle([(x0, y0), (x1, y1)], fill=fill)
+            base = comp(base, cell_l)
+
+    # 3. Secondary inner grid — thin dark lines subdividing a few cells for texture
+    draw2 = ImageDraw.Draw(base)
+    thin = 3
+    # Thin vertical inside col 0 at x=160
+    draw2.rectangle([(160, hlines[0]), (160+thin, hlines[2])], fill=(40, 40, 40))
+    # Thin horizontal inside row 3 at y=575
+    draw2.rectangle([(bw, 575), (vlines[1], 575+thin)], fill=(40, 40, 40))
+
+    # 4. Faint grid shimmer — subtle ivory wash over white cells to lift them off background
+    shimmer_l = layer()
+    shimmer_d = ImageDraw.Draw(shimmer_l)
+    shimmer_d.rectangle([(bw, hlines[1]+hw), (vlines[0]-hw, hlines[2]-hw)],
+                        fill=(255, 240, 180, 30))  # warm yellow tint over yellow cell
+    base = comp(base, shimmer_l)
+
+    return base
+
+
+def img_rothko_20261121():
+    """Mark Rothko colour-field style — earnings depth, voice mode, luminous bands.
+    Deep charcoal background. Two large soft-edged horizontal colour bands: a warm
+    amber-orange upper band and a deep teal-blue lower band, with a thin luminous
+    cream separator between them. Soft radiant halos bleed out at each band's edges.
+    The palette evokes both the depth of an earnings call and the warmth of voice.
+    """
+    base = Image.new("RGB", (W, H), (22, 20, 28))  # near-black charcoal
+
+    # 1. Upper colour band — amber-orange Rothko wash (y: 60..290)
+    upper_l = layer()
+    upper_d = ImageDraw.Draw(upper_l)
+    # Build as multiple overlapping semi-transparent rectangles with slightly
+    # varying widths to simulate the soft-edge bleed Rothko achieves with paint.
+    upper_col = (210, 110, 40)   # deep amber
+    for step in range(60):
+        margin = int(step * 1.5)
+        alpha  = int(180 * (1 - step / 60))
+        upper_d.rectangle(
+            [(margin, 60 + step), (W - margin, 290 - step)],
+            fill=(upper_col[0], upper_col[1], upper_col[2], alpha)
+        )
+    # Warm luminous core — brighter centre
+    for step in range(30):
+        margin = int(80 + step * 2)
+        alpha  = int(100 * (1 - step / 30))
+        upper_d.rectangle(
+            [(margin, 110 + step), (W - margin, 240 - step)],
+            fill=(245, 165, 70, alpha)
+        )
+    base = comp(base, upper_l)
+
+    # 2. Lower colour band — deep teal-blue (y: 360..570)
+    lower_l = layer()
+    lower_d = ImageDraw.Draw(lower_l)
+    lower_col = (28, 90, 140)   # deep teal-blue
+    for step in range(60):
+        margin = int(step * 1.8)
+        alpha  = int(185 * (1 - step / 60))
+        lower_d.rectangle(
+            [(margin, 360 + step), (W - margin, 570 - step)],
+            fill=(lower_col[0], lower_col[1], lower_col[2], alpha)
+        )
+    # Cool luminous core
+    for step in range(30):
+        margin = int(100 + step * 2)
+        alpha  = int(90 * (1 - step / 30))
+        lower_d.rectangle(
+            [(margin, 395 + step), (W - margin, 535 - step)],
+            fill=(60, 160, 210, alpha)
+        )
+    base = comp(base, lower_l)
+
+    # 3. Thin luminous cream separator between the two bands (y: 310..350)
+    sep_l = layer()
+    sep_d = ImageDraw.Draw(sep_l)
+    for step in range(20):
+        margin = int(step * 4)
+        alpha  = int(120 * (1 - step / 20))
+        sep_d.rectangle(
+            [(margin, 310 + step), (W - margin, 350 - step)],
+            fill=(245, 235, 215, alpha)
+        )
+    base = comp(base, sep_l)
+
+    # 4. Edge-glow halos — soft radiance at top and bottom of each band
+    halo_l = layer()
+    halo_d = ImageDraw.Draw(halo_l)
+    # Top glow of upper band
+    for i in range(25):
+        alpha = int(60 * (1 - i / 25))
+        halo_d.rectangle([(i*6, 55 + i), (W - i*6, 75 + i)],
+                         fill=(230, 140, 50, alpha))
+    # Bottom glow of lower band
+    for i in range(25):
+        alpha = int(60 * (1 - i / 25))
+        halo_d.rectangle([(i*6, 560 - i), (W - i*6, 580 - i)],
+                         fill=(40, 120, 180, alpha))
+    base = comp(base, halo_l)
+
+    # 5. Dark-field texture — subtle vertical noise across full canvas
+    noise_l = layer()
+    noise_d = ImageDraw.Draw(noise_l)
+    for _ in range(3000):
+        px = rng.randint(0, W)
+        py = rng.randint(0, H)
+        alpha = rng.randint(3, 18)
+        col_v = rng.randint(20, 60)
+        noise_d.ellipse([(px-1, py-1), (px+1, py+1)],
+                        fill=(col_v, col_v, col_v+10, alpha))
+    base = comp(base, noise_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -20982,6 +21156,8 @@ DAYS = [
     ("2026-11-17", img_moholy_20261117,    "Public Benefit", "László Moholy-Nagy"),
     ("2026-11-18", img_balla_20261118,     "IPO Priced",     "Giacomo Balla"),
     ("2026-11-19", img_seurat_20261119,    "First Trade",    "Georges Seurat"),
+    ("2026-11-20", img_mondrian_20261120,  "Analyst Grid",   "Piet Mondrian"),
+    ("2026-11-21", img_rothko_20261121,    "Voice & Depth",  "Mark Rothko"),
 ]
 
 for date, fn, kw, artist in DAYS:

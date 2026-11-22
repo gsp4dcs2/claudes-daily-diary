@@ -20794,6 +20794,103 @@ def img_rothko_20261121():
     return base
 
 
+def img_malevich_20261122():
+    """Kazimir Malevich Suprematism — Riemann hypothesis proof, pure mathematical structure.
+    Warm cream Suprematist ground. A dominant diagonal black bar sweeps across the canvas
+    (the absolute theorem boundary / number-line axis). A bold red circle outline at centre
+    (the complex unit circle where the non-trivial zeros lie). A navy rectangle anchors the
+    lower left (the critical strip 0 < Re(s) < 1). Gold shard fragments scatter across the
+    field (prime number distribution markers). Thin diagonal scrutiny lines traverse the
+    whole canvas. Pure structure, hard limits — the language of formal proof."""
+    import math as _math
+    base = Image.new("RGB", (W, H), (238, 233, 215))  # warm cream Suprematist ground
+
+    def rotated_rect(cx, cy, hw, hh, angle_deg):
+        rad = _math.radians(angle_deg)
+        corners = [(-hw, -hh), (hw, -hh), (hw, hh), (-hw, hh)]
+        return [(cx + p[0]*_math.cos(rad) - p[1]*_math.sin(rad),
+                 cy + p[0]*_math.sin(rad) + p[1]*_math.cos(rad)) for p in corners]
+
+    # 1. Dominant black diagonal bar — the theorem boundary / number-line axis
+    nb = layer(); nd = ImageDraw.Draw(nb)
+    nd.polygon(rotated_rect(500, 160, 500, 55, -11), fill=(10, 8, 6, 255))
+    base = comp(base, nb)
+
+    # 2. Second black bar — a secondary axis fragment (lower right)
+    fb = layer(); fd = ImageDraw.Draw(fb)
+    fd.polygon(rotated_rect(1020, 420, 160, 32, -11), fill=(10, 8, 6, 230))
+    base = comp(base, fb)
+
+    # 3. Red circle outline — complex unit circle (where zeros cluster on Re(s)=1/2)
+    rl = layer(); rd = ImageDraw.Draw(rl)
+    R = 195
+    cx_c, cy_c = 720, 320
+    rd.ellipse([(cx_c - R, cy_c - R), (cx_c + R, cy_c + R)],
+               fill=(0, 0, 0, 0), outline=(210, 22, 22, 255), width=28)
+    base = comp(base, rl)
+    # Semi-transparent fill — the critical strip interior
+    ri = layer(); rid = ImageDraw.Draw(ri)
+    rid.ellipse([(cx_c - R + 14, cy_c - R + 14), (cx_c + R - 14, cy_c + R - 14)],
+                fill=(210, 22, 22, 22))
+    base = comp(base, ri)
+    # Horizontal axis through circle — Re(s) = 1/2 line
+    hl = layer(); hd = ImageDraw.Draw(hl)
+    hd.polygon(rotated_rect(720, 320, 185, 14, 0), fill=(210, 22, 22, 180))
+    base = comp(base, hl)
+
+    # 4. Navy rectangle — the critical strip 0 < Re(s) < 1
+    sb = layer(); sbd = ImageDraw.Draw(sb)
+    sbd.polygon(rotated_rect(185, 495, 175, 50, -4), fill=(16, 22, 130, 248))
+    base = comp(base, sb)
+
+    # 5. Smaller navy bar — the convergence boundary (bottom sweep)
+    bb = layer(); bbd = ImageDraw.Draw(bb)
+    bbd.polygon(rotated_rect(560, 545, 490, 22, -4), fill=(16, 22, 130, 228))
+    base = comp(base, bb)
+
+    # 6. Gold shard fragments — prime distribution markers scattered across field
+    yl = layer(); yd = ImageDraw.Draw(yl)
+    shards = [
+        (610, 128, 50, 11, 18),
+        (730, 76,  42, 10, -5),
+        (550, 232, 46, 11, 30),
+        (88,  360, 44, 10, -13),
+        (1095, 450, 48, 11, 10),
+        (1148, 185, 40, 10, -4),
+        (425, 548, 44, 10, 22),
+        (62,  175, 38, 9,  -10),
+        (985, 550, 42, 10, 15),
+        (345, 318, 40, 9,  24),
+        (870, 60,  36, 9,  -8),
+        (1050, 300, 38, 9,  12),
+        (280, 420, 36, 9,  -18),
+        (480, 85,  34, 8,  7),
+    ]
+    for cx, cy, hw, hh, ang in shards:
+        yd.polygon(rotated_rect(cx, cy, hw, hh, ang), fill=(218, 180, 0, 235))
+    base = comp(base, yl)
+
+    # 7. Small red squares — the non-trivial zeros on the critical line
+    zl = layer(); zd = ImageDraw.Draw(zl)
+    zero_positions = [
+        (660, 210), (720, 165), (780, 215),
+        (640, 320), (800, 320),
+        (660, 420), (720, 468), (780, 420),
+    ]
+    for zx, zy in zero_positions:
+        zd.polygon(rotated_rect(zx, zy, 11, 11, 15), fill=(210, 22, 22, 210))
+    base = comp(base, zl)
+
+    # 8. Diagonal scrutiny lines across the whole field
+    sl = layer(); sd = ImageDraw.Draw(sl)
+    for i in range(0, W + H, 88):
+        sd.line([(i, 0), (0, i)], fill=(88, 82, 68, 16), width=1)
+        sd.line([(W - i, H), (W, H - i)], fill=(88, 82, 68, 12), width=1)
+    base = comp(base, sl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -21158,6 +21255,7 @@ DAYS = [
     ("2026-11-19", img_seurat_20261119,    "First Trade",    "Georges Seurat"),
     ("2026-11-20", img_mondrian_20261120,  "Analyst Grid",   "Piet Mondrian"),
     ("2026-11-21", img_rothko_20261121,    "Voice & Depth",  "Mark Rothko"),
+    ("2026-11-22", img_malevich_20261122,  "Prime Proof",    "Kazimir Malevich"),
 ]
 
 for date, fn, kw, artist in DAYS:

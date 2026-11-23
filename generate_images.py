@@ -20891,6 +20891,124 @@ def img_malevich_20261122():
     return base
 
 
+def img_klee_20261123():
+    """Paul Klee colour-cell grid — MCP Registry 1.0 launch: four certification
+    tiers visualised as distinct colour-zone columns (amber = Official,
+    teal = Partner Certified, violet = Community Verified, rose = Provisional).
+    Warm sand background. Rectangular cells with dark grid lines. White hub nodes
+    at intersections represent individual MCP servers. A central bright nexus node
+    marks the registry core. Radiating spoke-lines connect the hub outward."""
+    import math as _math
+    base = Image.new("RGB", (W, H), (34, 28, 44))  # deep indigo-plum ground
+
+    # 1. Klee colour-cell grid — four tier zones across the canvas
+    cell_w, cell_h = 72, 58
+    cols_n = _math.ceil(W / cell_w) + 1
+    rows_n = _math.ceil(H / cell_h) + 1
+
+    # Tier palettes: amber(Official), teal(Partner), violet(Community), rose(Provisional)
+    amber_p  = [(195, 118, 25), (218, 145, 48), (242, 168, 55),
+                (205, 128, 35), (228, 155, 60), (182,  98, 20)]
+    teal_p   = [(22,  118, 128), (38, 148, 162), (52, 168, 182),
+                (28,  132, 142), (44, 155, 172), (18,  98, 110)]
+    violet_p = [(108,  48, 168), (132,  65, 198), (152,  82, 218),
+                (118,  56, 180), (138,  74, 208), (95,   40, 150)]
+    rose_p   = [(188,  55,  88), (215,  75, 108), (232,  92, 128),
+                (198,  62,  96), (220,  80, 115), (172,  44,  75)]
+
+    for row in range(rows_n):
+        y0 = row * cell_h
+        for col in range(cols_n):
+            x0 = col * cell_w
+            x_frac = (x0 + cell_w / 2) / W
+            if x_frac < 0.25:
+                palette = amber_p
+            elif x_frac < 0.50:
+                palette = teal_p
+            elif x_frac < 0.75:
+                palette = violet_p
+            else:
+                palette = rose_p
+            idx = (row * 5 + col * 11) % len(palette)
+            bc = palette[idx]
+            r = max(0, min(255, bc[0] + rng.randint(-15, 15)))
+            g = max(0, min(255, bc[1] + rng.randint(-15, 15)))
+            b = max(0, min(255, bc[2] + rng.randint(-15, 15)))
+            draw_b = ImageDraw.Draw(base)
+            draw_b.rectangle([(x0, y0), (x0 + cell_w - 2, y0 + cell_h - 2)],
+                             fill=(r, g, b))
+
+    # 2. Dark Klee grid lines
+    gd = ImageDraw.Draw(base)
+    for col in range(cols_n + 1):
+        gd.line([(col * cell_w, 0), (col * cell_w, H)],
+                fill=(10, 6, 18), width=2)
+    for row in range(rows_n + 1):
+        gd.line([(0, row * cell_h), (W, row * cell_h)],
+                fill=(10, 6, 18), width=2)
+
+    # 3. White hub nodes at grid intersections — individual certified MCP servers
+    hub_positions = []
+    for row in range(rows_n):
+        for col in range(cols_n):
+            nx = col * cell_w
+            ny = row * cell_h
+            hub_positions.append((nx, ny))
+            r_n = rng.randint(6, 15)
+            nl = layer()
+            nd = ImageDraw.Draw(nl)
+            nd.ellipse([(nx - r_n, ny - r_n), (nx + r_n, ny + r_n)],
+                       fill=(255, 255, 255, 185), outline=(220, 220, 220, 120), width=1)
+            base = comp(base, nl)
+
+    # 4. Central registry nexus — bright gold hub at canvas centre
+    cx_hub, cy_hub = W // 2, H // 2
+    # Outer glow rings
+    for ring in range(5, 0, -1):
+        gl = layer()
+        gld = ImageDraw.Draw(gl)
+        rr = ring * 22
+        alpha = int(45 * (ring / 5))
+        gld.ellipse([(cx_hub - rr, cy_hub - rr), (cx_hub + rr, cy_hub + rr)],
+                    fill=(255, 220, 60, alpha))
+        base = comp(base, gl)
+    # Solid core
+    cl = layer()
+    cld = ImageDraw.Draw(cl)
+    cld.ellipse([(cx_hub - 24, cy_hub - 24), (cx_hub + 24, cy_hub + 24)],
+                fill=(255, 228, 80, 240))
+    cld.ellipse([(cx_hub - 12, cy_hub - 12), (cx_hub + 12, cy_hub + 12)],
+                fill=(255, 255, 180, 255))
+    base = comp(base, cl)
+
+    # 5. Spoke-lines radiating from nexus to hub nodes (every 4th node)
+    sl = layer()
+    sld = ImageDraw.Draw(sl)
+    for i, (hx, hy) in enumerate(hub_positions):
+        if i % 4 == 0:
+            dist = _math.hypot(hx - cx_hub, hy - cy_hub)
+            if 80 < dist < 420:
+                alpha = int(55 * max(0, 1 - dist / 420))
+                sld.line([(cx_hub, cy_hub), (hx, hy)],
+                         fill=(255, 220, 80, alpha), width=1)
+    base = comp(base, sl)
+
+    # 6. Tier-label bands — faint semi-transparent column overlays
+    tier_labels = [
+        (0,         W // 4,     (218, 145, 48, 18)),   # amber — Official
+        (W // 4,    W // 2,     (38,  148, 162, 18)),  # teal  — Partner
+        (W // 2,    3 * W // 4, (132,  65, 198, 18)),  # violet— Community
+        (3 * W // 4, W,         (215,  75, 108, 18)),  # rose  — Provisional
+    ]
+    for x0, x1, col_a in tier_labels:
+        tl = layer()
+        tld = ImageDraw.Draw(tl)
+        tld.rectangle([(x0, 0), (x1, H)], fill=col_a)
+        base = comp(base, tl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -21256,6 +21374,7 @@ DAYS = [
     ("2026-11-20", img_mondrian_20261120,  "Analyst Grid",   "Piet Mondrian"),
     ("2026-11-21", img_rothko_20261121,    "Voice & Depth",  "Mark Rothko"),
     ("2026-11-22", img_malevich_20261122,  "Prime Proof",    "Kazimir Malevich"),
+    ("2026-11-23", img_klee_20261123,      "MCP Registry",   "Paul Klee"),
 ]
 
 for date, fn, kw, artist in DAYS:

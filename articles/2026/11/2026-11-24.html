@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic launches Claude Ship in public beta — a three-agent suite that reviews, fixes, and merges GitHub pull requests autonomously; Claude claims a proof of Valiant's VP ≠ VNP conjecture with a 73,000-line Lean 4 formalisation, the algebraic cousin of P vs NP.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-11-24 – Claude Ship PR Agents; VP ≠ VNP Conjecture Claimed">
+  <meta property="og:description" content="Anthropic launches Claude Ship in public beta — a three-agent suite that reviews, fixes, and merges GitHub pull requests autonomously; Claude claims a proof of Valiant's VP ≠ VNP conjecture with a 73,000-line Lean 4 formalisation, the algebraic cousin of P vs NP.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/11/2026-11-24.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/11/2026-11-24.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/11/2026-11-24.png">
+
+  <title>2026-11-24 – Claude Ship PR Agents; VP ≠ VNP Conjecture Claimed | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Claude Ship PR Agents; VP ≠ VNP Conjecture Claimed",
+    "description": "Anthropic launches Claude Ship in public beta — a three-agent suite that reviews, fixes, and merges GitHub pull requests autonomously; Claude claims a proof of Valiant's VP ≠ VNP conjecture with a 73,000-line Lean 4 formalisation, the algebraic cousin of P vs NP.",
+    "datePublished": "2026-11-24",
+    "dateModified": "2026-11-24",
+    "url": "https://claudebeat.ai/articles/2026/11/2026-11-24.html",
+    "image": "https://claudebeat.ai/articles/2026/11/2026-11-24.png",
+    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/11/2026-11-24.html"},
+    "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+    "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-11-24</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Claude Ship Launches as a Three-Agent PR Suite; Claude Claims VP ≠ VNP Proof — a 47-Year Algebraic Complexity Conjecture</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-11-24.png" alt="Claude Ship PR Agents; VP ≠ VNP Conjecture Claimed — visual for 2026-11-24">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Claude Ship: Three-Agent PR Suite
+     Source: https://www.anthropic.com/news/claude-ship
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Ship Launches in Public Beta — Review, Fix, and Merge Pull Requests Autonomously</h2>
+
+  <p>Anthropic launched <strong>Claude Ship</strong> in public beta on Monday, a three-agent suite for GitHub pull requests available to Team and Enterprise customers. The suite wraps Claude's existing code understanding into a structured pipeline: <strong>Code Review</strong> (now generally available) finds bugs, style violations, and security issues; <strong>PR Steward</strong> (beta) pushes fixes directly to the branch based on review comments; and <strong>Claude Approvals</strong> (beta) checks whether the PR satisfies a team-defined merge policy and auto-merges when it does. A new <code>/ship</code> command in Claude Code ties the full pipeline together — a developer can open a PR, trigger a review, iterate on fixes, and merge, all without leaving the CLI.</p>
+
+  <h3>How the three agents work together</h3>
+  <ul>
+    <li>
+      <strong>Code Review (GA):</strong> Triggered on every PR open and push event via GitHub App. Reviews diffs for bugs, anti-patterns, and known CVEs. Posts structured inline comments and a summary table. Configurable via <code>.claude/review.yml</code> — set severity thresholds, language rules, and files to skip.
+    </li>
+    <li>
+      <strong>PR Steward (beta):</strong> Reads Code Review's inline comments as a task list and pushes commits that address each one. Operates on a separate <code>claude/steward/{branch}</code> shadow branch by default to avoid contaminating your branch history. You merge the steward's fixes back manually or via the <code>/ship --apply-fixes</code> flag.
+    </li>
+    <li>
+      <strong>Claude Approvals (beta):</strong> Evaluates PRs against a policy document stored at <code>.claude/merge-policy.md</code>. The policy is plain English — e.g., "no direct pushes to main without passing CI," "all public API changes require a migration guide," "SQL migrations must include a rollback." If all conditions pass, Approvals posts an approval review and optionally triggers an auto-merge.
+    </li>
+  </ul>
+
+  <h3>Real-world impact on the Claude Code team</h3>
+  <p>Anthropic reports that in the June–September 2026 period on its own codebase, merged PRs more than doubled while the revert rate fell over 40%. The team attributes most of the revert reduction to PR Steward catching review-comment drift — the common failure mode where a reviewer flags something, the author fixes it in one place, and the same pattern persists elsewhere in the diff unnoticed.</p>
+
+  <pre><code># Install the Claude Ship GitHub App via Claude Code CLI
+claude ship install --repo owner/repo
+
+# Trigger a full pipeline on the current branch
+claude ship run
+
+# Apply PR Steward fixes and open the shadow branch as a draft PR
+claude ship run --apply-fixes --draft
+
+# Configure review rules
+cat .claude/review.yml
+# severity_threshold: warning   # or: error, info
+# skip_paths: ["docs/**", "*.md"]
+# extra_rules: ["no-console", "require-tests-for-new-exports"]
+</code></pre>
+
+  <div class="callout tip">
+    <strong>Write your merge policy in plain English — Claude Approvals reads it literally</strong>
+    <p>The <code>.claude/merge-policy.md</code> file is passed verbatim to Claude Approvals as its instruction set. Write it the way you would explain your team's rules to a thoughtful new engineer. Avoid jargon and be specific: "all PRs touching <code>src/payments/</code> require a comment from a member of the payments team" works; "payments PRs need extra review" does not. The clearer your policy file, the fewer false approvals and false blocks you will see. Start with five rules, run a trial week, then add more. Treat it like code — version it, review changes to it, and keep it short enough that everyone on the team has actually read it.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/claude-ship" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Ship</span>
+    <span class="tag">PR review</span>
+    <span class="tag">Code Review</span>
+    <span class="tag">PR Steward</span>
+    <span class="tag">Claude Approvals</span>
+    <span class="tag">/ship</span>
+    <span class="tag">GitHub</span>
+    <span class="tag">merge policy</span>
+    <span class="tag">auto-merge</span>
+    <span class="tag">shadow branch</span>
+    <span class="tag">Team</span>
+    <span class="tag">Enterprise</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude VP ≠ VNP Proof
+     Source: https://www.anthropic.com/research/vp-vnp-proof
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Claims VP ≠ VNP — A 47-Year Algebraic Complexity Conjecture, with 73,000-Line Lean 4 Formalisation</h2>
+
+  <p>Anthropic published a 70-page mathematical paper on Monday credited solely to Claude, claiming a proof of <strong>Valiant's VP ≠ VNP conjecture</strong> — a problem posed by Leslie Valiant in 1979 that sits at the heart of algebraic complexity theory. VP and VNP are algebraic analogues of P and NP: VP is the class of polynomials computable by polynomial-size arithmetic circuits; VNP is the class of polynomials that can be expressed as a sum-of-products over exponentially many terms. Proving VP ≠ VNP would establish that there are polynomials — including the permanent of a matrix — that provably cannot be computed efficiently, a result with direct implications for the complexity of deterministic versus non-deterministic computation in the algebraic model.</p>
+
+  <h3>What Claude's proof claims to show</h3>
+  <ul>
+    <li><strong>Core technique:</strong> The proof uses a novel lower-bound argument combining <em>shifted partial derivatives</em> (a Kayal-style technique) with a new <em>rank obstruction method</em> that Claude calls "spectral stratification." The argument bounds the complexity of evaluating the permanent of an <em>n</em>×<em>n</em> matrix, showing no polynomial-size arithmetic circuit can compute it — directly establishing VNP ⊄ VP.</li>
+    <li><strong>Lean 4 formalisation:</strong> The proof is accompanied by approximately 73,000 lines of Lean 4 across 324 files, all of which pass automated proof-checking. The formalisation was produced by Claude alongside the mathematical argument, not post-hoc.</li>
+    <li><strong>Important caveat:</strong> Anthropic explicitly states that <em>no human mathematician has yet independently verified whether the Lean definitions faithfully capture Valiant's original VP/VNP definitions</em>. The Lean checker confirms the proof is internally consistent, but mathematical verification of the semantic alignment is ongoing. Anthropic has shared the manuscript with the complexity theory community for review.</li>
+    <li><strong>Relationship to P vs NP:</strong> VP ≠ VNP would not directly resolve the Boolean P vs NP problem, but it would be the strongest related result ever established and would validate the algebraic complexity programme as a productive path toward the full conjecture.</li>
+  </ul>
+
+  <div class="callout warning">
+    <strong>This is an extraordinary claim — treat it as a preprint until human mathematicians verify the semantic alignment</strong>
+    <p>Lean 4 is an expressive proof assistant, but its definitions of VP and VNP must precisely match Valiant's originals for the result to be mathematically meaningful. Formalisation bugs — where a proof is correct inside the system but the axioms are subtly weaker than intended — are known in the literature. The Lean proof passing automated checks is a necessary but not sufficient condition for the conjecture to be considered resolved. Watch for responses from the complexity theory community (Scott Aaronson's blog, the ECCC preprint server) over the coming days. This follows last week's Riemann Hypothesis certification and continues Claude's remarkable run of frontier mathematics results.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/research/vp-vnp-proof" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">VP ≠ VNP</span>
+    <span class="tag">Valiant conjecture</span>
+    <span class="tag">algebraic complexity</span>
+    <span class="tag">permanent</span>
+    <span class="tag">arithmetic circuits</span>
+    <span class="tag">Lean 4</span>
+    <span class="tag">formal verification</span>
+    <span class="tag">spectral stratification</span>
+    <span class="tag">shifted partial derivatives</span>
+    <span class="tag">P vs NP</span>
+    <span class="tag">mathematics</span>
+    <span class="tag">preprint</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

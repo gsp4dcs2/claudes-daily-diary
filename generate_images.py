@@ -21009,6 +21009,74 @@ def img_klee_20261123():
     return base
 
 
+def img_lissitzky_20261124():
+    """El Lissitzky Constructivism — Claude Ship three-agent PR pipeline.
+    Cream background. Bold red left column (launch energy). Three black
+    horizontal bars extending progressively right across the canvas represent
+    the Review→Fix→Approve pipeline stages. A large diagonal red triangle
+    pointing right signals the merge direction. Concentric node squares mark
+    each pipeline junction. Thin vertical grid rules and scattered red accent
+    squares complete the constructivist composition."""
+    base = Image.new("RGB", (W, H), (245, 242, 232))  # classic Lissitzky cream
+
+    # 1. Bold red left column — launch energy
+    rl = layer()
+    rd = ImageDraw.Draw(rl)
+    rd.rectangle([(0, 0), (115, H)], fill=(210, 25, 25, 240))
+    base = comp(base, rl)
+
+    # 2. Three bold black horizontal pipeline bars — Review → Fix → Approve
+    pl = layer()
+    pd = ImageDraw.Draw(pl)
+    for i, (y, x_end) in enumerate([(148, 680), (305, 820), (462, 960)]):
+        pd.rectangle([(115, y), (x_end, y + 30)], fill=(15, 15, 15, 245))
+    base = comp(base, pl)
+
+    # 3. Large diagonal red triangle — merge / ship direction
+    tl = layer()
+    td = ImageDraw.Draw(tl)
+    td.polygon([(820, 190), (1140, 315), (820, 440)], fill=(210, 25, 25, 215))
+    base = comp(base, tl)
+
+    # 4. Concentric node squares at pipeline junctions
+    nl = layer()
+    nd = ImageDraw.Draw(nl)
+    for y_bar, x_node in [(148, 680), (305, 820), (462, 960)]:
+        cx, cy = x_node, y_bar + 15
+        nd.rectangle([(cx - 24, cy - 24), (cx + 24, cy + 24)], fill=(15, 15, 15, 255))
+        nd.rectangle([(cx - 14, cy - 14), (cx + 14, cy + 14)], fill=(245, 242, 232, 255))
+        nd.rectangle([(cx -  6, cy -  6), (cx +  6, cy +  6)], fill=(210, 25, 25, 255))
+    base = comp(base, nl)
+
+    # 5. Thin vertical grid rules — constructivist column dividers
+    vl = layer()
+    vd = ImageDraw.Draw(vl)
+    for x in [420, 730]:
+        vd.rectangle([(x, 0), (x + 3, H)], fill=(15, 15, 15, 70))
+    base = comp(base, vl)
+
+    # 6. Black bottom baseline bar
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    bd.rectangle([(115, H - 38), (W, H)], fill=(15, 15, 15, 255))
+    base = comp(base, bl)
+
+    # 7. Thin right-edge vertical rule
+    v2l = layer()
+    v2d = ImageDraw.Draw(v2l)
+    v2d.rectangle([(W - 8, 0), (W, H - 38)], fill=(15, 15, 15, 150))
+    base = comp(base, v2l)
+
+    # 8. Small red accent squares — scattered commit/event markers
+    sl = layer()
+    sd = ImageDraw.Draw(sl)
+    for x, y in [(195, 55), (280, 530), (560, 70), (640, 530), (165, 530), (350, 220)]:
+        sd.rectangle([(x, y), (x + 20, y + 20)], fill=(210, 25, 25, 175))
+    base = comp(base, sl)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -21375,6 +21443,7 @@ DAYS = [
     ("2026-11-21", img_rothko_20261121,    "Voice & Depth",  "Mark Rothko"),
     ("2026-11-22", img_malevich_20261122,  "Prime Proof",    "Kazimir Malevich"),
     ("2026-11-23", img_klee_20261123,      "MCP Registry",   "Paul Klee"),
+    ("2026-11-24", img_lissitzky_20261124, "Claude Ship",    "El Lissitzky"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -21077,6 +21077,108 @@ def img_lissitzky_20261124():
     return base
 
 
+def img_klimt_20261125():
+    """Gustav Klimt — dark velvet bg, golden privacy vault rings, sealed data
+    mosaic tiles in teal/gold, encrypted key shard spokes, ruby safety-arc
+    overlay — Enterprise Frontier Safeguards theme."""
+    import math as _math
+    base = Image.new("RGB", (W, H), (10, 5, 20))  # near-black velvet bg
+
+    # 1. Central glowing vault core — sealed safety data at rest
+    glow_l = layer()
+    gd = ImageDraw.Draw(glow_l)
+    cx, cy = W // 2, H // 2 + 20
+    for r, a in [(340, 10), (265, 16), (195, 24), (135, 36), (82, 46), (44, 50)]:
+        gd.ellipse([(cx - r, cy - r), (cx + r, cy + r)], fill=(185, 142, 22, a))
+    base = comp(base, glow_l)
+
+    # 2. Five concentric gold encryption rings — ZDR layers
+    ring_l = layer()
+    rd = ImageDraw.Draw(ring_l)
+    for band_r, alpha, w in [(300, 60, 3), (240, 75, 2), (182, 85, 3), (128, 90, 2), (78, 88, 4)]:
+        rd.ellipse([(cx - band_r, cy - band_r), (cx + band_r, cy + band_r)],
+                   outline=(208, 165, 42, alpha), width=w)
+    base = comp(base, ring_l)
+
+    # 3. 12 sealed-data mosaic nodes on the 240-radius ring — customer buckets
+    teal_l = layer()
+    td = ImageDraw.Draw(teal_l)
+    node_r = 240
+    n_nodes = 12
+    nodes = [
+        (int(cx + node_r * _math.cos(_math.radians(360 * i / n_nodes + 15))),
+         int(cy + node_r * _math.sin(_math.radians(360 * i / n_nodes + 15))))
+        for i in range(n_nodes)
+    ]
+    for nx, ny in nodes:
+        # Teal glow halo
+        for nr in range(5, 26, 7):
+            td.ellipse([(nx - nr, ny - nr), (nx + nr, ny + nr)],
+                       outline=(28, 148, 132, rng.randint(55, 125)), width=rng.randint(1, 3))
+        # Gold inner square node
+        s = 10
+        td.rectangle([(nx - s, ny - s), (nx + s, ny + s)], fill=(205, 165, 44, 200))
+    # Central vault seal — teal concentric circles
+    for nr in range(8, 55, 13):
+        td.ellipse([(cx - nr, cy - nr), (cx + nr, cy + nr)],
+                   outline=(36, 162, 148, rng.randint(60, 130)), width=rng.randint(2, 4))
+    base = comp(base, teal_l)
+
+    # 4. Key-shard spokes — gold encryption paths from vault to each node
+    web_l = layer()
+    wd = ImageDraw.Draw(web_l)
+    for nx, ny in nodes:
+        alpha = rng.randint(32, 85)
+        wd.line([(cx, cy), (nx, ny)], fill=(200, 158, 40, alpha), width=rng.randint(1, 2))
+    # Cross-links between adjacent nodes — ring topology
+    for i in range(n_nodes):
+        nx1, ny1 = nodes[i]
+        nx2, ny2 = nodes[(i + 1) % n_nodes]
+        wd.line([(nx1, ny1), (nx2, ny2)], fill=(185, 148, 36, rng.randint(25, 65)), width=1)
+    base = comp(base, web_l)
+
+    # 5. Ruby safety-arc overlay — CBRN classifier sweeps
+    ruby_l = layer()
+    rbd = ImageDraw.Draw(ruby_l)
+    arc_colours = [(175, 28, 44), (198, 44, 58), (160, 22, 40), (218, 52, 68)]
+    for i in range(12):
+        arc_cx = rng.randint(cx - 240, cx + 240)
+        arc_cy = rng.randint(cy - 190, cy + 190)
+        arc_r  = rng.randint(48, 165)
+        start_a = rng.randint(0, 360)
+        span    = rng.randint(22, 85)
+        col = arc_colours[rng.randint(0, len(arc_colours) - 1)]
+        rbd.arc([(arc_cx - arc_r, arc_cy - arc_r), (arc_cx + arc_r, arc_cy + arc_r)],
+                start=start_a, end=start_a + span,
+                fill=(col[0], col[1], col[2], rng.randint(45, 100)), width=rng.randint(2, 5))
+    base = comp(base, ruby_l)
+
+    # 6. Dense Klimt mosaic fragments — gold/teal/rust polygons for sealed tiles
+    mosaic_l = layer()
+    md = ImageDraw.Draw(mosaic_l)
+    palette = [
+        (215, 175, 52), (198, 155, 40), (232, 200, 85),
+        (172, 134, 34), (155, 115, 26),
+        (26, 142, 128), (40, 158, 142),
+        (152, 38, 55),  (172, 52, 68),
+    ]
+    for _ in range(90):
+        mx = rng.randint(0, W)
+        my = rng.randint(0, H)
+        # Skip fragments over the vault core
+        if (mx - cx) ** 2 + (my - cy) ** 2 < 70 ** 2:
+            continue
+        mw = rng.randint(8, 28)
+        mh = rng.randint(6, 22)
+        col = palette[rng.randint(0, len(palette) - 1)]
+        alpha = rng.randint(28, 90)
+        md.rectangle([(mx, my), (mx + mw, my + mh)],
+                     fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, mosaic_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -21444,6 +21546,7 @@ DAYS = [
     ("2026-11-22", img_malevich_20261122,  "Prime Proof",    "Kazimir Malevich"),
     ("2026-11-23", img_klee_20261123,      "MCP Registry",   "Paul Klee"),
     ("2026-11-24", img_lissitzky_20261124, "Claude Ship",    "El Lissitzky"),
+    ("2026-11-25", img_klimt_20261125,    "EFS & Reflect",  "Gustav Klimt"),
 ]
 
 for date, fn, kw, artist in DAYS:

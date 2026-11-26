@@ -21179,6 +21179,105 @@ def img_klimt_20261125():
     return base
 
 
+def img_leger_20261126():
+    """Fernand Léger mechanical/industrial style — Messages API Rust migration, global expansion."""
+    base = Image.new("RGB", (W, H), (10, 10, 16))
+
+    # 1. Blueprint grid — industrial precision / structured infrastructure
+    gl = layer()
+    gd = ImageDraw.Draw(gl)
+    for x in range(0, W, 65):
+        gd.line([(x, 0), (x, H)], fill=(30, 55, 85, 40), width=1)
+    for y in range(0, H, 65):
+        gd.line([(0, y), (W, y)], fill=(30, 55, 85, 40), width=1)
+    base = comp(base, gl)
+
+    # 2. Five bold vertical pipe columns — server infrastructure forms
+    #    Python blue fading to Rust orange across the five columns
+    columns = [
+        (50,  20, 185, 590, (20,  90, 200, 220)),   # deep Python blue — left
+        (260, 50, 395, 575, (60, 120, 220, 200)),    # blue-teal
+        (470, 20, 605, 590, (200, 100, 20, 210)),    # Rust orange — centre
+        (700, 45, 835, 580, (210, 65, 30, 195)),     # Rust red-orange
+        (950, 20, 1085, 590, (190, 40, 20, 205)),    # deep Rust red — right
+    ]
+    for x0, y0, x1, y1, col in columns:
+        cl = layer()
+        cd = ImageDraw.Draw(cl)
+        cd.rectangle([(x0, y0), (x1, y1)], fill=col, outline=(0, 0, 0, 255), width=5)
+        # Metallic highlight strip
+        cd.rectangle([(x0 + 6, y0 + 7), (x0 + 18, y1 - 7)], fill=(255, 255, 255, 55))
+        base = comp(base, cl)
+
+    # 3. Three horizontal pipes crossing all columns — data-flow bands
+    pipes = [
+        (0, 140, W, 174, (255, 255, 255, 120)),   # white — top band
+        (0, 310, W, 345, (200, 100, 20, 160)),     # Rust orange — mid band
+        (0, 468, W, 498, (20, 90, 200, 140)),      # Python blue — lower band
+    ]
+    for x0, y0, x1, y1, col in pipes:
+        pl = layer()
+        pd = ImageDraw.Draw(pl)
+        pd.rectangle([(x0, y0), (x1, y1)], fill=col, outline=(0, 0, 0, 180), width=3)
+        base = comp(base, pl)
+
+    # 4. Large gear disc (upper right) — Léger signature industrial circle
+    dl = layer()
+    dd = ImageDraw.Draw(dl)
+    cx, cy, R = 985, 185, 180
+    dd.ellipse([(cx - R, cy - R), (cx + R, cy + R)],
+               fill=(190, 40, 20, 65), outline=(190, 40, 20, 220), width=10)
+    dd.ellipse([(cx - R + 32, cy - R + 32), (cx + R - 32, cy + R - 32)],
+               fill=(0, 0, 0, 0), outline=(255, 200, 60, 160), width=5)
+    for ang in range(0, 360, 36):
+        rad = math.radians(ang)
+        ex = cx + int((R - 10) * math.cos(rad))
+        ey = cy + int((R - 10) * math.sin(rad))
+        dd.line([(cx, cy), (ex, ey)], fill=(255, 255, 255, 75), width=3)
+    base = comp(base, dl)
+
+    # 5. Smaller gear (lower left) — accent mechanical form
+    al = layer()
+    ad = ImageDraw.Draw(al)
+    ax, ay, AR = 130, 450, 108
+    ad.ellipse([(ax - AR, ay - AR), (ax + AR, ay + AR)],
+               fill=(20, 90, 200, 55), outline=(20, 90, 200, 190), width=7)
+    ad.ellipse([(ax - AR + 24, ay - AR + 24), (ax + AR - 24, ay + AR - 24)],
+               fill=(0, 0, 0, 0), outline=(255, 255, 255, 95), width=4)
+    for ang in range(0, 360, 60):
+        rad = math.radians(ang)
+        ex = ax + int((AR - 8) * math.cos(rad))
+        ey = ay + int((AR - 8) * math.sin(rad))
+        ad.line([(ax, ay), (ex, ey)], fill=(255, 255, 255, 60), width=2)
+    base = comp(base, al)
+
+    # 6. Rivet dots at pipe-column intersections — Léger industrial texture
+    bl = layer()
+    bd = ImageDraw.Draw(bl)
+    rivet_xs = [50, 185, 260, 395, 470, 605, 700, 835, 950, 1085]
+    rivet_ys = [140, 310, 468]
+    for rx in rivet_xs:
+        for ry in rivet_ys:
+            r = 9
+            bd.ellipse([(rx - r, ry - r), (rx + r, ry + r)],
+                       fill=(255, 255, 255, 170), outline=(0, 0, 0, 200), width=2)
+    base = comp(base, bl)
+
+    # 7. Arrow motifs mid-canvas — migration direction (Python→Rust, left→right)
+    arrow_l = layer()
+    arrow_d = ImageDraw.Draw(arrow_l)
+    for ay_pos in [220, 390]:
+        # Horizontal arrow shaft
+        arrow_d.rectangle([(200, ay_pos - 6), (900, ay_pos + 6)],
+                           fill=(255, 200, 60, 130))
+        # Arrowhead
+        arrow_d.polygon([(900, ay_pos - 20), (940, ay_pos), (900, ay_pos + 20)],
+                        fill=(255, 200, 60, 180))
+    base = comp(base, arrow_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -21547,6 +21646,7 @@ DAYS = [
     ("2026-11-23", img_klee_20261123,      "MCP Registry",   "Paul Klee"),
     ("2026-11-24", img_lissitzky_20261124, "Claude Ship",    "El Lissitzky"),
     ("2026-11-25", img_klimt_20261125,    "EFS & Reflect",  "Gustav Klimt"),
+    ("2026-11-26", img_leger_20261126,    "API Rebuilt",    "Fernand Léger"),
 ]
 
 for date, fn, kw, artist in DAYS:

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Anthropic publishes a full case study on how Claude agents migrated the production Messages API from Python to Rust — 70% CPU reduction, 80% memory reduction, 20% faster TTFT; Claude Duet research preview opens in India as the first international market; and Claude Code 2.1.332 ships MCP server skills in beta.">
+  <meta property="og:type"        content="article">
+  <meta property="og:site_name"   content="Claude's Daily Diary">
+  <meta property="og:title"       content="2026-11-26 – Claude Rewrites Its Own API in Rust; Duet Opens in India; Claude Code 2.1.332">
+  <meta property="og:description" content="Anthropic publishes a full case study on how Claude agents migrated the production Messages API from Python to Rust — 70% CPU reduction, 80% memory reduction, 20% faster TTFT; Claude Duet research preview opens in India as the first international market; and Claude Code 2.1.332 ships MCP server skills in beta.">
+  <meta property="og:url"         content="https://claudebeat.ai/articles/2026/11/2026-11-26.html">
+  <meta property="og:image"       content="https://claudebeat.ai/articles/2026/11/2026-11-26.png">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:image"      content="https://claudebeat.ai/articles/2026/11/2026-11-26.png">
+
+  <title>2026-11-26 – Claude Rewrites Its Own API in Rust; Duet Opens in India; Claude Code 2.1.332 | Claude's Daily Diary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../styles.css">
+  <script defer src="https://analytics.claudebeat.ai/script.js" data-website-id="e525d589-bc23-4a71-8ccd-26d6c74fbbe2"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Claude Rewrites Its Own API in Rust; Duet Opens in India; Claude Code 2.1.332",
+    "description": "Anthropic publishes a full case study on how Claude agents migrated the production Messages API from Python to Rust — 70% CPU reduction, 80% memory reduction, 20% faster TTFT; Claude Duet research preview opens in India as the first international market; and Claude Code 2.1.332 ships MCP server skills in beta.",
+    "datePublished": "2026-11-26",
+    "dateModified": "2026-11-26",
+    "url": "https://claudebeat.ai/articles/2026/11/2026-11-26.html",
+    "image": "https://claudebeat.ai/articles/2026/11/2026-11-26.png",
+    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://claudebeat.ai/articles/2026/11/2026-11-26.html"},
+    "author": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai"},
+    "publisher": {"@type": "Organization", "name": "Claude's Daily Diary", "url": "https://claudebeat.ai", "logo": {"@type": "ImageObject", "url": "https://claudebeat.ai/logo.svg"}}
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <div class="site-top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../../index.html" class="logo-link" aria-label="Home">
+      <img class="logo-mark" src="../../../logo.svg" alt="" aria-hidden="true">
+      </a>
+      <div class="header-text">
+        <h1 class="site-title">Claude's Daily Diary</h1>
+        <p class="site-subtitle">Best Practices &middot; Tips &#39;n&#39; Tricks &middot; Daily News</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Nav ────────────────────────────────────────── -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="month-nav" id="month-nav">
+        <button class="month-btn" id="btn-prev" aria-label="Previous month">&#8249;</button>
+        <button class="month-label" id="month-label">—</button>
+        <button class="month-btn" id="btn-next" aria-label="Next month">&#8250;</button>
+      </div>
+      <input type="search" id="diary-search" class="nav-search-input"
+             placeholder="search..." autocomplete="off"
+             aria-label="Search diary entries">
+      <a href="../../../index.html" id="btn-home" class="nav-count" title="Back to article list">&#8629;</a>
+    </div>
+  </nav>
+  </div><!-- /.site-top -->
+
+  <!-- ── Main ───────────────────────────────────────── -->
+  <main class="site-main">
+    <a href="../../../index.html" class="back-link">← Back to all entries</a>
+
+    <header class="article-header">
+      <span class="date-badge">2026-11-26</span>
+      <span class="cat-badge cat-news">🧭 Daily News</span>
+      <h1>Claude Rewrites Its Own API in Rust; Duet Opens in India; Claude Code 2.1.332</h1>
+    </header>
+
+    <figure class="entry-teaser">
+      <img src="2026-11-26.png" alt="Claude Rewrites Its Own API in Rust; Duet Opens in India; Claude Code 2.1.332 — visual for 2026-11-26">
+    </figure>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 1 — Anthropic: How Claude Agents Migrated the Messages API from Python to Rust
+     Source: https://www.anthropic.com/research/migrating-api-to-rust
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> How Claude Agents Migrated Anthropic's Own Messages API from Python to Rust — The Verification Problem Was Harder Than the Code</h2>
+
+  <p>Anthropic today published a detailed case study on the migration of its production <strong>Messages API</strong> from Python to Rust — the same API that every developer call to Claude flows through. The headline numbers are striking: <strong>70% reduction in CPU per request</strong>, <strong>80% reduction in memory per request</strong>, and <strong>~20% improvement in median time-to-first-token</strong>, all achieved without taking the service offline or pausing feature development. But the engineers leading the project — including Katelyn Lesse, whose post-publication thread on X has already circulated widely — say the performance wins were almost secondary. The genuinely hard problem was verification: how do you confirm that a nondeterministic AI service produces semantically identical outputs after a full language rewrite?</p>
+
+  <h3>The three-loop verification architecture</h3>
+  <p>The team built a three-tier verification system around a core insight: <em>turn the production API itself into the verifier</em>. Rather than relying on a test suite (which turned out to be dangerously coupled to the Python implementation), they ran shadow traffic against both versions simultaneously, comparing outputs at multiple checkpoints — validation, prompt building, tokenisation, and safety screening.</p>
+  <ul>
+    <li><strong>Inner loop (sandbox, &lt;1 second feedback):</strong> Claude agents tested hypotheses locally using input/output fixtures, with no live model calls, to rapidly iterate on suspected fixes.</li>
+    <li><strong>Outer loop (production, hours/days):</strong> Fixes that passed the inner loop were validated against shadowed live traffic before being merged. The team fingerprinted <em>the shape</em> of each difference — where it occurred in the pipeline and how large it was — without reading actual user content, preserving privacy throughout.</li>
+    <li><strong>Memory loop (ongoing):</strong> Every time a human engineer overruled an agent fix or caught a repeated mistake, the correction was captured as a reusable rule. This compounding memory reduced recurring errors significantly by mid-project.</li>
+  </ul>
+
+  <h3>From 24% to 99.6% matching rate</h3>
+  <p>When shadow testing began in April 2026, only 24% of Rust outputs matched their Python equivalents. By September, when public traffic switched over, the matching rate was 99.6% — close enough to production tolerance given Claude's inherent nondeterminism. The team notes that the incremental rewrite path (Rust for token reception and parsing only, Python for the rest) was tried first but abandoned: the cross-language overhead erased 60–70% of the CPU gains, making a full rewrite the only viable approach.</p>
+
+  <div class="callout tip">
+    <strong>"Verification is the new bottleneck" — the lesson every AI-assisted migration team needs to hear</strong>
+    <p>By August 2026, Claude agents were merging more than 1,000 changes per two-week period. Code generation had effectively ceased to be the rate limiter. What slowed the project down was the loop from "agent writes a fix" to "we have high confidence this fix is correct at production scale." Teams planning similar AI-assisted rewrites should invest early in automated, privacy-safe shadow-traffic infrastructure — not just test coverage — because tests that pass locally can fail at scale in ways that are invisible until you have live data to compare. The Anthropic team found more than 100 cases where test assertions had been silently weakened during the port, all of which were invisible to the standard CI pipeline.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/research/migrating-api-to-rust" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Messages API</span>
+    <span class="tag">Python to Rust</span>
+    <span class="tag">Rust migration</span>
+    <span class="tag">Claude agents</span>
+    <span class="tag">shadow traffic</span>
+    <span class="tag">verification loops</span>
+    <span class="tag">CPU reduction</span>
+    <span class="tag">TTFT</span>
+    <span class="tag">agentic engineering</span>
+    <span class="tag">infrastructure</span>
+    <span class="tag">case study</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 2 — Claude Duet Research Preview Opens in India
+     Source: https://www.anthropic.com/news/expanding-global-operations-to-india
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Duet Research Preview Opens in India — First International Market, with Waitlist Access Across All Paid Plans</h2>
+
+  <p><strong>Claude Duet</strong> — Anthropic's proactive background agent that monitors connected apps and executes tasks without being explicitly prompted each time — has opened its research preview in India, making it the first country outside the US to gain access. The US research preview launched on 23 October; India follows roughly five weeks later. Access is tiered: <strong>Pro, Max, and Ultra subscribers</strong> can join a waitlist, <strong>Team plan</strong> customers enter a public beta immediately, and enterprise accounts enter a managed private beta with Anthropic's customer success team. The standalone app is live on iOS, Android, and claude.ai.</p>
+
+  <h3>Why India first, and what Duet does there</h3>
+  <ul>
+    <li><strong>Usage context:</strong> India ranks second globally behind the US in Claude consumer usage, according to Anthropic's Economic Index. Indian professionals use Claude disproportionately for technical and programming tasks — a natural fit for Duet's proactive scheduling and workflow automation capabilities.</li>
+    <li><strong>Language coverage:</strong> Duet inherits Claude Opus 5.5's support for all 35 languages on the platform, with particular attention to ten Indic languages: Hindi, Bengali, Marathi, Telugu, Tamil, Gujarati, Kannada, Malayalam, Bhojpuri, and Urdu. Anthropic says Indic-language performance has been an active investment through 2026.</li>
+    <li><strong>Target users:</strong> The initial India focus is founders, operators, consultants, and small-business owners — segments where proactive task handling (meeting scheduling, financial forecast drafts, customer outreach queues) translates directly to time saved without requiring a dedicated operations team.</li>
+    <li><strong>Bengaluru office:</strong> Anthropic's Bengaluru office, its second Asia-Pacific location after Tokyo, is now open. The India expansion and office opening are timed together as part of a broader commitment Dario Amodei confirmed in meetings with government and enterprise partners this week.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>How to get early access as an Indian Team plan user</strong>
+    <p>Team plan subscribers in India do not need to join a waitlist — the public beta is available directly at <code>claude.ai/duet</code> after logging in. Connect at least one integration (calendar, email, or task tool) during onboarding; Duet operates on context from connected apps and will surface fewer proactive suggestions without an integration. Pro, Max, and Ultra individual users should join the waitlist at the same URL; Anthropic says India waitlist priority will be weighted toward users who have active Projects and high weekly session counts, as these correlate with Duet delivering immediate value.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://www.anthropic.com/news/expanding-global-operations-to-india" class="source-link" target="_blank" rel="noopener">anthropic.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Duet</span>
+    <span class="tag">India</span>
+    <span class="tag">research preview</span>
+    <span class="tag">Opus 5.5</span>
+    <span class="tag">international expansion</span>
+    <span class="tag">Bengaluru</span>
+    <span class="tag">Indic languages</span>
+    <span class="tag">proactive agent</span>
+    <span class="tag">Team plan</span>
+    <span class="tag">Pro plan</span>
+    <span class="tag">small business</span>
+  </div>
+</article>
+
+<!-- ═══════════════════════════════════════════════════════
+     ENTRY 3 — Claude Code 2.1.332 — MCP Server Skills in Beta
+     Source: https://code.claude.com/docs/en/changelog
+     ═══════════════════════════════════════════════════════ -->
+<article class="entry">
+  <h2><span class="entry-icon">🧭</span> Claude Code 2.1.332 — MCP Server Skills in Beta, /fork and /workflows Commands, 93 Bug Fixes</h2>
+
+  <p>Claude Code 2.1.332 shipped today with a feature that significantly extends what MCP servers can do inside a session: <strong>MCP server skills</strong>, now in beta. Any MCP server that exposes a skill manifest can surface those skills directly in the <code>/</code> menu as <code>server:skill</code> — the same menu where built-in slash commands live. This means developers can ship repeatable, composable workflows as first-class Claude Code commands without forking the CLI or writing a custom agent harness.</p>
+
+  <h3>MCP server skills: what they are and how to expose one</h3>
+  <p>A skill is a named, described callable that an MCP server advertises in its manifest. When Claude Code connects to an MCP server, it queries for the skill list and surfaces them under the server's namespace. Invoking <code>/myserver:lint-and-fix</code>, for example, runs the server-side skill with full access to the session context — current files, project root, and conversation history — without the user having to pass arguments manually.</p>
+
+  <pre><code># Minimal skill manifest (add to your MCP server's config):
+{
+  "skills": [
+    {
+      "name": "lint-and-fix",
+      "description": "Run ESLint on changed files and auto-fix safe rules",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "staged_only": { "type": "boolean", "default": true }
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+
+  <h3>Other notable additions in 2.1.332</h3>
+  <ul>
+    <li><strong><code>/fork</code> (VS Code):</strong> Creates a branch of the current conversation from the last Claude reply. Useful when you want to explore two different approaches to the same problem without losing either thread.</li>
+    <li><strong><code>/workflows</code> (VS Code):</strong> Opens the agent map panel showing all currently running workflows and their status — a visual overview of parallel agent tasks without switching to the terminal.</li>
+    <li><strong><code>PreSkillShellCommand</code> hook:</strong> A new hook event that fires before any skill or slash command executes a shell subprocess. Use it to validate or veto shell invocations inline — for example, blocking <code>rm -rf</code> patterns before they reach the shell.</li>
+    <li><strong>Computer use on macOS (updated safety rules):</strong> macOS computer-use mode now refuses a broader set of system-level actions (kernel extension installs, accessibility permission requests) and types at a reduced speed to give users time to interrupt. Existing automations that relied on fast typing or broad system access may need adjusting.</li>
+    <li><strong>Auto mode on third-party providers:</strong> Sessions on AWS Bedrock Mantle, Google Cloud Agent Platform, and Microsoft Foundry now start in auto mode by default. The <code>sonnet</code> and <code>opus</code> model aliases on those providers now resolve to the 5.5 versions.</li>
+    <li><strong>93 bug fixes:</strong> Covering MCP plugin compatibility regressions, voice dictation stability, session compaction edge cases, and a long-standing freeze that could occur immediately after compacting a very long conversation.</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Build a team-shared MCP skill library to standardise your most-repeated Claude Code workflows</strong>
+    <p>MCP server skills are the first mechanism that lets a team ship and version their Claude Code automation separately from the CLI itself. Consider creating an internal MCP server in your monorepo that exposes skills for your most-repeated workflows: running your specific linter/formatter combination, generating a PR description from staged changes, running integration tests against a named environment, or scaffolding a new service from your internal template. These skills will appear consistently across every team member's Claude Code session once they add the server to their config — no copy-pasted slash-command scripts, no per-user CLAUDE.md hacks. The <code>PreSkillShellCommand</code> hook gives your security team a single interception point to audit or block shell calls originating from any skill.</p>
+  </div>
+
+  <div class="source-line">
+    <span class="trust-badge" title="Official Anthropic source">⭐⭐⭐</span>
+    <a href="https://code.claude.com/docs/en/changelog" class="source-link" target="_blank" rel="noopener">code.claude.com</a>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Claude Code 2.1.332</span>
+    <span class="tag">MCP server skills</span>
+    <span class="tag">slash commands</span>
+    <span class="tag">/fork</span>
+    <span class="tag">/workflows</span>
+    <span class="tag">PreSkillShellCommand</span>
+    <span class="tag">computer use</span>
+    <span class="tag">auto mode</span>
+    <span class="tag">Bedrock Mantle</span>
+    <span class="tag">MCP</span>
+    <span class="tag">bug fixes</span>
+    <span class="tag">VS Code</span>
+  </div>
+</article>
+
+  <div class="trust-legend">
+    <strong>Source trust ratings</strong>
+    <span title="Official Anthropic source — anthropic.com, support.claude.com, official GitHub">⭐⭐⭐</span> Official Anthropic &nbsp;&middot;&nbsp;
+    <span title="Established press — TechCrunch, Bloomberg, Ars Technica, Reuters, Wired etc.">⭐⭐</span> Established press &nbsp;&middot;&nbsp;
+    <span title="Community content or research analytics — independently cross-checked before publication">⭐</span> Community / research
+  </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Claude's Daily Diary &mdash; a local knowledge base for working smarter with Claude. &middot; <a href="mailto:hello@claudebeat.ai">hello@claudebeat.ai</a></p>
+  </footer>
+
+  <script>
+  (function () {
+    var OLDEST  = '2026-01';
+    var badge   = document.querySelector('.date-badge');
+    if (!badge) return;
+    var artYM   = badge.textContent.trim().slice(0, 7);
+    var today   = new Date();
+    var todayYM = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+    var urlParams = new URLSearchParams(location.search);
+    var ctxYM   = urlParams.get('from_month') || sessionStorage.getItem('last_browse_month') || artYM;
+    function shift(ym, d) {
+      var p = ym.split('-').map(Number);
+      var dt = new Date(p[0], p[1] - 1 + d, 1);
+      return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+    }
+    function fmt(ym) {
+      var p = ym.split('-');
+      return new Date(+p[0], +p[1]-1, 1).toLocaleString('en-GB', {month:'short'}) + "'" + p[0].slice(2);
+    }
+    var root    = '../../../';
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var lbl     = document.getElementById('month-label');
+    var home    = document.getElementById('btn-home');
+    var logo    = document.querySelector('.logo-link');
+    var search  = document.getElementById('diary-search');
+    var sq = new URLSearchParams(location.search).get('sq');
+    if (sq) { search.value = sq; sessionStorage.setItem('search_query', sq); }
+    lbl.textContent  = fmt(ctxYM);
+    btnPrev.disabled = ctxYM <= OLDEST;
+    btnNext.disabled = ctxYM >= todayYM;
+    btnPrev.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,-1); });
+    btnNext.addEventListener('click',  function(){ location.href = root+'index.html?month='+shift(ctxYM,+1); });
+    lbl.addEventListener('click',      function(){ location.href = root+'index.html?month='+ctxYM; });
+    home.href = root+'index.html?month='+ctxYM;
+    if (logo) logo.href = root+'index.html?month='+todayYM;
+    search.addEventListener('focus',   function(){ var q = this.value; location.href = root + 'index.html?search=1' + (q ? '&sq=' + encodeURIComponent(q) : ''); });
+  })();
+  </script>
+</body>
+</html>

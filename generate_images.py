@@ -21278,6 +21278,129 @@ def img_leger_20261126():
     return base
 
 
+def img_franzmarc_20261127():
+    """Franz Marc jewel-tone style — agent sandbox safety and boundary research.
+    Deep cobalt background, emerald guardian forms enclosing amber warning shapes,
+    ruby sentinel outlines, golden protective rings, and jewel-dot scatter."""
+    import math as _math
+    base = Image.new("RGB", (W, H), (14, 26, 88))   # deep cobalt
+
+    # 1. Textured cobalt wash — subtle depth patches
+    tex_l = layer()
+    td = ImageDraw.Draw(tex_l)
+    for _ in range(60):
+        tx = rng.randint(0, W)
+        ty = rng.randint(0, H)
+        tr = rng.randint(55, 230)
+        alpha = rng.randint(8, 32)
+        col = (rng.randint(10, 36), rng.randint(22, 58), rng.randint(95, 155))
+        td.ellipse([(tx - tr, ty - tr), (tx + tr, ty + tr)],
+                   fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, tex_l)
+
+    # 2. Concentric guardian rings (emerald) — the sandbox boundary metaphor
+    ring_l = layer()
+    rd = ImageDraw.Draw(ring_l)
+    cx, cy = 580, 300
+    for radius, alpha, width in [
+        (280, 110, 6), (240, 90, 5), (200, 70, 4),
+        (160, 55, 3), (120, 40, 3),
+    ]:
+        rd.ellipse([(cx - radius, cy - radius), (cx + radius, cy + radius)],
+                   outline=(30, 148, 88, alpha), width=width)
+    base = comp(base, ring_l)
+
+    # 3. Central amber form — the agent inside the sandbox
+    core_l = layer()
+    cd = ImageDraw.Draw(core_l)
+    # Warm amber core body
+    cd.ellipse([(cx - 72, cy - 72), (cx + 72, cy + 72)],
+               fill=(205, 138, 38, 195))
+    # Bright centre highlight
+    cd.ellipse([(cx - 38, cy - 38), (cx + 38, cy + 38)],
+               fill=(240, 185, 65, 215))
+    # Four radiating amber spokes
+    for angle in [0, 90, 180, 270]:
+        a_rad = _math.radians(angle)
+        ex = cx + int(105 * _math.cos(a_rad))
+        ey = cy + int(105 * _math.sin(a_rad))
+        cd.line([(cx, cy), (ex, ey)], fill=(215, 155, 48, 180), width=5)
+    base = comp(base, core_l)
+
+    # 4. Sentinel fox forms (top-left and bottom-right) — emerald guardians
+    fox_l = layer()
+    fd = ImageDraw.Draw(fox_l)
+    for fx, fy, flip in [(175, 148, 1), (1020, 462, -1)]:
+        # Body
+        fd.ellipse([(fx - 68, fy - 38), (fx + 68, fy + 38)],
+                   fill=(30, 140, 85, 175))
+        # Head
+        hx = fx + flip * 65
+        fd.ellipse([(hx - 42, fy - 54), (hx + 42, fy + 18)],
+                   fill=(36, 155, 92, 180))
+        # Tail
+        tx2 = fx - flip * 115
+        fd.ellipse([(tx2 - 48, fy - 25), (tx2 + 48, fy + 35)],
+                   fill=(185, 78, 20, 155))
+        fd.ellipse([(tx2 - 40, fy - 18), (tx2 + 40, fy + 28)],
+                   fill=(240, 230, 215, 70))
+    base = comp(base, fox_l)
+
+    # 5. Ruby sentinel outlines — boundary violation signals
+    ruby_l = layer()
+    ryd = ImageDraw.Draw(ruby_l)
+    for i in range(10):
+        angle = _math.radians(i * 36)
+        px = cx + int(310 * _math.cos(angle))
+        py = cy + int(310 * _math.sin(angle))
+        ryd.ellipse([(px - 14, py - 14), (px + 14, py + 14)],
+                    outline=(175, 32, 68, 180), width=3)
+        ryd.ellipse([(px - 7, py - 7), (px + 7, py + 7)],
+                    fill=(210, 48, 85, 155))
+    base = comp(base, ruby_l)
+
+    # 6. Forest-green nature arcs — Franz Marc's organic geometry
+    arc_l = layer()
+    ad = ImageDraw.Draw(arc_l)
+    green_shades = [
+        (25, 112, 68), (38, 142, 88), (20, 90, 55), (55, 168, 108),
+    ]
+    for i in range(12):
+        acx = rng.randint(0, W)
+        acy = rng.randint(0, H)
+        ar  = rng.randint(70, 310)
+        sa  = rng.randint(0, 360)
+        ea  = sa + rng.randint(40, 150)
+        col = green_shades[i % len(green_shades)]
+        alpha = rng.randint(42, 100)
+        w = rng.randint(2, 7)
+        ad.arc([(acx - ar, acy - ar), (acx + ar, acy + ar)],
+               start=sa, end=ea,
+               fill=(col[0], col[1], col[2], alpha), width=w)
+    base = comp(base, arc_l)
+
+    # 7. Jewel-dot scatter — emerald, cobalt, amber, ruby
+    dot_l = layer()
+    dd = ImageDraw.Draw(dot_l)
+    dot_palette = [
+        (38, 162, 102), (48, 182, 118),   # emerald
+        (22, 65, 178), (38, 88, 208),     # cobalt
+        (215, 162, 42), (232, 182, 60),   # amber
+        (152, 30, 68), (172, 46, 88),     # ruby
+    ]
+    for _ in range(85):
+        dx = rng.randint(0, W)
+        dy = rng.randint(0, H)
+        dr = rng.randint(3, 10)
+        col = dot_palette[rng.randint(0, len(dot_palette) - 1)]
+        alpha = rng.randint(75, 180)
+        dd.ellipse([(dx - dr, dy - dr), (dx + dr, dy + dr)],
+                   fill=(col[0], col[1], col[2], alpha))
+    base = comp(base, dot_l)
+
+    return base
+
+
 DAYS = [
     ("2025-11-24", img_kandinsky_20251124, "Opus 4.5",         "Wassily Kandinsky"),
     ("2025-11-25", img_lissitzky_20251125, "Claude Code Desktop","El Lissitzky"),
@@ -21647,6 +21770,7 @@ DAYS = [
     ("2026-11-24", img_lissitzky_20261124, "Claude Ship",    "El Lissitzky"),
     ("2026-11-25", img_klimt_20261125,    "EFS & Reflect",  "Gustav Klimt"),
     ("2026-11-26", img_leger_20261126,    "API Rebuilt",    "Fernand Léger"),
+    ("2026-11-27", img_franzmarc_20261127, "Sandbox Safety", "Franz Marc"),
 ]
 
 for date, fn, kw, artist in DAYS:
